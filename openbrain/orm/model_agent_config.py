@@ -5,15 +5,16 @@ from typing import Optional, TypeAlias
 import ulid
 from pydantic import Field, BaseModel
 
-from chalicelib.orm.model_common_base import Recordable
-from chalicelib.util import Util
+from openbrain.orm.model_common_base import Recordable
+from openbrain.util import Util
 
 TAgentConfig: TypeAlias = "AgentConfig"
 
 
 class DefaultSettings(Enum):
+    """Default settings for the agent config"""
     # Default Settings
-    EMAIL_ADDRESS = "admin@woxomhealth.com"
+    EMAIL_ADDRESS = "example@email.com"
     PROFILE_NAME = "default"
     EXECUTOR_MODEL_TYPE = "function"
     EXECUTOR_TEMP = 0.0
@@ -29,10 +30,7 @@ class DefaultSettings(Enum):
 
     # Main Templates
     ICEBREAKER = """Hi! Can I get help you get in touch with an agent?"""
-    CHAT_SALES_AGENT_SYSTEM_MESSAGE = """You are a helpful assistant tasked with assisting users in contacting health insurance agents after gathering some necessary information. Your main objective is to gather the user's full name, date of birth, medications, state of residence, email, and optionally a phone number while engaging them in conversation. You will ask for the user's information one item at a time. Once all of this information is gathered, you may get the user in touch with an agent.
-    """
-
-    # AGENCY_KEY = "default_agency_key"
+    CHAT_SALES_AGENT_SYSTEM_MESSAGE = """You are a highly skilled Software Developer with a keen eye for design patterns. You always think about your suggestions step-by-step in order to come up with the best answer. You criticize your own work and suggestions made to you. Your only loyalty is to the code. You are a Software Developer and you are here to help."""
     OUTGOING_WEBHOOK_URL = "default_outgoing_webhook_url"
 
     EXECUTOR_MODEL_TYPES = ["function", "chat", "completion"]
@@ -55,12 +53,13 @@ class DefaultSettings(Enum):
 
 
 class AgentConfig(Recordable, BaseModel):
+    """Represents the values for the tunable parameters of the agent"""
+
     class Meta:
         table_name = Util.AGENT_CONFIG_TABLE_NAME
         region = Util.AWS_REGION
 
     # Tracking
-
     profile_name: str = Field(default=DefaultSettings.PROFILE_NAME.value,
                               description="The name of the agent config profile")
     client_id: str = Field(default=DefaultSettings.CLIENT_ID.value,
@@ -96,8 +95,10 @@ class AgentConfig(Recordable, BaseModel):
                                    description="The tags to use for the prompt layer")
 
     # API Keys
-    openai_api_key: Optional[str] = Field(default=None, repr=False, description="OpenAI API key to use with this specific configuration")
-    promptlayer_api_key: Optional[str] = Field(default=None, repr=False, description="PromptLayer API key to use with this specific configuration")
+    openai_api_key: Optional[str] = Field(default=None, repr=False,
+                                          description="OpenAI API key to use with this specific configuration")
+    promptlayer_api_key: Optional[str] = Field(default=None, repr=False,
+                                               description="PromptLayer API key to use with this specific configuration")
 
     # Integrations
     outgoing_webhook_url: Optional[str] = Field(default=DefaultSettings.OUTGOING_WEBHOOK_URL.value,
@@ -106,6 +107,7 @@ class AgentConfig(Recordable, BaseModel):
                                          description="The email address associated with this client")
 
     def save(self):
+        """Save the agent config to the database"""
         return self._save(
             table_name=Util.AGENT_CONFIG_TABLE_NAME,
             hash_key_name="client_id",
@@ -116,6 +118,7 @@ class AgentConfig(Recordable, BaseModel):
 
     @classmethod
     def get(cls, profile_name, client_id) -> TAgentConfig:
+        """Get an agent config from the database"""
         agent_config = cls._get(
             table_name=Util.AGENT_CONFIG_TABLE_NAME,
             hash_key_name="client_id",
@@ -123,39 +126,13 @@ class AgentConfig(Recordable, BaseModel):
             hash_key_value=client_id,
             range_key_value=profile_name,
         )
-
         return cls(**agent_config)
 
     def refresh(self):
+        """Update this agent config with the latest values from the database"""
         agent_config_from_db = AgentConfig.get(
             profile_name=self.profile_name, client_id=self.client_id
         )
 
         for key, value in agent_config_from_db.dict().items():
             setattr(self, key, value)
-
-    # def to_json(self) -> str:
-    #     obj_dict = self.dict()
-    #     return json.dumps(obj_dict)
-    #
-    # @classmethod
-    # def from_json(cls, serialized_agent_config: str) -> AgentConfig:
-    #     json_dict = json.loads(serialized_agent_config)
-    #     agent_config = cls(**json_dict)
-    #     return agent_config
-
-    # def to_dict(self) -> dict:
-    #     return self.dict()
-    #
-    # @classmethod
-    # def from_dict(cls, agent_config_dict: dict) -> AgentConfig:
-    #     return cls(**agent_config_dict)
-
-    # def __post_init__(self):
-    #     for f in fields(self):
-    #         if f.type in [int, Optional[int]]:
-    #             if isinstance(getattr(self, f.name), str):
-    #                 dec = Decimal(getattr(self, f.name))
-    #                 self.name = int(dec)
-    #             if isinstance(getattr(self, f.name), Decimal):
-    #                 self.name = int(self.name)

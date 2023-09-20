@@ -4,9 +4,9 @@ from faker import Faker
 import ulid
 
 from tests.generator_leads import generate_lead
-from chalicelib.orm.model_chat_session import ChatSession
+from openbrain.orm.model_chat_session import ChatSession
 from tests.generator_agent_configs import generate_agent_config
-from gpt_agent import GptAgent
+from openbrain.agents.gpt_agent import GptAgent
 
 fake = Faker()
 

@@ -4,11 +4,12 @@ from typing import Optional
 
 from pydantic import Field, BaseModel
 
-from chalicelib.orm.model_agent_config import AgentConfig
-from chalicelib.orm.model_common_base import Recordable
+from openbrain.orm.model_agent_config import AgentConfig
+from openbrain.orm.model_common_base import Recordable
 
 
 class ChatMessage(Recordable, BaseModel):
+    """Represents a message sent to the agent"""
     # Tracking
     client_id: str = Field(description="The ID of the client the AgentConfig belongs to")
     session_id: Optional[str] = Field(default=None, description="DEPRECATED IN FAVOR OF SESSION HEADER/COOKIE - The session_id associated with this message")
@@ -21,10 +22,13 @@ class ChatMessage(Recordable, BaseModel):
 
     @classmethod
     def get(cls, *args, **kwargs) -> ChatMessage:
+        """Get a ChatMessage object from the database"""
         raise NotImplementedError("No DB for ChatMessage objects")
 
     def save(self):
+        """Save the ChatMessage object to the database"""
         raise NotImplementedError("No DB for ChatMessage objects")
 
     def refresh(self):
+        """Update this ChatMessage object with the latest values from the database"""
         raise NotImplementedError("No DB for ChatMessage objects")

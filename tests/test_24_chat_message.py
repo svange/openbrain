@@ -4,8 +4,8 @@ import json
 
 import pytest
 
-from chalicelib.orm.model_chat_message import AgentConfig
-from chalicelib.orm.model_chat_message import ChatMessage
+from openbrain.orm.model_chat_message import AgentConfig
+from openbrain.orm.model_chat_message import ChatMessage
 
 
 @pytest.fixture

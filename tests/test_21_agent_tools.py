@@ -2,10 +2,10 @@ import os
 
 import pytest
 
-from chalicelib.util import Util
-from chalicelib.gpt_agent import GptAgent, send_lead_event, send_business_sns, send_lead_to_lead_momentum, LeadAdaptor
-from orm.model_agent_config import AgentConfig
-from orm.model_lead import Lead
+from openbrain.util import Util
+from openbrain.agents.gpt_agent import GptAgent, send_lead_event, send_business_sns, send_lead_to_lead_momentum, LeadAdaptor
+from openbrain.orm.model_agent_config import AgentConfig
+from openbrain.orm.model_lead import Lead
 
 
 @pytest.fixture

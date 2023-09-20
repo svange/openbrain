@@ -23,10 +23,10 @@ from langchain.schema import SystemMessage, OutputParserException
 from langchain.tools.base import ToolException, BaseTool, tool
 from pydantic import BaseModel, Extra, Field
 
-from chalicelib.orm.model_agent_config import AgentConfig
-from chalicelib.orm.model_lead import Lead
-from chalicelib.util import Util
-from chalicelib.exceptions import AgentToolIncompleteLeadError, AgentError, AgentToolLeadMomentumError
+from openbrain.orm.model_agent_config import AgentConfig
+from openbrain.orm.model_lead import Lead
+from openbrain.util import Util
+from openbrain.agents.exceptions import AgentToolIncompleteLeadError, AgentError, AgentToolLeadMomentumError
 
 logger = Util.logger
 
@@ -170,7 +170,6 @@ class GptAgent:
                 memory = ConversationBufferMemory(memory_key="memory", return_messages=True)
                 memory.save_context({"input": "Hi!"}, {"output": self.agent_config.icebreaker})
 
-
             system_message = SystemMessage(content=system_message)
 
             agent_kwargs = {
@@ -249,12 +248,8 @@ class GptAgent:
         }
         return agent_state
 
-    def handle_user_message(
-            self, user_message: str, local=Util.LOCAL
-    ) -> str:
+    def handle_user_message(self, user_message: str) -> str:
         """Send message to agent, update lead based on conversation fragment, return LLM response and updated lead"""
-        if local:
-            return "DISCONNECTED"
 
         try:
             response_message = self.agent.run(
@@ -348,8 +343,7 @@ class ConnectWithAgentTool(BaseTool):
     description = """Useful when you want to get the user in touch with a human agent."""
     args_schema: Type[BaseModel] = LeadAdaptor
     handle_tool_error = True
-
-    verbose = Util.STAGE != "prod"
+    verbose = True
 
     def _run(self, *args, **kwargs) -> str:
         response = (
@@ -362,6 +356,20 @@ class ConnectWithAgentTool(BaseTool):
         raise NotImplementedError("connect_with_agent does not support async")
 
 
+def cli(message: str):
+    agent = GptAgent(AgentConfig(client_id="public", profile_name="default"))
+    response = agent.handle_user_message(message)
+    print(response)
+
+
+def cli_chat():
+    print("-- Ctrl-C to exit --")
+    agent = GptAgent(AgentConfig(client_id="public", profile_name="default"))
+    while True:
+        message = input("You: ")
+        response = agent.handle_user_message(message)
+        print("Agent: " + response + "\n")
+
 # class ToolBox:
 #     def __init__(self):
 #         # self.tools = [ToolBox.send_all_required_data_to_brokerage, ToolBox.query_docs]
@@ -372,7 +380,7 @@ class ConnectWithAgentTool(BaseTool):
 #     @staticmethod
 #     @tool
 #     def connect_with_agent(user_info: str) -> str:
-#         """useful if and only if ALL required user information is known. Takes a JSON object with user's information. If any optional user information is not known, do not lie, guess, or hallucinate; instead provide an empty string as its value. EXAMPLE INPUTS: {{"full_name": "John Doe", "date_of_birth": "01/01/1970", "current_medications": "", "state_of_residence": "CA", "email_address": "", "phone_number": "6194206969"}} AND {{"full_name": "Mary Jane Doe", "date_of_birth": "04/01/2001", "current_medications": "Tylenol", "state_of_residence": "CA", "email_address": "maryjane@woxom.com", "phone_number": ""}}"""
+#         """useful if and only if ALL required user information is known. Takes a JSON object with user's information. If any optional user information is not known, do not lie, guess, or hallucinate; instead provide an empty string as its value. EXAMPLE INPUTS: {{"full_name": "John Doe", "date_of_birth": "01/01/1970", "current_medications": "", "state_of_residence": "CA", "email_address": "", "phone_number": "6194206969"}} AND {{"full_name": "Mary Jane Doe", "date_of_birth": "04/01/2001", "current_medications": "Tylenol", "state_of_residence": "CA", "email_address": "maryjane@example.com", "phone_number": ""}}"""
 #
 #         try:
 #             user_info = json.loads(user_info)

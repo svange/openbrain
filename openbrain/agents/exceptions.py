@@ -1,6 +1,6 @@
 from langchain.tools.base import ToolException
 
-from chalicelib.util import Util
+from openbrain.util import Util
 
 logger = Util.logger
 metrics = Util.metrics

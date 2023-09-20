@@ -1,7 +1,7 @@
 import ulid
 from faker import Faker
 
-from chalicelib.orm.model_lead import Lead
+from openbrain.orm.model_lead import Lead
 
 fake = Faker()
 
