@@ -85,7 +85,7 @@ Conditions:
 
 Resources:
 
-  DeployerPolicy:
+  DevDeployerPolicy:
     Type: AWS::IAM::ManagedPolicy
     Properties:
       Description: Policy for GitHubActions
@@ -139,10 +139,11 @@ Resources:
 #            Resource:
 #                  - !Sub
 
+
+
   GitHubRole:
     Type: AWS::IAM::Role
     Properties:
-
       AssumeRolePolicyDocument:
         Statement:
           - Effect: Allow
@@ -157,8 +158,6 @@ Resources:
                 token.actions.githubusercontent.com:aud: !Ref OIDCAudience
               StringLike:
                 token.actions.githubusercontent.com:sub: !Sub repo:${GitHubOrg}/${RepositoryName}:*
-      ManagedPolicyArns:
-        - !Ref DeployerPolicy
 
   GithubOidc:
     Type: AWS::IAM::OIDCProvider
@@ -168,8 +167,7 @@ Resources:
       ClientIdList:
         - sts.amazonaws.com
       ThumbprintList:
-        - 6938fd4d98bab03faadb97b34396831e3780aea1
-        - 1c58a3a8518e8759bf075b76b750d4f2df264fcd
+        - ffffffffffffffffffffffffffffffffffffffff
 
   ProdSessionTable:
     Type: AWS::DynamoDB::Table
