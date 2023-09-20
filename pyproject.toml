@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "openbrain"
+version = "0.1.1"
+description = "A package to interact with generative AI and build specialized generative AI workflows. This project is dual-licensed under AGPL-3.0 and a separate commercial license."
+authors = ["Samuel Vange <7166607+svange@users.noreply.github.com>"]
+readme = "README.md"
+license = "AGPL-3.0"
+
+[tool.poetry.scripts]
+ob = "openbrain.agents.gpt_agent:cli"
+ob-chat = "openbrain.agents.gpt_agent:chat"
+ob-tuner = "openbrain.app:main"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+boto3 = "^1.28.51"
+langchain = "^0.0.295"
+openai = "^0.28.0"
+promptlayer = "^0.2.9"
+requests = "^2.31.0"
+pydantic = "^2.3.0"
+aws-lambda-powertools = "^2.25.0"
+python-dotenv = "^1.0.0"
+python-ulid = "^1.1.0"
+aws-xray-sdk = "^2.12.0"
+tiktoken = "^0.5.1"
+gradio = "^3.44.4"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+faker = "^19.6.1"
+retry = "^0.9.2"
+licensecheck = "^2023.4.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.licensecheck]
+using = "PEP631:tests;dev;docs"
+
+[tool.poetry_bumpversion.file."openbrain/__init__.py"]
+# Duplicate the line above to add more files

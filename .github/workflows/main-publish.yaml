@@ -1,4 +1,4 @@
-name: Test main branch and deploy to prod stage
+name: Test dev branch and deploy to pypi-test
 on:
   push:
     branches:
@@ -7,9 +7,10 @@ permissions:
   id-token: write # This is required for requesting the JWT
   contents: read  # This is required for actions/checkout
 env:
-  AWS_PROFILE: personal
+  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_PROD_DEPLOYER_ROLE_ARN }}
+  AWS_REGION: us-east-1
   PROJECT: openbrain
-  REPOSITORYNAME: open
+  REPOSITORYNAME: openbrain
   GITHUBORG: svange
   DISABLE_TUNER_API_MODE: 1
   INFRA_STACK_NAME: ai-infra
@@ -21,10 +22,16 @@ env:
   INFRASTRUCTURE_TOPIC_FRIENDLY_NAME: InfrastructureTopic
   BUSINESS_TOPIC_FRIENDLY_NAME: BusinessTopic
   EVENTBUS_FRIENDLY_NAME: DevEventBus
+  OPENAI_API_KEY: ${{ secrets.DEV_OPENAI_KEY }}
 jobs:
-  test:
+  test-build-publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_GITHUB_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
       #----------------------------------------------
       #       check-out repo and set-up python
       #----------------------------------------------
@@ -71,8 +78,16 @@ jobs:
       - name: Run tests
         run: |
           source .venv/bin/activate
-          pytest tests/
-          coverage report
+          python ci_cd.py -t
+
+      #----------------------------------------------
+      #              build package
+      #----------------------------------------------
+      - name: Run tests
+        run: |
+          source .venv/bin/activate
+          python ci_cd.py -B --skip-tests
+
       #----------------------------------------------
       #              publish to pypi
       #----------------------------------------------

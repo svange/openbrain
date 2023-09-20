@@ -85,7 +85,7 @@ Conditions:
 
 Resources:
 
-  DevDeployerPolicy:
+  DeployerPolicy:
     Type: AWS::IAM::ManagedPolicy
     Properties:
       Description: Policy for GitHubActions
@@ -139,11 +139,10 @@ Resources:
 #            Resource:
 #                  - !Sub
 
-
-
   GitHubRole:
     Type: AWS::IAM::Role
     Properties:
+
       AssumeRolePolicyDocument:
         Statement:
           - Effect: Allow
@@ -158,6 +157,8 @@ Resources:
                 token.actions.githubusercontent.com:aud: !Ref OIDCAudience
               StringLike:
                 token.actions.githubusercontent.com:sub: !Sub repo:${GitHubOrg}/${RepositoryName}:*
+      ManagedPolicyArns:
+        - !Ref DeployerPolicy
 
   GithubOidc:
     Type: AWS::IAM::OIDCProvider

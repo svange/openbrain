@@ -79,7 +79,7 @@ Conditions:
     - Ref: OIDCProviderArn
     - ''
 Resources:
-  DevDeployerPolicy:
+  DeployerPolicy:
     Type: AWS::IAM::ManagedPolicy
     Properties:
       Description: Policy for GitHubActions
@@ -161,6 +161,8 @@ Resources:
             StringLike:
               token.actions.githubusercontent.com:sub:
                 Fn::Sub: repo:${GitHubOrg}/${RepositoryName}:*
+      ManagedPolicyArns:
+      - Ref: DeployerPolicy
   GithubOidc:
     Type: AWS::IAM::OIDCProvider
     Condition: CreateOIDCProvider
