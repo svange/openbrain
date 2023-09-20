@@ -3,12 +3,12 @@ from typing import Optional
 import ulid
 from pydantic import Field
 
-from chalicelib.orm.model_common_base import Recordable
-from chalicelib.util import Util
+from openbrain.orm.model_common_base import Recordable
+from openbrain.util import Util
 
 
 class Lead(Recordable):
-    """Internal ORM representing a chat message configurations."""
+    """Internal ORM representing Lead."""
 
     # Tracking
     client_id: str
@@ -29,6 +29,7 @@ class Lead(Recordable):
     sent_by_agent: Optional[bool] = False
 
     def save(self):
+        """Save the Lead object to the database"""
         return self._save(
             table_name=Util.LEAD_TABLE_NAME,
             hash_key_name="client_id",
@@ -39,6 +40,7 @@ class Lead(Recordable):
 
     @classmethod
     def get(cls, lead_id, client_id):
+        """Get a Lead object from the database"""
         lead = cls._get(
             table_name=Util.LEAD_TABLE_NAME,
             hash_key_name="client_id",
@@ -49,6 +51,7 @@ class Lead(Recordable):
         return cls(**lead)
 
     def refresh(self):
+        """Update this Lead object with the latest values from the database"""
         lead = Lead.get(lead_id=self.lead_id, client_id=self.client_id)
 
         for key, value in lead.dict().items():

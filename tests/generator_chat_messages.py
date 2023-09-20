@@ -1,7 +1,7 @@
 import random
 
 from faker import Faker
-from chalicelib.orm.model_chat_message import ChatMessage
+from openbrain.orm.model_chat_message import ChatMessage
 
 # from tests.generator_agent_configs import generate_agent_config
 

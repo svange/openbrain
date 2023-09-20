@@ -2,12 +2,12 @@ import ulid
 from pydantic import Field
 from typing import Optional
 
-from chalicelib.orm.model_common_base import Recordable
-from chalicelib.util import Util
-from chalicelib.orm.model_agent_config import AgentConfig
+from openbrain.orm.model_common_base import Recordable
+from openbrain.util import Util
 
 
 class ChatSession(Recordable):
+    """A chat session with an agent including all necessary state (config, memory, etc)"""
     # Tracking
     client_id: str = Field(description="The ID of the client the ChatSession belongs to")
 
@@ -17,9 +17,9 @@ class ChatSession(Recordable):
     # serialized_agent = JSONAttribute()
     frozen_lead: Optional[str] = Field(default=None, description="The frozen lead", repr=False)
     session_id: str = Field(default_factory=ulid.ULID().to_uuid().__str__, description="The session_id associated with this ChatSession")
-    # agent_config: Optional[AgentConfig] = Field(default=None, exclude=True)
 
     def save(self):
+        """Save the ChatSession object to the database"""
         return self._save(
             table_name=Util.SESSION_TABLE_NAME,
             hash_key_name="client_id",
@@ -30,6 +30,7 @@ class ChatSession(Recordable):
 
     @classmethod
     def get(cls, session_id, client_id) -> Optional["ChatSession"]:
+        """Get a ChatSession object from the database"""
         agent_config = cls._get(
             table_name=Util.SESSION_TABLE_NAME,
             hash_key_name="client_id",
@@ -42,6 +43,7 @@ class ChatSession(Recordable):
         return cls(**agent_config) if agent_config else None
 
     def refresh(self):
+        """Update this ChatSession object with the latest values from the database"""
         session_from_db = ChatSession.get(session_id=self.session_id, client_id=self.client_id)
 
         for key, value in session_from_db.dict().items():

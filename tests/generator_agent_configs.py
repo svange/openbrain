@@ -2,7 +2,7 @@ import random
 
 from faker import Faker
 import ulid
-from chalicelib.orm.model_agent_config import AgentConfig, DefaultSettings
+from openbrain.orm.model_agent_config import AgentConfig, DefaultSettings
 
 fake = Faker()
 

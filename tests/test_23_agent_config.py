@@ -2,7 +2,7 @@ import uuid
 
 import pytest
 
-from chalicelib.orm.model_agent_config import AgentConfig
+from openbrain.orm.model_agent_config import AgentConfig
 
 
 @pytest.fixture

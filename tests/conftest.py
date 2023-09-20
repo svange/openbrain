@@ -9,21 +9,17 @@ from dataclasses import dataclass
 
 import pytest
 import ulid
-from chalice.test import Client
 
-from chalicelib.gpt_agent import GptAgent
-from chalicelib.orm.model_agent_config import AgentConfig
-from chalicelib.orm.model_chat_message import ChatMessage
-from chalicelib.orm.model_chat_session import ChatSession
-from chalicelib.orm.model_lead import Lead
+from openbrain.agents.gpt_agent import GptAgent
+from openbrain.orm.model_agent_config import AgentConfig
+from openbrain.orm.model_chat_message import ChatMessage
+from openbrain.orm.model_chat_session import ChatSession
+from openbrain.orm.model_lead import Lead
 from tests.generator_agent_configs import generate_agent_config
 from tests.generator_chat_messages import generate_chat_message
 from tests.generator_chat_sessions import generate_chat_session
 from tests.generator_leads import generate_lead
-from chalice import Chalice
 
-from app import app as chalice_app
-# from dotenv import load_dotenv
 
 # load_dotenv()
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
@@ -48,27 +44,25 @@ NUMBER_OF_SAMPLES = 2
 
 # if local:
 #     return {
-#         "BusinessTopic": "arn:aws:sns:us-east-1:439638760367:WoxomAiBusinessTopic",
-#         "DevAgentConfigTable": "woxom-ai-infra-DevAgentConfigTable-1F6IZ3EU2K1OT",
-#         "DevCommonAccessPolicy": "arn:aws:iam::439638760367:policy/woxom-ai-infra-DevCommonAccessPolicy-6kGw6kjxXsVY",
-#         "DevLeadTable": "woxom-ai-infra-DevLeadTable-UHN6S4DDO4CC",
-#         "DevSessionTable": "woxom-ai-infra-DevSessionTable-XJVE3IUS8XYP",
-#         "DevWoxomAiSecrets": "arn:aws:secretsmanager:us-east-1:439638760367:secret:DevWoxomAiSecrets-4XOAzYudYVIw-aIcEwN",
-#         "EventBus": "WoxomAiEventBus",
+#         "BusinessTopic": "arn:aws:sns:us-east-1:439638760367:BusinessTopic",
+#         "DevAgentConfigTable": "ai-infra-DevAgentConfigTable-1F6IZ3EU2K1OT",
+#         "DevCommonAccessPolicy": "arn:aws:iam::439638760367:policy/ai-infra-DevCommonAccessPolicy-6kGw6kjxXsVY",
+#         "DevLeadTable": "ai-infra-DevLeadTable-UHN6S4DDO4CC",
+#         "DevSessionTable": "ai-infra-DevSessionTable-XJVE3IUS8XYP",
+#         "DevSecrets": "arn:aws:secretsmanager:us-east-1:439638760367:secret:DevSecrets-4XOAzYudYVIw-aIcEwN",
+#         "EventBus": "AiEventBus",
 #         "InfrastructureTopic": "arn:aws:sns:us-east-1:439638760367:WoxomAiInfrastructureTopic",
-#         "ProdAgentConfigTable": "woxom-ai-infra-ProdAgentConfigTable-N0ISRVFPPAT2",
-#         "ProdCommonAccessPolicy": "arn:aws:iam::439638760367:policy/woxom-ai-infra-ProdCommonAccessPolicy-xLXTzQ9pqZpY",
-#         "ProdLeadTable": "woxom-ai-infra-ProdLeadTable-5WU1V5JXOML0",
-#         "ProdSessionTable": "woxom-ai-infra-ProdSessionTable-I9WP0387YBLH",
-#         "ProdWoxomAiSecrets": "arn:aws:secretsmanager:us-east-1:439638760367:secret:ProdWoxomAiSecrets-RhC3o1otv23V-rDsICf",
-#         "DomainName": "woxom-ai.com",
+#         "ProdAgentConfigTable": "ai-infra-ProdAgentConfigTable-N0ISRVFPPAT2",
+#         "ProdCommonAccessPolicy": "arn:aws:iam::439638760367:policy/ai-infra-ProdCommonAccessPolicy-xLXTzQ9pqZpY",
+#         "ProdLeadTable": "ai-infra-ProdLeadTable-5WU1V5JXOML0",
+#         "ProdSessionTable": "ai-infra-ProdSessionTable-I9WP0387YBLH",
+#         "ProdWoxomAiSecrets": "arn:aws:secretsmanager:us-east-1:439638760367:secret:ProdSecrets-RhC3o1otv23V-rDsICf",
+#         "DomainName": "samvange.net",
 #         "STAGES": "dev,prod",
 #     }  # TODO, git rid of this in favor of a monkeypatch in test
 
 
-@pytest.fixture
-def app() -> Chalice:
-    return chalice_app
+
 
 @pytest.fixture
 def lambda_event():

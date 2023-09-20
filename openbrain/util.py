@@ -3,9 +3,11 @@ import os
 from typing import Dict
 
 import boto3
-from aws_lambda_powertools import Logger, Tracer, Metrics
+from aws_lambda_powertools import Logger, Tracer, Metrics # TODO make this optional or learn to stream logs from one module to another
 from botocore.exceptions import ClientError
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def _get_logger() -> Logger:
     logger = Logger(service=f'{os.environ.get("PROJECT")}')
@@ -50,19 +52,18 @@ class Util:
         "STAGES",
         "DomainName",
     ]
-
-    DEFAULT_CLIENT_ID = "public"
     PROJECT = os.environ.get("PROJECT")
-    STAGE = os.environ.get("STAGE", "dev")
-    INFRA_STACK_NAME = os.environ.get("INFRA_STACK_NAME")
+
     SESSION_TABLE_FRIENDLY_NAME = os.environ.get("SESSION_TABLE_FRIENDLY_NAME")
     AGENT_CONFIG_TABLE_FRIENDLY_NAME = os.environ.get("AGENT_CONFIG_TABLE_FRIENDLY_NAME")
     LEAD_TABLE_FRIENDLY_NAME = os.environ.get("LEAD_TABLE_FRIENDLY_NAME")
+    DEFAULT_CLIENT_ID = "public"
+
+    INFRA_STACK_NAME = os.environ.get("INFRA_STACK_NAME")
     SECRET_STORE_FRIENDLY_NAME = os.environ.get("SECRET_STORE_FRIENDLY_NAME")
     EVENT_BUS_FRIENDLY_NAME = os.environ.get("EVENTBUS_FRIENDLY_NAME")
     SNS_BUSINESS_TOPIC_FRIENDLY_NAME = os.environ.get("BUSINESS_TOPIC_FRIENDLY_NAME")
     SNS_INFRASTRUCTURE_TOPIC_FRIENDLY_NAME = os.environ.get("INFRASTRUCTURE_TOPIC_FRIENDLY_NAME")
-    LOCAL = True if STAGE.casefold() == "local".casefold() else False
     BOTO_SESSION = boto3.Session()
     AWS_REGION = BOTO_SESSION.region_name
     CENTRAL_INFRA_OUTPUTS: Dict[str, str]
@@ -92,9 +93,7 @@ class Util:
         infra_project_name=INFRA_STACK_NAME,
     )
 
-    # DEV_COGNITO_POOL_ARN = CENTRAL_INFRA_OUTPUTS["DevCognitoUserPoolArn"]
-    # PROD_COGNITO_POOL_ARN = CENTRAL_INFRA_OUTPUTS["ProdCognitoUserPoolArn"]
-    TOP_LEVEL_DOMAIN = CENTRAL_INFRA_OUTPUTS["DomainName"]
+    TOP_LEVEL_DOMAIN = CENTRAL_INFRA_OUTPUTS["DevDomainName"]
     SESSION_TABLE_NAME = CENTRAL_INFRA_OUTPUTS[SESSION_TABLE_FRIENDLY_NAME]
     AGENT_CONFIG_TABLE_NAME = CENTRAL_INFRA_OUTPUTS[AGENT_CONFIG_TABLE_FRIENDLY_NAME]
     LEAD_TABLE_NAME = CENTRAL_INFRA_OUTPUTS[LEAD_TABLE_FRIENDLY_NAME]
@@ -110,14 +109,8 @@ class Util:
             boto_session: boto3.Session,
             sercret_name: str,
             secrets_store_region: str,
-            local: bool = False,
     ) -> dict:
         """Get a secret from AWS Secrets Manager."""
-        if local:
-            return {
-                "openai_api_key": "running_disconnected_test",
-                "promptlayer_api_key": "running_disconnected_test",
-            }
         # Create a Secrets Manager client
         session = boto_session
         client = session.client(
@@ -137,13 +130,10 @@ class Util:
         return secret
 
     SECRETS = get_secret(
-        BOTO_SESSION, SECRETS_STORE_ARN, SECRETS_STORE_REGION, local=LOCAL
+        BOTO_SESSION, SECRETS_STORE_ARN, SECRETS_STORE_REGION
     )
 
     # set OpenAI and Promptlayer API keys as env vars
-    os.environ["OPENAI_API_KEY"] = SECRETS["openai_api_key"]
-    os.environ["PROMPTLAYER_API_KEY"] = SECRETS["promptlayer_api_key"]
-
     CENSOR_TEMPLATE = """ You are a censorship agent working with an OpenAI chat model. Your job is to take what I'm going to say to a potential customer and make sure it conforms to the following rules:
 
     Only ask for one piece of information at a time. For example, change "Great! Can I have your full name, date of birth, list of..." into "Great! Please provide me with your full name so that I..."

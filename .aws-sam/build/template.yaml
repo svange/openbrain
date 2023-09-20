@@ -1,0 +1,390 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'python3.10
+
+
+  SAM Template for common infrastructure'
+Parameters:
+  GitHubOrg:
+    Description: Name of GitHub organization/user (case sensitive)
+    Type: String
+  RepositoryName:
+    Description: Name of GitHub repository (case sensitive)
+    Type: String
+  OIDCProviderArn:
+    Description: Arn for the GitHub OIDC Provider.
+    Default: ''
+    Type: String
+  OIDCAudience:
+    Description: Audience supplied to configure-aws-credentials.
+    Default: sts.amazonaws.com
+    Type: String
+  DevOpenAIKey:
+    Type: String
+    Description: OpenAI API Key for Development
+  DevPromptLayerKey:
+    Type: String
+    Description: PromptLayer API Key for Development
+  DevHuggingFaceKey:
+    Type: String
+    Description: HuggingFace API Key for Development
+  DevPineconeKey:
+    Type: String
+    Description: Pinecone API Key for Development
+  DevWeviateKey:
+    Type: String
+    Description: Weviate API Key for Development
+  DevMilvusKey:
+    Type: String
+    Description: Milvus API Key for Development
+  DevGoogleKey:
+    Type: String
+    Description: Google API Key for Development
+  DevMetaKey:
+    Type: String
+    Description: Meta API Key for Development
+  DevAnthropicKey:
+    Type: String
+    Description: Anthropic API Key for Development
+  ProdOpenAIKey:
+    Type: String
+    Description: OpenAI API Key for Production
+  ProdPromptLayerKey:
+    Type: String
+    Description: PromptLayer API Key for Production
+  ProdHuggingFaceKey:
+    Type: String
+    Description: HuggingFace API Key for Production
+  ProdPineconeKey:
+    Type: String
+    Description: Pinecone API Key for Production
+  ProdWeviateKey:
+    Type: String
+    Description: Weviate API Key for Production
+  ProdMilvusKey:
+    Type: String
+    Description: Milvus API Key for Production
+  ProdGoogleKey:
+    Type: String
+    Description: Google API Key for Production
+  ProdMetaKey:
+    Type: String
+    Description: Meta API Key for Production
+  ProdAnthropicKey:
+    Type: String
+    Description: Anthropic API Key for Production
+Conditions:
+  CreateOIDCProvider:
+    Fn::Equals:
+    - Ref: OIDCProviderArn
+    - ''
+Resources:
+  DevDeployerPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description: Policy for GitHubActions
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action:
+          - cognito-idp:DescribeUserPool
+          - cognito-idp:DescribeUserPoolClient
+          - cognito-idp:GetUser
+          Resource:
+          - arn:aws:cognito-idp:us-east-1:330659553592:userpool/us-east-1_NcdVCUDOV
+        - Effect: Allow
+          Action:
+          - secretsmanager:GetSecretValue
+          Resource:
+          - Ref: DevAiSecrets
+          - Ref: ProdAiSecrets
+        - Effect: Allow
+          Action:
+          - dynamodb:GetItem
+          - dynamodb:Query
+          - dynamodb:Scan
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          - dynamodb:DeleteItem
+          Resource:
+          - Fn::GetAtt:
+            - DevSessionTable
+            - Arn
+          - Fn::GetAtt:
+            - DevAgentConfigTable
+            - Arn
+          - Fn::GetAtt:
+            - DevLeadTable
+            - Arn
+          - Fn::GetAtt:
+            - ProdSessionTable
+            - Arn
+          - Fn::GetAtt:
+            - ProdAgentConfigTable
+            - Arn
+          - Fn::GetAtt:
+            - ProdLeadTable
+            - Arn
+        - Effect: Allow
+          Action:
+          - cloudformation:DescribeStacks
+          Resource:
+          - Fn::Sub: arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/${AWS::StackName}/*
+        - Effect: Allow
+          Action:
+          - events:PutEvents
+          Resource:
+          - Fn::GetAtt:
+            - DevEventBus
+            - Arn
+          - Fn::GetAtt:
+            - ProdEventBus
+            - Arn
+  GitHubRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Effect: Allow
+          Action: sts:AssumeRoleWithWebIdentity
+          Principal:
+            Federated:
+              Fn::If:
+              - CreateOIDCProvider
+              - Ref: GithubOidc
+              - Ref: OIDCProviderArn
+          Condition:
+            StringEquals:
+              token.actions.githubusercontent.com:aud:
+                Ref: OIDCAudience
+            StringLike:
+              token.actions.githubusercontent.com:sub:
+                Fn::Sub: repo:${GitHubOrg}/${RepositoryName}:*
+  GithubOidc:
+    Type: AWS::IAM::OIDCProvider
+    Condition: CreateOIDCProvider
+    Properties:
+      Url: https://token.actions.githubusercontent.com
+      ClientIdList:
+      - sts.amazonaws.com
+      ThumbprintList:
+      - ffffffffffffffffffffffffffffffffffffffff
+  ProdSessionTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: client_id
+        AttributeType: S
+      - AttributeName: session_id
+        AttributeType: S
+      KeySchema:
+      - AttributeName: client_id
+        KeyType: HASH
+      - AttributeName: session_id
+        KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+  DevSessionTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: client_id
+        AttributeType: S
+      - AttributeName: session_id
+        AttributeType: S
+      KeySchema:
+      - AttributeName: client_id
+        KeyType: HASH
+      - AttributeName: session_id
+        KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+  ProdAgentConfigTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: client_id
+        AttributeType: S
+      - AttributeName: profile_name
+        AttributeType: S
+      KeySchema:
+      - AttributeName: client_id
+        KeyType: HASH
+      - AttributeName: profile_name
+        KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+  DevAgentConfigTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: client_id
+        AttributeType: S
+      - AttributeName: profile_name
+        AttributeType: S
+      KeySchema:
+      - AttributeName: client_id
+        KeyType: HASH
+      - AttributeName: profile_name
+        KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+  DevLeadTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: client_id
+        AttributeType: S
+      - AttributeName: lead_id
+        AttributeType: S
+      KeySchema:
+      - AttributeName: client_id
+        KeyType: HASH
+      - AttributeName: lead_id
+        KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+  ProdLeadTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: client_id
+        AttributeType: S
+      - AttributeName: lead_id
+        AttributeType: S
+      KeySchema:
+      - AttributeName: client_id
+        KeyType: HASH
+      - AttributeName: lead_id
+        KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+  AiEventBus:
+    Type: AWS::Events::EventBus
+    Properties:
+      Name: AiEventBus
+  ProdAiSecrets:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: Secrets for Production Service
+      SecretString:
+        Fn::Sub: "{\n  \"openai_api_key\": \"${ProdOpenAIKey}\",\n  \"promptlayer_api_key\"\
+          : \"${ProdPromptLayerKey}\",\n  \"huggingface_api_key\": \"${ProdHuggingFaceKey}\"\
+          ,\n  \"pinecone_api_key\": \"${ProdPineconeKey}\",\n  \"weviate_api_key\"\
+          : \"${ProdWeviateKey}\",\n  \"milvus_api_key\": \"${ProdMilvusKey}\",\n\
+          \  \"google_api_key\": \"${ProdGoogleKey}\",\n  \"meta_api_key\": \"${ProdMetaKey}\"\
+          ,\n  \"anthropic_api_key\": \"${ProdAnthropicKey}\"\n}\n"
+  DevAiSecrets:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: Secrets for Development Service
+      SecretString:
+        Fn::Sub: "{\n  \"openai_api_key\": \"${DevOpenAIKey}\",\n  \"promptlayer_api_key\"\
+          : \"${DevPromptLayerKey}\",\n  \"huggingface_api_key\": \"${DevHuggingFaceKey}\"\
+          ,\n  \"pinecone_api_key\": \"${DevPineconeKey}\",\n  \"weviate_api_key\"\
+          : \"${DevWeviateKey}\",\n  \"milvus_api_key\": \"${DevMilvusKey}\",\n  \"\
+          google_api_key\": \"${DevGoogleKey}\",\n  \"meta_api_key\": \"${DevMetaKey}\"\
+          ,\n  \"anthropic_api_key\": \"${DevAnthropicKey}\"\n}\n"
+  DevInfraTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: DevInfraTopic
+      DisplayName: Dev Infrastructure Notifications
+  DevBusinessTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: DevBusinessTopic
+      DisplayName: Dev Business Notifications
+  ProdInfraTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: ProdInfraTopic
+      DisplayName: Production Infrastructure Notifications
+  ProdBusinessTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: ProdBusinessTopic
+      DisplayName: Production Business Notifications
+  DevEventBus:
+    Type: AWS::Events::EventBus
+    Properties:
+      Name: DevEventBus
+  ProdEventBus:
+    Type: AWS::Events::EventBus
+    Properties:
+      Name: ProdEventBus
+Outputs:
+  WordsOfWarning:
+    Description: WARNING
+    Value: These outputs are used by other stacks. These outputs are open to extension,
+      but closed to modification.
+  DevDomainName:
+    Description: This is a static value, someone should make it dynamic.
+    Value: www.samvange.net
+  DevAiSecrets:
+    Description: ARN of the Development Secrets
+    Value:
+      Ref: DevAiSecrets
+  ProdAiSecrets:
+    Description: ARN of the Production Secrets
+    Value:
+      Ref: ProdAiSecrets
+  DevSessionTable:
+    Description: Dynamic name of the DEVELOPMENT DynamoDB table for SESSIONS
+    Value:
+      Ref: DevSessionTable
+  DevAgentConfigTable:
+    Description: Dynamic name of the DEVELOPMENT DynamoDB table for AGENTCONFIGS
+    Value:
+      Ref: DevAgentConfigTable
+  DevLeadTable:
+    Description: Dynamic name of the DEVELOPMENT DynamoDB table for LEADS
+    Value:
+      Ref: DevLeadTable
+  Role:
+    Value:
+      Fn::GetAtt:
+      - GitHubRole
+      - Arn
+  ProdSessionTable:
+    Description: Dynamic name of the PRODUCTION DynamoDB table for SESSIONS
+    Value:
+      Ref: ProdSessionTable
+  ProdAgentConfigTable:
+    Description: Dynamic name of the PRODUCTION DynamoDB table for AGENTCONFIGS
+    Value:
+      Ref: ProdAgentConfigTable
+  ProdLeadTable:
+    Description: Dynamic name of the PRODUCTION DynamoDB table for LEADS
+    Value:
+      Ref: ProdLeadTable
+  STAGES:
+    Description: STAGES
+    Value: dev,prod
+  EventBus:
+    Description: EventBus
+    Value:
+      Ref: AiEventBus
+  DevInfrastructureTopic:
+    Description: InfrastructureTopic
+    Value:
+      Ref: DevInfraTopic
+  DevBusinessTopic:
+    Description: BusinessTopic
+    Value:
+      Ref: DevBusinessTopic
+  InfrastructureTopic:
+    Description: InfrastructureTopic
+    Value:
+      Ref: ProdInfraTopic
+  BusinessTopic:
+    Description: BusinessTopic
+    Value:
+      Ref: ProdBusinessTopic
