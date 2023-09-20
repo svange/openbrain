@@ -6,9 +6,9 @@ import pytest
 import retry
 from langchain.schema import BaseMemory
 
-from chalicelib.gpt_agent import GptAgent
-from chalicelib.orm.model_chat_session import ChatSession
-from chalicelib.orm.model_lead import Lead
+from openbrain.agents.gpt_agent import GptAgent
+from openbrain.orm.model_chat_session import ChatSession
+from openbrain.orm.model_lead import Lead
 
 
 @pytest.fixture

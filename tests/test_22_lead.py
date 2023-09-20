@@ -3,7 +3,7 @@ import uuid
 
 import pytest
 
-from chalicelib.orm.model_lead import Lead
+from openbrain.orm.model_lead import Lead
 
 tests_dir = pathlib.Path(__file__).parent.absolute()
 test_resources_dir = tests_dir / "resources" / "examples"

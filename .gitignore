@@ -6,5 +6,7 @@ __pycache__/
 .env
 *.log
 sdk
-pytest.log
 .idea
+build
+dist
+*.egg-info
