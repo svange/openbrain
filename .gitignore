@@ -1,0 +1,9 @@
+.chalice/deployments/
+.chalice/venv/
+.venv*/
+__pycache__/
+.pytest_cache/
+.env
+*.log
+sdk
+pytest.log
