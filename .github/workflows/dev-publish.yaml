@@ -1,8 +1,8 @@
 name: Test dev branch and deploy to pypi-test
 on:
   push:
-    branches-ignore:
-      - '!dev'
+    branches:
+      - dev
     tags:
       - "v*.*.*"
 
