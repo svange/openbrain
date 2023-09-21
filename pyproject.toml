@@ -25,6 +25,7 @@ python-ulid = "^1.1.0"
 aws-xray-sdk = "^2.12.0"
 tiktoken = "^0.5.1"
 gradio = "^3.44.4"
+poetry-semver = "^0.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -41,3 +42,4 @@ build-backend = "poetry_dynamic_versioning.backend"
 enable = true
 bump = true
 vcs = "git"
+style = "semver"
