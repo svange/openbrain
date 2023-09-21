@@ -1,13 +1,24 @@
 # OpenBra.in
-
-A tool to store and retrieve sets of langchain LLM agent parameters for use in chat sessions. Allows users to chat with a programatically configurable, stateful LLM agent. An ORM is provided using DynamoDB to aid in the storage and retrieval of agent parameters, sessions, agent parameters, agent memories, and more.
-
-## OpenBrain Central Infrastructure
-
 ![Main](https://github.com/svange/openbrain/actions/workflows/main-deploy.yaml/badge.svg?event=push)
 ![Dev](https://github.com/svange/openbrain/actions/workflows/dev-deploy.yaml/badge.svg?event=push)
 
-Project holding central infrastructure that is shared across projects. Other projects can learn dynamic names for these resources by querying the outputs of this stack.
+A tool to store and retrieve sets of langchain LLM agent parameters for use in chat sessions. Allows users to chat with a programatically configurable, stateful LLM agent. An ORM is provided using DynamoDB to aid in the storage and retrieval of agent parameters, sessions, agent parameters, agent memories, and more.
+
+## Command line interface and tools
+The following commands are available for use in the shell. 
+
+```bash
+ob "message" # sends a single message to the agent and returns the response 
+```
+```bash
+ob-chat # starts a chat session with the agent
+```
+```bash
+ob-tuner # launch a local gradio instance to create and modify AgentConfig objects
+```
+
+## OpenBrain Central Infrastructure
+This project holds central infrastructure that is used as a base for all operations needed by OpenBra.in. 
 
 To build and deploy run the following in your shell:
 
