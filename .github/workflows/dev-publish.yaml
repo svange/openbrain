@@ -99,12 +99,13 @@ jobs:
 
   submit-pr:
     runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
     needs: publish
     steps:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          name: Auto-release - ${{github.ref_name}}
+          title: Auto-release - ${{github.ref_name}}
           committer: GitHub Actions <samuelvange@gmail.com>
           branch: release/${{github.ref_name}}
           base: main
