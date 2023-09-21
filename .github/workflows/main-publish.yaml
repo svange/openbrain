@@ -81,17 +81,11 @@ jobs:
           python ci_cd.py -t
 
       #----------------------------------------------
-      #              build package
-      #----------------------------------------------
-      - name: Run tests
-        run: |
-          source .venv/bin/activate
-          python ci_cd.py -B --skip-tests
-
-      #----------------------------------------------
       #              publish to pypi
       #----------------------------------------------
       - name: Build and publish to pypi
         uses: JRubics/poetry-publish@v1.17
         with:
           pypi_token: ${{ secrets.PYPI_API_KEY }}
+          plugins: "poetry-dynamic-versioning-plugin"
+
