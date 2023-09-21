@@ -105,7 +105,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          title: Auto-release - ${{github.ref_name}}
+          title: GH Actions auto-release 🐍 ${{github.ref_name}}
           committer: GitHub Actions <samuelvange@gmail.com>
           branch: release/${{github.ref_name}}
           base: main
