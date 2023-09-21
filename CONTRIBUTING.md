@@ -1,4 +1,4 @@
-# Git Branching Strategy
+# Git Branching Strategy # TODO switch to forking strategy
 Work in the following branches:
 - `main` is protected and requires a pull request to merge.
 - `dev` is the development branch and is deployed to the dev stage. Tagged changes to `dev` run tests, deploy to pypi-test, and submit a pull request to `main`.
