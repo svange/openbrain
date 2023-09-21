@@ -7,6 +7,7 @@ permissions:
   id-token: write # This is required for requesting the JWT
   contents: read  # This is required for actions/checkout
 env:
+  AWS_GITHUB_ROLE_ARN: arn:aws:iam::330659553592:role/ai-infra-GitHubRole-gt6ZWvZIooUR
   AWS_REGION: us-east-1
   PROJECT: openbrain
   REPOSITORYNAME: openbrain
@@ -23,7 +24,7 @@ env:
   EVENTBUS_FRIENDLY_NAME: DevEventBus
   OPENAI_API_KEY: ${{ secrets.DEV_OPENAI_KEY }}
 jobs:
-  test:
+  test-build-publish:
     runs-on: ubuntu-latest
     steps:
       #----------------------------------------------
