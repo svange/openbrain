@@ -10,3 +10,4 @@ sdk
 build
 dist
 *.egg-info
+.run/
