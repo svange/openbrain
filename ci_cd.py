@@ -23,11 +23,11 @@ logger = logging.getLogger("CICD Script")
 logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG)
 
 BOTO_SESSION = boto3.Session()
-if BOTO_SESSION.region_name is None:
-    AWS_REGION = os.environ.get("AWS_REGION")
-    BOTO_SESSION = boto3.Session(region_name=AWS_REGION)
-else:
-    AWS_REGION = BOTO_SESSION.region_name
+# if BOTO_SESSION.region_name is None:
+#     AWS_REGION = os.environ.get("AWS_REGION")
+#     BOTO_SESSION = boto3.Session(region_name=AWS_REGION)
+# else:
+#     AWS_REGION = BOTO_SESSION.region_name
 
 def run_command(command: list):
     process = subprocess.Popen(" ".join(command), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=os.environ,

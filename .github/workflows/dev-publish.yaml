@@ -27,6 +27,11 @@ jobs:
   test-build-publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_GITHUB_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
       #----------------------------------------------
       #       check-out repo and set-up python
       #----------------------------------------------
