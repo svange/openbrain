@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "openbrain"
-version = "0.1.0"
+version = "0.1.1"
 description = "A package to interact with generative AI and build specialized generative AI workflows"
 authors = ["Samuel Vange <7166607+svange@users.noreply.github.com>"]
 readme = "README.md"
@@ -39,3 +39,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.licensecheck]
 using = "PEP631:tests;dev;docs"
+
+[tool.poetry_bumpversion.file."openbrain/__init__.py"]
+# Duplicate the line above to add more files
