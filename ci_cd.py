@@ -22,6 +22,12 @@ AWS_PROFILE = os.environ.get("AWS_PROFILE", "default")
 logger = logging.getLogger("CICD Script")
 logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG)
 
+BOTO_SESSION = boto3.Session()
+if BOTO_SESSION.region_name is None:
+    AWS_REGION = os.environ.get("AWS_REGION")
+    BOTO_SESSION = boto3.Session(region_name=AWS_REGION)
+else:
+    AWS_REGION = BOTO_SESSION.region_name
 
 def run_command(command: list):
     process = subprocess.Popen(" ".join(command), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=os.environ,
@@ -128,7 +134,7 @@ def test_python():
 
 def get_central_infra_outputs() -> dict:
     """Get the outputs from the central infrastructure stack."""
-    cloudformation = boto3.client("cloudformation")
+    cloudformation = BOTO_SESSION.client("cloudformation")
     response = cloudformation.describe_stacks(StackName=CENTRAL_INFRA_STACK_NAME)
     values = {item["OutputKey"]: item["OutputValue"] for item in response["Stacks"][0]["Outputs"]}
     # sort dictionary by key
