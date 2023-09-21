@@ -91,7 +91,9 @@ jobs:
       #----------------------------------------------
       #              publish to pypi
       #----------------------------------------------
-      - name: Build and publish to pypi
+      - name: Build and publish to pypi-test
         uses: JRubics/poetry-publish@v1.17
         with:
           pypi_token: ${{ secrets.TEST_PYPI_API_KEY }}
+          repository_name: "testpypi"
+          repository_url: "https://test.pypi.org/legacy/"
