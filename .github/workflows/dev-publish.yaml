@@ -1,8 +1,10 @@
 name: Test dev branch and deploy to pypi-test
 on:
   push:
-    branches:
-      - dev
+    branches-ignore:
+      - '!dev'
+    tags:
+      - "v*.*.*"
 
 permissions:
   id-token: write # This is required for requesting the JWT
