@@ -236,20 +236,6 @@ sequenceDiagram
 
 ```
 
-# Procedures
-
-## Git Branching Strategy
-For local prototyping, please use a branch with the prefix `prototype/`. Once stable, branches will be prefixed with `feature/` or `bugfix/` and merged into `dev` for testing.
-:
-- `main` is protected and requires a pull request to merge.
-- `dev` is the development branch and is deployed to the dev stage.
-- `prototype/<UNIQUE_NAME>` is used for local prototyping and is not deployed.
-- `feature/<UNIQUE_NAME>` once stable, this prefix is used for feature development and is merged into `dev` for testing.
-- `bugfix/<UNIQUE_NAME>` once stable, this prefix is used for bugfixes and is merged into `dev` for testing.
-
-This repo uses Github Actions. See `.github/workflows` for the workflow definitions. The workflows are triggered by
-pushes to
-
 ## Deployment (CI/CD)
 All devops procedures are codified in `ci_cd.py` to run cross-platform, and the commands are ultimately available as
 simple pipenv scripts.
