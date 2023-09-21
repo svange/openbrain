@@ -97,7 +97,7 @@ jobs:
           pypi_token: ${{ secrets.TEST_PYPI_API_KEY }}
           repository_name: "testpypi"
           repository_url: "https://test.pypi.org/legacy/"
-          plugins: "poetry-dynamic-versioning-plugin"
+          plugins: poetry-dynamic-versioning-plugin
 
   submit-pr:
     runs-on: ubuntu-latest
