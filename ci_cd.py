@@ -115,7 +115,7 @@ def publish_python(stage: str = "dev"):
         raise SystemExit(f"Unknown {stage=}")
 
     for command in commands:
-        logger.debug(f"Running: {' '.join(command)}")
+        print(f"Running: {' '.join(command)}")
         run_command(command)
 
 
