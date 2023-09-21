@@ -85,6 +85,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
+    needs: test
     steps:
       #----------------------------------------------
       #              publish to pypi
@@ -99,8 +100,7 @@ jobs:
     name: >-
       Sign the Python 🐍 distribution 📦 with Sigstore
       and upload them to GitHub Release
-    needs:
-      - publish
+    needs: publish
     runs-on: ubuntu-latest
 
     permissions:
