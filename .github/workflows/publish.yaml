@@ -2,12 +2,13 @@ name: Test dev branch and deploy to pypi-test
 on:
   push:
     branches:
-    - main
+      - main
+
 permissions:
   id-token: write # This is required for requesting the JWT
   contents: read  # This is required for actions/checkout
 env:
-  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_PROD_DEPLOYER_ROLE_ARN }}
+  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_DEV_DEPLOYER_ROLE_ARN }}
   AWS_REGION: us-east-1
   PROJECT: openbrain
   REPOSITORYNAME: openbrain
@@ -75,57 +76,47 @@ jobs:
       #----------------------------------------------
       #              run test suite
       #----------------------------------------------
-#      - name: Run tests
-#        run: |
-#          source .venv/bin/activate
-#          python ci_cd.py -t
       - name: Test with pytest
         run: |
+          source .venv/bin/activate
           pytest
+
   publish:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
     needs: test
     steps:
       #----------------------------------------------
       #              publish to pypi
       #----------------------------------------------
-      - name: Build and publish to pypi-test
+      - name: Publish Python 🐍 distribution 📦 to PyPI-test
         uses: JRubics/poetry-publish@v1.17
         with:
           pypi_token: ${{ secrets.PYPI_API_KEY }}
-          plugins: "poetry-dynamic-versioning-plugin"
+          plugins: poetry-dynamic-versioning-plugin
 
   github-release:
-    name: >-
-      Sign the Python 🐍 distribution 📦 with Sigstore
-      and upload them to GitHub Release
-    needs: publish
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write  # IMPORTANT: mandatory for making GitHub Releases
-      id-token: write  # IMPORTANT: mandatory for sigstore
-
+    needs: publish
     steps:
-      - name: Download all the dists
-        uses: actions/download-artifact@v3
-        with:
-          name: python-package-distributions
-          path: dist/
-      - name: Sign the dists with Sigstore
-        uses: sigstore/gh-action-sigstore-python@v1.2.3
-        with:
-          inputs: >-
-            ./dist/*.tar.gz
-            ./dist/*.whl
-      - name: Upload artifact signatures to GitHub Release
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ github.token }}
-        # Upload to GitHub Release using the `gh` CLI.
-        # `dist/` contains the built packages, and the
-        # sigstore-produced signatures and certificates.
-        run: >-
-          gh release upload
-          '${{ github.ref_name }}' dist/**
-          --repo '${{ github.repository }}'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/openbrain-${{ github.ref }}.tar.gz
+          asset_name: openbrain-${{ github.ref }}.tar.gz
+          asset_content_type: application/gzip
