@@ -15,7 +15,7 @@ jobs:
     uses: ./.github/workflows/run-tests.yaml
     with:
       tag: ${{ github.ref_name }}
-      secrets: inherit
+    secrets: inherit
 
 
   #  create-pr:
