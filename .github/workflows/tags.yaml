@@ -23,7 +23,7 @@ jobs:
   update-git-dev:
     runs-on: ubuntu-latest
     needs: run-tests
-    if : ! StartsWith(github.ref_name, 'test')
+    if: ! StartsWith(github.ref_name, 'test')
     steps:
       - uses: actions/checkout@v3
         with:
