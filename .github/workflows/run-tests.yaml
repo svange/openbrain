@@ -10,11 +10,11 @@ permissions:
   contents: read  # This is required for actions/checkout
 env:
   PROJECT: ${{ github.event.repository.name }}
-  GITHUBORG: ${{ github.event.inputs.GITHUBORG }}
+  GITHUBORG: ${{ github.actor }}
   REPOSITORYNAME: ${{ github.event.repository.name }}
 
   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_ROLE_ARN }}
+  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_PROD_DEPLOYER_ROLE_ARN }}
 
   AWS_REGION: us-east-1
   INFRA_STACK_NAME: ai-infra
