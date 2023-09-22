@@ -80,22 +80,22 @@ jobs:
           source .venv/bin/activate
           pytest
 
-  release-to-pypi-test:
-    name: Release
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
-      - name: Install poetry
-        run: pip install poetry==1.2.1
-      - uses: bjoluc/semantic-release-config-poetry@v2
-        with:
-          pypi_token: ${{ secrets.TEST_PYPI_TOKEN }}
-          pypi_repository: https://test.pypi.org/legacy/
-          release_branch: ${{ github.ref }}
+#  release-to-pypi-test:
+#    name: Release
+#    runs-on: ubuntu-latest
+#    needs: test
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: actions/setup-python@v4
+#        with:
+#          python-version: "3.10"
+#      - name: Install poetry
+#        run: pip install poetry==1.2.1
+#      - uses: bjoluc/semantic-release-config-poetry@v2
+#        with:
+#          pypi_token: ${{ secrets.TEST_PYPI_TOKEN }}
+#          pypi_repository: https://test.pypi.org/legacy/
+#          release_branch: ${{ github.ref }}
 
 #      - name: Publish Python 🐍 distribution 📦 to PyPI-test
 #        uses: JRubics/poetry-publish@v1.17
