@@ -1,14 +1,11 @@
 from __future__ import annotations
 
-import os
-
 import pytest
 import retry
 from langchain.schema import BaseMemory
 
 from openbrain.agents.gpt_agent import GptAgent
 from openbrain.orm.model_agent_config import AgentConfig
-from openbrain.orm.model_chat_message import ChatMessage
 from openbrain.orm.model_lead import Lead
 
 
@@ -39,14 +36,10 @@ class TestAgent:
 
     @retry.retry(delay=1, tries=2)
     @pytest.mark.integration_tests
-    def test_serialize_deserialize_agent(
-            self, incoming_agent_config: AgentConfig, incoming_lead: Lead
-    ):
+    def test_serialize_deserialize_agent(self, incoming_agent_config: AgentConfig, incoming_lead: Lead):
         # unique_agent_config = agent_config_fixture
         gpt_agent = GptAgent(agent_config=incoming_agent_config, lead=incoming_lead)
-        response_message = gpt_agent.handle_user_message(
-            "I see 25 blue birds!"
-        )
+        response_message = gpt_agent.handle_user_message("I see 25 blue birds!")
 
         serialized_agent = gpt_agent.serialize()
         assert serialized_agent is not None
@@ -68,17 +61,15 @@ class TestAgent:
         assert isinstance(deserialized_agent.working_memory, BaseMemory)
 
         # chat with the agent
-        response_message = deserialized_agent.handle_user_message(
-            user_message="How many birds did I tell you I saw?"
-        )
+        response_message = deserialized_agent.handle_user_message(user_message="How many birds did I tell you I saw?")
         assert response_message is not None
         assert len(response_message) > 0
         assert isinstance(response_message, str)
         assert (
-                "25" in response_message
-                or "twenty-five" in response_message
-                or "twenty five" in response_message
-                or "DISCONNECTED" in response_message
+            "25" in response_message
+            or "twenty-five" in response_message
+            or "twenty five" in response_message
+            or "DISCONNECTED" in response_message
         )
 
     @pytest.mark.integration_tests
@@ -87,7 +78,7 @@ class TestAgent:
             "I see 25 blue birds",
             "How many birds did I see?",
             "What color are they?",
-            ]
+        ]
 
         # GIVE INFO
         message = messages.pop(0)
@@ -103,11 +94,7 @@ class TestAgent:
 
         assert response_message is not None
         assert isinstance(response_message, str)
-        assert (
-                "25" in response_message
-                or "twenty-five" in response_message
-                or "twenty five" in response_message
-        )
+        assert "25" in response_message or "twenty-five" in response_message or "twenty five" in response_message
 
         # ASK ANOTHER QUESTION
         message = messages.pop(0)
@@ -116,4 +103,3 @@ class TestAgent:
         assert response_message is not None
         assert isinstance(response_message, str)
         assert "blue" in response_message.lower()
-

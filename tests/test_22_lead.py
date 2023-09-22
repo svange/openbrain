@@ -51,9 +51,7 @@ class TestLead:
     def test_lead_save_retrieve(self, incoming_lead):
         # 1. Save the unique Lead to DynamoDB
         save_response = incoming_lead.save()
-        assert (
-                save_response is not None
-        )  # Add more robust checks based on your DynamoDB response structure
+        assert save_response is not None  # Add more robust checks based on your DynamoDB response structure
 
         # 2. Retrieve the saved Lead from DynamoDB
         retrieved_lead = Lead.get(lead_id=incoming_lead.lead_id, client_id=incoming_lead.client_id)
@@ -75,9 +73,7 @@ class TestLead:
     def test_lead_update_refresh(self, incoming_lead):
         # 1. Save the unique Lead to DynamoDB
         save_response = incoming_lead.save()
-        assert (
-                save_response is not None
-        )  # Add more robust checks based on your DynamoDB response structure
+        assert save_response is not None  # Add more robust checks based on your DynamoDB response structure
 
         # 2. Update some fields
         updated_fields = {
@@ -89,9 +85,7 @@ class TestLead:
 
         # 3. Save the updated Lead
         update_response = incoming_lead.save()
-        assert (
-                update_response is not None
-        )  # Add more robust checks based on your DynamoDB response structure
+        assert update_response is not None  # Add more robust checks based on your DynamoDB response structure
 
         # 4. Retrieve the updated Lead
         retrieved_lead = Lead.get(lead_id=incoming_lead.lead_id, client_id=incoming_lead.client_id)
@@ -116,9 +110,7 @@ class TestLead:
 
         # Step 2: Save the unique lead to DynamoDB
         save_response = incoming_lead.save()
-        assert (
-                save_response is not None
-        )  # Add more robust checks based on your DynamoDB response structure
+        assert save_response is not None  # Add more robust checks based on your DynamoDB response structure
 
         # Step 3: Update some fields
         updated_fields = {
@@ -148,14 +140,10 @@ class TestLead:
 
         # Step 9: Save the updated lead
         update_response = incoming_lead.save()
-        assert (
-                update_response is not None
-        )  # Add more robust checks based on your DynamoDB response structure
+        assert update_response is not None  # Add more robust checks based on your DynamoDB response structure
 
         # Step 10: Retrieve the updated lead
-        retrieved_updated_lead = Lead.get(
-            lead_id=incoming_lead.lead_id, client_id=incoming_lead.client_id
-        )
+        retrieved_updated_lead = Lead.get(lead_id=incoming_lead.lead_id, client_id=incoming_lead.client_id)
         assert retrieved_updated_lead is not None
 
         # Step 11: Compare each value one by one, asserting their equality

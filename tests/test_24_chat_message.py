@@ -4,8 +4,7 @@ import json
 
 import pytest
 
-from openbrain.orm.model_chat_message import AgentConfig
-from openbrain.orm.model_chat_message import ChatMessage
+from openbrain.orm.model_chat_message import AgentConfig, ChatMessage
 
 
 @pytest.fixture

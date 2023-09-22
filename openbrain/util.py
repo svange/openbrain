@@ -3,11 +3,16 @@ import os
 from typing import Dict
 
 import boto3
-from aws_lambda_powertools import Logger, Tracer, Metrics # TODO make this optional or learn to stream logs from one module to another
+from aws_lambda_powertools import (  # TODO make this optional or learn to stream logs from one module to another
+    Logger,
+    Metrics,
+    Tracer,
+)
 from botocore.exceptions import ClientError
 from dotenv import load_dotenv
 
 load_dotenv()
+
 
 def _get_logger() -> Logger:
     logger = Logger(service=f'{os.environ.get("PROJECT")}')
@@ -29,6 +34,7 @@ def _get_tracer() -> Tracer:
 class Util:
     """A central source of truth for infrastructure resources and other utility functions.
     Loads API keys from AWS Secrets Manager and sets them as environment variables."""
+
     logger = _get_logger()
     metrics = _get_metrics()
     tracer = _get_tracer()
@@ -76,16 +82,13 @@ class Util:
 
     @staticmethod
     def get_central_infra_hints(
-            boto_session: boto3.Session,
-            infra_project_name: str,
+        boto_session: boto3.Session,
+        infra_project_name: str,
     ) -> Dict[str, str]:
-
         f"""Use friendly names get dynamically named resources from {infra_project_name} stack."""
         cf_client = boto_session.client("cloudformation")
         response = cf_client.describe_stacks(StackName=infra_project_name)
-        central_infra_outputs = {
-            x["OutputKey"]: x["OutputValue"] for x in response["Stacks"][0]["Outputs"]
-        }
+        central_infra_outputs = {x["OutputKey"]: x["OutputValue"] for x in response["Stacks"][0]["Outputs"]}
         return central_infra_outputs
 
     CENTRAL_INFRA_OUTPUTS = get_central_infra_hints(
@@ -100,22 +103,18 @@ class Util:
     SECRETS_STORE_ARN = CENTRAL_INFRA_OUTPUTS[SECRET_STORE_FRIENDLY_NAME]
     SECRETS_STORE_REGION = SECRETS_STORE_ARN.split(":")[3]
     SNS_BUSINESS_TOPIC_ARN = CENTRAL_INFRA_OUTPUTS[SNS_BUSINESS_TOPIC_FRIENDLY_NAME]
-    SNS_INFRASTRUCTURE_TOPIC_ARN = CENTRAL_INFRA_OUTPUTS[
-        SNS_INFRASTRUCTURE_TOPIC_FRIENDLY_NAME
-    ]
+    SNS_INFRASTRUCTURE_TOPIC_ARN = CENTRAL_INFRA_OUTPUTS[SNS_INFRASTRUCTURE_TOPIC_FRIENDLY_NAME]
 
     @staticmethod
     def get_secret(
-            boto_session: boto3.Session,
-            sercret_name: str,
-            secrets_store_region: str,
+        boto_session: boto3.Session,
+        sercret_name: str,
+        secrets_store_region: str,
     ) -> dict:
         """Get a secret from AWS Secrets Manager."""
         # Create a Secrets Manager client
         session = boto_session
-        client = session.client(
-            service_name="secretsmanager", region_name=secrets_store_region
-        )
+        client = session.client(service_name="secretsmanager", region_name=secrets_store_region)
 
         try:
             get_secret_value_response = client.get_secret_value(SecretId=sercret_name)
@@ -129,9 +128,7 @@ class Util:
 
         return secret
 
-    SECRETS = get_secret(
-        BOTO_SESSION, SECRETS_STORE_ARN, SECRETS_STORE_REGION
-    )
+    SECRETS = get_secret(BOTO_SESSION, SECRETS_STORE_ARN, SECRETS_STORE_REGION)
 
     # set OpenAI and Promptlayer API keys as env vars
     CENSOR_TEMPLATE = """ You are a censorship agent working with an OpenAI chat model. Your job is to take what I'm going to say to a potential customer and make sure it conforms to the following rules:

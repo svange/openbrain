@@ -1,25 +1,53 @@
 # OpenBra.in
+
+🚧 **This project is under active development and is not yet ready for use.** 🚧
 ![Main](https://github.com/svange/openbrain/actions/workflows/main.yml/badge.svg?event=push)
 
 A tool to store and retrieve sets of langchain LLM agent parameters for use in chat sessions. Allows users to chat with a programatically configurable, stateful LLM agent. An ORM is provided using DynamoDB to aid in the storage and retrieval of agent parameters, sessions, agent parameters, agent memories, and more.
 
-## Command line interface and tools
-The following commands are available for use in the shell. 
+## Ways ot interact with OpenBra.in
+
+OpenBrain uses tools, so any of the methods of interacting with the agent is capable of launching tool actions. For example, you can use the `ob` command-line utility to get a simple completion, but your prompt may trigger the use of a tool, making the single completion much more interesting.
+
+### OpenBrain Tuner
+Save, load, and modify agent configurations in DynamoDB. Use the included, self-hosted gradio UI to chat with the agent and interactively create your prompts and configurations.
+The following commands are available for use in the shell.
 
 ```bash
-ob "message" # sends a single message to the agent and returns the response 
+$ ob-tuner
+Running on local URL:  http://0.0.0.0:7861
+
+To create a public link, set `share=True` in `launch()`.
+Tip: You can show or hide the button for flagging with the `allow_flagging=` kwarg; for example: gr.Interface(..., allow_flagging=False)
 ```
+
+![img.png](img.png)
+
+### OpenBrain ad-hoc command-line completions
+Use `ob` command for one-off completions by the agent.
+
 ```bash
-ob-chat # starts a chat session with the agent
+$ ob "What is the airspeed velocity of an unladen swallow?"
+> OpenBrain: "African or European?"
 ```
-```bash
-ob-tuner # launch a local gradio instance to create and modify AgentConfig objects
+### OpenBrain interactive, command line chat
+Use the `oc-chat` command to start an interactive chat session with the agent on the command line.
+
+```
+$ ob-chat
+---------- Begin Chat Session ----------
+> OpenBrain: What… is your name?
+User: It is Arthur – King of the Britons.
+> OpenBrain: What… is your quest?
+User: To seek the Holy Grail.
+> OpenBrain: What… is the air-speed velocity of an unladen swallow?
+User: What do you mean? An African or a European swallow?
+> OpenBrain: I don’t know that. Aaaaaaaaagh!
 ```
 
 ## OpenBrain Central Infrastructure
-This project holds central infrastructure that is used as a base for all operations needed by OpenBra.in. 
+In order to realize the full benefit of this project, you must deploy the central infrastructure. This is a serverless stack that provides the following:
 
-To build and deploy run the following in your shell:
 
 ```bash
 pipenv run build
@@ -28,7 +56,7 @@ pipenv run build
 Alternatively, you can run the following to build and deploy:
 
 ```bash
-sam build 
+sam build
 sam deploy --guided
 ```
 ## Object Model - High level summary
@@ -50,7 +78,7 @@ Details subject to change. See OpenAPI spec for latest details.
 - **agentConfig**: The AgentConfig object used to customize the chat session. Only considered during requests to
   chat (`reset == True`).
 
-```json 
+```json
 {
     "sessionId": "OPTIONAL",
     "clientId": "OPTIONAL",
@@ -58,7 +86,7 @@ Details subject to change. See OpenAPI spec for latest details.
     "agentConfigOverrides": { "AgentConfig": "OPTIONAL" },
     "reset": "OPTIONAL"
 }
-``` 
+```
 
 ## AgentConfig Object
 
@@ -80,7 +108,7 @@ for the use of saved configurations and a combination of saved and custom config
 The API uses a "dirty" sessions table to store agent memories and configurations. The chat session object is composed of
 the following.
 
-```mermaid 
+```mermaid
 classDiagram
     class ChatMessage {
         User provided*
@@ -140,11 +168,11 @@ classDiagram
 ```
 
 # Data Flow diagram
-We use a decoupled, event driven architecture. The agent sends events to event bus and then the developer can simply write rules and targets for the incoming events once the targets are ready. The following diagram shows the data flow in two parts. 
+We use a decoupled, event driven architecture. The agent sends events to event bus and then the developer can simply write rules and targets for the incoming events once the targets are ready. The following diagram shows the data flow in two parts.
 1. The user interaction with the agent and the agent interaction with an event bus.
 2. The event bus and the targets that are triggered by the events.
-```mermaid 
-sequenceDiagram 
+```mermaid
+sequenceDiagram
     title Agent Data Flow
     participant User
     create participant GPT Agent
@@ -164,25 +192,25 @@ sequenceDiagram
         Tool -->> GPT Agent: ChatMessage
     destroy GPT Agent
     GPT Agent ->> User: ChatMessage, (AgentConfig, AgentMemory), Object
-      
+
   box blue Databases
       participant AgentConfigTable
   end
   box purple Tool
       participant Tool
   end
-  
-  box gray EventBus 
+
+  box gray EventBus
       participant EventBus
   end
-  
+
   box red Provider
       participant OpenAI
   end
 ```
 
-```mermaid 
-sequenceDiagram 
+```mermaid
+sequenceDiagram
     title Agent Data Flow
     participant SQS
     participant EventBus
@@ -195,42 +223,42 @@ sequenceDiagram
     EventBus ->> Lambda: (Object, clientId, sessionId, objectId)
     Lambda -->> ObjectTable: (clientId, objectId)
     ObjectTable -->> Lambda: Object
-    
+
     Lambda -->> AgentConfigTable: (profileName, clientId)
     ChatHistoryTable -->> Lambda: AgentConfig
-    
+
     Lambda --> ChatHistoryTable: (clientId, sessionId)
     ChatHistoryTable -->> Lambda: (AgentMemory, AgentConfig)
-    
+
     Lambda ->> ExternalSite: ...
     ExternalSite --x Lambda: ERROR
     Lambda ->> SQS: <DETAILS NEEDED TO RETRY>
     ExternalSite ->> Lambda: ...
-    
+
     Lambda -> EventBus: <POTENTIAL NEW EVENT>
-    
+
     box maroon DeadLetterQueue
         participant SQS
     end
-          
+
     box blue Databases
         participant ObjectTable
         participant AgentConfigTable
         participant ChatHistoryTable
     end
-    
-    box gray EventBus 
+
+    box gray EventBus
         participant EventBus
     end
-    
+
     box brown EventTargets
         participant Lambda
     end
-    
+
     box green Internet
         participant ExternalSite
     end
-    
+
 
 
 ```
@@ -240,7 +268,7 @@ All devops procedures are codified in `ci_cd.py` to run cross-platform, and the 
 simple pipenv scripts.
 
 ```
-# python ci_cd.py --help  
+# python ci_cd.py --help
 usage: ci_cd.py [-h] [--dry-run] [--verbose] [--print-central-infra-outputs] [--stage {dev,prod}] [--test-python] [--skip-tests] [--skip-build] [--build-python] [--publish-python] [--deploy-infra]
 
 Utility script for deployment of python packages and supporting infrastructure.
@@ -266,5 +294,5 @@ options:
 This project is dual-licensed.
 
 1. For open-source projects and educational purposes, it is available under the AGPL-3.0 License. See [LICENSE](LICENSE) for details.
-  
+
 2. For commercial projects, a separate license is available. See [COMMERCIAL_LICENSE](COMMERCIAL_LICENSE) for details and contact [Your Contact Information] for inquiries.

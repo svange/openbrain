@@ -1,7 +1,8 @@
 import random
 
-from faker import Faker
 import ulid
+from faker import Faker
+
 from openbrain.orm.model_agent_config import AgentConfig, DefaultSettings
 
 fake = Faker()
@@ -14,10 +15,7 @@ EXECUTOR_MODEL_TYPES = DefaultSettings.EXECUTOR_MODEL_TYPES.value
 def generate_agent_config(try_to_break_shit: bool = False):
     if try_to_break_shit:
         garbage_choices = (
-            EXECUTOR_MODEL_TYPES
-            + EXECUTOR_CHAT_MODELS
-            + EXECUTOR_COMPLETION_MODELS
-            + [fake.word() for _ in range(5)]
+            EXECUTOR_MODEL_TYPES + EXECUTOR_CHAT_MODELS + EXECUTOR_COMPLETION_MODELS + [fake.word() for _ in range(5)]
         )
         executor_completion_models = garbage_choices
         executor_chat_models = garbage_choices

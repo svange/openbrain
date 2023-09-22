@@ -2,13 +2,13 @@ name: Test and merge to dev
 on:
   push:
     branches:
-      - "feat/*"
-      - "fix/*"
-      - "perf/*"
-      - "build/*"
-      - "style/*"
-      - "refactor/*"
-      - "test/*"
+    - feat/*
+    - fix/*
+    - perf/*
+    - build/*
+    - style/*
+    - refactor/*
+    - test/*
 
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -23,26 +23,26 @@ jobs:
 
   create-pr:
     runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, '#pr')
     needs: run-tests
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: main
+    - uses: actions/checkout@v3
+      with:
+        ref: main
 
-      - name: git pull
-        run: |
-          git pull origin ${{ github.ref_name }}
+    - name: git pull
+      run: |
+        git pull origin ${{ github.ref_name }}
 
-      - name: Create PR to Master
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.GH_PAT }}
-          base: 'main' # the target branch for PR
-          branch: ci/${{ github.ref_name }}-to-main  # source branch
-          title: '🤖📦🐍 ${{ github.ref_name }} → main'
-          body: 'AUTO-PR. Please review the changes before merging.'
-          labels: 'automated,autosquash'
-          commit-message: AUTO - ${{ github.ref_name }}
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-
+    - name: Create PR to Master
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.GH_PAT }}
+        base: main     # the target branch for PR
+        branch: ci/${{ github.ref_name }}-to-main    # source branch
+        title: 🤖📦🐍 ${{ github.ref_name }} → main
+        body: AUTO-PR. Please review the changes before merging.
+        labels: automated,autosquash
+        commit-message: AUTO - ${{ github.ref_name }}
+        committer: GitHub <noreply@github.com>
+        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>

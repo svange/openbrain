@@ -21,6 +21,7 @@ class AgentToolIncompleteLeadError(AgentToolError):
 
 class AgentToolLeadMomentumError(AgentToolError):
     """Raised when LeadMomentum returns an error"""
+
     event_bus_name = Util.EVENT_BUS_FRIENDLY_NAME
     event_source = Util.PROJECT
     event_bridge_client = Util.BOTO_SESSION.client("events")

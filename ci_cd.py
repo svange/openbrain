@@ -1,16 +1,13 @@
 import argparse
-import json
-import os
-import subprocess
 import logging
+import os
+import pprint
+import subprocess
 import sys
-import openbrain
 
 import boto3
 import pytest
 from dotenv import load_dotenv
-
-import pprint
 
 load_dotenv()
 LOG_FILE = "ci_cd.log"
@@ -29,9 +26,15 @@ BOTO_SESSION = boto3.Session()
 # else:
 #     AWS_REGION = BOTO_SESSION.region_name
 
+
 def run_command(command: list):
-    process = subprocess.Popen(" ".join(command), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=os.environ,
-                               shell=True)
+    process = subprocess.Popen(
+        " ".join(command),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        env=os.environ,
+        shell=True,
+    )
 
     for c in iter(lambda: process.stdout.read(1), b""):
         sys.stdout.buffer.write(c)
@@ -46,10 +49,13 @@ def deploy_infra(dry_run: bool = False):
     """Deploy infrastructure stack"""
 
     commands = [
-        ['sam', 'build'],
-        ['sam', 'validate'],
+        ["sam", "build"],
+        ["sam", "validate"],
         [
-            'sam', 'deploy', '--no-confirm-changeset', '--parameter-overrides',
+            "sam",
+            "deploy",
+            "--no-confirm-changeset",
+            "--parameter-overrides",
             f"GitHubOrg={os.environ.get('GITHUBORG', 'NONE_PROVIDED')}",
             f"RepositoryName={os.environ.get('REPOSITORYNAME', 'NONE_PROVIDED')}",
             f"DevOpenAIKey={os.environ.get('DEV_OPENAI_KEY', 'NONE_PROVIDED')}",
@@ -69,20 +75,19 @@ def deploy_infra(dry_run: bool = False):
             f"ProdMilvusKey={os.environ.get('PROD_MILVUS_KEY', 'NONE_PROVIDED')}",
             f"ProdGoogleKey={os.environ.get('PROD_GOOGLE_KEY', 'NONE_PROVIDED')}",
             f"ProdMetaKey={os.environ.get('PROD_META_KEY', 'NONE_PROVIDED')}",
-            f"ProdAnthropicKey={os.environ.get('PROD_ANTHROPIC_KEY', 'NONE_PROVIDED')}"
-        ]
+            f"ProdAnthropicKey={os.environ.get('PROD_ANTHROPIC_KEY', 'NONE_PROVIDED')}",
+        ],
     ]
     [command.append(f"--profile={AWS_PROFILE}") for command in commands]
 
     if dry_run:
         last_command = commands.pop()
         # We're removing the last command if this is a dry run, so fail if our assumption is broken.
-        if "deploy" not in ' '.join(last_command):
+        if "deploy" not in " ".join(last_command):
             raise SystemExit("The word 'deploy' not found in the last command. Aborting! Assumption broke.")
         for command in commands:
-            if "deploy" in ' '.join(command):
-                raise SystemExit(
-                    "The word 'deploy' found in a command before the last command. Aborting! Assumption broke.")
+            if "deploy" in " ".join(command):
+                raise SystemExit("The word 'deploy' found in a command before the last command. Aborting! Assumption broke.")
 
     for command in commands:
         logger.debug(f"Running {' '.join(command)}")
@@ -92,8 +97,8 @@ def deploy_infra(dry_run: bool = False):
 def build_python():
     """Use poetry to build the python package."""
     commands = [
-        ['poetry', 'lock'],
-        ['poetry', 'build'],
+        ["poetry", "lock"],
+        ["poetry", "build"],
     ]
 
     for command in commands:
@@ -105,11 +110,11 @@ def publish_python(stage: str = "dev"):
     """Use poetry to publish the python package to pypi. If stage == dev, publish to pypi-test"""
     if stage == "dev":
         commands = [
-            ['poetry', 'publish', '-r', 'test-pypi'],
+            ["poetry", "publish", "-r", "test-pypi"],
         ]
     elif stage == "prod":
         commands = [
-            ['poetry', 'publish'],
+            ["poetry", "publish"],
         ]
     else:
         raise SystemExit(f"Unknown {stage=}")
@@ -153,14 +158,31 @@ def get_central_infra_outputs() -> dict:
 
 
 if __name__ == "__main__":
-    stages = ['dev', 'prod']
+    stages = ["dev", "prod"]
     parser = argparse.ArgumentParser(
-        description="Utility script for deployment of python packages and supporting infrastructure.")
+        description="Utility script for deployment of python packages and supporting infrastructure."
+    )
     # Tuning
-    parser.add_argument("--dry-run", "-d", action="store_true", help="Prevents any changes from being made.")
+    parser.add_argument(
+        "--dry-run",
+        "-d",
+        action="store_true",
+        help="Prevents any changes from being made.",
+    )
     parser.add_argument("--verbose", "-v", action="store_true", help="Logs debug messages.")
-    parser.add_argument("--print-central-infra-outputs", '-p', action="store_true", help="Prints the central infrastructure outputs as they currently exist.")
-    parser.add_argument("--stage", "-s", default="dev", choices=stages, help=f"If 'dev', publish to pypi-test, if 'prod', publish to pypi.")
+    parser.add_argument(
+        "--print-central-infra-outputs",
+        "-p",
+        action="store_true",
+        help="Prints the central infrastructure outputs as they currently exist.",
+    )
+    parser.add_argument(
+        "--stage",
+        "-s",
+        default="dev",
+        choices=stages,
+        help=f"If 'dev', publish to pypi-test, if 'prod', publish to pypi.",
+    )
 
     # Harmless
     parser.add_argument("--test-python", "-t", action="store_true", help="Run pytest tests")
@@ -168,9 +190,24 @@ if __name__ == "__main__":
     parser.add_argument("--skip-build", action="store_true", help="Skip poetry build commands")
 
     # Dangerous
-    parser.add_argument("--build-python", "-B", action="store_true", help="Run poetry build commands in an idempotent manner.")
-    parser.add_argument("--publish-python", "-P", action="store_true", help="Publish python using poetry")
-    parser.add_argument("--deploy-infra", "-I", action="store_true", help="Deploy the central infrastructure stack ")
+    parser.add_argument(
+        "--build-python",
+        "-B",
+        action="store_true",
+        help="Run poetry build commands in an idempotent manner.",
+    )
+    parser.add_argument(
+        "--publish-python",
+        "-P",
+        action="store_true",
+        help="Publish python using poetry",
+    )
+    parser.add_argument(
+        "--deploy-infra",
+        "-I",
+        action="store_true",
+        help="Deploy the central infrastructure stack ",
+    )
 
     # Setup type hints and auto-complete
     args = parser.parse_args()
@@ -213,7 +250,7 @@ if __name__ == "__main__":
     if args.skip_build:
         arg_build_python = False
     if arg_verbose:
-        print('\n'.join(log_message))
+        print("\n".join(log_message))
 
     central_infra_outputs = get_central_infra_outputs()
     if arg_print_central_infra_outputs:

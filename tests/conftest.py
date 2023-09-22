@@ -20,7 +20,6 @@ from tests.generator_chat_messages import generate_chat_message
 from tests.generator_chat_sessions import generate_chat_session
 from tests.generator_leads import generate_lead
 
-
 # load_dotenv()
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 PROMPTLAYER_API_KEY = os.environ.get("PROMPTLAYER_API_KEY")
@@ -60,8 +59,6 @@ NUMBER_OF_SAMPLES = 2
 #         "DomainName": "samvange.net",
 #         "STAGES": "dev,prod",
 #     }  # TODO, git rid of this in favor of a monkeypatch in test
-
-
 
 
 @pytest.fixture

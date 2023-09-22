@@ -26,12 +26,17 @@ python-ulid = "^1.1.0"
 aws-xray-sdk = "^2.12.0"
 tiktoken = "^0.5.1"
 gradio = "^3.44.4"
+black = "^23.9.1"
+pre-commit = "^3.4.0"
 
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
 faker = "^19.6.1"
 retry = "^0.9.2"
+flake8 = "^6.1.0"
+black = "^23.9.1"
+reorder-python-imports = "^3.11.0"
 
 
 [build-system]
@@ -65,3 +70,33 @@ allowed_tags = [
 ]
 minor_tags = ["build", "ci", "feat"]
 patch_tags = ["fix", "perf"]
+
+
+[tool.black]
+line-length = 130
+target-version = ['py310']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+| \.hg
+| \.mypy_cache
+| \.tox
+| \.venv
+| _build
+| buck-out
+| build
+)/
+'''
+
+[tool.flake8]
+max-line-length = 130
+extend-ignore = ["D203", "E203", "E251", "E266", "E302", "E305", "E401", "E402", "E501", "F401", "F403", "W503"]
+exclude = [".git", "__pycache__", "dist"]
+max-complexity = 10
+
+[tool.isort]
+atomic = true
+profile = "black"
+line_length = 130
+skip_gitignore = true

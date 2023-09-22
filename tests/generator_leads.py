@@ -33,15 +33,13 @@ def generate_lead(try_to_break_shit: bool = False):
     first_name = fake.first_name()
     middle_name = fake.middle_name()
     last_name = fake.last_name()
-    full_name = ' '.join([first_name, middle_name, last_name])
+    full_name = " ".join([first_name, middle_name, last_name])
     if try_to_break_shit:
         med_list = [fake.word() for _ in range(fake.random_int(min=0, max=100))]
 
     else:
         # three random elements from fake_medication_list
-        med_list = [
-            fake.random_element(fake_medication_list) for _ in range(fake.random_int(min=1, max=10))
-        ]
+        med_list = [fake.random_element(fake_medication_list) for _ in range(fake.random_int(min=1, max=10))]
 
     return Lead(
         client_id=fake.uuid4(),

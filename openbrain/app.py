@@ -1,3 +1,4 @@
+import logging
 import os
 
 import boto3
@@ -8,20 +9,17 @@ from dotenv import load_dotenv
 from openbrain.agents.gpt_agent import GptAgent
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.orm.model_chat_message import ChatMessage
-
 from openbrain.util import Util
-
-import logging
 
 load_dotenv()
 
-DISABLE_TUNER_API_MODE = os.environ.get('DISABLE_TUNER_API_MODE', False)
-AGENCY_API_KEY = os.environ.get('DEV_AGENCY_API_KEY')
-CHAT_ENDPOINT = os.environ.get('DEV_API_URL', "") + '/chat'
+DISABLE_TUNER_API_MODE = os.environ.get("DISABLE_TUNER_API_MODE", False)
+AGENCY_API_KEY = os.environ.get("DEV_AGENCY_API_KEY")
+CHAT_ENDPOINT = os.environ.get("DEV_API_URL", "") + "/chat"
 DEFAULT_CLIENT_ID = "public"
 DEFAULT_PROFILE_NAME = "default"
 
-logging.basicConfig(filename='app.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename="app.log", encoding="utf-8", level=logging.DEBUG)
 
 
 # CLIENT_ID = "gradio-tuner"
@@ -39,106 +37,103 @@ logging.basicConfig(filename='app.log', encoding='utf-8', level=logging.DEBUG)
 def chat(message, chat_history, _profile_name, session_state, _client_id):
     # Make a POST request to the chat endpoint
 
-    session_id = session_state['session_id']
-    session = session_state['session']
+    session_id = session_state["session_id"]
+    session = session_state["session"]
 
-    chat_message = ChatMessage(
-        client_id=DEFAULT_CLIENT_ID,
-        reset=False,
-        message=message,
-        session_id=session_id
-    )
+    chat_message = ChatMessage(client_id=DEFAULT_CLIENT_ID, reset=False, message=message, session_id=session_id)
 
+    response_message = None
     if DISABLE_TUNER_API_MODE:
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
         gpt_agent = GptAgent(agent_config=agent_config)
-        session_state['agent'] = gpt_agent
-        response = gpt_agent.handle_user_message(message)
-    else:
+        session_state["agent"] = gpt_agent
+        response_message = gpt_agent.handle_user_message(message)
 
-        logging.debug(f'{session_id=}')
+    else:
+        logging.debug(f"{session_id=}")
         session.headers.update(
             {
-                'x-api-key': AGENCY_API_KEY,
+                "x-api-key": AGENCY_API_KEY,
                 # 'Session': session_id
             }
         )
         response = session.post(CHAT_ENDPOINT, json=chat_message.to_json())
-    session_state['last_response'] = response
-    session_state['session'] = session
+        response_message = response.json()["message"]
+    session_state["last_response"] = response_message
+    session_state["session"] = session
 
-    chat_history.append((message, response.json()['message']))
+    chat_history.append(message, response_message)
 
     # Return the response from the API
-    return ['', chat_history, session_state]
+    return ["", chat_history, session_state]
 
 
-def reset(_icebreaker,
-          _chat_model,
-          _system_message,
-          _prompt_layer_tags,
-          _max_iterations,
-          _max_execution_time,
-          _executor_temp,
-          _profile_name,
-          _executor_model_type,
-          _openai_api_key,
-          _promptlayer_api_key,
-          _client_id,
-          _outgoing_webhook_url,
-          _message,
-          chat_history,
-          session_state
-          ):
+def reset(
+    _icebreaker,
+    _chat_model,
+    _system_message,
+    _prompt_layer_tags,
+    _max_iterations,
+    _max_execution_time,
+    _executor_temp,
+    _profile_name,
+    _executor_model_type,
+    _openai_api_key,
+    _promptlayer_api_key,
+    _client_id,
+    _outgoing_webhook_url,
+    _message,
+    chat_history,
+    session_state,
+):
     chat_message = ChatMessage(
         client_id=_client_id,
         reset=True,
         message="no message",
-        agent_config=_profile_name
+        agent_config=_profile_name,
     )
 
+    response = None
     if DISABLE_TUNER_API_MODE:
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
         gpt_agent = GptAgent(agent_config=agent_config)
-        session_state['agent'] = gpt_agent
+        session_state["agent"] = gpt_agent
         response_message = gpt_agent.agent_config.icebreaker
     else:
         # Make a POST request to the reset endpoint
-        session = session_state['session']
-        session.headers.update({'x-api-key': AGENCY_API_KEY})
+        session = session_state["session"]
+        session.headers.update({"x-api-key": AGENCY_API_KEY})
         response = session.post(CHAT_ENDPOINT, json=chat_message.to_json())
-        session_id = response.cookies['Session']
-        session_state['session_id'] = session_id
-        session_state['session'] = session
-        session_state['last_response'] = response
-        response_message = response.json()['message']
-
-        # _session_state.close()
-
-    chat_history.append(f'Please wait, fetching new agent...\n\n{response_message}')
+        session_id = response.cookies["Session"]
+        session_state["session_id"] = session_id
+        session_state["session"] = session
+        session_state["last_response"] = response
+        response_message = response.json()["message"]
+    message = f"Please wait, fetching new agent...\n\n{response_message}"
+    chat_history.append(message, response.json()["message"])
 
     # Return the response from the API
-    return ['', chat_history, session_state]
+    return ["", chat_history, session_state]
 
 
 def save(
-        _icebreaker,
-        _chat_model,
-        _system_message,
-        _prompt_layer_tags,
-        _max_iterations,
-        _max_execution_time,
-        _executor_temp,
-        _profile_name,
-        _executor_model_type,
-        _openai_api_key,
-        _promptlayer_api_key,
-        client_id,
-        outgoing_webhook_url
+    _icebreaker,
+    _chat_model,
+    _system_message,
+    _prompt_layer_tags,
+    _max_iterations,
+    _max_execution_time,
+    _executor_temp,
+    _profile_name,
+    _executor_model_type,
+    _openai_api_key,
+    _promptlayer_api_key,
+    client_id,
+    outgoing_webhook_url,
 ):
-    if _profile_name.strip() == '':
+    if _profile_name.strip() == "":
         gr.Error("Personalization key can't be blank.")
         return []
 
@@ -169,7 +164,7 @@ def save(
 
 
 def load(_profile_name: str, _client_id: str):
-    if _profile_name.strip() == '':
+    if _profile_name.strip() == "":
         raise gr.Error("client_id can't be blank.")
     # Upload the preferences to the DynamoDB database
     if not _client_id:
@@ -201,8 +196,8 @@ def is_settings_set():
 
 
 def auth(username, password):
-    if username in ['sam', 'mike', 'adam']:
-        if password == 'BieberFever!':
+    if username in ["sam", "mike", "adam"]:
+        if password == "BieberFever!":
             return True
     return False
 
@@ -210,60 +205,70 @@ def auth(username, password):
 def get_available_profile_names() -> list:
     # logger.warning("get_available_profile_names() is not implemented")
     # Get AgentConfig table
-    table = boto3.resource('dynamodb').Table(Util.AGENT_CONFIG_TABLE_NAME)
+    table = boto3.resource("dynamodb").Table(Util.AGENT_CONFIG_TABLE_NAME)
     # get all items in the table
     response = table.scan()
     # return the profile names with client_id == 'public'
-    return [item['profile_name'] for item in response['Items'] if item['client_id'] == DEFAULT_CLIENT_ID]
+    return [item["profile_name"] for item in response["Items"] if item["client_id"] == DEFAULT_CLIENT_ID]
 
 
-with gr.Blocks(theme='JohnSmith9982/small_and_pretty') as main_block:
-    session_state = gr.State(value={
-        'session_id': '',
-        'session': requests.Session(),
-        'agent': None
-    })
-    session_apikey = gr.State(value='')
-    with gr.Accordion("Tuning", elem_classes='accordian', visible=is_settings_set()) as prompts_box:
-        gr.Markdown("Changes to these settings are used to set up a conversation using the Reset button and will not "
-                    "be reflected until the next 'Reset'")
+with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
+    session_state = gr.State(value={"session_id": "", "session": requests.Session(), "agent": None})
+    session_apikey = gr.State(value="")
+    with gr.Accordion("Tuning", elem_classes="accordian", visible=is_settings_set()) as prompts_box:
+        gr.Markdown(
+            "Changes to these settings are used to set up a conversation using the Reset button and will not "
+            "be reflected until the next 'Reset'"
+        )
 
         with gr.Tab("LLM Tuning") as tuninig_tab:
             with gr.Row() as preferences_row1:
                 max_iterations = gr.Number(
                     label="Max Iterations",
                     info="The number of steps the executor can take before the conversation is terminated with an "
-                         "error message.")
-                max_execution_time = gr.Slider(minimum=0,
-                                               maximum=30,
-                                               label="Max Execution Time",
-                                               step=0.5,
-                                               info="The maximum amount of time the executor can take before the "
-                                                    "conversation is terminated with an error message.")
-                executor_temp = gr.Slider(minimum=0,
-                                          maximum=2,
-                                          label="ExecutorLLM Temp",
-                                          step=0.1,
-                                          info="Higher temperatures will result in more random responses.")
+                    "error message.",
+                )
+                max_execution_time = gr.Slider(
+                    minimum=0,
+                    maximum=30,
+                    label="Max Execution Time",
+                    step=0.5,
+                    info="The maximum amount of time the executor can take before the "
+                    "conversation is terminated with an error message.",
+                )
+                executor_temp = gr.Slider(
+                    minimum=0,
+                    maximum=2,
+                    label="ExecutorLLM Temp",
+                    step=0.1,
+                    info="Higher temperatures will result in more random responses.",
+                )
 
             with gr.Row() as preferences_row2:
-                prompt_layer_tags = gr.Textbox(label="Prompt Layer Tags",
-                                               info="A comma separated string containing the tags to be used in the "
-                                                    "prompt layer.")
+                prompt_layer_tags = gr.Textbox(
+                    label="Prompt Layer Tags",
+                    info="A comma separated string containing the tags to be used in the " "prompt layer.",
+                )
                 executor_model_type = gr.Dropdown(
                     choices=[
-                        'chat',
+                        "chat",
                         # 'completion',
-                        'function'
+                        "function",
                     ],
                     label="Chat Model Type",
-                    info="Function models are special OpenAI fine-tuned versions of chat models GPT-3.5 and GPT-4."
+                    info="Function models are special OpenAI fine-tuned versions of chat models GPT-3.5 and GPT-4.",
                 )
 
                 chat_model = gr.Dropdown(
-                    choices=["gpt-4–0613", "gpt-3.5-turbo-0613", "gpt-4", "gpt-4-32k", "gpt-3.5-turbo"],
+                    choices=[
+                        "gpt-4–0613",
+                        "gpt-3.5-turbo-0613",
+                        "gpt-4",
+                        "gpt-4-32k",
+                        "gpt-3.5-turbo",
+                    ],
                     label="Executor Chat Model",
-                    info="Choose gpt-4–0613 or gpt-3.5-turbo-0613 for 'function' models."
+                    info="Choose gpt-4–0613 or gpt-3.5-turbo-0613 for 'function' models.",
                 )
 
                 # executor_completion_model = gr.Dropdown( choices=["text-davinci-003", "text-davinci-002",
@@ -271,44 +276,63 @@ with gr.Blocks(theme='JohnSmith9982/small_and_pretty') as main_block:
                 # info="This is the model used when Executor Model Type is set to 'completion'" )
 
         with gr.Tab("API Keys and contact info") as api_keys_tab:
-            outgoing_webhook_url = gr.Textbox(label="Outgoing Webhook URL",
-                                              info=f"LeadMomentum webhook URL",
-                                              type="text")
+            outgoing_webhook_url = gr.Textbox(
+                label="Outgoing Webhook URL",
+                info=f"LeadMomentum webhook URL",
+                type="text",
+            )
 
-            openai_api_key = gr.Textbox(label="OpenAI API Key",
-                                        info="The API key for OpenAI's API",
-                                        type="password")
-            promptlayer_api_key = gr.Textbox(label="Prompt Layer API Key",
-                                             info="The API key for Prompt Layer's API",
-                                             type="password")
+            openai_api_key = gr.Textbox(
+                label="OpenAI API Key",
+                info="The API key for OpenAI's API",
+                type="password",
+            )
+            promptlayer_api_key = gr.Textbox(
+                label="Prompt Layer API Key",
+                info="The API key for Prompt Layer's API",
+                type="password",
+            )
 
         with gr.Tab("System Message") as long_text_row1:
-            system_message = gr.TextArea(lines=10, label="System Message", placeholder="Enter your system message here",
-                                         info="The System Message. This message is a part of every context with "
-                                              "ChatGPT, and is therefor the most influential, and expensive place to "
-                                              "add text",
-                                         show_label=False)
+            system_message = gr.TextArea(
+                lines=10,
+                label="System Message",
+                placeholder="Enter your system message here",
+                info="The System Message. This message is a part of every context with "
+                "ChatGPT, and is therefor the most influential, and expensive place to "
+                "add text",
+                show_label=False,
+            )
 
         with gr.Tab("Icebreaker") as long_text_row2:
-            icebreaker = gr.TextArea(lines=10, label="Icebreaker", placeholder="Enter your icebreaker here",
-                                     show_label=False,
-                                     info="The first message to be sent to the user.")
+            icebreaker = gr.TextArea(
+                lines=10,
+                label="Icebreaker",
+                placeholder="Enter your icebreaker here",
+                show_label=False,
+                info="The first message to be sent to the user.",
+            )
 
     with gr.Accordion("Save and Load") as submit_accordion:
         with gr.Row() as submit_row:
             with gr.Column(scale=4) as key_text_column:
-                client_id = gr.Textbox(label="Client ID", info=f"Your client ID. If left blank, defaults to 'public'.",
-                                       type="text")
+                client_id = gr.Textbox(
+                    label="Client ID",
+                    info=f"Your client ID. If left blank, defaults to 'public'.",
+                    type="text",
+                )
                 client_id.value = DEFAULT_CLIENT_ID
-                profile_name = gr.Dropdown(allow_custom_value=True, label="Profile Name",
-                                           info="Enter a unique string to save your preferences. This will "
-                                                "allow you to load your preferences later.",
-                                           choices=get_available_profile_names())
+                profile_name = gr.Dropdown(
+                    allow_custom_value=True,
+                    label="Profile Name",
+                    info="Enter a unique string to save your preferences. This will " "allow you to load your preferences later.",
+                    choices=get_available_profile_names(),
+                )
                 profile_name.value = DEFAULT_PROFILE_NAME
 
             with gr.Column(scale=1) as submit_column:
-                load_button = gr.Button(value="Load", variant='primary')
-                save_button = gr.Button(value="Save", variant='secondary')
+                load_button = gr.Button(value="Load", variant="primary")
+                save_button = gr.Button(value="Save", variant="secondary")
                 preferences = [
                     icebreaker,
                     chat_model,
@@ -323,12 +347,54 @@ with gr.Blocks(theme='JohnSmith9982/small_and_pretty') as main_block:
                     openai_api_key,
                     promptlayer_api_key,
                     client_id,
-                    outgoing_webhook_url
+                    outgoing_webhook_url,
                 ]
 
                 load_button.click(load, inputs=[profile_name, client_id], outputs=preferences)
 
-                save_button.click(save, inputs=[
+                save_button.click(
+                    save,
+                    inputs=[
+                        icebreaker,
+                        chat_model,
+                        system_message,
+                        prompt_layer_tags,
+                        max_iterations,
+                        max_execution_time,
+                        executor_temp,
+                        profile_name,
+                        executor_model_type,
+                        openai_api_key,
+                        promptlayer_api_key,
+                        client_id,
+                        outgoing_webhook_url,
+                    ],
+                )
+
+    chatbot = gr.Chatbot()
+
+    with gr.Row() as chat_row:
+        with gr.Column(scale=4) as chat_column:
+            msg = gr.Textbox()
+        with gr.Column(scale=1) as chat_button_column:
+            chat_button = gr.Button("Chat", variant="primary")
+            reset_agent = gr.Button("Reset", variant="secondary")
+
+            msg.submit(
+                chat,
+                [msg, chatbot, profile_name, session_state, client_id],
+                [msg, chatbot, session_state],
+            )
+
+            chat_button.click(
+                fn=chat,
+                inputs=[msg, chatbot, profile_name, session_state, client_id],
+                outputs=[msg, chatbot, session_state],
+            )
+
+            reset_agent.click(
+                fn=reset,
+                inputs=[
                     icebreaker,
                     chat_model,
                     system_message,
@@ -341,44 +407,13 @@ with gr.Blocks(theme='JohnSmith9982/small_and_pretty') as main_block:
                     openai_api_key,
                     promptlayer_api_key,
                     client_id,
-                    outgoing_webhook_url
-                ])
-
-    chatbot = gr.Chatbot()
-
-    with gr.Row() as chat_row:
-        with gr.Column(scale=4) as chat_column:
-            msg = gr.Textbox()
-        with gr.Column(scale=1) as chat_button_column:
-            chat_button = gr.Button("Chat", variant="primary")
-            reset_agent = gr.Button("Reset", variant="secondary")
-
-            msg.submit(chat, [
-                msg,
-                chatbot,
-                profile_name,
-                session_state, client_id
-            ], [msg, chatbot, session_state])
-
-            chat_button.click(fn=chat, inputs=[msg, chatbot, profile_name, session_state, client_id],
-                              outputs=[msg, chatbot, session_state])
-
-            reset_agent.click(fn=reset, inputs=[icebreaker,
-                                                chat_model,
-                                                system_message,
-                                                prompt_layer_tags,
-                                                max_iterations,
-                                                max_execution_time,
-                                                executor_temp,
-                                                profile_name,
-                                                executor_model_type,
-                                                openai_api_key,
-                                                promptlayer_api_key,
-                                                client_id,
-                                                outgoing_webhook_url,
-                                                msg,
-                                                chatbot, session_state
-                                                ], outputs=[msg, chatbot, session_state])
+                    outgoing_webhook_url,
+                    msg,
+                    chatbot,
+                    session_state,
+                ],
+                outputs=[msg, chatbot, session_state],
+            )
 
 
 def main():
@@ -388,8 +423,13 @@ def main():
     # reset the public default profile
     agent_config = AgentConfig(client_id=DEFAULT_CLIENT_ID, profile_name="default")
     agent_config.save()
-    main_block.launch(debug=True, share=False,
-                      server_name="0.0.0.0", server_port=7861, show_tips=True, )
+    main_block.launch(
+        debug=True,
+        share=False,
+        server_name="0.0.0.0",
+        server_port=7861,
+        show_tips=True,
+    )
 
 
 if "__main__" == __name__:

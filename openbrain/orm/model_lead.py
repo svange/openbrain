@@ -23,7 +23,10 @@ class Lead(Recordable):
     email_address: Optional[str] = Field(default=None, description="The email address of the lead")
     phone_number: Optional[str] = Field(default=None, description="The phone number of the lead")
     current_medications: Optional[list[str]] = Field(default=None, description="The current medications of the lead")
-    lead_id: str = Field(default_factory=ulid.ULID().to_uuid().__str__, description="A unique id associated with this lead")
+    lead_id: str = Field(
+        default_factory=ulid.ULID().to_uuid().__str__,
+        description="A unique id associated with this lead",
+    )
     status: Optional[str] = Field(default=None, description="Human readable status of the lead")
     send_error: Optional[bool] = Field(default=False, description="True if the the lead attempted to send, but failed")
     sent_by_agent: Optional[bool] = False

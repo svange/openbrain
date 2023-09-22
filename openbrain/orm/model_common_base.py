@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 from typing import TypeAlias
 
 import boto3
-from pydantic import Extra, BaseModel
+from pydantic import BaseModel, Extra
 
 from openbrain.util import Util
 
@@ -26,6 +26,7 @@ class Serializable(BaseModel, metaclass=ABCMeta):
 
     class Config:
         """Pydantic configuration for the Serializable class"""
+
         alias_generator = snake_to_camel_case
         extra = Extra.ignore
         populate_by_name = True
@@ -33,6 +34,7 @@ class Serializable(BaseModel, metaclass=ABCMeta):
 
     class Meta:
         """PynamoDB configuration for the Serializable class"""
+
         table_name = Util.AGENT_CONFIG_TABLE_NAME
         region = Util.AWS_REGION
 
@@ -83,17 +85,21 @@ class Recordable(Serializable, metaclass=ABCMeta):
         return boto3.resource("dynamodb")
 
     @classmethod
-    def _get(cls, range_key_name: str, range_key_value: str, hash_key_name: str, hash_key_value: str,
-             table_name: str) -> dict:
+    def _get(
+        cls,
+        range_key_name: str,
+        range_key_value: str,
+        hash_key_name: str,
+        hash_key_value: str,
+        table_name: str,
+    ) -> dict:
         """Get an object from the database."""
         dynamodb = cls._get_dynamo_client()
         table = dynamodb.Table(table_name)
         logger.info(
             f"Retrieving object: {table=} | {hash_key_name=} | {hash_key_value=} | {range_key_name=} | {range_key_value=}"
         )
-        response = table.get_item(
-            Key={hash_key_name: hash_key_value, range_key_name: range_key_value}
-        )
+        response = table.get_item(Key={hash_key_name: hash_key_value, range_key_name: range_key_value})
         item = response.get("Item", {})
 
         if item is None or len(item) == 0:
@@ -103,24 +109,29 @@ class Recordable(Serializable, metaclass=ABCMeta):
         # return dynamo_obj_to_python_obj(item)
         return item
 
-    def _save(self, table_name: str, range_key_name: str = None, hash_key_name: str = None, range_key_value: str = None,
-              hash_key_value: str = None, disable_surgical_update: bool = True):
+    def _save(
+        self,
+        table_name: str,
+        range_key_name: str = None,
+        hash_key_name: str = None,
+        range_key_value: str = None,
+        hash_key_value: str = None,
+        disable_surgical_update: bool = True,
+    ):
         """Save this object to the database."""
 
         dynamodb = self._get_dynamo_client()
         table = dynamodb.Table(table_name)
 
         if (
-                hash_key_name
-                and hash_key_value
-                and range_key_name
-                and range_key_value
-                and not disable_surgical_update  # TODO DISABLED
+            hash_key_name
+            and hash_key_value
+            and range_key_name
+            and range_key_value
+            and not disable_surgical_update  # TODO DISABLED
         ):
             # Get item for a more surgical insert
-            response = table.get_item(
-                Key={hash_key_name: hash_key_value, range_key_name: range_key_value}
-            )
+            response = table.get_item(Key={hash_key_name: hash_key_value, range_key_name: range_key_value})
             item = response.get("Item", {})
             if item:
                 # Update

@@ -42,13 +42,12 @@ def test_chat_session(incoming_chat_session):
 @pytest.mark.orm_tests
 def test_chat_session_save_retrieve(incoming_chat_session):
     save_response = incoming_chat_session.save()
-    assert (
-            save_response is not None
-    )  # Add more robust checks based on your DynamoDB response structure
+    assert save_response is not None  # Add more robust checks based on your DynamoDB response structure
 
     # 2. Retrieve the saved AgentConfig from DynamoDB
     retrieved_chat_session = ChatSession.get(
-        session_id=incoming_chat_session.session_id, client_id=incoming_chat_session.client_id
+        session_id=incoming_chat_session.session_id,
+        client_id=incoming_chat_session.client_id,
     )
     assert retrieved_chat_session is not None
 
@@ -78,7 +77,8 @@ def test_chat_session_session_id(incoming_chat_session: ChatSession):
     # Save the chat session, then retrieve it into a new instance, and assert that the session_id is the same
     incoming_chat_session.save()
     retrieved_chat_session = ChatSession.get(
-        session_id=incoming_chat_session.session_id, client_id=incoming_chat_session.client_id
+        session_id=incoming_chat_session.session_id,
+        client_id=incoming_chat_session.client_id,
     )
     assert incoming_chat_session.session_id == retrieved_chat_session.session_id
 
@@ -88,7 +88,8 @@ def test_get_agent_from_chat_session(incoming_chat_session):
     incoming_chat_session.save()
 
     retrieved_chat_session = ChatSession.get(
-        session_id=incoming_chat_session.session_id, client_id=incoming_chat_session.client_id
+        session_id=incoming_chat_session.session_id,
+        client_id=incoming_chat_session.client_id,
     )
     assert retrieved_chat_session is not None
     assert isinstance(retrieved_chat_session, ChatSession)
@@ -127,6 +128,7 @@ def test_get_agent_from_chat_session(incoming_chat_session):
     assert retrieved_chat_session.frozen_agent_config == incoming_chat_session.frozen_agent_config
     assert retrieved_chat_session.frozen_lead == incoming_chat_session.frozen_lead
     assert retrieved_chat_session == incoming_chat_session
+
 
 #
 # def test_chat_session(unique_agent_config: AgentConfig, unique_lead: Lead) -> None:
