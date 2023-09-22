@@ -34,16 +34,19 @@ jobs:
 #    needs: run-tests
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: main
+
       - name: Create PR to Master
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GH_PAT }}
           base: 'main' # the target branch for PR
-          branch: ${{ github.ref }}-to-main  # source branch
-          title: 'Automated PR: ${{ github.ref }} to master'
+          branch: ${{ github.event.ref }}-to-main  # source branch
+          title: 'Automated PR: ${{ github.event.ref }} to master'
           body: 'Automated PR. Please review the changes before merging.'
           labels: 'automated,pr'
-          commit-message: AUTO - ${{ github.ref }}
+          commit-message: AUTO - ${{ github.event.ref }}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
 
