@@ -1,10 +1,8 @@
 name: Test dev branch and deploy to pypi-test
 on:
   push:
-    tags:
-      - build
-#      - ci
-
+    branches:
+      - dev
 permissions:
   id-token: write # This is required for requesting the JWT
   contents: read  # This is required for actions/checkout
@@ -26,20 +24,81 @@ env:
   EVENTBUS_FRIENDLY_NAME: DevEventBus
   OPENAI_API_KEY: ${{ secrets.DEV_OPENAI_KEY }}
 jobs:
-  # fail if not on dev
-  branch-check:
+  test:
     runs-on: ubuntu-latest
-    if: github.ref_name != 'dev'
     steps:
-      - name: Fail if not on dev
-        run: |
-          echo "${{ github.ref_name }} only allowed on dev branch"
-          exit 1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_GITHUB_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+      #----------------------------------------------
+      #       check-out repo and set-up python
+      #----------------------------------------------
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Set up python
+        id: setup-python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      #----------------------------------------------
+      #  -----  install & configure poetry  -----
+      #----------------------------------------------
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
 
-  submit-pr:
+      #----------------------------------------------
+      #       load cached venv if cache exists
+      #----------------------------------------------
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
+      #----------------------------------------------
+      # install your root project, if required
+      #----------------------------------------------
+      - name: Install project
+        run: poetry install --no-interaction
+      #----------------------------------------------
+      #              run test suite
+      #----------------------------------------------
+      - name: Test with pytest
+        run: |
+          source .venv/bin/activate
+          pytest
+
+  publish-test:
     runs-on: ubuntu-latest
-    if: contains(fromJSON('["build"]'), github.ref_name)
-    needs: branch-check
+    needs: test
+    steps:
+      #----------------------------------------------
+      #              publish to test-pypi
+      #----------------------------------------------
+      - name: Publish Python 🐍 distribution 📦 to PyPI-test
+        uses: JRubics/poetry-publish@v1.17
+        with:
+          pypi_token: ${{ secrets.TEST_PYPI_API_KEY }}
+          repository_name: "testpypi"
+          repository_url: "https://test.pypi.org/legacy/"
+          plugins: poetry-dynamic-versioning-plugin
+
+
+  create-pr:
+    runs-on: ubuntu-latest
+    if: startsWith(github.context.commit.message, 'fix:') or startsWith(github.context.commit.message, 'feat:') or startsWith(github.context.commit.message, 'perf:') or startsWith(github.context.commit.message, 'build:') or startsWith(github.context.commit.message, 'ci:')
     steps:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
@@ -48,4 +107,28 @@ jobs:
           committer: GitHub Actions <samuelvange@gmail.com>
           branch: release/${{github.ref_name}}
           base: main
-
+  # if not on dev or master, and tag is "feat", "fix", "perf", "build", "ci"
+  # merge and push to dev
+#  update-git-dev:
+#    runs-on: ubuntu-latest
+#    needs: publish-test
+#    if: startsWith(github.context.commit.message, 'fix:') or startsWith(github.context.commit.message, 'feat:') or startsWith(github.context.commit.message, 'perf:') or startsWith(github.context.commit.message, 'build:') or startsWith(github.context.commit.message, 'ci:')
+#    steps:
+#      - uses: actions/checkout@v3
+#        with:
+#          ref: ${{ github.head_ref }}
+#          fetch-depth: 0
+#      - name: Git operations to merge and push to dev
+#        run: |
+#          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+#          git config --local user.name "github-actions[bot]"
+#          git fetch
+#          git rebase origin/dev
+#          git checkout dev
+#          git pull origin dev
+#          git merge --no-ff ${{ github.head_ref }}
+#          git commit -a -m "github-actions[bot] - ${{ github.ref_name }} - ${{ github.sha }}"
+#      - name: Push changes
+#        uses: ad-m/github-push-action@master
+#        with:
+#          branch: dev
