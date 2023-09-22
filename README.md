@@ -1,5 +1,5 @@
 # OpenBra.in
-![Main](https://github.com/svange/openbrain/actions/workflows/main.yaml/badge.svg?event=push)
+![Main](https://github.com/svange/openbrain/actions/workflows/main.yml/badge.svg?event=push)
 
 A tool to store and retrieve sets of langchain LLM agent parameters for use in chat sessions. Allows users to chat with a programatically configurable, stateful LLM agent. An ORM is provided using DynamoDB to aid in the storage and retrieval of agent parameters, sessions, agent parameters, agent memories, and more.
 
