@@ -1,4 +1,4 @@
-name: Test dev branch and deploy to pypi-test
+name: PyPI
 on:
   push:
     tags:
