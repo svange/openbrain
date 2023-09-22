@@ -5,7 +5,9 @@ on:
       - dev
 permissions:
   id-token: write # This is required for requesting the JWT
-  contents: read  # This is required for actions/checkout
+  contents: write  # This is required for actions/checkout
+
+
 
 
 jobs:
@@ -13,10 +15,6 @@ jobs:
     uses: ./.github/workflows/run-tests.yaml
     with:
       tag: ${{ github.ref_name }}
-      AWS_REGION: us-east-1
-      GITHUBORG: svange
-      AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_DEV_DEPLOYER_ROLE_ARN }}
-      OPENAI_API_KEY: ${{ secrets.DEV_OPENAI_KEY }}
 
 
   #  create-pr:

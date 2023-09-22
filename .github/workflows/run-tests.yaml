@@ -5,27 +5,16 @@ on:
       tag:
         required: true
         type: string
-      AWS_REGION:
-        required: true
-        type: string
-      GITHUBORG:
-        required: true
-        type: string
-    secrets:
-      OPENAI_API_KEY:
-        required: true
-      AWS_GITHUB_ROLE_ARN:
-        required: true
 
 env:
   PROJECT: ${{ github.event.repository.name }}
+  GITHUBORG: ${{ github.event.inputs.GITHUBORG }}
   REPOSITORYNAME: ${{ github.event.repository.name }}
 
-  GITHUBORG: ${{ github.event.inputs.GITHUBORG }}
-  OPENAI_API_KEY: ${{ github.event.secrets.OPENAI_API_KEY }}
-  AWS_REGION: ${{ github.event.inputs.AWS_REGION }}
-  AWS_GITHUB_ROLE_ARN: ${{ github.event.inputs.AWS_GITHUB_ROLE_ARN }}
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_ROLE_ARN }}
 
+  AWS_REGION: us-east-1
   INFRA_STACK_NAME: ai-infra
   SECRET_STORE_FRIENDLY_NAME: DevAiSecrets
   COMMON_ACCESS_POLICY_FRIENDLY_NAME: DevCommonAccessPolicy
