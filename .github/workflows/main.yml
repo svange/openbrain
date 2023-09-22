@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   run-tests:
-    uses: ./.github/workflows/run-tests.yaml
+    uses: ./.github/workflows/run-tests.yml
     secrets: inherit
     permissions:
         id-token: write
