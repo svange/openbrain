@@ -83,11 +83,6 @@ jobs:
         run: |
           source .venv/bin/activate
           pytest
-
-  publish-test:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
       #----------------------------------------------
       #              publish to test-pypi
       #----------------------------------------------
