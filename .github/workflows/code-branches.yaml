@@ -47,7 +47,7 @@ jobs:
           token: ${{ secrets.GH_PAT }}
           base: 'main' # the target branch for PR
           branch: ci/${{ github.ref_name }}-to-main  # source branch
-          title: '🧠🤖⚟🐍𝌚: ${{ github.event.ref_name }} → main'
+          title: '🤖📦🐍 ${{ github.ref_name }} → main'
           body: 'AUTO-PR. Please review the changes before merging.'
           labels: 'automated,pr'
           commit-message: AUTO - ${{ github.ref_name }}
