@@ -2,10 +2,10 @@ name: Test dev branch and deploy to pypi-test
 on:
   push:
     tags:
-      - "feat"
-      - "fix"
-      - "perf"
-      - "test"
+      - "feat:*"
+      - "fix:*"
+      - "perf:*"
+      - "test:*"
 
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -99,12 +99,14 @@ jobs:
           repository_url: "https://test.pypi.org/legacy/"
           plugins: poetry-dynamic-versioning-plugin
 
+
   # if not on dev or master, and tag is "feat", "fix", "perf", "build", "ci"
   # merge and push to dev
   update-git-dev:
     runs-on: ubuntu-latest
-    if: contains(fromJSON('["feat", "fix", "perf"]'), github.ref_name)
     needs: publish-test
+    if: not startsWith(github.ref_name, 'test:')
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -124,5 +126,3 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           branch: dev
-
-
