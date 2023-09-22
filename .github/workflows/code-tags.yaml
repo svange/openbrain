@@ -1,14 +1,14 @@
 name: Test and merge to dev
 on:
   push:
-    tags:
-      - "feat*"
-      - "fix*"
-      - "perf*"
-      - "build*"
-      - "style*"
-      - "refactor*"
-      - "test*"
+    branches:
+      - "feat/*"
+      - "fix/*"
+      - "perf/*"
+      - "build/*"
+      - "style/*"
+      - "ref/*"
+      - "test/*"
 
 permissions:
   id-token: write # This is required for requesting the JWT
