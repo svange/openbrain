@@ -47,7 +47,7 @@ version_toml = [
 branch = "main"
 upload_to_PyPI = true
 upload_to_release = true
-build_command = "pip install poetry && poetry build"
+build_command = "pip install poetry && pip install petry-semver && poetry build"
 
 [tool.semantic_release.commit_parser_options]
 allowed_tags = [
