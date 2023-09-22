@@ -8,22 +8,21 @@ on:
       AWS_REGION:
         required: true
         type: string
-      REPOSITORYNAME:
+      GITHUBORG:
         required: true
         type: string
     secrets:
-      GITHUBORG:
-        required: true
       OPENAI_API_KEY:
         required: true
       AWS_GITHUB_ROLE_ARN:
         required: true
 
 env:
-  PROJECT: ${{ github.repository }}
-  REPOSITORYNAME: ${{ github.event.inputs.REPOSITORYNAME }}
-  GITHUBORG: ${{ secrets.GITHUBORG }}
-  OPENAI_API_KEY: ${{ secrets.DEV_OPENAI_KEY }}
+  PROJECT: ${{ github.event.repository.name }}
+  REPOSITORYNAME: ${{ github.event.repository.name }}
+
+  GITHUBORG: ${{ github.event.inputs.GITHUBORG }}
+  OPENAI_API_KEY: ${{ github.event.secrets.OPENAI_API_KEY }}
   AWS_REGION: ${{ github.event.inputs.AWS_REGION }}
   AWS_GITHUB_ROLE_ARN: ${{ github.event.inputs.AWS_GITHUB_ROLE_ARN }}
 
