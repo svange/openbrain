@@ -7,15 +7,20 @@ permissions:
   id-token: write # This is required for requesting the JWT
   contents: write  # This is required for actions/checkout
 
+env:
+  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_DEV_DEPLOYER_ROLE_ARN }}
+  OPENAI_API_KEY: ${{ secrets.DEV_OPENAI_KEY }}
+
+
 jobs:
   run-tests:
     uses: ./.github/workflows/run-tests.yaml
     with:
       tag: ${{ github.ref_name }}
-      AWS_GITHUB_ROLE_ARN: "${{ secrets.AWS_GITHUB_DEV_DEPLOYER_ROLE_ARN }}"
       AWS_REGION: us-east-1
       GITHUBORG: svange
-      OPENAI_API_KEY: "${{ secrets.DEV_OPENAI_KEY }}"
+      AWS_GITHUB_ROLE_ARN: ${{ env.AWS_GITHUB_ROLE_ARN }}
+      OPENAI_API_KEY: ${{ env.OPENAI_API_KEY }}
 
 
   #  create-pr:
