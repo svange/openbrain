@@ -1,25 +1,53 @@
 # OpenBra.in
+
+🚧 **This project is under active development and is not yet ready for use.** 🚧
 ![Main](https://github.com/svange/openbrain/actions/workflows/main.yml/badge.svg?event=push)
 
 A tool to store and retrieve sets of langchain LLM agent parameters for use in chat sessions. Allows users to chat with a programatically configurable, stateful LLM agent. An ORM is provided using DynamoDB to aid in the storage and retrieval of agent parameters, sessions, agent parameters, agent memories, and more.
 
-## Command line interface and tools
-The following commands are available for use in the shell. 
+## Ways ot interact with OpenBra.in
+
+OpenBrain uses tools, so any of the methods of interacting with the agent is capable of launching tool actions. For example, you can use the `ob` command-line utility to get a simple completion, but your prompt may trigger the use of a tool, making the single completion much more interesting.
+
+### OpenBrain Tuner
+Save, load, and modify agent configurations in DynamoDB. Use the included, self-hosted gradio UI to chat with the agent and interactively create your prompts and configurations.
+The following commands are available for use in the shell.
 
 ```bash
-ob "message" # sends a single message to the agent and returns the response 
+$ ob-tuner
+Running on local URL:  http://0.0.0.0:7861
+
+To create a public link, set `share=True` in `launch()`.
+Tip: You can show or hide the button for flagging with the `allow_flagging=` kwarg; for example: gr.Interface(..., allow_flagging=False)
 ```
+
+![img.png](img.png)
+
+### OpenBrain ad-hoc command-line completions
+Use `ob` command for one-off completions by the agent.
+
 ```bash
-ob-chat # starts a chat session with the agent
+$ ob "What is the airspeed velocity of an unladen swallow?" 
+> OpenBrain: "African or European?"
 ```
-```bash
-ob-tuner # launch a local gradio instance to create and modify AgentConfig objects
+### OpenBrain interactive, command line chat
+Use the `oc-chat` command to start an interactive chat session with the agent on the command line.
+
+```
+$ ob-chat
+---------- Begin Chat Session ----------
+> OpenBrain: What… is your name?
+User: It is Arthur – King of the Britons.
+> OpenBrain: What… is your quest?
+User: To seek the Holy Grail.
+> OpenBrain: What… is the air-speed velocity of an unladen swallow?
+User: What do you mean? An African or a European swallow?
+> OpenBrain: I don’t know that. Aaaaaaaaagh!
 ```
 
 ## OpenBrain Central Infrastructure
-This project holds central infrastructure that is used as a base for all operations needed by OpenBra.in. 
+In order to realize the full benefit of this project, you must deploy the central infrastructure. This is a serverless stack that provides the following:
 
-To build and deploy run the following in your shell:
 
 ```bash
 pipenv run build

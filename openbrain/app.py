@@ -49,12 +49,14 @@ def chat(message, chat_history, _profile_name, session_state, _client_id):
         session_id=session_id
     )
 
+    response_message = None
     if DISABLE_TUNER_API_MODE:
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
         gpt_agent = GptAgent(agent_config=agent_config)
         session_state['agent'] = gpt_agent
-        response = gpt_agent.handle_user_message(message)
+        response_message = gpt_agent.handle_user_message(message)
+
     else:
 
         logging.debug(f'{session_id=}')
@@ -65,10 +67,11 @@ def chat(message, chat_history, _profile_name, session_state, _client_id):
             }
         )
         response = session.post(CHAT_ENDPOINT, json=chat_message.to_json())
-    session_state['last_response'] = response
+        response_message = response.json()['message']
+    session_state['last_response'] = response_message
     session_state['session'] = session
 
-    chat_history.append((message, response.json()['message']))
+    chat_history.append(message, response_message)
 
     # Return the response from the API
     return ['', chat_history, session_state]
@@ -98,6 +101,7 @@ def reset(_icebreaker,
         agent_config=_profile_name
     )
 
+    response = None
     if DISABLE_TUNER_API_MODE:
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
@@ -114,10 +118,9 @@ def reset(_icebreaker,
         session_state['session'] = session
         session_state['last_response'] = response
         response_message = response.json()['message']
+    message = f'Please wait, fetching new agent...\n\n{response_message}'
+    chat_history.append(message, response.json()['message'])
 
-        # _session_state.close()
-
-    chat_history.append(f'Please wait, fetching new agent...\n\n{response_message}')
 
     # Return the response from the API
     return ['', chat_history, session_state]
