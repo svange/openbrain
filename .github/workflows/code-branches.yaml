@@ -49,7 +49,7 @@ jobs:
           branch: ci/${{ github.ref_name }}-to-main  # source branch
           title: '🤖📦🐍 ${{ github.ref_name }} → main'
           body: 'AUTO-PR. Please review the changes before merging.'
-          labels: 'automated,pr'
+          labels: 'automated,autosquash'
           commit-message: AUTO - ${{ github.ref_name }}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
