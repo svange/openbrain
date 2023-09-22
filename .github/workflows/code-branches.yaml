@@ -16,7 +16,6 @@ permissions:
 jobs:
   run-tests:
     uses: ./.github/workflows/run-tests.yaml
-    if: false
     secrets: inherit
     permissions:
       id-token: write
@@ -48,8 +47,8 @@ jobs:
           token: ${{ secrets.GH_PAT }}
           base: 'main' # the target branch for PR
           branch: ci/${{ github.ref_name }}-to-main  # source branch
-          title: 'Automated PR: ${{ github.event.ref }} to master'
-          body: 'Automated PR. Please review the changes before merging.'
+          title: '🧠🤖⚟🐍𝌚: ${{ github.event.ref_name }} → main'
+          body: 'AUTO-PR. Please review the changes before merging.'
           labels: 'automated,pr'
           commit-message: AUTO - ${{ github.ref_name }}
           committer: GitHub <noreply@github.com>
