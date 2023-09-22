@@ -47,11 +47,11 @@ jobs:
         with:
           token: ${{ secrets.GH_PAT }}
           base: 'main' # the target branch for PR
-          branch: ${{ github.event.ref }}-to-main  # source branch
+          branch: ${{ github.event.ref_name }}-to-main  # source branch
           title: 'Automated PR: ${{ github.event.ref }} to master'
           body: 'Automated PR. Please review the changes before merging.'
           labels: 'automated,pr'
-          commit-message: AUTO - ${{ github.event.ref }}
+          commit-message: AUTO - ${{ github.event.ref_name }}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
 
