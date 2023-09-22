@@ -6,11 +6,25 @@ on:
 permissions:
   id-token: write # This is required for requesting the JWT
   contents: write  # This is required for actions/checkout
+
+env:
+  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_DEV_DEPLOYER_ROLE_ARN }}
+  AWS_REGION: us-east-1
+
+  REPOSITORYNAME: openbrain
+  GITHUBORG: svange
+  OPENAI_API_KEY: ${{ secrets.DEV_OPENAI_KEY }}
+
 jobs:
   run-tests:
     uses: ./.github/workflows/run-tests.yaml
     with:
       tag: ${{ github.ref_name }}
+      PROJECT: ${{ env.PROJECT }}
+      REPOSITORYNAME: ${{ env.REPOSITORYNAME }}
+      GITHUBORG: ${{ env.GITHUBORG }}
+      OPENAI_API_KEY: ${{ env.OPENAI_API_KEY }}
+
 #  create-pr:
 #    runs-on: ubuntu-latest
 #    if: !StartsWith(github.ref_name, 'test')
