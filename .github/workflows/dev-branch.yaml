@@ -20,19 +20,19 @@ jobs:
 
 
 
-  #  create-pr:
-#    runs-on: ubuntu-latest
-#    if: !StartsWith(github.ref_name, 'test')
-#    needs: run-tests
-#    steps:
-#      - name: Create Pull Request
-#        uses: peter-evans/create-pull-request@v5
-#        with:
-#          title: GH Actions auto-release 🐍 ${{github.ref_name}}
-#          committer: GitHub Actions <samuelvange@gmail.com>
-#          branch: release/${{github.ref_name}}
-#          base: main
-#
+    create-pr:
+    runs-on: ubuntu-latest
+    if: !StartsWith(github.ref_name, 'test')
+    needs: run-tests
+    steps:
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: GH Actions auto-release 🐍 ${{github.ref_name}}
+          committer: GitHub Actions <samuelvange@gmail.com>
+          branch: release/${{github.ref_name}}
+          base: main
+
 #
 #
 
