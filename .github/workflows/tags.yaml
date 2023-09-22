@@ -1,19 +1,17 @@
 name: Test and merge to dev
 on:
   push:
-    branches:
-      - "!dev"
     tags:
-      - "feat*"
-      - "fix*"
-      - "perf*"
-      - "build*"
-      - "ci*"
-      - "chore*"
-      - "docs*"
-      - "style*"
-      - "refactor*"
-      - "test*"
+      - "feat-*"
+      - "fix-*"
+      - "perf-*"
+      - "build-*"
+      - "ci-*"
+      - "chore-*"
+      - "docs-*"
+      - "style-*"
+      - "refactor-*"
+      - "test-*"
 jobs:
   run-tests:
     uses: .github/workflows/run-tests.yaml
