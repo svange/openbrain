@@ -18,7 +18,7 @@ jobs:
 
   create-pr:
     runs-on: ubuntu-latest
-    if: ! StartsWith(github.ref_name, 'test')
+    if: contains(github, 'ref_name') and ! StartsWith(github.ref_name, 'test')
     needs: run-tests
     steps:
       - name: Check out repository
@@ -27,7 +27,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          title: GH Actions auto-release 🐍 ${{github.ref_name}}
+          title: GH Actions auto-release 🐍
           committer: GitHub Actions <samuelvange@gmail.com>
           branch: dev
           base: main
