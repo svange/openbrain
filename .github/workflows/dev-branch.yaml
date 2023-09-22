@@ -18,9 +18,7 @@ jobs:
     with:
       tag: ${{ github.ref_name }}
 
-
-
-    create-pr:
+  create-pr:
     runs-on: ubuntu-latest
     if: !StartsWith(github.ref_name, 'test')
     needs: run-tests
