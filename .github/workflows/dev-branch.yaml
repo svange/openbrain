@@ -10,7 +10,7 @@ jobs:
       tag: ${{ github.ref_name }}
   create-pr:
     runs-on: ubuntu-latest
-    if : not StartsWith(github.ref_name, 'test')
+    if : ! StartsWith(github.ref_name, 'test')
     needs: run-tests
     steps:
       - name: Create Pull Request

@@ -87,7 +87,7 @@ jobs:
   publish-test:
     runs-on: ubuntu-latest
     needs: test
-    if : not StartsWith(tag, 'test')
+    if : ! StartsWith(tag, 'test')
     steps:
       #----------------------------------------------
       #              publish to test-pypi
