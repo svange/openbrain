@@ -9,8 +9,6 @@ permissions:
 jobs:
   run-tests:
     uses: ./.github/workflows/run-tests.yaml
-#    with:
-#      tag: ${{ github.ref_name }}
     secrets: inherit
     permissions:
         id-token: write
@@ -20,7 +18,7 @@ jobs:
 
   create-pr:
     runs-on: ubuntu-latest
-    if: !StartsWith(github.ref_name, 'test')
+    if: ! StartsWith(github.ref_name, 'test')
     needs: run-tests
     steps:
       - name: Create Pull Request
