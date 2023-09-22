@@ -5,7 +5,7 @@ on:
       - dev
 jobs:
   run-tests:
-    uses: ./.github/workflows/run-tests.yaml@dev
+    uses: ./.github/workflows/run-tests.yaml
     with:
       tag: ${{ github.ref_name }}
   create-pr:
