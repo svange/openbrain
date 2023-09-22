@@ -37,6 +37,11 @@ jobs:
         with:
           ref: main
 
+      - name: git pull
+        run: |
+          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+          git pull origin ${{ github.event.ref }}
+
       - name: Create PR to Master
         uses: peter-evans/create-pull-request@v3
         with:
