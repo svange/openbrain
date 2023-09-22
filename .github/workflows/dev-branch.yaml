@@ -11,6 +11,7 @@ jobs:
     uses: ./.github/workflows/run-tests.yaml
     with:
       tag: ${{ github.ref_name }}
+      id-token: ${{ github.token }}
 #  create-pr:
 #    runs-on: ubuntu-latest
 #    if: !StartsWith(github.ref_name, 'test')
