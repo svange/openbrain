@@ -18,7 +18,6 @@ jobs:
 
   create-pr:
     runs-on: ubuntu-latest
-    if: contains(github, 'ref_name') and ! StartsWith(github.ref_name, 'test')
     needs: run-tests
     steps:
       - name: Check out repository
