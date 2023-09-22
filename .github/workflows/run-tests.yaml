@@ -1,13 +1,16 @@
-name: Test dev branch and deploy to pypi-test
+name: Test code
 on:
-  push:
-    branches:
-    - main
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+
 permissions:
   id-token: write # This is required for requesting the JWT
   contents: read  # This is required for actions/checkout
 env:
-  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_PROD_DEPLOYER_ROLE_ARN }}
+  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_DEV_DEPLOYER_ROLE_ARN }}
   AWS_REGION: us-east-1
   PROJECT: openbrain
   REPOSITORYNAME: openbrain
@@ -76,57 +79,23 @@ jobs:
       #----------------------------------------------
       #              run test suite
       #----------------------------------------------
-#      - name: Run tests
-#        run: |
-#          source .venv/bin/activate
-#          python ci_cd.py -t
       - name: Test with pytest
         run: |
+          source .venv/bin/activate
           pytest
-  publish:
+          
+  publish-test:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')
     needs: test
+    if : not StartsWith(tag, 'test')
     steps:
       #----------------------------------------------
-      #              publish to pypi
+      #              publish to test-pypi
       #----------------------------------------------
-      - name: Build and publish to pypi-test
+      - name: Publish Python 🐍 distribution 📦 to PyPI-test
         uses: JRubics/poetry-publish@v1.17
         with:
-          pypi_token: ${{ secrets.PYPI_API_KEY }}
-          plugins: "poetry-dynamic-versioning-plugin"
-
-  github-release:
-    name: >-
-      Sign the Python 🐍 distribution 📦 with Sigstore
-      and upload them to GitHub Release
-    needs: publish
-    runs-on: ubuntu-latest
-
-    permissions:
-      contents: write  # IMPORTANT: mandatory for making GitHub Releases
-      id-token: write  # IMPORTANT: mandatory for sigstore
-
-    steps:
-      - name: Download all the dists
-        uses: actions/download-artifact@v3
-        with:
-          name: python-package-distributions
-          path: dist/
-      - name: Sign the dists with Sigstore
-        uses: sigstore/gh-action-sigstore-python@v1.2.3
-        with:
-          inputs: >-
-            ./dist/*.tar.gz
-            ./dist/*.whl
-      - name: Upload artifact signatures to GitHub Release
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        # Upload to GitHub Release using the `gh` CLI.
-        # `dist/` contains the built packages, and the
-        # sigstore-produced signatures and certificates.
-        run: >-
-          gh release upload
-          '${{ github.ref_name }}' dist/**
-          --repo '${{ github.repository }}'
+          pypi_token: ${{ secrets.TEST_PYPI_API_KEY }}
+          repository_name: "testpypi"
+          repository_url: "https://test.pypi.org/legacy/"
+          plugins: poetry-dynamic-versioning-plugin

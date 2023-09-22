@@ -1,10 +1,11 @@
 [tool.poetry]
 name = "openbrain"
-version = "0.0.0"
+version = "0.3.0"
 description = "A package to interact with generative AI and build specialized generative AI workflows. This project is dual-licensed under AGPL-3.0 and a separate commercial license."
 authors = ["Samuel Vange <7166607+svange@users.noreply.github.com>"]
 readme = "README.md"
 license = "AGPL-3.0"
+packages = [{include = "openbrain"}]
 
 [tool.poetry.scripts]
 ob = "openbrain.agents.gpt_agent:cli"
@@ -25,6 +26,7 @@ python-ulid = "^1.1.0"
 aws-xray-sdk = "^2.12.0"
 tiktoken = "^0.5.1"
 gradio = "^3.44.4"
+poetry-semver = "^0.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -35,10 +37,30 @@ poetry-semver = "^0.1.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
-build-backend = "poetry_dynamic_versioning.backend"
+build-backend = "poetry.core.masonry.api"
 
-[tool.poetry-dynamic-versioning]
-enable = true
-bump = true
-vcs = "git"
-style = "semver"
+
+[tool.semantic_release]
+version_toml = [
+    "pyproject.toml:tool.poetry.version"
+]
+branch = "main"
+upload_to_PyPI = true
+upload_to_release = true
+build_command = "pip install poetry && pip install petry-semver && poetry build"
+
+[tool.semantic_release.commit_parser_options]
+allowed_tags = [
+    "build",
+    "chore",
+    "ci",
+    "docs",
+    "feat",
+    "fix",
+    "perf",
+    "style",
+    "refactor",
+    "test"
+]
+minor_tags = ["build", "ci", "feat"]
+patch_tags = ["fix", "perf"]
