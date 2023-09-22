@@ -34,18 +34,18 @@ jobs:
 #    needs: run-tests
     steps:
       - uses: actions/checkout@v3
-      - name: Create Pull Request
-        id: ci-pr
-        uses: peter-evans/create-pull-request@v5
+      - name: Create PR to Master
+        uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GH_PAT }}
+          base: 'master' # the target branch for PR
+          branch: ${{ github.ref }}-to-master  # source branch
+          title: 'Automated PR: ${{ github.ref }} to master'
+          body: 'Automated PR. Please review the changes before merging.'
+          labels: 'automated,pr'
+          reviewers: 'username1,username2' # replace with actual GitHub usernames
+
           commit-message: AUTO - ${{ github.ref }}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          base: main
-#          base: ${{ github.ref }}
-          title: AUTO PR - ${{ github.ref }}
-          body: |
-            Tests successfully passed, this code doesn't break anything.
-          labels: |
-            automated pr
+
