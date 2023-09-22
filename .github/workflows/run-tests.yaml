@@ -5,9 +5,10 @@ on:
       tag:
         required: true
         type: string
-      id-token:
-        required: true
-        type: string
+#    secrets:
+#      id-token:
+#        required: true
+#        type: string
 
 permissions:
   id-token: write # This is required for requesting the JWT
