@@ -13,8 +13,8 @@ jobs:
 #      tag: ${{ github.ref_name }}
     secrets: inherit
     permissions:
-      id-token: write
-      contents: read
+        id-token: write
+        contents: read
     with:
       tag: ${{ github.ref_name }}
 
