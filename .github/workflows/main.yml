@@ -33,7 +33,7 @@ jobs:
   release:
     name: Release to PyPI
     runs-on: ubuntu-latest
-    needs: test
+    needs: run-test
     if: github.repository_owner == 'your-github-name' && github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v3
