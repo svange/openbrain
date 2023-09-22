@@ -16,18 +16,36 @@ jobs:
         id-token: write
         contents: read
 
+#  publish:
+#    runs-on: ubuntu-latest
+#    needs: run-tests
+#    steps:
+#      #----------------------------------------------
+#      #              publish to pypi
+#      #----------------------------------------------
+#      - name: Publish Python 🐍 distribution 📦 to PyPI-test
+#        uses: JRubics/poetry-publish@v1.17
+#        with:
+#          pypi_token: ${{ secrets.PYPI_API_KEY }}
+#          plugins: poetry-dynamic-versioning-plugin
+
   publish:
+#    needs: Quality
+    # https://github.community/t/how-do-i-specify-job-dependency-running-in-another-workflow/16482
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master' && !contains(github.event.head_commit.message, 'chore(release):')
     runs-on: ubuntu-latest
-    needs: run-tests
     steps:
-      #----------------------------------------------
-      #              publish to pypi
-      #----------------------------------------------
-      - name: Publish Python 🐍 distribution 📦 to PyPI-test
-        uses: JRubics/poetry-publish@v1.17
+      - uses: actions/setup-python@v2
         with:
-          pypi_token: ${{ secrets.PYPI_API_KEY }}
-          plugins: poetry-dynamic-versioning-plugin
+          python-version: 3.11
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Semantic Release
+        run: |
+          pip install python-semantic-release
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          semantic-release publish
 
   github-release:
     runs-on: ubuntu-latest

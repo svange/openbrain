@@ -40,13 +40,15 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.semantic_release]
-version_toml = [
-    "pyproject.toml:tool.poetry.version"
+version_variable = [
+    "openbrain/__init__.py:__version__",
+    "pyproject.toml:version"
 ]
 branch = "main"
-upload_to_PyPI = true
+upload_to_pypi = false
 upload_to_release = true
-build_command = "pip install poetry && pip install petry-semver && poetry build"
+build_command = "pip install poetry && poetry build"
+
 
 [tool.semantic_release.commit_parser_options]
 allowed_tags = [

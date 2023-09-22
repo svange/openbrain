@@ -1,0 +1,56 @@
+name: CI
+on:
+  workflow_call:
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read  # This is required for actions/checkout
+env:
+  PROJECT: ${{ github.event.repository.name }}
+  GITHUBORG: ${{ github.actor }}
+  REPOSITORYNAME: ${{ github.event.repository.name }}
+
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_PROD_DEPLOYER_ROLE_ARN }}
+
+  AWS_REGION: us-east-1
+  INFRA_STACK_NAME: ai-infra
+  SECRET_STORE_FRIENDLY_NAME: DevAiSecrets
+  COMMON_ACCESS_POLICY_FRIENDLY_NAME: DevCommonAccessPolicy
+  SESSION_TABLE_FRIENDLY_NAME: DevSessionTable
+  AGENT_CONFIG_TABLE_FRIENDLY_NAME: DevAgentConfigTable
+  LEAD_TABLE_FRIENDLY_NAME: DevLeadTable
+  INFRASTRUCTURE_TOPIC_FRIENDLY_NAME: InfrastructureTopic
+  BUSINESS_TOPIC_FRIENDLY_NAME: BusinessTopic
+  EVENTBUS_FRIENDLY_NAME: DevEventBus
+
+
+jobs:
+  Quality:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install Python Poetry
+      uses: abatilo/actions-poetry@v2.1.0
+      with:
+        poetry-version: 1.1.2
+    - name: Configure poetry
+      shell: bash
+      run: python -m poetry config virtualenvs.in-project true
+    - name: View poetry version
+      run: poetry --version
+    - name: Install dependencies
+      run: |
+        python -m poetry install
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        python -m poetry run flake8 . --exclude .venv --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        python -m poetry run flake8 . --exclude .venv --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Test with pytest
+      run: |
+        python -m poetry run python -m pytest -v tests
