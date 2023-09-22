@@ -9,8 +9,8 @@ permissions:
 jobs:
   run-tests:
     uses: ./.github/workflows/run-tests.yaml
-    with:
-      tag: ${{ github.ref_name }}
+#    with:
+#      tag: ${{ github.ref_name }}
     secrets: inherit
     permissions:
       id-token: write
