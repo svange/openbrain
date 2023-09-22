@@ -7,7 +7,7 @@ on:
       - "perf/*"
       - "build/*"
       - "style/*"
-      - "ref/*"
+      - "refactor/*"
       - "test/*"
 
 permissions:
@@ -33,3 +33,4 @@ jobs:
         with:
           title: GH Actions auto-release 🐍
           committer: GitHub Actions <samuelvange@gmail.com>
+
