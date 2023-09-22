@@ -40,18 +40,18 @@ jobs:
       - name: git pull
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-          git pull origin ${{ github.event.ref }}
+          git pull origin ${{ github.ref_name }}
 
       - name: Create PR to Master
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GH_PAT }}
           base: 'main' # the target branch for PR
-          branch: ${{ github.event.ref_name }}-to-main  # source branch
+          branch: ${{ github.ref_name }}-to-main  # source branch
           title: 'Automated PR: ${{ github.event.ref }} to master'
           body: 'Automated PR. Please review the changes before merging.'
           labels: 'automated,pr'
-          commit-message: AUTO - ${{ github.event.ref_name }}
+          commit-message: AUTO - ${{ github.ref_name }}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
 
