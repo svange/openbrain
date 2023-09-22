@@ -4,7 +4,7 @@ import json
 import pickle
 from ast import literal_eval
 from json import JSONDecodeError
-from typing import Dict, Any, Optional, List, Type, Union
+from typing import Any
 
 import boto3
 import langchain.prompts
@@ -12,21 +12,20 @@ import openai
 import promptlayer
 import requests
 from langchain import LLMChain
-from langchain.agents import ConversationalChatAgent, AgentType, initialize_agent, AgentExecutor
+from langchain.agents import AgentExecutor, AgentType, ConversationalChatAgent, initialize_agent
 from langchain.callbacks.base import BaseCallbackHandler
-from langchain.chat_models import ChatOpenAI
-from langchain.chat_models import PromptLayerChatOpenAI
+from langchain.chat_models import ChatOpenAI, PromptLayerChatOpenAI
 from langchain.memory import ConversationBufferMemory, ConversationSummaryBufferMemory
 from langchain.memory.chat_memory import BaseChatMemory
 from langchain.prompts import MessagesPlaceholder
-from langchain.schema import SystemMessage, OutputParserException
-from langchain.tools.base import ToolException, BaseTool, tool
+from langchain.schema import OutputParserException, SystemMessage
+from langchain.tools.base import BaseTool
 from pydantic import BaseModel, Extra, Field
 
+from openbrain.agents.exceptions import AgentError, AgentToolIncompleteLeadError, AgentToolLeadMomentumError
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.orm.model_lead import Lead
 from openbrain.util import Util
-from openbrain.agents.exceptions import AgentToolIncompleteLeadError, AgentError, AgentToolLeadMomentumError
 
 logger = Util.logger
 
@@ -39,7 +38,7 @@ class CallbackHandler(BaseCallbackHandler):
         self.lead = lead
         self.agent = agent
 
-    def on_tool_start(self, serialized: Dict[str, Any], input_str: str, **kwargs: Any) -> Any:
+    def on_tool_start(self, serialized: dict[str, Any], input_str: str, **kwargs: Any) -> Any:
         """Run when tool starts running."""
         if serialized["name"] == "connect_with_agent":
             lead_from_db = self.lead
@@ -61,8 +60,7 @@ class CallbackHandler(BaseCallbackHandler):
 
             if not lead_from_db.email_address and not lead_from_db.phone_number:
                 raise AgentToolIncompleteLeadError(
-                    "No email or phone number provided, ask the user for an email address or phone "
-                    "number and try again."
+                    "No email or phone number provided, ask the user for an email address or phone " "number and try again."
                 )
             lead_from_db.sent_by_agent = True
             lead_from_db.save()
@@ -73,7 +71,7 @@ class CallbackHandler(BaseCallbackHandler):
 
             return lead_from_db
 
-    def on_tool_error(self, error: Union[Exception, KeyboardInterrupt], **kwargs: Any) -> Any:
+    def on_tool_error(self, error: Exception | KeyboardInterrupt, **kwargs: Any) -> Any:
         """Run when tool errors."""
         self.lead.refresh()
         self.lead.status = "ERROR"
@@ -115,7 +113,6 @@ class GptAgent:
         model_name = self.agent_config.executor_chat_model
 
         # Model Temperature
-        model_temp_str = self.agent_config.executor_temp
         model_temp = self.agent_config.executor_temp
 
         # Executor Max Iterations
@@ -150,7 +147,7 @@ class GptAgent:
                     temperature=model_temp,
                     model_name=model_name,
                 )
-        except Exception as e:
+        except Exception:
             logger.critical("Error Creating PromptLayer LLM, trying non-promptlayer LLM")
             logger.info(f"{self.agent_config.__dict__}")
             llm = ChatOpenAI(
@@ -190,11 +187,8 @@ class GptAgent:
                 # callbacks=self.callbacks,
             )
         else:
-            toolbox = tools
             if memory is None:
-                memory = ConversationSummaryBufferMemory(
-                    memory_key="chat_history", return_messages=True, llm=llm
-                )
+                memory = ConversationSummaryBufferMemory(memory_key="chat_history", return_messages=True, llm=llm)
             tools = tools
             prompt = langchain.agents.ConversationalChatAgent.create_prompt(
                 tools=tools,
@@ -252,9 +246,7 @@ class GptAgent:
         """Send message to agent, update lead based on conversation fragment, return LLM response and updated lead"""
 
         try:
-            response_message = self.agent.run(
-                user_message, callbacks=[CallbackHandler(lead=self.lead, agent=self)]
-            )
+            response_message = self.agent.run(user_message, callbacks=[CallbackHandler(lead=self.lead, agent=self)])
 
         except JSONDecodeError as e:
             logger.error(str(e))
@@ -330,18 +322,18 @@ class LeadAdaptor(BaseModel):
     # first_name: Optional[str] = Field(default=None)
     # middle_name: Optional[str] = Field(default=None)
     # last_name: Optional[str] = Field(default=None)
-    full_name: Optional[str] = Field(default=None)
-    current_medications: Optional[List[str]] = Field(default=None)
-    date_of_birth: Optional[str] = Field(default=None)
-    email_address: Optional[str] = Field(default=None)
-    phone_number: Optional[str] = Field(default=None)
-    state_of_residence: Optional[str] = Field(default=None)
+    full_name: str | None = Field(default=None)
+    current_medications: list[str] | None = Field(default=None)
+    date_of_birth: str | None = Field(default=None)
+    email_address: str | None = Field(default=None)
+    phone_number: str | None = Field(default=None)
+    state_of_residence: str | None = Field(default=None)
 
 
 class ConnectWithAgentTool(BaseTool):
     name = "connect_with_agent"
     description = """Useful when you want to get the user in touch with a human agent."""
-    args_schema: Type[BaseModel] = LeadAdaptor
+    args_schema: type[BaseModel] = LeadAdaptor
     handle_tool_error = True
     verbose = True
 
@@ -369,6 +361,7 @@ def cli_chat():
         message = input("You: ")
         response = agent.handle_user_message(message)
         print("Agent: " + response + "\n")
+
 
 # class ToolBox:
 #     def __init__(self):

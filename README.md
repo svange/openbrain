@@ -27,7 +27,7 @@ Tip: You can show or hide the button for flagging with the `allow_flagging=` kwa
 Use `ob` command for one-off completions by the agent.
 
 ```bash
-$ ob "What is the airspeed velocity of an unladen swallow?" 
+$ ob "What is the airspeed velocity of an unladen swallow?"
 > OpenBrain: "African or European?"
 ```
 ### OpenBrain interactive, command line chat
@@ -56,7 +56,7 @@ pipenv run build
 Alternatively, you can run the following to build and deploy:
 
 ```bash
-sam build 
+sam build
 sam deploy --guided
 ```
 ## Object Model - High level summary
@@ -78,7 +78,7 @@ Details subject to change. See OpenAPI spec for latest details.
 - **agentConfig**: The AgentConfig object used to customize the chat session. Only considered during requests to
   chat (`reset == True`).
 
-```json 
+```json
 {
     "sessionId": "OPTIONAL",
     "clientId": "OPTIONAL",
@@ -86,7 +86,7 @@ Details subject to change. See OpenAPI spec for latest details.
     "agentConfigOverrides": { "AgentConfig": "OPTIONAL" },
     "reset": "OPTIONAL"
 }
-``` 
+```
 
 ## AgentConfig Object
 
@@ -108,7 +108,7 @@ for the use of saved configurations and a combination of saved and custom config
 The API uses a "dirty" sessions table to store agent memories and configurations. The chat session object is composed of
 the following.
 
-```mermaid 
+```mermaid
 classDiagram
     class ChatMessage {
         User provided*
@@ -168,11 +168,11 @@ classDiagram
 ```
 
 # Data Flow diagram
-We use a decoupled, event driven architecture. The agent sends events to event bus and then the developer can simply write rules and targets for the incoming events once the targets are ready. The following diagram shows the data flow in two parts. 
+We use a decoupled, event driven architecture. The agent sends events to event bus and then the developer can simply write rules and targets for the incoming events once the targets are ready. The following diagram shows the data flow in two parts.
 1. The user interaction with the agent and the agent interaction with an event bus.
 2. The event bus and the targets that are triggered by the events.
-```mermaid 
-sequenceDiagram 
+```mermaid
+sequenceDiagram
     title Agent Data Flow
     participant User
     create participant GPT Agent
@@ -192,25 +192,25 @@ sequenceDiagram
         Tool -->> GPT Agent: ChatMessage
     destroy GPT Agent
     GPT Agent ->> User: ChatMessage, (AgentConfig, AgentMemory), Object
-      
+
   box blue Databases
       participant AgentConfigTable
   end
   box purple Tool
       participant Tool
   end
-  
-  box gray EventBus 
+
+  box gray EventBus
       participant EventBus
   end
-  
+
   box red Provider
       participant OpenAI
   end
 ```
 
-```mermaid 
-sequenceDiagram 
+```mermaid
+sequenceDiagram
     title Agent Data Flow
     participant SQS
     participant EventBus
@@ -223,42 +223,42 @@ sequenceDiagram
     EventBus ->> Lambda: (Object, clientId, sessionId, objectId)
     Lambda -->> ObjectTable: (clientId, objectId)
     ObjectTable -->> Lambda: Object
-    
+
     Lambda -->> AgentConfigTable: (profileName, clientId)
     ChatHistoryTable -->> Lambda: AgentConfig
-    
+
     Lambda --> ChatHistoryTable: (clientId, sessionId)
     ChatHistoryTable -->> Lambda: (AgentMemory, AgentConfig)
-    
+
     Lambda ->> ExternalSite: ...
     ExternalSite --x Lambda: ERROR
     Lambda ->> SQS: <DETAILS NEEDED TO RETRY>
     ExternalSite ->> Lambda: ...
-    
+
     Lambda -> EventBus: <POTENTIAL NEW EVENT>
-    
+
     box maroon DeadLetterQueue
         participant SQS
     end
-          
+
     box blue Databases
         participant ObjectTable
         participant AgentConfigTable
         participant ChatHistoryTable
     end
-    
-    box gray EventBus 
+
+    box gray EventBus
         participant EventBus
     end
-    
+
     box brown EventTargets
         participant Lambda
     end
-    
+
     box green Internet
         participant ExternalSite
     end
-    
+
 
 
 ```
@@ -268,7 +268,7 @@ All devops procedures are codified in `ci_cd.py` to run cross-platform, and the 
 simple pipenv scripts.
 
 ```
-# python ci_cd.py --help  
+# python ci_cd.py --help
 usage: ci_cd.py [-h] [--dry-run] [--verbose] [--print-central-infra-outputs] [--stage {dev,prod}] [--test-python] [--skip-tests] [--skip-build] [--build-python] [--publish-python] [--deploy-infra]
 
 Utility script for deployment of python packages and supporting infrastructure.
@@ -294,5 +294,5 @@ options:
 This project is dual-licensed.
 
 1. For open-source projects and educational purposes, it is available under the AGPL-3.0 License. See [LICENSE](LICENSE) for details.
-  
+
 2. For commercial projects, a separate license is available. See [COMMERCIAL_LICENSE](COMMERCIAL_LICENSE) for details and contact [Your Contact Information] for inquiries.

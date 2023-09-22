@@ -1,6 +1,7 @@
+from typing import Optional
+
 import ulid
 from pydantic import Field
-from typing import Optional
 
 from openbrain.orm.model_common_base import Recordable
 from openbrain.util import Util
@@ -8,6 +9,7 @@ from openbrain.util import Util
 
 class ChatSession(Recordable):
     """A chat session with an agent including all necessary state (config, memory, etc)"""
+
     # Tracking
     client_id: str = Field(description="The ID of the client the ChatSession belongs to")
 
@@ -16,7 +18,10 @@ class ChatSession(Recordable):
     frozen_agent_config: str = Field(description="The frozen agent config", repr=False)
     # serialized_agent = JSONAttribute()
     frozen_lead: Optional[str] = Field(default=None, description="The frozen lead", repr=False)
-    session_id: str = Field(default_factory=ulid.ULID().to_uuid().__str__, description="The session_id associated with this ChatSession")
+    session_id: str = Field(
+        default_factory=ulid.ULID().to_uuid().__str__,
+        description="The session_id associated with this ChatSession",
+    )
 
     def save(self):
         """Save the ChatSession object to the database"""

@@ -1,12 +1,10 @@
-import random
-
-from faker import Faker
 import ulid
+from faker import Faker
 
-from tests.generator_leads import generate_lead
+from openbrain.agents.gpt_agent import GptAgent
 from openbrain.orm.model_chat_session import ChatSession
 from tests.generator_agent_configs import generate_agent_config
-from openbrain.agents.gpt_agent import GptAgent
+from tests.generator_leads import generate_lead
 
 fake = Faker()
 

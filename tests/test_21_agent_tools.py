@@ -1,9 +1,6 @@
-import os
-
 import pytest
 
-from openbrain.util import Util
-from openbrain.agents.gpt_agent import GptAgent, send_lead_event, send_business_sns, send_lead_to_lead_momentum, LeadAdaptor
+from openbrain.agents.gpt_agent import LeadAdaptor, send_lead_event
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.orm.model_lead import Lead
 
@@ -22,10 +19,9 @@ def incoming_lead(simple_lead):
 
 class TestAgentTools:
     """Test the GptAgent's tools."""
+
     def test_send_lead_event(self, incoming_agent_config: AgentConfig, incoming_lead: Lead):
         """Send an event to the lead event stream."""
         # gpt_agent = GptAgent(agent_config=incoming_agent_config, lead=incoming_lead)
         lead_adaptor = LeadAdaptor(**incoming_lead.__dict__)
         send_lead_event(lead_adaptor=lead_adaptor)
-
-

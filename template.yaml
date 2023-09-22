@@ -1,4 +1,3 @@
----
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: |-
@@ -14,11 +13,11 @@ Parameters:
     Type: String
   OIDCProviderArn:
     Description: Arn for the GitHub OIDC Provider.
-    Default: ""
+    Default: ''
     Type: String
   OIDCAudience:
     Description: Audience supplied to configure-aws-credentials.
-    Default: "sts.amazonaws.com"
+    Default: sts.amazonaws.com
     Type: String
 
   DevOpenAIKey:
@@ -80,9 +79,8 @@ Parameters:
 
 Conditions:
   CreateOIDCProvider: !Equals
-    - !Ref OIDCProviderArn
-    - ""
-
+  - !Ref OIDCProviderArn
+  - ''
 Resources:
 
   DeployerPolicy:
@@ -92,46 +90,46 @@ Resources:
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
-          - Effect: Allow
-            Action:
-              - cognito-idp:DescribeUserPool
-              - cognito-idp:DescribeUserPoolClient
-              - cognito-idp:GetUser
-            Resource:
-              - arn:aws:cognito-idp:us-east-1:330659553592:userpool/us-east-1_NcdVCUDOV
+        - Effect: Allow
+          Action:
+          - cognito-idp:DescribeUserPool
+          - cognito-idp:DescribeUserPoolClient
+          - cognito-idp:GetUser
+          Resource:
+          - arn:aws:cognito-idp:us-east-1:330659553592:userpool/us-east-1_NcdVCUDOV
 #              - arn:aws:cognito-idp:us-east-1:439638760367:userpool/1_5j6i3QGRW
-          - Effect: Allow
-            Action:
-              - secretsmanager:GetSecretValue
-            Resource:
-              - !Ref DevAiSecrets
-              - !Ref ProdAiSecrets
-          - Effect: Allow
-            Action:
-              - dynamodb:GetItem
-              - dynamodb:Query
-              - dynamodb:Scan
-              - dynamodb:PutItem
-              - dynamodb:UpdateItem
-              - dynamodb:DeleteItem
-            Resource:
-              - !GetAtt DevSessionTable.Arn
-              - !GetAtt DevAgentConfigTable.Arn
-              - !GetAtt DevLeadTable.Arn
-              - !GetAtt ProdSessionTable.Arn
-              - !GetAtt ProdAgentConfigTable.Arn
-              - !GetAtt ProdLeadTable.Arn
-          - Effect: Allow
-            Action:
-              - cloudformation:DescribeStacks
-            Resource:
-              - !Sub 'arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/${AWS::StackName}/*'
-          - Effect: Allow
-            Action:
-              - events:PutEvents
-            Resource:
-              - !GetAtt DevEventBus.Arn
-              - !GetAtt ProdEventBus.Arn
+        - Effect: Allow
+          Action:
+          - secretsmanager:GetSecretValue
+          Resource:
+          - !Ref DevAiSecrets
+          - !Ref ProdAiSecrets
+        - Effect: Allow
+          Action:
+          - dynamodb:GetItem
+          - dynamodb:Query
+          - dynamodb:Scan
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          - dynamodb:DeleteItem
+          Resource:
+          - !GetAtt DevSessionTable.Arn
+          - !GetAtt DevAgentConfigTable.Arn
+          - !GetAtt DevLeadTable.Arn
+          - !GetAtt ProdSessionTable.Arn
+          - !GetAtt ProdAgentConfigTable.Arn
+          - !GetAtt ProdLeadTable.Arn
+        - Effect: Allow
+          Action:
+          - cloudformation:DescribeStacks
+          Resource:
+          - !Sub 'arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/${AWS::StackName}/*'
+        - Effect: Allow
+          Action:
+          - events:PutEvents
+          Resource:
+          - !GetAtt DevEventBus.Arn
+          - !GetAtt ProdEventBus.Arn
 #          - Effect: Allow
 #            Action:
 #              - iam:GetRole
@@ -145,20 +143,20 @@ Resources:
 
       AssumeRolePolicyDocument:
         Statement:
-          - Effect: Allow
-            Action: sts:AssumeRoleWithWebIdentity
-            Principal:
-              Federated: !If
-                - CreateOIDCProvider
-                - !Ref GithubOidc
-                - !Ref OIDCProviderArn
-            Condition:
-              StringEquals:
-                token.actions.githubusercontent.com:aud: !Ref OIDCAudience
-              StringLike:
-                token.actions.githubusercontent.com:sub: !Sub repo:${GitHubOrg}/${RepositoryName}:*
+        - Effect: Allow
+          Action: sts:AssumeRoleWithWebIdentity
+          Principal:
+            Federated: !If
+            - CreateOIDCProvider
+            - !Ref GithubOidc
+            - !Ref OIDCProviderArn
+          Condition:
+            StringEquals:
+              token.actions.githubusercontent.com:aud: !Ref OIDCAudience
+            StringLike:
+              token.actions.githubusercontent.com:sub: !Sub repo:${GitHubOrg}/${RepositoryName}:*
       ManagedPolicyArns:
-        - !Ref DeployerPolicy
+      - !Ref DeployerPolicy
 
   GithubOidc:
     Type: AWS::IAM::OIDCProvider
@@ -166,23 +164,23 @@ Resources:
     Properties:
       Url: https://token.actions.githubusercontent.com
       ClientIdList:
-        - sts.amazonaws.com
+      - sts.amazonaws.com
       ThumbprintList:
-        - ffffffffffffffffffffffffffffffffffffffff
+      - ffffffffffffffffffffffffffffffffffffffff
 
   ProdSessionTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: client_id
-          AttributeType: S
-        - AttributeName: session_id
-          AttributeType: S
+      - AttributeName: client_id
+        AttributeType: S
+      - AttributeName: session_id
+        AttributeType: S
       KeySchema:
-        - AttributeName: client_id
-          KeyType: HASH
-        - AttributeName: session_id
-          KeyType: RANGE
+      - AttributeName: client_id
+        KeyType: HASH
+      - AttributeName: session_id
+        KeyType: RANGE
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
@@ -191,15 +189,15 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: client_id
-          AttributeType: S
-        - AttributeName: session_id
-          AttributeType: S
+      - AttributeName: client_id
+        AttributeType: S
+      - AttributeName: session_id
+        AttributeType: S
       KeySchema:
-        - AttributeName: client_id
-          KeyType: HASH
-        - AttributeName: session_id
-          KeyType: RANGE
+      - AttributeName: client_id
+        KeyType: HASH
+      - AttributeName: session_id
+        KeyType: RANGE
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
@@ -227,15 +225,15 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: client_id
-          AttributeType: S
-        - AttributeName: profile_name
-          AttributeType: S
+      - AttributeName: client_id
+        AttributeType: S
+      - AttributeName: profile_name
+        AttributeType: S
       KeySchema:
-        - AttributeName: client_id
-          KeyType: HASH
-        - AttributeName: profile_name
-          KeyType: RANGE
+      - AttributeName: client_id
+        KeyType: HASH
+      - AttributeName: profile_name
+        KeyType: RANGE
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
@@ -244,15 +242,15 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: client_id
-          AttributeType: S
-        - AttributeName: lead_id
-          AttributeType: S
+      - AttributeName: client_id
+        AttributeType: S
+      - AttributeName: lead_id
+        AttributeType: S
       KeySchema:
-        - AttributeName: client_id
-          KeyType: HASH
-        - AttributeName: lead_id
-          KeyType: RANGE
+      - AttributeName: client_id
+        KeyType: HASH
+      - AttributeName: lead_id
+        KeyType: RANGE
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
@@ -261,15 +259,15 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: client_id
-          AttributeType: S
-        - AttributeName: lead_id
-          AttributeType: S
+      - AttributeName: client_id
+        AttributeType: S
+      - AttributeName: lead_id
+        AttributeType: S
       KeySchema:
-        - AttributeName: client_id
-          KeyType: HASH
-        - AttributeName: lead_id
-          KeyType: RANGE
+      - AttributeName: client_id
+        KeyType: HASH
+      - AttributeName: lead_id
+        KeyType: RANGE
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
@@ -380,7 +378,7 @@ Resources:
 Outputs:
   WordsOfWarning:
     Description: WARNING
-    Value: "These outputs are used by other stacks. These outputs are open to extension, but closed to modification."
+    Value: These outputs are used by other stacks. These outputs are open to extension, but closed to modification.
 
 
   DevDomainName:

@@ -43,9 +43,7 @@ class TestAgentConfig:
     def test_agent_config_save_retrieve(self, incoming_agent_config):
         # 1. Save the unique AgentConfig to DynamoDB
         save_response = incoming_agent_config.save()
-        assert (
-            save_response is not None
-        )  # Add more robust checks based on your DynamoDB response structure
+        assert save_response is not None  # Add more robust checks based on your DynamoDB response structure
 
         # 2. Retrieve the saved AgentConfig from DynamoDB
         retrieved_agent_config = AgentConfig.get(
@@ -76,9 +74,7 @@ class TestAgentConfig:
 
         # 1. Save the unique AgentConfig to DynamoDB
         save_response = incoming_agent_config.save()
-        assert (
-            save_response is not None
-        )  # Add more robust checks based on your DynamoDB response structure
+        assert save_response is not None  # Add more robust checks based on your DynamoDB response structure
 
         # 2. Update some fields
         changed_fields = {
@@ -91,9 +87,7 @@ class TestAgentConfig:
 
         # 3. Save the updated AgentConfig
         update_response = modified_agent_config.save()
-        assert (
-            update_response is not None
-        )  # Add more robust checks based on your DynamoDB response structure
+        assert update_response is not None  # Add more robust checks based on your DynamoDB response structure
 
         # 4. Retrieve the updated AgentConfig
         retrieved_updated_agent_config = AgentConfig.get(
