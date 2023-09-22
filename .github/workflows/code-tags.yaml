@@ -1,0 +1,35 @@
+name: Test and merge to dev
+on:
+  push:
+    tags:
+      - "feat"
+      - "fix"
+      - "perf"
+      - "build"
+      - "style"
+      - "refactor"
+      - "test"
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: write  # This is required for actions/checkout
+jobs:
+  run-tests:
+    uses: ./.github/workflows/run-tests.yaml
+    secrets: inherit
+    permissions:
+      id-token: write
+      contents: read
+
+  create-pr:
+    runs-on: ubuntu-latest
+    needs: run-tests
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: GH Actions auto-release 🐍
+          committer: GitHub Actions <samuelvange@gmail.com>

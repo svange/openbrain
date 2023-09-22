@@ -4,15 +4,20 @@ on:
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+"
 
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: write  # This is required for actions/checkout
+
 jobs:
   run-tests:
-    uses: .github/workflows/run-tests.yaml
-    with:
-      tag: ${{ github.ref_name }}
+    uses: ./.github/workflows/run-tests.yaml
+    secrets: inherit
+    permissions:
+        id-token: write
+        contents: read
 
   publish:
     runs-on: ubuntu-latest
-    if: github.ref_name == 'v[0-9]+.[0-9]+.[0-9]+'
     needs: run-tests
     steps:
       #----------------------------------------------
