@@ -28,9 +28,21 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
+  createPullRequest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       - name: Create Pull Request
+        id: ci-pr
         uses: peter-evans/create-pull-request@v5
         with:
-          title: GH Actions auto-release 🐍
-          committer: GitHub Actions <samuelvange@gmail.com>
-
+          token: ${{ secrets.GH_PAT }}
+          commit-message: AUTO - ${{ github.ref }}
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          branch: example-patches
+          title: AUTO PR - ${{ github.ref }}
+          body: |
+            Tests successfully passed, this code doesn't break anything.
+          labels: |
+            automated pr
