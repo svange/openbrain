@@ -83,11 +83,11 @@ jobs:
       #              publish to test-pypi
       #----------------------------------------------
 
-      - name: Python Semantic Release
-        uses: python-semantic-release/python-semantic-release@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          root_options: -r test-pypi
+#      - name: Python Semantic Release
+#        uses: python-semantic-release/python-semantic-release@master
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          root_options: -r test-pypi
 
 
 #      - name: Publish Python 🐍 distribution 📦 to PyPI-test
