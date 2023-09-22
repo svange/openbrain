@@ -16,6 +16,8 @@ on:
         required: true
       OPENAI_API_KEY:
         required: true
+      AWS_GITHUB_ROLE_ARN:
+        required: true
 
 env:
   PROJECT: ${{ github.repository }}
@@ -23,6 +25,7 @@ env:
   GITHUBORG: ${{ secrets.GITHUBORG }}
   OPENAI_API_KEY: ${{ secrets.DEV_OPENAI_KEY }}
   AWS_REGION: ${{ github.event.inputs.AWS_REGION }}
+  AWS_GITHUB_ROLE_ARN: ${{ github.event.inputs.AWS_GITHUB_ROLE_ARN }}
 
   INFRA_STACK_NAME: ai-infra
   SECRET_STORE_FRIENDLY_NAME: DevAiSecrets

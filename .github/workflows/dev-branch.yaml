@@ -20,7 +20,8 @@ jobs:
     uses: ./.github/workflows/run-tests.yaml
     with:
       tag: ${{ github.ref_name }}
-      PROJECT: ${{ env.PROJECT }}
+      AWS_REGION: ${{ env.AWS_REGION }}
+      AWS_GITHUB_ROLE_ARN: ${{ env.AWS_GITHUB_ROLE_ARN }}
       REPOSITORYNAME: ${{ env.REPOSITORYNAME }}
       GITHUBORG: ${{ env.GITHUBORG }}
       OPENAI_API_KEY: ${{ env.OPENAI_API_KEY }}
