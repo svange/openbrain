@@ -42,8 +42,8 @@ jobs:
           commit-message: AUTO - ${{ github.ref }}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          branch: main
-          base: ${{ github.ref }}
+          base: main
+#          base: ${{ github.ref }}
           title: AUTO PR - ${{ github.ref }}
           body: |
             Tests successfully passed, this code doesn't break anything.
