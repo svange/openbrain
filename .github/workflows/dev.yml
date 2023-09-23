@@ -1,0 +1,45 @@
+name: CI Test -> [PR(dev) -> main]
+on:
+  push:
+    branches:
+    - dev
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: write  # This is required for actions/checkout
+jobs:
+  run-tests:
+    uses: ./.github/workflows/run-tests.yml
+    if: contains(github.event.head_commit.message, '#test')
+    secrets: inherit
+    permissions:
+      id-token: write
+      contents: read
+
+  create-pr:
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, '#pr')
+    needs: run-tests
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: main
+
+    - name: Update main branch for PR
+      run: |
+        git pull origin ${{ github.ref_name }}
+
+    - name: PR to main from ${{ github.ref_name }}
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.GH_PAT }}
+        base: main     # the target branch for PR
+        branch: ci/${{ github.ref_name }}-to-main    # source branch
+        title: PR ci/${{ github.ref_name }} -> main
+        body: |
+          🤖📦🐍 Automated PR from ${{ github.ref_name }} → main  
+          ${{ github.event.head_commit.message }}
+        labels: automated,autosquash
+        commit-message: AUTO - ${{ github.ref_name }}
+        committer: GitHub <noreply@github.com>
+        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
