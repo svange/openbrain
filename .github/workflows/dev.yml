@@ -1,4 +1,4 @@
-name: CI Test -> PR dev-to-main
+name: CI Test & PR dev -> main
 on:
   push:
     branches:
@@ -21,13 +21,13 @@ jobs:
     steps:
 #    - uses: actions/checkout@v3
 #      with:
-#        ref: ci/${{ github.ref_name }}-to-main
+#        ref: ci/${{ github.ref_name }}
 #
 #    - name: Update main branch for PR
 #      run: |
 #        git pull origin main
 #        git pull origin ${{ github.ref_name }}
-#        git push origin ci/${{ github.ref_name }}-to-main
+#        git push origin ci/${{ github.ref_name }}
 
     - uses: actions/checkout@v3
       with:
@@ -43,7 +43,7 @@ jobs:
       with:
         token: ${{ secrets.GH_PAT }}
         base: main     # the target branch for PR
-        branch: ci/${{ github.ref_name }}-to-main    # source branch
+        branch: ci/${{ github.ref_name }}    # source branch
         title: PR ci/${{ github.ref_name }} -> main
         body: |
           🤖📦🐍 Automated PR from ${{ github.ref_name }} → main  

@@ -39,7 +39,7 @@ jobs:
       with:
         token: ${{ secrets.GH_PAT }}
         base: main     # the target branch for PR
-        branch: ci/${{ github.ref_name }}-to-main    # source branch
+        branch: ci/${{ github.ref_name }}    # source branch
         title: AUTO-PR ci/${{ github.ref_name }} -> main
         body: |
           🤖📦🐍 Automated PR from ${{ github.ref_name }} → main  
