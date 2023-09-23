@@ -21,6 +21,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
+        ref: ci/${{ github.ref_name }}-to-main
+
+    - name: Update main branch for PR
+      run: |
+        git pull origin ${{ github.ref_name }}
+        git push origin ci/${{ github.ref_name }}-to-main
+
+    - uses: actions/checkout@v3
+      with:
         ref: main
 
     - name: Update main branch for PR
