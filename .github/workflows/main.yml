@@ -1,4 +1,4 @@
-name: Release main to PyPi
+name: 🤖📦🐍 Release main to PyPi
 on:
   push:
     branches:
