@@ -30,6 +30,7 @@ jobs:
     - uses: bjoluc/semantic-release-config-poetry@v2
       with:
         pypi_token: ${{ secrets.PYPI_TOKEN }}
+        github_token: ${{ secrets.GH_PAT }}
 
 #  github-release:
 #    runs-on: ubuntu-latest
