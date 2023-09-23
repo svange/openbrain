@@ -99,7 +99,7 @@ version_variable = [
     "pyproject.toml:version"
 ]
 upload_to_pypi = true
-upload_to_vcs_release = false # TODO, we want this, make it tru
+upload_to_vcs_release = true # TODO, we want this, make it tru
 build_command = "pip install poetry && poetry build"
 
 assets = []
@@ -153,6 +153,6 @@ prerelease = false
 #env = "GH_TOKEN"
 
 [tool.semantic_release.publish]
-#dist_glob_patterns = ["dist/*"]
-upload_to_vcs_release = false
+dist_glob_patterns = ["dist/*"]
+#upload_to_vcs_release = false
 
