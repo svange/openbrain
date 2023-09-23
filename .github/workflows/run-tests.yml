@@ -23,6 +23,13 @@ env:
   BUSINESS_TOPIC_FRIENDLY_NAME: BusinessTopic
   EVENTBUS_FRIENDLY_NAME: DevEventBus
 jobs:
+  pre-commit-tests:
+    uses: ./.github/workflows/pre-commit.yml
+    secrets: inherit
+    permissions:
+      id-token: write
+      contents: read
+
   test:
     runs-on: ubuntu-latest
     steps:
@@ -72,6 +79,7 @@ jobs:
       #----------------------------------------------
     - name: Install project
       run: poetry install --no-interaction
+
       #----------------------------------------------
       #              run test suite
       #----------------------------------------------
