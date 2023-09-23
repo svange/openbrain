@@ -5,7 +5,7 @@ description = "A package to interact with generative AI and build specialized ge
 authors = ["Samuel Vange <7166607+svange@users.noreply.github.com>"]
 readme = "README.md"
 license = "AGPL-3.0"
-packages = [{include = "openbrain"}]
+packages = [{ include = "openbrain" }]
 
 [tool.poetry.scripts]
 ob = "openbrain.cli:cli"
@@ -28,7 +28,6 @@ tiktoken = "^0.5.1"
 gradio = "^3.44.4"
 black = "^23.9.1"
 pre-commit = "^3.4.0"
-
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
