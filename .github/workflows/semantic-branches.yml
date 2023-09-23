@@ -23,29 +23,29 @@ jobs:
 
   create-pr:
     runs-on: ubuntu-latest
-#    if: contains(github.event.head_commit.message, '#pr')
+    if: contains(github.event.head_commit.message, '#pr')
     needs: run-tests
     steps:
     - uses: actions/checkout@v3
-      with:
-        ref: main
 
     - name: Update main branch for PR
       run: |
-        git pull origin ${{ github.ref_name }}
+        git fetch origin dev:ci/#{{ github.ref_name }} || git checkout -b ci/#{{ github.ref_name }} origin/#{{ github.ref_name }}
+        git pull origin #{{ github.ref_name }}
+        git push --force origin ci/#{{ github.ref_name }}
 
-    - name: PR to main from ${{ github.ref_name }}
-      uses: peter-evans/create-pull-request@v3
-      with:
-        token: ${{ secrets.GH_PAT }}
-        base: main     # the target branch for PR
-        branch: ci/${{ github.ref_name }}    # source branch
-        title: AUTO-PR ci/${{ github.ref_name }} -> main
-        body: |
-          🤖📦🐍 Automated PR from ${{ github.ref_name }} → main  
-          ${{ github.event.head_commit.message }}
-        labels: automated,autosquash
-        commit-message: AUTO - ${{ github.ref_name }}
-        committer: GitHub <noreply@github.com>
-        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-        auto-squash: true
+#    - name: PR to main from ${{ github.ref_name }}
+#      uses: peter-evans/create-pull-request@v3
+#      with:
+#        token: ${{ secrets.GH_PAT }}
+#        base: main     # the target branch for PR
+#        branch: main    # source branch
+#        title: AUTO-PR ci/${{ github.ref_name }} -> main
+#        body: |
+#          🤖📦🐍 Automated PR from External source: ${{ github.ref_name }} → main
+#          ${{ github.event.head_commit.message }}
+#        labels: automated
+#        commit-message: AUTO - ${{ github.ref_name }}
+#        committer: GitHub <noreply@github.com>
+#        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+#        auto-squash: true
