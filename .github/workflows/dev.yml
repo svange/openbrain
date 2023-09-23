@@ -27,7 +27,7 @@ jobs:
       run: |
         git fetch origin dev:ci/dev || git checkout -b ci/dev origin/dev
         git checkout ci/dev
-        git merge origin/ci/dev
+        git pull origin dev --ff-only
 
     - name: PR to main from ${{ github.ref_name }}
       uses: peter-evans/create-pull-request@v3
