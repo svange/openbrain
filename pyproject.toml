@@ -44,9 +44,6 @@ python-semantic-release = "^8.1.1"
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-
-
-
 [tool.black]
 line-length = 130
 target-version = ['py310']
@@ -77,8 +74,6 @@ line_length = 130
 skip_gitignore = true
 
 
-
-
 [tool.semantic_release.commit_parser_options]
 allowed_tags = [
     "build",
@@ -94,6 +89,12 @@ allowed_tags = [
 ]
 minor_tags = ["build", "ci", "feat"]
 patch_tags = ["fix", "perf"]
+
+[tool.semantic_release]
+version_variable = [
+    "openbrain/__init__.py:__version__",
+    "pyproject.toml:version"
+]
 
 #[tool.semantic_release]
 #version_variable = [
