@@ -1,4 +1,4 @@
-name: Semantic code branches
+name: CI test & [\#pr] → main
 on:
   push:
     branches:
