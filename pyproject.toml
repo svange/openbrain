@@ -9,7 +9,7 @@ packages = [{include = "openbrain"}]
 
 [tool.poetry.scripts]
 ob = "openbrain.agents.gpt_agent:cli"
-ob-chat = "openbrain.agents.gpt_agent:chat"
+ob-chat = "openbrain.agent.gpt_agent:chat"
 ob-tuner = "openbrain.app:main"
 
 [tool.poetry.dependencies]

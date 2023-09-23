@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import pickle
+import sys
 from ast import literal_eval
 from json import JSONDecodeError
 from typing import Any
@@ -348,7 +349,8 @@ class ConnectWithAgentTool(BaseTool):
         raise NotImplementedError("connect_with_agent does not support async")
 
 
-def cli(message: str):
+def cli():
+    message = sys.argv[1] if len(sys.argv) > 1 else "No message provided"
     agent = GptAgent(AgentConfig(client_id="public", profile_name="default"))
     response = agent.handle_user_message(message)
     print(response)

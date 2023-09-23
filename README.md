@@ -22,6 +22,13 @@ Interactions with the agent can be injected into any application easily by const
 
 
 ```bash
+(openbrain-py3.11) $ ob "What is the air speed velocity of an unladen swallow?"
+
+> Entering new AgentExecutor chain...
+Ah, the famous question about the air speed velocity of an unladen swallow. Are you referring to an African or European swallow?
+
+> Finished chain.
+Ah, the famous question about the air speed velocity of an unladen swallow. Are you referring to an African or European swallow?
 # pip install openbrain
 ```
 
