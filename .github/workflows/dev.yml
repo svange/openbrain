@@ -19,24 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: run-tests
     steps:
-#    - uses: actions/checkout@v3
-#      with:
-#        ref: ci/${{ github.ref_name }}
-#
-#    - name: Update main branch for PR
-#      run: |
-#        git pull origin main
-#        git pull origin ${{ github.ref_name }}
-#        git push origin ci/${{ github.ref_name }}
 
     - uses: actions/checkout@v3
-      with:
-        ref: main
 
-    - name: Update main branch for PR
+
+    - name: Update ci/dev branch
       run: |
-        git pull 
-        git pull origin ${{ github.ref_name }}        
+        git fetch origin dev:ci/dev || git checkout -b ci/dev origin/dev
+        git checkout ci/dev
+        git merge origin/ci/dev
 
     - name: PR to main from ${{ github.ref_name }}
       uses: peter-evans/create-pull-request@v3
