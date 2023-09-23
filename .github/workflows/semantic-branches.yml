@@ -1,4 +1,4 @@
-name: Test and merge to dev
+name: CI test & [\#pr] → main
 on:
   push:
     branches:
@@ -30,18 +30,20 @@ jobs:
       with:
         ref: main
 
-    - name: git pull
+    - name: Update main branch for PR
       run: |
         git pull origin ${{ github.ref_name }}
 
-    - name: Create PR to Master
+    - name: PR to main from ${{ github.ref_name }}
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GH_PAT }}
         base: main     # the target branch for PR
         branch: ci/${{ github.ref_name }}-to-main    # source branch
-        title: 🤖📦🐍 ${{ github.ref_name }} → main
-        body: AUTO-PR. Please review the changes before merging.
+        title: PR ci/${{ github.ref_name }} -> main
+        body: |
+          🤖📦🐍 Automated PR from ${{ github.ref_name }} → main  
+          ${{ github.event.head_commit.message }}
         labels: automated,autosquash
         commit-message: AUTO - ${{ github.ref_name }}
         committer: GitHub <noreply@github.com>
