@@ -31,6 +31,7 @@ jobs:
         pypi_token: ${{ secrets.TEST_PYPI_API_KEY }}
         pypi_repository: https://test.pypi.org/legacy/
         release_branch: dev
+        github_token: ${{ secrets.GH_PAT }}
 
   create-pr:
     runs-on: ubuntu-latest
