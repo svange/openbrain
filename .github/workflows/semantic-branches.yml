@@ -48,3 +48,4 @@ jobs:
         commit-message: AUTO - ${{ github.ref_name }}
         committer: GitHub <noreply@github.com>
         author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+        auto-squash: true
