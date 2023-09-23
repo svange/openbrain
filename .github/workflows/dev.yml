@@ -1,4 +1,4 @@
-name: CI Test -> [PR(dev) -> main]
+name: CI Test -> PR dev-to-main
 on:
   push:
     branches:
