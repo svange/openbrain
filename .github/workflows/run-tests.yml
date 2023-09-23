@@ -30,7 +30,7 @@ jobs:
       id-token: write
       contents: read
 
-  test:
+  pytest:
     runs-on: ubuntu-latest
     steps:
     - name: Configure AWS Credentials
