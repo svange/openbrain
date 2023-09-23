@@ -26,7 +26,8 @@ jobs:
 
     - name: Update main branch for PR
       run: |
-        git pull origin ${{ github.ref_name }}
+        git pull 
+        git pull origin ${{ github.ref_name }}        
 
     - name: PR to main from ${{ github.ref_name }}
       uses: peter-evans/create-pull-request@v3
@@ -42,6 +43,7 @@ jobs:
         commit-message: AUTO - ${{ github.ref_name }}
         committer: GitHub <noreply@github.com>
         author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+
 
 
 #  release-to-pypi-test:
