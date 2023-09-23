@@ -22,12 +22,12 @@ jobs:
 
     - uses: actions/checkout@v3
 
-    - name: Create or Update ci/dev branch
-      run: |
-        git fetch origin dev:ci/dev || git checkout -b ci/dev origin/dev
-        git pull origin dev
-        git push --force origin ci/dev
-      working-directory: ./
+#    - name: Update branch
+#      run: |
+#        git fetch origin dev
+#        git pull origin dev
+#        git push origin dev
+#      working-directory: ./
 
 
     - name: PR to main from dev
@@ -35,7 +35,7 @@ jobs:
       with:
         token: ${{ secrets.GH_PAT }}
         base: main     # the target branch for PR
-        branch: ci/dev    # source branch
+#        branch: dev    # source branch
         title: PR ci/dev -> main
         body: |
           🤖📦🐍 Automated PR from dev → main  
@@ -44,7 +44,7 @@ jobs:
         commit-message: AUTO - dev
         committer: GitHub <noreply@github.com>
         author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-        auto-squash: true
+        delete-branch: true
 
 
 
