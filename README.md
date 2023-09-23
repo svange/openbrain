@@ -22,14 +22,7 @@ Interactions with the agent can be injected into any application easily by const
 
 
 ```bash
-(openbrain-py3.11) $ ob "What is the air speed velocity of an unladen swallow?"
-
-> Entering new AgentExecutor chain...
-Ah, the famous question about the air speed velocity of an unladen swallow. Are you referring to an African or European swallow?
-
-> Finished chain.
-Ah, the famous question about the air speed velocity of an unladen swallow. Are you referring to an African or European swallow?
-# pip install openbrain
+pip install openbrain
 ```
 
 ### Setup .env file
@@ -59,9 +52,13 @@ Tip: You can show or hide the button for flagging with the `allow_flagging=` kwa
 ### Command Line Completions
 
 ```bash
-$ ob "What's the airspeed velocity of an unladen swallow?"
-> OpenBrain: "African or European?"
-$
+$ ob "What is the air speed velocity of an unladen swallow?" -v
+
+> Entering new AgentExecutor chain...
+Ah, the famous question about the air speed velocity of an unladen swallow. Are you referring to an African or European swallow?
+
+> Finished chain.
+Ah, the famous question about the air speed velocity of an unladen swallow. Are you referring to an African or European swallow?
 ```
 
 ### Command Line Interactive Session
@@ -141,8 +138,6 @@ classDiagram
     ChatSession "1" *-- "1" langchain_ChatMemory: from langchain, serialized
 ```
 
-
-### Data Flow
 # Data Flow diagram
 OpenBrain uses an event driven architecture. The agent sends events to event bus and then the developer can simply write rules and targets for the incoming events once the targets are ready. The following diagram shows the data flow in two parts.
 1. The user interaction with the agent and the agent interaction with an event bus.
