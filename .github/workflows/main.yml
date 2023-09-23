@@ -8,6 +8,9 @@ permissions:
   id-token: write # This is required for requesting the JWT
   contents: write  # This is required for actions/checkout
 
+env:
+  PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+
 jobs:
   run-tests:
     uses: ./.github/workflows/run-tests.yml
