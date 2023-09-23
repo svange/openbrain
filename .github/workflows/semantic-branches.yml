@@ -30,7 +30,7 @@ jobs:
       with:
         ref: main
 
-    - name: git pull
+    - name: Update main branch for PR
       run: |
         git pull origin ${{ github.ref_name }}
 
