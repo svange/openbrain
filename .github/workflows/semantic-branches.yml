@@ -1,4 +1,4 @@
-name: Test and merge to dev
+name: Semantic code branches
 on:
   push:
     branches:
@@ -30,11 +30,11 @@ jobs:
       with:
         ref: main
 
-    - name: git pull
+    - name: Update main branch for PR
       run: |
         git pull origin ${{ github.ref_name }}
 
-    - name: Create PR to Master
+    - name: PR to main from ${{ github.ref_name }}
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GH_PAT }}
