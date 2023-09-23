@@ -92,7 +92,7 @@ patch_tags = ["fix", "perf"]
 
 
 upload_to_pypi = true
-upload_to_release = true
+#upload_to_release = true
 build_command = "pip install poetry && poetry build"
 
 
@@ -145,14 +145,11 @@ prerelease = true
 #env = "GIT_COMMIT_AUTHOR"
 #default = "semantic-release <semantic-release>"
 
-#[tool.semantic_release.commit_parser_options]
-#allowed_tags = ["build", "chore", "ci", "docs", "feat", "fix", "perf", "style", "refactor", "test"]
-#minor_tags = ["feat"]
-#patch_tags = ["fix", "perf"]
 
-[tool.semantic_release.remote]
-name = "origin"
-type = "github"
+
+#[tool.semantic_release.remote]
+#name = "origin"
+#type = "github"
 #ignore_token_for_push = true
 
 #[tool.semantic_release.remote.token]
