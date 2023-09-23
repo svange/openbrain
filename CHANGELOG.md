@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.14](https://github.com/svange/openbrain/compare/v0.4.13...v0.4.14) (2023-09-23)
+
+
+### Bug Fixes
+
+* pipeline semantic-release #pr ([3299fa7](https://github.com/svange/openbrain/commit/3299fa7d6cd0214826f56600c4b2efec408eb42c))
+
 ## [0.4.13](https://github.com/svange/openbrain/compare/v0.4.12...v0.4.13) (2023-09-23)
 
 
