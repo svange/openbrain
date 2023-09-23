@@ -30,18 +30,18 @@ jobs:
       working-directory: ./
 
 
-    - name: PR to main from ${{ github.ref_name }}
+    - name: PR to main from dev
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GH_PAT }}
         base: main     # the target branch for PR
-        branch: ci/${{ github.ref_name }}    # source branch
-        title: PR ci/${{ github.ref_name }} -> main
+        branch: ci/dev    # source branch
+        title: PR ci/dev -> main
         body: |
-          🤖📦🐍 Automated PR from ${{ github.ref_name }} → main  
+          🤖📦🐍 Automated PR from dev → main  
           ${{ github.event.head_commit.message }}
         labels: automated
-        commit-message: AUTO - ${{ github.ref_name }}
+        commit-message: AUTO - dev
         committer: GitHub <noreply@github.com>
         author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
         auto-squash: true
