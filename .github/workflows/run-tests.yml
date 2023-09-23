@@ -101,7 +101,7 @@ jobs:
 #        run: pip install poetry==1.2.1
 #      - uses: bjoluc/semantic-release-config-poetry@v2
 #        with:
-#          pypi_token: ${{ secrets.TEST_PYPI_TOKEN }}
+#          pypi_token: ${{ secrets.PYPI_TOKEN }}
 #          pypi_repository: https://test.pypi.org/legacy/
 #          release_branch: ${{ github.ref }}
 

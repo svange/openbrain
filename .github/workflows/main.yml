@@ -8,8 +8,8 @@ permissions:
   id-token: write # This is required for requesting the JWT
   contents: write  # This is required for actions/checkout
 
-env:
-  PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+#env:
+#  PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
 
 jobs:
   run-tests:
@@ -95,7 +95,7 @@ jobs:
 #      - name: Publish Python 🐍 distribution 📦 to PyPI-test
 #        uses: JRubics/poetry-publish@v1.17
 #        with:
-#          pypi_token: ${{ secrets.PYPI_API_KEY }}
+#          pypi_token: ${{ secrets.PYPI_TOKEN }}
 #          plugins: poetry-dynamic-versioning-plugin
 
 
