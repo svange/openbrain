@@ -27,6 +27,7 @@ jobs:
         git fetch origin dev:ci/dev || git checkout -b ci/dev origin/dev
         git checkout ci/dev
         git pull origin dev --ff-only
+      working-directory: ./
 
     - name: PR to main from ${{ github.ref_name }}
       uses: peter-evans/create-pull-request@v3
