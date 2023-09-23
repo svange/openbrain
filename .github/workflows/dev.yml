@@ -25,6 +25,7 @@ jobs:
 
     - name: Update main branch for PR
       run: |
+        git pull origin main
         git pull origin ${{ github.ref_name }}
         git push origin ci/${{ github.ref_name }}-to-main
 
