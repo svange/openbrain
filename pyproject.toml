@@ -114,10 +114,10 @@ match = "main"
 prerelease_token = "rc"
 prerelease = false
 
-[tool.semantic_release.branches.dev]
-match = "dev"
-prerelease_token = "dev"
-prerelease = true
+#[tool.semantic_release.branches.dev]
+#match = "dev"
+#prerelease_token = "dev"
+#prerelease = true
 
 #[tool.semantic_release.changelog]
 #template_dir = "templates"
