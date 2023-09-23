@@ -8,8 +8,8 @@ license = "AGPL-3.0"
 packages = [{include = "openbrain"}]
 
 [tool.poetry.scripts]
-ob = "openbrain.agents.gpt_agent:cli"
-ob-chat = "openbrain.agent.gpt_agent:chat"
+ob = "openbrain.cli:cli"
+ob-chat = "openbrain.cli:chat"
 ob-tuner = "openbrain.app:main"
 
 [tool.poetry.dependencies]
