@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.18](https://github.com/svange/openbrain/compare/v0.4.17...v0.4.18) (2023-09-23)
+
+
+### Bug Fixes
+
+* pipeline semantic-release #pr ([02a258a](https://github.com/svange/openbrain/commit/02a258aa7420e3c5330a414f5dcf5be63c623cb7))
+
+## [0.4.17](https://github.com/svange/openbrain/compare/v0.4.16...v0.4.17) (2023-09-23)
+
+
+### Bug Fixes
+
+* pipeline semantic-release #pr ([86a8cb5](https://github.com/svange/openbrain/commit/86a8cb5c7ed71d2b70408cdb33b5686ee864904b))
+
+## [0.4.16](https://github.com/svange/openbrain/compare/v0.4.15...v0.4.16) (2023-09-23)
+
+
+### Bug Fixes
+
+* pipeline semantic-release #pr ([5dd35eb](https://github.com/svange/openbrain/commit/5dd35eb77378e18a7619732e5273c94d950b4f83))
+
+## [0.4.15](https://github.com/svange/openbrain/compare/v0.4.14...v0.4.15) (2023-09-23)
+
+
+### Bug Fixes
+
+* pipeline semantic-release #pr ([8442463](https://github.com/svange/openbrain/commit/844246375fe3eb718ecb94e4fb4753bde832ebd9))
+
+## [0.4.14](https://github.com/svange/openbrain/compare/v0.4.13...v0.4.14) (2023-09-23)
+
+
+### Bug Fixes
+
+* pipeline semantic-release #pr ([3299fa7](https://github.com/svange/openbrain/commit/3299fa7d6cd0214826f56600c4b2efec408eb42c))
+
+## [0.4.13](https://github.com/svange/openbrain/compare/v0.4.12...v0.4.13) (2023-09-23)
+
+
+### Bug Fixes
+
+* pipeline semantic-release #pr ([607050d](https://github.com/svange/openbrain/commit/607050d63211bb238ae686ac580a815b1dd54b0f))
+* pipeline semantic-release #pr ([4f33971](https://github.com/svange/openbrain/commit/4f339713c10fc5ce6e710bd43f13a5070c6362db))
+* pipeline semantic-release #pr ([23ec830](https://github.com/svange/openbrain/commit/23ec830712051e47ed7c9be08987ab1ca087ecdb))
+
+## [0.4.12](https://github.com/svange/openbrain/compare/v0.4.11...v0.4.12) (2023-09-23)
+
+
+### Bug Fixes
+
+* pipeline semantic-release ([e7833f8](https://github.com/svange/openbrain/commit/e7833f8ab0c7bb4d8c6d85f804ab281012118334))
+* pipeline semantic-release #pr ([108ea42](https://github.com/svange/openbrain/commit/108ea42bce60d798e751b44efaee035ffa080721))
+
 ## [0.4.11](https://github.com/svange/openbrain/compare/v0.4.10...v0.4.11) (2023-09-23)
 
 
