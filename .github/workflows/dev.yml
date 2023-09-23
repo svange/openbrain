@@ -24,9 +24,8 @@ jobs:
 
     - name: Update ci/dev branch
       run: |
-        git fetch origin dev:ci/dev || git checkout -b ci/dev origin/dev
-        git checkout ci/dev
-        git pull origin dev --ff-only
+        git fetch origin dev:ci/dev
+        git checkout -B ci/dev origin/ci/dev
       working-directory: ./
 
     - name: PR to main from ${{ github.ref_name }}
