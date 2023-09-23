@@ -1,4 +1,4 @@
-name: CI test & #pr → main
+name: CI Test -> [PR -> main]
 on:
   push:
     branches:
@@ -23,7 +23,7 @@ jobs:
 
   create-pr:
     runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.message, '#pr')
+#    if: contains(github.event.head_commit.message, '#pr')
     needs: run-tests
     steps:
     - uses: actions/checkout@v3
