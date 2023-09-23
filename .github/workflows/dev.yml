@@ -36,7 +36,7 @@ jobs:
         token: ${{ secrets.GH_PAT }}
         base: main     # the target branch for PR
 #        branch: dev    # source branch
-        title: PR ci/dev -> main
+        title: PR dev -> main
         body: |
           🤖📦🐍 Automated PR from dev → main  
           ${{ github.event.head_commit.message }}
