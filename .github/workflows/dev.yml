@@ -20,16 +20,22 @@ jobs:
     needs: run-tests
     steps:
 
-    - uses: actions/checkout@v3
-#      with:
-#        branch: dev
+    - name: update dev
+      uses: actions/checkout@v3
+      with:
+        branch: dev
+        fetch-depth: 0
 
-#    - name: Update branch
-#      run: |
-#        git fetch origin dev
-#        git pull origin dev
-#        git push origin dev
-#      working-directory: ./
+    - name: Pull dev and main
+      run: |
+        git pull origin dev
+        git pull origin main
+
+    - name: Create or Update ci/dev branch
+      run: |
+        git fetch origin dev:ci/dev || git checkout -b ci/dev origin/dev
+        git pull origin dev
+        git push --force origin ci/dev
 
 
     - name: PR to main from dev
