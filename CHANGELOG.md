@@ -2,6 +2,12 @@
 
 
 
+## v0.10.2 (2023-09-24)
+
+### Fix
+
+- disabling test-pypi for now
+
 ## v0.10.1 (2023-09-24)
 
 ### Fix
