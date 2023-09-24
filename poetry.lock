@@ -2684,13 +2684,13 @@ test = ["coverage[toml] (>=6,<8)", "pytest (>=7,<8)", "pytest-cov (>=4,<5)", "py
 
 [[package]]
 name = "python-ulid"
-version = "1.1.0"
-description = "Universally Unique Lexicographically Sortable Identifier"
+version = "2.2.0"
+description = "Universally unique lexicographically sortable identifier"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.9"
 files = [
-    {file = "python-ulid-1.1.0.tar.gz", hash = "sha256:5fb5e4a91db8ca93e8938a613360b3def299b60d41f847279a8c39c9b2e9c65e"},
-    {file = "python_ulid-1.1.0-py3-none-any.whl", hash = "sha256:88c952f6be133dbede19c907d72d26717d2691ec8421512b573144794d891e24"},
+    {file = "python_ulid-2.2.0-py3-none-any.whl", hash = "sha256:ec2e69292c0b7c338a07df5e15b05270be6823675c103383e74d1d531945eab5"},
+    {file = "python_ulid-2.2.0.tar.gz", hash = "sha256:9ec777177d396880d94be49ac7eb4ae2cd4a7474448bfdbfe911537add970aeb"},
 ]
 
 [[package]]
@@ -3812,4 +3812,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "7bba7c293723fea4b9adc3a18434904daf704e97114cf4819d34cfc0022ceeba"
+content-hash = "7462d143a24dd2dc0097fa8ced759e4abe1c77982b5c99b9a1970fd392a6bc34"
