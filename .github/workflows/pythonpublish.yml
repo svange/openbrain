@@ -27,12 +27,18 @@ jobs:
       - name: Main Configure PyPI token
         run: poetry config pypi-token.pypi "${{ secrets.PYPI_TOKEN }}"
 
-      - name: Main Publish to PyPI
-        env:
+#      - name: Main Publish to PyPI
+#        env:
+#
+#          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+#        run: |
+#          ./scripts/publish
 
-          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-        run: |
-          ./scripts/publish
+      - name: Python Semantic Release
+        uses: python-semantic-release/python-semantic-release@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
 
 #      - name: Dev Configure PyPI token # TODO: re-enable to get dev builds going to test-pypi
 #        run: poetry config pypi-token.pypi "${{ secrets.TEST_PYPI_API_KEY }}"
