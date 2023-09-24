@@ -30,7 +30,7 @@ jobs:
         git pull origin main
         git reset --hard
         git pull origin dev 
-
+        git push --force origin dev
 
     - name: PR to main from dev
       uses: peter-evans/create-pull-request@v3
