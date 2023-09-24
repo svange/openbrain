@@ -172,10 +172,10 @@ target-version = "py310"
 #version_scheme = "post-release"
 #local_scheme = "dirty-tag"
 
-#[tool.semantic_release.branches.dev]
-#match = "dev"
-#prerelease_token = "dev"
-#prerelease = true
+[tool.semantic_release.branches.dev]
+match = "dev"
+prerelease_token = "dev"
+prerelease = true
 
 #[tool.semantic_release.changelog]
 #template_dir = "templates"
