@@ -2,6 +2,12 @@
 
 
 
+## v0.8.0 (2023-09-24)
+
+### Feat
+
+- commitizen
+
 ## v0.7.0 (2023-09-24)
 
 
@@ -414,8 +420,10 @@ Added guard so that PRs aren&#39;t always submitted upon pushes to this branch. 
 
 * 🤖📦🐍 style/ci-cd-standup → main (#24)
 
-* Updating README badge
-
+* Updating README badge
+
+
+
 * re-enabling pipeline steps ([`a23f325`](https://github.com/svange/openbrain/commit/a23f3258901ae8037c78f2505bd690f7e495764b))
 
 * Merge branch &#39;main&#39; of github.com:/svange/openbrain into style/ci-cd-standup ([`11868ad`](https://github.com/svange/openbrain/commit/11868ade0dbd33116f38027ec440cab4a09c8b28))
