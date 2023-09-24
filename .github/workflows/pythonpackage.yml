@@ -29,11 +29,11 @@ jobs:
           git config --global user.name "GitHub Action"
           ./scripts/test
         shell: bash
-      - name: Upload coverage to Codecov
-        if: runner.os == 'Linux'
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{secrets.CODECOV_TOKEN}}
-          file: ./coverage.xml
-          flags: unittests
-          name: codecov-umbrella
+#      - name: Upload coverage to Codecov
+#        if: runner.os == 'Linux'
+#        uses: codecov/codecov-action@v3
+#        with:
+#          token: ${{secrets.CODECOV_TOKEN}}
+#          file: ./coverage.xml
+#          flags: unittests
+#          name: codecov-umbrella
