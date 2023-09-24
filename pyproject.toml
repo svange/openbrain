@@ -38,6 +38,8 @@ black = "^23.9.1"
 reorder-python-imports = "^3.11.0"
 python-semantic-release = "^8.1.1"
 commitizen = "^3.9.1"
+ruff = "^0.0.291"
+mypy = "^1.5.1"
 
 
 
@@ -123,6 +125,53 @@ match = "main"
 prerelease_token = "rc"
 prerelease = false
 
+[tool.ruff]
+# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
+select = ["E", "F"]
+ignore = []
+
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN", "ARG", "BLE", "COM", "DJ", "DTZ", "EM", "ERA", "EXE", "FBT", "ICN", "INP", "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE", "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"]
+unfixable = []
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+# Same as Black.
+line-length = 130
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Assume Python 3.11
+target-version = "py310"
+
+#[tool.setuptools_scm]
+#version_scheme = "post-release"
+#local_scheme = "dirty-tag"
+
 #[tool.semantic_release.branches.dev]
 #match = "dev"
 #prerelease_token = "dev"
@@ -164,4 +213,3 @@ prerelease = false
 [tool.semantic_release.publish]
 dist_glob_patterns = ["dist/*"]
 #upload_to_vcs_release = false
-

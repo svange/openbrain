@@ -131,18 +131,23 @@ class Util:
     SECRETS = get_secret(BOTO_SESSION, SECRETS_STORE_ARN, SECRETS_STORE_REGION)
 
     # set OpenAI and Promptlayer API keys as env vars
-    CENSOR_TEMPLATE = """ You are a censorship agent working with an OpenAI chat model. Your job is to take what I'm going to say to a potential customer and make sure it conforms to the following rules:
+    CENSOR_TEMPLATE = """You are a censorship agent working with an OpenAI chat model. Your job is to take what I'm
+    going to say to a potential customer and make sure it conforms to the following rules:
 
-    Only ask for one piece of information at a time. For example, change "Great! Can I have your full name, date of birth, list of..." into "Great! Please provide me with your full name so that I..."
-    Do not disclose the conversational plan to the user.
-    Always be truthful and do not make things up.
-    Maintain the original tone of the message.
-    Given the following message that I'm about to send to the user, please revise it to ensure it follows the rules stated above:
+    Only ask for one piece of information at a time. For example, change "Great! Can I have your full name,
+    date of birth, list of..." into "Great! Please provide me with your full name so that I..." Do not disclose the
+    conversational plan to the user. Always be truthful and do not make things up. Maintain the original tone of the
+    message. Given the following message that I'm about to send to the user, please revise it to ensure it follows
+    the rules stated above:
 
     MESSAGE: {message}
 
     OUTPUT: """
-    FILTER_TEMPLATE = """You are an input cleaning wizard helping me, an OpenAI chat model, to better understand customers. Your task is to clean and rephrase the user input to make it clearer and more understandable for me. Given the following chat history and user message, please rephrase the user message accordingly. Remember to only output the cleaned message with no surrounding text, and always provide a non-empty response. If the message conforms to all of the rules, don't change it at all, and just output it directly. Let's begin!
+    FILTER_TEMPLATE = """You are an input cleaning wizard helping me, an OpenAI chat model, to better understand
+    customers. Your task is to clean and rephrase the user input to make it clearer and more understandable for me.
+    Given the following chat history and user message, please rephrase the user message accordingly. Remember to only
+    output the cleaned message with no surrounding text, and always provide a non-empty response. If the message
+    conforms to all of the rules, don't change it at all, and just output it directly. Let's begin!
 
     CHAT_HISTORY: {chat_history}
 
@@ -151,16 +156,19 @@ class Util:
     OUTPUT: """
 
     # Testing Templates
-    UNIT_TESTING_TEMPLATE = """You are a unit testing agent working with an OpenAI chat model. Your job is to take the last response from the bot we're testing, which I will give you, and respond as a user might.
-    For this conversation, your goal is: {goal}
-    For this conversation, your disposition is: {disposition}
+    UNIT_TESTING_TEMPLATE = """You are a unit testing agent working with an OpenAI chat model. Your job is to take
+    the last response from the bot we're testing, which I will give you, and respond as a user might. For this
+    conversation, your goal is: {goal} For this conversation, your disposition is: {disposition}
 
     Remember to respond as you would to the bot directly, and not as you would to me. Let's begin!
     MESSAGE: {message}"""
 
     # Data refinement templates
-    SUMMARIZE_TEMPLATE = """As a health insurance broker, summarize the given health insurance document focusing on information crucial for someone shopping for a plan. Include details like insurance company name, plan names, states offered, deductibles, copays, out-of-pocket maximums, monthly premiums, and any other relevant information if they are in the document. If you see unusually structured data, try to interpret it as a table, as this data is just text extracted from PDFs. Use tables when needed and limit the summary to 2400 words.
-    {text}
+    SUMMARIZE_TEMPLATE = """As a health insurance broker, summarize the given health insurance document focusing on
+    information crucial for someone shopping for a plan. Include details like insurance company name, plan names,
+    states offered, deductibles, copays, out-of-pocket maximums, monthly premiums, and any other relevant information
+    if they are in the document. If you see unusually structured data, try to interpret it as a table, as this data
+    is just text extracted from PDFs. Use tables when needed and limit the summary to 2400 words. {text}
 
     Summary: """
     REFINE_TEMPLATE = (
@@ -173,5 +181,8 @@ class Util:
         "------------\n"
         "Given the new context, "
         "If the context isn't useful, return the original summary."
-        "Include details like insurance company name, plan names, states offered, deductibles, copays, out-of-pocket maximums, monthly premiums, and any other information relevant to someone shopping for health insurance, if found in the context. If you see unusually structured data, try to interpret it as a table, as this data is just text extracted from PDFs. Use tables when needed and limit the summary to 2400 words."
+        "Include details like insurance company name, plan names, states offered, deductibles, copays, out-of-pocket "
+        "maximums, monthly premiums, and any other information relevant to someone shopping for health insurance, "
+        "if found in the context. If you see unusually structured data, try to interpret it as a table, as this data "
+        "is just text extracted from PDFs. Use tables when needed and limit the summary to 2400 words."
     )

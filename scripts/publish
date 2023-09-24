@@ -1,0 +1,2 @@
+# Publish to pypi
+poetry publish --build

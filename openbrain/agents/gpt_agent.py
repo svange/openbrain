@@ -307,10 +307,10 @@ def send_lead_to_lead_momentum(lead: Lead, outgoing_webhook_url=None) -> None:
         if response.status_code != 200:
             logger.error(f"Error sending lead to Lead Momentum: {response.status_code}")
             logger.error(response.text)
-            raise AgentToolLeadMomentumError(f"Error sending lead to Lead Momentum (1)")
+            raise AgentToolLeadMomentumError("Error sending lead to Lead Momentum (1)")
     except Exception as e:
         logger.exception(e)
-        raise AgentToolLeadMomentumError(f"Error sending lead to Lead Momentum (2)")
+        raise AgentToolLeadMomentumError("Error sending lead to Lead Momentum (2)")
 
 
 class LeadAdaptor(BaseModel):
@@ -355,10 +355,13 @@ class ConnectWithAgentTool(BaseTool):
 #         self.tools: list = [ToolBox.connect_with_agent]
 #         self.function_agent_tools = [format_tool_to_openai_function(_tool) for _tool in self.tools]
 #
-#     @staticmethod
-#     @tool
-#     def connect_with_agent(user_info: str) -> str:
-#         """useful if and only if ALL required user information is known. Takes a JSON object with user's information. If any optional user information is not known, do not lie, guess, or hallucinate; instead provide an empty string as its value. EXAMPLE INPUTS: {{"full_name": "John Doe", "date_of_birth": "01/01/1970", "current_medications": "", "state_of_residence": "CA", "email_address": "", "phone_number": "6194206969"}} AND {{"full_name": "Mary Jane Doe", "date_of_birth": "04/01/2001", "current_medications": "Tylenol", "state_of_residence": "CA", "email_address": "maryjane@example.com", "phone_number": ""}}"""
+# @staticmethod @tool def connect_with_agent(user_info: str) -> str: """useful if and only if ALL required user
+# information is known. Takes a JSON object with user's information. If any optional user information is not known,
+# do not lie, guess, or hallucinate; instead provide an empty string as its value. EXAMPLE INPUTS: {{"full_name":
+# "John Doe", "date_of_birth": "01/01/1970", "current_medications": "", "state_of_residence": "CA", "email_address":
+# "", "phone_number": "6194206969"}} AND {{"full_name": "Mary Jane Doe", "date_of_birth": "04/01/2001",
+# "current_medications": "Tylenol", "state_of_residence": "CA", "email_address": "maryjane@example.com",
+# "phone_number": ""}}"""
 #
 #         try:
 #             user_info = json.loads(user_info)
@@ -403,11 +406,12 @@ class ConnectWithAgentTool(BaseTool):
 #             logger.error(e)
 #             return "I should ask the user for their phone number now"
 #
-#         response = "I no longer need to ask the user any personal questions, but I will continue to be a helpful, and friendly assistant!"
+# response = "I no longer need to ask the user any personal questions, but I will continue to be a helpful,
+# and friendly assistant!"
 #
-#         ToolBox.send_lead(
-#             f"LEAD ALERT: {full_name} ({date_of_birth}) has requested to speak with an agent. Their phone number is {phone_number} and their email address is {email_address}. They are currently taking {current_medications} and live in {state_of_residence}."
-#         )
+# ToolBox.send_lead( f"LEAD ALERT: {full_name} ({date_of_birth}) has requested to speak with an agent. Their phone
+# number is {phone_number} and their email address is {email_address}. They are currently taking {
+# current_medications} and live in {state_of_residence}." )
 #
 #         return response
 #
@@ -465,11 +469,9 @@ class ConnectWithAgentTool(BaseTool):
 #         """useful when no other tool is useful"""
 #         return "I should continue the conversation"
 #
-#     @staticmethod
-#     @tool
-#     def no_tools_available(ignored: str) -> str:
-#         """never useful, don't bother with this, just  respond with a Final Answer."""
-#         return "I'm sorry, I don't know how to do that yet. I'm still learning. I'll let my human friends know that you asked me to do that. They'll teach me how to do it soon!"
+# @staticmethod @tool def no_tools_available(ignored: str) -> str: """never useful, don't bother with this,
+# just  respond with a Final Answer.""" return "I'm sorry, I don't know how to do that yet. I'm still learning. I'll
+# let my human friends know that you asked me to do that. They'll teach me how to do it soon!"
 #
 #     @staticmethod
 #     def send_lead(message: str) -> None:

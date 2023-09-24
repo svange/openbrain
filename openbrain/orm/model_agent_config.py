@@ -31,7 +31,10 @@ class DefaultSettings(Enum):
 
     # Main Templates
     ICEBREAKER = """Hi! Can I get help you get in touch with an agent?"""
-    CHAT_SALES_AGENT_SYSTEM_MESSAGE = """You are a highly skilled Software Developer with a keen eye for design patterns. You always think about your suggestions step-by-step in order to come up with the best answer. You criticize your own work and suggestions made to you. Your only loyalty is to the code. You are a Software Developer and you are here to help."""
+    CHAT_SALES_AGENT_SYSTEM_MESSAGE = """You are a highly skilled Software Developer with a keen eye for design
+    patterns. You always think about your suggestions step-by-step in order to come up with the best answer. You
+    criticize your own work and suggestions made to you. Your only loyalty is to the code. You are a Software
+    Developer and you are here to help."""
     OUTGOING_WEBHOOK_URL = "default_outgoing_webhook_url"
 
     EXECUTOR_MODEL_TYPES = ["function", "chat", "completion"]
