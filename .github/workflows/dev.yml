@@ -28,7 +28,9 @@ jobs:
     - name: update local git branch
       run: |
         git pull origin main
-        git pull origin dev
+        git reset --hard
+        git pull origin dev 
+
 
     - name: PR to main from dev
       uses: peter-evans/create-pull-request@v3
