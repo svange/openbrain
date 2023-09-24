@@ -2348,13 +2348,13 @@ wcwidth = "*"
 
 [[package]]
 name = "promptlayer"
-version = "0.2.9"
+version = "0.3.1"
 description = "PromptLayer is a package to keep track of your GPT models training"
 optional = false
 python-versions = ">=3.8.1,<4.0"
 files = [
-    {file = "promptlayer-0.2.9-py3-none-any.whl", hash = "sha256:a51aace93ea70292a9d47b1573254f262f19d6285e69be921d7468d999c652e0"},
-    {file = "promptlayer-0.2.9.tar.gz", hash = "sha256:2f72e88de9d4be2cd27188690abbcb89e42d83e77d4a3ff42984de72e1cb8f63"},
+    {file = "promptlayer-0.3.1-py3-none-any.whl", hash = "sha256:09eb9e390cef922c3e98db3d18107d5ba4e63a5fd54a65f7e64c203d2d955484"},
+    {file = "promptlayer-0.3.1.tar.gz", hash = "sha256:441aa5a95457ba1584c62f4eb0bb51e51abf018f9b03e35ff453bac80ae55bd9"},
 ]
 
 [package.dependencies]
@@ -3812,4 +3812,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "05997376f89f100bc6a4b185abe7459b6ac4be5e1becbef307df332ba10ab7c9"
+content-hash = "7bba7c293723fea4b9adc3a18434904daf704e97114cf4819d34cfc0022ceeba"
