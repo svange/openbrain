@@ -1,64 +1,966 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+
+## v0.4.19-dev.1 (2023-09-23)
+
+### Fix
+
+* fix: 16 ([`ed0ec0b`](https://github.com//svange/openbrain/commit/ed0ec0bd86299e851bcd51963a45d760a46fbee4))
+
+* fix: 15 ([`37ede03`](https://github.com//svange/openbrain/commit/37ede031e95238e19144cbab8ad36ac1b2d16f76))
+
+* fix: 14 ([`aec5cdb`](https://github.com//svange/openbrain/commit/aec5cdbea4501487287317da1859003b35e47984))
+
+* fix: 14 ([`ea80c69`](https://github.com//svange/openbrain/commit/ea80c694f73d80fd66af50e7c5e4d6b90be365fc))
+
+* fix: 14 ([`ff12807`](https://github.com//svange/openbrain/commit/ff12807aad067b36a8ae97f210652bdf700cab10))
+
+* fix: 14 ([`aa1c7ab`](https://github.com//svange/openbrain/commit/aa1c7abce3fd7d892db1eb78291874f390eb58f9))
+
+* fix: 14 ([`6d1c8fe`](https://github.com//svange/openbrain/commit/6d1c8fe32d2c6d73ffe0e01cb27c48c08db332f5))
+
+* fix: 13 ([`3d44e73`](https://github.com//svange/openbrain/commit/3d44e73b2e4e164ebd68a038b0064d306d422cd7))
+
+* fix: 11 ([`bcba19d`](https://github.com//svange/openbrain/commit/bcba19d914259d08e16c0c2d40081eefde846e72))
+
+* fix: 11 ([`b427bae`](https://github.com//svange/openbrain/commit/b427bae91607df713da84778b76440cebbb16abe))
+
+* fix: 10 ([`159fa2e`](https://github.com//svange/openbrain/commit/159fa2e3331286e0d690f2ae8c4e3c8ff16e8fd0))
+
+* fix: 10 ([`54de46d`](https://github.com//svange/openbrain/commit/54de46d5b25276a3ec013d91d7a8c60431cc70fd))
+
+* fix: 10 ([`8ef53b7`](https://github.com//svange/openbrain/commit/8ef53b786481cee3c3dd6e0589d0bbdb97943f1e))
+
+* fix: 10 ([`e41d4e0`](https://github.com//svange/openbrain/commit/e41d4e04478c41f12a7b72b3b7707bcc04889ffa))
+
+* fix: 09 ([`9fe7b2d`](https://github.com//svange/openbrain/commit/9fe7b2d22739b343c1e487aaa1c3f759d009bfb1))
+
+* fix: 08 ([`b9b2b7e`](https://github.com//svange/openbrain/commit/b9b2b7e461e9049594092c8f9643c276de7e1590))
+
+* fix: 07 ([`5daae95`](https://github.com//svange/openbrain/commit/5daae955c651591a1e5fa5d6508c6ffe035e2846))
+
+* fix: 06 disabled tests for faster iterations ([`218c2c6`](https://github.com//svange/openbrain/commit/218c2c631d31dd6dfe001db2e20ed8ea661ecff9))
+
+* fix: 05 disabled tests for faster iterations ([`19f4d0f`](https://github.com//svange/openbrain/commit/19f4d0f80f8d92628b4fc47184a8cc68d567fc07))
+
+* fix: 05 disabled tests for faster iterations ([`89ed899`](https://github.com//svange/openbrain/commit/89ed899d7fb8bb8211419bc1eb8a50f819f9e664))
+
+* fix: 04 removed pre-commit checks and added ci branch update step. ([`f86f353`](https://github.com//svange/openbrain/commit/f86f3535249e964a78bf756de86ff8b9eb862633))
+
+* fix: 03 removed pre-commit checks and added ci branch update step. ([`d892101`](https://github.com//svange/openbrain/commit/d892101b2415a458d39d3eb15144125758ccd018))
+
+* fix: 02 removed pre-commit checks and added ci branch update step. ([`5daab2c`](https://github.com//svange/openbrain/commit/5daab2cbed1e1faec10006e7a7b22af2a9d4b9cb))
+
+* fix: 01 removed pre-commit checks and added ci branch update step. ([`f8fae4b`](https://github.com//svange/openbrain/commit/f8fae4b7d9c11134858e4de9667b6f21a4a0145d))
+
+* fix: 01 removed pre-commit checks and added ci branch update step. ([`f56b622`](https://github.com//svange/openbrain/commit/f56b6222ea2496a14819eaeb7b5c9afa8fa9140b))
+
+* fix: 00 removed pre-commit checks and added ci branch update step. ([`5ee0cba`](https://github.com//svange/openbrain/commit/5ee0cbaf289201ec873b242f57a846810dc337f1))
+
+* fix: 00 removed pre-commit checks and added ci branch update step. ([`0e9b74c`](https://github.com//svange/openbrain/commit/0e9b74c10e49cda6eaf6a1545ff1e8a5b8f53dd9))
+
+* fix: removed pre-commit checks and added ci branch update step. ([`ba040e3`](https://github.com//svange/openbrain/commit/ba040e386c18391604949915024de6fba129f339))
+
+* fix: removed pre-commit checks and added ci branch update step. ([`5f52b98`](https://github.com//svange/openbrain/commit/5f52b982cdd43f617be0c05e5b9980d5184b6893))
+
+* fix: pipeline semantic-release #pr ([`860f563`](https://github.com//svange/openbrain/commit/860f563e0a612e515c3fc03c1a55e985945900dc))
+
+* fix: pipeline semantic-release #pr ([`54c89c9`](https://github.com//svange/openbrain/commit/54c89c9f983c0198b190a3ac49bc1d24eda39033))
+
+* fix: pipeline semantic-release #pr ([`4a245e0`](https://github.com//svange/openbrain/commit/4a245e07bda26cb46596fbbf397a95173cb3c5a1))
+
+* fix: pipeline semantic-release #pr ([`e5d588a`](https://github.com//svange/openbrain/commit/e5d588a440d9517227452f8ee3dc990a18cf59ad))
+
+* fix: pipeline semantic-release #pr ([`746d193`](https://github.com//svange/openbrain/commit/746d1933ab93851666dfd2c20ecc066bb8220228))
+
+* fix: pipeline semantic-release #pr ([`099fe2b`](https://github.com//svange/openbrain/commit/099fe2bd1c97410441dd51d0796c42b348b56162))
+
+* fix: pipeline semantic-release #pr ([`afc38fe`](https://github.com//svange/openbrain/commit/afc38fe46e5fc9ec57466f869b68445d3769d526))
+
+* fix: pipeline semantic-release #pr ([`dd44a4b`](https://github.com//svange/openbrain/commit/dd44a4b1add85b8b2c65591166b5490078bcc82b))
+
+### Unknown
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into dev ([`c674cb2`](https://github.com//svange/openbrain/commit/c674cb27b112a6a2e5b47f380d2be2425d8b83f4))
+
+* Merge pull request #35
+
+* chat cli wip #pr
+
+* reverting to older working config for ci/cd pipeline
+
+* fix: pipeline semantic-release
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.12 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.13 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.14 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.15 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.16 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* chore(release): 0.4.17 [skip ci]
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.18 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr ([`d0bbdeb`](https://github.com//svange/openbrain/commit/d0bbdeb54f42f5a80f8a101bf08a214d34342cdf))
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into dev ([`99306e7`](https://github.com//svange/openbrain/commit/99306e70395bc34d042aa51a4cf06b0e695e9846))
+
+* Merge pull request #34
+
+* chat cli wip #pr
+
+* reverting to older working config for ci/cd pipeline
+
+* fix: pipeline semantic-release
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.12 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.13 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.14 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.15 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.16 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* chore(release): 0.4.17 [skip ci]
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.18 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr ([`0f575f1`](https://github.com//svange/openbrain/commit/0f575f11f9f5fa05ce2befe4e26c08508e035901))
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into dev ([`f9b516b`](https://github.com//svange/openbrain/commit/f9b516b5091a00ec4ee503f7ff8534089a2e521c))
+
+* Merge pull request #33
+
+* chat cli wip #pr
+
+* reverting to older working config for ci/cd pipeline
+
+* fix: pipeline semantic-release
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.12 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.13 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.14 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.15 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.16 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* chore(release): 0.4.17 [skip ci]
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr
+
+* chore(release): 0.4.18 [skip ci]
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+* fix: pipeline semantic-release #pr
+
+* fix: pipeline semantic-release #pr ([`8f9ff2e`](https://github.com//svange/openbrain/commit/8f9ff2e3c8f8fc31bfe6ff71de335c73a9aee0a4))
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev ([`f8cadf7`](https://github.com//svange/openbrain/commit/f8cadf7a466b3e37f8bb228d15ac69daddb8ddb2))
+
+
+## v0.4.18 (2023-09-23)
+
+### Chore
+
+* chore(release): 0.4.18 [skip ci]
 
 ## [0.4.18](https://github.com/svange/openbrain/compare/v0.4.17...v0.4.18) (2023-09-23)
 
-
 ### Bug Fixes
 
-* pipeline semantic-release #pr ([02a258a](https://github.com/svange/openbrain/commit/02a258aa7420e3c5330a414f5dcf5be63c623cb7))
+* pipeline semantic-release #pr ([02a258a](https://github.com/svange/openbrain/commit/02a258aa7420e3c5330a414f5dcf5be63c623cb7)) ([`3943db0`](https://github.com//svange/openbrain/commit/3943db0d6afb5f9f24f6f04d43e012d5d1647069))
+
+### Fix
+
+* fix: pipeline semantic-release #pr ([`02a258a`](https://github.com//svange/openbrain/commit/02a258aa7420e3c5330a414f5dcf5be63c623cb7))
+
+
+## v0.4.17 (2023-09-23)
+
+### Chore
+
+* chore(release): 0.4.17 [skip ci]
 
 ## [0.4.17](https://github.com/svange/openbrain/compare/v0.4.16...v0.4.17) (2023-09-23)
 
-
 ### Bug Fixes
 
-* pipeline semantic-release #pr ([86a8cb5](https://github.com/svange/openbrain/commit/86a8cb5c7ed71d2b70408cdb33b5686ee864904b))
+* pipeline semantic-release #pr ([86a8cb5](https://github.com/svange/openbrain/commit/86a8cb5c7ed71d2b70408cdb33b5686ee864904b)) ([`534cbcf`](https://github.com//svange/openbrain/commit/534cbcf00bd2e633ffb3ea6e95fc699854f34172))
+
+### Fix
+
+* fix: pipeline semantic-release #pr ([`86a8cb5`](https://github.com//svange/openbrain/commit/86a8cb5c7ed71d2b70408cdb33b5686ee864904b))
+
+### Unknown
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev ([`c505ca5`](https://github.com//svange/openbrain/commit/c505ca5189634838a6e487e292b094f20bc4d8de))
+
+
+## v0.4.16 (2023-09-23)
+
+### Chore
+
+* chore(release): 0.4.16 [skip ci]
 
 ## [0.4.16](https://github.com/svange/openbrain/compare/v0.4.15...v0.4.16) (2023-09-23)
 
-
 ### Bug Fixes
 
-* pipeline semantic-release #pr ([5dd35eb](https://github.com/svange/openbrain/commit/5dd35eb77378e18a7619732e5273c94d950b4f83))
+* pipeline semantic-release #pr ([5dd35eb](https://github.com/svange/openbrain/commit/5dd35eb77378e18a7619732e5273c94d950b4f83)) ([`fb103fc`](https://github.com//svange/openbrain/commit/fb103fce4083f88f7c2f3c2327ddc8897f82edb2))
+
+### Fix
+
+* fix: pipeline semantic-release #pr ([`5dd35eb`](https://github.com//svange/openbrain/commit/5dd35eb77378e18a7619732e5273c94d950b4f83))
+
+### Unknown
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev ([`cc73a98`](https://github.com//svange/openbrain/commit/cc73a985fe7bfae878ec12a86965c547dac85b9b))
+
+
+## v0.4.15 (2023-09-23)
+
+### Chore
+
+* chore(release): 0.4.15 [skip ci]
 
 ## [0.4.15](https://github.com/svange/openbrain/compare/v0.4.14...v0.4.15) (2023-09-23)
 
-
 ### Bug Fixes
 
-* pipeline semantic-release #pr ([8442463](https://github.com/svange/openbrain/commit/844246375fe3eb718ecb94e4fb4753bde832ebd9))
+* pipeline semantic-release #pr ([8442463](https://github.com/svange/openbrain/commit/844246375fe3eb718ecb94e4fb4753bde832ebd9)) ([`c538c9f`](https://github.com//svange/openbrain/commit/c538c9fb754e6ce83b530e8b1b1199fc05e7ba57))
+
+### Fix
+
+* fix: pipeline semantic-release #pr ([`8442463`](https://github.com//svange/openbrain/commit/844246375fe3eb718ecb94e4fb4753bde832ebd9))
+
+### Unknown
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev ([`b989e1f`](https://github.com//svange/openbrain/commit/b989e1f5e86d9ef8b9c983f786a9c5cf0c712635))
+
+
+## v0.4.14 (2023-09-23)
+
+### Chore
+
+* chore(release): 0.4.14 [skip ci]
 
 ## [0.4.14](https://github.com/svange/openbrain/compare/v0.4.13...v0.4.14) (2023-09-23)
 
-
 ### Bug Fixes
 
-* pipeline semantic-release #pr ([3299fa7](https://github.com/svange/openbrain/commit/3299fa7d6cd0214826f56600c4b2efec408eb42c))
+* pipeline semantic-release #pr ([3299fa7](https://github.com/svange/openbrain/commit/3299fa7d6cd0214826f56600c4b2efec408eb42c)) ([`c03c40e`](https://github.com//svange/openbrain/commit/c03c40e6e61166ab32c1898f2ab44c8fd7827c7e))
+
+### Fix
+
+* fix: pipeline semantic-release #pr ([`3299fa7`](https://github.com//svange/openbrain/commit/3299fa7d6cd0214826f56600c4b2efec408eb42c))
+
+### Unknown
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev ([`fde5546`](https://github.com//svange/openbrain/commit/fde554664cfdf9d1902ee4d90c622f214695a100))
+
+
+## v0.4.13 (2023-09-23)
+
+### Chore
+
+* chore(release): 0.4.13 [skip ci]
 
 ## [0.4.13](https://github.com/svange/openbrain/compare/v0.4.12...v0.4.13) (2023-09-23)
-
 
 ### Bug Fixes
 
 * pipeline semantic-release #pr ([607050d](https://github.com/svange/openbrain/commit/607050d63211bb238ae686ac580a815b1dd54b0f))
 * pipeline semantic-release #pr ([4f33971](https://github.com/svange/openbrain/commit/4f339713c10fc5ce6e710bd43f13a5070c6362db))
-* pipeline semantic-release #pr ([23ec830](https://github.com/svange/openbrain/commit/23ec830712051e47ed7c9be08987ab1ca087ecdb))
+* pipeline semantic-release #pr ([23ec830](https://github.com/svange/openbrain/commit/23ec830712051e47ed7c9be08987ab1ca087ecdb)) ([`d69aafb`](https://github.com//svange/openbrain/commit/d69aafb19a594d61535481418abbe7e25ee36f86))
+
+### Fix
+
+* fix: pipeline semantic-release #pr ([`607050d`](https://github.com//svange/openbrain/commit/607050d63211bb238ae686ac580a815b1dd54b0f))
+
+* fix: pipeline semantic-release #pr ([`4f33971`](https://github.com//svange/openbrain/commit/4f339713c10fc5ce6e710bd43f13a5070c6362db))
+
+* fix: pipeline semantic-release #pr ([`23ec830`](https://github.com//svange/openbrain/commit/23ec830712051e47ed7c9be08987ab1ca087ecdb))
+
+### Unknown
+
+* Merge branch &#39;dev&#39; of github.com:/svange/openbrain into dev
+
+# Conflicts:
+#	pyproject.toml ([`da1bcd4`](https://github.com//svange/openbrain/commit/da1bcd4678976fb0fbe0f55cd862e4189e79c881))
+
+
+## v0.4.12 (2023-09-23)
+
+### Chore
+
+* chore(release): 0.4.12 [skip ci]
 
 ## [0.4.12](https://github.com/svange/openbrain/compare/v0.4.11...v0.4.12) (2023-09-23)
-
 
 ### Bug Fixes
 
 * pipeline semantic-release ([e7833f8](https://github.com/svange/openbrain/commit/e7833f8ab0c7bb4d8c6d85f804ab281012118334))
-* pipeline semantic-release #pr ([108ea42](https://github.com/svange/openbrain/commit/108ea42bce60d798e751b44efaee035ffa080721))
+* pipeline semantic-release #pr ([108ea42](https://github.com/svange/openbrain/commit/108ea42bce60d798e751b44efaee035ffa080721)) ([`7cb1a03`](https://github.com//svange/openbrain/commit/7cb1a0305a8a03f803a5590ab38297f3bf4b8e86))
+
+### Fix
+
+* fix: pipeline semantic-release #pr ([`108ea42`](https://github.com//svange/openbrain/commit/108ea42bce60d798e751b44efaee035ffa080721))
+
+* fix: pipeline semantic-release ([`e7833f8`](https://github.com//svange/openbrain/commit/e7833f8ab0c7bb4d8c6d85f804ab281012118334))
+
+### Unknown
+
+* reverting to older working config for ci/cd pipeline ([`2b6b106`](https://github.com//svange/openbrain/commit/2b6b106eccdcc57e7c20164d6511cfbae95268cf))
+
+* chat cli wip #pr ([`4b14597`](https://github.com//svange/openbrain/commit/4b14597103371a3a518e121432f3a5ed77e2f526))
+
+* Merge pull request #32
+
+PR ci/dev -&gt; main ([`9df186f`](https://github.com//svange/openbrain/commit/9df186f5b8a317baa0755caf69dbe67602ba47de))
+
+* chat cli wip #pr ([`1c8d172`](https://github.com//svange/openbrain/commit/1c8d17262757f333e09d77ce8b56ae0809096397))
+
+* add gh_pat env var ([`ac87fa6`](https://github.com//svange/openbrain/commit/ac87fa6c582e83b9fcb145b0682bebd0647d588c))
+
+
+## v0.4.11 (2023-09-23)
+
+### Chore
+
+* chore(release): 0.4.11 [skip ci]
 
 ## [0.4.11](https://github.com/svange/openbrain/compare/v0.4.10...v0.4.11) (2023-09-23)
-
 
 ### Bug Fixes
 
 * github actions ([ef1c1fc](https://github.com/svange/openbrain/commit/ef1c1fcc1d0d65fcb004c066d642a5b3e99c5235))
-* github actions bux fixes ([072805b](https://github.com/svange/openbrain/commit/072805b0dffc558a9a067df1265ec839e2c72e35))
+* github actions bux fixes ([072805b](https://github.com/svange/openbrain/commit/072805b0dffc558a9a067df1265ec839e2c72e35)) ([`6a2f731`](https://github.com//svange/openbrain/commit/6a2f7317edaeb52d477e403b74f51605986c8c0b))
+
+### Fix
+
+* fix: github actions bux fixes ([`072805b`](https://github.com//svange/openbrain/commit/072805b0dffc558a9a067df1265ec839e2c72e35))
+
+* fix: github actions ([`ef1c1fc`](https://github.com//svange/openbrain/commit/ef1c1fcc1d0d65fcb004c066d642a5b3e99c5235))
+
+### Unknown
+
+* Merge pull request #31
+
+PR ci/dev -&gt; main ([`9141165`](https://github.com//svange/openbrain/commit/9141165cf3f865be67e78274d51c8cfac268a729))
+
+* updating pipeline for work on dev branch #pr ([`75ac93a`](https://github.com//svange/openbrain/commit/75ac93afbf7ce6b249a2cfb86d0d025426ac0e22))
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into dev
+
+# Conflicts:
+#	.github/workflows/dev.yml ([`caaa765`](https://github.com//svange/openbrain/commit/caaa7655828c6e2499fa6d3c1ae850c564cca54d))
+
+* updating pipeline for work on dev branch #pr ([`f5860fd`](https://github.com//svange/openbrain/commit/f5860fd7d696dac0d8170a6aababb1e13b48014f))
+
+* updating pipeline for work on dev branch #pr ([`96f1331`](https://github.com//svange/openbrain/commit/96f1331ba9142824c9ca30f74d4373878220d8c0))
+
+* Merge pull request #30
+
+* updating pipeline for work on dev branch #test #pr ([`bd23f33`](https://github.com//svange/openbrain/commit/bd23f33a69138dded3a692c324fef4b7c6063713))
+
+* updating pipeline for work on dev branch #test #pr ([`61c565b`](https://github.com//svange/openbrain/commit/61c565b57f57fe8e0be597b77273d4a9da15eb59))
+
+* Merge branch &#39;fix/pipeline-not-releasing-on-master-only-on-refs&#39; of github.com:/svange/openbrain
+
+# Conflicts:
+#	.github/workflows/semantic-branches.yml ([`f39698b`](https://github.com//svange/openbrain/commit/f39698b32658d36b0786497887998c3a9bf5be9b))
+
+* stopping pr from triggering conditionally, just always pr, hopefully, each branch will just have a single, updating PR. ([`b0719cb`](https://github.com//svange/openbrain/commit/b0719cb51ae4b0eddd75ef2bf2b304b83109310d))
+
+* Merge pull request #29
+
+* Fixing pipeline
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into fix/pipeline…
+
+* trying regex in pyproject.toml #pr
+
+* trying regex in pyproject.toml
+
+* Merge remote-tracking branch &#39;origin/fix/pipeline-not-releasing-on-ma…
+
+* bugfixing #pr
+
+* bugfixing
+
+* Merge remote-tracking branch &#39;origin/fix/pipeline-not-releasing-on-ma…
+
+* bugfixing #pr
+
+* bugfixing #pr
+
+* bugfixing #pr
+
+* Merge remote-tracking branch &#39;origin/fix/pipeline-not-releasing-on-ma…
+
+* bugfixing #pr ([`99d2e42`](https://github.com//svange/openbrain/commit/99d2e42b2bb32d75db93586224f8947e2e0a9f2b))
+
+* bugfixing #pr ([`4914654`](https://github.com//svange/openbrain/commit/4914654cd188877a652675b721b3e37290d2c2d7))
+
+* Merge remote-tracking branch &#39;origin/fix/pipeline-not-releasing-on-master-only-on-refs&#39; into fix/pipeline-not-releasing-on-master-only-on-refs ([`a2489fe`](https://github.com//svange/openbrain/commit/a2489fe8cca37f5ee5d2bd52dda93c0f47ce0c84))
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into fix/pipeline-not-releasing-on-master-only-on-refs
+
+# Conflicts:
+#	.github/workflows/semantic-branches.yml ([`32caec3`](https://github.com//svange/openbrain/commit/32caec39ae13a68466afd8dba13e6e6a8276c1b9))
+
+* Fixing pipeline ([`cd99171`](https://github.com//svange/openbrain/commit/cd99171e612768b61c3d6f62d268393af2c4a6e8))
+
+* bugfixing #pr ([`e4724b0`](https://github.com//svange/openbrain/commit/e4724b00f8fef5b7b9d889ed77cbf4f634e7a3fd))
+
+
+## v0.4.10 (2023-09-23)
+
+### Unknown
+
+* AUTO-PR ci/fix/pipeline-not-releasing-on-master-only-on-refs -&gt; main (#28)
+
+Merge pull request #28 ([`7b62ea6`](https://github.com//svange/openbrain/commit/7b62ea6c6ce7397bce3c047ce86c1d261798cb38))
+
+* bugfixing #pr ([`355b97d`](https://github.com//svange/openbrain/commit/355b97d19ec47d87e8e7823599bddfb405f0a443))
+
+* bugfixing #pr ([`d05b21c`](https://github.com//svange/openbrain/commit/d05b21c7554fefaaefae5f26179607220973ef48))
+
+* Merge remote-tracking branch &#39;origin/fix/pipeline-not-releasing-on-master-only-on-refs&#39; into fix/pipeline-not-releasing-on-master-only-on-refs ([`f67756f`](https://github.com//svange/openbrain/commit/f67756f5282267f27bdd0b5f0c27a1e517953e55))
+
+* bugfixing #pr ([`5afeaee`](https://github.com//svange/openbrain/commit/5afeaeee6dcdca8640fc3cf14e4de9c1f23042df))
+
+* bugfixing ([`69fc1b9`](https://github.com//svange/openbrain/commit/69fc1b9bfc444b12574423c6e22854da57361c1e))
+
+* Merge remote-tracking branch &#39;origin/fix/pipeline-not-releasing-on-master-only-on-refs&#39; into fix/pipeline-not-releasing-on-master-only-on-refs ([`5e29fd1`](https://github.com//svange/openbrain/commit/5e29fd1464ff9f85c25d350665c3b898d03e29c5))
+
+* trying regex in pyproject.toml #pr ([`dd7c77a`](https://github.com//svange/openbrain/commit/dd7c77a1b11b4f444e2cca13f534d3dd50520a37))
+
+* trying regex in pyproject.toml ([`e8056dd`](https://github.com//svange/openbrain/commit/e8056dd0ab8f6ed7e92f48b9f4b52f63c27f32f2))
+
+* tweaked readme... and pipeline, sorry ([`56ad92c`](https://github.com//svange/openbrain/commit/56ad92cb60bb12ead0ed11fa1796474795a483ea))
+
+* tweaked readme... sorry ([`a0391d4`](https://github.com//svange/openbrain/commit/a0391d4311f0c3b5834fb254322ec5ef7cd007ef))
+
+
+## v0.4.9 (2023-09-23)
+
+### Unknown
+
+* fixing ob command and ci-cd bug that launches pre-commit job too often. ([`496bdfc`](https://github.com//svange/openbrain/commit/496bdfc0048443f934dad868a3f7436ffd33da44))
+
+* Merge pull request #27
+
+🤖📦🐍 style/update-readmes → main ([`e6cc5e7`](https://github.com//svange/openbrain/commit/e6cc5e7733b531dc6e6f405354c70b04b55dda1d))
+
+
+## v0.4.8 (2023-09-23)
+
+### Style
+
+* style: #pr Merge branch &#39;main&#39; of github.com:/svange/openbrain into style/update-readmes
+
+# Conflicts:
+#	.github/PULL_REQUEST_TEMPLATE.md
+#	CONTRIBUTING.md
+#	README.md ([`da6ba8d`](https://github.com//svange/openbrain/commit/da6ba8def87592d0ea3c575b4af2f7d34d45aad7))
+
+### Unknown
+
+* Merge pull request #26
+
+* integrated pre-commit 
+
+* enforce pre-commit at pr time
+
+* update README.md and start enforcing code quality. ([`9588f32`](https://github.com//svange/openbrain/commit/9588f329c9a7c4a0d227b891dc1e0a50d58d6aec))
+
+* Updated README.md and CONTRIBUTING.md. ([`c0cca05`](https://github.com//svange/openbrain/commit/c0cca053c27719adf389684a3ff793187f1f7fdc))
+
+* integrated pre-commit with many hooks to help with code quality, added github action to enforce it #pr ([`10aa27e`](https://github.com//svange/openbrain/commit/10aa27e2ee0c3e1b3a5e1e87b3485908c1b89c81))
+
+* update README.md and start enforcing code quality.
+Added guard so that PRs aren&#39;t always submitted upon pushes to this branch. ([`97cd906`](https://github.com//svange/openbrain/commit/97cd906ba2e7b44b3d95571047ae5ee64f976a7c))
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into style/enable-pre-commit
+
+# Conflicts:
+#	README.md ([`1230463`](https://github.com//svange/openbrain/commit/12304630491001dd4a40120801150127db5521e5))
+
+* update README.md and start enforcing code quality. ([`2226f1b`](https://github.com//svange/openbrain/commit/2226f1bb7b95f4b33e23e508b78b19a20ac425e4))
+
+
+## v0.4.7 (2023-09-22)
+
+### Unknown
+
+* Merge pull request #25
+
+* Updating README badge
+
+* re-enabling pipeline steps
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into style/ci-cd-…
+
+* re-enabling pipeline steps
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into style/ci-cd-… ([`b52af2b`](https://github.com//svange/openbrain/commit/b52af2b47df6d4b616caef768404cc6d75210511))
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into style/ci-cd-standup ([`c9a4796`](https://github.com//svange/openbrain/commit/c9a479656578089f7c5902c1f3b6d9b4428e388f))
+
+* re-enabling pipeline steps ([`00f5839`](https://github.com//svange/openbrain/commit/00f583956c3be99cbaf2bcbeaee81c2bb81dab9b))
+
+
+## v0.4.6 (2023-09-22)
+
+### Unknown
+
+* 🤖📦🐍 style/ci-cd-standup → main (#24)
+
+* Updating README badge
+
+* re-enabling pipeline steps ([`a23f325`](https://github.com//svange/openbrain/commit/a23f3258901ae8037c78f2505bd690f7e495764b))
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into style/ci-cd-standup ([`11868ad`](https://github.com//svange/openbrain/commit/11868ade0dbd33116f38027ec440cab4a09c8b28))
+
+* re-enabling pipeline steps ([`6381757`](https://github.com//svange/openbrain/commit/63817576ca9306f4d737c3ec0792b1448617d202))
+
+
+## v0.4.5 (2023-09-22)
+
+### Unknown
+
+* Updating README badge (#23) ([`941f738`](https://github.com//svange/openbrain/commit/941f73832068275f7d8be81afc0ba90bf1b08436))
+
+* Updating README badge ([`e74c885`](https://github.com//svange/openbrain/commit/e74c8851c23080d5aa8b2ed50594e68699b17c9a))
+
+* Working CI/CD pipeline tested, but no tests on main branch commits yet. ([`7f643da`](https://github.com//svange/openbrain/commit/7f643da9da25205e7b17519e72884ba99654556e))
+
+
+## v0.4.4 (2023-09-22)
+
+### Unknown
+
+* Working CI/CD pipeline tested, but no tests on main branch commits yet. ([`9366090`](https://github.com//svange/openbrain/commit/9366090fdd6402b664df67cf796de4387f51c3cb))
+
+
+## v0.4.3 (2023-09-22)
+
+### Unknown
+
+* Working CI/CD pipeline tested, but no tests on main branch commits yet. ([`c4e8baa`](https://github.com//svange/openbrain/commit/c4e8baa5a384e6afded5536c5e4353ea329e1598))
+
+
+## v0.4.2 (2023-09-22)
+
+### Unknown
+
+* Working CI/CD pipeline tested, but no tests on main branch commits yet. ([`32261d4`](https://github.com//svange/openbrain/commit/32261d4fe7fe1dd85d86d6847ecd241d66b13dc9))
+
+
+## v0.4.1 (2023-09-22)
+
+### Unknown
+
+* Working CI/CD pipeline tested, but no tests on main branch commits yet. ([`67f6e97`](https://github.com//svange/openbrain/commit/67f6e97a41e8e7c2251f8ee6779dfc2fba300112))
+
+* Working CI/CD pipeline tested, but no tests on main branch commits yet. ([`5663f0c`](https://github.com//svange/openbrain/commit/5663f0c2528152a0e93b60deb317e1f0d5ea8d8b))
+
+
+## v0.4.0 (2023-09-22)
+
+### Test
+
+* test: Standing up CI/CD. ([`a1cddd1`](https://github.com//svange/openbrain/commit/a1cddd12eba3da6081aef946d1efa90c04c223ae))
+
+### Unknown
+
+* 🤖📦🐍 feat/ci-cd → main (#22)
+
+Stood up first CI/CD pipeline for semantic versioning with github actions, and poetry. ([`742f797`](https://github.com//svange/openbrain/commit/742f79702045668dffde7c6ab6bf0f21a2623a2b))
+
+* Standing up CI/CD ([`e804686`](https://github.com//svange/openbrain/commit/e804686552ba998d2ddfc9c97c2fa97e90f2eb87))
+
+* Standing up CI/CD ([`69503b6`](https://github.com//svange/openbrain/commit/69503b6526cc8d78de91e678943579546386fbbf))
+
+* Standing up CI/CD ([`621993f`](https://github.com//svange/openbrain/commit/621993f92196dd986f286004f78d1d2e09c84aca))
+
+* Standing up CI/CD ([`6662ebe`](https://github.com//svange/openbrain/commit/6662ebe95cf6df9c9c99a5a97448b7ad71bebfed))
+
+* Standing up CI/CD ([`d1ce2a7`](https://github.com//svange/openbrain/commit/d1ce2a75b66a7d803015654269aaad8968cea96e))
+
+* Standing up CI/CD ([`c1e78e0`](https://github.com//svange/openbrain/commit/c1e78e0aa1aef05174e29b3cee7c8e4251868311))
+
+* Standing up CI/CD ([`fdeebf7`](https://github.com//svange/openbrain/commit/fdeebf7030ea1e5017538d56c8c29f8e57e518d6))
+
+* Standing up CI/CD ([`374ac46`](https://github.com//svange/openbrain/commit/374ac46c82be22f1e8693c15056a563084617969))
+
+* Standing up CI/CD ([`07ea54d`](https://github.com//svange/openbrain/commit/07ea54d57e558d405e9f52493ef76186551a305f))
+
+* Standing up CI/CD ([`54b6093`](https://github.com//svange/openbrain/commit/54b609385a64c33d3198b87ba6395f15384455cd))
+
+* Standing up CI/CD ([`9be0be6`](https://github.com//svange/openbrain/commit/9be0be69a05bee1a15db760ad08f0f7e9108aaa3))
+
+* Standing up CI/CD ([`aa79c00`](https://github.com//svange/openbrain/commit/aa79c00cd5046709b84643e657c5a27caa3451ea))
+
+* Standing up CI/CD ([`6f465bd`](https://github.com//svange/openbrain/commit/6f465bdc956fe46a14874b9d6e4cf4331a9dba19))
+
+* Standing up CI/CD ([`d6cf33e`](https://github.com//svange/openbrain/commit/d6cf33ea8c060e3461d7d96c36ed2ba0eca9c849))
+
+* Standing up CI/CD ([`3c60a28`](https://github.com//svange/openbrain/commit/3c60a28926be9f625dd7d92ba71b922a8e6dc59c))
+
+* Standing up CI/CD ([`e1890ed`](https://github.com//svange/openbrain/commit/e1890ed6519376c12843786a67aa142884e0df2c))
+
+* Standing up CI/CD ([`2071551`](https://github.com//svange/openbrain/commit/2071551aac816d022dd12f61bf55dfd3709af35e))
+
+* Standing up CI/CD ([`d6f212a`](https://github.com//svange/openbrain/commit/d6f212a055ec009910336174c9e47b535b093080))
+
+* Standing up CI/CD ([`e74436a`](https://github.com//svange/openbrain/commit/e74436a91c572dfec185f77eafdda32b3fb5b4b7))
+
+* Standing up CI/CD ([`3dc6bf4`](https://github.com//svange/openbrain/commit/3dc6bf49601c30a4f90ecc84d8f7455c471520d2))
+
+* Standing up CI/CD ([`e14c464`](https://github.com//svange/openbrain/commit/e14c4648a1e8d795ba373fe63a44dd4ca039dd18))
+
+* Standing up CI/CD ([`11db018`](https://github.com//svange/openbrain/commit/11db018483701a65dd70e4c32f60ff213efccd3d))
+
+* Standing up CI/CD ([`752502b`](https://github.com//svange/openbrain/commit/752502b8a43bb3dd8b6134b67c469c91bedbf11d))
+
+* Standing up CI/CD ([`63b1e9a`](https://github.com//svange/openbrain/commit/63b1e9a1c0c242260aa0c1abcf42b96f0926ae63))
+
+* Standing up CI/CD ([`9d7a049`](https://github.com//svange/openbrain/commit/9d7a04928554db7198d31e38b9a78e1fe02be78c))
+
+* Standing up CI/CD ([`df292ff`](https://github.com//svange/openbrain/commit/df292ff0468087c723c91525608823f61e7d9e08))
+
+* Standing up CI/CD ([`e074459`](https://github.com//svange/openbrain/commit/e0744596885101accc7eca23ff922c44a1356fbc))
+
+* Standing up CI/CD ([`fde0d5a`](https://github.com//svange/openbrain/commit/fde0d5a51a0edff9ed71d761331be1dbda114912))
+
+* Standing up CI/CD ([`7eca82d`](https://github.com//svange/openbrain/commit/7eca82db0964847ce0ec47a8b70edbb4f63bbf85))
+
+* Standing up CI/CD ([`d5e4f1b`](https://github.com//svange/openbrain/commit/d5e4f1bb196278dc3313d24e6e47d8f17dfd4470))
+
+* Standing up CI/CD ([`f16074e`](https://github.com//svange/openbrain/commit/f16074e48a1987cc8e2263b6359e957f1b4b6427))
+
+* Standing up CI/CD ([`00c3db0`](https://github.com//svange/openbrain/commit/00c3db07bccc41df7aa1363233659787e10318b7))
+
+* Standing up CI/CD ([`0b89e6b`](https://github.com//svange/openbrain/commit/0b89e6b301960a9b75ecb4d47b483caeef8e5449))
+
+* Standing up CI/CD ([`106b394`](https://github.com//svange/openbrain/commit/106b3945acf80b744a7e69ef0611de952111caed))
+
+* Standing up CI/CD ([`cc288aa`](https://github.com//svange/openbrain/commit/cc288aab662ec194bc3adb0535e9204dcde36d61))
+
+* Standing up CI/CD ([`b91d158`](https://github.com//svange/openbrain/commit/b91d1586489a76ebf792df3fa401e5e302a20d22))
+
+* Standing up CI/CD ([`c3240f5`](https://github.com//svange/openbrain/commit/c3240f51bd127832b4a2dcce0b9354f0854ad122))
+
+* Standing up CI/CD ([`f0e748e`](https://github.com//svange/openbrain/commit/f0e748e5aeaef1f6f391c656a5ca2b79da6587a5))
+
+* Standing up CI/CD ([`b7190c8`](https://github.com//svange/openbrain/commit/b7190c8f792c02a7d1bb1133892528474bd9b5cb))
+
+* Standing up CI/CD ([`d22270f`](https://github.com//svange/openbrain/commit/d22270f7cc05a1c0876c89b5e74dd08d0de9d121))
+
+* Standing up CI/CD ([`5e7ea9e`](https://github.com//svange/openbrain/commit/5e7ea9e80aaa6ac79bbff4999d3684e7e93e47be))
+
+* Standing up CI/CD ([`f9fd71d`](https://github.com//svange/openbrain/commit/f9fd71d353bd74a44d270937f998b453f04b9d9a))
+
+* Standing up CI/CD ([`1b9b107`](https://github.com//svange/openbrain/commit/1b9b107b9971a8ce7db82c7f65b7034fa73dbeef))
+
+* Standing up CI/CD ([`f657e00`](https://github.com//svange/openbrain/commit/f657e00e4cf2e44a0a1f6df9f149690515a70dea))
+
+* Standing up CI/CD ([`d54f69d`](https://github.com//svange/openbrain/commit/d54f69d9923523661ade1d93f6251447cefa6cac))
+
+* Standing up CI/CD ([`7df428c`](https://github.com//svange/openbrain/commit/7df428c0b6645b7c597cd6b03998c26fa9480ca9))
+
+* Standing up CI/CD ([`58ef92c`](https://github.com//svange/openbrain/commit/58ef92c422810cb89c4010efa25f6622800398a9))
+
+* Standing up CI/CD ([`1b2caf1`](https://github.com//svange/openbrain/commit/1b2caf1ad949bf49dd467467eac99a21b0fb2a33))
+
+* Standing up CI/CD ([`969a9cd`](https://github.com//svange/openbrain/commit/969a9cd0b04f84fbf2d61dd44bfe7cb7ef408006))
+
+* Standing up CI/CD ([`3e744a3`](https://github.com//svange/openbrain/commit/3e744a30910e30cc3f8735c3d5553fab7be83afb))
+
+* Standing up CI/CD ([`ca19b41`](https://github.com//svange/openbrain/commit/ca19b41b03345ddbf2444561c422eeb17fe534ad))
+
+* Standing up CI/CD ([`3d463c1`](https://github.com//svange/openbrain/commit/3d463c1eae9dd3f0d0d018f57503cf7ce627673d))
+
+* Standing up CI/CD ([`b641e7d`](https://github.com//svange/openbrain/commit/b641e7d690022859f73e6d558d4ba675e1b4051c))
+
+* Standing up CI/CD ([`fca045b`](https://github.com//svange/openbrain/commit/fca045b11b132d883192215da99b038a6ec014ab))
+
+* Standing up CI/CD ([`f8cf346`](https://github.com//svange/openbrain/commit/f8cf346c4754560cbbb2e8db86f62ea24a158e42))
+
+* Standing up CI/CD ([`06e18ba`](https://github.com//svange/openbrain/commit/06e18bab9a08f33930cc47fb490c3b9d09d73ae3))
+
+* Merge branch &#39;features/cicd-pipeline&#39; of github.com:/svange/openbrain into dev ([`26b1c68`](https://github.com//svange/openbrain/commit/26b1c68c383c4070056fcf8211a20e7260daf86e))
+
+* Standing up CI/CD ([`f30c329`](https://github.com//svange/openbrain/commit/f30c32937f7e544a591ada2b08dfc127ccf6592d))
+
+* Standing up CI/CD ([`887752f`](https://github.com//svange/openbrain/commit/887752fc5998e409283205d5bc9afd0bb8a41e95))
+
+* tweaking ([`ed74c90`](https://github.com//svange/openbrain/commit/ed74c902f452b0c0dc958af9f786bcaccc60c9c6))
+
+* tweaking ([`55dd6ba`](https://github.com//svange/openbrain/commit/55dd6bae52c56e8a0d700f8d27f91eab909d4cc0))
+
+* tweaking ([`f30d3bd`](https://github.com//svange/openbrain/commit/f30d3bd78568bb31d97f8a69f5c2fd3ae08b0f92))
+
+
+## v0.2.12 (2023-09-22)
+
+### Unknown
+
+* tweaking ([`55b60dc`](https://github.com//svange/openbrain/commit/55b60dcca8f75f8d7993bf7dd2c820f97a6f63de))
+
+
+## v0.2.11 (2023-09-22)
+
+### Unknown
+
+* removed smever in an attempt to make github play along. ([`f4d651f`](https://github.com//svange/openbrain/commit/f4d651f37451f8ea775432cbde5d47cfc8d0f3ba))
+
+
+## v0.2.10 (2023-09-22)
+
+### Unknown
+
+* removed smever in an attempt to make github play along. ([`d589fc7`](https://github.com//svange/openbrain/commit/d589fc73aa316c15e223a7225e762224080621da))
+
+
+## v0.2.9 (2023-09-22)
+
+### Unknown
+
+* updated dependencies ([`996a12b`](https://github.com//svange/openbrain/commit/996a12b2e44dbb160fda6352172c0b1cdabb5070))
+
+
+## v0.2.7 (2023-09-22)
+
+### Unknown
+
+* updated dependencies ([`27d3a7b`](https://github.com//svange/openbrain/commit/27d3a7beb276246009f1a43fa5d4c286234eab95))
+
+
+## v0.2.6 (2023-09-22)
+
+### Unknown
+
+* updated dependencies ([`21e50c5`](https://github.com//svange/openbrain/commit/21e50c59bf11a728b8ef8aabe4b10d3e0a74009b))
+
+
+## v0.2.5 (2023-09-22)
+
+### Unknown
+
+* updated CONTRIBUTING.md ([`dd0b5a2`](https://github.com//svange/openbrain/commit/dd0b5a27d5755fd91f810a6f9e040c3790decd90))
+
+
+## v0.2.4 (2023-09-22)
+
+### Unknown
+
+* updated CI/CD pipeline ([`d4800ed`](https://github.com//svange/openbrain/commit/d4800edd5220a453d9ebc28ab505b38dc692b829))
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`51c3427`](https://github.com//svange/openbrain/commit/51c3427f4dea191d9f579851fd321aec1ce3e16d))
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`3e618f2`](https://github.com//svange/openbrain/commit/3e618f291c280cce7b3c7e5a065c3610526dd48e))
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`f8e76a2`](https://github.com//svange/openbrain/commit/f8e76a2bec3d59bdfe34308093a389db6b0874f1))
+
+* Setting up CI/CD pipeline and workflow ([`494e23d`](https://github.com//svange/openbrain/commit/494e23dbea902c301e691b45c58e3184d578a53e))
+
+* Setting up CI/CD pipeline and workflow ([`f9ef366`](https://github.com//svange/openbrain/commit/f9ef366174de6884718400c8040923d70dae084b))
+
+
+## v0.2.0 (2023-09-22)
+
+### Unknown
+
+* Setting up CI/CD pipeline and workflow ([`c779436`](https://github.com//svange/openbrain/commit/c779436f7e4032a2725a5348c17b08ef3f4f7041))
+
+* Setting up CI/CD pipeline and workflow ([`951c908`](https://github.com//svange/openbrain/commit/951c9085caab1eac3f9137f3bb8d47be00ef5607))
+
+* Setting up CI/CD pipeline and workflow ([`0f41845`](https://github.com//svange/openbrain/commit/0f41845682b92ad8495da0be2030b8db8da63f45))
+
+* Setting up CI/CD pipeline and workflow ([`1c2a8aa`](https://github.com//svange/openbrain/commit/1c2a8aa28f3733578d5760272654ab911267727f))
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`d8050fa`](https://github.com//svange/openbrain/commit/d8050fa9ee898207197bb049376bb7f74a325dbf))
+
+* Setting up CI/CD pipeline and workflow ([`cbde9ba`](https://github.com//svange/openbrain/commit/cbde9baaf63d6a7c88e69003c53d0221ff221cdc))
+
+* Setting up CI/CD pipeline and workflow ([`48b6978`](https://github.com//svange/openbrain/commit/48b69786436591da4c406d20482a072e1b78fbe7))
+
+* Updated README.md ([`0808e6a`](https://github.com//svange/openbrain/commit/0808e6a287ff8a8ad0f2f0c906499b603b66458f))
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into dev
+
+# Conflicts:
+#	.aws-sam/build/template.yaml
+#	.env.example
+#	.github/workflows/main-publish.yaml
+#	LICENSE.md
+#	README.md
+#	ci_cd.py
+#	pyproject.toml
+#	template.yaml ([`9b0aad0`](https://github.com//svange/openbrain/commit/9b0aad0a8b922a9d924bb432e5262f0b2bada93d))
+
+* Updated README.md ([`2ff9ccc`](https://github.com//svange/openbrain/commit/2ff9ccc953ae8cd3004ac5224281764862065144))
+
+* Version bump to fix failed deploy ([`290ce13`](https://github.com//svange/openbrain/commit/290ce13f176e6a188745b7bacfe736278766b78f))
+
+* Establishing project structure, publishing, license and other metadata details. ([`2c2c779`](https://github.com//svange/openbrain/commit/2c2c7797a51632a8ce2f97c16206ba2200d921a9))
+
+* initial commit ([`4fb4d38`](https://github.com//svange/openbrain/commit/4fb4d380eeb2841133c8d151901085cb9f009197))
+
+* added auto version bumping ([`0951f7f`](https://github.com//svange/openbrain/commit/0951f7fd7628200c6d4fa80e8c30760a7174a83b))
+
+* troubleshooting ci/cd pipeline ([`19a2053`](https://github.com//svange/openbrain/commit/19a2053626899e2dab18f7ec7c569c5eeaa4c3fa))
+
+* troubleshooting ci/cd pipeline ([`7d20728`](https://github.com//svange/openbrain/commit/7d207284db79834a114961636b4c7328da0e6b4c))
+
+* troubleshooting ci/cd pipeline ([`7778547`](https://github.com//svange/openbrain/commit/7778547a4a89ff52926c68054930b171e8008d1d))
+
+* troubleshooting ci/cd pipeline ([`c5fd255`](https://github.com//svange/openbrain/commit/c5fd2559a474f79344266147569cdabad87d7a0b))
+
+* troubleshooting ci/cd pipeline ([`b8cf544`](https://github.com//svange/openbrain/commit/b8cf54419016be525ea3fe4f036c5272b244a8c9))
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`5afb255`](https://github.com//svange/openbrain/commit/5afb2555e8cf85ac1470aa9f524d9b0592348315))
+
+* troubleshooting ci/cd pipeline ([`c221f35`](https://github.com//svange/openbrain/commit/c221f3523e9ffc98c96cb531e9ad49f8145aa5ea))
+
+* troubleshooting ci/cd pipeline ([`ca73a78`](https://github.com//svange/openbrain/commit/ca73a7841345f7bc03d7d75b4ee31979bdf0a3dd))
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`e6990ed`](https://github.com//svange/openbrain/commit/e6990ed016b2edf742ccfcfc33b00fab966a0116))
+
+* initial commit ([`9626530`](https://github.com//svange/openbrain/commit/96265303eb71cdb1e30d39346b883b21041b1ce0))
+
+* initial commit ([`9c8c944`](https://github.com//svange/openbrain/commit/9c8c94400152a7b2b41e7190196387908bb0097f))
+
+* initial commit ([`9e7ea40`](https://github.com//svange/openbrain/commit/9e7ea403a357a8bb9563c077e134dbdf7ab31fae))
+
+* initial commit ([`b8bdfce`](https://github.com//svange/openbrain/commit/b8bdfce01a57ce5d4f96d877892a50df3d590f2d))
+
+* Initial commit ([`8bb71cc`](https://github.com//svange/openbrain/commit/8bb71cc4fba6a357f41e110e5d3b23f01def39ac))
