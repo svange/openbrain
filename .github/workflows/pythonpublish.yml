@@ -20,12 +20,31 @@ jobs:
       - name: Install dependencies
         run: |
           # pin poetry to 1.3.2 due to https://github.com/python-poetry/poetry/issues/7611
-          python -m pip install -U pip poetry==1.3.2 mkdocs mkdocs-material
+          python -m pip install -U pip poetry==1.3.2 #mkdocs mkdocs-material
           poetry --version
           poetry install
-      - name: Publish
+
+      # MAIN BRANCH
+      - name: Configure PyPI token
+        run: poetry config pypi-token.pypi "${{ secrets.PYPI_TOKEN }}"
+        if: !contains(github.ref, 'dev')
+
+      - name: Publish to PyPI
+        if: !contains(github.ref, 'dev')
         env:
-          PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
-          PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: |
           ./scripts/publish
+
+      # DEV BRANCH
+      - name: Configure PyPI token
+        run: poetry config pypi-token.pypi "${{ secrets.TEST_PYPI_API_KEY }}"
+        if: contains(github.ref, 'dev')
+
+      - name: Publish to TestPyPI
+        if: contains(github.ref, 'dev')
+        env:
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          ./scripts/publish -r testpypi
