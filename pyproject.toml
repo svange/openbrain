@@ -15,7 +15,7 @@ major_version_zero = true
 
 [tool.poetry]
 name = "openbrain"
-version = "0.10.2"
+version = "0.10.3"
 description = "A package to interact with generative AI and build specialized generative AI workflows. This project is dual-licensed under AGPL-3.0 and a separate commercial license."
 authors = ["Samuel Vange <7166607+svange@users.noreply.github.com>"]
 readme = "README.md"
@@ -28,7 +28,7 @@ homepage = "https://github.com/svange/openbrain"
 ob = "openbrain.cli:cli"
 ob-chat = "openbrain.cli:chat"
 ob-tuner = "openbrain.app:main"
-cz = "git-cz"
+#cz = "git-cz"
 
 [tool.poetry.plugins."commitizen.plugin"] # completely untested
 cz_conventional_commits = "commitizen.cz.conventional_commits:ConventionalCommitsCz"

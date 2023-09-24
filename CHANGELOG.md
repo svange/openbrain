@@ -2,6 +2,13 @@
 
 
 
+## v0.10.3 (2023-09-24)
+
+### Fix
+
+- update ci and deps
+- update ci and deps
+
 ## v0.10.2 (2023-09-24)
 
 ### Fix
@@ -404,7 +411,7 @@ Merge pull request #28 ([`7b62ea6`](https://github.com/svange/openbrain/commit/7
 
 * Merge pull request #26
 
-* integrated pre-commit 
+* integrated pre-commit
 
 * enforce pre-commit at pr time
 
