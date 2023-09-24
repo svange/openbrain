@@ -26,7 +26,7 @@ jobs:
 
       - name: Main Configure PyPI token
         run: poetry config pypi-token.pypi "${{ secrets.PYPI_TOKEN }}"
-        if: !contains(github.ref, 'dev')
+        if: ! contains(github.ref, 'dev')
 
       - name: Main Publish to PyPI
         if: !contains(github.ref, 'dev')
