@@ -2,6 +2,15 @@
 
 
 
+## v0.10.0 (2023-09-24)
+
+### Feat
+
+- adding dev branch back into ci/cd
+- adding dev branch back into ci/cd
+- adding dev branch back into ci/cd
+- adding dev branch back into ci/cd
+
 ## v0.9.0 (2023-09-24)
 
 ### Feat
