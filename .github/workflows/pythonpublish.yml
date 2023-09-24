@@ -24,12 +24,11 @@ jobs:
           poetry --version
           poetry install
 
-      # MAIN BRANCH
-      - name: Configure PyPI token
+      - name: Main Configure PyPI token
         run: poetry config pypi-token.pypi "${{ secrets.PYPI_TOKEN }}"
         if: !contains(github.ref, 'dev')
 
-      - name: Publish to PyPI
+      - name: Main Publish to PyPI
         if: !contains(github.ref, 'dev')
         env:
 
@@ -37,12 +36,11 @@ jobs:
         run: |
           ./scripts/publish
 
-      # DEV BRANCH
-      - name: Configure PyPI token
+      - name: Dev Configure PyPI token
         run: poetry config pypi-token.pypi "${{ secrets.TEST_PYPI_API_KEY }}"
         if: contains(github.ref, 'dev')
 
-      - name: Publish to TestPyPI
+      - name: Dev Publish to TestPyPI
         if: contains(github.ref, 'dev')
         env:
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
