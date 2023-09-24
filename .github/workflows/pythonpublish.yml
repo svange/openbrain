@@ -26,23 +26,21 @@ jobs:
 
       - name: Main Configure PyPI token
         run: poetry config pypi-token.pypi "${{ secrets.PYPI_TOKEN }}"
-        if: ! contains(github.ref, 'dev')
 
       - name: Main Publish to PyPI
-        if: ! contains(github.ref, 'dev')
         env:
 
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: |
           ./scripts/publish
 
-      - name: Dev Configure PyPI token
-        run: poetry config pypi-token.pypi "${{ secrets.TEST_PYPI_API_KEY }}"
-        if: contains(github.ref, 'dev')
-
-      - name: Dev Publish to TestPyPI
-        if: contains(github.ref, 'dev')
-        env:
-          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-        run: |
-          ./scripts/publish -r testpypi
+#      - name: Dev Configure PyPI token # TODO: re-enable to get dev builds going to test-pypi
+#        run: poetry config pypi-token.pypi "${{ secrets.TEST_PYPI_API_KEY }}"
+#        if: contains(github.ref, 'dev')
+#
+#      - name: Dev Publish to TestPyPI
+#        if: contains(github.ref, 'dev')
+#        env:
+#          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+#        run: |
+#          ./scripts/publish -r testpypi
