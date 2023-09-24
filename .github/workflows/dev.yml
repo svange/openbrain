@@ -28,7 +28,7 @@ jobs:
     - name: update local git branch
       run: |
         git config --global user.name "GitHub Actions"
-        git config --global user.email "noreply@github.com
+        git config --global user.email "noreply@github.com"
         git pull origin main
         git reset --hard
         git pull origin dev 
