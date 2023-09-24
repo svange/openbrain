@@ -29,11 +29,11 @@ repos:
         args: [ '--unsafe' ] # for mkdocs.yml
       - id: detect-private-key
 
-#  - repo: https://github.com/asottile/blacken-docs
-#    rev: 1.13.0
-#    hooks:
-#      - id: blacken-docs
-#        additional_dependencies: [ black==22.10 ]
+  - repo: https://github.com/asottile/blacken-docs
+    rev: 1.13.0
+    hooks:
+      - id: blacken-docs
+        additional_dependencies: [ black==22.10 ]
 
 #  - repo: https://github.com/codespell-project/codespell
 #    rev: v2.2.4
