@@ -20,30 +20,22 @@ jobs:
     needs: run-tests
     steps:
 
-    - name: update dev
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
       with:
-        branch: dev
+        branch: main
         fetch-depth: 0
 
-    - name: Pull dev and main
+    - name: update local git branch
       run: |
-        git pull origin dev
         git pull origin main
-
-    - name: Create or Update ci/dev branch
-      run: |
-        git fetch origin dev:ci/dev || git checkout -b ci/dev origin/dev
         git pull origin dev
-        git push --force origin ci/dev
-
 
     - name: PR to main from dev
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GH_PAT }}
         base: main     # the target branch for PR
-        branch: ci/dev    # source branch
+#        branch: dev    # source branch
         title: PR dev -> main
         body: |
           🤖📦🐍 Automated PR from dev → main  
