@@ -9,4 +9,4 @@ ${PREFIX}pytest tests/
 ${PREFIX}black openbrain tests --check
 ${PREFIX}ruff openbrain/ tests/
 #${PREFIX}mypy openbrain/ tests/  # TODO: fix mypy errors, this is great insight!
-${PREFIX}commitizen -nr 3 check --rev-range origin/master..
+${PREFIX}commitizen -nr 3 check --rev-range origin/main..
