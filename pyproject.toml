@@ -197,10 +197,10 @@ patch_tags = ["fix", "perf"]
 
 
 [tool.semantic_release]
-version_variable = [
-    "openbrain/__init__.py:__version__",
-    "pyproject.toml:version"
-]
+#version_variable = [
+#    "openbrain/__init__.py:__version__",
+#    "pyproject.toml:version"
+#]
 upload_to_pypi = true
 upload_to_vcs_release = true # TODO, we want this, make it tru
 build_command = "pip install poetry && poetry build"
