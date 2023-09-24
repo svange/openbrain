@@ -215,7 +215,7 @@ def get_available_profile_names() -> list:
 with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
     session_state = gr.State(value={"session_id": "", "session": requests.Session(), "agent": None})
     session_apikey = gr.State(value="")
-    with gr.Accordion("Tuning", elem_classes="accordian", visible=is_settings_set()) as prompts_box:
+    with gr.Accordion("Tuning", elem_classes="accordion", visible=is_settings_set()) as prompts_box:
         gr.Markdown(
             "Changes to these settings are used to set up a conversation using the Reset button and will not "
             "be reflected until the next 'Reset'"
@@ -278,7 +278,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
         with gr.Tab("API Keys and contact info") as api_keys_tab:
             outgoing_webhook_url = gr.Textbox(
                 label="Outgoing Webhook URL",
-                info=f"LeadMomentum webhook URL",
+                info="LeadMomentum webhook URL",
                 type="text",
             )
 
@@ -299,7 +299,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 label="System Message",
                 placeholder="Enter your system message here",
                 info="The System Message. This message is a part of every context with "
-                "ChatGPT, and is therefor the most influential, and expensive place to "
+                "ChatGPT, and is therefore the most influential, and expensive place to "
                 "add text",
                 show_label=False,
             )
@@ -318,7 +318,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
             with gr.Column(scale=4) as key_text_column:
                 client_id = gr.Textbox(
                     label="Client ID",
-                    info=f"Your client ID. If left blank, defaults to 'public'.",
+                    info="Your client ID. If left blank, defaults to 'public'.",
                     type="text",
                 )
                 client_id.value = DEFAULT_CLIENT_ID
