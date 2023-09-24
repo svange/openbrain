@@ -10,7 +10,12 @@ Thank you for your interest in contributing to OpenBrain! This guide will help y
 
 3. **Pre-commit**: This project uses pre-commit hooks. Install it using:
     ```
-    pip install pre-commit
+    pre-commit install
+    ```
+   
+4. Commitizen: This project uses Commitizen to enforce the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) standard. Commit messages can be generated using:
+    ```
+    cz commit
     ```
 
 4. **AWS Credentials**: Ensure you have AWS credentials configured for testing.
