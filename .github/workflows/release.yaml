@@ -71,23 +71,10 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction
 
-      - name: Release
-        id: release
-        env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.email "release-bot@woxomai.com"
-          git config --global user.name "Release Bot"
-
-          latest_version=$(poetry run semantic-release  --noop version --print)
-
-          poetry run semantic-release publish
-          if [[ ! -z $latest_version ]]; then
-            echo "tag=v${LATEST_VERSION}" >> "$GITHUB_OUTPUT"
-          else
-            echo "tag=" >> "$GITHUB_OUTPUT"
-          fi
+      - uses: bjoluc/semantic-release-config-poetry@v2
+        with:
+          pypi_token: ${{ secrets.GITHUB_TOKEN }}
+          release_branch: ${{ github.ref }}
 
   deploy:
     runs-on: ubuntu-latest
