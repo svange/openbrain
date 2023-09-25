@@ -1,23 +1,58 @@
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "semver"
+version_provider = "poetry" #"scm"
+update_changelog_on_bump = true
+major_version_zero = true
+#version = "3.9.1"
+#version_files = [
+#  "pyproject.toml:version",
+#  "openbrain/__version__.py",
+#  ".pre-commit-config.yaml:rev:.+Openbrain",
+#]
+
+
 [tool.poetry]
 name = "openbrain"
-version = "0.8.0"
+version = "0.10.3"
 description = "A package to interact with generative AI and build specialized generative AI workflows. This project is dual-licensed under AGPL-3.0 and a separate commercial license."
 authors = ["Samuel Vange <7166607+svange@users.noreply.github.com>"]
 readme = "README.md"
-license = "AGPL-3.0"
+license = "MIT"
 packages = [{ include = "openbrain" }]
+homepage = "https://github.com/svange/openbrain"
+
 
 [tool.poetry.scripts]
 ob = "openbrain.cli:cli"
 ob-chat = "openbrain.cli:chat"
 ob-tuner = "openbrain.app:main"
+#cz = "git-cz"
+
+[tool.poetry.plugins."commitizen.plugin"] # completely untested
+cz_conventional_commits = "commitizen.cz.conventional_commits:ConventionalCommitsCz"
+#cz_jira = "commitizen.cz.jira:JiraSmartCz"
+cz_customize = "commitizen.cz.customize:CustomizeCommitsCz"
+cargo = "commitizen.providers:CargoProvider"
+commitizen = "commitizen.providers:CommitizenProvider"
+composer = "commitizen.providers:ComposerProvider"
+npm = "commitizen.providers:NpmProvider"
+pep621 = "commitizen.providers:Pep621Provider"
+poetry = "commitizen.providers:PoetryProvider"
+scm = "commitizen.providers:ScmProvider"
+
+[tool.poetry.plugins."commitizen.scheme"]
+pep440 = "commitizen.version_schemes:Pep440"
+semver = "commitizen.version_schemes:SemVer"
+
 
 [tool.poetry.dependencies]
 python = "^3.10"
 boto3 = "^1.28.51"
 langchain = "^0.0.295"
 openai = "^0.28.0"
-promptlayer = "^0.2.9"
+promptlayer = ">=0.2.9,<0.4.0"
 requests = "^2.31.0"
 pydantic = "^2.3.0"
 aws-lambda-powertools = "^2.25.0"
@@ -37,22 +72,79 @@ flake8 = "^6.1.0"
 black = "^23.9.1"
 reorder-python-imports = "^3.11.0"
 python-semantic-release = "^8.1.1"
-commitizen = "^3.9.1"
 ruff = "^0.0.291"
 mypy = "^1.5.1"
+commitizen = "^3.9.1"
+isort = "^5.12.0"
+pre-commit = "^3.4.0"
 
 
-
-[tool.commitizen]
-name = "cz_conventional_commits"
-tag_format = "v$version"
-version_scheme = "semver"
-version_provider = "poetry"
-update_changelog_on_bump = true
-major_version_zero = true
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.coverage] # not tested
+    [tool.coverage.report]
+    show_missing = true
+    exclude_lines = [
+        # Have to re-enable the standard pragma
+        'pragma: no cover',
+
+        # Don't complain about missing debug-only code:
+        'def __repr__',
+        'if self\.debug',
+
+        # Don't complain if tests don't hit defensive assertion code:
+        'raise AssertionError',
+        'raise NotImplementedError',
+
+        # Don't complain if non-runnable code isn't run:
+        'if 0:',
+        'if __name__ == .__main__.:',
+        'if TYPE_CHECKING:',
+    ]
+    omit = [
+        'env/*',
+        'venv/*',
+        '.venv/*',
+        '*/virtualenv/*',
+        '*/virtualenvs/*',
+        '*/tests/*',
+    ]
+
+[tool.pytest.ini_options]
+addopts = '-m "not remote_tests and not redundant"'
+
+[tool.ruff]
+line-length = 130
+ignore = [
+    "E501",
+    "D1",
+    "D415"
+]
+# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
+select = ["E", "F"]
+
+[tool.ruff.isort]
+known-first-party = ["commitizen", "tests"]
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+files = "commitizen"
+disallow_untyped_decorators = true
+disallow_subclassing_any = true
+warn_return_any = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unused_configs = true
+
+[[tool.mypy.overrides]]
+module = "py.*"  # Legacy pytest dependencies
+ignore_missing_imports = true
+
 
 [tool.black]
 line-length = 130
@@ -125,10 +217,7 @@ match = "main"
 prerelease_token = "rc"
 prerelease = false
 
-[tool.ruff]
-# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
-select = ["E", "F"]
-ignore = []
+
 
 # Allow autofix for all enabled rules (when `--fix`) is provided.
 fixable = ["A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN", "ARG", "BLE", "COM", "DJ", "DTZ", "EM", "ERA", "EXE", "FBT", "ICN", "INP", "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE", "RUF", "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"]

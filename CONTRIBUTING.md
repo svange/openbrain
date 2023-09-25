@@ -1,5 +1,8 @@
 # Contributing to OpenBrain
 
+## ADD
+notes and scripts for commitizen 
+
 Thank you for your interest in contributing to OpenBrain! This guide will help you set up your development environment and walk you through our contribution workflow.
 
 ## Prerequisites

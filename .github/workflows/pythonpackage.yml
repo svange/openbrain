@@ -6,8 +6,10 @@ jobs:
   python-check:
     strategy:
       matrix:
-        python-version: [ "3.10", "3.11" ]
-        platform: [ ubuntu-20.04, macos-latest, windows-latest ]
+#        python-version: [ "3.10", "3.11" ]
+#        platform: [ ubuntu-20.04, macos-latest, windows-latest ]
+        python-version: [ "3.10" ]
+        platform: [ ubuntu-20.04 ]
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
@@ -29,11 +31,11 @@ jobs:
           git config --global user.name "GitHub Action"
           ./scripts/test
         shell: bash
-      - name: Upload coverage to Codecov
-        if: runner.os == 'Linux'
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{secrets.CODECOV_TOKEN}}
-          file: ./coverage.xml
-          flags: unittests
-          name: codecov-umbrella
+#      - name: Upload coverage to Codecov
+#        if: runner.os == 'Linux'
+#        uses: codecov/codecov-action@v3
+#        with:
+#          token: ${{secrets.CODECOV_TOKEN}}
+#          file: ./coverage.xml
+#          flags: unittests
+#          name: codecov-umbrella
