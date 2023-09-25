@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.8](https://github.com/svange/openbrain/compare/v0.10.7...v0.10.8) (2023-09-25)
+
+
+### Bug Fixes
+
+* disabled pytest temporarily ([098aca8](https://github.com/svange/openbrain/commit/098aca8f85c210e9dad6ccf8e373574bf502401a))
+
 ## [0.10.7](https://github.com/svange/openbrain/compare/v0.10.6...v0.10.7) (2023-09-25)
 
 
