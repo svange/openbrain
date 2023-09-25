@@ -1,21 +1,21 @@
 # Contributing to OpenBrain
 
 ## ADD
-notes and scripts for commitizen 
+notes and scripts for commitizen
 
 Thank you for your interest in contributing to OpenBrain! This guide will help you set up your development environment and walk you through our contribution workflow.
 
 ## Prerequisites
 
 1. **Python 3.11**: This project requires Python 3.11, which you can download from [here](https://www.python.org/downloads/).
-  
+
 2. **Poetry**: We use Poetry for dependency management. Install it from [Poetry's official website](https://python-poetry.org/docs/#installation), **not from pip**.
 
 3. **Pre-commit**: This project uses pre-commit hooks. Install it using:
     ```
     pre-commit install
     ```
-   
+
 4. Commitizen: This project uses Commitizen to enforce the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) standard. Commit messages can be generated using:
     ```
     cz commit
@@ -36,7 +36,7 @@ Thank you for your interest in contributing to OpenBrain! This guide will help y
     ```bash
     cd Project_Name
     ```
-   
+
 1. **Set up Environment Variables**: Copy the `.env.example` to `.env` and populate it with the necessary variables.
 
 2. **Deploy AWS Supporting Infrastructure Stack**:
@@ -95,7 +95,7 @@ Thank you for your interest in contributing to OpenBrain! This guide will help y
     pre-commit run --all-files
     ```
 
-6. **Commit Your Changes**: 
+6. **Commit Your Changes**:
     ```bash
     git add .
     git commit -m "Describe your changes"

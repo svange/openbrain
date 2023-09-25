@@ -42,7 +42,7 @@ jobs:
         branch: ci/${{ github.ref_name }}-to-main    # source branch
         title: AUTO-PR ci/${{ github.ref_name }} -> main
         body: |
-          🤖📦🐍 Automated PR from ${{ github.ref_name }} → main  
+          🤖📦🐍 Automated PR from ${{ github.ref_name }} → main
           ${{ github.event.head_commit.message }}
         labels: automated,autosquash
         commit-message: AUTO - ${{ github.ref_name }}

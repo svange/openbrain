@@ -92,7 +92,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [release]
-    name: "Build release"
+    name: "Deploy (NOT YET IMPLEMENTED)"
     if: needs.release.outputs.tag != ''
 
     steps:

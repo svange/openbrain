@@ -25,8 +25,8 @@ jobs:
 
     - name: Update main branch for PR
       run: |
-        git pull 
-        git pull origin ${{ github.ref_name }}        
+        git pull
+        git pull origin ${{ github.ref_name }}
 
     - name: PR to main from ${{ github.ref_name }}
       uses: peter-evans/create-pull-request@v3
@@ -36,7 +36,7 @@ jobs:
         branch: ci/${{ github.ref_name }}-to-main    # source branch
         title: PR ci/${{ github.ref_name }} -> main
         body: |
-          🤖📦🐍 Automated PR from ${{ github.ref_name }} → main  
+          🤖📦🐍 Automated PR from ${{ github.ref_name }} → main
           ${{ github.event.head_commit.message }}
         labels: automated,autosquash
         commit-message: AUTO - ${{ github.ref_name }}
@@ -61,4 +61,3 @@ jobs:
 #        pypi_token: ${{ secrets.TEST_PYPI_API_KEY }}
 #        pypi_repository: https://test.pypi.org/legacy/
 #        release_branch: dev
-
