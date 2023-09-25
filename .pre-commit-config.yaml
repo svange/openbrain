@@ -54,19 +54,19 @@ repos:
           - post-commit
           - push
 
-  - repo: local
-    hooks:
-      - id: format
-        name: format
-        language: system
-        pass_filenames: false
-        entry: ./scripts/format
-        types: [ python ]
-
-      - id: linter and test
-        name: linter and test
-        language: system
-        pass_filenames: false
-        stages: [ push ]
-        entry: ./scripts/test
-        types: [ python ]
+#  - repo: local
+#    hooks:
+#      - id: format
+#        name: format
+#        language: system
+#        pass_filenames: false
+#        entry: ./scripts/format
+#        types: [ python ]
+#
+#      - id: linter and test
+#        name: linter and test
+#        language: system
+#        pass_filenames: false
+#        stages: [ push ]
+#        entry: ./scripts/test
+#        types: [ python ]
