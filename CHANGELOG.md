@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.0](https://github.com/svange/openbrain/compare/v0.10.8...v0.11.0) (2023-09-25)
+
+
+### Features
+
+* CI/CD pipeline is ready! Semantic motherfucking releases!!! ([64134be](https://github.com/svange/openbrain/commit/64134bee1dde452e5314448c900531ef45c38357))
+
 ## [0.10.8](https://github.com/svange/openbrain/compare/v0.10.7...v0.10.8) (2023-09-25)
 
 
