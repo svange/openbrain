@@ -32,16 +32,16 @@ scm = "commitizen.providers:ScmProvider"
 #commit_version_number = true # not in docs
 commit_message = "chore(release): release {version}"
 # End from video
-branches = ["main", "dev"]
-#[tool.semantic_release.branches.main]
-#match = "main"
-#prerelease_token = "rc"
-#prerelease = false
-#
-#[tool.semantic_release.branches.dev]
-#match = "dev"
-#prerelease_token = "dev"
-#prerelease = true
+branch = "(main|dev)"
+[tool.semantic_release.branches.main]
+match = "main"
+prerelease_token = "rc"
+prerelease = false
+
+[tool.semantic_release.branches.dev]
+match = "dev"
+prerelease_token = "dev"
+prerelease = true
 
 version_toml = [
     "pyproject.toml:tool.poetry.version",
