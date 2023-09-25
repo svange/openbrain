@@ -83,8 +83,8 @@ jobs:
           latest_version=$(poetry run semantic-release print-version)
 
           poetry run semantic-release publish
-          if [[ ! -z ${{ latest_version }} ]]; then
-            echo "tag=v${{ latest_version }}" >> "$GITHUB_OUTPUT"
+          if [[ ! -z $latest_version ]]; then
+            echo "tag=v${LATEST_VERSION}" >> "$GITHUB_OUTPUT"
           else
             echo "tag=" >> "$GITHUB_OUTPUT"
           fi
