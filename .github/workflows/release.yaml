@@ -80,7 +80,7 @@ jobs:
           git config --global user.email "release-bot@woxomai.com"
           git config --global user.name "Release Bot"
 
-          latest_version=$(poetry run semantic-release print-version)
+          latest_version=$(poetry run semantic-release  --noop version --print)
 
           poetry run semantic-release publish
           if [[ ! -z $latest_version ]]; then
