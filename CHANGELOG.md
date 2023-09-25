@@ -1,3 +1,33 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.10.6](https://github.com/svange/openbrain/compare/v0.10.5...v0.10.6) (2023-09-25)
+
+
+### Bug Fixes
+
+* ci/cd ([6a1ff5f](https://github.com/svange/openbrain/commit/6a1ff5f9867e13694b660fde71d99288c3cbfbe4))
+* ci/cd ([af9778e](https://github.com/svange/openbrain/commit/af9778e46f6f593386063dd497332c02dd852867))
+* ci/cd ([ea0693e](https://github.com/svange/openbrain/commit/ea0693ef4963d0f1a8d57fcf9c1ce79dafee67ff))
+* ci/cd ([b1f8d86](https://github.com/svange/openbrain/commit/b1f8d86f78dccb8e8f90b6ffcf5cbfdf46dba45b))
+* ci/cd ([a5c6a90](https://github.com/svange/openbrain/commit/a5c6a90c78c70f9eae535c20b3d263509f57d444))
+* ci/cd ([bcaec4b](https://github.com/svange/openbrain/commit/bcaec4b8504bd80529ae75e92d4f9c261f1fa2ce))
+* disabled pytest temporarily ([d80c08c](https://github.com/svange/openbrain/commit/d80c08c7634e0d62b95cd81806a40cd6bdfc143e))
+* disabled pytest temporarily ([4c2e885](https://github.com/svange/openbrain/commit/4c2e8852b9bcd2f2991e89bfb4fd9ce7d73a9d27))
+* disabled pytest temporarily ([4de360f](https://github.com/svange/openbrain/commit/4de360fe306efa28832dba58ddc3b9e00e7b78fd))
+* disabled pytest temporarily ([6f66003](https://github.com/svange/openbrain/commit/6f66003cfda18d02250e71146764c72362fbc99e))
+* removing references to commitizen repo ([be3b8de](https://github.com/svange/openbrain/commit/be3b8deeef3315af784b28d95f23df1d05df7ea9))
+
+
+### Performance Improvements
+
+* disabled pytest temporarily ([ccdb6bc](https://github.com/svange/openbrain/commit/ccdb6bc8fcb2e6c091523132e4aea3e2cba8e103))
+* disabled pytest temporarily ([7cc2dfa](https://github.com/svange/openbrain/commit/7cc2dfa6a49eae143c0c92f7986b317c578bef16))
+* disabled pytest temporarily ([f40db8e](https://github.com/svange/openbrain/commit/f40db8e294a50e3b6fd4d9bad97027addd73afcf))
+* disabled pytest temporarily ([9013b3c](https://github.com/svange/openbrain/commit/9013b3c601b9824f39a131fe167d44161cd3e3ba))
+
 # CHANGELOG
 
 
