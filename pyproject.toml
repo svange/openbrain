@@ -32,6 +32,16 @@ scm = "commitizen.providers:ScmProvider"
 #commit_version_number = true # not in docs
 commit_message = "chore(release): release {version}"
 # End from video
+branches = ["main", "dev"]
+#[tool.semantic_release.branches.main]
+#match = "main"
+#prerelease_token = "rc"
+#prerelease = false
+#
+#[tool.semantic_release.branches.dev]
+#match = "dev"
+#prerelease_token = "dev"
+#prerelease = true
 
 version_toml = [
     "pyproject.toml:tool.poetry.version",
@@ -54,15 +64,7 @@ dist_glob_patterns = ["dist/*"]
 env = "GITHUB_TOKEN"
 fallback_env = "GH_TOKEN"
 
-[tool.semantic_release.branches.main]
-match = "main"
-prerelease_token = "rc"
-prerelease = false
 
-[tool.semantic_release.branches.dev]
-match = "dev"
-prerelease_token = "dev"
-prerelease = true
 
 [tool.commitizen]
 name = "cz_conventional_commits"
