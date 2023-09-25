@@ -1,6 +1,26 @@
 # OpenBrain
 
-![Main Build Status](https://github.com/svange/openbrain/actions/workflows/main.yml/badge.svg?event=push)
+![Release](https://github.com/svange/openbrain/actions/workflows/release.yml/badge.svg?event=push)
+
+![CI](https://img.shields.io/github/actions/workflow/status/svange/openbrain/.github%2Fworkflows%2Frelease.yaml)
+
+
+![Test](https://github.com/svange/openbrain/actions/workflows/run-tests.yml/badge.svg?event=push)
+
+https://img.shields.io/github/languages/top/svange/openbrain
+
+![Test](https://img.shields.io/pypi/v/openbrain)
+
+[![semantic-release: Python](https://img.shields.io/badge/semantic--release-python-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+
+https://img.shields.io/github/commit-activity/m/svange/openbrain/main
+
+https://img.shields.io/github/sponsors/svange
+
+
+https://img.shields.io/github/contributors/svange/openbrain
+
+
 
 🚧 **Under active development. Not ready for use.** 🚧
 
@@ -240,5 +260,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 
-- **Open Source**: AGPL-3.0, see [LICENSE](LICENSE)
+- **Open Source**: MIT
 - **Commercial**: See [COMMERCIAL_LICENSE](COMMERCIAL_LICENSE) and contact us for inquiries.

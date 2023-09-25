@@ -1,6 +1,6 @@
 # Commercial License for OpenBra.in
 
-This is a commercial license available for OpenBrain, separate from the AGPL-3.0 license under which the project is generally available. This commercial license grants you the rights outlined below, allowing for more flexibility in how you use the code.
+This is a commercial license available for OpenBrain, separate from the MIT license under which the project is generally available. This commercial license grants you the rights outlined below, allowing for more flexibility in how you use the code.
 
 ## Terms and Conditions
 
