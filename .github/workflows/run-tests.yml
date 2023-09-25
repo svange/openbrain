@@ -31,7 +31,7 @@ jobs:
       contents: read
 
   pytest:
-    if: false # DISABLED TO SPEED UP ITERATIONS WHILE STANDING UP SEMANTIC RELEASE
+#    if: false # DISABLED TO SPEED UP ITERATIONS WHILE STANDING UP SEMANTIC RELEASE
     strategy:
       matrix:
         #        python-version: [ "3.10", "3.11" ]

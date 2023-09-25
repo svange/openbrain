@@ -59,6 +59,8 @@ tag_format = "v{version}"
 
 [tool.semantic_release.publish]
 dist_glob_patterns = ["dist/*"]
+upload_to_vcs_release = true
+type = "github"
 
 [tool.semantic_release.remote.token]
 env = "GITHUB_TOKEN"
