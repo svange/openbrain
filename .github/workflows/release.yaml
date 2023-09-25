@@ -75,7 +75,7 @@ jobs:
         with:
           pypi_token: ${{ secrets.PYPI_TOKEN }}
           release_branch: ${{ github.ref_name }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
   deploy:
     runs-on: ubuntu-latest
