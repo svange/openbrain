@@ -74,7 +74,7 @@ jobs:
       - uses: bjoluc/semantic-release-config-poetry@v2
         with:
           pypi_token: ${{ secrets.GITHUB_TOKEN }}
-          release_branch: ${{ github.ref }}
+          release_branch: ${{ github.ref_name }}
 
   deploy:
     runs-on: ubuntu-latest
