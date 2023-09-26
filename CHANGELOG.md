@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.2](https://github.com/svange/openbrain/compare/v0.11.1...v0.11.2) (2023-09-26)
+
+
+### Bug Fixes
+
+* added more granularity to CI/CD system and attempting to bring prereleases. ([8316019](https://github.com/svange/openbrain/commit/83160190224d043e9663cf47fbe7b2c381fb586c))
+* updating CI/CD ([937d34b](https://github.com/svange/openbrain/commit/937d34b65f22210e808546cc5afd7bd48f76acad))
+
 ## [0.11.1](https://github.com/svange/openbrain/compare/v0.11.0...v0.11.1) (2023-09-26)
 
 
