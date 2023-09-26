@@ -18,13 +18,6 @@
 [//]: # (![CD &#40;staging&#41;]&#40;https://github.com/svange/openbrain/actions/workflows/deploy-dev.yml/badge.svg&#41;)
 
 
-
-
-
-
-
----
-
 🚧 **Under active development. Not ready for use.** 🚧
 
 OpenBrain is a chat platform backed by Large Language Model (LLM) agents. It provides APIs and tools to configure, store, and retrieve chat agents, making your chat sessions more versatile and context-aware.
