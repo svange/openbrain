@@ -1,24 +1,27 @@
 # OpenBrain
 
+
+![CI](https://github.com/svange/openbrain/actions/workflows/publish-release.yml/badge.svg)
+![CD](https://github.com/svange/openbrain/actions/workflows/deploy-prod.yml/badge.svg)
+![Tests](https://github.com/svange/openbrain/actions/workflows/publish-release.yml/badge.svg)
+![CI (pre-release)](https://github.com/svange/openbrain/actions/workflows/publish-prerelease.yml/badge.svg)
+![CD (staging)](https://github.com/svange/openbrain/actions/workflows/deploy-dev.yml/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+![PyPI - Version](https://img.shields.io/pypi/v/openbrain)
+
+[//]: # (Dependabot)
+![CI](https://github.com/github/docs/actions/workflows/run-tests.yml/badge.svg?branch=main)
+![CI](https://github.com/github/docs/actions/workflows/.yml/badge.svg?branch=main)
+
+# Broken
 ![Release](https://github.com/svange/openbrain/actions/workflows/release.yml/badge.svg?event=push)
-
-![CI](https://img.shields.io/github/actions/workflow/status/svange/openbrain/.github%2Fworkflows%2Frelease.yaml)
-
-
-![Test](https://github.com/svange/openbrain/actions/workflows/run-tests.yml/badge.svg?event=push)
-
 https://img.shields.io/github/languages/top/svange/openbrain
-
-![Test](https://img.shields.io/pypi/v/openbrain)
-
-[![semantic-release: Python](https://img.shields.io/badge/semantic--release-python-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
-
 https://img.shields.io/github/commit-activity/m/svange/openbrain/main
-
 https://img.shields.io/github/sponsors/svange
-
-
 https://img.shields.io/github/contributors/svange/openbrain
+
+# TOOLS
+[![Made with GH Actions](https://img.shields.io/badge/CI-GitHub_Actions-blue?logo=github-actions&logoColor=white)](https://github.com/features/actions "Go to GitHub Actions homepage")
 
 
 
