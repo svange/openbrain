@@ -24,6 +24,13 @@ All notable changes to this project will be documented in this file. See
 
 * CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3))
 
+## [0.11.1](https://github.com/svange/openbrain/compare/v0.11.0...v0.11.1) (2023-09-26)
+
+
+### Bug Fixes
+
+* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3))
+
 ## [0.11.0](https://github.com/svange/openbrain/compare/v0.10.8...v0.11.0) (2023-09-25)
 
 
