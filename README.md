@@ -1,26 +1,29 @@
 # OpenBrain
+![ci status](https://github.com/svange/openbrain/actions/workflows/deploy-prod.yml/badge.svg)
+![PyPI - Version](https://img.shields.io/pypi/v/openbrain)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+<a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)](https://conventionalcommits.org)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?style=flat-square&logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![Made with GH Actions](https://img.shields.io/badge/CI-GitHub_Actions-blue?logo=github-actions&logoColor=white)](https://github.com/features/actions "Go to GitHub Actions homepage")
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-![Release](https://github.com/svange/openbrain/actions/workflows/release.yml/badge.svg?event=push)
+[//]: # (![CI]&#40;https://github.com/svange/openbrain/actions/workflows/publish-release.yml/badge.svg&#41;)
 
-![CI](https://img.shields.io/github/actions/workflow/status/svange/openbrain/.github%2Fworkflows%2Frelease.yaml)
+[//]: # (![Tests]&#40;https://github.com/svange/openbrain/actions/workflows/run-tests.yml/badge.svg&#41;)
 
+[//]: # (![CI &#40;pre-release&#41;]&#40;https://github.com/svange/openbrain/actions/workflows/publish-prerelease.yml/badge.svg&#41;)
 
-![Test](https://github.com/svange/openbrain/actions/workflows/run-tests.yml/badge.svg?event=push)
-
-https://img.shields.io/github/languages/top/svange/openbrain
-
-![Test](https://img.shields.io/pypi/v/openbrain)
-
-[![semantic-release: Python](https://img.shields.io/badge/semantic--release-python-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
-
-https://img.shields.io/github/commit-activity/m/svange/openbrain/main
-
-https://img.shields.io/github/sponsors/svange
-
-
-https://img.shields.io/github/contributors/svange/openbrain
+[//]: # (![CD &#40;staging&#41;]&#40;https://github.com/svange/openbrain/actions/workflows/deploy-dev.yml/badge.svg&#41;)
 
 
+
+
+
+
+
+---
 
 🚧 **Under active development. Not ready for use.** 🚧
 
