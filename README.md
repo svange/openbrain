@@ -255,5 +255,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 
-- **Open Source**: MIT
+- **Open Source**: AGPLv3
 - **Commercial**: See [COMMERCIAL_LICENSE](COMMERCIAL_LICENSE) and contact us for inquiries.
