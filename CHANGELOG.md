@@ -15,6 +15,18 @@ All notable changes to this project will be documented in this file. See
 
 * CI/CD pipeline and migrate to poetry. ([b6d1bf4](https://github.com/svange/openbrain/commit/b6d1bf4fbf5d90e95b9ff5c98893510c8c4ac594))
 
+## [0.12.0](https://github.com/svange/openbrain/compare/v0.11.1...v0.12.0) (2023-09-27)
+
+
+### Features
+
+* created ci_cd test set to stop my api keys from getting revoked. ([af9643e](https://github.com/svange/openbrain/commit/af9643eaf030fcbd2385059fdfc40276ce925316))
+
+
+### Bug Fixes
+
+* CI/CD pipeline and migrate to poetry. ([b6d1bf4](https://github.com/svange/openbrain/commit/b6d1bf4fbf5d90e95b9ff5c98893510c8c4ac594))
+
 ## [0.11.1](https://github.com/svange/openbrain/compare/v0.11.0...v0.11.1) (2023-09-26)
 
 
