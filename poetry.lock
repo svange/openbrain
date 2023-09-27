@@ -1007,13 +1007,13 @@ test = ["black", "coverage[toml]", "ddt (>=1.1.1,!=1.4.3)", "mypy", "pre-commit"
 
 [[package]]
 name = "gradio"
-version = "3.45.0"
+version = "3.45.1"
 description = "Python library for easily interacting with trained machine learning models"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "gradio-3.45.0-py3-none-any.whl", hash = "sha256:5263ef0ff829895d18e80256639eade1873dc71f8fa99366f7a5216ca72f5182"},
-    {file = "gradio-3.45.0.tar.gz", hash = "sha256:ea2c90b95a013d51d197d2298b1485472cbdcd04b0c16a00a3635c22033cb089"},
+    {file = "gradio-3.45.1-py3-none-any.whl", hash = "sha256:755d6f7821854b33d1244e673bc037817dd7ec706bc246f473fe9efa8523d920"},
+    {file = "gradio-3.45.1.tar.gz", hash = "sha256:d4482655782a4a7905b29ae9474d49ce01988aeb59da8c9674c38075fa9c3738"},
 ]
 
 [package.dependencies]
