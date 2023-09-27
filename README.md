@@ -21,7 +21,7 @@
 
 OpenBrain is a chat platform backed by Large Language Model (LLM) agents. It provides APIs and tools to configure, store, and retrieve chat agents, making your chat sessions more versatile and context-aware.
 
-OpenBrain agents are stateful, so they can remember things about you and your conversation. They can also use tools, so you can use the same agent to chat and to perform actions.
+OpenBrain agents are stateless, so they can remember things about you and your conversation. They can also use tools, so you can use the same agent to chat and to perform actions.
 
 Interactions with the agent can be injected into any application easily by constructing a query, choosing an agent configuration, and pre-processing your data through that agent before sending it of for further processing.
 
@@ -172,7 +172,6 @@ sequenceDiagram
         AgentConfigTable -->> GPT Agent: AgentConfig
         GPT Agent -->> OpenAI: ChatMessage
         OpenAI -->> GPT Agent: ChatMessage
-%%        GPT Agent ->> GPT Agent: Create/Update Object
         GPT Agent -->> Tool: Tool(Object, clientId)
         Tool -->> EventBus: (Object, clientId, session_id, object_id)
         Tool -->> GPT Agent: ChatMessage
