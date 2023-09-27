@@ -1,6 +1,9 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: "python3.10\n\nSAM Template for common infrastructure"
+Description: 'python3.10
+
+
+  SAM Template for common infrastructure'
 Parameters:
   GitHubOrg:
     Description: Name of GitHub organization/user (case sensitive)
@@ -274,13 +277,23 @@ Resources:
     Properties:
       Description: Secrets for Production Service
       SecretString:
-        Fn::Sub: "{\n  \"openai_api_key\": \"${ProdOpenAIKey}\",\n  \"promptlayer_api_key\": \"${ProdPromptLayerKey}\",\n  \"huggingface_api_key\": \"${ProdHuggingFaceKey}\",\n  \"pinecone_api_key\": \"${ProdPineconeKey}\",\n  \"weviate_api_key\": \"${ProdWeviateKey}\",\n  \"milvus_api_key\": \"${ProdMilvusKey}\",\n  \"google_api_key\": \"${ProdGoogleKey}\",\n  \"meta_api_key\": \"${ProdMetaKey}\",\n  \"anthropic_api_key\": \"${ProdAnthropicKey}\"\n}\n"
+        Fn::Sub: "{\n  \"openai_api_key\": \"${ProdOpenAIKey}\",\n  \"promptlayer_api_key\"\
+          : \"${ProdPromptLayerKey}\",\n  \"huggingface_api_key\": \"${ProdHuggingFaceKey}\"\
+          ,\n  \"pinecone_api_key\": \"${ProdPineconeKey}\",\n  \"weviate_api_key\"\
+          : \"${ProdWeviateKey}\",\n  \"milvus_api_key\": \"${ProdMilvusKey}\",\n\
+          \  \"google_api_key\": \"${ProdGoogleKey}\",\n  \"meta_api_key\": \"${ProdMetaKey}\"\
+          ,\n  \"anthropic_api_key\": \"${ProdAnthropicKey}\"\n}\n"
   DevAiSecrets:
     Type: AWS::SecretsManager::Secret
     Properties:
       Description: Secrets for Development Service
       SecretString:
-        Fn::Sub: "{\n  \"openai_api_key\": \"${DevOpenAIKey}\",\n  \"promptlayer_api_key\": \"${DevPromptLayerKey}\",\n  \"huggingface_api_key\": \"${DevHuggingFaceKey}\",\n  \"pinecone_api_key\": \"${DevPineconeKey}\",\n  \"weviate_api_key\": \"${DevWeviateKey}\",\n  \"milvus_api_key\": \"${DevMilvusKey}\",\n  \"google_api_key\": \"${DevGoogleKey}\",\n  \"meta_api_key\": \"${DevMetaKey}\",\n  \"anthropic_api_key\": \"${DevAnthropicKey}\"\n}\n"
+        Fn::Sub: "{\n  \"openai_api_key\": \"${DevOpenAIKey}\",\n  \"promptlayer_api_key\"\
+          : \"${DevPromptLayerKey}\",\n  \"huggingface_api_key\": \"${DevHuggingFaceKey}\"\
+          ,\n  \"pinecone_api_key\": \"${DevPineconeKey}\",\n  \"weviate_api_key\"\
+          : \"${DevWeviateKey}\",\n  \"milvus_api_key\": \"${DevMilvusKey}\",\n  \"\
+          google_api_key\": \"${DevGoogleKey}\",\n  \"meta_api_key\": \"${DevMetaKey}\"\
+          ,\n  \"anthropic_api_key\": \"${DevAnthropicKey}\"\n}\n"
   DevInfraTopic:
     Type: AWS::SNS::Topic
     Properties:
@@ -312,7 +325,8 @@ Resources:
 Outputs:
   WordsOfWarning:
     Description: WARNING
-    Value: These outputs are used by other stacks. These outputs are open to extension, but closed to modification.
+    Value: These outputs are used by other stacks. These outputs are open to extension,
+      but closed to modification.
   DevDomainName:
     Description: This is a static value, someone should make it dynamic.
     Value: www.samvange.net
