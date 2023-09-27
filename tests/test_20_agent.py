@@ -72,6 +72,7 @@ class TestAgent:
             or "DISCONNECTED" in response_message
         )
 
+    @pytest.mark.ci_cd
     @pytest.mark.integration_tests
     def test_conversational_memory(self, incoming_agent_config: AgentConfig):
         messages = [

@@ -20,6 +20,7 @@ def incoming_lead(simple_lead):
 class TestAgentTools:
     """Test the GptAgent's tools."""
 
+    @pytest.mark.ci_cd
     def test_send_lead_event(self, incoming_agent_config: AgentConfig, incoming_lead: Lead):
         """Send an event to the lead event stream."""
         # gpt_agent = GptAgent(agent_config=incoming_agent_config, lead=incoming_lead)

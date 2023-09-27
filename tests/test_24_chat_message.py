@@ -14,6 +14,7 @@ def incoming_chat_message(simple_chat_message):
 
 
 class TestChatMessage:
+    @pytest.mark.ci_cd
     @pytest.mark.orm_tests
     def test_chat_message(self, incoming_chat_message):
         chat_message = incoming_chat_message
@@ -66,6 +67,7 @@ class TestChatMessage:
         copied_chat_message.client_id = "Different"
         assert copied_chat_message != chat_message
 
+    @pytest.mark.ci_cd
     @pytest.mark.orm_tests
     def test_serialize_chat_message(self, incoming_chat_message):
         chat_message = incoming_chat_message

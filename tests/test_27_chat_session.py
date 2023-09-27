@@ -17,6 +17,7 @@ def incoming_chat_session(simple_chat_session):
     return outgoing_chat_session
 
 
+@pytest.mark.ci_cd
 @pytest.mark.orm_tests
 def test_chat_session(incoming_chat_session):
     chat_session = incoming_chat_session
@@ -39,6 +40,7 @@ def test_chat_session(incoming_chat_session):
     assert copied_chat_session != chat_session
 
 
+@pytest.mark.ci_cd
 @pytest.mark.orm_tests
 def test_chat_session_save_retrieve(incoming_chat_session):
     save_response = incoming_chat_session.save()
@@ -65,6 +67,7 @@ def test_chat_session_save_retrieve(incoming_chat_session):
     assert incoming_chat_session is not retrieved_chat_session
 
 
+@pytest.mark.ci_cd
 @pytest.mark.orm_tests
 @retry.retry(delay=1, tries=2)
 def test_chat_session_session_id(incoming_chat_session: ChatSession):
@@ -83,6 +86,7 @@ def test_chat_session_session_id(incoming_chat_session: ChatSession):
     assert incoming_chat_session.session_id == retrieved_chat_session.session_id
 
 
+@pytest.mark.ci_cd
 @pytest.mark.orm_tests
 def test_get_agent_from_chat_session(incoming_chat_session):
     incoming_chat_session.save()
