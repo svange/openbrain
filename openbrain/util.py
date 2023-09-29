@@ -12,6 +12,7 @@ from botocore.exceptions import ClientError
 from dotenv import load_dotenv
 
 load_dotenv()
+UTIL_LOCAL = os.environ.get("UTIL_LOCAL", False)
 
 
 def _get_logger() -> Logger:
@@ -38,26 +39,6 @@ class Util:
     logger = _get_logger()
     metrics = _get_metrics()
     tracer = _get_tracer()
-    CENTRAL_STACK_OUTPUTS_KNOWN_KEYS = [
-        "DevCommonAccessPolicy",
-        "DevSessionTable",
-        "DevAgentConfigTable",
-        "DevLeadTable",
-        "ProdSecrets",
-        "DevSecrets",
-        "ProdCommonAccessPolicy",
-        "ProdSessionTable",
-        "ProdAgentConfigTable",
-        "ProdLeadTable",
-        "DevEventBus",
-        "ProdEventBus",
-        "DevInfraTopic",
-        "DevBusinessTopic",
-        "ProdInfraTopic",
-        "ProdBusinessTopic",
-        "STAGES",
-        "DomainName",
-    ]
     PROJECT = os.environ.get("PROJECT")
 
     SESSION_TABLE_FRIENDLY_NAME = os.environ.get("SESSION_TABLE_FRIENDLY_NAME")
@@ -70,8 +51,8 @@ class Util:
     EVENT_BUS_FRIENDLY_NAME = os.environ.get("EVENTBUS_FRIENDLY_NAME")
     SNS_BUSINESS_TOPIC_FRIENDLY_NAME = os.environ.get("BUSINESS_TOPIC_FRIENDLY_NAME")
     SNS_INFRASTRUCTURE_TOPIC_FRIENDLY_NAME = os.environ.get("INFRASTRUCTURE_TOPIC_FRIENDLY_NAME")
-    BOTO_SESSION = boto3.Session()
-    AWS_REGION = BOTO_SESSION.region_name
+    BOTO_SESSION = boto3.Session() if not UTIL_LOCAL else None
+    AWS_REGION = BOTO_SESSION.region_name if not UTIL_LOCAL else "local"
     CENTRAL_INFRA_OUTPUTS: Dict[str, str]
     SESSION_TABLE_NAME: str
     AGENT_CONFIG_TABLE_NAME: str
@@ -86,9 +67,34 @@ class Util:
         infra_project_name: str,
     ) -> Dict[str, str]:
         f"""Use friendly names get dynamically named resources from {infra_project_name} stack."""
-        cf_client = boto_session.client("cloudformation")
-        response = cf_client.describe_stacks(StackName=infra_project_name)
-        central_infra_outputs = {x["OutputKey"]: x["OutputValue"] for x in response["Stacks"][0]["Outputs"]}
+        if UTIL_LOCAL:
+            central_infra_outputs = {
+                "DevCommonAccessPolicy": "DevCommonAccessPolicy",
+                "DevSessionTable": "DevSessionTable",
+                "DevAgentConfigTable": "DevAgentConfigTable",
+                "DevLeadTable": "DevLeadTable",
+                "ProdAiSecrets": "ProdSecrets",
+                "DevAiSecrets": "DevAiSecrets",
+                "ProdCommonAccessPolicy": "ProdCommonAccessPolicy",
+                "ProdSessionTable": "ProdSessionTable",
+                "ProdAgentConfigTable": "ProdAgentConfigTable",
+                "ProdLeadTable": "ProdLeadTable",
+                "DevEventBus": "DevEventBus",
+                "ProdEventBus": "ProdEventBus",
+                "DevInfraTopic": "InfraTopic",
+                "DevBusinessTopic": "BusinessTopic",
+                "ProdInfraTopic": "InfraTopic",
+                "ProdBusinessTopic": "BusinessTopic",
+                "STAGES": "STAGES",
+                "DomainName": "DomainName",
+                "BusinessTopic": "BusinessTopic",
+                "InfrastructureTopic": "InfrastructureTopic",
+            }
+        else:
+            cf_client = boto_session.client("cloudformation")
+            response = cf_client.describe_stacks(StackName=infra_project_name)
+            central_infra_outputs = {x["OutputKey"]: x["OutputValue"] for x in response["Stacks"][0]["Outputs"]}
+
         return central_infra_outputs
 
     CENTRAL_INFRA_OUTPUTS = get_central_infra_hints(
@@ -101,7 +107,7 @@ class Util:
     AGENT_CONFIG_TABLE_NAME = CENTRAL_INFRA_OUTPUTS[AGENT_CONFIG_TABLE_FRIENDLY_NAME]
     LEAD_TABLE_NAME = CENTRAL_INFRA_OUTPUTS[LEAD_TABLE_FRIENDLY_NAME]
     SECRETS_STORE_ARN = CENTRAL_INFRA_OUTPUTS[SECRET_STORE_FRIENDLY_NAME]
-    SECRETS_STORE_REGION = SECRETS_STORE_ARN.split(":")[3]
+    SECRETS_STORE_REGION = SECRETS_STORE_ARN.split(":")[3] if not UTIL_LOCAL else "local"
     SNS_BUSINESS_TOPIC_ARN = CENTRAL_INFRA_OUTPUTS[SNS_BUSINESS_TOPIC_FRIENDLY_NAME]
     SNS_INFRASTRUCTURE_TOPIC_ARN = CENTRAL_INFRA_OUTPUTS[SNS_INFRASTRUCTURE_TOPIC_FRIENDLY_NAME]
 
@@ -112,21 +118,22 @@ class Util:
         secrets_store_region: str,
     ) -> dict:
         """Get a secret from AWS Secrets Manager."""
+        if UTIL_LOCAL:
+            return os.environ.__dict__
         # Create a Secrets Manager client
-        session = boto_session
-        client = session.client(service_name="secretsmanager", region_name=secrets_store_region)
+        else:
+            client = boto_session.client(service_name="secretsmanager", region_name=secrets_store_region)
+            try:
+                get_secret_value_response = client.get_secret_value(SecretId=sercret_name)
+            except ClientError as e:
+                # For a list of exceptions thrown, see
+                # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+                raise e
 
-        try:
-            get_secret_value_response = client.get_secret_value(SecretId=sercret_name)
-        except ClientError as e:
-            # For a list of exceptions thrown, see
-            # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
-            raise e
+            # Decrypts secret using the associated KMS key.
+            secret = json.loads(get_secret_value_response["SecretString"])
 
-        # Decrypts secret using the associated KMS key.
-        secret = json.loads(get_secret_value_response["SecretString"])
-
-        return secret
+            return secret
 
     SECRETS = get_secret(BOTO_SESSION, SECRETS_STORE_ARN, SECRETS_STORE_REGION)
 

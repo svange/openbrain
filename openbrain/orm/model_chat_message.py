@@ -1,12 +1,16 @@
 from __future__ import annotations
 
+import os
+
 from pydantic import BaseModel, Field
 
 from openbrain.orm.model_agent_config import AgentConfig
-from openbrain.orm.model_common_base import Recordable
+if os.environ.get("ORM_LOCAL"):
+    from openbrain.orm.model_common_base import Ephemeral as ORMModel
+else:
+    from openbrain.orm.model_common_base import Recordable as ORMModel
 
-
-class ChatMessage(Recordable, BaseModel):
+class ChatMessage(ORMModel, BaseModel):
     """Represents a message sent to the agent"""
 
     # Tracking

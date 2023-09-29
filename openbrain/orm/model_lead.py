@@ -1,13 +1,18 @@
+import os
 from typing import Optional
 
 import ulid
 from pydantic import Field
 
-from openbrain.orm.model_common_base import Recordable
+if os.environ.get("ORM_LOCAL"):
+    from openbrain.orm.model_common_base import Ephemeral as ORMModel
+else:
+    from openbrain.orm.model_common_base import Recordable as ORMModel
+from openbrain.util import Util
 from openbrain.util import Util
 
 
-class Lead(Recordable):
+class Lead(ORMModel):
     """Internal ORM representing Lead."""
 
     # Tracking
