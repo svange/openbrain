@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.0](https://github.com/svange/openbrain/compare/v0.12.0...v0.13.0) (2023-09-29)
+
+
+### Features
+
+* in memory DB for locally running full system. ([f0ba078](https://github.com/svange/openbrain/commit/f0ba078ba70c8c5152d258349cfd707bbc454073))
+
 ## [0.12.0](https://github.com/svange/openbrain/compare/v0.11.1...v0.12.0) (2023-09-27)
 
 
