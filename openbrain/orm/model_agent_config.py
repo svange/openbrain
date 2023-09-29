@@ -5,7 +5,11 @@ from typing import Optional, TypeAlias
 import ulid
 from pydantic import BaseModel, Field
 
-from openbrain.orm.model_common_base import Recordable
+if os.environ.get("ORM_LOCAL"):
+    from openbrain.orm.model_common_base import Ephemeral as ORMModel
+else:
+    from openbrain.orm.model_common_base import Recordable as ORMModel
+
 from openbrain.util import Util
 
 TAgentConfig: TypeAlias = "AgentConfig"
@@ -56,7 +60,7 @@ class DefaultSettings(Enum):
     ]
 
 
-class AgentConfig(Recordable, BaseModel):
+class AgentConfig(ORMModel, BaseModel):
     """Represents the values for the tunable parameters of the agent"""
 
     class Meta:
