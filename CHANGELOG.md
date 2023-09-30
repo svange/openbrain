@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.0](https://github.com/svange/openbrain/compare/v0.13.0...v0.14.0) (2023-09-30)
+
+
+### Features
+
+* support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). ([1fe40b4](https://github.com/svange/openbrain/commit/1fe40b42a5981add67414e65d03e414e11735dbf))
+
+
+### Bug Fixes
+
+* support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). ([4a59dfb](https://github.com/svange/openbrain/commit/4a59dfb22ed256ffd5654603e067153a3522ce03))
+
 ## [0.13.0](https://github.com/svange/openbrain/compare/v0.12.0...v0.13.0) (2023-09-29)
 
 
