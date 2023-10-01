@@ -99,7 +99,11 @@ python-dotenv = "^1.0.0"
 python-ulid = "^1.1.0"
 aws-xray-sdk = "^2.12.0"
 tiktoken = "^0.5.1"
-gradio = "^3.44.4"
+gradio = { version = "^3.44.4", optional = true }
+
+
+[tool.poetry.extras]
+gradio = ["gradio"]
 
 
 [tool.poetry.group.dev.dependencies]
@@ -117,33 +121,30 @@ isort = "^5.12.0"
 pre-commit = "^3.4.0"
 
 [tool.coverage] # not tested
-    [tool.coverage.report]
-    show_missing = true
-    exclude_lines = [
-        # Have to re-enable the standard pragma
-        'pragma: no cover',
-
-        # Don't complain about missing debug-only code:
-        'def __repr__',
-        'if self\.debug',
-
-        # Don't complain if tests don't hit defensive assertion code:
-        'raise AssertionError',
-        'raise NotImplementedError',
-
-        # Don't complain if non-runnable code isn't run:
-        'if 0:',
-        'if __name__ == .__main__.:',
-        'if TYPE_CHECKING:',
-    ]
-    omit = [
-        'env/*',
-        'venv/*',
-        '.venv/*',
-        '*/virtualenv/*',
-        '*/virtualenvs/*',
-        '*/tests/*',
-    ]
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+    # Have to re-enable the standard pragma
+    'pragma: no cover',
+    # Don't complain about missing debug-only code:
+    'def __repr__',
+    'if self\.debug',
+    # Don't complain if tests don't hit defensive assertion code:
+    'raise AssertionError',
+    'raise NotImplementedError',
+    # Don't complain if non-runnable code isn't run:
+    'if 0:',
+    'if __name__ == .__main__.:',
+    'if TYPE_CHECKING:',
+]
+omit = [
+    'env/*',
+    'venv/*',
+    '.venv/*',
+    '*/virtualenv/*',
+    '*/virtualenvs/*',
+    '*/tests/*',
+]
 
 [tool.pytest.ini_options]
 addopts = '-m "not remote_tests and not redundant"'
