@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.0](https://github.com/svange/openbrain/compare/v0.14.1...v0.15.0) (2023-10-01)
+
+
+### Features
+
+* demote gradio to be an optional dependency so that package fits in lambdas by default. Install with -E to get gradio. ([0595a08](https://github.com/svange/openbrain/commit/0595a083b06edf1e82efefc50640ef2d460b820c))
+
 ## [0.14.1](https://github.com/svange/openbrain/compare/v0.14.0...v0.14.1) (2023-09-30)
 
 
