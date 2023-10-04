@@ -22,6 +22,7 @@ def incoming_lead(simple_lead):
 
 
 class TestLead:
+    @pytest.mark.ci_cd
     @pytest.mark.orm_tests
     def test_lead_operations(self, incoming_lead):
         # 1. Test creation of AgentConfig
@@ -47,6 +48,7 @@ class TestLead:
         different_lead = Lead(client_id="Different", session_id=str(uuid.uuid4()))
         assert different_lead != incoming_lead
 
+    @pytest.mark.ci_cd
     @pytest.mark.orm_tests
     def test_lead_save_retrieve(self, incoming_lead):
         # 1. Save the unique Lead to DynamoDB
@@ -69,6 +71,7 @@ class TestLead:
         # 4. Use == to assert equality between the original and retrieved Leads
         assert incoming_lead == retrieved_lead
 
+    @pytest.mark.ci_cd
     @pytest.mark.orm_tests
     def test_lead_update_refresh(self, incoming_lead):
         # 1. Save the unique Lead to DynamoDB
@@ -101,6 +104,7 @@ class TestLead:
             refreshed_value = getattr(incoming_lead, field)
             assert refreshed_value == expected_value
 
+    @pytest.mark.ci_cd
     @pytest.mark.orm_tests
     def test_lead_update_refresh_extensive(self, incoming_lead):
         # Step 1: Get a unique lead

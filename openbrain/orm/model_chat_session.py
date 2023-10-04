@@ -1,13 +1,17 @@
+import os
 from typing import Optional
 
 import ulid
 from pydantic import Field
 
-from openbrain.orm.model_common_base import Recordable
+if os.environ.get("ORM_LOCAL"):
+    from openbrain.orm.model_common_base import Ephemeral as ORMModel
+else:
+    from openbrain.orm.model_common_base import Recordable as ORMModel
 from openbrain.util import Util
 
 
-class ChatSession(Recordable):
+class ChatSession(ORMModel):
     """A chat session with an agent including all necessary state (config, memory, etc)"""
 
     # Tracking

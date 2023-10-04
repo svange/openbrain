@@ -13,7 +13,7 @@ from openbrain.util import Util
 
 load_dotenv()
 
-DISABLE_TUNER_API_MODE = os.environ.get("DISABLE_TUNER_API_MODE", False)
+GRADIO_LOCAL = os.environ.get("GRADIO_LOCAL", False)
 AGENCY_API_KEY = os.environ.get("DEV_AGENCY_API_KEY")
 CHAT_ENDPOINT = os.environ.get("DEV_API_URL", "") + "/chat"
 DEFAULT_CLIENT_ID = "public"
@@ -43,7 +43,7 @@ def chat(message, chat_history, _profile_name, session_state, _client_id):
     chat_message = ChatMessage(client_id=DEFAULT_CLIENT_ID, reset=False, message=message, session_id=session_id)
 
     response_message = None
-    if DISABLE_TUNER_API_MODE:
+    if GRADIO_LOCAL:
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
         gpt_agent = GptAgent(agent_config=agent_config)
@@ -95,7 +95,7 @@ def reset(
     )
 
     response = None
-    if DISABLE_TUNER_API_MODE:
+    if GRADIO_LOCAL:
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
         gpt_agent = GptAgent(agent_config=agent_config)

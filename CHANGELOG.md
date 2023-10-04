@@ -3,20 +3,90 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.11.2](https://github.com/svange/openbrain/compare/v0.11.1...v0.11.2) (2023-09-26)
+## [0.15.0](https://github.com/svange/openbrain/compare/v0.14.1...v0.15.0) (2023-10-01)
+
+
+### Features
+
+* demote gradio to be an optional dependency so that package fits in lambdas by default. Install with -E to get gradio. ([0595a08](https://github.com/svange/openbrain/commit/0595a083b06edf1e82efefc50640ef2d460b820c))
+
+## [0.14.1](https://github.com/svange/openbrain/compare/v0.14.0...v0.14.1) (2023-09-30)
 
 
 ### Bug Fixes
 
-* added more granularity to CI/CD system and attempting to bring prereleases. ([8316019](https://github.com/svange/openbrain/commit/83160190224d043e9663cf47fbe7b2c381fb586c))
-* updating CI/CD ([937d34b](https://github.com/svange/openbrain/commit/937d34b65f22210e808546cc5afd7bd48f76acad))
+* support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). Second attempt :( ([52c4545](https://github.com/svange/openbrain/commit/52c4545dfd8304b3bcf958c680b392abccfbed7f))
+
+## [0.14.0](https://github.com/svange/openbrain/compare/v0.13.0...v0.14.0) (2023-09-30)
+
+
+### Features
+
+* support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). ([1fe40b4](https://github.com/svange/openbrain/commit/1fe40b42a5981add67414e65d03e414e11735dbf))
+
+
+### Bug Fixes
+
+* support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). ([4a59dfb](https://github.com/svange/openbrain/commit/4a59dfb22ed256ffd5654603e067153a3522ce03))
+
+## [0.13.0](https://github.com/svange/openbrain/compare/v0.12.0...v0.13.0) (2023-09-29)
+
+
+### Features
+
+* in memory DB for locally running full system. ([f0ba078](https://github.com/svange/openbrain/commit/f0ba078ba70c8c5152d258349cfd707bbc454073))
+
+## [0.12.0](https://github.com/svange/openbrain/compare/v0.11.1...v0.12.0) (2023-09-27)
+
+
+### Features
+
+* created ci_cd test set to stop my api keys from getting revoked. ([af9643e](https://github.com/svange/openbrain/commit/af9643eaf030fcbd2385059fdfc40276ce925316))
+
+
+### Bug Fixes
+
+* CI/CD pipeline and migrate to poetry. ([b6d1bf4](https://github.com/svange/openbrain/commit/b6d1bf4fbf5d90e95b9ff5c98893510c8c4ac594))
+
+## [0.12.0](https://github.com/svange/openbrain/compare/v0.11.1...v0.12.0) (2023-09-27)
+
+
+### Features
+
+* created ci_cd test set to stop my api keys from getting revoked. ([af9643e](https://github.com/svange/openbrain/commit/af9643eaf030fcbd2385059fdfc40276ce925316))
+
+
+### Bug Fixes
+
+* CI/CD pipeline and migrate to poetry. ([b6d1bf4](https://github.com/svange/openbrain/commit/b6d1bf4fbf5d90e95b9ff5c98893510c8c4ac594))
 
 ## [0.11.1](https://github.com/svange/openbrain/compare/v0.11.0...v0.11.1) (2023-09-26)
 
 
 ### Bug Fixes
 
-* added more granularity to CI/CD system and attempting to bring prereleases. ([f4e02ea](https://github.com/svange/openbrain/commit/f4e02ea9d53899068336d765bfa815b6a199ef40))
+* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3))
+
+## [0.11.1](https://github.com/svange/openbrain/compare/v0.11.0...v0.11.1) (2023-09-26)
+
+
+### Bug Fixes
+
+* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3))
+
+## [0.11.1](https://github.com/svange/openbrain/compare/v0.11.0...v0.11.1) (2023-09-26)
+
+
+### Bug Fixes
+
+* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3))
+
+## [0.11.1](https://github.com/svange/openbrain/compare/v0.11.0...v0.11.1) (2023-09-26)
+
+
+### Bug Fixes
+
+* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3))
 
 ## [0.11.0](https://github.com/svange/openbrain/compare/v0.10.8...v0.11.0) (2023-09-25)
 

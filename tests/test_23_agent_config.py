@@ -39,6 +39,7 @@ class TestAgentConfig:
         different_agent_config = AgentConfig(profile_name="Different", session_id=str(uuid.uuid4()))
         assert different_agent_config != incoming_agent_config
 
+    @pytest.mark.ci_cd
     @pytest.mark.orm_tests
     def test_agent_config_save_retrieve(self, incoming_agent_config):
         # 1. Save the unique AgentConfig to DynamoDB
@@ -66,6 +67,8 @@ class TestAgentConfig:
         assert incoming_agent_config == retrieved_agent_config
 
     # # Test to validate updating fields and refreshing the AgentConfig object
+    @pytest.mark.ci_cd
+
     @pytest.mark.orm_tests
     def test_agent_config_update_refresh(self, incoming_agent_config):
         original_agent_config = incoming_agent_config
