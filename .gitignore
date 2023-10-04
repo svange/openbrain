@@ -11,3 +11,4 @@ build
 dist
 *.egg-info
 .run/
+poetry.lock
