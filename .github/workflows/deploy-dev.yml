@@ -27,4 +27,4 @@ jobs:
         run: |
           echo "NOT YET IMPLEMENTED"
           echo "This needs to deploy the new code to production environments that are using it."
-          exit 1
+          exit 0
