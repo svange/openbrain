@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.0](https://github.com/svange/openbrain/compare/v0.15.1...v0.16.0) (2023-10-04)
+
+
+### Features
+
+* ob-tuner updated to use in memory ORM, controllable by .env file. ([47ba771](https://github.com/svange/openbrain/commit/47ba771399c37bc4e07a56db1b561da035e5a5ed))
+
 ## [0.15.1](https://github.com/svange/openbrain/compare/v0.15.0...v0.15.1) (2023-10-04)
 
 
