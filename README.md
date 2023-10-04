@@ -19,7 +19,7 @@
 
 🚧 **Under active development. Not ready for use.** 🚧
 
-OpenBrain is a chat platform backed by Large Language Model (LLM) agents. It provides APIs and tools to configure, store, and retrieve chat agents, making your chat sessions more versatile and context-aware.
+OpenBrain is a tool-wielding, cloud native, LLM agent platform. It provides APIs and tools to configure, store, and retrieve LangChain agents, making your chat sessions and workflows stateful and persistent. You will find in-memory and DynamoDB mixins for the ORM as well as a SAM template for deploying the necessary resources for stateless agents to your AWS. The use of these mixins is controlled by environment variables.
 
 OpenBrain agents are stateful by nature, so they can remember things about you and your conversation. They can also use tools, so you can use the same agent to chat and to perform actions. This project provides a mechanisms to integrate with an API to store the state of the agent as a session, so that the agent can be used asynchronously from any source in a serverless environment.
 
@@ -45,6 +45,8 @@ pip install openbrain
 cp .env.example .env  # Edit this file with your own values
 ```
 ### Deploy Supporting Infrastructure
+:warning: **This will deploy resources to your AWS account.** :warning: You will be charged for these resources. See [AWS Pricing](https://aws.amazon.com/pricing/) for more information.
+
 ```bash
 python ci_cd.py -I
 ```
@@ -52,7 +54,7 @@ python ci_cd.py -I
 ## Using OpenBrain
 
 ### OpenBrain Gradio Tuner
-To facilitate tuning agent parameters and experimenting with prompts, OpenBrain provides a GUI interface using Gradio. To launch the GUI.
+To facilitate tuning agent parameters and experimenting with prompts, OpenBrain provides a GUI interface using Gradio. You can use the in-memory ORM mixin to store your agent configurations locally. This is controllable by setting `GRADIO_LOCAL=True`, `ORM_LOCAL=True`, `UTIL_LOCAL=True` in your `.env` file.
 
 ![img.png](img.png)
 

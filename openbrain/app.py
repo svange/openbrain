@@ -11,6 +11,7 @@ from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.orm.model_chat_message import ChatMessage
 from openbrain.util import Util
 
+
 load_dotenv()
 
 GRADIO_LOCAL = os.environ.get("GRADIO_LOCAL", False)
@@ -19,19 +20,10 @@ CHAT_ENDPOINT = os.environ.get("DEV_API_URL", "") + "/chat"
 DEFAULT_CLIENT_ID = "public"
 DEFAULT_PROFILE_NAME = "default"
 
+if GRADIO_LOCAL:
+    from openbrain.orm.model_common_base import InMemoryDb
+
 logging.basicConfig(filename="app.log", encoding="utf-8", level=logging.DEBUG)
-
-
-# CLIENT_ID = "gradio-tuner"
-
-
-# def store_key(profile_name):
-#     # Retrieve the user preferences from the DynamoDB database
-#     agent_config = AgentConfig.get(profile_name=profile_name, client_id=CLIENT_ID)
-#
-#     # Store the personalization key and user preferences for the session
-#     # For now, we'll just return the user preferences
-#     return agent_config
 
 
 def chat(message, chat_history, _profile_name, session_state, _client_id):
@@ -63,7 +55,7 @@ def chat(message, chat_history, _profile_name, session_state, _client_id):
     session_state["last_response"] = response_message
     session_state["session"] = session
 
-    chat_history.append(message, response_message)
+    chat_history.append([message, response_message])
 
     # Return the response from the API
     return ["", chat_history, session_state]
@@ -112,7 +104,7 @@ def reset(
         session_state["last_response"] = response
         response_message = response.json()["message"]
     message = f"Please wait, fetching new agent...\n\n{response_message}"
-    chat_history.append(message, response.json()["message"])
+    chat_history.append([message, response_message])
 
     # Return the response from the API
     return ["", chat_history, session_state]
@@ -205,11 +197,21 @@ def auth(username, password):
 def get_available_profile_names() -> list:
     # logger.warning("get_available_profile_names() is not implemented")
     # Get AgentConfig table
-    table = boto3.resource("dynamodb").Table(Util.AGENT_CONFIG_TABLE_NAME)
-    # get all items in the table
-    response = table.scan()
-    # return the profile names with client_id == 'public'
-    return [item["profile_name"] for item in response["Items"] if item["client_id"] == DEFAULT_CLIENT_ID]
+    if GRADIO_LOCAL:
+        try:
+            lst = list(InMemoryDb.instance[Util.AGENT_CONFIG_TABLE_NAME][DEFAULT_CLIENT_ID].keys())
+            return lst
+        except Exception:
+            default_config = AgentConfig(client_id=DEFAULT_CLIENT_ID, profile_name=DEFAULT_PROFILE_NAME)
+            default_config.save()
+            lst = list(InMemoryDb.instance[Util.AGENT_CONFIG_TABLE_NAME][DEFAULT_CLIENT_ID].keys())
+            return lst
+        table = boto3.resource("dynamodb").Table(Util.AGENT_CONFIG_TABLE_NAME)
+        # get all items in the table
+        response = table.scan()
+        # return the profile names with client_id == 'public'
+        return [item["profile_name"] for item in response["Items"] if item["client_id"] == DEFAULT_CLIENT_ID]
+
 
 
 with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
