@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.17.0](https://github.com/svange/openbrain/compare/v0.16.0...v0.17.0) (2023-10-06)
+
+
+### Features
+
+* `ob-chat` works with in-memory DB out-of-the-box. ([558d44b](https://github.com/svange/openbrain/commit/558d44bf495a3d4d440cdd085688f8e22dea464b))
+
 ## [0.16.0](https://github.com/svange/openbrain/compare/v0.15.1...v0.16.0) (2023-10-04)
 
 
