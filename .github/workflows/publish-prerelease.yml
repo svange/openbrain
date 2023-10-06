@@ -1,8 +1,8 @@
 name: Publish
 on:
-    push:
-      branches:
-        - dev
+  push:
+    branches:
+      - dev
 
 permissions:
     id-token: write
@@ -16,6 +16,7 @@ jobs:
       contents: read
 
   publish:
+    if: contains(github.event.head_commit.message, '#publish')
     runs-on: ubuntu-latest
     name: Release
     needs: [run-tests]
