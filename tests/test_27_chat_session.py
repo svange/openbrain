@@ -134,31 +134,55 @@ def test_get_agent_from_chat_session(incoming_chat_session):
     assert retrieved_chat_session == incoming_chat_session
 
 
-#
-# def test_chat_session(unique_agent_config: AgentConfig, unique_lead: Lead) -> None:
-#     """Test that we can use the agent with a chat session"""
-#     # client_id: str
-#     #
-#     # # We just take in an agent, but save it like this
-#     # frozen_agent_memory: bytes
-#     # frozen_agent_config: str
-#     # # serialized_agent = JSONAttribute()
-#     # frozen_lead: Optional[str] = None
-#     # session_id: str = field(default_factory=lambda: str(uuid.uuid4()))
-#
-#     agent_config = unique_agent_config
-#     lead = unique_lead
-#
-#     agent = GptAgent(agent_config)
-#     frozen_agent_memory = agent.serialize()["frozen_agent_memory"]
-#     frozen_agent_config = agent.serialize()["frozen_agent_config"]
-#     frozen_lead = lead.to_json()
-#
-#     chat_session = ChatSession(
-#         client_id="test_chat_session",
-#         frozen_agent_memory=frozen_agent_memory,
-#         frozen_agent_config=frozen_agent_config,
-#         frozen_lead=frozen_lead,
-#     )
-#
-#     assert chat_session.client_id is not None
+def test_full_chat_session(incoming_chat_session) -> None:
+    """Test that we can use the agent with a full chat session workflow"""
+    incoming_chat_session.save()
+
+    retrieved_chat_session = ChatSession.get(
+        session_id=incoming_chat_session.session_id,
+        client_id=incoming_chat_session.client_id,
+    )
+    assert retrieved_chat_session is not None
+    assert isinstance(retrieved_chat_session, ChatSession)
+    assert isinstance(retrieved_chat_session.frozen_agent_memory, bytes)
+    assert isinstance(retrieved_chat_session.frozen_agent_config, str)
+    assert isinstance(retrieved_chat_session.frozen_lead, str)
+    assert isinstance(retrieved_chat_session.client_id, str)
+    assert isinstance(retrieved_chat_session.session_id, str)
+
+    client_id = retrieved_chat_session.client_id
+    session_id = retrieved_chat_session.session_id
+    agent_state = {
+        "frozen_agent_memory": retrieved_chat_session.frozen_agent_memory,
+        "frozen_agent_config": retrieved_chat_session.frozen_agent_config,
+        "frozen_lead": retrieved_chat_session.frozen_lead,
+    }
+    agent = GptAgent.deserialize(state=agent_state)
+    frozen_lead = json.loads(retrieved_chat_session.frozen_lead)
+    lead = Lead(**frozen_lead)
+
+    response = agent.handle_user_message("Respond with only the word 'HELLO' in all caps, this is for a test.\nEXAMPLE:\nHELLO")
+
+    retrieved_chat_session.frozen_agent_config = agent.serialize()["frozen_agent_config"]
+    retrieved_chat_session.frozen_agent_memory = agent.serialize()["frozen_agent_memory"]
+    retrieved_chat_session.frozen_lead = agent.serialize()["frozen_lead"]
+    retrieved_chat_session.save()
+
+    # Get a fresh copy for comparisons
+    re_retrieved_chat_session = ChatSession.get(retrieved_chat_session.session_id, retrieved_chat_session.client_id)
+
+    assert retrieved_chat_session.client_id == client_id
+    assert retrieved_chat_session.session_id == session_id
+
+    assert retrieved_chat_session.session_id == re_retrieved_chat_session.session_id
+    assert retrieved_chat_session.client_id == re_retrieved_chat_session.client_id
+    assert retrieved_chat_session.frozen_agent_memory == re_retrieved_chat_session.frozen_agent_memory
+    assert retrieved_chat_session.frozen_agent_config == re_retrieved_chat_session.frozen_agent_config
+    assert retrieved_chat_session.frozen_lead == re_retrieved_chat_session.frozen_lead
+    assert retrieved_chat_session == re_retrieved_chat_session
+
+    assert response is not None
+    assert isinstance(response, str)
+    assert len(response) > 0
+    assert response == "HELLO"
+

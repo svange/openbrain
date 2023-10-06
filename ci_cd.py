@@ -12,7 +12,6 @@ from dotenv import load_dotenv
 load_dotenv()
 LOG_FILE = "ci_cd.log"
 
-APP_NAME = os.getenv("PROJECT")
 CENTRAL_INFRA_STACK_NAME = os.getenv("INFRA_STACK_NAME")
 AWS_PROFILE = os.environ.get("AWS_PROFILE", "default")
 
@@ -128,8 +127,6 @@ def test_python():
     """Test the python package."""
     logger.info("Running deployment test.")
     # Add this directory to the PYTHONPATH for the call to pytest
-    # sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-    # sys.path.append(os.path.dirname(os.path.abspath(__file__)) + f"/{APP_NAME}")
     rc = pytest.main(["-x", "tests"])
     if rc != 0:
         logger.critical("Error: tests failed.")

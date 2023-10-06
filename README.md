@@ -19,7 +19,7 @@
 
 🚧 **Under active development. Not ready for use.** 🚧
 
-OpenBrain is a tool-wielding, cloud native, LLM agent platform. It provides APIs and tools to configure, store, and retrieve LangChain agents, making your chat sessions and workflows stateful and persistent. You will find in-memory and DynamoDB mixins for the ORM as well as a SAM template for deploying the necessary resources for stateless agents to your AWS. The use of these mixins is controlled by environment variables.
+OpenBrain is a tool-wielding, cloud native, LLM agent platform. It provides APIs and tools to configure, store, and retrieve LangChain agents, making your chat sessions and workflows stateful and persistent. You will find in-memory and DynamoDB ORM options as well as a SAM template for deploying the necessary resources for stateless agents to your AWS. The use of these mixins is controlled by environment variables.
 
 OpenBrain agents are stateful by nature, so they can remember things about you and your conversation. They can also use tools, so you can use the same agent to chat and to perform actions. This project provides a mechanisms to integrate with an API to store the state of the agent as a session, so that the agent can be used asynchronously from any source in a serverless environment.
 
@@ -33,11 +33,18 @@ Interactions with the agent can be injected into any application easily by const
 - **Event-Driven Architecture**: Extensible through cloud-based event handling.
 
 ## Quick Start
-### Installation
+```bash
+# TLDR: demo functionality
+pip install openbrain[gradio]
+cp .env.demo .env
+ob-tuner
+```
 
+### Installation
+Gradio is included as an extra dependency. This keeps the base installation small enough to fit in a lambda layer. If you intend to experiment with the `ob-tuner` interface locally, add the `[gradio]` extra to your pip install command.
 
 ```bash
-pip install openbrain
+pip install openbrain[gradio]
 ```
 
 ### Setup .env file
@@ -45,6 +52,10 @@ pip install openbrain
 cp .env.example .env  # Edit this file with your own values
 ```
 ### Deploy Supporting Infrastructure
+The `AgentConfig`s you create in `ob-tuner` can be saved to your DynamoDB tables in AWS, allowing you to reference them in any AWS workflow using the boto3 library.
+
+If you intend to use this project in your API, an AWS SAM template is provided to get you started. You can deploy the template using the following command. You will need to have the AWS CLI installed and configured with your credentials.
+
 :warning: **This will deploy resources to your AWS account.** :warning: You will be charged for these resources. See [AWS Pricing](https://aws.amazon.com/pricing/) for more information.
 
 ```bash
@@ -54,7 +65,7 @@ python ci_cd.py -I
 ## Using OpenBrain
 
 ### OpenBrain Gradio Tuner
-To facilitate tuning agent parameters and experimenting with prompts, OpenBrain provides a GUI interface using Gradio. You can use the in-memory ORM mixin to store your agent configurations locally. This is controllable by setting `GRADIO_LOCAL=True`, `ORM_LOCAL=True`, `UTIL_LOCAL=True` in your `.env` file.
+To facilitate tuning agent parameters and experimenting with prompts, OpenBrain provides a GUI interface using Gradio. You can use the in-memory object model to store your agent configurations locally. This is controllable by setting `GRADIO_LOCAL=True`, `ORM_LOCAL=True`, `UTIL_LOCAL=True` in your `.env` file.
 
 ![img.png](img.png)
 
@@ -67,19 +78,15 @@ Tip: You can show or hide the button for flagging with the `allow_flagging=` kwa
 ```
 
 ### Command Line Completions
-
+(doesn't work quite like this yet, but that's the idea, currently noisy)
 ```bash
-$ ob "What is the air speed velocity of an unladen swallow?" -v
+$ ob --profile_name=linux 'change the file permissions of all files that start with a "w" in this directory (recursively) to 042'
 
-> Entering new AgentExecutor chain...
-Ah, the famous question about the air speed velocity of an unladen swallow. Are you referring to an African or European swallow?
-
-> Finished chain.
-Ah, the famous question about the air speed velocity of an unladen swallow. Are you referring to an African or European swallow?
+find . -type f -name 'w*' -exec chmod 042 {} +
 ```
 
 ### Command Line Interactive Session
-
+(doesn't work quite like this yet, but that's the idea)
 ```bash
 $ ob-chat
 ---------- Begin Chat Session ----------

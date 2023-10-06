@@ -238,7 +238,7 @@ class GptAgent:
         agent_state = {
             "frozen_agent_memory": memory_snapshot,
             "frozen_agent_config": self.agent_config.to_json(),
-            "frozen_lead": self.lead.to_json(),
+            "frozen_lead": None if self.lead.to_json is None else self.lead.to_json(),
         }
         return agent_state
 

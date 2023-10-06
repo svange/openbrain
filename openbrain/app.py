@@ -9,18 +9,21 @@ from dotenv import load_dotenv
 from openbrain.agents.gpt_agent import GptAgent
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.orm.model_chat_message import ChatMessage
+from openbrain.orm.model_chat_session import ChatSession
+from openbrain.orm.model_lead import Lead
 from openbrain.util import Util
 
 
 load_dotenv()
 
 GRADIO_LOCAL = os.environ.get("GRADIO_LOCAL", False)
-AGENCY_API_KEY = os.environ.get("DEV_AGENCY_API_KEY")
+ORM_LOCAL = os.environ.get("ORM_LOCAL", False)
+AGENCY_API_KEY = os.environ.get("DEV_OB_PROVIDER_API_KEY", "")
 CHAT_ENDPOINT = os.environ.get("DEV_API_URL", "") + "/chat"
 DEFAULT_CLIENT_ID = "public"
 DEFAULT_PROFILE_NAME = "default"
 
-if GRADIO_LOCAL:
+if ORM_LOCAL:
     from openbrain.orm.model_common_base import InMemoryDb
 
 logging.basicConfig(filename="app.log", encoding="utf-8", level=logging.DEBUG)
@@ -30,30 +33,45 @@ def chat(message, chat_history, _profile_name, session_state, _client_id):
     # Make a POST request to the chat endpoint
 
     session_id = session_state["session_id"]
-    session = session_state["session"]
 
-    chat_message = ChatMessage(client_id=DEFAULT_CLIENT_ID, reset=False, message=message, session_id=session_id)
+    chat_message = ChatMessage(client_id=_client_id, reset=False, message=message, session_id=session_id)
 
     response_message = None
     if GRADIO_LOCAL:
-        # Get a new agent with the specified settings
-        agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
-        gpt_agent = GptAgent(agent_config=agent_config)
-        session_state["agent"] = gpt_agent
+        chat_session = ChatSession.get(session_id=session_id, client_id=_client_id)
+        agent_state = {
+            "frozen_agent_memory": chat_session.frozen_agent_memory,
+            "frozen_agent_config": chat_session.frozen_agent_config,
+            "frozen_lead": chat_session.frozen_lead
+        }
+        gpt_agent = GptAgent.deserialize(state=agent_state)
+
         response_message = gpt_agent.handle_user_message(message)
 
+        frozen_agent_memory = gpt_agent.serialize()["frozen_agent_memory"]
+        frozen_agent_config = gpt_agent.serialize()["frozen_agent_config"]
+        frozen_lead = gpt_agent.serialize()["frozen_lead"]
+
+        chat_session = ChatSession(
+            session_id=session_id,
+            client_id=_client_id,
+            frozen_agent_memory=frozen_agent_memory,
+            frozen_agent_config=frozen_agent_config,
+            frozen_lead=frozen_lead,
+        )
+        chat_session.save()
+
     else:
-        logging.debug(f"{session_id=}")
+        session = session_state["session"]
         session.headers.update(
             {
                 "x-api-key": AGENCY_API_KEY,
-                # 'Session': session_id
             }
         )
         response = session.post(CHAT_ENDPOINT, json=chat_message.to_json())
         response_message = response.json()["message"]
+        session_state["session"] = session
     session_state["last_response"] = response_message
-    session_state["session"] = session
 
     chat_history.append([message, response_message])
 
@@ -90,8 +108,22 @@ def reset(
     if GRADIO_LOCAL:
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
-        gpt_agent = GptAgent(agent_config=agent_config)
-        session_state["agent"] = gpt_agent
+        lead = Lead(client_id=_client_id)
+        gpt_agent = GptAgent(agent_config=agent_config, lead=lead)
+
+        frozen_agent_memory = gpt_agent.serialize()["frozen_agent_memory"]
+        frozen_agent_config = gpt_agent.serialize()["frozen_agent_config"]
+        frozen_lead = gpt_agent.serialize()["frozen_lead"]
+
+        chat_session = ChatSession(
+            client_id=_client_id,
+            frozen_agent_memory=frozen_agent_memory,
+            frozen_agent_config=frozen_agent_config,
+            frozen_lead=frozen_lead,
+        )
+        session_id = chat_session.session_id
+        session_state["session_id"] = session_id
+        chat_session.save()
         response_message = gpt_agent.agent_config.icebreaker
     else:
         # Make a POST request to the reset endpoint
@@ -103,7 +135,7 @@ def reset(
         session_state["session"] = session
         session_state["last_response"] = response
         response_message = response.json()["message"]
-    message = f"Please wait, fetching new agent...\n\n{response_message}"
+    message = f"Please wait, fetching new agent..."
     chat_history.append([message, response_message])
 
     # Return the response from the API
@@ -197,7 +229,7 @@ def auth(username, password):
 def get_available_profile_names() -> list:
     # logger.warning("get_available_profile_names() is not implemented")
     # Get AgentConfig table
-    if GRADIO_LOCAL:
+    if ORM_LOCAL:
         try:
             lst = list(InMemoryDb.instance[Util.AGENT_CONFIG_TABLE_NAME][DEFAULT_CLIENT_ID].keys())
             return lst
@@ -206,12 +238,12 @@ def get_available_profile_names() -> list:
             default_config.save()
             lst = list(InMemoryDb.instance[Util.AGENT_CONFIG_TABLE_NAME][DEFAULT_CLIENT_ID].keys())
             return lst
+    else:
         table = boto3.resource("dynamodb").Table(Util.AGENT_CONFIG_TABLE_NAME)
         # get all items in the table
         response = table.scan()
         # return the profile names with client_id == 'public'
         return [item["profile_name"] for item in response["Items"] if item["client_id"] == DEFAULT_CLIENT_ID]
-
 
 
 with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:

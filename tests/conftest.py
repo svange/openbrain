@@ -23,8 +23,8 @@ from tests.generator_leads import generate_lead
 # load_dotenv()
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 PROMPTLAYER_API_KEY = os.environ.get("PROMPTLAYER_API_KEY")
-DEV_WOXOM_API_KEY = os.environ.get("DEV_WOXOM_API_KEY")
-PROD_WOXOM_API_KEY = os.environ.get("PROD_WOXOM_API_KEY")
+DEV_OB_PROVIDER_API_KEY = os.environ.get("DEV_OB_PROVIDER_API_KEY")
+PROD_OB_PROVIDER_API_KEY = os.environ.get("PROD_OB_PROVIDER_API_KEY")
 STAGE = os.environ.get("STAGE", "dev")
 DEV_API_URL = os.environ.get("DEV_API_URL")
 PROD_API_URL = os.environ.get("PROD_API_URL")
@@ -80,7 +80,7 @@ def lambda_context():
 
 @pytest.fixture
 def headers():
-    return {"x-api-key": DEV_WOXOM_API_KEY, "Content-Type": "application/json"}
+    return {"x-api-key": DEV_OB_PROVIDER_API_KEY, "Content-Type": "application/json"}
 
 
 @pytest.fixture(scope="module", params=range(NUMBER_OF_SAMPLES))

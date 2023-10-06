@@ -8,6 +8,14 @@ default_stages:
   - push
 
 repos:
+#- repo: local
+#  hooks:
+#  - id: python-hook
+#    name: python-hook
+#    entry: python python_script.py
+#    language: python
+#    pass_filenames: false
+#    additional_dependencies: [gradio]
   - repo: meta
     hooks:
       - id: check-hooks-apply
