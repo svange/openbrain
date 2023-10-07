@@ -2,6 +2,7 @@
 ![ci status](https://github.com/svange/openbrain/actions/workflows/publish-release.yml/badge.svg?branch=main)
 ![PyPI - Version](https://img.shields.io/pypi/v/openbrain)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)](https://conventionalcommits.org)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?style=flat-square&logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
@@ -17,13 +18,22 @@
 [//]: # (![CD &#40;staging&#41;]&#40;https://github.com/svange/openbrain/actions/workflows/deploy-dev.yml/badge.svg&#41;)
 
 
-🚧 **Under active development. Not ready for use.** 🚧
+🚧 **Under active development** 🚧
 
 OpenBrain is a tool-wielding, cloud native, LLM agent platform. It provides APIs and tools to configure, store, and retrieve LangChain agents, making your chat sessions and workflows stateful and persistent. You will find in-memory and DynamoDB ORM options as well as a SAM template for deploying the necessary resources for stateless agents to your AWS. The use of these mixins is controlled by environment variables.
 
 OpenBrain agents are stateful by nature, so they can remember things about you and your conversation. They can also use tools, so you can use the same agent to chat and to perform actions. This project provides a mechanisms to integrate with an API to store the state of the agent as a session, so that the agent can be used asynchronously from any source in a serverless environment.
 
 Interactions with the agent can be injected into any application easily by constructing a query, choosing an agent configuration, and pre-processing your data through that agent before sending it of for further processing.
+
+## Openbrain as a Service
+To test Openbrain as a service, please do the following:
+1. Register at [https://portal.openbra.in](https://portal.openbra.in).
+2. Log in to the portal and subscribe to the Openbrain service.
+3. Navigate to your dashboard in the portal and use your API keys to interact with the API.
+4. A swagger UI and SDKs are available for subscribers.
+
+NOTE: There is currently no fee for using the service, but it's using my personal AWS and OpenAI accounts, so I'll pull the plug immediately if it becomes expensive.
 
 ## Features
 
