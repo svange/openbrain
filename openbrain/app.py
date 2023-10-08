@@ -22,7 +22,7 @@ AGENCY_API_KEY = os.environ.get("DEV_OB_PROVIDER_API_KEY", "")
 CHAT_ENDPOINT = os.environ.get("DEV_API_URL", "") + "/chat"
 DEFAULT_CLIENT_ID = "public"
 DEFAULT_PROFILE_NAME = "default"
-PORT = os.environ.get("GRADIO_PORT", 7861)
+PORT = int(os.environ.get("GRADIO_PORT", 7861))
 
 if ORM_LOCAL:
     from openbrain.orm.model_common_base import InMemoryDb
