@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.1](https://github.com/svange/openbrain/compare/v0.18.0...v0.18.1) (2023-10-08)
+
+
+### Bug Fixes
+
+* ob-tuner PORT type error. ([98b0f3c](https://github.com/svange/openbrain/commit/98b0f3cffb32d0de394c69dd03f26425cb420ca4))
+
 ## [0.18.0](https://github.com/svange/openbrain/compare/v0.17.1...v0.18.0) (2023-10-08)
 
 
