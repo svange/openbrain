@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.0](https://github.com/svange/openbrain/compare/v0.17.1...v0.18.0) (2023-10-08)
+
+
+### Features
+
+* add GRADIO_PORT env var to allow a single instance to host several gradios ([8f45495](https://github.com/svange/openbrain/commit/8f4549582cb7d0a14c8a7dea9ff9daca8105dc4e))
+
 ## [0.17.1](https://github.com/svange/openbrain/compare/v0.17.0...v0.17.1) (2023-10-06)
 
 
