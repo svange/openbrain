@@ -1,8 +1,9 @@
 name: Release to development environment
 on:
-    push:
-      tags:
-        - v[0-9]+.[0-9]+.[0-9]+-dev.*
+  workflow_dispatch: disabled
+#  push:
+#    tags:
+#      - v[0-9]+.[0-9]+.[0-9]+-dev.*
 
 permissions:
     id-token: write
