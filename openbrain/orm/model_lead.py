@@ -3,8 +3,10 @@ from typing import Optional
 
 import ulid
 from pydantic import Field
+from openbrain.util import config
 
-if os.environ.get("ORM_LOCAL"):
+if config.MODE == "LOCAL":
+
     from openbrain.orm.model_common_base import Ephemeral as ORMModel
 else:
     from openbrain.orm.model_common_base import Recordable as ORMModel

@@ -15,10 +15,7 @@ from openbrain.exceptions import ObMissingEnvironmentVariable
 
 load_dotenv()
 
-if os.getenv("MODE", "DEV") == "DEV":
-    identity = boto3.client("sts").get_caller_identity()
-    print(identity)
-
+MODE = os.getenv("MODE", "LOCAL")
 
 def get_logger() -> Logger:
     logger = Logger(service=f"{__name__}")
@@ -35,6 +32,12 @@ def get_metrics() -> Metrics:
 def get_tracer() -> Tracer:
     tracer = Tracer(service=f"{__name__}")
     return tracer
+
+
+if MODE == "DEV":
+    identity = boto3.client("sts").get_caller_identity()
+    logger = get_logger()
+    logger.debug(identity)
 
 
 def detect_aws_region() -> str:
@@ -129,15 +132,15 @@ class Config:
         no_friendly_name = []
         for attrib in dynamic_attributes:
             if self.MODE == "LOCAL":
-                logger.info(f"Running in local mode, ignoring dynamic values for {attrib}")
+                logger.debug(f"Running in local mode, ignoring dynamic values for {attrib}")
                 continue
 
             attrib_friendly_name = getattr(self, attrib + "_FRIENDLY_NAME")
-            _logger.info(f"{attrib} not defined in environment variables, searching for friendly name {attrib_friendly_name}")
+            _logger.debug(f"{attrib} not defined in environment variables, searching for friendly name {attrib_friendly_name}")
 
             # If the friendly name is using the default, emit a warning
             if attrib_friendly_name == defaults[attrib]:
-                _logger.warning(f"{attrib} is using the default friendly name. Do you have this infrastructure deployed?")
+                _logger.debug(f"{attrib} is using the default friendly name. Do you have this infrastructure deployed?")
 
             if not attrib_friendly_name:
                 _logger.error(f"{attrib} not defined in environment variables")
@@ -153,6 +156,8 @@ class Config:
             except ClientError as e:
                 print(f"ERROR: Can't find {attrib} in environment variables or central infrastructure")
                 undefined_resources.append((attrib, attrib_friendly_name))
+
+        # Run through accumulated errors and raise
         if no_friendly_name or undefined_resources:
             for attrib, attrib_friendly_name in no_friendly_name:
                 print(

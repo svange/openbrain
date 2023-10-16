@@ -10,9 +10,9 @@ homepage = "https://github.com/svange/openbrain"
 
 [tool.poetry.scripts]
 ob = "openbrain.cli:cli"
-ob-chat = "openbrain.cli:chat"
+ob-chat = "openbrain.cli:cli_chat"
 ob-tuner = "openbrain.app:main"
-#cz = "git-cz"
+ob-env = "openbrain.cli:cli_env"
 
 [tool.poetry.plugins."commitizen.plugin"] # completely untested
 cz_conventional_commits = "commitizen.cz.conventional_commits:ConventionalCommitsCz"

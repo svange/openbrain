@@ -4,8 +4,9 @@ from typing import Optional, TypeAlias
 
 import ulid
 from pydantic import BaseModel, Field
+from openbrain.util import config
 
-if os.environ.get("ORM_LOCAL"):
+if config.MODE == "LOCAL":
     from openbrain.orm.model_common_base import Ephemeral as ORMModel
 else:
     from openbrain.orm.model_common_base import Recordable as ORMModel
