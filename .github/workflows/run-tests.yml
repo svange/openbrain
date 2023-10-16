@@ -8,7 +8,7 @@ env:
   #######################
   # AWS
   #######################
-  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_OB_DEPLOYER_ROLE_ARN }}
+  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_PROD_DEPLOYER_ROLE_ARN }}
   AWS_REGION: us-east-1
   #######################
   # GITHUB
