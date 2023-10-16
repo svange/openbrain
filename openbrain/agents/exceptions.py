@@ -1,10 +1,10 @@
 from langchain.tools.base import ToolException
 
-from openbrain.util import Util
+from openbrain.util import config, get_logger, get_metrics, get_tracer
 
-logger = Util.logger
-metrics = Util.metrics
-tracer = Util.tracer
+logger = get_logger()
+metrics = get_metrics()
+tracer = get_tracer()
 
 
 class AgentError(Exception):
@@ -22,9 +22,9 @@ class AgentToolIncompleteLeadError(AgentToolError):
 class AgentToolLeadMomentumError(AgentToolError):
     """Raised when LeadMomentum returns an error"""
 
-
-    event_bus_name = Util.EVENT_BUS_FRIENDLY_NAME
-    event_source = Util.PROJECT
+    pass
+    # event_bus_name = config.EVENTBUS_FRIENDLY_NAME
+    # event_source = Util.PROJECT
     # event_bridge_client = Util.BOTO_SESSION.client("events")
     # event = {
     #     "Source": event_source,

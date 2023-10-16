@@ -1,0 +1,2 @@
+class ObMissingEnvironmentVariable(Exception):
+    pass

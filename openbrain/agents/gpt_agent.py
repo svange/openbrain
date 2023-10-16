@@ -22,12 +22,16 @@ from langchain.schema import OutputParserException, SystemMessage
 from langchain.tools.base import BaseTool
 from pydantic import BaseModel, Extra, Field
 
-from openbrain.agents.exceptions import AgentError, AgentToolIncompleteLeadError, AgentToolLeadMomentumError
+from openbrain.agents.exceptions import (
+    AgentError,
+    AgentToolIncompleteLeadError,
+    AgentToolLeadMomentumError,
+)
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.orm.model_lead import Lead
-from openbrain.util import Util
+from openbrain.util import config, get_logger
 
-logger = Util.logger
+logger = get_logger()
 
 
 class CallbackHandler(BaseCallbackHandler):
@@ -64,7 +68,7 @@ class CallbackHandler(BaseCallbackHandler):
                 )
             lead_from_db.sent_by_agent = True
             lead_from_db.save()
-            send_business_sns(f"New lead sent: {lead_from_db=}")
+            # send_business_sns(f"New lead sent: {lead_from_db=}")
             send_lead_event(lead_from_db)
 
             send_lead_to_lead_momentum(lead_from_db, outgoing_webhook_url=url)
@@ -272,31 +276,36 @@ class GptAgent:
 def send_lead_event(lead_adaptor):
     """Send lead event to event bus."""
     logger.info(f"Sending lead event to event bus: {lead_adaptor.__dict__}")
-    event_bus_friendly_name = Util.EVENT_BUS_FRIENDLY_NAME
+
+    event_bus_friendly_name = config.EVENTBUS_FRIENDLY_NAME
     event_bus_client = boto3.client("events")
-    event_bus_client.put_events(
-        Entries=[
-            {
-                "EventBusName": event_bus_friendly_name,
-                "DetailType": "Lead",
-                "Detail": json.dumps(lead_adaptor.__dict__),
-            }
-        ]
-    )
-    # Don't forget the exception that also does this
+    event = [
+        {
+            "EventBusName": event_bus_friendly_name,
+            "DetailType": "Lead",
+            "Detail": json.dumps(lead_adaptor.__dict__),
+        }
+    ]
+    try:
+        event_bus_client.put_events(Entries=event)
+    except Exception as e:
+        if config.MODE == "LOCAL":
+            print(f"LOCAL_MODE: {event=}")
+        else:
+            raise
 
 
-def send_business_sns(message: str) -> None:
-    """Send message event to sns Business topic."""
-    logger.info(f"Sending event to sns Business topic: {message}")
-    sns = boto3.client("sns")
-    sns.publish(
-        TopicArn=Util.SNS_BUSINESS_TOPIC_ARN,
-        Message=message,
-        Subject="GptAgent tool used",
-        MessageStructure="string",
-    )
-    # Don't forget the exception that also does this
+# def send_business_sns(message: str) -> None:
+#     """Send message event to sns Business topic."""
+#     logger.info(f"Sending event to sns Business topic: {message}")
+#     sns = boto3.client("sns")
+#     sns.publish(
+#         TopicArn=Config.S,
+#         Message=message,
+#         Subject="GptAgent tool used",
+#         MessageStructure="string",
+#     )
+# Don't forget the exception that also does this
 
 
 def send_lead_to_lead_momentum(lead: Lead, outgoing_webhook_url=None) -> None:

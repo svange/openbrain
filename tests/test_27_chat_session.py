@@ -185,4 +185,3 @@ def test_full_chat_session(incoming_chat_session) -> None:
     assert isinstance(response, str)
     assert len(response) > 0
     assert response == "HELLO"
-

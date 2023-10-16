@@ -68,7 +68,6 @@ class TestAgentConfig:
 
     # # Test to validate updating fields and refreshing the AgentConfig object
     @pytest.mark.ci_cd
-
     @pytest.mark.orm_tests
     def test_agent_config_update_refresh(self, incoming_agent_config):
         original_agent_config = incoming_agent_config

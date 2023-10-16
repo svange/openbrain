@@ -27,9 +27,7 @@ def prepare_commit_msg(commit_msg_file: Path) -> int:
         ).returncode
         != 0
     ):
-        backup_file = Path(
-            tempfile.gettempdir(), f"cz.commit{os.environ.get('USER', '')}.backup"
-        )
+        backup_file = Path(tempfile.gettempdir(), f"cz.commit{os.environ.get('USER', '')}.backup")
 
         if backup_file.is_file():
             # confirm if commit message from backup file should be reused

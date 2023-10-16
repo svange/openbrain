@@ -6,13 +6,12 @@ from typing import TypeAlias
 import boto3
 from pydantic import BaseModel, Extra
 
-from openbrain.util import Util
+from openbrain.util import config, Defaults, get_logger, get_tracer, get_metrics
 
 # LOGGING
-logger = Util.logger
+logger = get_logger()
 TRecordable: TypeAlias = "Recordable"
 TSerializable: TypeAlias = "Serializable"
-
 
 
 def snake_to_camel_case(value: str) -> str:
@@ -37,8 +36,8 @@ class Serializable(BaseModel, metaclass=ABCMeta):
     class Meta:
         """PynamoDB configuration for the Serializable class"""
 
-        table_name = Util.AGENT_CONFIG_TABLE_NAME
-        region = Util.AWS_REGION
+        table_name = config.AGENT_CONFIG_TABLE
+        region = config.AWS_REGION
 
     @abstractmethod
     def save(self):
@@ -87,14 +86,7 @@ class Recordable(Serializable, metaclass=ABCMeta):
         return boto3.resource("dynamodb")
 
     @classmethod
-    def _get(
-            cls,
-            range_key_name: str,
-            range_key_value: str,
-            hash_key_name: str,
-            hash_key_value: str,
-            table_name: str
-    ) -> dict:
+    def _get(cls, range_key_name: str, range_key_value: str, hash_key_name: str, hash_key_value: str, table_name: str) -> dict:
         """Get an object from the database."""
         dynamodb = cls._get_dynamo_client()
         table = dynamodb.Table(table_name)
@@ -112,13 +104,13 @@ class Recordable(Serializable, metaclass=ABCMeta):
         return item
 
     def _save(
-            self,
-            table_name: str,
-            range_key_name: str = None,
-            hash_key_name: str = None,
-            range_key_value: str = None,
-            hash_key_value: str = None,
-            disable_surgical_update: bool = True
+        self,
+        table_name: str,
+        range_key_name: str = None,
+        hash_key_name: str = None,
+        range_key_value: str = None,
+        hash_key_value: str = None,
+        disable_surgical_update: bool = True,
     ):
         """Save this object to the database."""
 
@@ -126,11 +118,11 @@ class Recordable(Serializable, metaclass=ABCMeta):
         table = dynamodb.Table(table_name)
 
         if (
-                hash_key_name
-                and hash_key_value
-                and range_key_name
-                and range_key_value
-                and not disable_surgical_update  # TODO DISABLED
+            hash_key_name
+            and hash_key_value
+            and range_key_name
+            and range_key_value
+            and not disable_surgical_update  # TODO DISABLED
         ):
             # Get item for a more surgical insert
             response = table.get_item(Key={hash_key_name: hash_key_value, range_key_name: range_key_value})
@@ -156,7 +148,7 @@ class Recordable(Serializable, metaclass=ABCMeta):
 
 class InMemoryDb(dict):
     def __new__(cls):
-        if not hasattr(cls, 'instance'):
+        if not hasattr(cls, "instance"):
             cls.instance = super(InMemoryDb, cls).__new__(cls)
         return cls.instance
 
@@ -165,38 +157,25 @@ class Ephemeral(Serializable, metaclass=ABCMeta):
     """Base class for in memory objects as an alternative to cloud (for demo purposes)."""
 
     @classmethod
-    def _get(
-            cls,
-            range_key_name: str,
-            range_key_value: str,
-            hash_key_name: str,
-            hash_key_value: str,
-            table_name: str
-    ) -> dict:
+    def _get(cls, range_key_name: str, range_key_value: str, hash_key_name: str, hash_key_value: str, table_name: str) -> dict:
         """Get an object from the DICT."""
         object_dict = InMemoryDb()
         if not object_dict.get(table_name):
-            raise LookupError(
-                f"Failed to find: {table_name=}"
-            )
+            raise LookupError(f"Failed to find: {table_name=}")
         if not object_dict[table_name].get(hash_key_value):
-            raise LookupError(
-                f"Failed to find: {hash_key_name=} | {hash_key_value=}"
-            )
+            raise LookupError(f"Failed to find: {hash_key_name=} | {hash_key_value=}")
         if not object_dict[table_name][hash_key_value].get(range_key_value):
-            raise LookupError(
-                f"Failed to find: f{range_key_name=} | {range_key_value=}"
-            )
+            raise LookupError(f"Failed to find: f{range_key_name=} | {range_key_value=}")
         return object_dict[table_name][hash_key_value][range_key_value].to_dict()
 
     def _save(
-            self,
-            table_name: str,
-            range_key_name: str = None,
-            hash_key_name: str = None,
-            range_key_value: str = None,
-            hash_key_value: str = None,
-            disable_surgical_update: bool = True
+        self,
+        table_name: str,
+        range_key_name: str = None,
+        hash_key_name: str = None,
+        range_key_value: str = None,
+        hash_key_value: str = None,
+        disable_surgical_update: bool = True,
     ):
         """Save this object to the database."""
         object_dict = InMemoryDb()

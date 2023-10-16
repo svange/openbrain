@@ -1,9 +1,9 @@
-import json
 import os
-from typing import Dict
+from dataclasses import dataclass, field, asdict
+from enum import Enum
 
 import boto3
-from aws_lambda_powertools import (  # TODO make this optional or learn to stream logs from one module to another
+from aws_lambda_powertools import (
     Logger,
     Metrics,
     Tracer,
@@ -11,185 +11,202 @@ from aws_lambda_powertools import (  # TODO make this optional or learn to strea
 from botocore.exceptions import ClientError
 from dotenv import load_dotenv
 
+from openbrain.exceptions import ObMissingEnvironmentVariable
+
 load_dotenv()
-UTIL_LOCAL = os.environ.get("UTIL_LOCAL", False)
+
+if os.getenv("MODE", "DEV") == "DEV":
+    identity = boto3.client("sts").get_caller_identity()
+    print(identity)
 
 
-def _get_logger() -> Logger:
-    logger = Logger(service=f'{os.environ.get("PROJECT")}')
+def get_logger() -> Logger:
+    logger = Logger(service=f"{__name__}")
     # boto3.set_stream_logger()
     # boto3.set_stream_logger("botocore")
     return logger
 
 
-def _get_metrics() -> Metrics:
-    metrics = Metrics(service=f'{os.environ.get("PROJECT")}')
+def get_metrics() -> Metrics:
+    metrics = Metrics(service=f"{__name__}")
     return metrics
 
 
-def _get_tracer() -> Tracer:
-    tracer = Tracer(service=f'{os.environ.get("PROJECT")}')
+def get_tracer() -> Tracer:
+    tracer = Tracer(service=f"{__name__}")
     return tracer
 
 
-class Util:
-    """A central source of truth for infrastructure resources and other utility functions.
-    Loads API keys from AWS Secrets Manager and sets them as environment variables."""
+def detect_aws_region() -> str:
+    """Detects the AWS region from the environment or boto3 session"""
+    region_from_env = os.getenv("AWS_REGION", None)
+    if os.getenv("AWS_REGION"):
+        return os.getenv("AWS_REGION")
+    else:
+        session = boto3.session.Session()
+        return session.region_name
 
-    logger = _get_logger()
-    metrics = _get_metrics()
-    tracer = _get_tracer()
-    PROJECT = os.environ.get("PROJECT")
 
-    SESSION_TABLE_FRIENDLY_NAME = os.environ.get("SESSION_TABLE_FRIENDLY_NAME", "ai-infra")
-    AGENT_CONFIG_TABLE_FRIENDLY_NAME = os.environ.get("AGENT_CONFIG_TABLE_FRIENDLY_NAME", "DevAiSecrets")
-    LEAD_TABLE_FRIENDLY_NAME = os.environ.get("LEAD_TABLE_FRIENDLY_NAME", "DevCommonAccessPolicy")
+class Defaults(Enum):
+    """Default values for environment variables and other constants."""
+
+    # Dynamic values without defaults, must defined in environment variables or central infrastructure
+    SESSION_TABLE = None
+    LEAD_TABLE = None
+    AGENT_CONFIG_TABLE = None
+    EVENTBUS = None
+    SECRET_STORE = None
+
+    # Central Infrastructure and friendly names
+    INFRA_STACK_NAME = "ai-infra"
+    SESSION_TABLE_FRIENDLY_NAME = "OpenbrainSessionTable"
+    LEAD_TABLE_FRIENDLY_NAME = "OpenbrainLeadTable"
+    EVENTBUS_FRIENDLY_NAME = "AiEventBus"
+    AGENT_CONFIG_TABLE_FRIENDLY_NAME = "OpenbrainAgentConfigTable"
+    SECRET_STORE_FRIENDLY_NAME = "OpenbrainSecretStore"
+
+    # Other Values with defaults
     DEFAULT_CLIENT_ID = "public"
+    DEFAULT_PROFILE_NAME = "default"
+    MODE = "LOCAL"
+    PROJECT = "openbrain"
+    LOG_LEVEL = "INFO"
 
-    INFRA_STACK_NAME = os.environ.get("INFRA_STACK_NAME", "DevSessionTable")
-    SECRET_STORE_FRIENDLY_NAME = os.environ.get("SECRET_STORE_FRIENDLY_NAME", "DevAgentConfigTable")
-    EVENT_BUS_FRIENDLY_NAME = os.environ.get("EVENTBUS_FRIENDLY_NAME", "DevLeadTable")
-    SNS_BUSINESS_TOPIC_FRIENDLY_NAME = os.environ.get("BUSINESS_TOPIC_FRIENDLY_NAME", "InfrastructureTopic")
-    SNS_INFRASTRUCTURE_TOPIC_FRIENDLY_NAME = os.environ.get("INFRASTRUCTURE_TOPIC_FRIENDLY_NAME", "BusinessTopic")
-    BOTO_SESSION = boto3.Session() if not UTIL_LOCAL else None
-    AWS_REGION = BOTO_SESSION.region_name if not UTIL_LOCAL else "local"
-    CENTRAL_INFRA_OUTPUTS: Dict[str, str]
-    SESSION_TABLE_NAME: str
-    AGENT_CONFIG_TABLE_NAME: str
-    LEAD_TABLE_NAME: str
-    SNS_BUSINESS_TOPIC_ARN: str
-    SNS_INFRASTRUCTURE_TOPIC_ARN: str
-    # TOP_LEVEL_DOMAIN: str
+    # Lists
+    RECOGNIZED_MODES = ["DEV", "PROD", "LOCAL"]
 
-    @staticmethod
-    def get_central_infra_hints(
-        boto_session: boto3.Session,
-        infra_project_name: str,
-    ) -> Dict[str, str]:
-        f"""Use friendly names get dynamically named resources from {infra_project_name} stack."""
-        if UTIL_LOCAL:
-            central_infra_outputs = {
-                "DevCommonAccessPolicy": "DevCommonAccessPolicy",
-                "DevSessionTable": "DevSessionTable",
-                "DevAgentConfigTable": "DevAgentConfigTable",
-                "DevLeadTable": "DevLeadTable",
-                "ProdAiSecrets": "ProdSecrets",
-                "DevAiSecrets": "DevAiSecrets",
-                "ProdCommonAccessPolicy": "ProdCommonAccessPolicy",
-                "ProdSessionTable": "ProdSessionTable",
-                "ProdAgentConfigTable": "ProdAgentConfigTable",
-                "ProdLeadTable": "ProdLeadTable",
-                "DevEventBus": "DevEventBus",
-                "ProdEventBus": "ProdEventBus",
-                "DevInfraTopic": "InfraTopic",
-                "DevBusinessTopic": "BusinessTopic",
-                "ProdInfraTopic": "InfraTopic",
-                "ProdBusinessTopic": "BusinessTopic",
-                "STAGES": "STAGES",
-                "DomainName": "DomainName",
-                "BusinessTopic": "BusinessTopic",
-                "InfrastructureTopic": "InfrastructureTopic",
-            }
-        else:
-            cf_client = boto_session.client("cloudformation")
-            response = cf_client.describe_stacks(StackName=infra_project_name)
-            central_infra_outputs = {x["OutputKey"]: x["OutputValue"] for x in response["Stacks"][0]["Outputs"]}
 
-        return central_infra_outputs
+@dataclass()
+class Config:
+    MODE: str = field(default=os.environ.get(Defaults.MODE.name, Defaults.MODE.value))
+    AWS_REGION: str = field(default_factory=detect_aws_region)
+    INFRA_STACK_NAME: str = field(default=os.environ.get(Defaults.INFRA_STACK_NAME.name, Defaults.INFRA_STACK_NAME.value))
 
-    CENTRAL_INFRA_OUTPUTS = get_central_infra_hints(
-        boto_session=BOTO_SESSION,
-        infra_project_name=INFRA_STACK_NAME,
+    # DB TABLES
+    SESSION_TABLE: str = field(default=os.environ.get(Defaults.SESSION_TABLE.name, Defaults.SESSION_TABLE.value))
+    LEAD_TABLE: str = field(default=os.environ.get(Defaults.LEAD_TABLE.name, Defaults.LEAD_TABLE.value))
+    AGENT_CONFIG_TABLE: str = field(default=os.environ.get(Defaults.AGENT_CONFIG_TABLE.name, Defaults.AGENT_CONFIG_TABLE.value))
+
+    SESSION_TABLE_FRIENDLY_NAME: str = field(
+        default=os.environ.get(Defaults.SESSION_TABLE_FRIENDLY_NAME.name, Defaults.SESSION_TABLE_FRIENDLY_NAME.value)
+    )
+    LEAD_TABLE_FRIENDLY_NAME: str = field(
+        default=os.environ.get(Defaults.LEAD_TABLE_FRIENDLY_NAME.name, Defaults.LEAD_TABLE_FRIENDLY_NAME.value)
+    )
+    AGENT_CONFIG_TABLE_FRIENDLY_NAME: str = field(
+        default=os.environ.get(
+            Defaults.AGENT_CONFIG_TABLE_FRIENDLY_NAME.name,
+            Defaults.AGENT_CONFIG_TABLE_FRIENDLY_NAME.value,
+        )
     )
 
-    # TOP_LEVEL_DOMAIN = CENTRAL_INFRA_OUTPUTS["DevDomainName"]
-    SESSION_TABLE_NAME = CENTRAL_INFRA_OUTPUTS[SESSION_TABLE_FRIENDLY_NAME]
-    AGENT_CONFIG_TABLE_NAME = CENTRAL_INFRA_OUTPUTS[AGENT_CONFIG_TABLE_FRIENDLY_NAME]
-    LEAD_TABLE_NAME = CENTRAL_INFRA_OUTPUTS[LEAD_TABLE_FRIENDLY_NAME]
-    SECRETS_STORE_ARN = CENTRAL_INFRA_OUTPUTS[SECRET_STORE_FRIENDLY_NAME]
-    SECRETS_STORE_REGION = SECRETS_STORE_ARN.split(":")[3] if not UTIL_LOCAL else "local"
-    SNS_BUSINESS_TOPIC_ARN = CENTRAL_INFRA_OUTPUTS[SNS_BUSINESS_TOPIC_FRIENDLY_NAME]
-    SNS_INFRASTRUCTURE_TOPIC_ARN = CENTRAL_INFRA_OUTPUTS[SNS_INFRASTRUCTURE_TOPIC_FRIENDLY_NAME]
+    # MISC RESOURCES
+    EVENTBUS: str = field(default=os.environ.get(Defaults.EVENTBUS.name, Defaults.EVENTBUS.value))
+    SECRET_STORE: str = field(default=os.environ.get(Defaults.SECRET_STORE.name, Defaults.SECRET_STORE.value))
 
-    @staticmethod
-    def get_secret(
-        boto_session: boto3.Session,
-        sercret_name: str,
-        secrets_store_region: str,
-    ) -> dict:
-        """Get a secret from AWS Secrets Manager."""
-        if UTIL_LOCAL:
-            return os.environ.__dict__
-        # Create a Secrets Manager client
-        else:
-            client = boto_session.client(service_name="secretsmanager", region_name=secrets_store_region)
+    EVENTBUS_FRIENDLY_NAME: str = field(
+        default=os.environ.get(Defaults.EVENTBUS_FRIENDLY_NAME.name, Defaults.EVENTBUS_FRIENDLY_NAME.value)
+    )
+    SECRET_STORE_FRIENDLY_NAME: str = field(
+        default=os.environ.get(Defaults.SECRET_STORE_FRIENDLY_NAME.name, Defaults.SECRET_STORE_FRIENDLY_NAME.value)
+    )
+
+    LOG_LEVEL: str = field(default=os.environ.get(Defaults.LOG_LEVEL.name, Defaults.LOG_LEVEL.value))
+    _central_infra_outputs: dict[str, str] = field(default=None, init=False, repr=False, compare=False, hash=False)
+
+    def __post_init__(self):
+        if self.MODE not in Defaults.RECOGNIZED_MODES.value:
+            raise ValueError(f"Environment variable MODE={self.MODE} must be one of {Defaults.RECOGNIZED_MODES.value}")
+        self.set_dynamic_values()
+
+    def set_dynamic_values(self):
+        _logger = get_logger()
+        dynamic_attributes = [
+            attrib.replace("_FRIENDLY_NAME", "") for attrib in self.__dict__ if attrib.endswith("_FRIENDLY_NAME")
+        ]
+        defaults = asdict(self)
+        undefined_resources = []
+        no_friendly_name = []
+        for attrib in dynamic_attributes:
+            if self.MODE == "LOCAL":
+                logger.info(f"Running in local mode, ignoring dynamic values for {attrib}")
+                continue
+
+            attrib_friendly_name = getattr(self, attrib + "_FRIENDLY_NAME")
+            _logger.info(f"{attrib} not defined in environment variables, searching for friendly name {attrib_friendly_name}")
+
+            # If the friendly name is using the default, emit a warning
+            if attrib_friendly_name == defaults[attrib]:
+                _logger.warning(f"{attrib} is using the default friendly name. Do you have this infrastructure deployed?")
+
+            if not attrib_friendly_name:
+                _logger.error(f"{attrib} not defined in environment variables")
+                print(
+                    f"ERROR: Must define {attrib} in environment variables or define {attrib_friendly_name} and {Defaults.INFRA_STACK_NAME} in environment variables"
+                )
+                no_friendly_name.append((attrib, attrib_friendly_name))
+                continue
+
             try:
-                get_secret_value_response = client.get_secret_value(SecretId=sercret_name)
+                resource_name = self._get_resource_from_central_infra(attrib_friendly_name)
+                setattr(self, attrib, resource_name)
             except ClientError as e:
-                # For a list of exceptions thrown, see
-                # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+                print(f"ERROR: Can't find {attrib} in environment variables or central infrastructure")
+                undefined_resources.append((attrib, attrib_friendly_name))
+        if no_friendly_name or undefined_resources:
+            for attrib, attrib_friendly_name in no_friendly_name:
+                print(
+                    f"ERROR: Must define {attrib} in environment variables or define {attrib_friendly_name} and {Defaults.INFRA_STACK_NAME.value} in environment variables"
+                )
+
+            for attrib, attrib_friendly_name in undefined_resources:
+                print(f"ERROR: Can't find {attrib_friendly_name} values from your central infrastructure")
+
+            raise ObMissingEnvironmentVariable(
+                "Missing environment variables or central infrastructure. Please define all resource names in "
+                "environment OR define the central infrastructure stack name in environment and resource friendly "
+                "names."
+            )
+
+    def _get_resource_from_central_infra(self, friendly_name):
+        logger = get_logger()
+
+        if not self._central_infra_outputs:  # Lazy load
+            boto_session = boto3.Session()
+            cf_client = boto_session.client("cloudformation")
+
+            try:
+                response = cf_client.describe_stacks(StackName=self.INFRA_STACK_NAME)
+                self._central_infra_outputs = {x["OutputKey"]: x["OutputValue"] for x in response["Stacks"][0]["Outputs"]}
+            except ClientError as e:
+                logger.error(
+                    f"Can't find central infrastructure stack {self.INFRA_STACK_NAME} - to find resources from "
+                    f"friendly names. Please define all resource names in the environment OR define the central "
+                    f"infrastructure stack name in the environment and resource friendly names"
+                )
                 raise e
 
-            # Decrypts secret using the associated KMS key.
-            secret = json.loads(get_secret_value_response["SecretString"])
+        return self._central_infra_outputs[friendly_name]
 
-            return secret
 
-    SECRETS = get_secret(BOTO_SESSION, SECRETS_STORE_ARN, SECRETS_STORE_REGION)
+class ConfigSingleton:
+    _instance = None
 
-    # set OpenAI and Promptlayer API keys as env vars
-    CENSOR_TEMPLATE = """You are a censorship agent working with an OpenAI chat model. Your job is to take what I'm
-    going to say to a potential customer and make sure it conforms to the following rules:
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._instance._initialize()
+        return cls._instance
 
-    Only ask for one piece of information at a time. For example, change "Great! Can I have your full name,
-    date of birth, list of..." into "Great! Please provide me with your full name so that I..." Do not disclose the
-    conversational plan to the user. Always be truthful and do not make things up. Maintain the original tone of the
-    message. Given the following message that I'm about to send to the user, please revise it to ensure it follows
-    the rules stated above:
+    @classmethod
+    def _initialize(cls):
+        cls._instance = Config()
 
-    MESSAGE: {message}
 
-    OUTPUT: """
-    FILTER_TEMPLATE = """You are an input cleaning wizard helping me, an OpenAI chat model, to better understand
-    customers. Your task is to clean and rephrase the user input to make it clearer and more understandable for me.
-    Given the following chat history and user message, please rephrase the user message accordingly. Remember to only
-    output the cleaned message with no surrounding text, and always provide a non-empty response. If the message
-    conforms to all of the rules, don't change it at all, and just output it directly. Let's begin!
+logger = get_logger()
+metrics = get_metrics()
+tracer = get_tracer()
+config = ConfigSingleton()
 
-    CHAT_HISTORY: {chat_history}
-
-    MESSAGE: {message}
-
-    OUTPUT: """
-
-    # Testing Templates
-    UNIT_TESTING_TEMPLATE = """You are a unit testing agent working with an OpenAI chat model. Your job is to take
-    the last response from the bot we're testing, which I will give you, and respond as a user might. For this
-    conversation, your goal is: {goal} For this conversation, your disposition is: {disposition}
-
-    Remember to respond as you would to the bot directly, and not as you would to me. Let's begin!
-    MESSAGE: {message}"""
-
-    # Data refinement templates
-    SUMMARIZE_TEMPLATE = """As a health insurance broker, summarize the given health insurance document focusing on
-    information crucial for someone shopping for a plan. Include details like insurance company name, plan names,
-    states offered, deductibles, copays, out-of-pocket maximums, monthly premiums, and any other relevant information
-    if they are in the document. If you see unusually structured data, try to interpret it as a table, as this data
-    is just text extracted from PDFs. Use tables when needed and limit the summary to 2400 words. {text}
-
-    Summary: """
-    REFINE_TEMPLATE = (
-        "Your job is to produce a final summary\n"
-        "We have provided an existing summary up to a certain point: {existing_answer}\n"
-        "We have the opportunity to refine the existing summary"
-        "(only if needed) with some more context below.\n"
-        "------------\n"
-        "{text}\n"
-        "------------\n"
-        "Given the new context, "
-        "If the context isn't useful, return the original summary."
-        "Include details like insurance company name, plan names, states offered, deductibles, copays, out-of-pocket "
-        "maximums, monthly premiums, and any other information relevant to someone shopping for health insurance, "
-        "if found in the context. If you see unusually structured data, try to interpret it as a table, as this data "
-        "is just text extracted from PDFs. Use tables when needed and limit the summary to 2400 words."
-    )
+if __name__ == "__main__":
+    c = config

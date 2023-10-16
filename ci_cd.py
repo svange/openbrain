@@ -13,9 +13,9 @@ load_dotenv()
 LOG_FILE = "ci_cd.log"
 
 CENTRAL_INFRA_STACK_NAME = os.getenv("INFRA_STACK_NAME")
-AWS_PROFILE = os.environ.get("AWS_PROFILE", "default")
+# AWS_PROFILE = os.environ.get("AWS_PROFILE", "personal")
 
-logger = logging.getLogger("CICD Script")
+logger = logging.getLogger("OpenBrain CICD Script")
 logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG)
 
 BOTO_SESSION = boto3.Session()
@@ -77,7 +77,7 @@ def deploy_infra(dry_run: bool = False):
             f"ProdAnthropicKey={os.environ.get('PROD_ANTHROPIC_KEY', 'NONE_PROVIDED')}",
         ],
     ]
-    [command.append(f"--profile={AWS_PROFILE}") for command in commands]
+    # [command.append(f"--profile={AWS_PROFILE}") for command in commands]
 
     if dry_run:
         last_command = commands.pop()

@@ -5,23 +5,36 @@ permissions:
   id-token: write # This is required for requesting the JWT
   contents: read  # This is required for actions/checkout
 env:
-  PROJECT: ${{ github.event.repository.name }}
+  #######################
+  # AWS
+  #######################
+  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_OB_DEPLOYER_ROLE_ARN }}
+  AWS_REGION: us-east-1
+  #######################
+  # GITHUB
+  #######################
   GITHUBORG: ${{ github.actor }}
   REPOSITORYNAME: ${{ github.event.repository.name }}
-
+  #######################
+  # Gradio and Testing
+  #######################
+  MODE: DEV
   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-  AWS_GITHUB_ROLE_ARN: ${{ secrets.AWS_GITHUB_OB_DEPLOYER_ROLE_ARN }}
-
-  AWS_REGION: us-east-1
+  DEV_OB_PROVIDER_API_KEY: ${{ secrets.DEV_OB_PROVIDER_API_KEY }}
+  DEV_API_URL: https://dev.woxomai.com
+  PROD_API_URL: https://www.woxomai.com
+  OB_API_URL: https://api.openbra.in
+  #######################
+  # OpenBrain Util / SAM
+  #######################
+  # Openbrain resource references and SAM template inputs
   INFRA_STACK_NAME: ai-infra
-  SECRET_STORE_FRIENDLY_NAME: DevAiSecrets
-  COMMON_ACCESS_POLICY_FRIENDLY_NAME: DevCommonAccessPolicy
   SESSION_TABLE_FRIENDLY_NAME: DevSessionTable
-  AGENT_CONFIG_TABLE_FRIENDLY_NAME: DevAgentConfigTable
   LEAD_TABLE_FRIENDLY_NAME: DevLeadTable
-  INFRASTRUCTURE_TOPIC_FRIENDLY_NAME: InfrastructureTopic
-  BUSINESS_TOPIC_FRIENDLY_NAME: BusinessTopic
-  EVENTBUS_FRIENDLY_NAME: DevEventBus
+  EVENTBUS_FRIENDLY_NAME: EventBus
+  AGENT_CONFIG_TABLE_FRIENDLY_NAME: DevAgentConfigTable
+  SECRET_STORE_FRIENDLY_NAME: DevAiSecrets
+
 jobs:
   pre-commit-tests:
     uses: ./.github/workflows/pre-commit.yml

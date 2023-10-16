@@ -6,6 +6,7 @@ from cmd import Cmd
 
 from openbrain.agents.gpt_agent import GptAgent
 from openbrain.orm.model_agent_config import AgentConfig
+from openbrain.util import config, get_logger, get_tracer, get_metrics
 
 
 class CliChatBot(Cmd):
@@ -14,7 +15,7 @@ class CliChatBot(Cmd):
 
     def __init__(self):
         super().__init__()
-        self.agent = GptAgent(AgentConfig(client_id="public", profile_name="default"))
+        self.agent = GptAgent(AgentConfig(client_id="public", profile_name=config.DEFAULT_PROFILE_NAME))
 
     def do_quit(self, arg):
         """Quit the chat bot."""
@@ -30,8 +31,8 @@ class CliChatBot(Cmd):
 # Use click to take the optional --client_id parameter (defaults to public) and the --profile_name parameter (defaults to default)
 # Also takes a positional argument "message" which is the message to send to the agent
 @click.command()
-@click.option("--client_id", default="public", help="The client_id to use")
-@click.option("--profile_name", default="default", help="The profile_name to use")
+@click.option("--client_id", default=config.DEFAULT_CLIENT_ID, help="The client_id to use")
+@click.option("--profile_name", default=config.DEFAULT_PROFILE_NAME, help="The profile_name to use")
 @click.argument("message", default="No message provided")
 def cli(client_id, profile_name, message):
     try:

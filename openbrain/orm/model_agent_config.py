@@ -10,7 +10,7 @@ if os.environ.get("ORM_LOCAL"):
 else:
     from openbrain.orm.model_common_base import Recordable as ORMModel
 
-from openbrain.util import Util
+from openbrain.util import config, Defaults
 
 TAgentConfig: TypeAlias = "AgentConfig"
 
@@ -20,7 +20,7 @@ class DefaultSettings(Enum):
 
     # Default Settings
     EMAIL_ADDRESS = "example@email.com"
-    PROFILE_NAME = "default"
+    PROFILE_NAME = Defaults.DEFAULT_PROFILE_NAME.value
     EXECUTOR_MODEL_TYPE = "function"
     EXECUTOR_TEMP = 0.0
     MAX_EXECUTION_TIME = 10
@@ -31,7 +31,7 @@ class DefaultSettings(Enum):
     PROMPT_LAYER_TAGS = ""
     OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
     PROMPTLAYER_API_KEY = os.environ.get("PROMPTLAYER_API_KEY", "")
-    CLIENT_ID = "public"
+    CLIENT_ID = Defaults.DEFAULT_CLIENT_ID.value
 
     # Main Templates
     ICEBREAKER = """Hi! Can I get help you get in touch with an agent?"""
@@ -64,8 +64,8 @@ class AgentConfig(ORMModel, BaseModel):
     """Represents the values for the tunable parameters of the agent"""
 
     class Meta:
-        table_name = Util.AGENT_CONFIG_TABLE_NAME
-        region = Util.AWS_REGION
+        table_name = config.AGENT_CONFIG_TABLE
+        region = config.AWS_REGION
 
     # Tracking
     profile_name: str = Field(
@@ -156,7 +156,7 @@ class AgentConfig(ORMModel, BaseModel):
     def save(self):
         """Save the agent config to the database"""
         return self._save(
-            table_name=Util.AGENT_CONFIG_TABLE_NAME,
+            table_name=config.AGENT_CONFIG_TABLE,
             hash_key_name="client_id",
             range_key_name="profile_name",
             hash_key_value=self.client_id,
@@ -167,7 +167,7 @@ class AgentConfig(ORMModel, BaseModel):
     def get(cls, profile_name, client_id) -> TAgentConfig:
         """Get an agent config from the database"""
         agent_config = cls._get(
-            table_name=Util.AGENT_CONFIG_TABLE_NAME,
+            table_name=config.AGENT_CONFIG_TABLE,
             hash_key_name="client_id",
             range_key_name="profile_name",
             hash_key_value=client_id,

@@ -8,8 +8,7 @@ if os.environ.get("ORM_LOCAL"):
     from openbrain.orm.model_common_base import Ephemeral as ORMModel
 else:
     from openbrain.orm.model_common_base import Recordable as ORMModel
-from openbrain.util import Util
-from openbrain.util import Util
+from openbrain.util import config
 
 
 class Lead(ORMModel):
@@ -39,7 +38,7 @@ class Lead(ORMModel):
     def save(self):
         """Save the Lead object to the database"""
         return self._save(
-            table_name=Util.LEAD_TABLE_NAME,
+            table_name=config.LEAD_TABLE,
             hash_key_name="client_id",
             range_key_name="lead_id",
             hash_key_value=self.client_id,
@@ -50,7 +49,7 @@ class Lead(ORMModel):
     def get(cls, lead_id, client_id):
         """Get a Lead object from the database"""
         lead = cls._get(
-            table_name=Util.LEAD_TABLE_NAME,
+            table_name=config.LEAD_TABLE,
             hash_key_name="client_id",
             range_key_name="lead_id",
             hash_key_value=client_id,

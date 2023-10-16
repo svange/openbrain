@@ -3,6 +3,7 @@ import random
 from faker import Faker
 
 from openbrain.orm.model_chat_message import ChatMessage
+from openbrain.util import config
 
 # from tests.generator_agent_configs import generate_agent_config
 
@@ -17,13 +18,13 @@ def generate_chat_message(try_to_break_shit: bool = False):
     else:
         message = fake.sentence()
         reset = random.choice([True, False])
-        client_id = "public"
+        client_id = config.DEFAULT_CLIENT_ID
 
     return ChatMessage(
         client_id=client_id,
         # session_id=fake.uuid4(),
         reset=reset,
         # agent_config_overrides=generate_agent_config(),
-        agent_config="default",
+        agent_config=config.DEFAULT_PROFILE_NAME,
         message=message,
     )

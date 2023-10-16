@@ -11,20 +11,19 @@ from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.orm.model_chat_message import ChatMessage
 from openbrain.orm.model_chat_session import ChatSession
 from openbrain.orm.model_lead import Lead
-from openbrain.util import Util
+from openbrain.util import config, Defaults
 
 
 load_dotenv()
 
-GRADIO_LOCAL = os.environ.get("GRADIO_LOCAL", False)
-ORM_LOCAL = os.environ.get("ORM_LOCAL", False)
+MODE = config.MODE
 AGENCY_API_KEY = os.environ.get("DEV_OB_PROVIDER_API_KEY", "")
 CHAT_ENDPOINT = os.environ.get("DEV_API_URL", "") + "/chat"
-DEFAULT_CLIENT_ID = "public"
-DEFAULT_PROFILE_NAME = "default"
+DEFAULT_CLIENT_ID = Defaults.DEFAULT_CLIENT_ID.value
+DEFAULT_PROFILE_NAME = Defaults.DEFAULT_PROFILE_NAME.value
 PORT = int(os.environ.get("GRADIO_PORT", 7861))
 
-if ORM_LOCAL:
+if MODE:
     from openbrain.orm.model_common_base import InMemoryDb
 
 logging.basicConfig(filename="app.log", encoding="utf-8", level=logging.DEBUG)
@@ -38,12 +37,12 @@ def chat(message, chat_history, _profile_name, session_state, _client_id):
     chat_message = ChatMessage(client_id=_client_id, reset=False, message=message, session_id=session_id)
 
     response_message = None
-    if GRADIO_LOCAL:
+    if MODE:
         chat_session = ChatSession.get(session_id=session_id, client_id=_client_id)
         agent_state = {
             "frozen_agent_memory": chat_session.frozen_agent_memory,
             "frozen_agent_config": chat_session.frozen_agent_config,
-            "frozen_lead": chat_session.frozen_lead
+            "frozen_lead": chat_session.frozen_lead,
         }
         gpt_agent = GptAgent.deserialize(state=agent_state)
 
@@ -106,7 +105,7 @@ def reset(
     )
 
     response = None
-    if GRADIO_LOCAL:
+    if MODE:
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
         lead = Lead(client_id=_client_id)
@@ -163,7 +162,7 @@ def save(
         return []
 
     if not client_id:
-        client_id = DEFAULT_CLIENT_ID
+        client_id = DEFAULT_CLIENT_ID.value
 
     agent_config = AgentConfig(
         icebreaker=str(_icebreaker),
@@ -230,17 +229,17 @@ def auth(username, password):
 def get_available_profile_names() -> list:
     # logger.warning("get_available_profile_names() is not implemented")
     # Get AgentConfig table
-    if ORM_LOCAL:
+    if MODE:
         try:
-            lst = list(InMemoryDb.instance[Util.AGENT_CONFIG_TABLE_NAME][DEFAULT_CLIENT_ID].keys())
+            lst = list(InMemoryDb.instance[config.AGENT_CONFIG_TABLE][DEFAULT_CLIENT_ID].keys())
             return lst
         except Exception:
             default_config = AgentConfig(client_id=DEFAULT_CLIENT_ID, profile_name=DEFAULT_PROFILE_NAME)
             default_config.save()
-            lst = list(InMemoryDb.instance[Util.AGENT_CONFIG_TABLE_NAME][DEFAULT_CLIENT_ID].keys())
+            lst = list(InMemoryDb.instance[config.AGENT_CONFIG_TABLE][DEFAULT_CLIENT_ID].keys())
             return lst
     else:
-        table = boto3.resource("dynamodb").Table(Util.AGENT_CONFIG_TABLE_NAME)
+        table = boto3.resource("dynamodb").Table(config.AGENT_CONFIG_TABLE)
         # get all items in the table
         response = table.scan()
         # return the profile names with client_id == 'public'
@@ -456,7 +455,7 @@ def main():
     # main_block.launch(auth=auth, auth_message="Please login to continue", share=False, debug=True,
     #                   server_name="0.0.0.0", server_port=7861, show_tips=True, )
     # reset the public default profile
-    agent_config = AgentConfig(client_id=DEFAULT_CLIENT_ID, profile_name="default")
+    agent_config = AgentConfig(client_id=DEFAULT_CLIENT_ID, profile_name=DEFAULT_PROFILE_NAME)
     agent_config.save()
     main_block.launch(
         debug=True,

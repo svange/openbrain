@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import boto3
 import os
 import pathlib
 import pprint
@@ -20,6 +21,7 @@ from tests.generator_chat_messages import generate_chat_message
 from tests.generator_chat_sessions import generate_chat_session
 from tests.generator_leads import generate_lead
 
+
 # load_dotenv()
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 PROMPTLAYER_API_KEY = os.environ.get("PROMPTLAYER_API_KEY")
@@ -38,27 +40,6 @@ tests_dir = pathlib.Path(__file__).parent.absolute()
 test_resources_dir = tests_dir / "resources" / "examples"
 
 NUMBER_OF_SAMPLES = 2
-
-# This is a starting point for the Util get_central_infra_outputs monkeypatch
-
-# if local:
-#     return {
-#         "BusinessTopic": "arn:aws:sns:us-east-1:439638760367:BusinessTopic",
-#         "DevAgentConfigTable": "ai-infra-DevAgentConfigTable-1F6IZ3EU2K1OT",
-#         "DevCommonAccessPolicy": "arn:aws:iam::439638760367:policy/ai-infra-DevCommonAccessPolicy-6kGw6kjxXsVY",
-#         "DevLeadTable": "ai-infra-DevLeadTable-UHN6S4DDO4CC",
-#         "DevSessionTable": "ai-infra-DevSessionTable-XJVE3IUS8XYP",
-#         "DevSecrets": "arn:aws:secretsmanager:us-east-1:439638760367:secret:DevSecrets-4XOAzYudYVIw-aIcEwN",
-#         "EventBus": "AiEventBus",
-#         "InfrastructureTopic": "arn:aws:sns:us-east-1:439638760367:WoxomAiInfrastructureTopic",
-#         "ProdAgentConfigTable": "ai-infra-ProdAgentConfigTable-N0ISRVFPPAT2",
-#         "ProdCommonAccessPolicy": "arn:aws:iam::439638760367:policy/ai-infra-ProdCommonAccessPolicy-xLXTzQ9pqZpY",
-#         "ProdLeadTable": "ai-infra-ProdLeadTable-5WU1V5JXOML0",
-#         "ProdSessionTable": "ai-infra-ProdSessionTable-I9WP0387YBLH",
-#         "ProdWoxomAiSecrets": "arn:aws:secretsmanager:us-east-1:439638760367:secret:ProdSecrets-RhC3o1otv23V-rDsICf",
-#         "DomainName": "samvange.net",
-#         "STAGES": "dev,prod",
-#     }  # TODO, git rid of this in favor of a monkeypatch in test
 
 
 @pytest.fixture
