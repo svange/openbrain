@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.0](https://github.com/svange/openbrain/compare/v0.18.1...v0.19.0) (2023-10-16)
+
+
+### Features
+
+* Fallback scheme for environment variables and better output when initializing. ([d797a8b](https://github.com/svange/openbrain/commit/d797a8bf040485eacf6c3259b30d0bc61dd13b65))
+* Fallback scheme for environment variables and better output when initializing. ([498b92e](https://github.com/svange/openbrain/commit/498b92ec029f1f95e66a74f54d07b74138961f53))
+
+
+### Bug Fixes
+
+* another attempt to fix ci/cd pipeline env vars ([90f0fa0](https://github.com/svange/openbrain/commit/90f0fa0e4b0b7d1f9513cd1f5ef8d9dd7a29bf88))
+* ci/cd env vars for new scheme. ([d5ef7af](https://github.com/svange/openbrain/commit/d5ef7af09ad71c55dde86c3ab24ac99d1e9a03b3))
+* fixed __init__.py environment auto-setup for ci/cd ([3ad3042](https://github.com/svange/openbrain/commit/3ad3042a2350a187162085e44ec8534198868a9e))
+* repaired and improved cli tools except for ob-chat ([3908a38](https://github.com/svange/openbrain/commit/3908a38d9a06be011d11a78b74ba5b88f1df9b43))
+* repaired and improved cli tools except for ob-chat ([c8c0729](https://github.com/svange/openbrain/commit/c8c0729830bc64fa21283a771bbc7e9ab2d5ac90))
+
 ## [0.18.1](https://github.com/svange/openbrain/compare/v0.18.0...v0.18.1) (2023-10-08)
 
 
