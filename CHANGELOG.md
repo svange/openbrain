@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.0](https://github.com/svange/openbrain/compare/v0.20.0...v0.21.0) (2023-10-17)
+
+
+### Features
+
+* demote many info log statements to debug statements ([6dee4bb](https://github.com/svange/openbrain/commit/6dee4bba5c6baf2bc793661d1af0c65403a3a39c))
+
 ## [0.20.0](https://github.com/svange/openbrain/compare/v0.19.0...v0.20.0) (2023-10-17)
 
 
