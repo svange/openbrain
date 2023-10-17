@@ -107,7 +107,7 @@ class GptAgent:
         # self.sensor_chain = self.get_new_censor_chain()
 
         # self._snapshot_state()  # ensure that the memory is saved after every message
-        logger.info("Initialized agent with id: " + self.agent_config.executor_id)
+        logger.debug("Initialized agent with id: " + self.agent_config.executor_id)
 
     def _get_new_agent(self, memory: BaseChatMemory = None) -> AgentExecutor:
         # Get attributes from the preferences dict
@@ -255,7 +255,7 @@ class GptAgent:
 
 def send_lead_event(lead_adaptor):
     """Send lead event to event bus."""
-    logger.info(f"Sending lead event to event bus: {lead_adaptor.__dict__}")
+    logger.debug(f"Sending lead event to event bus: {lead_adaptor.__dict__}")
 
     event_bus_friendly_name = config.EVENTBUS_FRIENDLY_NAME
     event_bus_client = boto3.client("events")
