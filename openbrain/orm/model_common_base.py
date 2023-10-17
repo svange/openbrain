@@ -90,7 +90,7 @@ class Recordable(Serializable, metaclass=ABCMeta):
         """Get an object from the database."""
         dynamodb = cls._get_dynamo_client()
         table = dynamodb.Table(table_name)
-        logger.info(
+        logger.debug(
             f"Retrieving object: {table=} | {hash_key_name=} | {hash_key_value=} | {range_key_name=} | {range_key_value=}"
         )
         response = table.get_item(Key={hash_key_name: hash_key_value, range_key_name: range_key_value})
