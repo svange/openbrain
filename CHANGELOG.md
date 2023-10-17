@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.0](https://github.com/svange/openbrain/compare/v0.19.0...v0.20.0) (2023-10-17)
+
+
+### Features
+
+* remove promptlayer support ([d99e26e](https://github.com/svange/openbrain/commit/d99e26eef05c3eb31dd26f5aed513262282148ae))
+
 ## [0.19.0](https://github.com/svange/openbrain/compare/v0.18.1...v0.19.0) (2023-10-16)
 
 
