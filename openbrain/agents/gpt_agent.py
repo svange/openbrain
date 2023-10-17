@@ -9,7 +9,6 @@ from typing import Any
 import boto3
 import langchain.prompts
 import openai
-import promptlayer
 import requests
 from langchain import LLMChain
 from langchain.agents import AgentExecutor, AgentType, ConversationalChatAgent, initialize_agent
@@ -64,7 +63,8 @@ class CallbackHandler(BaseCallbackHandler):
 
             if not lead_from_db.email_address and not lead_from_db.phone_number:
                 raise AgentToolIncompleteLeadError(
-                    "No email or phone number provided, ask the user for an email address or phone " "number and try again."
+                    "No email or phone number provided, ask the user for an email address or phone "
+                    "number and try again."
                 )
             lead_from_db.sent_by_agent = True
             lead_from_db.save()
@@ -128,36 +128,12 @@ class GptAgent:
         # System Message
         system_message = self.agent_config.system_message
 
-        # Prompt layer tags
-        prompt_layer_tags = ["executor", model_name, self.agent_config.executor_id]
-        if self.agent_config.prompt_layer_tags != "":
-            prompt_layer_tags += self.agent_config.prompt_layer_tags.split(",")
-
         openai.api_key = self.agent_config.openai_api_key
 
-        try:
-            # Prompt layer enabled
-            if self.agent_config.promptlayer_api_key:
-                langchain.debug = True
-                promptlayer.api_key = self.agent_config.promptlayer_api_key
-                llm = PromptLayerChatOpenAI(
-                    pl_tags=prompt_layer_tags,
-                    model_name=model_name,
-                    temperature=model_temp,
-                    verbose=True,
-                )
-            else:
-                llm = ChatOpenAI(
-                    temperature=model_temp,
-                    model_name=model_name,
-                )
-        except Exception:
-            logger.critical("Error Creating PromptLayer LLM, trying non-promptlayer LLM")
-            logger.info(f"{self.agent_config.__dict__}")
-            llm = ChatOpenAI(
-                temperature=model_temp,
-                model_name=model_name,
-            )
+        llm = ChatOpenAI(
+            temperature=model_temp,
+            model_name=model_name,
+        )
 
         # Memory
         self._rw_memory = memory
@@ -192,7 +168,9 @@ class GptAgent:
             )
         else:
             if memory is None:
-                memory = ConversationSummaryBufferMemory(memory_key="chat_history", return_messages=True, llm=llm)
+                memory = ConversationSummaryBufferMemory(
+                    memory_key="chat_history", return_messages=True, llm=llm
+                )
             tools = tools
             prompt = langchain.agents.ConversationalChatAgent.create_prompt(
                 tools=tools,
@@ -250,7 +228,9 @@ class GptAgent:
         """Send message to agent, update lead based on conversation fragment, return LLM response and updated lead"""
 
         try:
-            response_message = self.agent.run(user_message, callbacks=[CallbackHandler(lead=self.lead, agent=self)])
+            response_message = self.agent.run(
+                user_message, callbacks=[CallbackHandler(lead=self.lead, agent=self)]
+            )
 
         except JSONDecodeError as e:
             logger.error(str(e))
