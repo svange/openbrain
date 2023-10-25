@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.0](https://github.com/svange/openbrain/compare/v0.21.0...v0.22.0) (2023-10-25)
+
+
+### Features
+
+* demote many info log statements to debug statements ([fdd91fe](https://github.com/svange/openbrain/commit/fdd91fe55b7bbfbdd4c46742cc11b0b1eca9f492))
+* Importing openbrain now registers ALL subclasses of OBTool in the module tree as available tools for the agent. Choosing a set of tools can now be done in the AgentConfig's tools (list of stings) field. Additionally, the connect with CRM tool now sends an event with the updated lead and agent_config that triggered the tool use to the bus defined in the central infrastructure stack's output. ([6c60d96](https://github.com/svange/openbrain/commit/6c60d961d68a36889334e5d9aa1e306ff5ff4280))
+* remove promptlayer support ([c72b163](https://github.com/svange/openbrain/commit/c72b1632630dd8c5477c990b33b3919964d694a2))
+
+
+### Bug Fixes
+
+* turning relative imports into absolute imports. ([f7f2b19](https://github.com/svange/openbrain/commit/f7f2b19d0e5556ed28c81d235cb4826ae713d77d))
+
 ## [0.21.0](https://github.com/svange/openbrain/compare/v0.20.0...v0.21.0) (2023-10-17)
 
 
