@@ -1,12 +1,10 @@
-from typing import TypeVar
-
 from langchain.tools import BaseTool
 
-from callback_handler import CallbackHandler
-from protocols import OBCallbackHandlerFunctionProtocol
-from model_agent_config import AgentConfig
-from model_lead import Lead
-from obtool import OBTool
+from openbrain.tools.callback_handler import CallbackHandler
+from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
+from openbrain.orm.model_agent_config import AgentConfig
+from openbrain.orm.model_lead import Lead
+from openbrain.tools.obtool import OBTool
 
 from openbrain.util import get_logger
 

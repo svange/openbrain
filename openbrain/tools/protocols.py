@@ -1,7 +1,7 @@
 from typing import Protocol, Any
 
-from model_agent_config import AgentConfig
-from model_lead import Lead
+from openbrain.orm.model_agent_config import AgentConfig
+from openbrain.orm.model_lead import Lead
 
 
 class OBCallbackHandlerFunctionProtocol(Protocol):

@@ -9,13 +9,13 @@ from botocore.exceptions import ParamValidationError
 from langchain.tools.base import BaseTool
 from pydantic import BaseModel, Extra, Field
 
-from model_agent_config import AgentConfig
-from obtool import OBTool
+from openbrain.orm.model_agent_config import AgentConfig
+from openbrain.tools.obtool import OBTool
 from openbrain.agents.exceptions import AgentToolIncompleteLeadError
 from openbrain.orm.event_lead import LeadEvent
 from openbrain.orm.model_lead import Lead
 from openbrain.util import config, get_logger, Defaults
-from protocols import OBCallbackHandlerFunctionProtocol
+from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 
 logger = get_logger()
 

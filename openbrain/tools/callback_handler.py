@@ -3,11 +3,11 @@ from typing import Any, Dict, List, Union
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.schema import BaseMessage, LLMResult, AgentAction, AgentFinish
 
-from model_agent_config import AgentConfig
-from obtool import OBTool
+from openbrain.orm.model_agent_config import AgentConfig
+from openbrain.tools.obtool import OBTool
 from openbrain.orm.model_lead import Lead
 from openbrain.util import get_logger
-from protocols import OBCallbackHandlerFunctionProtocol
+from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 
 logger = get_logger()
 

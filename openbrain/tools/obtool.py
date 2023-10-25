@@ -1,5 +1,5 @@
 from langchain.tools import BaseTool
-from protocols import OBCallbackHandlerFunctionProtocol
+from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 
 
 class OBTool:
