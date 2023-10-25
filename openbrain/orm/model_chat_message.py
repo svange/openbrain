@@ -8,7 +8,6 @@ from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.util import config, Defaults
 
 if config.MODE == Defaults.MODE_LOCAL.value:
-
     from openbrain.orm.model_common_base import Ephemeral as ORMModel
 else:
     from openbrain.orm.model_common_base import Recordable as ORMModel

@@ -91,9 +91,7 @@ class ConnectWithAgentTool(BaseTool):
 
 
 # on_tool_start
-def on_tool_start(
-    lead: Lead, agent_config: AgentConfig, input_str: str, *args, **kwargs
-) -> Any:
+def on_tool_start(lead: Lead, agent_config: AgentConfig, input_str: str, *args, **kwargs) -> Any:
     """Function to run during callback handler's on_llm_start event."""
 
     lead_info_from_conversation = literal_eval(input_str)
@@ -105,15 +103,14 @@ def on_tool_start(
 
         if old_value == new_value:
             logger.warning(
-                f"Ambiguous property for lead, arbitrarily replacing with new value.\n{old_value=}\n{new_value=}" # TODO good place to test accuracy of the LLM agent
+                f"Ambiguous property for lead, arbitrarily replacing with new value.\n{old_value=}\n{new_value=}"  # TODO good place to test accuracy of the LLM agent
             )
 
         setattr(lead, key, new_value)
 
     if not lead.email_address and not lead.phone_number:
         raise AgentToolIncompleteLeadError(
-            "No email or phone number provided, ask the user for an email address or phone "
-            "number and try again."
+            "No email or phone number provided, ask the user for an email address or phone " "number and try again."
         )
     lead.sent_by_agent = True
     lead.save()
@@ -126,9 +123,7 @@ def on_tool_start(
     return lead
 
 
-def on_tool_error(
-    lead: Lead = None, agent_config: AgentConfig = None, agent_input=None, *args, **kwargs
-) -> Any:
+def on_tool_error(lead: Lead = None, agent_config: AgentConfig = None, agent_input=None, *args, **kwargs) -> Any:
     lead.refresh()
     lead.status = "ERROR"
     lead.save()

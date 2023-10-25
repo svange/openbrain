@@ -34,9 +34,7 @@ def chat(message, chat_history, _profile_name, session_state, _client_id):
 
     session_id = session_state["session_id"]
 
-    chat_message = ChatMessage(
-        client_id=_client_id, reset=False, message=message, session_id=session_id
-    )
+    chat_message = ChatMessage(client_id=_client_id, reset=False, message=message, session_id=session_id)
 
     response_message = None
     if MODE == Defaults.MODE_LOCAL.value:
@@ -236,9 +234,7 @@ def get_available_profile_names() -> list:
             lst = list(InMemoryDb.instance[config.AGENT_CONFIG_TABLE][DEFAULT_CLIENT_ID].keys())
             return lst
         except Exception:
-            default_config = AgentConfig(
-                client_id=DEFAULT_CLIENT_ID, profile_name=DEFAULT_PROFILE_NAME
-            )
+            default_config = AgentConfig(client_id=DEFAULT_CLIENT_ID, profile_name=DEFAULT_PROFILE_NAME)
             default_config.save()
             lst = list(InMemoryDb.instance[config.AGENT_CONFIG_TABLE][DEFAULT_CLIENT_ID].keys())
             return lst
@@ -247,11 +243,7 @@ def get_available_profile_names() -> list:
         # get all items in the table
         response = table.scan()
         # return the profile names with client_id == 'public'
-        return [
-            item["profile_name"]
-            for item in response["Items"]
-            if item["client_id"] == DEFAULT_CLIENT_ID
-        ]
+        return [item["profile_name"] for item in response["Items"] if item["client_id"] == DEFAULT_CLIENT_ID]
 
 
 with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
@@ -289,8 +281,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
             with gr.Row() as preferences_row2:
                 prompt_layer_tags = gr.Textbox(
                     label="Prompt Layer Tags",
-                    info="A comma separated string containing the tags to be used in the "
-                    "prompt layer.",
+                    info="A comma separated string containing the tags to be used in the " "prompt layer.",
                 )
                 executor_model_type = gr.Dropdown(
                     choices=[
@@ -368,8 +359,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 profile_name = gr.Dropdown(
                     allow_custom_value=True,
                     label="Profile Name",
-                    info="Enter a unique string to save your preferences. This will "
-                    "allow you to load your preferences later.",
+                    info="Enter a unique string to save your preferences. This will " "allow you to load your preferences later.",
                     choices=get_available_profile_names(),
                 )
                 profile_name.value = DEFAULT_PROFILE_NAME

@@ -31,24 +31,18 @@ class CallbackHandler(BaseCallbackHandler):
         callbacks = [
             getattr(obtool, attr)
             for attr in dir(obtool)
-            if callable(getattr(obtool, attr))
-            and not attr.startswith("__")
-            and attr.startswith("on_")
+            if callable(getattr(obtool, attr)) and not attr.startswith("__") and attr.startswith("on_")
         ]
         self.registered_callbacks.extend(callbacks)
 
-    def run_callbacks(
-        self, handler_method_name: str = "on_tool_start", *args, **kwargs
-    ) -> dict[str, Any]:
+    def run_callbacks(self, handler_method_name: str = "on_tool_start", *args, **kwargs) -> dict[str, Any]:
         """Run all callbacks registered for the handler_method."""
         responses: dict[str, Any] = {}
         for callback in self.registered_callbacks:
             callback_name = callback.__name__
             if callback_name == handler_method_name:
                 logger.info(f"Running callback {callback_name}")
-                responses[callback_name] = callback(
-                    lead=self.lead, agent_config=self.agent_config, *args, **kwargs
-                )
+                responses[callback_name] = callback(lead=self.lead, agent_config=self.agent_config, *args, **kwargs)
         return responses
 
     # Langchain callbacks
@@ -68,9 +62,7 @@ class CallbackHandler(BaseCallbackHandler):
         responses = self.run_callbacks("on_llm_start")
         return responses
 
-    def on_chat_model_start(
-        self, serialized: Dict[str, Any], messages: List[List[BaseMessage]], **kwargs: Any
-    ) -> Any:
+    def on_chat_model_start(self, serialized: Dict[str, Any], messages: List[List[BaseMessage]], **kwargs: Any) -> Any:
         """Run when Chat Model starts running."""
         responses = self.run_callbacks("on_chat_model_start")
         return responses
@@ -90,9 +82,7 @@ class CallbackHandler(BaseCallbackHandler):
         responses = self.run_callbacks("on_llm_error")
         return responses
 
-    def on_chain_start(
-        self, serialized: Dict[str, Any], inputs: Dict[str, Any], **kwargs: Any
-    ) -> Any:
+    def on_chain_start(self, serialized: Dict[str, Any], inputs: Dict[str, Any], **kwargs: Any) -> Any:
         """Run when chain starts running."""
         responses = self.run_callbacks("on_chain_start")
         return responses
