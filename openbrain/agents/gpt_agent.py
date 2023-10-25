@@ -121,9 +121,7 @@ class GptAgent:
             )
         else:
             if memory is None:
-                memory = ConversationSummaryBufferMemory(
-                    memory_key="chat_history", return_messages=True, llm=llm
-                )
+                memory = ConversationSummaryBufferMemory(memory_key="chat_history", return_messages=True, llm=llm)
             prompt = langchain.agents.ConversationalChatAgent.create_prompt(
                 tools=tools,
                 system_message=system_message,
@@ -180,10 +178,7 @@ class GptAgent:
         """Send message to agent, update lead based on conversation fragment, return LLM response and updated lead"""
 
         try:
-            response_message = self.agent.run(
-                user_message,
-                callbacks=[self.toolbox.callback_handler]
-            )
+            response_message = self.agent.run(user_message, callbacks=[self.toolbox.callback_handler])
 
         except JSONDecodeError as e:
             logger.error(str(e))

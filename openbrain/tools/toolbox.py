@@ -11,8 +11,9 @@ from openbrain.util import get_logger
 logger = get_logger()
 
 
-class Toolbox: # invoker
+class Toolbox:  # invoker
     """A toolbox for GptAgents."""
+
     available_tools: dict[str:OBTool] = {}
 
     def __init__(
@@ -37,9 +38,7 @@ class Toolbox: # invoker
                 try:
                     obtool = self.available_tools[tool_name]
                 except KeyError:
-                    raise KeyError(
-                        f"Tool {tool_name} not registered\n Registered tools: {str(self.available_tools)}"
-                    )
+                    raise KeyError(f"Tool {tool_name} not registered\n Registered tools: {str(self.available_tools)}")
 
                 self.callback_handler.register_ob_tool(obtool)
                 self.register_obtool(obtool)
@@ -47,7 +46,6 @@ class Toolbox: # invoker
         else:
             # add all tools
             self.tools = [obtool.tool for obtool in self.available_tools.values()]
-
 
     def _initialize_known_lists(self, *args, **kwargs):
         """Initialize a list for the BaseTool objects and one list each for each langchain callback type."""
