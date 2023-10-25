@@ -23,7 +23,7 @@ DEFAULT_CLIENT_ID = Defaults.DEFAULT_CLIENT_ID.value
 DEFAULT_PROFILE_NAME = Defaults.DEFAULT_PROFILE_NAME.value
 PORT = int(os.environ.get("GRADIO_PORT", 7861))
 
-if MODE == "LOCAL":
+if MODE == Defaults.MODE_LOCAL.value:
     from openbrain.orm.model_common_base import InMemoryDb
 
 logging.basicConfig(filename="app.log", encoding="utf-8", level=logging.DEBUG)
@@ -39,7 +39,7 @@ def chat(message, chat_history, _profile_name, session_state, _client_id):
     )
 
     response_message = None
-    if MODE == "LOCAL":
+    if MODE == Defaults.MODE_LOCAL.value:
         chat_session = ChatSession.get(session_id=session_id, client_id=_client_id)
         agent_state = {
             "frozen_agent_memory": chat_session.frozen_agent_memory,
@@ -107,7 +107,7 @@ def reset(
     )
 
     response = None
-    if MODE == "LOCAL":
+    if MODE == Defaults.MODE_LOCAL.value:
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
         lead = Lead(client_id=_client_id)
@@ -231,7 +231,7 @@ def auth(username, password):
 def get_available_profile_names() -> list:
     # logger.warning("get_available_profile_names() is not implemented")
     # Get AgentConfig table
-    if MODE == "LOCAL":
+    if MODE == Defaults.MODE_LOCAL.value:
         try:
             lst = list(InMemoryDb.instance[config.AGENT_CONFIG_TABLE][DEFAULT_CLIENT_ID].keys())
             return lst

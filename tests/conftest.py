@@ -98,7 +98,7 @@ def default_lead():
 def simple_lead():
     return Lead(
         client_id="simple_lead_test_fixture",
-        session_id=str(ulid.ULID.to_uuid),
+        session_id=str(ulid.ULID().to_uuid()),
         full_name="Buck Futter",
         state_of_residence="FL",
         email_address="test@test.test",

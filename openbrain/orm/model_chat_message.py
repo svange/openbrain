@@ -5,9 +5,9 @@ import os
 from pydantic import BaseModel, Field
 
 from openbrain.orm.model_agent_config import AgentConfig
-from openbrain.util import config
+from openbrain.util import config, Defaults
 
-if config.MODE == "LOCAL":
+if config.MODE == Defaults.MODE_LOCAL.value:
 
     from openbrain.orm.model_common_base import Ephemeral as ORMModel
 else:

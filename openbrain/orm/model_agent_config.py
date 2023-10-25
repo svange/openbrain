@@ -4,9 +4,9 @@ from typing import Optional, TypeAlias
 
 import ulid
 from pydantic import BaseModel, Field
-from openbrain.util import config
+from openbrain.util import config, Defaults
 
-if config.MODE == "LOCAL":
+if config.MODE == Defaults.MODE_LOCAL.value:
     from openbrain.orm.model_common_base import Ephemeral as ORMModel
 else:
     from openbrain.orm.model_common_base import Recordable as ORMModel
@@ -59,6 +59,7 @@ class DefaultSettings(Enum):
         "text-davinci-003",
         "gpt-3.5-turbo-16k",
     ]
+    TOOLS = []
 
 
 class AgentConfig(ORMModel, BaseModel):
@@ -153,6 +154,7 @@ class AgentConfig(ORMModel, BaseModel):
         default=DefaultSettings.EMAIL_ADDRESS.value,
         description="The email address associated with this client",
     )
+    tools: list[str] = Field(default=DefaultSettings.TOOLS.value, description="The tools that this agent will use")
 
     def save(self):
         """Save the agent config to the database"""
