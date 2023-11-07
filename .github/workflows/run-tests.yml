@@ -18,7 +18,7 @@ env:
   #######################
   # Gradio and Testing
   #######################
-  MODE: DEV
+  OB_MODE: DEV
   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
   DEV_OB_PROVIDER_API_KEY: ${{ secrets.DEV_OB_PROVIDER_API_KEY }}
   DEV_API_URL: https://dev.woxomai.com

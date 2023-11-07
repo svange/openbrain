@@ -5,7 +5,7 @@ import ulid
 from pydantic import Field
 from openbrain.util import config, Defaults
 
-if config.MODE == Defaults.MODE_LOCAL.value:
+if config.OB_MODE == Defaults.OB_MODE_LOCAL.value:
     from openbrain.orm.model_common_base import Ephemeral as ORMModel
 else:
     from openbrain.orm.model_common_base import Recordable as ORMModel
@@ -39,7 +39,7 @@ class Lead(ORMModel):
     def save(self):
         """Save the Lead object to the database"""
         return self._save(
-            table_name=config.LEAD_TABLE,
+            table_name=config.LEAD_TABLE_NAME,
             hash_key_name="client_id",
             range_key_name="lead_id",
             hash_key_value=self.client_id,
@@ -50,7 +50,7 @@ class Lead(ORMModel):
     def get(cls, lead_id, client_id):
         """Get a Lead object from the database"""
         lead = cls._get(
-            table_name=config.LEAD_TABLE,
+            table_name=config.LEAD_TABLE_NAME,
             hash_key_name="client_id",
             range_key_name="lead_id",
             hash_key_value=client_id,

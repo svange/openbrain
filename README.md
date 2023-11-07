@@ -296,7 +296,6 @@ sequenceDiagram
     end
 
 
-
 ```
 
 ## Contributing

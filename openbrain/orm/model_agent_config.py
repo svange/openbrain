@@ -6,7 +6,7 @@ import ulid
 from pydantic import BaseModel, Field
 from openbrain.util import config, Defaults
 
-if config.MODE == Defaults.MODE_LOCAL.value:
+if config.OB_MODE == Defaults.OB_MODE_LOCAL.value:
     from openbrain.orm.model_common_base import Ephemeral as ORMModel
 else:
     from openbrain.orm.model_common_base import Recordable as ORMModel
@@ -66,7 +66,7 @@ class AgentConfig(ORMModel, BaseModel):
     """Represents the values for the tunable parameters of the agent"""
 
     class Meta:
-        table_name = config.AGENT_CONFIG_TABLE
+        table_name = config.AGENT_CONFIG_TABLE_NAME
         region = config.AWS_REGION
 
     # Tracking
@@ -159,7 +159,7 @@ class AgentConfig(ORMModel, BaseModel):
     def save(self):
         """Save the agent config to the database"""
         return self._save(
-            table_name=config.AGENT_CONFIG_TABLE,
+            table_name=config.AGENT_CONFIG_TABLE_NAME,
             hash_key_name="client_id",
             range_key_name="profile_name",
             hash_key_value=self.client_id,
@@ -170,7 +170,7 @@ class AgentConfig(ORMModel, BaseModel):
     def get(cls, profile_name, client_id) -> TAgentConfig:
         """Get an agent config from the database"""
         agent_config = cls._get(
-            table_name=config.AGENT_CONFIG_TABLE,
+            table_name=config.AGENT_CONFIG_TABLE_NAME,
             hash_key_name="client_id",
             range_key_name="profile_name",
             hash_key_value=client_id,
