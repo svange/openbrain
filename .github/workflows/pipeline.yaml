@@ -92,7 +92,7 @@ jobs:
 
       - name: Validate artifacts
         run: |
-          sam validate --lint -t .\packaged-testing.yaml
+          sam validate --lint -t packaged-testing.yaml
 
       - uses: actions/upload-artifact@v3
         with:
