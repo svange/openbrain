@@ -13,3 +13,4 @@ dist
 .run/
 poetry.lock
 /.aws-sam/pipeline/pipelineconfig.toml
+/packaged-testing.yaml
