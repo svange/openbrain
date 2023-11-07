@@ -50,7 +50,6 @@ env:
   EVENTBUS_NAME: ${{ secrets.EVENTBUS_NAME }}
   AGENT_CONFIG_TABLE_NAME: ${{ secrets.AGENT_CONFIG_TABLE_NAME }}
   SECRET_STORE_NAME: ${{ secrets.SECRET_STORE_NAME }}
-#  APP_NAME: ${{ secrets.APP_NAME }}
   OB_MODE: ${{ secrets.OB_MODE }}
 
 jobs:

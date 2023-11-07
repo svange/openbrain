@@ -12,7 +12,7 @@ from github import Github, Auth
 import click
 
 
-DEFAULT_SECRET_NAME = "ob-api-secrets"
+DEFAULT_SECRET_NAME = "openbrain-secrets"
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.WARNING)
