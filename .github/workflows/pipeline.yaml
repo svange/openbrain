@@ -43,14 +43,6 @@ env:
   DEV_GOOGLE_KEY: ${{ secrets.DEV_GOOGLE_KEY }}
   DEV_META_KEY: ${{ secrets.DEV_META_KEY }}
   DEV_ANTHROPIC_KEY: ${{ secrets.DEV_ANTHROPIC_KEY }}
-  PROD_OPENAI_KEY: ${{ secrets.PROD_OPENAI_KEY }}
-  PROD_HUGGINGFACE_KEY: ${{ secrets.PROD_HUGGINGFACE_KEY }}
-  PROD_PINECONE_KEY: ${{ secrets.PROD_PINECONE_KEY }}
-  PROD_WEVIATE_KEY: ${{ secrets.PROD_WEVIATE_KEY }}
-  PROD_MILVUS_KEY: ${{ secrets.PROD_MILVUS_KEY }}
-  PROD_GOOGLE_KEY: ${{ secrets.PROD_GOOGLE_KEY }}
-  PROD_META_KEY: ${{ secrets.PROD_META_KEY }}
-  PROD_ANTHROPIC_KEY: ${{ secrets.PROD_ANTHROPIC_KEY }}
 
 #  PROJECT: ${{ secrets.PROJECT }}
   SESSION_TABLE_NAME: ${{ secrets.SESSION_TABLE_NAME }}
@@ -62,6 +54,13 @@ env:
   OB_MODE: ${{ secrets.OB_MODE }}
 
 jobs:
+  pre-commit-tests:
+    uses: ./.github/workflows/pre-commit.yml
+    secrets: inherit
+    permissions:
+      id-token: write
+      contents: read
+
   deploy-infrastructure:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -111,30 +110,216 @@ jobs:
               --parameter-overrides OpenAIKey=${{ env.OPENAI_KEY }} HuggingFaceKey=${{ env.HUGGINGFACE_KEY }} PineconeKey=${{ env.PINECONE_KEY }} WeviateKey=${{ env.WEVIATE_KEY }} MilvusKey=${{ env.MILVUS_KEY }} GoogleKey=${{ env.GOOGLE_KEY }} MetaKey=${{ env.META_KEY }} AnthropicKey=${{ env.ANTHROPIC_KEY }} ResourceSuffix=${{ github.ref_name }}
 
   run-tests:
-    uses: ./.github/workflows/run-tests.yml
     needs: [deploy-infrastructure]
-    secrets: inherit
-    permissions:
-      id-token: write
-      contents: read
+    strategy:
+      matrix:
+#        python-version: [ "3.10", "3.11" ]
+        python-version: [ "3.10" ]
+        platform: [ ubuntu-20.04 ]
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+    - name: Assume the testing pipeline user role
+      uses: aws-actions/configure-aws-credentials@v1-node16
+      with:
+        aws-access-key-id: ${{ env.PIPELINE_USER_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ env.PIPELINE_USER_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.TESTING_REGION }}
+        role-to-assume: ${{ env.TESTING_PIPELINE_EXECUTION_ROLE }}
+        role-session-name: testing-packaging
+        role-duration-seconds: 3600
+        role-skip-session-tagging: true
+
+      #    - name: Configure AWS Credentials
+#      uses: aws-actions/configure-aws-credentials@v4
+#      with:
+#        role-to-assume: ${{ env.AWS_GITHUB_ROLE_ARN }}
+#        aws-region: ${{ env.AWS_REGION }}
+      #----------------------------------------------
+      #       check-out repo and set-up python
+      #----------------------------------------------
+    - name: Check out repository
+      uses: actions/checkout@v4
+    - name: Set up python
+      id: setup-python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+      #----------------------------------------------
+      #  -----  install & configure poetry  -----
+      #----------------------------------------------
+    - name: Install Poetry
+
+      uses: snok/install-poetry@v1
+      with:
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+        installer-parallel: true
+
+      #----------------------------------------------
+      #       load cached venv if cache exists
+      #----------------------------------------------
+    - name: Load cached venv
+      id: cached-poetry-dependencies
+      uses: actions/cache@v3
+      with:
+        path: .venv
+        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
+    - name: Install dependencies
+      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      run: poetry install --no-interaction --no-root
+      #----------------------------------------------
+      # install your root project, if required
+      #----------------------------------------------
+    - name: Install project
+      run: poetry install --no-interaction
+
+      #----------------------------------------------
+      #              run test suite
+      #----------------------------------------------
+    - name: Test with pytest
+      run: |
+        source .venv/bin/activate
+        pytest -m ci_cd
+
+
+
+#  run-tests:
+#    uses: ./.github/workflows/run-tests.yml
+#    needs: [deploy-infrastructure]
+#    secrets: inherit
+#    permissions:
+#      id-token: write
+#      contents: read
 
   publish-prerelease:
     if: github.ref == 'refs/heads/dev'
     needs: [run-tests]
-    uses: ./.github/workflows/publish-prerelease.yml
-    secrets: inherit
-    permissions:
-      id-token: write
-      contents: read
+    runs-on: ubuntu-latest
+    name: Release
+    outputs:
+      tag: ${{ steps.bump.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+#          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        #----------------------------------------------
+        #       check-out repo and set-up python
+        #----------------------------------------------
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up python
+        id: setup-python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+        #----------------------------------------------
+        #  -----  install & configure poetry  -----
+        #----------------------------------------------
+      - name: Install Poetry
+
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+
+        #----------------------------------------------
+        #       load cached venv if cache exists
+        #----------------------------------------------
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+        #----------------------------------------------
+        # install dependencies if cache does not exist
+        #----------------------------------------------
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
+        #----------------------------------------------
+        # install your root project, if required
+        #----------------------------------------------
+      - name: Install project
+        run: poetry install --no-interaction
+
+      - uses: bjoluc/semantic-release-config-poetry@v2
+        with:
+          pypi_token: ${{ secrets.TEST_PYPI_API_KEY }}
+          release_branch: ${{ github.ref_name }}
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          pypi_repository: https://test.pypi.org/legacy/
+
 
   publish-release:
-    if: github.ref == 'refs/heads/main'
-    needs: [ run-tests ]
-    uses: ./.github/workflows/publish-release.yml
-    secrets: inherit
-    permissions:
-      id-token: write
-      contents: read
+    runs-on: ubuntu-latest
+    name: Release
+#    needs: [run-tests]
+    outputs:
+      tag: ${{ steps.bump.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+#          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        #----------------------------------------------
+        #       check-out repo and set-up python
+        #----------------------------------------------
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up python
+        id: setup-python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+        #----------------------------------------------
+        #  -----  install & configure poetry  -----
+        #----------------------------------------------
+      - name: Install Poetry
+
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+
+        #----------------------------------------------
+        #       load cached venv if cache exists
+        #----------------------------------------------
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+        #----------------------------------------------
+        # install dependencies if cache does not exist
+        #----------------------------------------------
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
+        #----------------------------------------------
+        # install your root project, if required
+        #----------------------------------------------
+      - name: Install project
+        run: poetry install --no-interaction
+
+      - uses: bjoluc/semantic-release-config-poetry@v2
+        with:
+          pypi_token: ${{ secrets.PYPI_TOKEN }}
+          release_branch: ${{ github.ref_name }}
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
 
 
 

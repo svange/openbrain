@@ -6,30 +6,39 @@ Parameters:
 
   OpenAIKey:
     Type: String
+    Default: "CHANGE_ME"
     Description: OpenAI API Key for Development
   PromptLayerKey:
     Type: String
+    Default: "CHANGE_ME"
     Description: PromptLayer API Key for Development
   HuggingFaceKey:
     Type: String
+    Default: "CHANGE_ME"
     Description: HuggingFace API Key for Development
   PineconeKey:
     Type: String
+    Default: "CHANGE_ME"
     Description: Pinecone API Key for Development
   WeviateKey:
     Type: String
+    Default: "CHANGE_ME"
     Description: Weviate API Key for Development
   MilvusKey:
     Type: String
+    Default: "CHANGE_ME"
     Description: Milvus API Key for Development
   GoogleKey:
     Type: String
+    Default: "CHANGE_ME"
     Description: Google API Key for Development
   MetaKey:
     Type: String
+    Default: "CHANGE_ME"
     Description: Meta API Key for Development
   AnthropicKey:
     Type: String
+    Default: "CHANGE_ME"
     Description: Anthropic API Key for Development
 
   ObToolEventSource:
