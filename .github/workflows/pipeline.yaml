@@ -98,7 +98,7 @@ jobs:
       - name: Deploy to feature stack in the testing account
         shell: bash
         run: |
-          pipenv run sam deploy \
+          sam deploy \
               --stack-name ${TESTING_STACK_NAME} \
               --template-file packaged-testing.yaml \
               --capabilities CAPABILITY_IAM \
