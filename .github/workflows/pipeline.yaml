@@ -35,14 +35,14 @@ env:
 #  PROD_REGION: us-east-1
 
   # OB API Specific Env Vars
-  DEV_OPENAI_KEY: ${{ secrets.DEV_OPENAI_KEY }}
-  DEV_HUGGINGFACE_KEY: ${{ secrets.DEV_HUGGINGFACE_KEY }}
-  DEV_PINECONE_KEY: ${{ secrets.DEV_PINECONE_KEY }}
-  DEV_WEVIATE_KEY: ${{ secrets.DEV_WEVIATE_KEY }}
-  DEV_MILVUS_KEY: ${{ secrets.DEV_MILVUS_KEY }}
-  DEV_GOOGLE_KEY: ${{ secrets.DEV_GOOGLE_KEY }}
-  DEV_META_KEY: ${{ secrets.DEV_META_KEY }}
-  DEV_ANTHROPIC_KEY: ${{ secrets.DEV_ANTHROPIC_KEY }}
+  OPENAI_KEY: ${{ secrets.DEV_OPENAI_KEY }}
+  HUGGINGFACE_KEY: ${{ secrets.DEV_HUGGINGFACE_KEY }}
+  PINECONE_KEY: ${{ secrets.DEV_PINECONE_KEY }}
+  WEVIATE_KEY: ${{ secrets.DEV_WEVIATE_KEY }}
+  MILVUS_KEY: ${{ secrets.DEV_MILVUS_KEY }}
+  GOOGLE_KEY: ${{ secrets.DEV_GOOGLE_KEY }}
+  META_KEY: ${{ secrets.DEV_META_KEY }}
+  ANTHROPIC_KEY: ${{ secrets.DEV_ANTHROPIC_KEY }}
 
 #  PROJECT: ${{ secrets.PROJECT }}
   SESSION_TABLE_NAME: ${{ secrets.SESSION_TABLE_NAME }}
