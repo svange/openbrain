@@ -79,7 +79,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      Name: !Sub
+      FunctionName: !Sub
         - 'ObCrmToolLambda${ResourceSuffix}'
         - Suffix: !Ref ResourceSuffix
       Runtime: python3.10
