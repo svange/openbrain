@@ -1,0 +1,158 @@
+Globals:
+  Api:
+    OpenApiVersion: 3.0.1
+
+Parameters:
+
+  OpenAIKey:
+    Type: String
+    Description: OpenAI API Key for Development
+  PromptLayerKey:
+    Type: String
+    Description: PromptLayer API Key for Development
+  HuggingFaceKey:
+    Type: String
+    Description: HuggingFace API Key for Development
+  PineconeKey:
+    Type: String
+    Description: Pinecone API Key for Development
+  WeviateKey:
+    Type: String
+    Description: Weviate API Key for Development
+  MilvusKey:
+    Type: String
+    Description: Milvus API Key for Development
+  GoogleKey:
+    Type: String
+    Description: Google API Key for Development
+  MetaKey:
+    Type: String
+    Description: Meta API Key for Development
+  AnthropicKey:
+    Type: String
+    Description: Anthropic API Key for Development
+
+  ObToolEventSource:
+    Description: Matches openbrain.util.Defaults.OBToolEventSource
+    Default: "in.openbra"
+    Type: String
+  ObToolEventDetailType:
+    Description: Matches openbrain.util.Defaults.OBToolEventDetailType
+    Default: "Openbrain Tool Event"
+    Type: String
+  EventBusName:
+    Description: Matches openbrain.util.Defaults.AiEventBus
+    Default: "ObEventBus"
+    Type: String
+  ResourceSuffix:
+    Description: Suffix to append to all resources
+    Type: String
+    Default: ""
+
+Resources:
+  ObToolEventRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: !Sub
+        - 'ObToolEventRule${ResourceSuffix}'
+        - Suffix: !Ref ResourceSuffix
+      EventBusName: !Ref EventBusName
+      EventPattern:
+        source:
+          - !Ref ObToolEventSource
+        detail-type:
+          - !Ref ObToolEventDetailType
+      State: ENABLED
+      Targets:
+        - Arn: !GetAtt ObCrmToolLambda.Arn
+          Id: openbrain-crm-tool-lambda
+  ObCrmToolLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Name: !Sub
+        - 'ObCrmToolLambda${ResourceSuffix}'
+        - Suffix: !Ref ResourceSuffix
+      Runtime: python3.10
+      CodeUri: ./src/tools/send_lead_to_crm.py
+      Events:
+        MyEvent:
+          Type: CloudWatchEvent
+          Properties:
+            Pattern:
+              source:
+                - !Ref ObToolEventSource
+  #######################################################
+  # Tables
+  #######################################################
+  ObSessionTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: client_id
+          AttributeType: S
+        - AttributeName: session_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: client_id
+          KeyType: HASH
+        - AttributeName: session_id
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      TableName: !Sub
+        - 'ObSessionTable${ResourceSuffix}'
+        - Suffix: !Ref ResourceSuffix
+  ObAgentConfigTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: client_id
+          AttributeType: S
+        - AttributeName: profile_name
+          AttributeType: S
+      KeySchema:
+        - AttributeName: client_id
+          KeyType: HASH
+        - AttributeName: profile_name
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      TableName: !Sub
+        - 'ObAgentConfigTable${ResourceSuffix}'
+        - Suffix: !Ref ResourceSuffix
+  ObLeadTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: client_id
+          AttributeType: S
+        - AttributeName: lead_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: client_id
+          KeyType: HASH
+        - AttributeName: lead_id
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      TableName: !Sub
+        - 'ObLeadTable${ResourceSuffix}'
+        - Suffix: !Ref ResourceSuffix
+
+  #######################################################
+  # Secrets
+  #######################################################
+  ObSecrets:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: Secrets for Openbrain Service
+
+      Name: !Sub
+        - 'ObSecrets${ResourceSuffix}'
+        - Suffix: !Ref ResourceSuffix
+      SecretString:
+        Fn::Sub: "{\n  \"openai_api_key\": \"${OpenAIKey}\",\n \"huggingface_api_key\": \"${HuggingFaceKey}\",\n  \"pinecone_api_key\": \"${PineconeKey}\",\n  \"weviate_api_key\": \"${WeviateKey}\",\n  \"milvus_api_key\": \"${MilvusKey}\",\n  \"google_api_key\": \"${GoogleKey}\",\n  \"meta_api_key\": \"${MetaKey}\",\n  \"anthropic_api_key\": \"${AnthropicKey}\"\n}\n"

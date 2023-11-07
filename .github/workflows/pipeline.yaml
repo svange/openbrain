@@ -1,0 +1,417 @@
+name: Pipeline
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'dev'
+      - 'feature**'
+  delete:
+    branches:
+      - 'feature**'
+
+env:
+
+  PIPELINE_USER_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  PIPELINE_USER_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  SAM_TEMPLATE: resources.yaml
+  TESTING_STACK_NAME: OpenBrainPublish
+  TESTING_PIPELINE_EXECUTION_ROLE: ${{ secrets.TESTING_PIPELINE_EXECUTION_ROLE }}
+  TESTING_CLOUDFORMATION_EXECUTION_ROLE: ${{ secrets.TESTING_CLOUDFORMATION_EXECUTION_ROLE }}
+  TESTING_ARTIFACTS_BUCKET: ${{ secrets.TESTING_ARTIFACTS_BUCKET }}
+  # If there are functions with "Image" PackageType in your template,
+  # uncomment the line below and add "--image-repository ${TESTING_IMAGE_REPOSITORY}" to
+  # testing "sam package" and "sam deploy" commands.
+  # TESTING_IMAGE_REPOSITORY = '0123456789.dkr.ecr.region.amazonaws.com/repository-name'
+  TESTING_REGION: us-east-1
+#  PROD_STACK_NAME: ObApi
+#  PROD_PIPELINE_EXECUTION_ROLE: ${{ secrets.PROD_PIPELINE_EXECUTION_ROLE }}
+#  PROD_CLOUDFORMATION_EXECUTION_ROLE: ${{ secrets.PROD_CLOUDFORMATION_EXECUTION_ROLE }}
+#  PROD_ARTIFACTS_BUCKET: ${{ secrets.PROD_ARTIFACTS_BUCKET }}
+#  # If there are functions with "Image" PackageType in your template,
+#  # uncomment the line below and add "--image-repository ${PROD_IMAGE_REPOSITORY}" to
+#  # prod "sam package" and "sam deploy" commands.
+#  # PROD_IMAGE_REPOSITORY = '0123456789.dkr.ecr.region.amazonaws.com/repository-name'
+#  PROD_REGION: us-east-1
+
+  # OB API Specific Env Vars
+  DEV_OPENAI_KEY: ${{ secrets.DEV_OPENAI_KEY }}
+  DEV_HUGGINGFACE_KEY: ${{ secrets.DEV_HUGGINGFACE_KEY }}
+  DEV_PINECONE_KEY: ${{ secrets.DEV_PINECONE_KEY }}
+  DEV_WEVIATE_KEY: ${{ secrets.DEV_WEVIATE_KEY }}
+  DEV_MILVUS_KEY: ${{ secrets.DEV_MILVUS_KEY }}
+  DEV_GOOGLE_KEY: ${{ secrets.DEV_GOOGLE_KEY }}
+  DEV_META_KEY: ${{ secrets.DEV_META_KEY }}
+  DEV_ANTHROPIC_KEY: ${{ secrets.DEV_ANTHROPIC_KEY }}
+  PROD_OPENAI_KEY: ${{ secrets.PROD_OPENAI_KEY }}
+  PROD_HUGGINGFACE_KEY: ${{ secrets.PROD_HUGGINGFACE_KEY }}
+  PROD_PINECONE_KEY: ${{ secrets.PROD_PINECONE_KEY }}
+  PROD_WEVIATE_KEY: ${{ secrets.PROD_WEVIATE_KEY }}
+  PROD_MILVUS_KEY: ${{ secrets.PROD_MILVUS_KEY }}
+  PROD_GOOGLE_KEY: ${{ secrets.PROD_GOOGLE_KEY }}
+  PROD_META_KEY: ${{ secrets.PROD_META_KEY }}
+  PROD_ANTHROPIC_KEY: ${{ secrets.PROD_ANTHROPIC_KEY }}
+
+#  PROJECT: ${{ secrets.PROJECT }}
+  SESSION_TABLE_NAME: ${{ secrets.SESSION_TABLE_NAME }}
+  LEAD_TABLE_NAME: ${{ secrets.LEAD_TABLE_NAME }}
+  EVENTBUS_NAME: ${{ secrets.EVENTBUS_NAME }}
+  AGENT_CONFIG_TABLE_NAME: ${{ secrets.AGENT_CONFIG_TABLE_NAME }}
+  SECRET_STORE_NAME: ${{ secrets.SECRET_STORE_NAME }}
+#  APP_NAME: ${{ secrets.APP_NAME }}
+  OB_MODE: ${{ OB_MODE }}
+
+jobs:
+  deploy-infrastructure:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: aws-actions/setup-sam@v2
+        with:
+          use-installer: true
+
+      - name: Build resources
+        run: sam build --template ${SAM_TEMPLATE} --use-container
+
+      - name: Assume the testing pipeline user role
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-access-key-id: ${{ env.PIPELINE_USER_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.PIPELINE_USER_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.TESTING_REGION }}
+          role-to-assume: ${{ env.TESTING_PIPELINE_EXECUTION_ROLE }}
+          role-session-name: testing-packaging
+          role-duration-seconds: 3600
+          role-skip-session-tagging: true
+
+      - name: Upload artifacts to testing artifact buckets
+        run: |
+          sam package \
+            --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
+            --region ${TESTING_REGION} \
+            --output-template-file packaged-testing.yaml
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: packaged-testing.yaml
+          path: packaged-testing.yaml
+
+      - name: Deploy to feature stack in the testing account
+        shell: bash
+        run: |
+          pipenv run sam deploy \
+              --stack-name ${TESTING_STACK_NAME} \
+              --template-file packaged-testing.yaml \
+              --capabilities CAPABILITY_IAM \
+              --region ${TESTING_REGION} \
+              --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
+              --no-fail-on-empty-changeset \
+              --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE} \
+              --parameter-overrides OpenAIKey=${{ env.OPENAI_KEY }} HuggingFaceKey=${{ env.HUGGINGFACE_KEY }} PineconeKey=${{ env.PINECONE_KEY }} WeviateKey=${{ env.WEVIATE_KEY }} MilvusKey=${{ env.MILVUS_KEY }} GoogleKey=${{ env.GOOGLE_KEY }} MetaKey=${{ env.META_KEY }} AnthropicKey=${{ env.ANTHROPIC_KEY }} ResourceSuffix=${{ github.ref_name }}
+
+  run-tests:
+    uses: ./.github/workflows/run-tests.yml
+    needs: [deploy-infrastructure]
+    secrets: inherit
+    permissions:
+      id-token: write
+      contents: read
+
+  publish-prerelease:
+    if: github.ref == 'refs/heads/dev'
+    needs: [run-tests]
+    uses: ./.github/workflows/publish-prerelease.yml
+    secrets: inherit
+    permissions:
+      id-token: write
+      contents: read
+
+  publish-release:
+    if: github.ref == 'refs/heads/main'
+    needs: [ run-tests ]
+    uses: ./.github/workflows/publish-release.yml
+    secrets: inherit
+    permissions:
+      id-token: write
+      contents: read
+
+
+
+#  test:
+#    if: github.event_name == 'push'
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - run: |
+#          python -m pip install --upgrade poetry
+#          pipenv install --deploy --dev
+#          pipenv requirements > requirements.txt
+#
+#          PYTHONPATH=$PYTHONPATH:$PWD pipenv run pytest -m no_infra
+#        env:
+#          OB_API_MODE: LOCAL
+#
+#
+#  delete-feature:
+#    if: startsWith(github.event.ref, 'feature') && github.event_name == 'delete'
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: aws-actions/setup-sam@v2
+#        with:
+#          use-installer: true
+#
+#      - name: Assume the testing pipeline user role
+#        uses: aws-actions/configure-aws-credentials@v1-node16
+#        with:
+#          aws-access-key-id: ${{ env.PIPELINE_USER_ACCESS_KEY_ID }}
+#          aws-secret-access-key: ${{ env.PIPELINE_USER_SECRET_ACCESS_KEY }}
+#          aws-region: ${{ env.TESTING_REGION }}
+#          role-to-assume: ${{ env.TESTING_PIPELINE_EXECUTION_ROLE }}
+#          role-session-name: testing-packaging
+#          role-duration-seconds: 3600
+#          role-skip-session-tagging: true
+#
+#      - name: Delete feature branch stack
+#        env:
+#          FEATURE_BRANCH_NAME: ${{ github.event.ref }}
+#        run: |
+#          sam delete \
+#            --stack-name $(echo ${FEATURE_BRANCH_NAME##*/} | tr -cd '[a-zA-Z0-9-]') \
+#            --region ${TESTING_REGION} \
+#            --no-prompts
+#
+#  build-and-deploy-feature:
+#    # this stage is triggered only for feature branches (feature*),
+#    # which will build the stack and deploy to a stack named with branch name.
+#    # https://github.com/actions/setup-python
+#    # https://github.com/aws-actions/configure-aws-credentials#notice-node12-deprecation-warning
+#    if: startsWith(github.ref, 'refs/heads/feature')
+#    needs: [test]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: aws-actions/setup-sam@v2
+#        with:
+#          use-installer: true
+#      - run: |
+#          pipenv run chalice package \
+#            --stage $CHALICE_DEV_STAGE \
+#            --merge-template resources.yaml \
+#            --template-format yaml \
+#            --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
+#            packaged-feature
+#
+#          pipenv run sam package \
+#            --template-file packaged-feature/sam.yaml \
+#            --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
+#            --output-template-file transformed-feature.yaml
+#
+#          echo "-------------------------- Show Artifacts --------------------------"
+#          find .
+#          cat transformed-feature.yaml
+#          echo "-------------------------- Show Artifacts --------------------------"
+#
+#          sam validate transformed-feature.yaml
+#
+#      - name: Assume the testing pipeline user role
+#        uses: aws-actions/configure-aws-credentials@v1-node16
+#        with:
+#          aws-access-key-id: ${{ env.PIPELINE_USER_ACCESS_KEY_ID }}
+#          aws-secret-access-key: ${{ env.PIPELINE_USER_SECRET_ACCESS_KEY }}
+#          aws-region: ${{ env.TESTING_REGION }}
+#          role-to-assume: ${{ env.TESTING_PIPELINE_EXECUTION_ROLE }}
+#          role-session-name: feature-deployment
+#          role-duration-seconds: 3600
+#          role-skip-session-tagging: true
+#
+#      - name: Deploy to feature stack in the testing account
+#        shell: bash
+#        run: |
+#          export STACK_NAME=$(echo ${GITHUB_REF##*/} | tr -cd '[a-zA-Z0-9-]')
+#          echo "STACK_NAME: {$STACK_NAME}"
+#          echo "Ensure stack name won't clobber, then remove the exit 1"
+#          exit 1
+#          pipenv run sam deploy \
+#              --stack-name ${STACK_NAME} \
+#              --template-file transformed-feature.yaml \
+#              --capabilities CAPABILITY_IAM \
+#              --region ${TESTING_REGION} \
+#              --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
+#              --no-fail-on-empty-changeset \
+#              --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE} \
+#              --parameter-overrides OpenAIKey=${{ env.OPENAI_KEY }} HuggingFaceKey=${{ env.HUGGINGFACE_KEY }} PineconeKey=${{ env.PINECONE_KEY }} WeviateKey=${{ env.WEVIATE_KEY }} MilvusKey=${{ env.MILVUS_KEY }} GoogleKey=${{ env.GOOGLE_KEY }} MetaKey=${{ env.META_KEY }} AnthropicKey=${{ env.ANTHROPIC_KEY }}
+#
+#
+#
+#  build-and-package:
+#    if: github.ref == 'refs/heads/main'
+#    needs: [test]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: aws-actions/setup-sam@v2
+#        with:
+#          use-installer: true
+#
+#      - name: Assume the testing pipeline user role
+#        uses: aws-actions/configure-aws-credentials@v1-node16
+#        with:
+#          aws-access-key-id: ${{ env.PIPELINE_USER_ACCESS_KEY_ID }}
+#          aws-secret-access-key: ${{ env.PIPELINE_USER_SECRET_ACCESS_KEY }}
+#          aws-region: ${{ env.TESTING_REGION }}
+#          role-to-assume: ${{ env.TESTING_PIPELINE_EXECUTION_ROLE }}
+#          role-session-name: testing-packaging
+#          role-duration-seconds: 3600
+#          role-skip-session-tagging: true
+#
+#      - name: Build resources
+#        run: |
+#          pipenv run chalice package \
+#            --stage $CHALICE_DEV_STAGE \
+#            --merge-template resources.yaml \
+#            --template-format yaml \
+#            --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
+#            packaged-testing
+#
+#          pipenv run sam package \
+#            --template-file packaged-testing/sam.yaml \
+#            --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
+#            --output-template-file transformed-testing.yaml
+#
+#          echo "-------------------------- Show Artifacts --------------------------"
+#          find .
+#          cat transformed-testing.yaml
+#          echo "-------------------------- Show Artifacts --------------------------"
+#
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: packaged-testing
+#          path: packaged-testing
+#
+#      - name: Assume the prod pipeline user role
+#        uses: aws-actions/configure-aws-credentials@v1-node16
+#        with:
+#          aws-access-key-id: ${{ env.PIPELINE_USER_ACCESS_KEY_ID }}
+#          aws-secret-access-key: ${{ env.PIPELINE_USER_SECRET_ACCESS_KEY }}
+#          aws-region: ${{ env.PROD_REGION }}
+#          role-to-assume: ${{ env.PROD_PIPELINE_EXECUTION_ROLE }}
+#          role-session-name: prod-packaging
+#          role-duration-seconds: 3600
+#          role-skip-session-tagging: true
+#
+#      - name: Build resources
+#        run: |
+#         pipenv run chalice package \
+#           --stage ${CHALICE_PROD_STAGE} \
+#           --merge-template resources.yaml \
+#           --template-format yaml \
+#           --s3-bucket ${PROD_ARTIFACTS_BUCKET} \
+#           packaged-prod
+#
+#          pipenv run sam package \
+#            --template-file packaged-prod/sam.yaml \
+#            --s3-bucket ${PROD_ARTIFACTS_BUCKET} \
+#            --output-template-file transformed-prod.yaml
+#
+#          echo "-------------------------- Show Artifacts --------------------------"
+#          find .
+#          cat transformed-prod.yaml
+#          echo "-------------------------- Show Artifacts --------------------------"
+#
+#
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: packaged-prod
+#          path: packaged-prod
+#
+#  deploy-testing:
+#    if: github.ref == 'refs/heads/main'
+#    needs: [build-and-package]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: aws-actions/setup-sam@v2
+#        with:
+#          use-installer: true
+#      - uses: actions/download-artifact@v3
+#        with:
+#          name: packaged-testing.yaml
+#
+#      - name: Assume the testing pipeline user role
+#        uses: aws-actions/configure-aws-credentials@v1-node16
+#        with:
+#          aws-access-key-id: ${{ env.PIPELINE_USER_ACCESS_KEY_ID }}
+#          aws-secret-access-key: ${{ env.PIPELINE_USER_SECRET_ACCESS_KEY }}
+#          aws-region: ${{ env.TESTING_REGION }}
+#          role-to-assume: ${{ env.TESTING_PIPELINE_EXECUTION_ROLE }}
+#          role-session-name: testing-deployment
+#          role-duration-seconds: 3600
+#          role-skip-session-tagging: true
+#
+#      - name: Deploy to testing stage
+#        run: |
+#          sam deploy --stack-name ${TESTING_STACK_NAME} \
+#            --template transformed-testing.yaml \
+#            --capabilities CAPABILITY_IAM \
+#            --region ${TESTING_REGION} \
+#            --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
+#            --no-fail-on-empty-changeset \
+#            --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE} \
+#            --parameter-overrides OpenAIKey=${{ env.DEV_OPENAI_KEY }} HuggingFaceKey=${{ env.DEV_HUGGINGFACE_KEY }} PineconeKey=${{ env.DEV_PINECONE_KEY }} WeviateKey=${{ env.DEV_WEVIATE_KEY }} MilvusKey=${{ env.DEV_MILVUS_KEY }} GoogleKey=${{ env.DEV_GOOGLE_KEY }} MetaKey=${{ env.DEV_META_KEY }} AnthropicKey=${{ env.DEV_ANTHROPIC_KEY }}
+#
+##  integration-test:
+##    if: github.ref == 'refs/heads/main'
+##    needs: [deploy-testing]
+##    runs-on: ubuntu-latest
+##    steps:
+##      - uses: actions/checkout@v3
+##      - name: Run local tests with infrastructure dependencies against dev environment.
+##        run: |
+##          PYTHONPATH=$PYTHONPATH:$PWD pipenv run pytest
+##
+##      - name: Test the API as a user.
+##        run: |
+##          PYTHONPATH=$PYTHONPATH:$PWD pipenv run pytest -m remote_tests
+##
+##
+##
+##  deploy-prod:
+##    if: github.ref == 'refs/heads/main'
+###    needs: [integration-test]
+##    needs: [build-and-package]
+##    runs-on: ubuntu-latest
+##    # Configure GitHub Action Environment to have a manual approval step before deployment to production
+##    # https://docs.github.com/en/actions/reference/environments
+##    # environment: <configured-environment>
+##    steps:
+##      - uses: actions/checkout@v3
+##      - uses: aws-actions/setup-sam@v2
+##        with:
+##          use-installer: true
+##      - uses: actions/download-artifact@v3
+##        with:
+##          name: packaged-prod
+##
+##      - name: Assume the prod pipeline user role
+##        uses: aws-actions/configure-aws-credentials@v1-node16
+##        with:
+##          aws-access-key-id: ${{ env.PIPELINE_USER_ACCESS_KEY_ID }}
+##          aws-secret-access-key: ${{ env.PIPELINE_USER_SECRET_ACCESS_KEY }}
+##          aws-region: ${{ env.PROD_REGION }}
+##          role-to-assume: ${{ env.PROD_PIPELINE_EXECUTION_ROLE }}
+##          role-session-name: prod-deployment
+##          role-duration-seconds: 3600
+##          role-skip-session-tagging: true
+##
+##      - name: Deploy to production stage
+##        run: |
+##          sam deploy --stack-name ${PROD_STACK_NAME} \
+##            --template transformed-prod.yaml \
+##            --capabilities CAPABILITY_IAM \
+##            --region ${PROD_REGION} \
+##            --s3-bucket ${PROD_ARTIFACTS_BUCKET} \
+##            --no-fail-on-empty-changeset \
+##            --role-arn ${PROD_CLOUDFORMATION_EXECUTION_ROLE} \
+##            --parameter-overrides OpenAIKey=${{ env.PROD_OPENAI_KEY }} HuggingFaceKey=${{ env.PROD_HUGGINGFACE_KEY }} PineconeKey=${{ env.PROD_PINECONE_KEY }} WeviateKey=${{ env.PROD_WEVIATE_KEY }} MilvusKey=${{ env.PROD_MILVUS_KEY }} GoogleKey=${{ env.PROD_GOOGLE_KEY }} MetaKey=${{ env.PROD_META_KEY }} AnthropicKey=${{ env.PROD_ANTHROPIC_KEY }}

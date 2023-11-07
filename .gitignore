@@ -12,3 +12,4 @@ dist
 *.egg-info
 .run/
 poetry.lock
+/.aws-sam/pipeline/pipelineconfig.toml

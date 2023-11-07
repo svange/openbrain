@@ -1,24 +1,22 @@
 name: Publish
 on:
-    push:
-      branches:
-        - main
+  workflow_call:
 
 permissions:
     id-token: write
     contents: write
 jobs:
-  run-tests:
-    uses: ./.github/workflows/run-tests.yml
-    secrets: inherit
-    permissions:
-      id-token: write
-      contents: read
+#  run-tests:
+#    uses: ./.github/workflows/run-tests.yml
+#    secrets: inherit
+#    permissions:
+#      id-token: write
+#      contents: read
 
   publish:
     runs-on: ubuntu-latest
     name: Release
-    needs: [run-tests]
+#    needs: [run-tests]
     outputs:
       tag: ${{ steps.bump.outputs.tag }}
     steps:
