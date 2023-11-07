@@ -52,10 +52,11 @@ class Defaults(Enum):
     EVENTBUS_NAME = "ObEventBus"
 
     # DB Tables
-    SESSION_TABLE_NAME = "SessionTable"
-    LEAD_TABLE_NAME = "LeadTable"
-    AGENT_CONFIG_TABLE_NAME = "AgentConfigTable"
-    SECRET_STORE_NAME = "ObSecrets"
+    INFRA_STACK_NAME = "OpenBrain"
+    SESSION_TABLE_NAME = "ObSessionTable"
+    LEAD_TABLE_NAME = "ObLeadTable"
+    AGENT_CONFIG_TABLE_NAME = "ObAgentConfigTable"
+    # SECRET_STORE_NAME = "ObSecrets"
 
     # Other Values with defaults
     DEFAULT_CLIENT_ID = "public"

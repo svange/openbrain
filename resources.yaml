@@ -60,7 +60,7 @@ Resources:
 #    Type: AWS::Events::Rule
 #    Properties:
 #      Name: !Sub
-#        - 'ObToolEventRule${ResourceSuffix}'
+#        - 'ObToolEventRule-${ResourceSuffix}'
 #        - ResourceSuffix: !Ref ResourceSuffix
 #      EventBusName: !Ref EventBusName
 #      EventPattern:
@@ -77,7 +77,7 @@ Resources:
 #    Properties:
 #      Handler: index.handler
 #      FunctionName: !Sub
-#        - 'ObCrmToolLambda${ResourceSuffix}'
+#        - 'ObCrmToolLambda-${ResourceSuffix}'
 #        - ResourceSuffix: !Ref ResourceSuffix
 #      Runtime: python3.10
 #      CodeUri: ./src/tools/send_lead_to_crm.py
@@ -108,7 +108,7 @@ Resources:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
       TableName: !Sub
-        - 'ObSessionTable${ResourceSuffix}'
+        - 'ObSessionTable-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
   ObAgentConfigTable:
     Type: AWS::DynamoDB::Table
@@ -127,7 +127,7 @@ Resources:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
       TableName: !Sub
-        - 'ObAgentConfigTable${ResourceSuffix}'
+        - 'ObAgentConfigTable-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
   ObLeadTable:
     Type: AWS::DynamoDB::Table
@@ -146,7 +146,7 @@ Resources:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
       TableName: !Sub
-        - 'ObLeadTable${ResourceSuffix}'
+        - 'ObLeadTable-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
 
   #######################################################
@@ -158,7 +158,21 @@ Resources:
       Description: Secrets for Openbrain Service
 
       Name: !Sub
-        - 'ObSecrets${ResourceSuffix}'
+        - 'ObSecrets-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
       SecretString:
         Fn::Sub: "{\n  \"openai_api_key\": \"${OpenAIKey}\",\n \"huggingface_api_key\": \"${HuggingFaceKey}\",\n  \"pinecone_api_key\": \"${PineconeKey}\",\n  \"weviate_api_key\": \"${WeviateKey}\",\n  \"milvus_api_key\": \"${MilvusKey}\",\n  \"google_api_key\": \"${GoogleKey}\",\n  \"meta_api_key\": \"${MetaKey}\",\n  \"anthropic_api_key\": \"${AnthropicKey}\"\n}\n"
+
+Outputs:
+    ObSessionTableName:
+        Description: ObSessionTable
+        Value: !Ref ObSessionTable
+    ObAgentConfigTableName:
+        Description: ObAgentConfigTable
+        Value: !Ref ObAgentConfigTable
+    ObLeadTableName:
+        Description: ObLeadTable
+        Value: !Ref ObLeadTable
+    ObSecretsArn:
+        Description: ObSecrets
+        Value: !Ref ObSecrets
