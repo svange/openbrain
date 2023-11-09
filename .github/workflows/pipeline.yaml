@@ -1,4 +1,4 @@
-name: Pipeline
+name: Test and publish OpenBrain
 
 on:
   push:
@@ -31,11 +31,10 @@ env:
   PROD_API_URL: ${{ secrets.PROD_API_URL }}
   OB_API_URL: ${{ secrets.OB_API_URL }}
 
-
-
 jobs:
   pre-commit-tests:
     uses: ./.github/workflows/pre-commit.yml
+    name: Clean and validate commit
     secrets: inherit
     permissions:
       id-token: write
@@ -43,6 +42,7 @@ jobs:
 
   deploy-infrastructure:
     if: github.event_name == 'push'
+    name: Deploy infrastructure needed for testing
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -95,6 +95,7 @@ jobs:
 
   run-tests:
     needs: [deploy-infrastructure, pre-commit-tests]
+    name: Run pytest CI/CD tests
     strategy:
       matrix:
 #        python-version: [ "3.10", "3.11" ]
@@ -180,7 +181,7 @@ jobs:
     if: github.ref == 'refs/heads/dev'
     needs: [run-tests]
     runs-on: ubuntu-latest
-    name: Release
+    name: Publish to PyPi test
     outputs:
       tag: ${{ steps.bump.outputs.tag }}
     steps:
@@ -236,14 +237,14 @@ jobs:
         with:
           pypi_token: ${{ secrets.TEST_PYPI_API_KEY }}
           release_branch: ${{ github.ref_name }}
-          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           pypi_repository: https://test.pypi.org/legacy/
 
 
   publish-release:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    name: Release
+    name: Publish to PyPi
     needs: [run-tests]
     outputs:
       tag: ${{ steps.bump.outputs.tag }}
