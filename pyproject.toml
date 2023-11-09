@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "openbrain"
-version = "1.0.0"
+version = "0.22.0"
 description = "A package to interact with generative AI and build specialized generative AI workflows. This project is dual-licensed under AGPL-3.0 and a separate commercial license."
 authors = ["Samuel Vange <7166607+svange@users.noreply.github.com>"]
 readme = "README.md"
@@ -26,34 +26,18 @@ pep621 = "commitizen.providers:Pep621Provider"
 poetry = "commitizen.providers:PoetryProvider"
 scm = "commitizen.providers:ScmProvider"
 
-
-
-[tool.semantic_release.branches."2.x.x"]
-match = "2.x.x"
-prerelease = true
-prerelease_token = "rc"
-
-
-
-#[tool.semantic_release]
-## From video
-##version_source = "tag" # not in docs
-##commit_version_number = true # not in docs
-#commit_message = "chore(release): release {version}"
-#major_on_zero = true
+[tool.semantic_release]
+major_on_zero = false
 
 # End from video
-#branch = "(main|dev)"
 [tool.semantic_release.branches.main]
 match = "main"
 commit_message = "chore(release): release {version}"
-major_on_zero = true
 prerelease = false
 
 [tool.semantic_release.branches.dev]
 match = "dev"
 commit_message = "chore(pre-release): release {version}"
-major_on_zero = true
 prerelease_token = "dev"
 prerelease = true
 
