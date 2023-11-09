@@ -54,7 +54,7 @@ jobs:
 
     steps:
     - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v4
+      uses: aws-actions/configure-aws-credentials@v4.0.1
       with:
         role-to-assume: ${{ env.AWS_GITHUB_ROLE_ARN }}
         aws-region: ${{ env.AWS_REGION }}
