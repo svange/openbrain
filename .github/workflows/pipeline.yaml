@@ -187,7 +187,6 @@ jobs:
       #----------------------------------------------
     - name: Test with pytest
       run: |
-        source assume-role.sh ${{ env.TESTING_CLOUDFORMATION_EXECUTION_ROLE }} "openbrain-deploy"
         poetry run pytest tests -m ci_cd
 
 #  run-tests:

@@ -5,7 +5,34 @@ Parameters:
     Default: ""
 
 Resources:
-#  ObToolEventRule:
+  #######################################################
+  # Policies
+  #######################################################
+  CommonAccessPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description: Policy to grant common access to DynamoDB tables and CloudFormation outputs
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:GetItem
+              - dynamodb:Query
+              - dynamodb:Scan
+              - dynamodb:PutItem
+              - dynamodb:UpdateItem
+              - dynamodb:DeleteItem
+            Resource:
+              - !GetAtt ObSessionTable.Arn
+              - !GetAtt ObAgentConfigTable.Arn
+              - !GetAtt ObLeadTable.Arn
+          - Effect: Allow
+            Action:
+              - cloudformation:DescribeStacks
+            Resource: !Sub 'arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/${AWS::StackName}/*'
+
+  #  ObToolEventRule:
 #    Type: AWS::Events::Rule
 #    Properties:
 #      Name: !Sub
@@ -108,3 +135,6 @@ Outputs:
     ObLeadTableName:
         Description: ObLeadTable
         Value: !Ref ObLeadTable
+    CommonAccessPolicyArn:
+        Description: CommonAccessPolicyArn
+        Value: !Ref CommonAccessPolicy
