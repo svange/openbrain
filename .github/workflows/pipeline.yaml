@@ -1,4 +1,4 @@
-name: Test and publish OpenBrain
+name: 🐍 Deploy Infrastructure, test, and publish to PyPI
 
 on:
   push:
@@ -30,6 +30,9 @@ env:
   DEV_API_URL: ${{ secrets.DEV_API_URL }}
   PROD_API_URL: ${{ secrets.PROD_API_URL }}
   OB_API_URL: ${{ secrets.OB_API_URL }}
+
+  PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+  PYPI_TEST_TOKEN: ${{ secrets.PYPI_TEST_TOKEN }}
 
 jobs:
   pre-commit-tests:
@@ -235,7 +238,7 @@ jobs:
 
       - uses: bjoluc/semantic-release-config-poetry@v2
         with:
-          pypi_token: ${{ secrets.TEST_PYPI_API_KEY }}
+          pypi_token: ${{ secrets.PYPI_TEST_TOKEN }}
           release_branch: ${{ github.ref_name }}
           github_token: ${{ secrets.GH_TOKEN }}
           pypi_repository: https://test.pypi.org/legacy/
@@ -301,7 +304,7 @@ jobs:
         with:
           pypi_token: ${{ secrets.PYPI_TOKEN }}
           release_branch: ${{ github.ref_name }}
-          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
 
 
 
