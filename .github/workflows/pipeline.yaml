@@ -166,7 +166,7 @@ jobs:
       #----------------------------------------------
     - name: Test with pytest
       run: |
-        poetry run semantic-release.exe --noop version
+        poetry run semantic-release --noop version
         exit 1
         poetry run pytest tests -m ci_cd
 
