@@ -13,6 +13,44 @@ All notable changes to this project will be documented in this file. See
 ### Features
 
 * decoupling from central infrastructure. ([e6409fb](https://github.com/svange/openbrain/commit/e6409fb1f8680c816fce85496723225ae834f36e))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([03552a3](https://github.com/svange/openbrain/commit/03552a32c7b5b03dc2f2e38143ddaf18f41b8c8d))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([0a305d1](https://github.com/svange/openbrain/commit/0a305d12ea31d0dad34e751406df9269f47d483a))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([126b260](https://github.com/svange/openbrain/commit/126b260f6f7639e84843ebfb746cc57eb4b1009b))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([a6cdb94](https://github.com/svange/openbrain/commit/a6cdb94240fea55a8e2a64a7626667931a2a9013))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([ef69fb4](https://github.com/svange/openbrain/commit/ef69fb426c4331998b3e16f1b2077c63f607b6c7))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([376082e](https://github.com/svange/openbrain/commit/376082e2a740f9bdf0dcfba773f52fe84fbf774f))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([b90452f](https://github.com/svange/openbrain/commit/b90452fe43f4cab16d1c36fea0686bb9b89287d4))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([b6abe94](https://github.com/svange/openbrain/commit/b6abe9413ca593d605ae9e3e041d6e2a7d5b4694))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([ea607db](https://github.com/svange/openbrain/commit/ea607db6f2ae425abae38d99c594e14d581a093e))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([1537262](https://github.com/svange/openbrain/commit/1537262493511d26fe874d0533187e4647d2803b))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([9afcfba](https://github.com/svange/openbrain/commit/9afcfba38bb2baac593bbd1d12949f920405b462))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([0f374c2](https://github.com/svange/openbrain/commit/0f374c2bb0a8d63edaa92d979c81ea8617e63f83))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([0c972de](https://github.com/svange/openbrain/commit/0c972de104ac58cc695f2aaa8a86ea27bd4def6a))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([debc6a6](https://github.com/svange/openbrain/commit/debc6a6e00c9ed8ad40eb8665f1525d9fd9cb2e1))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([8d874af](https://github.com/svange/openbrain/commit/8d874afff4d82d5b3500dad6d22c8b3c52ebedb1))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([c841c4b](https://github.com/svange/openbrain/commit/c841c4b5d5d62f3201d38ee405cf2f64394ce9b8))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([bbdcc24](https://github.com/svange/openbrain/commit/bbdcc2472b4b1da62c6f908edb973c8ab255f0ef))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([362de3e](https://github.com/svange/openbrain/commit/362de3eb7a9a072a8636de1c0bdb2437a3b02d4b))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([24a5c05](https://github.com/svange/openbrain/commit/24a5c0547f468d7d363717941ac9026256dfefda))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([03a1bd7](https://github.com/svange/openbrain/commit/03a1bd78a34e2982fc3e5cf193843cf25e28b42b))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([4605b30](https://github.com/svange/openbrain/commit/4605b3001c5b155713864733aa32b938fcc03498))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([193991b](https://github.com/svange/openbrain/commit/193991bb2fdf12fc14f3c4041856a07a5920f609))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([8d785aa](https://github.com/svange/openbrain/commit/8d785aabefdf8f1c0e62b8fad7c15ce970d339e2))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([ded1a38](https://github.com/svange/openbrain/commit/ded1a383357653c93be23bd1265372b34217f4ac))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([5856d15](https://github.com/svange/openbrain/commit/5856d156c7f20f603ba20d00ab3d2909b4a77558))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([a2431aa](https://github.com/svange/openbrain/commit/a2431aa44e48c1623d28b3c7d46b971f4f13b47c))
+* decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([8409770](https://github.com/svange/openbrain/commit/84097705263aaf88f59a85597a9343730b4cc532))
+
+## [1.0.0](https://github.com/svange/openbrain/compare/v0.22.0...v1.0.0) (2023-11-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* Module initialization and required env vars have changed... glad nobody uses this but met yet...
+
+### Features
+
+* decoupling from central infrastructure. ([e6409fb](https://github.com/svange/openbrain/commit/e6409fb1f8680c816fce85496723225ae834f36e))
 * decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([0a305d1](https://github.com/svange/openbrain/commit/0a305d12ea31d0dad34e751406df9269f47d483a))
 * decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([126b260](https://github.com/svange/openbrain/commit/126b260f6f7639e84843ebfb746cc57eb4b1009b))
 * decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([a6cdb94](https://github.com/svange/openbrain/commit/a6cdb94240fea55a8e2a64a7626667931a2a9013))
