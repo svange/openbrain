@@ -187,9 +187,8 @@ jobs:
       #----------------------------------------------
     - name: Test with pytest
       run: |
-        poetry shell
         source assume-role.sh
-        pytest tests -m ci_cd
+        poetry run pytest tests -m ci_cd
 
 #  run-tests:
 #    uses: ./.github/workflows/run-tests.yml
