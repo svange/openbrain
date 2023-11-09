@@ -14,7 +14,4 @@ class TestUtil:
         configs_table_name = config.AGENT_CONFIG_TABLE_NAME
         assert configs_table_name is not None
 
-    def test_get_secrets(self):
-        """Create a new agent config and store it in DynamoDB, then make sure it was stored correctly."""
-        secrets = config.SECRET_STORE_NAME
-        assert secrets is not None
+

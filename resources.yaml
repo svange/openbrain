@@ -152,16 +152,16 @@ Resources:
   #######################################################
   # Secrets
   #######################################################
-  ObSecrets:
-    Type: AWS::SecretsManager::Secret
-    Properties:
-      Description: Secrets for Openbrain Service
-
-      Name: !Sub
-        - 'ObSecrets-${ResourceSuffix}'
-        - ResourceSuffix: !Ref ResourceSuffix
-      SecretString:
-        Fn::Sub: "{\n  \"openai_api_key\": \"${OpenAIKey}\",\n \"huggingface_api_key\": \"${HuggingFaceKey}\",\n  \"pinecone_api_key\": \"${PineconeKey}\",\n  \"weviate_api_key\": \"${WeviateKey}\",\n  \"milvus_api_key\": \"${MilvusKey}\",\n  \"google_api_key\": \"${GoogleKey}\",\n  \"meta_api_key\": \"${MetaKey}\",\n  \"anthropic_api_key\": \"${AnthropicKey}\"\n}\n"
+#  ObSecrets: # TODO Move to OB API
+#    Type: AWS::SecretsManager::Secret
+#    Properties:
+#      Description: Secrets for Openbrain Service
+#
+#      Name: !Sub
+#        - 'ObSecrets-${ResourceSuffix}'
+#        - ResourceSuffix: !Ref ResourceSuffix
+#      SecretString:
+#        Fn::Sub: "{\n  \"openai_api_key\": \"${OpenAIKey}\",\n \"huggingface_api_key\": \"${HuggingFaceKey}\",\n  \"pinecone_api_key\": \"${PineconeKey}\",\n  \"weviate_api_key\": \"${WeviateKey}\",\n  \"milvus_api_key\": \"${MilvusKey}\",\n  \"google_api_key\": \"${GoogleKey}\",\n  \"meta_api_key\": \"${MetaKey}\",\n  \"anthropic_api_key\": \"${AnthropicKey}\"\n}\n"
 
 Outputs:
     ObSessionTableName:
@@ -173,6 +173,6 @@ Outputs:
     ObLeadTableName:
         Description: ObLeadTable
         Value: !Ref ObLeadTable
-    ObSecretsArn:
-        Description: ObSecrets
-        Value: !Ref ObSecrets
+#    ObSecretsArn:  # TODO Move to OB API
+#        Description: ObSecrets
+#        Value: !Ref ObSecrets

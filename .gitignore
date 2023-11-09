@@ -3,7 +3,7 @@
 .venv*/
 __pycache__/
 .pytest_cache/
-.env
+.env*
 *.log
 sdk
 .idea

@@ -47,16 +47,20 @@ def detect_aws_region() -> str:
 
 class Defaults(Enum):
     """Default values for environment variables and other constants."""
+    SESSION_TABLE_NAME = None
+    LEAD_TABLE_NAME = None
+    AGENT_CONFIG_TABLE_NAME = None
+    # SECRET_STORE_NAME = "ObSecrets"
 
     # Central Infrastructure
     EVENTBUS_NAME = "ObEventBus"
 
     # DB Tables
     INFRA_STACK_NAME = "OpenBrain"
-    SESSION_TABLE_NAME = "ObSessionTable"
-    LEAD_TABLE_NAME = "ObLeadTable"
-    AGENT_CONFIG_TABLE_NAME = "ObAgentConfigTable"
-    # SECRET_STORE_NAME = "ObSecrets"
+    SESSION_TABLE_PUBLISHED_NAME = "ObSessionTableName"
+    LEAD_TABLE_PUBLISHED_NAME = "ObLeadTableName"
+    AGENT_CONFIG_TABLE_PUBLISHED_NAME = "ObAgentConfigTableName"
+    # SECRET_STORE_PUBLISHED_NAME = "OpenbrainSecretStore"
 
     # Other Values with defaults
     DEFAULT_CLIENT_ID = "public"
@@ -81,7 +85,7 @@ class Config:
 
     OB_MODE: str = field(default=os.environ.get(Defaults.OB_MODE.name, Defaults.OB_MODE.value))
     AWS_REGION: str = field(default_factory=detect_aws_region)
-    # INFRA_STACK_NAME: str = field(default=os.environ.get(Defaults.INFRA_STACK_NAME.name, Defaults.INFRA_STACK_NAME.value))
+    INFRA_STACK_NAME: str = field(default=os.environ.get(Defaults.INFRA_STACK_NAME.name, Defaults.INFRA_STACK_NAME.value))
 
     # DB TABLES
     SESSION_TABLE_NAME: str = field(
@@ -96,20 +100,31 @@ class Config:
         )
     )
 
+    SESSION_TABLE_PUBLISHED_NAME: str = field(
+        default=os.environ.get(Defaults.SESSION_TABLE_PUBLISHED_NAME.name, Defaults.SESSION_TABLE_PUBLISHED_NAME.value)
+    )
+    LEAD_TABLE_PUBLISHED_NAME: str = field(
+        default=os.environ.get(Defaults.LEAD_TABLE_PUBLISHED_NAME.name, Defaults.LEAD_TABLE_PUBLISHED_NAME.value)
+    )
+    AGENT_CONFIG_TABLE_PUBLISHED_NAME: str = field(
+        default=os.environ.get(
+            Defaults.AGENT_CONFIG_TABLE_PUBLISHED_NAME.name, Defaults.AGENT_CONFIG_TABLE_PUBLISHED_NAME.value)
+    )
+
     # MISC RESOURCES
     EVENTBUS_NAME: str = field(
         default=os.environ.get(Defaults.EVENTBUS_NAME.name, Defaults.EVENTBUS_NAME.value)
     )
-    SECRET_STORE_NAME: str = field(
-        default=os.environ.get(Defaults.SECRET_STORE_NAME.name, Defaults.SECRET_STORE_NAME.value)
-    )
+    # SECRET_STORE_NAME: str = field(
+    #     default=os.environ.get(Defaults.SECRET_STORE_NAME.name, Defaults.SECRET_STORE_NAME.value)
+    # )
 
     LOG_LEVEL: str = field(
         default=os.environ.get(Defaults.LOG_LEVEL.name, Defaults.LOG_LEVEL.value)
     )
-    # _central_infra_outputs: dict[str, str] = field(
-    #     default=None, init=False, repr=False, compare=False, hash=False
-    # )
+    _central_infra_outputs: dict[str, str] = field(
+        default=None, init=False, repr=False, compare=False, hash=False
+    )
 
     # MODES
     RECOGNIZED_OB_MODES: list[str] = field(
@@ -123,78 +138,78 @@ class Config:
             logger.warning(
                 f"Environment variable OB_MODE={self.OB_MODE} must be one of {self.RECOGNIZED_OB_MODES}"
             )
-        # self.set_dynamic_values()
+        self.set_dynamic_values()
 
-    # def set_dynamic_values(self):
-    #     _logger = get_logger()
-    #     dynamic_attributes = [
-    #         attrib.replace("_FRIENDLY_NAME", "") for attrib in self.__dict__ if attrib.endswith("_FRIENDLY_NAME")
-    #     ]
-    #     defaults = asdict(self)
-    #     undefined_resources = []
-    #     no_friendly_name = []
-    #     for attrib in dynamic_attributes:
-    #         if self.OB_MODE == "LOCAL":
-    #             logger.debug(f"Running in local mode, ignoring dynamic values for {attrib}")
-    #             continue
-    #
-    #         attrib_friendly_name = getattr(self, attrib + "_FRIENDLY_NAME")
-    #         _logger.debug(f"{attrib} not defined in environment variables, searching for friendly name {attrib_friendly_name}")
-    #
-    #         # If the friendly name is using the default, emit a warning
-    #         if attrib_friendly_name == defaults[attrib]:
-    #             _logger.debug(f"{attrib} is using the default friendly name. Do you have this infrastructure deployed?")
-    #
-    #         if not attrib_friendly_name:
-    #             _logger.error(f"{attrib} not defined in environment variables")
-    #             print(
-    #                 f"ERROR: Must define {attrib} in environment variables or define {attrib_friendly_name} and {Defaults.INFRA_STACK_NAME} in environment variables"
-    #             )
-    #             no_friendly_name.append((attrib, attrib_friendly_name))
-    #             continue
-    #
-    #         try:
-    #             resource_name = self._get_resource_from_central_infra(attrib_friendly_name)
-    #             setattr(self, attrib, resource_name)
-    #         except ClientError as e:
-    #             print(f"ERROR: Can't find {attrib} in environment variables or central infrastructure")
-    #             undefined_resources.append((attrib, attrib_friendly_name))
-    #
-    #     # Run through accumulated errors and raise
-    #     if no_friendly_name or undefined_resources:
-    #         for attrib, attrib_friendly_name in no_friendly_name:
-    #             print(
-    #                 f"ERROR: Must define {attrib} in environment variables or define {attrib_friendly_name} and {Defaults.INFRA_STACK_NAME.value} in environment variables"
-    #             )
-    #
-    #         for attrib, attrib_friendly_name in undefined_resources:
-    #             print(f"ERROR: Can't find {attrib_friendly_name} values from your central infrastructure")
-    #
-    #         raise ObMissingEnvironmentVariable(
-    #             "Missing environment variables or central infrastructure. Please define all resource names in "
-    #             "environment OR define the central infrastructure stack name in environment and resource friendly "
-    #             "names."
-    #         )
+    def set_dynamic_values(self):
+        _logger = get_logger()
+        dynamic_attributes = [
+            attrib.replace("_PUBLISHED_NAME", "_NAME") for attrib in self.__dict__ if attrib.endswith("_PUBLISHED_NAME")
+        ]
+        defaults = asdict(self)
+        undefined_resources = []
+        no_published_name = []
+        for attrib in dynamic_attributes:
+            if self.OB_MODE == "LOCAL":
+                logger.debug(f"Running in local mode, ignoring dynamic values for {attrib}")
+                continue
 
-    # def _get_resource_from_central_infra(self, friendly_name):
-    #     logger = get_logger()
-    #
-    #     if not self._central_infra_outputs:  # Lazy load
-    #         boto_session = boto3.Session()
-    #         cf_client = boto_session.client("cloudformation")
-    #
-    #         try:
-    #             response = cf_client.describe_stacks(StackName=self.INFRA_STACK_NAME)
-    #             self._central_infra_outputs = {x["OutputKey"]: x["OutputValue"] for x in response["Stacks"][0]["Outputs"]}
-    #         except ClientError as e:
-    #             logger.error(
-    #                 f"Can't find central infrastructure stack {self.INFRA_STACK_NAME} - to find resources from "
-    #                 f"friendly names. Please define all resource names in the environment OR define the central "
-    #                 f"infrastructure stack name in the environment and resource friendly names"
-    #             )
-    #             raise e
-    #
-    #     return self._central_infra_outputs[friendly_name]
+            attrib_published_name = getattr(self, attrib.replace("_NAME", "_PUBLISHED_NAME"))
+            _logger.debug(f"{attrib} not defined in environment variables, searching for friendly name {attrib_published_name}")
+
+            # If the friendly name is using the default, emit a warning
+            if attrib_published_name == defaults[attrib]:
+                _logger.debug(f"{attrib} is using the default friendly name. Do you have this infrastructure deployed?")
+
+            if not attrib_published_name:
+                _logger.error(f"{attrib} not defined in environment variables")
+                print(
+                    f"ERROR: Must define {attrib} in environment variables or define {attrib_published_name} and {Defaults.INFRA_STACK_NAME} in environment variables"
+                )
+                no_published_name.append((attrib, attrib_published_name))
+                continue
+
+            try:
+                resource_name = self._get_resource_from_central_infra(attrib_published_name)
+                setattr(self, attrib, resource_name)
+            except ClientError as e:
+                print(f"ERROR: Can't find {attrib} in environment variables or central infrastructure")
+                undefined_resources.append((attrib, attrib_published_name))
+
+        # Run through accumulated errors and raise
+        if no_published_name or undefined_resources:
+            for attrib, attrib_published_name in no_published_name:
+                print(
+                    f"ERROR: Must define {attrib} in environment variables or define {attrib_published_name} and {Defaults.INFRA_STACK_NAME.value} in environment variables"
+                )
+
+            for attrib, attrib_published_name in undefined_resources:
+                print(f"ERROR: Can't find {attrib_published_name} values from your central infrastructure")
+
+            raise ObMissingEnvironmentVariable(
+                "Missing environment variables or central infrastructure. Please define all resource names in "
+                "environment OR define the central infrastructure stack name in environment and resource friendly "
+                "names."
+            )
+
+    def _get_resource_from_central_infra(self, friendly_name):
+        logger = get_logger()
+
+        if not self._central_infra_outputs:  # Lazy load
+            boto_session = boto3.Session()
+            cf_client = boto_session.client("cloudformation")
+
+            try:
+                response = cf_client.describe_stacks(StackName=self.INFRA_STACK_NAME)
+                self._central_infra_outputs = {x["OutputKey"]: x["OutputValue"] for x in response["Stacks"][0]["Outputs"]}
+            except ClientError as e:
+                logger.error(
+                    f"Can't find central infrastructure stack {self.INFRA_STACK_NAME} - to find resources from "
+                    f"friendly names. Please define all resource names in the environment OR define the central "
+                    f"infrastructure stack name in the environment and resource friendly names"
+                )
+                raise e
+
+        return self._central_infra_outputs[friendly_name]
 
 
 class ConfigSingleton:
