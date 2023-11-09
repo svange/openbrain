@@ -75,7 +75,7 @@ jobs:
       # install your root project, if required
       #----------------------------------------------
     - name: Install project
-      run:
+      run: |
         semantic-release.exe --noop version
         exit 1
 
