@@ -112,7 +112,7 @@ jobs:
               --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
               --no-fail-on-empty-changeset \
               --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE} \
-              --parameter-overrides OpenAIKey=${{ env.OPENAI_KEY }} HuggingFaceKey=${{ env.HUGGINGFACE_KEY }} PineconeKey=${{ env.PINECONE_KEY }} WeviateKey=${{ env.WEVIATE_KEY }} MilvusKey=${{ env.MILVUS_KEY }} GoogleKey=${{ env.GOOGLE_KEY }} MetaKey=${{ env.META_KEY }} AnthropicKey=${{ env.ANTHROPIC_KEY }} ResourceSuffix=${{ github.ref_name }}
+              --parameter-overrides ResourceSuffix=${{ github.ref_name }}
 
   run-tests:
     needs: [deploy-infrastructure, pre-commit-tests]

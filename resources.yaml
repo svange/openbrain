@@ -1,55 +1,4 @@
-#Globals:
-#  Api:
-#    OpenApiVersion: 3.0.1
-
-
 Parameters:
-
-#  OpenAIKey:
-#    Type: String
-#    Default: "CHANGE_ME"
-#    Description: OpenAI API Key for Development
-#  HuggingFaceKey:
-#    Type: String
-#    Default: "CHANGE_ME"
-#    Description: HuggingFace API Key for Development
-#  PineconeKey:
-#    Type: String
-#    Default: "CHANGE_ME"
-#    Description: Pinecone API Key for Development
-#  WeviateKey:
-#    Type: String
-#    Default: "CHANGE_ME"
-#    Description: Weviate API Key for Development
-#  MilvusKey:
-#    Type: String
-#    Default: "CHANGE_ME"
-#    Description: Milvus API Key for Development
-#  GoogleKey:
-#    Type: String
-#    Default: "CHANGE_ME"
-#    Description: Google API Key for Development
-#  MetaKey:
-#    Type: String
-#    Default: "CHANGE_ME"
-#    Description: Meta API Key for Development
-#  AnthropicKey:
-#    Type: String
-#    Default: "CHANGE_ME"
-#    Description: Anthropic API Key for Development
-
-#  ObToolEventSource:
-#    Description: Matches openbrain.util.Defaults.OBToolEventSource
-#    Default: "in.openbra"
-#    Type: String
-#  ObToolEventDetailType:
-#    Description: Matches openbrain.util.Defaults.OBToolEventDetailType
-#    Default: "Openbrain Tool Event"
-#    Type: String
-#  EventBusName:
-#    Description: Matches openbrain.util.Defaults.AiEventBus
-#    Default: "ObEventBus"
-#    Type: String
   ResourceSuffix:
     Description: Suffix to append to all resources
     Type: String
@@ -149,20 +98,6 @@ Resources:
         - 'ObLeadTable-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
 
-  #######################################################
-  # Secrets
-  #######################################################
-#  ObSecrets: # TODO Move to OB API
-#    Type: AWS::SecretsManager::Secret
-#    Properties:
-#      Description: Secrets for Openbrain Service
-#
-#      Name: !Sub
-#        - 'ObSecrets-${ResourceSuffix}'
-#        - ResourceSuffix: !Ref ResourceSuffix
-#      SecretString:
-#        Fn::Sub: "{\n  \"openai_api_key\": \"${OpenAIKey}\",\n \"huggingface_api_key\": \"${HuggingFaceKey}\",\n  \"pinecone_api_key\": \"${PineconeKey}\",\n  \"weviate_api_key\": \"${WeviateKey}\",\n  \"milvus_api_key\": \"${MilvusKey}\",\n  \"google_api_key\": \"${GoogleKey}\",\n  \"meta_api_key\": \"${MetaKey}\",\n  \"anthropic_api_key\": \"${AnthropicKey}\"\n}\n"
-
 Outputs:
     ObSessionTableName:
         Description: ObSessionTable
@@ -173,6 +108,3 @@ Outputs:
     ObLeadTableName:
         Description: ObLeadTable
         Value: !Ref ObLeadTable
-#    ObSecretsArn:  # TODO Move to OB API
-#        Description: ObSecrets
-#        Value: !Ref ObSecrets
