@@ -187,10 +187,7 @@ jobs:
       #----------------------------------------------
     - name: Test with pytest
       run: |
-        source .venv/bin/activate
-        pytest -m ci_cd
-
-
+        poetry run pytest tests -m ci_cd
 
 #  run-tests:
 #    uses: ./.github/workflows/run-tests.yml
