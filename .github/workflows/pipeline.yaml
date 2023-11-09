@@ -1,4 +1,4 @@
-name: 🐍 Deploy Infrastructure, test, and publish to PyPI
+name: CI-OpenBrain 🐍 Deploy Infrastructure, test, and publish to PyPI
 
 on:
   push:
@@ -38,7 +38,7 @@ jobs:
 
   pre-commit-tests:
     uses: ./.github/workflows/pre-commit.yml
-    name: Clean and validate commit
+    name: Enforce commit standards
     secrets: inherit
     permissions:
       id-token: write
@@ -46,7 +46,7 @@ jobs:
 
   deploy-infrastructure:
     if: github.event_name == 'push'
-    name: Deploy infrastructure needed for testing
+    name: Deploy infrastructure
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -68,7 +68,7 @@ jobs:
           role-duration-seconds: 3600
           role-skip-session-tagging: true
 
-      - name: Upload artifacts to testing artifact buckets
+      - name: Upload artifacts
         run: |
           sam package \
             --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
@@ -84,7 +84,7 @@ jobs:
           name: packaged-testing.yaml
           path: packaged-testing.yaml
 
-      - name: Deploy to feature stack in the testing account
+      - name: Deploy to feature stack
         shell: bash
         run: |
           sam deploy \
@@ -119,11 +119,6 @@ jobs:
         role-duration-seconds: 3600
         role-skip-session-tagging: true
 
-      #    - name: Configure AWS Credentials
-#      uses: aws-actions/configure-aws-credentials@v4
-#      with:
-#        role-to-assume: ${{ env.AWS_GITHUB_ROLE_ARN }}
-#        aws-region: ${{ env.AWS_REGION }}
       #----------------------------------------------
       #       check-out repo and set-up python
       #----------------------------------------------
@@ -171,15 +166,9 @@ jobs:
       #----------------------------------------------
     - name: Test with pytest
       run: |
+        poetry run semantic-release.exe --noop version
+        exit 1
         poetry run pytest tests -m ci_cd
-
-#  run-tests:
-#    uses: ./.github/workflows/run-tests.yml
-#    needs: [deploy-infrastructure]
-#    secrets: inherit
-#    permissions:
-#      id-token: write
-#      contents: read
 
   publish-prerelease:
     if: github.ref == 'refs/heads/dev'
@@ -237,10 +226,9 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction
 
-      - uses: bjoluc/semantic-release-config-poetry@v2
+      - uses: bjoluc/semantic-release-config-poetry@v2.2.0
         with:
           pypi_token: ${{ secrets.PYPI_TEST_TOKEN }}
-          release_branch: dev
           github_token: ${{ secrets.GH_TOKEN }}
           pypi_repository: https://test.pypi.org/legacy/
         env:
@@ -303,7 +291,7 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction
 
-      - uses: bjoluc/semantic-release-config-poetry@v2
+      - uses: bjoluc/semantic-release-config-poetry@v2.2.0
         with:
           pypi_token: ${{ secrets.PYPI_TOKEN }}
           release_branch: ${{ github.ref_name }}
