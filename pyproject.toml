@@ -31,8 +31,10 @@ scm = "commitizen.providers:ScmProvider"
 #version_source = "tag" # not in docs
 #commit_version_number = true # not in docs
 commit_message = "chore(release): release {version}"
+major_on_zero = true
+
 # End from video
-branch = "(main|dev)"
+#branch = "(main|dev)"
 [tool.semantic_release.branches.main]
 match = "main"
 prerelease_token = "rc"
@@ -51,7 +53,7 @@ version_variable = [
 ]
 build_command = "pip install poetry && poetry build"
 #logging_use_named_masks = true
-major_on_zero = true
+#major_on_zero = true
 tag_format = "v{version}"
 #exclude_commit_patterns = [
 #    'skip: ',
