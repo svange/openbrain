@@ -45,7 +45,7 @@ def send_event(lead_event: LeadEvent, *args, **kwargs) -> Any:
     logger.debug(f"Sending lead to Lead Momentum: {lead_event.__dict__}")
 
     # Send event to eventbus
-    event_bus_friendly_name = config.EVENTBUS_FRIENDLY_NAME
+    event_bus_friendly_name = config.EVENTBUS_NAME
     event_bus_client = boto3.client("events")
     response = None
     entries = [
@@ -61,7 +61,7 @@ def send_event(lead_event: LeadEvent, *args, **kwargs) -> Any:
         response = event_bus_client.put_events(Entries=entries)
         print(response["Entries"])
     except ParamValidationError:
-        if config.MODE == Defaults.MODE_LOCAL.value:
+        if config.OB_MODE == Defaults.OB_MODE_LOCAL.value:
             print(f"LOCAL_MODE: Can't sendto CRM in local MODE, skipping.")
         else:
             raise

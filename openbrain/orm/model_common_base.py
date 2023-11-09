@@ -36,7 +36,7 @@ class Serializable(BaseModel, metaclass=ABCMeta):
     class Meta:
         """PynamoDB configuration for the Serializable class"""
 
-        table_name = config.AGENT_CONFIG_TABLE
+        table_name = config.AGENT_CONFIG_TABLE_NAME
         region = config.AWS_REGION
 
     @abstractmethod

@@ -3,7 +3,7 @@
 .venv*/
 __pycache__/
 .pytest_cache/
-.env
+.env*
 *.log
 sdk
 .idea
@@ -12,3 +12,5 @@ dist
 *.egg-info
 .run/
 poetry.lock
+/.aws-sam/pipeline/pipelineconfig.toml
+/packaged-testing.yaml

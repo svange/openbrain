@@ -5,7 +5,7 @@ import ulid
 from pydantic import Field
 from openbrain.util import config, Defaults
 
-if config.MODE == Defaults.MODE_LOCAL.value:
+if config.OB_MODE == Defaults.OB_MODE_LOCAL.value:
     from openbrain.orm.model_common_base import Ephemeral as ORMModel
 else:
     from openbrain.orm.model_common_base import Recordable as ORMModel
@@ -31,7 +31,7 @@ class ChatSession(ORMModel):
     def save(self):
         """Save the ChatSession object to the database"""
         return self._save(
-            table_name=config.SESSION_TABLE,
+            table_name=config.SESSION_TABLE_NAME,
             hash_key_name="client_id",
             range_key_name="session_id",
             hash_key_value=self.client_id,
@@ -42,7 +42,7 @@ class ChatSession(ORMModel):
     def get(cls, session_id, client_id) -> Optional["ChatSession"]:
         """Get a ChatSession object from the database"""
         agent_config = cls._get(
-            table_name=config.SESSION_TABLE,
+            table_name=config.SESSION_TABLE_NAME,
             hash_key_name="client_id",
             range_key_name="session_id",
             hash_key_value=client_id,

@@ -1,0 +1,140 @@
+Parameters:
+  ResourceSuffix:
+    Description: Suffix to append to all resources
+    Type: String
+    Default: ""
+
+Resources:
+  #######################################################
+  # Policies
+  #######################################################
+  CommonAccessPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description: Policy to grant common access to DynamoDB tables and CloudFormation outputs
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:GetItem
+              - dynamodb:Query
+              - dynamodb:Scan
+              - dynamodb:PutItem
+              - dynamodb:UpdateItem
+              - dynamodb:DeleteItem
+            Resource:
+              - !GetAtt ObSessionTable.Arn
+              - !GetAtt ObAgentConfigTable.Arn
+              - !GetAtt ObLeadTable.Arn
+          - Effect: Allow
+            Action:
+              - cloudformation:DescribeStacks
+            Resource: !Sub 'arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/${AWS::StackName}/*'
+
+  #  ObToolEventRule:
+#    Type: AWS::Events::Rule
+#    Properties:
+#      Name: !Sub
+#        - 'ObToolEventRule-${ResourceSuffix}'
+#        - ResourceSuffix: !Ref ResourceSuffix
+#      EventBusName: !Ref EventBusName
+#      EventPattern:
+#        source:
+#          - !Ref ObToolEventSource
+#        detail-type:
+#          - !Ref ObToolEventDetailType
+#      State: ENABLED
+#      Targets:
+#        - Arn: !GetAtt ObCrmToolLambda.Arn
+#          Id: openbrain-crm-tool-lambda
+#  ObCrmToolLambda:
+#    Type: AWS::Serverless::Function
+#    Properties:
+#      Handler: index.handler
+#      FunctionName: !Sub
+#        - 'ObCrmToolLambda-${ResourceSuffix}'
+#        - ResourceSuffix: !Ref ResourceSuffix
+#      Runtime: python3.10
+#      CodeUri: ./src/tools/send_lead_to_crm.py
+#      Events:
+#        MyEvent:
+#          Type: CloudWatchEvent
+#          Properties:
+#            Pattern:
+#              source:
+#                - !Ref ObToolEventSource
+  #######################################################
+  # Tables
+  #######################################################
+  ObSessionTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: client_id
+          AttributeType: S
+        - AttributeName: session_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: client_id
+          KeyType: HASH
+        - AttributeName: session_id
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      TableName: !Sub
+        - 'ObSessionTable-${ResourceSuffix}'
+        - ResourceSuffix: !Ref ResourceSuffix
+  ObAgentConfigTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: client_id
+          AttributeType: S
+        - AttributeName: profile_name
+          AttributeType: S
+      KeySchema:
+        - AttributeName: client_id
+          KeyType: HASH
+        - AttributeName: profile_name
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      TableName: !Sub
+        - 'ObAgentConfigTable-${ResourceSuffix}'
+        - ResourceSuffix: !Ref ResourceSuffix
+  ObLeadTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: client_id
+          AttributeType: S
+        - AttributeName: lead_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: client_id
+          KeyType: HASH
+        - AttributeName: lead_id
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      TableName: !Sub
+        - 'ObLeadTable-${ResourceSuffix}'
+        - ResourceSuffix: !Ref ResourceSuffix
+
+Outputs:
+    ObSessionTableName:
+        Description: ObSessionTable
+        Value: !Ref ObSessionTable
+    ObAgentConfigTableName:
+        Description: ObAgentConfigTable
+        Value: !Ref ObAgentConfigTable
+    ObLeadTableName:
+        Description: ObLeadTable
+        Value: !Ref ObLeadTable
+    CommonAccessPolicyArn:
+        Description: CommonAccessPolicyArn
+        Value: !Ref CommonAccessPolicy
