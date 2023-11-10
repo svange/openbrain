@@ -2,7 +2,18 @@
 
 
 
+## v0.23.0-dev.7 (2023-11-10)
+
+### Fix
+
+* fix: tuning ci pipeline ([`7f9df0d`](https://github.com/svange/openbrain/commit/7f9df0d740bead7856b52a02d4ff37bd92b2ebe1))
+
+
 ## v0.23.0-dev.6 (2023-11-10)
+
+### Chore
+
+* chore(release): release 0.23.0-dev.6 ([`4c62d40`](https://github.com/svange/openbrain/commit/4c62d405a0159b310b72414139d6069294f594cc))
 
 ### Fix
 
