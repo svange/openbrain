@@ -73,7 +73,35 @@ All notable changes to this project will be documented in this file. See
 
 
 
+## v0.23.0-dev.6 (2023-11-10)
+
+### Fix
+
+* fix: tuning ci pipeline ([`6330be2`](https://github.com/svange/openbrain/commit/6330be25eff009ac9602b3855795e047b35c1e21))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`c1cf7d4`](https://github.com/svange/openbrain/commit/c1cf7d4dfc94682f2b0be34af189b192904660b2))
+
+
+## v0.23.0-dev.5 (2023-11-10)
+
+### Chore
+
+* chore(release): release 0.23.0-dev.5 [skip ci] ([`8960f7e`](https://github.com/svange/openbrain/commit/8960f7e610a79b00dc390563aaa9a6d8c070828e))
+
+### Fix
+
+* fix: tuning ci pipeline ([`971cfbd`](https://github.com/svange/openbrain/commit/971cfbded58aa64a358ae64ecd18616e350806d4))
+
+* fix: adding skip ci to automatic commit messages ([`5c07136`](https://github.com/svange/openbrain/commit/5c07136c5d214a8d6050071f03f0236ef4087306))
+
+
 ## v0.23.0-dev.4 (2023-11-10)
+
+### Chore
+
+* chore(release): release 0.23.0-dev.4 [skip ci] ([`ec457eb`](https://github.com/svange/openbrain/commit/ec457ebc3a7a96069d2f7fbef49ec7d31fdff1c7))
 
 ### Fix
 
