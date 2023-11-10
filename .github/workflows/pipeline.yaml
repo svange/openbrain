@@ -37,6 +37,7 @@ env:
 jobs:
   pre-commit-tests:
     uses: ./.github/workflows/pre-commit.yml
+    if: "!contains(github.event.head_commit.message, 'chore(release):')"
     name: Enforce commit standards
     secrets: inherit
     permissions:
@@ -44,7 +45,7 @@ jobs:
       contents: read
 
   deploy-infrastructure:
-    if: github.event_name == 'push'
+    if: "!contains(github.event.head_commit.message, 'chore(release):')"
 
     name: Deploy infrastructure
     runs-on: ubuntu-latest
@@ -99,6 +100,7 @@ jobs:
 
   run-tests:
     needs: [deploy-infrastructure, pre-commit-tests]
+    if: "!contains(github.event.head_commit.message, 'chore(release):')"
     name: Run pytest CI/CD tests
     strategy:
       matrix:
