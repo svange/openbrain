@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/svange/openbrain/compare/v1.0.0...v1.0.1) (2023-11-10)
+
+
+### Bug Fixes
+
+* skipping unnecessary steps in pipeline ([6cff920](https://github.com/svange/openbrain/commit/6cff92072b366d2628d0694cf5267007cf0deb91))
+* skipping unnecessary steps in pipeline ([1c371d9](https://github.com/svange/openbrain/commit/1c371d9c5dccd286b1913f301d970d53be9714e6))
+* skipping unnecessary steps in pipeline ([4e3a67f](https://github.com/svange/openbrain/commit/4e3a67f2dca2f6cb453d8cbcb5e5f8063c0253a1))
+* tuning ci pipeline ([7f9df0d](https://github.com/svange/openbrain/commit/7f9df0d740bead7856b52a02d4ff37bd92b2ebe1))
+* tuning ci pipeline ([6330be2](https://github.com/svange/openbrain/commit/6330be25eff009ac9602b3855795e047b35c1e21))
+* tuning ci pipeline ([971cfbd](https://github.com/svange/openbrain/commit/971cfbded58aa64a358ae64ecd18616e350806d4))
+
 ## [1.0.0](https://github.com/svange/openbrain/compare/v0.22.0...v1.0.0) (2023-11-10)
 
 
