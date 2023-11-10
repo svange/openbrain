@@ -2,7 +2,22 @@
 
 
 
+## v0.23.0-dev.8 (2023-11-10)
+
+### Fix
+
+* fix: skipping unnecessary steps in pipeline ([`6cff920`](https://github.com/svange/openbrain/commit/6cff92072b366d2628d0694cf5267007cf0deb91))
+
+* fix: skipping unnecessary steps in pipeline ([`1c371d9`](https://github.com/svange/openbrain/commit/1c371d9c5dccd286b1913f301d970d53be9714e6))
+
+* fix: skipping unnecessary steps in pipeline ([`4e3a67f`](https://github.com/svange/openbrain/commit/4e3a67f2dca2f6cb453d8cbcb5e5f8063c0253a1))
+
+
 ## v0.23.0-dev.7 (2023-11-10)
+
+### Chore
+
+* chore(release): release 0.23.0-dev.7 ([`b1d4f0d`](https://github.com/svange/openbrain/commit/b1d4f0d8e6fe9abc7236eca6f42ee2c7b04383e8))
 
 ### Fix
 
