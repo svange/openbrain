@@ -1699,7 +1699,7 @@ Merge pull request #28 ([`7b62ea6`](https://github.com/svange/openbrain/commit/7
 
 * Merge pull request #26
 
-* integrated pre-commit 
+* integrated pre-commit
 
 * enforce pre-commit at pr time
 
