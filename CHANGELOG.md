@@ -2,6 +2,13 @@
 
 
 
+## v0.23.0-dev.2 (2023-11-10)
+
+### Feature
+
+* feat: decoupling from central infrastructure. ([`1173b10`](https://github.com/svange/openbrain/commit/1173b1013dac5304a37c194f81e20240e8304002))
+
+
 ## v0.23.0-dev.1 (2023-11-10)
 
 ### Breaking
@@ -11,6 +18,8 @@
 BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([`e6409fb`](https://github.com/svange/openbrain/commit/e6409fb1f8680c816fce85496723225ae834f36e))
 
 ### Chore
+
+* chore(release): release 0.23.0-dev.1 ([`a84e946`](https://github.com/svange/openbrain/commit/a84e946ff03f9b4bb5319aa0c28a9aaf11c7cfcb))
 
 * chore(release): 1.0.0 [skip ci]
 
@@ -1699,7 +1708,7 @@ Merge pull request #28 ([`7b62ea6`](https://github.com/svange/openbrain/commit/7
 
 * Merge pull request #26
 
-* integrated pre-commit
+* integrated pre-commit 
 
 * enforce pre-commit at pr time
 
