@@ -176,7 +176,7 @@ jobs:
       # install dependencies if cache does not exist
       #----------------------------------------------
     - name: Install dependencies
-      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true' and !contains(github.event.head_commit.message, 'chore(release):')
+      if: "steps.cached-poetry-dependencies.outputs.cache-hit != 'true' and !contains(github.event.head_commit.message, 'chore(release):')"
       run: poetry install --no-interaction --no-root
       #----------------------------------------------
       # install your root project, if required
