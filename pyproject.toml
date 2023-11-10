@@ -28,17 +28,17 @@ scm = "commitizen.providers:ScmProvider"
 
 [tool.semantic_release]
 major_on_zero = false
-commit_message = "chore(release): release {version}"
+commit_message = "chore(release): release {version} [skip ci]"
 
 # End from video
 [tool.semantic_release.branches.main]
 match = "main"
-commit_message = "chore(release): release {version}"
+#commit_message = "chore(release): release {version}"
 prerelease = false
 
 [tool.semantic_release.branches.dev]
 match = "dev"
-commit_message = "chore(pre-release): release {version}"
+#commit_message = "chore(pre-release): release {version}"
 prerelease_token = "dev"
 prerelease = true
 
