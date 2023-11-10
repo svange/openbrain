@@ -23,7 +23,6 @@
 
 ---
 > **NOTE**: The following links demonstrate resources that are works in progress, these are the main issues that will get addressed eventually, and that make this project difficult to use locally.
-
 ---
 
 - [OpenBrain Portal](https://portal.openbra.in):
