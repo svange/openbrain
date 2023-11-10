@@ -1,5 +1,5 @@
 # OpenBrain
-![ci status](https://github.com/svange/openbrain/actions/workflows/publish-release.yml/badge.svg?branch=main)
+![ci status](https://github.com/svange/openbrain/actions/workflows/pipeline.yml/badge.svg?branch=main)
 ![PyPI - Version](https://img.shields.io/pypi/v/openbrain)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
@@ -58,6 +58,7 @@ To test Openbrain as a service, do the following:
 2. Log in to the portal and subscribe to the Openbrain service.
 3. Navigate to your dashboard in the portal and use your API keys to interact with the API.
 4. A swagger UI and SDKs are available for subscribers.
+5. (Optional) deploy the infrastructure to your AWS account using the SAM template provided in this repository (`resources.yaml`).
 
 NOTE: There is currently no fee for using the service, but it's using my personal AWS and OpenAI accounts, so I'll pull the plug immediately if it becomes expensive.
 
