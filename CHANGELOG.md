@@ -1,44 +1,90 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v0.22.0 (2023-10-25)
+
+### Chore
+
+* chore(release): 0.22.0 [skip ci]
 
 ## [0.22.0](https://github.com/svange/openbrain/compare/v0.21.0...v0.22.0) (2023-10-25)
-
 
 ### Features
 
 * demote many info log statements to debug statements ([fdd91fe](https://github.com/svange/openbrain/commit/fdd91fe55b7bbfbdd4c46742cc11b0b1eca9f492))
-* Importing openbrain now registers ALL subclasses of OBTool in the module tree as available tools for the agent. Choosing a set of tools can now be done in the AgentConfig's tools (list of stings) field. Additionally, the connect with CRM tool now sends an event with the updated lead and agent_config that triggered the tool use to the bus defined in the central infrastructure stack's output. ([6c60d96](https://github.com/svange/openbrain/commit/6c60d961d68a36889334e5d9aa1e306ff5ff4280))
+* Importing openbrain now registers ALL subclasses of OBTool in the module tree as available tools for the agent. Choosing a set of tools can now be done in the AgentConfig&#39;s tools (list of stings) field. Additionally, the connect with CRM tool now sends an event with the updated lead and agent_config that triggered the tool use to the bus defined in the central infrastructure stack&#39;s output. ([6c60d96](https://github.com/svange/openbrain/commit/6c60d961d68a36889334e5d9aa1e306ff5ff4280))
 * remove promptlayer support ([c72b163](https://github.com/svange/openbrain/commit/c72b1632630dd8c5477c990b33b3919964d694a2))
-
 
 ### Bug Fixes
 
-* turning relative imports into absolute imports. ([f7f2b19](https://github.com/svange/openbrain/commit/f7f2b19d0e5556ed28c81d235cb4826ae713d77d))
+* turning relative imports into absolute imports. ([f7f2b19](https://github.com/svange/openbrain/commit/f7f2b19d0e5556ed28c81d235cb4826ae713d77d)) ([`6502ffb`](https://github.com/svange/openbrain/commit/6502ffb07a4a2479f8cd4a2f617c69db812be6ee))
+
+### Documentation
+
+* docs: Updating README.md with new sites. ([`4136830`](https://github.com/svange/openbrain/commit/4136830cd1cefa06f8f0a469f251946efab6c450))
+
+### Feature
+
+* feat: Importing openbrain now registers ALL subclasses of OBTool in the module tree as available tools for the agent. Choosing a set of tools can now be done in the AgentConfig&#39;s tools (list of stings) field. Additionally, the connect with CRM tool now sends an event with the updated lead and agent_config that triggered the tool use to the bus defined in the central infrastructure stack&#39;s output. ([`6c60d96`](https://github.com/svange/openbrain/commit/6c60d961d68a36889334e5d9aa1e306ff5ff4280))
+
+### Fix
+
+* fix: turning relative imports into absolute imports. ([`f7f2b19`](https://github.com/svange/openbrain/commit/f7f2b19d0e5556ed28c81d235cb4826ae713d77d))
+
+### Unknown
+
+* Merge branch &#39;main&#39; into dev ([`72c28ce`](https://github.com/svange/openbrain/commit/72c28cea44f9c2f9d2e2d1040d77c883fda31499))
+
+
+## v0.21.0 (2023-10-17)
+
+### Chore
+
+* chore(release): 0.21.0 [skip ci]
 
 ## [0.21.0](https://github.com/svange/openbrain/compare/v0.20.0...v0.21.0) (2023-10-17)
 
-
 ### Features
 
-* demote many info log statements to debug statements ([6dee4bb](https://github.com/svange/openbrain/commit/6dee4bba5c6baf2bc793661d1af0c65403a3a39c))
+* demote many info log statements to debug statements ([6dee4bb](https://github.com/svange/openbrain/commit/6dee4bba5c6baf2bc793661d1af0c65403a3a39c)) ([`3a65feb`](https://github.com/svange/openbrain/commit/3a65febc79a1273339077aad66432e98ab501f92))
+
+### Feature
+
+* feat: demote many info log statements to debug statements ([`6dee4bb`](https://github.com/svange/openbrain/commit/6dee4bba5c6baf2bc793661d1af0c65403a3a39c))
+
+* feat: demote many info log statements to debug statements ([`fdd91fe`](https://github.com/svange/openbrain/commit/fdd91fe55b7bbfbdd4c46742cc11b0b1eca9f492))
+
+
+## v0.20.0 (2023-10-17)
+
+### Chore
+
+* chore(release): 0.20.0 [skip ci]
 
 ## [0.20.0](https://github.com/svange/openbrain/compare/v0.19.0...v0.20.0) (2023-10-17)
 
-
 ### Features
 
-* remove promptlayer support ([d99e26e](https://github.com/svange/openbrain/commit/d99e26eef05c3eb31dd26f5aed513262282148ae))
+* remove promptlayer support ([d99e26e](https://github.com/svange/openbrain/commit/d99e26eef05c3eb31dd26f5aed513262282148ae)) ([`68f7aa7`](https://github.com/svange/openbrain/commit/68f7aa79f01d3fb9e75cf804336f4d34853dc936))
+
+### Feature
+
+* feat: remove promptlayer support ([`d99e26e`](https://github.com/svange/openbrain/commit/d99e26eef05c3eb31dd26f5aed513262282148ae))
+
+* feat: remove promptlayer support ([`c72b163`](https://github.com/svange/openbrain/commit/c72b1632630dd8c5477c990b33b3919964d694a2))
+
+
+## v0.19.0 (2023-10-16)
+
+### Chore
+
+* chore(release): 0.19.0 [skip ci]
 
 ## [0.19.0](https://github.com/svange/openbrain/compare/v0.18.1...v0.19.0) (2023-10-16)
-
 
 ### Features
 
 * Fallback scheme for environment variables and better output when initializing. ([d797a8b](https://github.com/svange/openbrain/commit/d797a8bf040485eacf6c3259b30d0bc61dd13b65))
 * Fallback scheme for environment variables and better output when initializing. ([498b92e](https://github.com/svange/openbrain/commit/498b92ec029f1f95e66a74f54d07b74138961f53))
-
 
 ### Bug Fixes
 
@@ -46,160 +92,701 @@ All notable changes to this project will be documented in this file. See
 * ci/cd env vars for new scheme. ([d5ef7af](https://github.com/svange/openbrain/commit/d5ef7af09ad71c55dde86c3ab24ac99d1e9a03b3))
 * fixed __init__.py environment auto-setup for ci/cd ([3ad3042](https://github.com/svange/openbrain/commit/3ad3042a2350a187162085e44ec8534198868a9e))
 * repaired and improved cli tools except for ob-chat ([3908a38](https://github.com/svange/openbrain/commit/3908a38d9a06be011d11a78b74ba5b88f1df9b43))
-* repaired and improved cli tools except for ob-chat ([c8c0729](https://github.com/svange/openbrain/commit/c8c0729830bc64fa21283a771bbc7e9ab2d5ac90))
+* repaired and improved cli tools except for ob-chat ([c8c0729](https://github.com/svange/openbrain/commit/c8c0729830bc64fa21283a771bbc7e9ab2d5ac90)) ([`c0e1c17`](https://github.com/svange/openbrain/commit/c0e1c17441d1c20a2e6161f54f10e874e58fb8c5))
+
+### Documentation
+
+* docs: updating FUNDING.yml ([`789c809`](https://github.com/svange/openbrain/commit/789c80950471ae6ac3d572e7632c6b754e1537ae))
+
+* docs: Removing GitHub FUNDING.yml ([`21c857d`](https://github.com/svange/openbrain/commit/21c857dac7e3df9536419c1632e688e9f0f72806))
+
+* docs: Adding GitHub FUNDING.yml ([`9ec8976`](https://github.com/svange/openbrain/commit/9ec89762d633dbc8c0ca232d835feaadf6b2dfb9))
+
+* docs: Adding GitHub FUNDING.yml ([`59a0a56`](https://github.com/svange/openbrain/commit/59a0a561de33d974d0fe508ee2e4d0f54aa17d74))
+
+### Feature
+
+* feat: Fallback scheme for environment variables and better output when initializing. ([`d797a8b`](https://github.com/svange/openbrain/commit/d797a8bf040485eacf6c3259b30d0bc61dd13b65))
+
+* feat: Fallback scheme for environment variables and better output when initializing. ([`498b92e`](https://github.com/svange/openbrain/commit/498b92ec029f1f95e66a74f54d07b74138961f53))
+
+### Fix
+
+* fix: repaired and improved cli tools except for ob-chat ([`3908a38`](https://github.com/svange/openbrain/commit/3908a38d9a06be011d11a78b74ba5b88f1df9b43))
+
+* fix: repaired and improved cli tools except for ob-chat ([`c8c0729`](https://github.com/svange/openbrain/commit/c8c0729830bc64fa21283a771bbc7e9ab2d5ac90))
+
+* fix: another attempt to fix ci/cd pipeline env vars ([`90f0fa0`](https://github.com/svange/openbrain/commit/90f0fa0e4b0b7d1f9513cd1f5ef8d9dd7a29bf88))
+
+* fix: fixed __init__.py environment auto-setup for ci/cd ([`3ad3042`](https://github.com/svange/openbrain/commit/3ad3042a2350a187162085e44ec8534198868a9e))
+
+* fix: ci/cd env vars for new scheme. ([`d5ef7af`](https://github.com/svange/openbrain/commit/d5ef7af09ad71c55dde86c3ab24ac99d1e9a03b3))
+
+### Unknown
+
+* Create FUNDING.yml ([`9a72f0c`](https://github.com/svange/openbrain/commit/9a72f0c7c0bc67fd8790edd1e49ece5d4705fddf))
+
+
+## v0.18.1 (2023-10-08)
+
+### Chore
+
+* chore(release): 0.18.1 [skip ci]
 
 ## [0.18.1](https://github.com/svange/openbrain/compare/v0.18.0...v0.18.1) (2023-10-08)
 
-
 ### Bug Fixes
 
-* ob-tuner PORT type error. ([98b0f3c](https://github.com/svange/openbrain/commit/98b0f3cffb32d0de394c69dd03f26425cb420ca4))
+* ob-tuner PORT type error. ([98b0f3c](https://github.com/svange/openbrain/commit/98b0f3cffb32d0de394c69dd03f26425cb420ca4)) ([`3e6f827`](https://github.com/svange/openbrain/commit/3e6f827ea60de39d74aca85377af704eceabf47e))
+
+### Fix
+
+* fix: ob-tuner PORT type error. ([`98b0f3c`](https://github.com/svange/openbrain/commit/98b0f3cffb32d0de394c69dd03f26425cb420ca4))
+
+
+## v0.18.0 (2023-10-08)
+
+### Build
+
+* build: Launching OBaaS, added info to readme. ([`e0c0f23`](https://github.com/svange/openbrain/commit/e0c0f23b37202fced1b6c13a14cfef5707c7c2d6))
+
+* build: Launching OBaaS, added info to readme. ([`d96d7c5`](https://github.com/svange/openbrain/commit/d96d7c54abed4f99306b0fce8dee0f781b631765))
+
+* build: Launching OBaaS, added info to readme. ([`f0fca24`](https://github.com/svange/openbrain/commit/f0fca24940ebb7d6289ef4bc2ed6f5a79f68babd))
+
+* build: Launching OBaaS, added info to readme. ([`19fb30f`](https://github.com/svange/openbrain/commit/19fb30fa19b9d49c86c8e039015379d6da38e002))
+
+* build: Launching OBaaS, added info to readme. ([`b144e43`](https://github.com/svange/openbrain/commit/b144e438fbf2dca7dca0bd3a037c93f6d11a4b92))
+
+### Chore
+
+* chore(release): 0.18.0 [skip ci]
 
 ## [0.18.0](https://github.com/svange/openbrain/compare/v0.17.1...v0.18.0) (2023-10-08)
 
-
 ### Features
 
-* add GRADIO_PORT env var to allow a single instance to host several gradios ([8f45495](https://github.com/svange/openbrain/commit/8f4549582cb7d0a14c8a7dea9ff9daca8105dc4e))
+* add GRADIO_PORT env var to allow a single instance to host several gradios ([8f45495](https://github.com/svange/openbrain/commit/8f4549582cb7d0a14c8a7dea9ff9daca8105dc4e)) ([`7b98a20`](https://github.com/svange/openbrain/commit/7b98a2055c702bc20ea8c5ff06cd9e5c758bd9ab))
+
+### Feature
+
+* feat: add GRADIO_PORT env var to allow a single instance to host several gradios ([`8f45495`](https://github.com/svange/openbrain/commit/8f4549582cb7d0a14c8a7dea9ff9daca8105dc4e))
+
+
+## v0.17.1 (2023-10-06)
+
+### Chore
+
+* chore(release): 0.17.1 [skip ci]
 
 ## [0.17.1](https://github.com/svange/openbrain/compare/v0.17.0...v0.17.1) (2023-10-06)
 
-
 ### Bug Fixes
 
-* fixing ci/cd so pre-releases don't always release. ([f724422](https://github.com/svange/openbrain/commit/f7244220be1a1da43979bce421383ffd41e4c0bd))
+* fixing ci/cd so pre-releases don&#39;t always release. ([f724422](https://github.com/svange/openbrain/commit/f7244220be1a1da43979bce421383ffd41e4c0bd)) ([`91ae964`](https://github.com/svange/openbrain/commit/91ae9646d34fa4540d1c3c1b4ec81e4049fc372d))
+
+### Fix
+
+* fix: fixing ci/cd so pre-releases don&#39;t always release. ([`f724422`](https://github.com/svange/openbrain/commit/f7244220be1a1da43979bce421383ffd41e4c0bd))
+
+
+## v0.17.0 (2023-10-06)
+
+### Chore
+
+* chore(release): 0.17.0 [skip ci]
 
 ## [0.17.0](https://github.com/svange/openbrain/compare/v0.16.0...v0.17.0) (2023-10-06)
 
-
 ### Features
 
-* `ob-chat` works with in-memory DB out-of-the-box. ([558d44b](https://github.com/svange/openbrain/commit/558d44bf495a3d4d440cdd085688f8e22dea464b))
+* `ob-chat` works with in-memory DB out-of-the-box. ([558d44b](https://github.com/svange/openbrain/commit/558d44bf495a3d4d440cdd085688f8e22dea464b)) ([`22fcc11`](https://github.com/svange/openbrain/commit/22fcc1105be9894f43cfdc004cadf81235b3b85c))
+
+### Feature
+
+* feat: `ob-chat` works with in-memory DB out-of-the-box.
+
+feat: &#39;ob --profile-name &lt;PROFILE_NAME&gt; &lt;MESSAGE&gt;` implemented for customized completions. ([`558d44b`](https://github.com/svange/openbrain/commit/558d44bf495a3d4d440cdd085688f8e22dea464b))
+
+
+## v0.16.0 (2023-10-04)
+
+### Chore
+
+* chore(release): 0.16.0 [skip ci]
 
 ## [0.16.0](https://github.com/svange/openbrain/compare/v0.15.1...v0.16.0) (2023-10-04)
 
-
 ### Features
 
-* ob-tuner updated to use in memory ORM, controllable by .env file. ([47ba771](https://github.com/svange/openbrain/commit/47ba771399c37bc4e07a56db1b561da035e5a5ed))
+* ob-tuner updated to use in memory ORM, controllable by .env file. ([47ba771](https://github.com/svange/openbrain/commit/47ba771399c37bc4e07a56db1b561da035e5a5ed)) ([`f8e3b8f`](https://github.com/svange/openbrain/commit/f8e3b8f54428623e00753fc9be9e4612b15233e6))
+
+### Feature
+
+* feat: ob-tuner updated to use in memory ORM, controllable by .env file. ([`47ba771`](https://github.com/svange/openbrain/commit/47ba771399c37bc4e07a56db1b561da035e5a5ed))
+
+
+## v0.15.1 (2023-10-04)
+
+### Build
+
+* build: update ci/cd to resolve dependencies (removed poetry.lock) ([`3908f05`](https://github.com/svange/openbrain/commit/3908f055cf94229d1f8d04e5d7a6da94389bdf0c))
+
+* build: merge master, get repo back on track, improve ci/cd. ([`4e85fec`](https://github.com/svange/openbrain/commit/4e85fec47558396468798258677c0f4e8981c813))
+
+### Chore
+
+* chore(release): 0.15.1 [skip ci]
 
 ## [0.15.1](https://github.com/svange/openbrain/compare/v0.15.0...v0.15.1) (2023-10-04)
-
 
 ### Bug Fixes
 
 * added more granularity to CI/CD system and attempting to bring prereleases. ([8316019](https://github.com/svange/openbrain/commit/83160190224d043e9663cf47fbe7b2c381fb586c))
 * added more granularity to CI/CD system and attempting to bring prereleases. ([f4e02ea](https://github.com/svange/openbrain/commit/f4e02ea9d53899068336d765bfa815b6a199ef40))
-* updating CI/CD ([937d34b](https://github.com/svange/openbrain/commit/937d34b65f22210e808546cc5afd7bd48f76acad))
+* updating CI/CD ([937d34b](https://github.com/svange/openbrain/commit/937d34b65f22210e808546cc5afd7bd48f76acad)) ([`ddddf5a`](https://github.com/svange/openbrain/commit/ddddf5a7af05f94212f7117c31173a61518f4f3f))
+
+### Unknown
+
+* Merge branch &#39;main&#39; into dev
+
+# Conflicts:
+#	.github/workflows/deploy-prod.yml
+#	.github/workflows/publish-prerelease.yml
+#	CHANGELOG.md
+#	README.md
+#	openbrain/__init__.py
+#	pyproject.toml ([`54bac11`](https://github.com/svange/openbrain/commit/54bac110e2b1c9efd74c1f18e62735d05ebe2a72))
+
+
+## v0.15.0 (2023-10-01)
+
+### Chore
+
+* chore(release): 0.15.0 [skip ci]
 
 ## [0.15.0](https://github.com/svange/openbrain/compare/v0.14.1...v0.15.0) (2023-10-01)
 
-
 ### Features
 
-* demote gradio to be an optional dependency so that package fits in lambdas by default. Install with -E to get gradio. ([0595a08](https://github.com/svange/openbrain/commit/0595a083b06edf1e82efefc50640ef2d460b820c))
+* demote gradio to be an optional dependency so that package fits in lambdas by default. Install with -E to get gradio. ([0595a08](https://github.com/svange/openbrain/commit/0595a083b06edf1e82efefc50640ef2d460b820c)) ([`55196a1`](https://github.com/svange/openbrain/commit/55196a1aa21148566d99031cf4c73cdc29c8b00f))
+
+### Feature
+
+* feat: demote gradio to be an optional dependency so that package fits in lambdas by default. Install with -E to get gradio. ([`0595a08`](https://github.com/svange/openbrain/commit/0595a083b06edf1e82efefc50640ef2d460b820c))
+
+
+## v0.14.1 (2023-09-30)
+
+### Chore
+
+* chore(release): 0.14.1 [skip ci]
 
 ## [0.14.1](https://github.com/svange/openbrain/compare/v0.14.0...v0.14.1) (2023-09-30)
 
-
 ### Bug Fixes
 
-* support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). Second attempt :( ([52c4545](https://github.com/svange/openbrain/commit/52c4545dfd8304b3bcf958c680b392abccfbed7f))
+* support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). Second attempt :( ([52c4545](https://github.com/svange/openbrain/commit/52c4545dfd8304b3bcf958c680b392abccfbed7f)) ([`5929cdb`](https://github.com/svange/openbrain/commit/5929cdb15ea011e67f7e8b958a4e77f496349923))
+
+### Fix
+
+* fix: support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). Second attempt :( ([`52c4545`](https://github.com/svange/openbrain/commit/52c4545dfd8304b3bcf958c680b392abccfbed7f))
+
+
+## v0.14.0 (2023-09-30)
+
+### Chore
+
+* chore(release): 0.14.0 [skip ci]
 
 ## [0.14.0](https://github.com/svange/openbrain/compare/v0.13.0...v0.14.0) (2023-09-30)
-
 
 ### Features
 
 * support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). ([1fe40b4](https://github.com/svange/openbrain/commit/1fe40b42a5981add67414e65d03e414e11735dbf))
 
-
 ### Bug Fixes
 
-* support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). ([4a59dfb](https://github.com/svange/openbrain/commit/4a59dfb22ed256ffd5654603e067153a3522ce03))
+* support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). ([4a59dfb](https://github.com/svange/openbrain/commit/4a59dfb22ed256ffd5654603e067153a3522ce03)) ([`9e34aa6`](https://github.com/svange/openbrain/commit/9e34aa6f156ad7525f8963b1260c18d547796fde))
+
+### Feature
+
+* feat: support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). ([`1fe40b4`](https://github.com/svange/openbrain/commit/1fe40b42a5981add67414e65d03e414e11735dbf))
+
+### Fix
+
+* fix: support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). ([`4a59dfb`](https://github.com/svange/openbrain/commit/4a59dfb22ed256ffd5654603e067153a3522ce03))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/fix/python-310-support-for-shit-fws-like-chalice&#39;
+
+# Conflicts:
+#	poetry.lock ([`ef5d897`](https://github.com/svange/openbrain/commit/ef5d8970c13e2dce327d4aa92aa9b43bffb6b7d9))
+
+
+## v0.13.0 (2023-09-29)
+
+### Build
+
+* build(deps): bump boto3 from 1.28.56 to 1.28.57 (#58)
+
+Bumps [boto3](https://github.com/boto/boto3) from 1.28.56 to 1.28.57.
+- [Release notes](https://github.com/boto/boto3/releases)
+- [Changelog](https://github.com/boto/boto3/blob/develop/CHANGELOG.rst)
+- [Commits](https://github.com/boto/boto3/compare/1.28.56...1.28.57)
+
+---
+updated-dependencies:
+- dependency-name: boto3
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`2ec366c`](https://github.com/svange/openbrain/commit/2ec366c53d32dbd7672536a41ed2f8ecfd965d55))
+
+* build(deps): bump boto3 from 1.28.55 to 1.28.56 (#53)
+
+Bumps [boto3](https://github.com/boto/boto3) from 1.28.55 to 1.28.56.
+- [Release notes](https://github.com/boto/boto3/releases)
+- [Changelog](https://github.com/boto/boto3/blob/develop/CHANGELOG.rst)
+- [Commits](https://github.com/boto/boto3/compare/1.28.55...1.28.56)
+
+---
+updated-dependencies:
+- dependency-name: boto3
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`06dc33a`](https://github.com/svange/openbrain/commit/06dc33a98332d3041d91be8c6b810e0d26b9a405))
+
+* build(deps): bump langchain from 0.0.301 to 0.0.304 (#54)
+
+Bumps [langchain](https://github.com/langchain-ai/langchain) from 0.0.301 to 0.0.304.
+- [Release notes](https://github.com/langchain-ai/langchain/releases)
+- [Commits](https://github.com/langchain-ai/langchain/compare/v0.0.301...v0.0.304)
+
+---
+updated-dependencies:
+- dependency-name: langchain
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`b1192ff`](https://github.com/svange/openbrain/commit/b1192ff8d260e334ebcf09d3cdc3fbf4390b9fcc))
+
+* build(deps): bump promptlayer from 0.3.1 to 0.3.2 (#55)
+
+Bumps [promptlayer]() from 0.3.1 to 0.3.2.
+
+---
+updated-dependencies:
+- dependency-name: promptlayer
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`156b043`](https://github.com/svange/openbrain/commit/156b0432c5736064f395fa0d6434a4f2a3e2a391))
+
+* build(deps): bump gradio from 3.45.0 to 3.45.2 (#56)
+
+Bumps [gradio](https://github.com/gradio-app/gradio) from 3.45.0 to 3.45.2.
+- [Release notes](https://github.com/gradio-app/gradio/releases)
+- [Changelog](https://github.com/gradio-app/gradio/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/gradio-app/gradio/commits)
+
+---
+updated-dependencies:
+- dependency-name: gradio
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`0cd910b`](https://github.com/svange/openbrain/commit/0cd910b668850a5274444ef56d9f81fc4bc74817))
+
+* build(deps): bump pydantic from 2.4.1 to 2.4.2 (#57)
+
+Bumps [pydantic](https://github.com/pydantic/pydantic) from 2.4.1 to 2.4.2.
+- [Release notes](https://github.com/pydantic/pydantic/releases)
+- [Changelog](https://github.com/pydantic/pydantic/blob/main/HISTORY.md)
+- [Commits](https://github.com/pydantic/pydantic/compare/v2.4.1...v2.4.2)
+
+---
+updated-dependencies:
+- dependency-name: pydantic
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`76d9902`](https://github.com/svange/openbrain/commit/76d9902f8e1b3c096b77328ce833d6c583da7ed2))
+
+### Chore
+
+* chore(release): 0.13.0 [skip ci]
 
 ## [0.13.0](https://github.com/svange/openbrain/compare/v0.12.0...v0.13.0) (2023-09-29)
 
-
 ### Features
 
-* in memory DB for locally running full system. ([f0ba078](https://github.com/svange/openbrain/commit/f0ba078ba70c8c5152d258349cfd707bbc454073))
+* in memory DB for locally running full system. ([f0ba078](https://github.com/svange/openbrain/commit/f0ba078ba70c8c5152d258349cfd707bbc454073)) ([`9570204`](https://github.com/svange/openbrain/commit/95702042bc71ed1d3975a5e1a3fdba78b346e422))
+
+### Feature
+
+* feat: in memory DB for locally running full system. ([`f0ba078`](https://github.com/svange/openbrain/commit/f0ba078ba70c8c5152d258349cfd707bbc454073))
+
+
+## v0.12.0 (2023-09-27)
+
+### Build
+
+* build: update util.py for better integration with upstream apis. ([`53afd8f`](https://github.com/svange/openbrain/commit/53afd8f481d2db6071499c597226e58c4fc044e4))
+
+* build: update util.py for better integration with upstream apis. ([`aa79aef`](https://github.com/svange/openbrain/commit/aa79aef6601a833b8008f14a6f475ae79d539b6b))
+
+### Chore
+
+* chore(release): 0.12.0 [skip ci]
 
 ## [0.12.0](https://github.com/svange/openbrain/compare/v0.11.1...v0.12.0) (2023-09-27)
-
 
 ### Features
 
 * created ci_cd test set to stop my api keys from getting revoked. ([af9643e](https://github.com/svange/openbrain/commit/af9643eaf030fcbd2385059fdfc40276ce925316))
 
-
 ### Bug Fixes
 
-* CI/CD pipeline and migrate to poetry. ([b6d1bf4](https://github.com/svange/openbrain/commit/b6d1bf4fbf5d90e95b9ff5c98893510c8c4ac594))
+* CI/CD pipeline and migrate to poetry. ([b6d1bf4](https://github.com/svange/openbrain/commit/b6d1bf4fbf5d90e95b9ff5c98893510c8c4ac594)) ([`d662103`](https://github.com/svange/openbrain/commit/d662103b22fc90f200f113badf4de97f073e7f5b))
+
+* chore(release): 0.12.0 [skip ci]
 
 ## [0.12.0](https://github.com/svange/openbrain/compare/v0.11.1...v0.12.0) (2023-09-27)
-
 
 ### Features
 
 * created ci_cd test set to stop my api keys from getting revoked. ([af9643e](https://github.com/svange/openbrain/commit/af9643eaf030fcbd2385059fdfc40276ce925316))
 
-
 ### Bug Fixes
 
-* CI/CD pipeline and migrate to poetry. ([b6d1bf4](https://github.com/svange/openbrain/commit/b6d1bf4fbf5d90e95b9ff5c98893510c8c4ac594))
+* CI/CD pipeline and migrate to poetry. ([b6d1bf4](https://github.com/svange/openbrain/commit/b6d1bf4fbf5d90e95b9ff5c98893510c8c4ac594)) ([`c717c1c`](https://github.com/svange/openbrain/commit/c717c1cd1d21d0f70d1c341ba422c85aea46bb84))
+
+### Feature
+
+* feat: created ci_cd test set to stop my api keys from getting revoked. ([`af9643e`](https://github.com/svange/openbrain/commit/af9643eaf030fcbd2385059fdfc40276ce925316))
+
+### Fix
+
+* fix: CI/CD pipeline and migrate to poetry. ([`b6d1bf4`](https://github.com/svange/openbrain/commit/b6d1bf4fbf5d90e95b9ff5c98893510c8c4ac594))
+
+### Unknown
+
+* bump: troubleshooting ci/cd pipeline ([`2ad7bbc`](https://github.com/svange/openbrain/commit/2ad7bbc2df0f4fcf40c7bfbed1be8557459f2351))
+
+* bump: updating license ([`0dd3a77`](https://github.com/svange/openbrain/commit/0dd3a7701238e6786392bb3ac2a49fb8776a3605))
+
+* bump: updating license ([`a96dd89`](https://github.com/svange/openbrain/commit/a96dd895a54f332a90ff0cfd8f0e686470944847))
+
+
+## v0.11.1 (2023-09-26)
+
+### Build
+
+* build(deps): bump boto3 from 1.28.53 to 1.28.54
+
+Bumps [boto3](https://github.com/boto/boto3) from 1.28.53 to 1.28.54.
+- [Release notes](https://github.com/boto/boto3/releases)
+- [Changelog](https://github.com/boto/boto3/blob/develop/CHANGELOG.rst)
+- [Commits](https://github.com/boto/boto3/compare/1.28.53...1.28.54)
+
+---
+updated-dependencies:
+- dependency-name: boto3
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`a20bfb3`](https://github.com/svange/openbrain/commit/a20bfb3f82f9a5d721e9b8f324acbb5790454f69))
+
+* build(deps-dev): bump commitizen from 3.9.1 to 3.10.0
+
+Bumps [commitizen](https://github.com/commitizen-tools/commitizen) from 3.9.1 to 3.10.0.
+- [Release notes](https://github.com/commitizen-tools/commitizen/releases)
+- [Changelog](https://github.com/commitizen-tools/commitizen/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/commitizen-tools/commitizen/compare/3.9.1...3.10.0)
+
+---
+updated-dependencies:
+- dependency-name: commitizen
+  dependency-type: direct:development
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`02cfe6d`](https://github.com/svange/openbrain/commit/02cfe6d990abc0f105e3f7a2ea4cb972e3917882))
+
+* build(deps): bump pydantic from 2.3.0 to 2.4.0
+
+Bumps [pydantic](https://github.com/pydantic/pydantic) from 2.3.0 to 2.4.0.
+- [Release notes](https://github.com/pydantic/pydantic/releases)
+- [Changelog](https://github.com/pydantic/pydantic/blob/main/HISTORY.md)
+- [Commits](https://github.com/pydantic/pydantic/compare/v2.3.0...v2.4.0)
+
+---
+updated-dependencies:
+- dependency-name: pydantic
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`c8d0804`](https://github.com/svange/openbrain/commit/c8d080419a6e5f7487ec0dc88e743b0b19db067a))
+
+* build(deps): bump langchain from 0.0.295 to 0.0.301
+
+Bumps [langchain](https://github.com/langchain-ai/langchain) from 0.0.295 to 0.0.301.
+- [Release notes](https://github.com/langchain-ai/langchain/releases)
+- [Commits](https://github.com/langchain-ai/langchain/compare/v0.0.295...v0.0.301)
+
+---
+updated-dependencies:
+- dependency-name: langchain
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`8c54598`](https://github.com/svange/openbrain/commit/8c545981946ca03dc9be314d152bbdee7758cc1a))
+
+### Chore
+
+* chore(release): 0.11.1 [skip ci]
 
 ## [0.11.1](https://github.com/svange/openbrain/compare/v0.11.0...v0.11.1) (2023-09-26)
 
-
 ### Bug Fixes
 
-* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3))
+* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3)) ([`fd63c8e`](https://github.com/svange/openbrain/commit/fd63c8e6f84991225c557cac41f5bcf33113fd37))
+
+* chore(release): 0.11.1 [skip ci]
 
 ## [0.11.1](https://github.com/svange/openbrain/compare/v0.11.0...v0.11.1) (2023-09-26)
 
-
 ### Bug Fixes
 
-* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3))
+* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3)) ([`8c6be05`](https://github.com/svange/openbrain/commit/8c6be05b19cc1065625a5587ccee6389b76a7d05))
+
+* chore(release): 0.11.1 [skip ci]
 
 ## [0.11.1](https://github.com/svange/openbrain/compare/v0.11.0...v0.11.1) (2023-09-26)
 
-
 ### Bug Fixes
 
-* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3))
+* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3)) ([`54d33d5`](https://github.com/svange/openbrain/commit/54d33d562035171a137ca491ef5a439e128ac44c))
+
+* chore: bot pr
+
+build(deps): bump langchain from 0.0.295 to 0.0.301 ([`9999b06`](https://github.com/svange/openbrain/commit/9999b06ab87a6f4c8bc306ab65a03e0cc303f38c))
+
+* chore(release): 0.11.1 [skip ci]
 
 ## [0.11.1](https://github.com/svange/openbrain/compare/v0.11.0...v0.11.1) (2023-09-26)
 
+### Bug Fixes
+
+* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3)) ([`3546dc1`](https://github.com/svange/openbrain/commit/3546dc15ab714ad3a6ec5202e82c52bcdabe23f2))
+
+* chore(release): 0.11.1 [skip ci]
+
+## [0.11.1](https://github.com/svange/openbrain/compare/v0.11.0...v0.11.1) (2023-09-26)
 
 ### Bug Fixes
 
-* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3))
+* CI/CD and style enforced, preparing to make public. ([2793298](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3)) ([`442b1ff`](https://github.com/svange/openbrain/commit/442b1ff783406497b53775da37ecfa067a2fbafe))
+
+### Ci
+
+* ci(deps): bump actions/setup-python from 2 to 4
+
+Bumps [actions/setup-python](https://github.com/actions/setup-python) from 2 to 4.
+- [Release notes](https://github.com/actions/setup-python/releases)
+- [Commits](https://github.com/actions/setup-python/compare/v2...v4)
+
+---
+updated-dependencies:
+- dependency-name: actions/setup-python
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt; ([`33b33dc`](https://github.com/svange/openbrain/commit/33b33dc25f5260398e33e9585fd2b90da317d74f))
+
+* ci(deps): bump actions/checkout from 2 to 4 (#42)
+
+Bumps [actions/checkout](https://github.com/actions/checkout) from 2 to 4.
+- [Release notes](https://github.com/actions/checkout/releases)
+- [Changelog](https://github.com/actions/checkout/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/actions/checkout/compare/v2...v4)
+
+---
+updated-dependencies:
+- dependency-name: actions/checkout
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`2d2f9bf`](https://github.com/svange/openbrain/commit/2d2f9bf5d678ed3d6fbef21e1835acb8df1fd983))
+
+### Fix
+
+* fix: CI/CD and style enforced, preparing to make public. ([`2793298`](https://github.com/svange/openbrain/commit/2793298bfa0756c1d82d1add706759e71dd0fca3))
+
+### Unknown
+
+* bump: bump commit ([`fd89773`](https://github.com/svange/openbrain/commit/fd89773668cedc58d6964ee895f9de09e80d4251))
+
+* bump: bump commit ([`6901abe`](https://github.com/svange/openbrain/commit/6901abed6679ab6cc022c405ed9fcc7057fa61ba))
+
+* Merge pull request #47 from svange/dependabot/pip/boto3-1.28.54
+
+chore: bot pr
+build(deps): bump boto3 from 1.28.53 to 1.28.54 ([`2b27e1b`](https://github.com/svange/openbrain/commit/2b27e1b9bf75f38e823e2712069e66800c618d34))
+
+* Merge pull request #46 from svange/dependabot/pip/commitizen-3.10.0
+
+chore: bot pr
+build(deps-dev): bump commitizen from 3.9.1 to 3.10.0 ([`3f06e87`](https://github.com/svange/openbrain/commit/3f06e87f1f55270668af44e0d3901cdc3b95ebab))
+
+* Merge pull request #45 from svange/dependabot/pip/pydantic-2.4.0
+
+chore: bot pr
+build(deps): bump pydantic from 2.3.0 to 2.4.0 ([`6817e3e`](https://github.com/svange/openbrain/commit/6817e3e1658ad82280ce462895351d98886dcc60))
+
+* Merge pull request #43 from svange/dependabot/github_actions/actions/setup-python-4
+
+chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f46378bc49c6619bef15bdfb8a145a1f536))
+
+* Merge branch &#39;proto&#39;
+
+# Conflicts:
+#	openbrain/__init__.py
+#	pyproject.toml ([`5ef9418`](https://github.com/svange/openbrain/commit/5ef941814177a3979ade5cbf56ea0dc8341d65f7))
+
+* bump: bump commit ([`fb3868a`](https://github.com/svange/openbrain/commit/fb3868a4b0ea6dc479e5a9b16e0eb2ea040351b0))
+
+* bump: Fixing metadata and github actions ([`4bc07ad`](https://github.com/svange/openbrain/commit/4bc07adf75eacadfa5432af7667eba7741084884))
+
+
+## v0.11.2 (2023-09-26)
+
+### Build
+
+* build: CI/CD pipeline up and ready, REAMDE.md updated. ([`e682fd3`](https://github.com/svange/openbrain/commit/e682fd32a64e4a7fb04e7d05c3c3a72c43d47378))
+
+### Chore
+
+* chore(release): 0.11.2 [skip ci]
+
+## [0.11.2](https://github.com/svange/openbrain/compare/v0.11.1...v0.11.2) (2023-09-26)
+
+### Bug Fixes
+
+* added more granularity to CI/CD system and attempting to bring prereleases. ([8316019](https://github.com/svange/openbrain/commit/83160190224d043e9663cf47fbe7b2c381fb586c))
+* updating CI/CD ([937d34b](https://github.com/svange/openbrain/commit/937d34b65f22210e808546cc5afd7bd48f76acad)) ([`01b3ae3`](https://github.com/svange/openbrain/commit/01b3ae338c279515da00a0042520fd10ccc023b1))
+
+* chore(release): 0.11.1 [skip ci]
+
+## [0.11.1](https://github.com/svange/openbrain/compare/v0.11.0...v0.11.1) (2023-09-26)
+
+### Bug Fixes
+
+* added more granularity to CI/CD system and attempting to bring prereleases. ([f4e02ea](https://github.com/svange/openbrain/commit/f4e02ea9d53899068336d765bfa815b6a199ef40)) ([`7bc6de1`](https://github.com/svange/openbrain/commit/7bc6de10b98f943f6f30a6abe9ff31685a5e2f8b))
+
+### Fix
+
+* fix: updating CI/CD ([`937d34b`](https://github.com/svange/openbrain/commit/937d34b65f22210e808546cc5afd7bd48f76acad))
+
+* fix: added more granularity to CI/CD system and attempting to bring prereleases. ([`8316019`](https://github.com/svange/openbrain/commit/83160190224d043e9663cf47fbe7b2c381fb586c))
+
+* fix: added more granularity to CI/CD system and attempting to bring prereleases. ([`f4e02ea`](https://github.com/svange/openbrain/commit/f4e02ea9d53899068336d765bfa815b6a199ef40))
+
+
+## v0.11.0 (2023-09-25)
+
+### Chore
+
+* chore(release): 0.11.0 [skip ci]
 
 ## [0.11.0](https://github.com/svange/openbrain/compare/v0.10.8...v0.11.0) (2023-09-25)
 
-
 ### Features
 
-* CI/CD pipeline is ready! Semantic motherfucking releases!!! ([64134be](https://github.com/svange/openbrain/commit/64134bee1dde452e5314448c900531ef45c38357))
+* CI/CD pipeline is ready! Semantic motherfucking releases!!! ([64134be](https://github.com/svange/openbrain/commit/64134bee1dde452e5314448c900531ef45c38357)) ([`fbbda8e`](https://github.com/svange/openbrain/commit/fbbda8e243fc6eb85e4e6ec91dec80912eb11790))
+
+### Feature
+
+* feat: CI/CD pipeline is ready! Semantic motherfucking releases!!! ([`64134be`](https://github.com/svange/openbrain/commit/64134bee1dde452e5314448c900531ef45c38357))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev
+
+# Conflicts:
+#	pyproject.toml ([`42d847c`](https://github.com/svange/openbrain/commit/42d847cd5e2cdcef9684b7a96ab46f8ddc7fc076))
+
+
+## v0.10.8 (2023-09-25)
+
+### Chore
+
+* chore(release): 0.10.8 [skip ci]
 
 ## [0.10.8](https://github.com/svange/openbrain/compare/v0.10.7...v0.10.8) (2023-09-25)
 
-
 ### Bug Fixes
 
-* disabled pytest temporarily ([098aca8](https://github.com/svange/openbrain/commit/098aca8f85c210e9dad6ccf8e373574bf502401a))
+* disabled pytest temporarily ([098aca8](https://github.com/svange/openbrain/commit/098aca8f85c210e9dad6ccf8e373574bf502401a)) ([`71b740f`](https://github.com/svange/openbrain/commit/71b740f14182dd3a5a2f87f2d0d3a1a361225eb1))
+
+### Fix
+
+* fix: disabled pytest temporarily ([`098aca8`](https://github.com/svange/openbrain/commit/098aca8f85c210e9dad6ccf8e373574bf502401a))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`5ba8170`](https://github.com/svange/openbrain/commit/5ba8170a38007753b3d38415e8085b4cdcfbfe02))
+
+
+## v0.10.7 (2023-09-25)
+
+### Chore
+
+* chore(release): 0.10.7 [skip ci]
 
 ## [0.10.7](https://github.com/svange/openbrain/compare/v0.10.6...v0.10.7) (2023-09-25)
 
-
 ### Bug Fixes
 
-* disabled pytest temporarily ([9b2db9f](https://github.com/svange/openbrain/commit/9b2db9fc00bde9695177a2f1dc9ee471cf61ffc3))
+* disabled pytest temporarily ([9b2db9f](https://github.com/svange/openbrain/commit/9b2db9fc00bde9695177a2f1dc9ee471cf61ffc3)) ([`151827f`](https://github.com/svange/openbrain/commit/151827f5a62a858ac5dda2c4f91a6f36f0b7c021))
+
+### Fix
+
+* fix: disabled pytest temporarily ([`9b2db9f`](https://github.com/svange/openbrain/commit/9b2db9fc00bde9695177a2f1dc9ee471cf61ffc3))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`7bee378`](https://github.com/svange/openbrain/commit/7bee378f6e07308ae12623a1425ab8c06cdbc630))
+
+
+## v0.10.6 (2023-09-25)
+
+### Chore
+
+* chore(release): 0.10.6 [skip ci]
 
 ## [0.10.6](https://github.com/svange/openbrain/compare/v0.10.5...v0.10.6) (2023-09-25)
-
 
 ### Bug Fixes
 
@@ -215,62 +802,192 @@ All notable changes to this project will be documented in this file. See
 * disabled pytest temporarily ([6f66003](https://github.com/svange/openbrain/commit/6f66003cfda18d02250e71146764c72362fbc99e))
 * removing references to commitizen repo ([be3b8de](https://github.com/svange/openbrain/commit/be3b8deeef3315af784b28d95f23df1d05df7ea9))
 
-
 ### Performance Improvements
 
 * disabled pytest temporarily ([ccdb6bc](https://github.com/svange/openbrain/commit/ccdb6bc8fcb2e6c091523132e4aea3e2cba8e103))
 * disabled pytest temporarily ([7cc2dfa](https://github.com/svange/openbrain/commit/7cc2dfa6a49eae143c0c92f7986b317c578bef16))
 * disabled pytest temporarily ([f40db8e](https://github.com/svange/openbrain/commit/f40db8e294a50e3b6fd4d9bad97027addd73afcf))
-* disabled pytest temporarily ([9013b3c](https://github.com/svange/openbrain/commit/9013b3c601b9824f39a131fe167d44161cd3e3ba))
+* disabled pytest temporarily ([9013b3c](https://github.com/svange/openbrain/commit/9013b3c601b9824f39a131fe167d44161cd3e3ba)) ([`a727ed6`](https://github.com/svange/openbrain/commit/a727ed65e248b0ccedc543e73d77182f69129b5c))
 
-# CHANGELOG
-
-
-
-## v0.10.3 (2023-09-24)
+* chore: Merge remote-tracking branch &#39;origin/main&#39; ([`19fa657`](https://github.com/svange/openbrain/commit/19fa657e44eb6c6cae003d687a56ccc5b76da594))
 
 ### Fix
 
-- update ci and deps
-- update ci and deps
+* fix: disabled pytest temporarily ([`d80c08c`](https://github.com/svange/openbrain/commit/d80c08c7634e0d62b95cd81806a40cd6bdfc143e))
+
+* fix: disabled pytest temporarily ([`4c2e885`](https://github.com/svange/openbrain/commit/4c2e8852b9bcd2f2991e89bfb4fd9ce7d73a9d27))
+
+* fix: disabled pytest temporarily ([`4de360f`](https://github.com/svange/openbrain/commit/4de360fe306efa28832dba58ddc3b9e00e7b78fd))
+
+* fix: disabled pytest temporarily ([`6f66003`](https://github.com/svange/openbrain/commit/6f66003cfda18d02250e71146764c72362fbc99e))
+
+* fix: ci/cd ([`6a1ff5f`](https://github.com/svange/openbrain/commit/6a1ff5f9867e13694b660fde71d99288c3cbfbe4))
+
+* fix: ci/cd ([`af9778e`](https://github.com/svange/openbrain/commit/af9778e46f6f593386063dd497332c02dd852867))
+
+* fix: ci/cd ([`ea0693e`](https://github.com/svange/openbrain/commit/ea0693ef4963d0f1a8d57fcf9c1ce79dafee67ff))
+
+* fix: ci/cd ([`b1f8d86`](https://github.com/svange/openbrain/commit/b1f8d86f78dccb8e8f90b6ffcf5cbfdf46dba45b))
+
+* fix: ci/cd ([`a5c6a90`](https://github.com/svange/openbrain/commit/a5c6a90c78c70f9eae535c20b3d263509f57d444))
+
+* fix: ci/cd ([`bcaec4b`](https://github.com/svange/openbrain/commit/bcaec4b8504bd80529ae75e92d4f9c261f1fa2ce))
+
+### Performance
+
+* perf: disabled pytest temporarily ([`ccdb6bc`](https://github.com/svange/openbrain/commit/ccdb6bc8fcb2e6c091523132e4aea3e2cba8e103))
+
+* perf: disabled pytest temporarily ([`7cc2dfa`](https://github.com/svange/openbrain/commit/7cc2dfa6a49eae143c0c92f7986b317c578bef16))
+
+* perf: disabled pytest temporarily ([`f40db8e`](https://github.com/svange/openbrain/commit/f40db8e294a50e3b6fd4d9bad97027addd73afcf))
+
+* perf: disabled pytest temporarily ([`9013b3c`](https://github.com/svange/openbrain/commit/9013b3c601b9824f39a131fe167d44161cd3e3ba))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`08fa30e`](https://github.com/svange/openbrain/commit/08fa30ed54ea14d4f76e93f9ed9d2aa2965ac1bf))
+
+* bump: ci/cd ([`42dcec5`](https://github.com/svange/openbrain/commit/42dcec50429f9748a5e2ea19d4daa3f360f15e5c))
+
+* bump: ci/cd ([`e43752c`](https://github.com/svange/openbrain/commit/e43752cbe7334147f4c1deafeceb2f9526cc06c2))
+
+* bump: ci/cd ([`c31dc0a`](https://github.com/svange/openbrain/commit/c31dc0a8dfef536e778f5113d9ba5c189b1ec8bc))
+
+* bump: ci/cd ([`13cb480`](https://github.com/svange/openbrain/commit/13cb48002bcea357b0f438b9979d2585bf717d35))
+
+
+## v0.10.5 (2023-09-25)
+
+### Fix
+
+* fix: working on semantic versioning. ([`410abcd`](https://github.com/svange/openbrain/commit/410abcd04e4fc9a9253b792449c25f845456bfbb))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`d57f62c`](https://github.com/svange/openbrain/commit/d57f62ce37e91170f180831fb80ad77749059464))
+
+* bump: ci/cd ([`a6d31a9`](https://github.com/svange/openbrain/commit/a6d31a9be04430b3ce8b61d96243429df2bf8013))
+
+
+## v0.10.4 (2023-09-25)
+
+### Fix
+
+* fix: working on semantic versioning. ([`a2099e9`](https://github.com/svange/openbrain/commit/a2099e9d621cb8a1331157e16e41569f21b9aa21))
+
+
+## v0.10.3 (2023-09-25)
+
+### Build
+
+* build: fixing semantic release ([`89d8a8d`](https://github.com/svange/openbrain/commit/89d8a8dc037b00bcb91758d8b6fe0bbddf28385b))
+
+* build: fixing semantic release ([`a199079`](https://github.com/svange/openbrain/commit/a1990798465ec2a60171aeb0490ad3dc67da7414))
+
+### Chore
+
+* chore: updated LICENSE.md ([`034d214`](https://github.com/svange/openbrain/commit/034d214dd60c73826572f91b69d5c5d9303432e8))
+
+### Fix
+
+* fix: update ci and deps ([`7214806`](https://github.com/svange/openbrain/commit/7214806443a5d3aced198743f71cf227b4581f8e))
+
+* fix: update ci and deps ([`59bf0fd`](https://github.com/svange/openbrain/commit/59bf0fd8980620ca4b0cb890e0e5e316d52fa5e2))
+
+### Unknown
+
+* Merge pull request #39
+
+* build(deps): bump promptlayer from 0.2.9 to 0.3.1 ([`df04962`](https://github.com/svange/openbrain/commit/df0496291542188938cb4f29b38230c80eb7ea96))
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`7abbac1`](https://github.com/svange/openbrain/commit/7abbac1072a2440ce66e37bdb94d243ef513d844))
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`5875912`](https://github.com/svange/openbrain/commit/5875912a8e34dea41e426b8d3ff3107881e54816))
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`b32155a`](https://github.com/svange/openbrain/commit/b32155a91acd9aba3fd7525db26e8c1dc532d621))
+
+* bump: update dependencies ([`26e21c5`](https://github.com/svange/openbrain/commit/26e21c55f7350a85f3e9a6c7d1b6f4a2eb997c0d))
+
+* bump: update dependencies ([`247f37b`](https://github.com/svange/openbrain/commit/247f37bf25055581bca5a55aef63650a7c8a3d36))
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`624950e`](https://github.com/svange/openbrain/commit/624950e9c7a0966287af54d78623df95f3816414))
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`1997121`](https://github.com/svange/openbrain/commit/199712155c06a9feb87819fc2336453e25ad03fa))
+
+* bump: version 0.10.1 → 0.10.2 ([`a859742`](https://github.com/svange/openbrain/commit/a859742ae9c7253d371747b18c28905aed1d0220))
+
 
 ## v0.10.2 (2023-09-24)
 
 ### Fix
 
-- disabling test-pypi for now
+* fix: disabling test-pypi for now ([`c1371ba`](https://github.com/svange/openbrain/commit/c1371baf90dad07fdb0f199190915783f463ef78))
+
+### Unknown
+
+* bump: version 0.10.1 → 0.10.2 ([`179d2cd`](https://github.com/svange/openbrain/commit/179d2cd47510a2b1a4c9dcccbf4e3764f27e09aa))
+
 
 ## v0.10.1 (2023-09-24)
 
 ### Fix
 
-- disabling test-pypi for now
+* fix: disabling test-pypi for now ([`dfe3a15`](https://github.com/svange/openbrain/commit/dfe3a15f43994e70e7ab376bf3816b6978afd82f))
+
+### Unknown
+
+* bump: version 0.10.0 → 0.10.1 ([`8a96312`](https://github.com/svange/openbrain/commit/8a96312d0aa971596ba45bcf69734e66d08619e4))
+
 
 ## v0.10.0 (2023-09-24)
 
-### Feat
+### Feature
 
-- adding dev branch back into ci/cd
-- adding dev branch back into ci/cd
-- adding dev branch back into ci/cd
-- adding dev branch back into ci/cd
+* feat: adding dev branch back into ci/cd ([`731da0d`](https://github.com/svange/openbrain/commit/731da0d91a95f04e14dd3724939c78ebf903d116))
+
+* feat: adding dev branch back into ci/cd ([`59bd06f`](https://github.com/svange/openbrain/commit/59bd06f8747a6231e95f13983426655c73bbcc57))
+
+* feat: adding dev branch back into ci/cd ([`3aa021b`](https://github.com/svange/openbrain/commit/3aa021bf029ee1380ce4fc971ea618e5c30a28e9))
+
+* feat: adding dev branch back into ci/cd ([`f667569`](https://github.com/svange/openbrain/commit/f66756933c475dd78cbae00e92ccbf447607a667))
+
+### Unknown
+
+* bump: version 0.9.0 → 0.10.0 ([`9790cfe`](https://github.com/svange/openbrain/commit/9790cfea373097c4b660775a81d3bc4fd2bb6401))
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`465bc82`](https://github.com/svange/openbrain/commit/465bc825e48678d71756784e8cc0dc2e69c287a7))
+
 
 ## v0.9.0 (2023-09-24)
 
-### Feat
+### Build
 
-- adding dev branch back into ci/cd
+* build: implementing commitizen, pre-commit, github actions, and semantic release ([`fbca8e5`](https://github.com/svange/openbrain/commit/fbca8e5d20f37403e4af68ebabd07b087486c95e))
+
+* build: implementing commitizen, pre-commit, github actions, and semantic release ([`8bd5306`](https://github.com/svange/openbrain/commit/8bd5306781b790eb37eeb51026c965d6f10085bc))
+
+* build: lets try commitizen and sematic releases ([`61041b8`](https://github.com/svange/openbrain/commit/61041b8e2980018e0fdefff51a74b3050b5ac5ed))
+
+### Feature
+
+* feat: adding dev branch back into ci/cd ([`af6f046`](https://github.com/svange/openbrain/commit/af6f046106fafec032593d6a853d66075d0cddb3))
+
+* feat: commitizen ([`cda241a`](https://github.com/svange/openbrain/commit/cda241a3cbd400341a65b47188ad3f294e514ad9))
 
 ### Fix
 
-- removing references to commitizen repo
-- changing refs to master branch to main
+* fix: removing references to commitizen repo ([`793288f`](https://github.com/svange/openbrain/commit/793288fe1cdf6739172cce055dc043ce15cea07d))
 
-## v0.8.0 (2023-09-24)
+* fix: removing references to commitizen repo ([`be3b8de`](https://github.com/svange/openbrain/commit/be3b8deeef3315af784b28d95f23df1d05df7ea9))
 
-### Feat
+* fix: changing refs to master branch to main ([`0418b43`](https://github.com/svange/openbrain/commit/0418b43936f22254465148a517aad6eeb42b52f7))
 
-- commitizen
+### Unknown
+
+* bump: version 0.8.0 → 0.9.0 ([`4da1cc4`](https://github.com/svange/openbrain/commit/4da1cc494ca20744b2eead50fc26fd528f13d19f))
+
+* bump: version 0.7.0 → 0.8.0 ([`04eae40`](https://github.com/svange/openbrain/commit/04eae404ad22d69c1969965a20ebb044c8445c14))
+
 
 ## v0.7.0 (2023-09-24)
 
@@ -685,8 +1402,6 @@ Added guard so that PRs aren&#39;t always submitted upon pushes to this branch. 
 * 🤖📦🐍 style/ci-cd-standup → main (#24)
 
 * Updating README badge
-
-
 
 * re-enabling pipeline steps ([`a23f325`](https://github.com/svange/openbrain/commit/a23f3258901ae8037c78f2505bd690f7e495764b))
 

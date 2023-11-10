@@ -5,10 +5,10 @@ on:
     branches:
       - 'main'
       - 'dev'
-      - 'feature**'
+#      - 'feature**'
   delete:
     branches:
-      - 'feature**'
+#      - 'feature**'
 
 env:
   PIPELINE_USER_ACCESS_KEY_ID: ${{ secrets.GH_AWS_ACCESS_KEY_ID }}
@@ -300,14 +300,28 @@ jobs:
 #      - name: Install project
 #        run: poetry install --no-interaction
 
-      - uses: bjoluc/semantic-release-config-poetry@v2.2.0
-        with:
-          pypi_token: ${{ secrets.PYPI_TEST_TOKEN }}
-          github_token: ${{ secrets.GH_TOKEN }}
-          pypi_repository: https://test.pypi.org/legacy/
-          release_branch: dev
+#      - uses: bjoluc/semantic-release-config-poetry@v2.2.0
+#        with:
+#          pypi_token: ${{ secrets.PYPI_TEST_TOKEN }}
+#          github_token: ${{ secrets.GH_TOKEN }}
+#          pypi_repository: https://test.pypi.org/legacy/
+#          release_branch: dev
+#        env:
+#          RELEASE_BRANCH: dev
+      - name: Python Semantic Release
+        uses: python-semantic-release/python-semantic-release@master
         env:
+          PYPI_TOKEN: ${{ secrets.PYPI_TEST_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          PYPI_REPOSITORY: https://test.pypi.org/legacy/
           RELEASE_BRANCH: dev
+#      - name: Python Semantic Release
+#        uses: python-semantic-release/python-semantic-release@master
+#        env:
+#          PYPI_TOKEN: ${{ secrets.PYPI_TEST_TOKEN }}
+#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+#          PYPI_REPOSITORY: https://test.pypi.org/legacy/
+#          RELEASE_BRANCH: dev
 
 
   publish-release:

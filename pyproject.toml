@@ -28,6 +28,7 @@ scm = "commitizen.providers:ScmProvider"
 
 [tool.semantic_release]
 major_on_zero = false
+commit_message = "chore(release): release {version}"
 
 # End from video
 [tool.semantic_release.branches.main]
