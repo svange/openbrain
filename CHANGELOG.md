@@ -2,7 +2,28 @@
 
 
 
+## v0.23.0-dev.4 (2023-11-10)
+
+### Fix
+
+* fix: adding skip ci to automatic commit messages ([`75954a4`](https://github.com/svange/openbrain/commit/75954a4e34cd3c3b54d452070ce31c52f397423d))
+
+* fix: adding skip ci to automatic commit messages ([`b456a24`](https://github.com/svange/openbrain/commit/b456a24cbb17058ffc68180d0855c2aa8e36f45d))
+
+* fix: ignoring changelog for trailing whitespace check ([`d9b7de3`](https://github.com/svange/openbrain/commit/d9b7de36a5689cf58c4f25df1fe1898fa0b7880f))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`bd14552`](https://github.com/svange/openbrain/commit/bd14552b42582092d6afb8f231f61d7767d07771))
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`d0652e8`](https://github.com/svange/openbrain/commit/d0652e86620bd120a59a72d44ada15bef1600119))
+
+
 ## v0.23.0-dev.3 (2023-11-10)
+
+### Chore
+
+* chore(release): release 0.23.0-dev.3 ([`4af20c2`](https://github.com/svange/openbrain/commit/4af20c2a397d4d28d2878bbf29f9a3ee64a9feb8))
 
 ### Fix
 
