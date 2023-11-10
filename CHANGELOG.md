@@ -2,7 +2,18 @@
 
 
 
+## v0.23.0-dev.3 (2023-11-10)
+
+### Fix
+
+* fix: ignoring changelog for trailing whitespace check ([`a5fe800`](https://github.com/svange/openbrain/commit/a5fe800665a110cfa94a75a74d1d58f9213e2ce5))
+
+
 ## v0.23.0-dev.2 (2023-11-10)
+
+### Chore
+
+* chore(release): release 0.23.0-dev.2 ([`23e7055`](https://github.com/svange/openbrain/commit/23e7055b0b1d9759ffd20db8464b2a2adf1a3f99))
 
 ### Feature
 
