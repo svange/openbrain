@@ -161,9 +161,9 @@ class Config:
                 _logger.debug(f"{attrib} is using the default friendly name. Do you have this infrastructure deployed?")
 
             if not attrib_published_name:
-                _logger.error(f"{attrib} not defined in environment variables")
+                _logger.warning(f"{attrib} not defined in environment variables")
                 print(
-                    f"ERROR: Must define {attrib} in environment variables or define {attrib_published_name} and {Defaults.INFRA_STACK_NAME} in environment variables"
+                    f"WARNING: Must define {attrib} in environment variables or define {attrib_published_name} and {Defaults.INFRA_STACK_NAME} in environment variables"
                 )
                 no_published_name.append((attrib, attrib_published_name))
                 continue
@@ -185,11 +185,11 @@ class Config:
             for attrib, attrib_published_name in undefined_resources:
                 print(f"ERROR: Can't find {attrib_published_name} values from your central infrastructure")
 
-            raise ObMissingEnvironmentVariable(
-                "Missing environment variables or central infrastructure. Please define all resource names in "
-                "environment OR define the central infrastructure stack name in environment and resource friendly "
-                "names."
-            )
+            # raise ObMissingEnvironmentVariable(
+            #     "Missing environment variables or central infrastructure. Please define all resource names in "
+            #     "environment OR define the central infrastructure stack name in environment and resource friendly "
+            #     "names."
+            # )
 
     def _get_resource_from_central_infra(self, friendly_name):
         logger = get_logger()
@@ -202,12 +202,12 @@ class Config:
                 response = cf_client.describe_stacks(StackName=self.INFRA_STACK_NAME)
                 self._central_infra_outputs = {x["OutputKey"]: x["OutputValue"] for x in response["Stacks"][0]["Outputs"]}
             except ClientError as e:
-                logger.error(
+                logger.warning(
                     f"Can't find central infrastructure stack {self.INFRA_STACK_NAME} - to find resources from "
                     f"friendly names. Please define all resource names in the environment OR define the central "
                     f"infrastructure stack name in the environment and resource friendly names"
                 )
-                raise e
+                # raise e
 
         return self._central_infra_outputs[friendly_name]
 
