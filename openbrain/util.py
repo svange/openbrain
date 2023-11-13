@@ -222,12 +222,13 @@ class Config:
                 self._central_infra_outputs = {
                     x["OutputKey"]: x["OutputValue"] for x in response["Stacks"][0]["Outputs"]
                 }
-            except NoCredentialsError or ClientError:
+            except NoCredentialsError or ClientError as e:
                 logger.warning(
                     f"Can't find central infrastructure stack {self.INFRA_STACK_NAME} - to find resources from "
                     f"friendly names. Please define all resource names in the environment OR define the central "
                     f"infrastructure stack name in the environment and resource friendly names"
                 )
+                logger.warning(str(e))
                 # raise e
 
         return self._central_infra_outputs[friendly_name]
