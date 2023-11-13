@@ -1,3 +1,15 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.2](https://github.com/svange/openbrain/compare/v1.0.1...v1.0.2) (2023-11-13)
+
+
+### Bug Fixes
+
+* removing import exceptions in favor of logging warnings so Chalice can stop complaining. ([4f66cbf](https://github.com/svange/openbrain/commit/4f66cbf1497534c3355c04278570eb62962afb05))
+
 # CHANGELOG
 
 
