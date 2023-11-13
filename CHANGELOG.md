@@ -1,10 +1,33 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+
+## v1.0.2-dev.1 (2023-11-13)
+
+### Documentation
+
+* docs: added info about the SAM template ([`b7b90f4`](https://github.com/svange/openbrain/commit/b7b90f4c658394bd490ce3a4c670c1e729734e31))
+
+### Fix
+
+* fix: removing import exceptions in favor of logging warnings so Chalice can stop complaining. ([`4f66cbf`](https://github.com/svange/openbrain/commit/4f66cbf1497534c3355c04278570eb62962afb05))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`d8da56d`](https://github.com/svange/openbrain/commit/d8da56dc2920fbe5e75f956b67a9aaf9b4c1d41d))
+
+
+## v1.0.1 (2023-11-10)
+
+### Build
+
+* build: merge dev into main ([`3b47875`](https://github.com/svange/openbrain/commit/3b47875b75ab4e6bbbea7ce20c8047380e239721))
+
+### Chore
+
+* chore(release): 1.0.1 [skip ci]
 
 ## [1.0.3](https://github.com/svange/openbrain/compare/v1.0.2...v1.0.3) (2023-11-13)
-
 
 ### Bug Fixes
 
