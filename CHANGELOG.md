@@ -1,3 +1,15 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.4](https://github.com/svange/openbrain/compare/v1.0.3...v1.0.4) (2023-11-13)
+
+
+### Bug Fixes
+
+* catching AWS client error to allow for no-infra testing in CI pipelines. ([55573ad](https://github.com/svange/openbrain/commit/55573adc8734389ad3ea9f16fc0b280528320ec7))
+
 # CHANGELOG
 
 
