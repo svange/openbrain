@@ -1,10 +1,33 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+
+## v1.0.2-dev.1 (2023-11-13)
+
+### Documentation
+
+* docs: added info about the SAM template ([`b7b90f4`](https://github.com/svange/openbrain/commit/b7b90f4c658394bd490ce3a4c670c1e729734e31))
+
+### Fix
+
+* fix: removing import exceptions in favor of logging warnings so Chalice can stop complaining. ([`4f66cbf`](https://github.com/svange/openbrain/commit/4f66cbf1497534c3355c04278570eb62962afb05))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`d8da56d`](https://github.com/svange/openbrain/commit/d8da56dc2920fbe5e75f956b67a9aaf9b4c1d41d))
+
+
+## v1.0.1 (2023-11-10)
+
+### Build
+
+* build: merge dev into main ([`3b47875`](https://github.com/svange/openbrain/commit/3b47875b75ab4e6bbbea7ce20c8047380e239721))
+
+### Chore
+
+* chore(release): 1.0.1 [skip ci]
 
 ## [1.0.1](https://github.com/svange/openbrain/compare/v1.0.0...v1.0.1) (2023-11-10)
-
 
 ### Bug Fixes
 
@@ -13,10 +36,76 @@ All notable changes to this project will be documented in this file. See
 * skipping unnecessary steps in pipeline ([4e3a67f](https://github.com/svange/openbrain/commit/4e3a67f2dca2f6cb453d8cbcb5e5f8063c0253a1))
 * tuning ci pipeline ([7f9df0d](https://github.com/svange/openbrain/commit/7f9df0d740bead7856b52a02d4ff37bd92b2ebe1))
 * tuning ci pipeline ([6330be2](https://github.com/svange/openbrain/commit/6330be25eff009ac9602b3855795e047b35c1e21))
-* tuning ci pipeline ([971cfbd](https://github.com/svange/openbrain/commit/971cfbded58aa64a358ae64ecd18616e350806d4))
+* tuning ci pipeline ([971cfbd](https://github.com/svange/openbrain/commit/971cfbded58aa64a358ae64ecd18616e350806d4)) ([`b573f45`](https://github.com/svange/openbrain/commit/b573f4512ad0e58b902496c8a70a2d0534603c64))
+
+
+## v0.23.0-dev.8 (2023-11-10)
+
+### Build
+
+* build: merging dev into main ([`8c57e33`](https://github.com/svange/openbrain/commit/8c57e33b8e6c2368aa40000c0cbae6a3c78765dc))
+
+### Chore
+
+* chore(release): release 0.23.0-dev.8 ([`bc1b15a`](https://github.com/svange/openbrain/commit/bc1b15a3b61db09b1e2fb0234066dcac81901657))
+
+### Fix
+
+* fix: skipping unnecessary steps in pipeline ([`6cff920`](https://github.com/svange/openbrain/commit/6cff92072b366d2628d0694cf5267007cf0deb91))
+
+* fix: skipping unnecessary steps in pipeline ([`1c371d9`](https://github.com/svange/openbrain/commit/1c371d9c5dccd286b1913f301d970d53be9714e6))
+
+* fix: skipping unnecessary steps in pipeline ([`4e3a67f`](https://github.com/svange/openbrain/commit/4e3a67f2dca2f6cb453d8cbcb5e5f8063c0253a1))
+
+### Unknown
+
+* Merge branch &#39;dev&#39; ([`e7676c5`](https://github.com/svange/openbrain/commit/e7676c510351fc094a1bb63554a847ca8ba48901))
+
+
+## v0.23.0-dev.7 (2023-11-10)
+
+### Chore
+
+* chore(release): release 0.23.0-dev.7 ([`b1d4f0d`](https://github.com/svange/openbrain/commit/b1d4f0d8e6fe9abc7236eca6f42ee2c7b04383e8))
+
+### Fix
+
+* fix: tuning ci pipeline ([`7f9df0d`](https://github.com/svange/openbrain/commit/7f9df0d740bead7856b52a02d4ff37bd92b2ebe1))
+
+
+## v0.23.0-dev.6 (2023-11-10)
+
+### Chore
+
+* chore(release): release 0.23.0-dev.6 ([`4c62d40`](https://github.com/svange/openbrain/commit/4c62d405a0159b310b72414139d6069294f594cc))
+
+### Fix
+
+* fix: tuning ci pipeline ([`6330be2`](https://github.com/svange/openbrain/commit/6330be25eff009ac9602b3855795e047b35c1e21))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`c1cf7d4`](https://github.com/svange/openbrain/commit/c1cf7d4dfc94682f2b0be34af189b192904660b2))
+
+
+## v0.23.0-dev.5 (2023-11-10)
+
+### Chore
+
+* chore(release): release 0.23.0-dev.5 [skip ci] ([`8960f7e`](https://github.com/svange/openbrain/commit/8960f7e610a79b00dc390563aaa9a6d8c070828e))
+
+### Fix
+
+* fix: tuning ci pipeline ([`971cfbd`](https://github.com/svange/openbrain/commit/971cfbded58aa64a358ae64ecd18616e350806d4))
+
+
+## v1.0.0 (2023-11-10)
+
+### Chore
+
+* chore(release): 1.0.0 [skip ci]
 
 ## [1.0.0](https://github.com/svange/openbrain/compare/v0.22.0...v1.0.0) (2023-11-10)
-
 
 ### ⚠ BREAKING CHANGES
 
@@ -72,65 +161,15 @@ All notable changes to this project will be documented in this file. See
 * decoupling from central infrastructure. BREAKING-CHANGE: Module initialization and required env vars have changed... glad nobody uses this but met yet... ([8409770](https://github.com/svange/openbrain/commit/84097705263aaf88f59a85597a9343730b4cc532))
 * decoupling from central infrastructure. Updating CI/CD pipeline for pre-releases to pypi test. BREAKING-CHANGE ([7ddb957](https://github.com/svange/openbrain/commit/7ddb957156c565b2fa8288fc82538a43b45754e5))
 
-
 ### Bug Fixes
 
 * adding skip ci to automatic commit messages ([5c07136](https://github.com/svange/openbrain/commit/5c07136c5d214a8d6050071f03f0236ef4087306))
 * adding skip ci to automatic commit messages ([75954a4](https://github.com/svange/openbrain/commit/75954a4e34cd3c3b54d452070ce31c52f397423d))
 * adding skip ci to automatic commit messages ([b456a24](https://github.com/svange/openbrain/commit/b456a24cbb17058ffc68180d0855c2aa8e36f45d))
 * ignoring changelog for trailing whitespace check ([d9b7de3](https://github.com/svange/openbrain/commit/d9b7de36a5689cf58c4f25df1fe1898fa0b7880f))
-* ignoring changelog for trailing whitespace check ([a5fe800](https://github.com/svange/openbrain/commit/a5fe800665a110cfa94a75a74d1d58f9213e2ce5))
-
-# CHANGELOG
-
-
-
-## v0.23.0-dev.8 (2023-11-10)
+* ignoring changelog for trailing whitespace check ([a5fe800](https://github.com/svange/openbrain/commit/a5fe800665a110cfa94a75a74d1d58f9213e2ce5)) ([`5df56f9`](https://github.com/svange/openbrain/commit/5df56f90960ac75c978a6e2971551597c6f8b8d2))
 
 ### Fix
-
-* fix: skipping unnecessary steps in pipeline ([`6cff920`](https://github.com/svange/openbrain/commit/6cff92072b366d2628d0694cf5267007cf0deb91))
-
-* fix: skipping unnecessary steps in pipeline ([`1c371d9`](https://github.com/svange/openbrain/commit/1c371d9c5dccd286b1913f301d970d53be9714e6))
-
-* fix: skipping unnecessary steps in pipeline ([`4e3a67f`](https://github.com/svange/openbrain/commit/4e3a67f2dca2f6cb453d8cbcb5e5f8063c0253a1))
-
-
-## v0.23.0-dev.7 (2023-11-10)
-
-### Chore
-
-* chore(release): release 0.23.0-dev.7 ([`b1d4f0d`](https://github.com/svange/openbrain/commit/b1d4f0d8e6fe9abc7236eca6f42ee2c7b04383e8))
-
-### Fix
-
-* fix: tuning ci pipeline ([`7f9df0d`](https://github.com/svange/openbrain/commit/7f9df0d740bead7856b52a02d4ff37bd92b2ebe1))
-
-
-## v0.23.0-dev.6 (2023-11-10)
-
-### Chore
-
-* chore(release): release 0.23.0-dev.6 ([`4c62d40`](https://github.com/svange/openbrain/commit/4c62d405a0159b310b72414139d6069294f594cc))
-
-### Fix
-
-* fix: tuning ci pipeline ([`6330be2`](https://github.com/svange/openbrain/commit/6330be25eff009ac9602b3855795e047b35c1e21))
-
-### Unknown
-
-* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`c1cf7d4`](https://github.com/svange/openbrain/commit/c1cf7d4dfc94682f2b0be34af189b192904660b2))
-
-
-## v0.23.0-dev.5 (2023-11-10)
-
-### Chore
-
-* chore(release): release 0.23.0-dev.5 [skip ci] ([`8960f7e`](https://github.com/svange/openbrain/commit/8960f7e610a79b00dc390563aaa9a6d8c070828e))
-
-### Fix
-
-* fix: tuning ci pipeline ([`971cfbd`](https://github.com/svange/openbrain/commit/971cfbded58aa64a358ae64ecd18616e350806d4))
 
 * fix: adding skip ci to automatic commit messages ([`5c07136`](https://github.com/svange/openbrain/commit/5c07136c5d214a8d6050071f03f0236ef4087306))
 
@@ -1478,13 +1517,9 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * build: implementing commitizen, pre-commit, github actions, and semantic release ([`8bd5306`](https://github.com/svange/openbrain/commit/8bd5306781b790eb37eeb51026c965d6f10085bc))
 
-* build: lets try commitizen and sematic releases ([`61041b8`](https://github.com/svange/openbrain/commit/61041b8e2980018e0fdefff51a74b3050b5ac5ed))
-
 ### Feature
 
 * feat: adding dev branch back into ci/cd ([`af6f046`](https://github.com/svange/openbrain/commit/af6f046106fafec032593d6a853d66075d0cddb3))
-
-* feat: commitizen ([`cda241a`](https://github.com/svange/openbrain/commit/cda241a3cbd400341a65b47188ad3f294e514ad9))
 
 ### Fix
 
@@ -1497,6 +1532,19 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 ### Unknown
 
 * bump: version 0.8.0 → 0.9.0 ([`4da1cc4`](https://github.com/svange/openbrain/commit/4da1cc494ca20744b2eead50fc26fd528f13d19f))
+
+
+## v0.8.0 (2023-09-24)
+
+### Build
+
+* build: lets try commitizen and sematic releases ([`61041b8`](https://github.com/svange/openbrain/commit/61041b8e2980018e0fdefff51a74b3050b5ac5ed))
+
+### Feature
+
+* feat: commitizen ([`cda241a`](https://github.com/svange/openbrain/commit/cda241a3cbd400341a65b47188ad3f294e514ad9))
+
+### Unknown
 
 * bump: version 0.7.0 → 0.8.0 ([`04eae40`](https://github.com/svange/openbrain/commit/04eae404ad22d69c1969965a20ebb044c8445c14))
 
