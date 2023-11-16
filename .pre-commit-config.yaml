@@ -58,10 +58,10 @@ repos:
     rev: v3.9.1 # automatically updated by Commitizen
     hooks:
       - id: commitizen
-      - id: commitizen-branch
-        stages:
-          - post-commit
-          - push
+#      - id: commitizen-branch
+#        stages:
+#          - post-commit
+#          - push
 
 #  - repo: local
 #    hooks:
