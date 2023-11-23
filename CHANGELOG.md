@@ -1,62 +1,78 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
-
-## [1.0.4](https://github.com/svange/openbrain/compare/v1.0.3...v1.0.4) (2023-11-13)
-
-
-### Bug Fixes
-
-* catching AWS client error to allow for no-infra testing in CI pipelines. ([55573ad](https://github.com/svange/openbrain/commit/55573adc8734389ad3ea9f16fc0b280528320ec7))
-
 # CHANGELOG
 
 
 
-## v1.0.2-dev.1 (2023-11-13)
-
-### Documentation
-
-* docs: added info about the SAM template ([`b7b90f4`](https://github.com/svange/openbrain/commit/b7b90f4c658394bd490ce3a4c670c1e729734e31))
-
-### Fix
-
-* fix: removing import exceptions in favor of logging warnings so Chalice can stop complaining. ([`4f66cbf`](https://github.com/svange/openbrain/commit/4f66cbf1497534c3355c04278570eb62962afb05))
-
-### Unknown
-
-* Merge remote-tracking branch &#39;origin/main&#39; ([`d8da56d`](https://github.com/svange/openbrain/commit/d8da56dc2920fbe5e75f956b67a9aaf9b4c1d41d))
-
-
-## v1.0.1 (2023-11-10)
+## v1.0.5-dev.1 (2023-11-23)
 
 ### Build
 
-* build: merge dev into main ([`3b47875`](https://github.com/svange/openbrain/commit/3b47875b75ab4e6bbbea7ce20c8047380e239721))
+* build(merge): merge main back into dev ([`04e25ab`](https://github.com/svange/openbrain/commit/04e25ab350fd807e9e1d11a73c4830678652be7c))
+
+### Fix
+
+* fix: update gradio to work with new environment variables. ([`396ab70`](https://github.com/svange/openbrain/commit/396ab709d4e3f0962fffb25e71168cc28349384f))
+
+
+## v1.0.4 (2023-11-13)
 
 ### Chore
 
-* chore(release): 1.0.1 [skip ci]
+* chore(release): 1.0.4 [skip ci]
+
+## [1.0.4](https://github.com/svange/openbrain/compare/v1.0.3...v1.0.4) (2023-11-13)
+
+### Bug Fixes
+
+* catching AWS client error to allow for no-infra testing in CI pipelines. ([55573ad](https://github.com/svange/openbrain/commit/55573adc8734389ad3ea9f16fc0b280528320ec7)) ([`92be7a6`](https://github.com/svange/openbrain/commit/92be7a6068abf025341d3463328353948478a104))
+
+### Fix
+
+* fix: catching AWS client error to allow for no-infra testing in CI pipelines. ([`55573ad`](https://github.com/svange/openbrain/commit/55573adc8734389ad3ea9f16fc0b280528320ec7))
+
+### Unknown
+
+* Merge branch &#39;dev&#39; ([`5341bbe`](https://github.com/svange/openbrain/commit/5341bbe4b741af8d8b7ac0ce66f33eb60b4a19c5))
+
+
+## v1.0.3 (2023-11-13)
+
+### Chore
+
+* chore(release): 1.0.3 [skip ci]
 
 ## [1.0.3](https://github.com/svange/openbrain/compare/v1.0.2...v1.0.3) (2023-11-13)
 
 ### Bug Fixes
 
-* catching AWS client error to allow for no-infra testing in CI pipelines. ([7f5c401](https://github.com/svange/openbrain/commit/7f5c40133266d6fd70656f3dfdb84b8b90738e82))
+* catching AWS client error to allow for no-infra testing in CI pipelines. ([7f5c401](https://github.com/svange/openbrain/commit/7f5c40133266d6fd70656f3dfdb84b8b90738e82)) ([`69743cf`](https://github.com/svange/openbrain/commit/69743cfad98bf8c3bb135504f3b55bce5a4dcbfe))
+
+### Fix
+
+* fix: catching AWS client error to allow for no-infra testing in CI pipelines. ([`7f5c401`](https://github.com/svange/openbrain/commit/7f5c40133266d6fd70656f3dfdb84b8b90738e82))
+
+
+## v1.0.2 (2023-11-13)
+
+### Build
+
+* build: Update release branch ([`e2aba1f`](https://github.com/svange/openbrain/commit/e2aba1f745f976242f69df89cc8225e5a94db724))
+
+### Chore
+
+* chore(release): 1.0.2 [skip ci]
 
 ## [1.0.2](https://github.com/svange/openbrain/compare/v1.0.1...v1.0.2) (2023-11-13)
 
-
 ### Bug Fixes
 
-* removing import exceptions in favor of logging warnings so Chalice can stop complaining. ([4f66cbf](https://github.com/svange/openbrain/commit/4f66cbf1497534c3355c04278570eb62962afb05))
-
-# CHANGELOG
-
+* removing import exceptions in favor of logging warnings so Chalice can stop complaining. ([4f66cbf](https://github.com/svange/openbrain/commit/4f66cbf1497534c3355c04278570eb62962afb05)) ([`e413078`](https://github.com/svange/openbrain/commit/e4130784a82630d25f9ba3daf8912359ecf763a1))
 
 
 ## v1.0.2-dev.1 (2023-11-13)
+
+### Chore
+
+* chore(release): release 1.0.2-dev.1 ([`5233fa2`](https://github.com/svange/openbrain/commit/5233fa27159a72aeea2750a8c3d8865ae688e047))
 
 ### Documentation
 
