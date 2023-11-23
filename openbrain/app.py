@@ -17,8 +17,12 @@ from openbrain.util import config, Defaults
 load_dotenv()
 
 OB_MODE = config.OB_MODE
-AGENCY_API_KEY = os.environ.get("DEV_OB_PROVIDER_API_KEY", "")
-CHAT_ENDPOINT = os.environ.get("DEV_API_URL", "") + "/chat"
+CHAT_ENDPOINT = os.environ.get("OB_API_URL", "") + "/chat"
+
+DEFAULT_ORIGIN = os.environ.get("DEFAULT_ORIGIN", "https://localhost:5173")
+OB_PROVIDER_API_KEY = os.environ.get("OB_PROVIDER_API_KEY", "")
+
+
 DEFAULT_CLIENT_ID = Defaults.DEFAULT_CLIENT_ID.value
 DEFAULT_PROFILE_NAME = Defaults.DEFAULT_PROFILE_NAME.value
 PORT = int(os.environ.get("GRADIO_PORT", 7861))
@@ -65,7 +69,8 @@ def chat(message, chat_history, _profile_name, session_state, _client_id):
         session = session_state["session"]
         session.headers.update(
             {
-                "x-api-key": AGENCY_API_KEY,
+                "x-api-key": OB_PROVIDER_API_KEY,
+                "origin": DEFAULT_ORIGIN,
             }
         )
         response = session.post(CHAT_ENDPOINT, json=chat_message.to_json())
@@ -128,7 +133,12 @@ def reset(
     else:
         # Make a POST request to the reset endpoint
         session = session_state["session"]
-        session.headers.update({"x-api-key": AGENCY_API_KEY})
+        session.headers.update(
+            {
+                "x-api-key": OB_PROVIDER_API_KEY,
+                "origin": DEFAULT_ORIGIN,
+             }
+        )
         response = session.post(CHAT_ENDPOINT, json=chat_message.to_json())
         session_id = response.cookies["Session"]
         session_state["session_id"] = session_id
@@ -455,8 +465,8 @@ def main():
     # main_block.launch(auth=auth, auth_message="Please login to continue", share=False, debug=True,
     #                   server_name="0.0.0.0", server_port=7861, show_tips=True, )
     # reset the public default profile
-    agent_config = AgentConfig(client_id=DEFAULT_CLIENT_ID, profile_name=DEFAULT_PROFILE_NAME)
-    agent_config.save()
+    # agent_config = AgentConfig(client_id=DEFAULT_CLIENT_ID, profile_name=DEFAULT_PROFILE_NAME)
+    # agent_config.save()
     main_block.launch(
         debug=True,
         share=False,
