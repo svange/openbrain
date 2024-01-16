@@ -1,3 +1,15 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.0.5](https://github.com/svange/openbrain/compare/v1.0.4...v1.0.5) (2023-11-23)
+
+
+### Bug Fixes
+
+* update gradio to work with new environment variables. ([396ab70](https://github.com/svange/openbrain/commit/396ab709d4e3f0962fffb25e71168cc28349384f))
+
 # CHANGELOG
 
 
