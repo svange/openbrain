@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.6](https://github.com/svange/openbrain/compare/v1.0.5...v1.0.6) (2024-01-16)
+
+
+### Bug Fixes
+
+* added newlines for demo ([297e672](https://github.com/svange/openbrain/commit/297e6724a4b4fd2942d7779c33bfe2aa1eeab7d7))
+
 ## [1.0.5](https://github.com/svange/openbrain/compare/v1.0.4...v1.0.5) (2023-11-23)
 
 
