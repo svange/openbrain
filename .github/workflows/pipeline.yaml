@@ -76,7 +76,6 @@ jobs:
 
       - name: Upload artifacts
         if: "!contains(github.event.head_commit.message, 'chore(release):')"
-
         run: |
           sam package \
             --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
@@ -85,20 +84,17 @@ jobs:
 
       - name: Validate artifacts
         if: "!contains(github.event.head_commit.message, 'chore(release):')"
-
         run: |
           sam validate --lint -t packaged-testing.yaml
 
       - uses: actions/upload-artifact@v3
         if: "!contains(github.event.head_commit.message, 'chore(release):')"
-
         with:
           name: packaged-testing.yaml
           path: packaged-testing.yaml
 
       - name: Deploy to stack
         if: "!contains(github.event.head_commit.message, 'chore(release):')"
-
         shell: bash
         run: |
           sam deploy \
