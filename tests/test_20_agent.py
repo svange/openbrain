@@ -20,6 +20,10 @@ def incoming_lead(simple_lead):
     outgoing_lead = simple_lead
     return outgoing_lead
 
+@pytest.fixture
+def initial_context():
+    return {"email": "e@my.ass"}
+
 
 class TestAgent:
     @retry.retry(delay=1, tries=5)
@@ -104,3 +108,23 @@ class TestAgent:
         assert response_message is not None
         assert isinstance(response_message, str)
         assert "blue" in response_message.lower()
+
+
+    @pytest.mark.ci_cd
+    @pytest.mark.integration_tests
+    def test_initial_context_email(self, incoming_agent_config: AgentConfig, initial_context: dict[str, str]):
+        assert initial_context["email"] is not None
+        email = initial_context["email"]
+
+        messages = [
+            "What's my email address?",
+        ]
+
+        # GIVE INFO
+        message = messages.pop(0)
+        gpt_agent = GptAgent(agent_config=incoming_agent_config, initial_context=initial_context)
+        response_message = gpt_agent.handle_user_message(message)
+
+        assert response_message is not None
+        assert isinstance(response_message, str)
+        assert email in response_message
