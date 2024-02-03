@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/svange/openbrain/compare/v1.0.6...v1.1.0) (2024-02-03)
+
+
+### Features
+
+* adding optional initial_context dictionary to agent creation, allowing for information like initiating user's information to be injected into the agent's memory. ([0e8feaa](https://github.com/svange/openbrain/commit/0e8feaa9b6b0da1de74ff76eba44200b739de070))
+* adding optional initial_context dictionary to agent creation, allowing for information like initiating user's information to be injected into the agent's memory. ([fa751c5](https://github.com/svange/openbrain/commit/fa751c5f80b0910e0a11a96ea60d97c07ddf9334))
+
 ## [1.0.6](https://github.com/svange/openbrain/compare/v1.0.5...v1.0.6) (2024-01-16)
 
 
