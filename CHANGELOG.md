@@ -2,11 +2,26 @@
 
 
 
+## v1.1.0-dev.1 (2024-02-03)
+
+### Feature
+
+* feat: adding optional initial_context dictionary to agent creation, allowing for information like initiating user&#39;s information to be injected into the agent&#39;s memory. ([`fa751c5`](https://github.com/svange/openbrain/commit/fa751c5f80b0910e0a11a96ea60d97c07ddf9334))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`271967a`](https://github.com/svange/openbrain/commit/271967a39d140fa6d954c29844ee1cf36ec5a19e))
+
+
 ## v1.0.5-dev.1 (2023-11-23)
 
 ### Build
 
 * build(merge): merge main back into dev ([`04e25ab`](https://github.com/svange/openbrain/commit/04e25ab350fd807e9e1d11a73c4830678652be7c))
+
+### Chore
+
+* chore(release): release 1.0.5-dev.1 ([`0fe92a0`](https://github.com/svange/openbrain/commit/0fe92a04f2f903d3f6e75be07fa43f7ea47cf29a))
 
 ### Fix
 
