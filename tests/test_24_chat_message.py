@@ -16,13 +16,16 @@ def incoming_chat_message(simple_chat_message):
 class TestChatMessage:
     @pytest.mark.ci_cd
     @pytest.mark.orm_tests
-    def test_chat_message(self, incoming_chat_message):
+    def test_chat_message(self, incoming_chat_message, email: str = "e@my.ass"):
         chat_message = incoming_chat_message
         client_id = chat_message.client_id
         session_id = chat_message.session_id
         reset = chat_message.reset
         agent_config = chat_message.agent_config_overrides
         message = chat_message.message
+
+        # Adding email to test new email field
+        chat_message.email = email
 
         # Assert that the client_id is not None
         if chat_message.client_id:
@@ -52,6 +55,11 @@ class TestChatMessage:
         # If an AgentConfig is present, assert its profile_name is not None
         if chat_message.agent_config_overrides:
             assert chat_message.client_id is not None
+
+        # Check email field
+        if chat_message.email:
+            assert chat_message.email == email
+            assert isinstance(chat_message.email, str)
 
         # Create a copy then assert equality
         serialized_chat_message = chat_message.to_json()

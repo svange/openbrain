@@ -14,18 +14,15 @@ from langchain.memory.chat_memory import BaseChatMemory
 from langchain.prompts import MessagesPlaceholder
 from langchain.schema import OutputParserException, SystemMessage
 
-# from openbrain.tools.tool_callback_handler import CallbackHandler
-
-
 from openbrain.agents.exceptions import (
     AgentError,
-    AgentToolIncompleteLeadError,
-    AgentToolLeadMomentumError,
 )
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.orm.model_lead import Lead
-from openbrain.util import get_logger
 from openbrain.tools.toolbox import Toolbox
+from openbrain.util import get_logger
+
+# from openbrain.tools.tool_callback_handler import CallbackHandler
 
 
 logger = get_logger()
@@ -34,8 +31,9 @@ logger = get_logger()
 class GptAgent:
     working_memory: BaseChatMemory
 
-    def __init__(self, agent_config: AgentConfig, memory=None, lead=None):
+    def __init__(self, agent_config: AgentConfig, memory: BaseChatMemory = None, lead: Lead = None, initial_context: dict = None):
         # Initialize the agent config
+        self.initial_context = initial_context
         self.lead = lead
         self.agent_config = agent_config
         self.client_id = agent_config.client_id
@@ -95,10 +93,16 @@ class GptAgent:
         tools = self.tools
 
         # Function agents are special, so we build them differently # TODO: Time to make a class...
+        initial_message = "Hi!"
+
+        if self.initial_context:
+            readable_list = [k + ": " + v for k, v in self.initial_context.items()]
+            initial_message = "To begin, here is some information about me: " + ", ".join(readable_list)
+
         if self.agent_config.executor_model_type == "function":
             if memory is None:
                 memory = ConversationBufferMemory(memory_key="memory", return_messages=True)
-                memory.save_context({"input": "Hi!"}, {"output": self.agent_config.icebreaker})
+                memory.save_context({"input": initial_message}, {"output": self.agent_config.icebreaker})
 
             system_message = SystemMessage(content=system_message)
 

@@ -35,6 +35,11 @@ class ChatMessage(ORMModel, BaseModel):
         description="The message to send to the agent, ignored when resetting the session",
     )
 
+    email: str | None = Field(
+        default=None,
+        description="DEPRECATED - The email of the user initiating the chat",
+    )
+
     @classmethod
     def get(cls, *args, **kwargs) -> ChatMessage:
         """Get a ChatMessage object from the database"""
