@@ -152,6 +152,7 @@ classDiagram
         + str: sessionId
         + str: clientId
         + str: message
+        + str: email
         + AgentConfig: agentConfigOverrides
         + str: agentConfig
         + bool: reset
@@ -218,14 +219,15 @@ sequenceDiagram
     participant Tool
     participant EventBus
 
-    User ->> GPT Agent: (AgentConfig, AgentMemory), ChatMessage
-        GPT Agent -->> AgentConfigTable: profileName
-        AgentConfigTable -->> GPT Agent: AgentConfig
-        GPT Agent -->> OpenAI: ChatMessage
-        OpenAI -->> GPT Agent: ChatMessage
-        GPT Agent -->> Tool: Tool(Object, clientId)
+    User ->> GPT Agent: (AgentConfig, AgentMemory, Lead, Email, InitialContext), ChatMessage
+        GPT Agent -->> AgentConfigTable: profileName, clientId (on reset)
+        AgentConfigTable -->> GPT Agent: AgentConfig (on reset)
+        GPT Agent ->> GPT Agent: InitialContext, Email, Lead (on reset)  
+        GPT Agent -->> OpenAI: ChatMessage (on chat)
+        OpenAI -->> GPT Agent: ChatMessage (on chat)
+        GPT Agent -->> Tool: Tool(Object, clientId) (on chat)
         Tool -->> EventBus: (Object, clientId, session_id, object_id)
-        Tool -->> GPT Agent: ChatMessage
+        Tool -->> GPT Agent: ChatMessage (on chat)
     destroy GPT Agent
     GPT Agent ->> User: ChatMessage, (AgentConfig, AgentMemory), Object
 
@@ -247,7 +249,7 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
-    title Agent Data Flow
+    title Example tool event data flow
     participant SQS
     participant EventBus
     participant Lambda
