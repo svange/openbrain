@@ -8,48 +8,67 @@ from openbrain.tools.obtool import OBTool
 
 from openbrain.util import get_logger
 
+from openbrain.tools.tool_leadmo_update_contact import OBToolLeadmoUpdateContact
+from openbrain.tools.tool_leadmo_stop_conversation import OBToolLeadmoStopConversation
+from openbrain.tools.tool_send_lead_to_crm import OBToolSendToCRM
+
 logger = get_logger()
 
 
 class Toolbox:  # invoker
     """A toolbox for GptAgents."""
 
+    tool_friendly_names: dict[str:OBTool] = {
+        "leadmo_update_contact": "OBToolLeadmoUpdateContact",
+        "leadmo_stop_conversation": "OBToolLeadmoStopConversation",
+        "send_lead_to_crm": "OBToolSendToCRM",
+        "tester": "OBToolTester",
+    }
+
     available_tools: dict[str:OBTool] = {}
+
+    tools: list[BaseTool] = []
 
     def __init__(
         self,
-        lead: Lead,
         agent_config: AgentConfig,
+        initial_context: dict = None,
         *args,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
-        self.callback_handler = CallbackHandler(lead=lead, agent_config=agent_config)
+        self.callback_handler = CallbackHandler(agent_config=agent_config, initial_context=initial_context)
         # Initialize a list for the BaseTool objects and one list each for each langchain callback type
         self._initialize_known_lists()
 
         # Add tools listed by name in the agent_config to the list of tool, and add the tool's callbacks to the
         # appropriate callback list, creating new lists for callback types if langchain has added new callback types
         # emit a warning to the user to update the list of known callback types
-        tools_to_register = agent_config.tools if agent_config.tools else [too.__name__ for too in self.available_tools.values()]
 
+        tools_to_register = [tool_name for tool_name in agent_config.tools]
         if tools_to_register:
             for tool_name in tools_to_register:
+                tool_class_name = self.tool_friendly_names.get(tool_name)
                 try:
-                    obtool = self.available_tools[tool_name]
+                    obtool = self.available_tools[tool_class_name]
                 except KeyError:
-                    raise KeyError(f"Tool {tool_name} not registered\n Registered tools: {str(self.available_tools)}")
+                    raise KeyError(f"Tool {tool_class_name} not registered\n Registered tools: {str(self.available_tools)}")
 
-                self.callback_handler.register_ob_tool(obtool)
+                self.callback_handler.register_ob_tool(obtool, initial_context=initial_context)
                 self.register_obtool(obtool)
 
         else:
             # add all tools
-            self.tools = [obtool.tool for obtool in self.available_tools.values()]
+            # self.tools = [obtool.tool for obtool in self.available_tools.values()]
+            # add no tools
+            self.tools = [self.available_tools['OBToolDoNothing'].tool]
+
+
+
 
     def _initialize_known_lists(self, *args, **kwargs):
         """Initialize a list for the BaseTool objects and one list each for each langchain callback type."""
-        self.tools: list[BaseTool] = []
+        # self.tools: list[BaseTool] = []
         # Setting known langchain handler callbacks for type hinting new callbacks (i.e. on_whatever) added to
         # langchain should be added here for completeness as type hints don't work through setattr
         self.on_llm_start_callbacks: list[OBCallbackHandlerFunctionProtocol] = []
@@ -71,22 +90,6 @@ class Toolbox:  # invoker
         if obtool.tool:
             self.tools.append(obtool.tool)
 
-        # obtool_callbacks = [cb_name for cb_name in dir(obtool) if cb_name.startswith("on_")]
-        #
-        # for cb_name in obtool_callbacks:
-        #     # create self.this_callback_list
-        #     cb_list_name = f"{cb_name}_callbacks"
-        #     if not getattr(self, cb_list_name):
-        #         logger.WARNING(
-        #             f"Callback list {cb_list_name} not found, langchain must have added new "
-        #             f"callbacks to the callback handler, time to update the list of known handlers."
-        #         )
-        #         setattr(self, cb_list_name, [])
-        #
-        #     # if the callback is defined in the tool, add it to the list
-        #     if getattr(obtool, cb_name):
-        #         callback = getattr(obtool, cb_name)
-        #         getattr(self, cb_list_name).append(callback)
 
     @classmethod
     def register_available_obtool(cls, tool: type[OBTool]):

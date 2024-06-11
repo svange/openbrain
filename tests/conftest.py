@@ -137,19 +137,19 @@ def simple_chat_session(default_agent_config, simple_lead):
     client_id = f"t_{r_client_id}"
     agent_config = default_agent_config
     lead = simple_lead
-    gpt_agent = GptAgent(agent_config=agent_config, lead=lead)
+    gpt_agent = GptAgent(agent_config=agent_config)
     agent_response = gpt_agent.handle_user_message("Hello!")
     assert agent_response is not None
 
     frozen_agent_memory = gpt_agent.serialize()["frozen_agent_memory"]
     frozen_agent_config = gpt_agent.serialize()["frozen_agent_config"]
-    frozen_lead = gpt_agent.serialize()["frozen_lead"]
+    # frozen_lead = gpt_agent.serialize()["frozen_lead"]
 
     chat_session = ChatSession(
         client_id=client_id,
         frozen_agent_memory=frozen_agent_memory,
         frozen_agent_config=frozen_agent_config,
-        frozen_lead=frozen_lead,
+        # frozen_lead=frozen_lead,
     )
     # Randomly select a test_case to create a unique ChatSession
     return chat_session

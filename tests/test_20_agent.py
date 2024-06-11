@@ -26,10 +26,16 @@ def initial_context():
 
 
 class TestAgent:
-    @retry.retry(delay=1, tries=5)
+    @retry.retry(delay=1, tries=1)
     @pytest.mark.integration_tests
-    def test_gpt_agent_creation(self, incoming_agent_config: AgentConfig, incoming_lead: Lead):
+    def test_gpt_agent_creation_no_tools(self, incoming_agent_config: AgentConfig, incoming_lead: Lead):
+
         gpt_agent = GptAgent(incoming_agent_config)
+        assert gpt_agent.tools is not None
+        assert getattr(gpt_agent.tools[0], 'name') == 'do_nothing'
+        assert len(gpt_agent.tools) == 1
+        assert True
+
         assert True
 
         response = gpt_agent.handle_user_message("Hello")
@@ -38,11 +44,29 @@ class TestAgent:
         assert len(response) > 0
         # assert isinstance(type(returned_lead), type(unique_lead)) # TODO, types coming in wrong
 
+    @retry.retry(delay=1, tries=1)
+    @pytest.mark.integration_tests
+    def test_gpt_agent_creation_tools(self, incoming_agent_config: AgentConfig, incoming_lead: Lead):
+        incoming_agent_config.tools = ['leadmo_update_contact']
+
+        gpt_agent = GptAgent(incoming_agent_config)
+
+        assert gpt_agent.tools is not None
+        assert gpt_agent.tools[0].name == 'leadmo_update_contact'
+        assert len(gpt_agent.tools) == 1
+        assert True
+
+        response = gpt_agent.handle_user_message("Hello")
+        assert response is not None
+        assert isinstance(response, str)
+        assert len(response) > 0
+
+
     @retry.retry(delay=1, tries=2)
     @pytest.mark.integration_tests
     def test_serialize_deserialize_agent(self, incoming_agent_config: AgentConfig, incoming_lead: Lead):
         # unique_agent_config = agent_config_fixture
-        gpt_agent = GptAgent(agent_config=incoming_agent_config, lead=incoming_lead)
+        gpt_agent = GptAgent(agent_config=incoming_agent_config)
         response_message = gpt_agent.handle_user_message("I see 25 blue birds!")
 
         serialized_agent = gpt_agent.serialize()

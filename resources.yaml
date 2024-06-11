@@ -125,6 +125,23 @@ Resources:
         - 'ObLeadTable-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
 
+#  LeadmoContactTable:
+#    Type: AWS::DynamoDB::Table
+#    Properties:
+#      AttributeDefinitions:
+#        - AttributeName: client_id
+#          AttributeType: S
+#      KeySchema:
+#        - AttributeName: client_id
+#          KeyType: HASH
+#      ProvisionedThroughput:
+#        ReadCapacityUnits: 5
+#        WriteCapacityUnits: 5
+#      TableName: !Sub
+#        - 'LeadmoContactTable-${ResourceSuffix}'
+#        - ResourceSuffix: !Ref ResourceSuffix
+#
+#
 Outputs:
     ObSessionTableName:
         Description: ObSessionTable

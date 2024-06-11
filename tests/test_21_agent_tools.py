@@ -11,7 +11,7 @@ from langchain.callbacks.base import BaseCallbackHandler
 
 import openbrain.tools.tool_send_lead_to_crm
 from openbrain.agents.gpt_agent import GptAgent
-from openbrain.orm.event_lead import LeadEvent
+from openbrain.tools.models.event_lead import LeadEvent
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.orm.model_lead import Lead
 from openbrain.tools.callback_handler import CallbackHandler
@@ -20,6 +20,17 @@ from openbrain.tools.toolbox import Toolbox
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 from openbrain.util import config, Defaults
 
+
+@pytest.fixture
+def tester_agent_config(default_agent_config):
+    profile_name = "tester"
+    system_message = "You are being tested for your ability to use tools. Use the tools available to you when appropriate."
+    ice_breaker = "Hello, I am a test agent."
+    tools = ["tester"]
+
+    agent_config = AgentConfig(profile_name=profile_name, system_message=system_message, ice_breaker=ice_breaker, tools=tools)
+
+    return agent_config
 
 @pytest.fixture
 def event_bridge_client():
@@ -129,59 +140,70 @@ class TestAgentTools:
             assert tool is not None
 
     @pytest.mark.tools
-    @pytest.mark.expected_failure
-    @pytest.mark.skip
-    def test_agent_send_to_crm_tool(
-        self,
-        incoming_agent_config: AgentConfig,
-        incoming_lead: Lead,
-        message="My name is Chad Geepeeti, my DOB is April 1, 1975. I live in Mississippi, and I currently take vicodin and tylonol. My phone number is 619-465-7894 and my email is e@my.ass. Please get me in touch with an agent immediately.",
-    ):
-        """Send an event to the lead event stream by getting the agent to invoke the function."""
-        openbrain.tools.tool_send_lead_to_crm.fake_event_bus = {}
-        results_container = {}
-
-        def simple_mock(
-            lead_event: LeadEvent, results_container: dict = results_container, *args, **kwargs
-        ):
-            event_bus_friendly_name = config.EVENTBUS_NAME
-            event = [
-                {
-                    "EventBusName": event_bus_friendly_name,
-                    "Source": Defaults.OB_TOOL_EVENT_SOURCE.value,
-                    "DetailType": Defaults.OB_TOOL_EVENT_DETAIL_TYPE.value,
-                    "Detail": lead_event.to_json(),
-                    "Time": datetime.datetime.now().isoformat(),
-                }
-            ]
-
-            results_container["lead_event"] = lead_event
-            results_container["event"] = event
-            results_container["kwargs"] = kwargs
-            return lead_event
-
-        openbrain.tools.tool_send_lead_to_crm.send_event = (
-            simple_mock  # First mock ever... pretty fuckin powerful...
-        )
-        agent = GptAgent(agent_config=incoming_agent_config, lead=incoming_lead)
-        # agent.tools[0]._run = simple_mock
-
-        response = agent.handle_user_message(message)
-
-        assert results_container is not None
-        for key, value in results_container.items():
-            assert key is not None
-            assert value is not None
-
+    def test_tester_tool(self, tester_agent_config: AgentConfig):
+        """Test the tester tool."""
+        initial_context = {"random_word_from_agent_creation": "rambutan"}
+        agent = GptAgent(agent_config=tester_agent_config, initial_context=initial_context)
+        response = agent.handle_user_message("Your random word is banana.")
         assert response is not None
-        # TODO assert that response is a success messge
 
-        lead_event = results_container["lead_event"]
-        assert lead_event is not None
-        assert isinstance(lead_event, LeadEvent)
-        assert lead_event.lead is not None
-        assert lead_event.agent_config is not None
 
-        lead_from_lead_event = lead_event.lead
-        for key, val in incoming_lead.to_dict().items():
-            assert getattr(lead_from_lead_event, key) == val
+
+
+    # @pytest.mark.tools
+    # @pytest.mark.expected_failure
+    # @pytest.mark.skip
+    # def test_agent_send_to_crm_tool(
+    #     self,
+    #     incoming_agent_config: AgentConfig,
+    #     incoming_lead: Lead,
+    #     message="My name is Chad Geepeeti, my DOB is April 1, 1975. I live in Mississippi, and I currently take vicodin and tylonol. My phone number is 619-465-7894 and my email is e@my.ass. Please get me in touch with an agent immediately.",
+    # ):
+    #     """Send an event to the lead event stream by getting the agent to invoke the function."""
+    #     openbrain.tools.tool_send_lead_to_crm.fake_event_bus = {}
+    #     results_container = {}
+    #
+    #     def simple_mock(
+    #         lead_event: LeadEvent, results_container: dict = results_container, *args, **kwargs
+    #     ):
+    #         event_bus_friendly_name = config.EVENTBUS_NAME
+    #         event = [
+    #             {
+    #                 "EventBusName": event_bus_friendly_name,
+    #                 "Source": Defaults.OB_TOOL_EVENT_SOURCE.value,
+    #                 "DetailType": Defaults.OB_TOOL_EVENT_DETAIL_TYPE.value,
+    #                 "Detail": lead_event.to_json(),
+    #                 "Time": datetime.datetime.now().isoformat(),
+    #             }
+    #         ]
+    #
+    #         results_container["lead_event"] = lead_event
+    #         results_container["event"] = event
+    #         results_container["kwargs"] = kwargs
+    #         return lead_event
+    #
+    #     openbrain.tools.tool_send_lead_to_crm.send_event = (
+    #         simple_mock  # First mock ever... pretty fuckin powerful...
+    #     )
+    #     agent = GptAgent(agent_config=incoming_agent_config, lead=incoming_lead)
+    #     # agent.tools[0]._run = simple_mock
+    #
+    #     response = agent.handle_user_message(message)
+    #
+    #     assert results_container is not None
+    #     for key, value in results_container.items():
+    #         assert key is not None
+    #         assert value is not None
+    #
+    #     assert response is not None
+    #     # TODO assert that response is a success messge
+    #
+    #     lead_event = results_container["lead_event"]
+    #     assert lead_event is not None
+    #     assert isinstance(lead_event, LeadEvent)
+    #     assert lead_event.lead is not None
+    #     assert lead_event.agent_config is not None
+    #
+    #     lead_from_lead_event = lead_event.lead
+    #     for key, val in incoming_lead.to_dict().items():
+    #         assert getattr(lead_from_lead_event, key) == val

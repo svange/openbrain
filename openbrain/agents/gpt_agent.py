@@ -18,7 +18,7 @@ from openbrain.agents.exceptions import (
     AgentError,
 )
 from openbrain.orm.model_agent_config import AgentConfig
-from openbrain.orm.model_lead import Lead
+# from openbrain.orm.model_lead import Lead
 from openbrain.tools.toolbox import Toolbox
 from openbrain.util import get_logger
 
@@ -31,16 +31,16 @@ logger = get_logger()
 class GptAgent:
     working_memory: BaseChatMemory
 
-    def __init__(self, agent_config: AgentConfig, memory: BaseChatMemory = None, lead: Lead = None, initial_context: dict = None):
+    def __init__(self, agent_config: AgentConfig, memory: BaseChatMemory = None, initial_context: dict = None, **kwargs):
         # Initialize the agent config
         self.initial_context = initial_context
-        self.lead = lead
+        # self.lead = lead
         self.agent_config = agent_config
         self.client_id = agent_config.client_id
         self.session_id = agent_config.session_id
 
         # Initialize the agent
-        self.toolbox = Toolbox(lead=self.lead, agent_config=self.agent_config)
+        self.toolbox = Toolbox(agent_config=self.agent_config, initial_context=initial_context, **kwargs)
 
         self.tools = self.toolbox.get_tools()
         # self.tools = [ConnectWithAgentTool()]
@@ -157,14 +157,14 @@ class GptAgent:
         """Reconstructs an agent from a serialized agent memory and initial config."""
         frozen_memory = state["frozen_agent_memory"]
         frozen_agent_config = state["frozen_agent_config"]
-        frozen_lead = state["frozen_lead"]
+        # frozen_lead = state["frozen_lead"]
 
         thawed_agent_config = json.loads(frozen_agent_config)
-        thawed_lead = Lead.from_json(frozen_lead)
+        # thawed_lead = Lead.from_json(frozen_lead)
         agent_memory = pickle.loads(frozen_memory)
 
         initial_config = AgentConfig(**thawed_agent_config)
-        agent = GptAgent(agent_config=initial_config, memory=agent_memory, lead=thawed_lead)
+        agent = GptAgent(agent_config=initial_config, memory=agent_memory)
         return agent
 
     def serialize(self) -> dict[str, str | bytes]:
@@ -174,12 +174,14 @@ class GptAgent:
         agent_state = {
             "frozen_agent_memory": memory_snapshot,
             "frozen_agent_config": self.agent_config.to_json(),
-            "frozen_lead": None if self.lead.to_json is None else self.lead.to_json(),
+            # "frozen_lead": None if self.lead.to_json is None else self.lead.to_json(),
         }
         return agent_state
 
-    def handle_user_message(self, user_message: str) -> str:
-        """Send message to agent, update lead based on conversation fragment, return LLM response and updated lead"""
+    def handle_user_message(self, user_message: str, **kwargs) -> str:
+        """Send message to agent"""
+
+        logger.info(f"{kwargs=}")
 
         try:
             response_message = self.agent.run(user_message, callbacks=[self.toolbox.callback_handler])
