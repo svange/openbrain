@@ -39,6 +39,45 @@ class TestAgentConfig:
         different_agent_config = AgentConfig(profile_name="Different", session_id=str(uuid.uuid4()))
         assert different_agent_config != incoming_agent_config
 
+    # @pytest.mark.ci_cd
+    # @pytest.mark.orm_tests
+    # def test_enable_disable_tools(self, incoming_agent_config):
+    #
+    #     # Test that all tools are disabled by default
+    #     # assert all([not tool_enabled for tool_enabled in incoming_agent_config.tools.values()])
+    #
+    #     # Get list of available tools
+    #     available_tools = incoming_agent_config.available_tools()
+    #     assert available_tools == AgentConfig.available_tools()
+    #
+    #     # Enable a tool
+    #     tool_to_enable = available_tools[-2]
+    #     incoming_agent_config.tools[tool_to_enable] = True
+    #
+    #     # Test that the tool is enabled
+    #     assert incoming_agent_config.tools[tool_to_enable]
+    #
+    #     # Save the agentconfig
+    #     incoming_agent_config.save()
+    #
+    #     # Retrieve the agentconfig
+    #     retrieved_agent_config = AgentConfig.get(
+    #         profile_name=incoming_agent_config.profile_name,
+    #         client_id=incoming_agent_config.client_id,
+    #     )
+    #
+    #     # Test that the tool is enabled
+    #     assert retrieved_agent_config.tools[tool_to_enable]
+    #
+    #     # Ensure all available tools have an entry in the tools dict
+    #     for tool in available_tools:
+    #         assert tool in retrieved_agent_config.tools.keys()
+    #
+    #     # Test correct tools are enabled
+    #     enabled_tools = retrieved_agent_config.get_enabled_tool_names()
+    #     assert tool_to_enable in enabled_tools
+
+
     @pytest.mark.ci_cd
     @pytest.mark.orm_tests
     def test_agent_config_save_retrieve(self, incoming_agent_config):
@@ -196,3 +235,4 @@ class TestAgentConfig:
         #
         # # Step 12: Assert that the updated agent_config and the newly retrieved agent_config are still equal
         # assert incoming_agent_config == retrieved_updated_agent_config
+

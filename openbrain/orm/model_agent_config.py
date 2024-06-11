@@ -19,6 +19,15 @@ TAgentConfig: TypeAlias = "AgentConfig"
 class DefaultSettings(Enum):
     """Default settings for the agent config"""
 
+    # Tools
+    AVAILABLE_TOOLS = ["leadmo_update_contact",
+                       "leadmo_stop_conversation",
+                       "connect_with_agent",
+                       "tester"
+                       ]
+
+    TOOLS = []
+
     # Default Settings
     EMAIL_ADDRESS = "example@email.com"
     PROFILE_NAME = Defaults.DEFAULT_PROFILE_NAME.value
@@ -59,7 +68,6 @@ class DefaultSettings(Enum):
         "text-davinci-003",
         "gpt-3.5-turbo-16k",
     ]
-    TOOLS = []
 
 
 class AgentConfig(ORMModel, BaseModel):
@@ -68,6 +76,17 @@ class AgentConfig(ORMModel, BaseModel):
     class Meta:
         table_name = config.AGENT_CONFIG_TABLE_NAME
         region = config.AWS_REGION
+
+    # Tools
+    # @staticmethod
+    # def available_tools():
+    #     """Return a list of available tools"""
+    #     return DefaultSettings.AVAILABLE_TOOLS.value
+
+    def get_enabled_tool_names(self):
+        """Return a list of enabled tool names"""
+        return [tool for tool, enabled in self.tools.items() if enabled]
+
 
     # Tracking
     profile_name: str = Field(
@@ -154,7 +173,14 @@ class AgentConfig(ORMModel, BaseModel):
         default=DefaultSettings.EMAIL_ADDRESS.value,
         description="The email address associated with this client",
     )
-    tools: list[str] = Field(default=DefaultSettings.TOOLS.value, description="The tools that this agent will use")
+
+    tools: Optional[list[str]] = Field(
+        # default=[tool: False for tool in DefaultSettings.AVAILABLE_TOOLS.value]
+        # default={tool: False for tool in list(DefaultSettings.AVAILABLE_TOOLS.value)},
+        default=[],
+        description="A list of tool names indicating which tools to enable",
+    )
+
 
     def save(self):
         """Save the agent config to the database"""

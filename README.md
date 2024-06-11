@@ -70,6 +70,10 @@ NOTE: There is currently no fee for using the service, but it's using my persona
 - **Flexible Configuration**: Customizable agents through DynamoDB backed ORM.
 - **Event-Driven Architecture**: Extensible through cloud-based event handling.
 
+## AI Agent Tools
+- **leadmo_update_contact**: Update a contact in Lead Momentum.
+- **connect_with_agent**: Connect with an agent in Lead Momentum.
+
 ## Quick Start
 ```bash
 # TLDR: demo functionality

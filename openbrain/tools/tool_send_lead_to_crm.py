@@ -12,7 +12,7 @@ from pydantic import BaseModel, Extra, Field
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.tools.obtool import OBTool
 from openbrain.agents.exceptions import AgentToolIncompleteLeadError
-from openbrain.orm.event_lead import LeadEvent
+from openbrain.tools.models.event_lead import LeadEvent
 from openbrain.orm.model_lead import Lead
 from openbrain.util import config, get_logger, Defaults
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
@@ -40,7 +40,7 @@ class LeadAdaptor(BaseModel):
     state_of_residence: str | None = Field(default=None)
 
 
-def send_event(lead_event: LeadEvent, *args, **kwargs) -> Any:
+def send_event(lead_event: LeadEvent) -> Any:
     """Send lead to Lead Momentum."""
     logger.debug(f"Sending lead to Lead Momentum: {lead_event.__dict__}")
 
@@ -91,9 +91,10 @@ class ConnectWithAgentTool(BaseTool):
 
 
 # on_tool_start
-def on_tool_start(lead: Lead, agent_config: AgentConfig, input_str: str, *args, **kwargs) -> Any:
+def on_tool_start(agent_config: AgentConfig, input_str: str, **kwargs) -> Any:
     """Function to run during callback handler's on_llm_start event."""
 
+    lead = kwargs.get("lead")
     lead_info_from_conversation = literal_eval(input_str)
     for key, new_value in lead_info_from_conversation.items():
         try:
@@ -123,7 +124,8 @@ def on_tool_start(lead: Lead, agent_config: AgentConfig, input_str: str, *args, 
     return lead
 
 
-def on_tool_error(lead: Lead = None, agent_config: AgentConfig = None, agent_input=None, *args, **kwargs) -> Any:
+def on_tool_error(agent_config: AgentConfig = None, agent_input=None, **kwargs) -> Any:
+    lead = kwargs.get("lead")
     lead.refresh()
     lead.status = "ERROR"
     lead.save()

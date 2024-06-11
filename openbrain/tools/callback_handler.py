@@ -5,7 +5,6 @@ from langchain.schema import BaseMessage, LLMResult, AgentAction, AgentFinish
 
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.tools.obtool import OBTool
-from openbrain.orm.model_lead import Lead
 from openbrain.util import get_logger
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 
@@ -17,9 +16,9 @@ class CallbackHandler(BaseCallbackHandler):
 
     registered_callbacks: list[OBCallbackHandlerFunctionProtocol] = []
 
-    def __init__(self, lead: Lead, agent_config: AgentConfig, *args, **kwargs):
+    def __init__(self, initial_context: dict, agent_config: AgentConfig, *args, **kwargs):
         super().__init__()
-        self.lead = lead
+        self.initial_context = initial_context or {}
         self.agent_config = agent_config
 
     # Using dynamic method names to register callbacks and run them
@@ -27,7 +26,7 @@ class CallbackHandler(BaseCallbackHandler):
     # make sure the function extends langchain.tools.BaseTool
     # make sure the function accepts the following kwargs (it can ignore): lead, agent, agent_input
 
-    def register_ob_tool(self, obtool: OBTool):
+    def register_ob_tool(self, obtool: OBTool, initial_context: dict = None):
         callbacks = [
             getattr(obtool, attr)
             for attr in dir(obtool)
@@ -42,7 +41,7 @@ class CallbackHandler(BaseCallbackHandler):
             callback_name = callback.__name__
             if callback_name == handler_method_name:
                 logger.info(f"Running callback {callback_name}")
-                responses[callback_name] = callback(lead=self.lead, agent_config=self.agent_config, *args, **kwargs)
+                responses[callback_name] = callback(context=self.initial_context, agent_config=self.agent_config, *args, **kwargs)
         return responses
 
     # Langchain callbacks

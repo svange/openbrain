@@ -6,7 +6,7 @@ from typing import TypeAlias
 import boto3
 from pydantic import BaseModel, Extra
 
-from openbrain.util import config, Defaults, get_logger, get_tracer, get_metrics
+from openbrain.util import config, get_logger
 
 # LOGGING
 logger = get_logger()
@@ -86,14 +86,19 @@ class Recordable(Serializable, metaclass=ABCMeta):
         return boto3.resource("dynamodb")
 
     @classmethod
-    def _get(cls, range_key_name: str, range_key_value: str, hash_key_name: str, hash_key_value: str, table_name: str) -> dict:
+    def _get(cls, hash_key_name: str, hash_key_value: str, table_name: str, range_key_name: str = None
+, range_key_value: str = None) -> dict:
         """Get an object from the database."""
         dynamodb = cls._get_dynamo_client()
         table = dynamodb.Table(table_name)
         logger.debug(
             f"Retrieving object: {table=} | {hash_key_name=} | {hash_key_value=} | {range_key_name=} | {range_key_value=}"
         )
-        response = table.get_item(Key={hash_key_name: hash_key_value, range_key_name: range_key_value})
+        if range_key_name is None:
+            response = table.get_item(Key={hash_key_name: hash_key_value})
+        else:
+            response = table.get_item(Key={hash_key_name: hash_key_value, range_key_name: range_key_value})
+
         item = response.get("Item", {})
 
         if item is None or len(item) == 0:
@@ -120,12 +125,16 @@ class Recordable(Serializable, metaclass=ABCMeta):
         if (
             hash_key_name
             and hash_key_value
-            and range_key_name
-            and range_key_value
+            # and range_key_name
+            # and range_key_value
             and not disable_surgical_update  # TODO DISABLED
         ):
             # Get item for a more surgical insert
-            response = table.get_item(Key={hash_key_name: hash_key_value, range_key_name: range_key_value})
+            if range_key_name is None:
+                response = table.get_item(Key={hash_key_name: hash_key_value})
+            else:
+                response = table.get_item(Key={hash_key_name: hash_key_value, range_key_name: range_key_value})
+
             item = response.get("Item", {})
             if item:
                 # Update
@@ -189,6 +198,10 @@ class Ephemeral(Serializable, metaclass=ABCMeta):
         except KeyError:
             object_dict[table_name][hash_key_value] = {}
 
-        object_dict[table_name][hash_key_value][range_key_value] = deepcopy(self)
+        if range_key_name:
+            object_dict[table_name][hash_key_value][range_key_value] = deepcopy(self)
+        else:
+            object_dict[table_name][hash_key_value] = deepcopy(self)
+
 
         return self
