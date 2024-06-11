@@ -1,3 +1,16 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.2.0](https://github.com/svange/openbrain/compare/v1.1.0...v1.2.0) (2024-06-11)
+
+
+### Features
+
+* Tools framework updated ([3aece69](https://github.com/svange/openbrain/commit/3aece69d02dcf1c36b0081a683c312cb6a3abb48))
+* Tools framework updated ([fa2e64d](https://github.com/svange/openbrain/commit/fa2e64d3a660e8ffe952d417e070f667f48541ff))
+
 # CHANGELOG
 
 
