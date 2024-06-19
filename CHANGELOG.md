@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.0](https://github.com/svange/openbrain/compare/v1.2.0...v1.3.0) (2024-06-19)
+
+
+### Features
+
+* Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([36a85a2](https://github.com/svange/openbrain/commit/36a85a2dea83d646fba8163734add45399b0a8b6))
+* Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([c8a4a40](https://github.com/svange/openbrain/commit/c8a4a404d7dfa76fefb28c374a1a4362db8b8c3a))
+
 ## [1.2.0](https://github.com/svange/openbrain/compare/v1.1.0...v1.2.0) (2024-06-11)
 
 
