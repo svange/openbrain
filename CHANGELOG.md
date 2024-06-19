@@ -1,48 +1,61 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v1.4.2-dev.1 (2024-06-19)
+
+### Fix
+
+* fix: fixed empty initial context failing to create agents. ([`383c4d7`](https://github.com/svange/openbrain/commit/383c4d7e3ceaeb066df75a084e688b53e2be6c28))
+
+* fix: bump commit ([`304cd1f`](https://github.com/svange/openbrain/commit/304cd1f8c2f7ebe59ecd6b0a0e0c217cbb83d6ef))
+
+* fix: Merge branch &#39;refs/heads/main&#39; into dev ([`5d2b3e6`](https://github.com/svange/openbrain/commit/5d2b3e646b7c1ec14ead5d145f90d9f008a9a367))
+
+* fix: removing initial context from initial message to AI and moving it to the metadata plane ([`190f31f`](https://github.com/svange/openbrain/commit/190f31fe335fd530edfe54aa873ad332e238ad48))
+
+## v1.4.1 (2024-06-19)
+
+### Chore
+
+* chore(release): 1.4.1 [skip ci]
 
 ## [1.4.1](https://github.com/svange/openbrain/compare/v1.4.0...v1.4.1) (2024-06-19)
-
 
 ### Bug Fixes
 
 *  bump commit ([33ea41c](https://github.com/svange/openbrain/commit/33ea41cb8fb2310094b5d06d73932de101a7221c))
-* bump commit ([bba2622](https://github.com/svange/openbrain/commit/bba26226ee90ba93da78a2c52c0062e8dc5723df))
+* bump commit ([bba2622](https://github.com/svange/openbrain/commit/bba26226ee90ba93da78a2c52c0062e8dc5723df)) ([`681c865`](https://github.com/svange/openbrain/commit/681c865ccd983ab02a18d6c7b065f4647b31fbcd))
+
+### Fix
+
+* fix: bump commit ([`bba2622`](https://github.com/svange/openbrain/commit/bba26226ee90ba93da78a2c52c0062e8dc5723df))
+
+## v1.2.0-dev.4 (2024-06-19)
+
+### Chore
+
+* chore(release): release 1.2.0-dev.4 ([`db4ba6c`](https://github.com/svange/openbrain/commit/db4ba6cf99819ee1ea4351f400d98ef2281b806b))
+
+### Fix
+
+* fix:  bump commit ([`33ea41c`](https://github.com/svange/openbrain/commit/33ea41cb8fb2310094b5d06d73932de101a7221c))
+
+## v1.4.0 (2024-06-19)
+
+### Chore
+
+* chore(release): 1.4.0 [skip ci]
 
 ## [1.4.0](https://github.com/svange/openbrain/compare/v1.3.0...v1.4.0) (2024-06-19)
-
 
 ### Features
 
 * Changes to ChatMessage ORM model pushed to release. ([4efe453](https://github.com/svange/openbrain/commit/4efe453a109fc108c1ed91d0ad091c78ddfbb948))
 * Changes to ChatMessage ORM model pushed to release. ([f2d7354](https://github.com/svange/openbrain/commit/f2d7354fc125511fae3c6390e42590877a622404))
-* updating ChatMessage ORM object to allow extra fields for initial_context ([e64566c](https://github.com/svange/openbrain/commit/e64566c862b98494c4dcae5fd5ad5d24ca398d80))
+* updating ChatMessage ORM object to allow extra fields for initial_context ([e64566c](https://github.com/svange/openbrain/commit/e64566c862b98494c4dcae5fd5ad5d24ca398d80)) ([`257f9f7`](https://github.com/svange/openbrain/commit/257f9f7e99ef54a9692573804ec06adf112182ff))
 
-## [1.3.0](https://github.com/svange/openbrain/compare/v1.2.0...v1.3.0) (2024-06-19)
+### Feature
 
-
-### Features
-
-* Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([36a85a2](https://github.com/svange/openbrain/commit/36a85a2dea83d646fba8163734add45399b0a8b6))
-* Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([c8a4a40](https://github.com/svange/openbrain/commit/c8a4a404d7dfa76fefb28c374a1a4362db8b8c3a))
-
-## [1.2.0](https://github.com/svange/openbrain/compare/v1.1.0...v1.2.0) (2024-06-11)
-
-
-### Features
-
-* Tools framework updated ([3aece69](https://github.com/svange/openbrain/commit/3aece69d02dcf1c36b0081a683c312cb6a3abb48))
-* Tools framework updated ([fa2e64d](https://github.com/svange/openbrain/commit/fa2e64d3a660e8ffe952d417e070f667f48541ff))
-
-# CHANGELOG
-
-## v1.2.0-dev.4 (2024-06-19)
-
-### Fix
-
-* fix:  bump commit ([`33ea41c`](https://github.com/svange/openbrain/commit/33ea41cb8fb2310094b5d06d73932de101a7221c))
+* feat: Changes to ChatMessage ORM model pushed to release. ([`4efe453`](https://github.com/svange/openbrain/commit/4efe453a109fc108c1ed91d0ad091c78ddfbb948))
 
 ## v1.2.0-dev.3 (2024-06-19)
 
@@ -52,7 +65,26 @@ All notable changes to this project will be documented in this file. See
 
 ### Feature
 
+* feat: Changes to ChatMessage ORM model pushed to release. ([`f2d7354`](https://github.com/svange/openbrain/commit/f2d7354fc125511fae3c6390e42590877a622404))
+
 * feat: updating ChatMessage ORM object to allow extra fields for initial_context ([`e64566c`](https://github.com/svange/openbrain/commit/e64566c862b98494c4dcae5fd5ad5d24ca398d80))
+
+## v1.3.0 (2024-06-19)
+
+### Chore
+
+* chore(release): 1.3.0 [skip ci]
+
+## [1.3.0](https://github.com/svange/openbrain/compare/v1.2.0...v1.3.0) (2024-06-19)
+
+### Features
+
+* Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([36a85a2](https://github.com/svange/openbrain/commit/36a85a2dea83d646fba8163734add45399b0a8b6))
+* Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([c8a4a40](https://github.com/svange/openbrain/commit/c8a4a404d7dfa76fefb28c374a1a4362db8b8c3a)) ([`d40f45c`](https://github.com/svange/openbrain/commit/d40f45c1662fdfa66d1eec71fd8c9dd71181bf84))
+
+### Feature
+
+* feat: Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([`36a85a2`](https://github.com/svange/openbrain/commit/36a85a2dea83d646fba8163734add45399b0a8b6))
 
 ## v1.2.0-dev.2 (2024-06-19)
 
@@ -64,7 +96,28 @@ All notable changes to this project will be documented in this file. See
 
 * feat: Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([`c8a4a40`](https://github.com/svange/openbrain/commit/c8a4a404d7dfa76fefb28c374a1a4362db8b8c3a))
 
+## v1.2.0 (2024-06-11)
+
+### Chore
+
+* chore(release): 1.2.0 [skip ci]
+
+## [1.2.0](https://github.com/svange/openbrain/compare/v1.1.0...v1.2.0) (2024-06-11)
+
+### Features
+
+* Tools framework updated ([3aece69](https://github.com/svange/openbrain/commit/3aece69d02dcf1c36b0081a683c312cb6a3abb48))
+* Tools framework updated ([fa2e64d](https://github.com/svange/openbrain/commit/fa2e64d3a660e8ffe952d417e070f667f48541ff)) ([`d389093`](https://github.com/svange/openbrain/commit/d389093888c8cbe44f4d1b7e817411b653574c24))
+
+### Feature
+
+* feat: Tools framework updated ([`3aece69`](https://github.com/svange/openbrain/commit/3aece69d02dcf1c36b0081a683c312cb6a3abb48))
+
 ## v1.2.0-dev.1 (2024-06-11)
+
+### Build
+
+* build: update packages to latest available ([`736a47c`](https://github.com/svange/openbrain/commit/736a47cf82c20c163ff7b06b589a2e9c1e6dde99))
 
 ### Chore
 
