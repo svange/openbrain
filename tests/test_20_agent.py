@@ -134,6 +134,7 @@ class TestAgent:
 
     @pytest.mark.ci_cd
     @pytest.mark.integration_tests
+    # expected failure
     def test_initial_context_email(self, incoming_agent_config: AgentConfig, initial_context: dict[str, str]):
         assert initial_context["email"] is not None
         email = initial_context["email"]
