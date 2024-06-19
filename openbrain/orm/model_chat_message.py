@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, Extra
 
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.util import config, Defaults
@@ -15,6 +15,8 @@ else:
 
 class ChatMessage(ORMModel, BaseModel):
     """Represents a message sent to the agent"""
+    class Config:
+        extra = Extra.allow
 
     # Tracking
     client_id: str = Field(description="The ID of the client the AgentConfig belongs to")
