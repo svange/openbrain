@@ -1,6 +1,16 @@
 # CHANGELOG
 
+## v1.2.0-dev.3 (2024-06-19)
+
+### Feature
+
+* feat: updating ChatMessage ORM object to allow extra fields for initial_context ([`e64566c`](https://github.com/svange/openbrain/commit/e64566c862b98494c4dcae5fd5ad5d24ca398d80))
+
 ## v1.2.0-dev.2 (2024-06-19)
+
+### Chore
+
+* chore(release): release 1.2.0-dev.2 ([`3011808`](https://github.com/svange/openbrain/commit/3011808d76b482c44373587be8805eec49008053))
 
 ### Feature
 
