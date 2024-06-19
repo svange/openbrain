@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.0](https://github.com/svange/openbrain/compare/v1.3.0...v1.4.0) (2024-06-19)
+
+
+### Features
+
+* Changes to ChatMessage ORM model pushed to release. ([4efe453](https://github.com/svange/openbrain/commit/4efe453a109fc108c1ed91d0ad091c78ddfbb948))
+* Changes to ChatMessage ORM model pushed to release. ([f2d7354](https://github.com/svange/openbrain/commit/f2d7354fc125511fae3c6390e42590877a622404))
+* updating ChatMessage ORM object to allow extra fields for initial_context ([e64566c](https://github.com/svange/openbrain/commit/e64566c862b98494c4dcae5fd5ad5d24ca398d80))
+
 ## [1.3.0](https://github.com/svange/openbrain/compare/v1.2.0...v1.3.0) (2024-06-19)
 
 
