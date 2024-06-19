@@ -1,3 +1,41 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.4.1](https://github.com/svange/openbrain/compare/v1.4.0...v1.4.1) (2024-06-19)
+
+
+### Bug Fixes
+
+*  bump commit ([33ea41c](https://github.com/svange/openbrain/commit/33ea41cb8fb2310094b5d06d73932de101a7221c))
+* bump commit ([bba2622](https://github.com/svange/openbrain/commit/bba26226ee90ba93da78a2c52c0062e8dc5723df))
+
+## [1.4.0](https://github.com/svange/openbrain/compare/v1.3.0...v1.4.0) (2024-06-19)
+
+
+### Features
+
+* Changes to ChatMessage ORM model pushed to release. ([4efe453](https://github.com/svange/openbrain/commit/4efe453a109fc108c1ed91d0ad091c78ddfbb948))
+* Changes to ChatMessage ORM model pushed to release. ([f2d7354](https://github.com/svange/openbrain/commit/f2d7354fc125511fae3c6390e42590877a622404))
+* updating ChatMessage ORM object to allow extra fields for initial_context ([e64566c](https://github.com/svange/openbrain/commit/e64566c862b98494c4dcae5fd5ad5d24ca398d80))
+
+## [1.3.0](https://github.com/svange/openbrain/compare/v1.2.0...v1.3.0) (2024-06-19)
+
+
+### Features
+
+* Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([36a85a2](https://github.com/svange/openbrain/commit/36a85a2dea83d646fba8163734add45399b0a8b6))
+* Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([c8a4a40](https://github.com/svange/openbrain/commit/c8a4a404d7dfa76fefb28c374a1a4362db8b8c3a))
+
+## [1.2.0](https://github.com/svange/openbrain/compare/v1.1.0...v1.2.0) (2024-06-11)
+
+
+### Features
+
+* Tools framework updated ([3aece69](https://github.com/svange/openbrain/commit/3aece69d02dcf1c36b0081a683c312cb6a3abb48))
+* Tools framework updated ([fa2e64d](https://github.com/svange/openbrain/commit/fa2e64d3a660e8ffe952d417e070f667f48541ff))
+
 # CHANGELOG
 
 ## v1.2.0-dev.4 (2024-06-19)
