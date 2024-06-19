@@ -17,7 +17,7 @@
 [//]: # (![CD &#40;staging&#41;]&#40;https://github.com/svange/openbrain/actions/workflows/deploy-dev.yml/badge.svg&#41;)
 
 
-🚧 **Under active development, expect instability until v1 (targeting Jan).** 🚧
+🚧 **Under active development, expect instability until v1 (targeting September 2024).** 🚧
 
 ## Links
 
