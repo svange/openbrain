@@ -1,22 +1,20 @@
 # CHANGELOG
 
-## v1.4.2-dev.1 (2024-06-19)
+## v1.4.3-dev.1 (2024-06-19)
 
 ### Fix
 
-* fix: fixed empty initial context failing to create agents. ([`383c4d7`](https://github.com/svange/openbrain/commit/383c4d7e3ceaeb066df75a084e688b53e2be6c28))
+* fix: removing initial context from initial message to AI and moving it to the metadata plane. ([`57e3f11`](https://github.com/svange/openbrain/commit/57e3f11d6722713f9db9203dd1e69fd2c3807f3e))
 
-* fix: bump commit ([`304cd1f`](https://github.com/svange/openbrain/commit/304cd1f8c2f7ebe59ecd6b0a0e0c217cbb83d6ef))
+### Unknown
 
-* fix: Merge branch &#39;refs/heads/main&#39; into dev ([`5d2b3e6`](https://github.com/svange/openbrain/commit/5d2b3e646b7c1ec14ead5d145f90d9f008a9a367))
+* Merge branch &#39;refs/heads/main&#39; into dev ([`4e3b2ee`](https://github.com/svange/openbrain/commit/4e3b2eea6ce671aafed8f1128158f7cc8390e778))
 
-* fix: removing initial context from initial message to AI and moving it to the metadata plane ([`190f31f`](https://github.com/svange/openbrain/commit/190f31fe335fd530edfe54aa873ad332e238ad48))
-
-## v1.4.1 (2024-06-19)
+## v1.4.2 (2024-06-19)
 
 ### Chore
 
-* chore(release): 1.4.1 [skip ci]
+* chore(release): 1.4.2 [skip ci]
 
 ## [1.4.2](https://github.com/svange/openbrain/compare/v1.4.1...v1.4.2) (2024-06-19)
 
@@ -24,13 +22,19 @@
 
 * bump commit ([304cd1f](https://github.com/svange/openbrain/commit/304cd1f8c2f7ebe59ecd6b0a0e0c217cbb83d6ef))
 * fixed empty initial context failing to create agents. ([383c4d7](https://github.com/svange/openbrain/commit/383c4d7e3ceaeb066df75a084e688b53e2be6c28))
-* Merge branch 'refs/heads/main' into dev ([5d2b3e6](https://github.com/svange/openbrain/commit/5d2b3e646b7c1ec14ead5d145f90d9f008a9a367))
+* Merge branch &#39;refs/heads/main&#39; into dev ([5d2b3e6](https://github.com/svange/openbrain/commit/5d2b3e646b7c1ec14ead5d145f90d9f008a9a367))
 * merging dev into release branch ([7c8a87f](https://github.com/svange/openbrain/commit/7c8a87f4f0231713d4cfb56f157099a2294fce54))
-* removing initial context from initial message to AI and moving it to the metadata plane ([190f31f](https://github.com/svange/openbrain/commit/190f31fe335fd530edfe54aa873ad332e238ad48))
+* removing initial context from initial message to AI and moving it to the metadata plane ([190f31f](https://github.com/svange/openbrain/commit/190f31fe335fd530edfe54aa873ad332e238ad48)) ([`1c784a1`](https://github.com/svange/openbrain/commit/1c784a18ec4924f9ef08ea57ad0d6b1de37b3524))
 
-# CHANGELOG
+### Fix
+
+* fix: merging dev into release branch ([`7c8a87f`](https://github.com/svange/openbrain/commit/7c8a87f4f0231713d4cfb56f157099a2294fce54))
 
 ## v1.4.2-dev.1 (2024-06-19)
+
+### Chore
+
+* chore(release): release 1.4.2-dev.1 ([`95d3452`](https://github.com/svange/openbrain/commit/95d34526ced40adfd6a431eae91d9a22fc2cfac2))
 
 ### Fix
 
