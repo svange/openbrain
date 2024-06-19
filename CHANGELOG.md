@@ -30,7 +30,17 @@ All notable changes to this project will be documented in this file. See
 
 # CHANGELOG
 
+## v1.2.0-dev.4 (2024-06-19)
+
+### Fix
+
+* fix:  bump commit ([`33ea41c`](https://github.com/svange/openbrain/commit/33ea41cb8fb2310094b5d06d73932de101a7221c))
+
 ## v1.2.0-dev.3 (2024-06-19)
+
+### Chore
+
+* chore(release): release 1.2.0-dev.3 ([`4496c18`](https://github.com/svange/openbrain/commit/4496c187c00e8909b800f5e9224c4283adec8f9d))
 
 ### Feature
 
