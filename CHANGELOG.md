@@ -18,6 +18,36 @@
 
 * chore(release): 1.4.1 [skip ci]
 
+## [1.4.2](https://github.com/svange/openbrain/compare/v1.4.1...v1.4.2) (2024-06-19)
+
+### Bug Fixes
+
+* bump commit ([304cd1f](https://github.com/svange/openbrain/commit/304cd1f8c2f7ebe59ecd6b0a0e0c217cbb83d6ef))
+* fixed empty initial context failing to create agents. ([383c4d7](https://github.com/svange/openbrain/commit/383c4d7e3ceaeb066df75a084e688b53e2be6c28))
+* Merge branch 'refs/heads/main' into dev ([5d2b3e6](https://github.com/svange/openbrain/commit/5d2b3e646b7c1ec14ead5d145f90d9f008a9a367))
+* merging dev into release branch ([7c8a87f](https://github.com/svange/openbrain/commit/7c8a87f4f0231713d4cfb56f157099a2294fce54))
+* removing initial context from initial message to AI and moving it to the metadata plane ([190f31f](https://github.com/svange/openbrain/commit/190f31fe335fd530edfe54aa873ad332e238ad48))
+
+# CHANGELOG
+
+## v1.4.2-dev.1 (2024-06-19)
+
+### Fix
+
+* fix: fixed empty initial context failing to create agents. ([`383c4d7`](https://github.com/svange/openbrain/commit/383c4d7e3ceaeb066df75a084e688b53e2be6c28))
+
+* fix: bump commit ([`304cd1f`](https://github.com/svange/openbrain/commit/304cd1f8c2f7ebe59ecd6b0a0e0c217cbb83d6ef))
+
+* fix: Merge branch &#39;refs/heads/main&#39; into dev ([`5d2b3e6`](https://github.com/svange/openbrain/commit/5d2b3e646b7c1ec14ead5d145f90d9f008a9a367))
+
+* fix: removing initial context from initial message to AI and moving it to the metadata plane ([`190f31f`](https://github.com/svange/openbrain/commit/190f31fe335fd530edfe54aa873ad332e238ad48))
+
+## v1.4.1 (2024-06-19)
+
+### Chore
+
+* chore(release): 1.4.1 [skip ci]
+
 ## [1.4.1](https://github.com/svange/openbrain/compare/v1.4.0...v1.4.1) (2024-06-19)
 
 ### Bug Fixes
