@@ -36,8 +36,6 @@ class TestAgent:
         assert len(gpt_agent.tools) == 1
         assert True
 
-        assert True
-
         response = gpt_agent.handle_user_message("Hello")
         assert response is not None
         assert isinstance(response, str)

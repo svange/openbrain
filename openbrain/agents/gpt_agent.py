@@ -95,10 +95,10 @@ class GptAgent:
         # Function agents are special, so we build them differently # TODO: Time to make a class...
         initial_message = "Hi!"
 
-        if self.initial_context:
-            readable_list = [k + ": " + v for k, v in self.initial_context.items()]
-            initial_message = "To begin, here is some information about me: " + ", ".join(readable_list)
-
+        # if self.initial_context:
+        #     readable_list = [k + ": " + v for k, v in self.initial_context.items()]
+        #     initial_message = "To begin, here is some information about me: " + ", ".join(readable_list)
+        #
         if self.agent_config.executor_model_type == "function":
             if memory is None:
                 memory = ConversationBufferMemory(memory_key="memory", return_messages=True)
