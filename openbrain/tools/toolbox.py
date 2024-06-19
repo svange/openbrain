@@ -1,3 +1,5 @@
+import json
+
 from langchain.tools import BaseTool
 
 from openbrain.tools.callback_handler import CallbackHandler
@@ -27,8 +29,6 @@ class Toolbox:  # invoker
 
     available_tools: dict[str:OBTool] = {}
 
-    tools: list[BaseTool] = []
-
     def __init__(
         self,
         agent_config: AgentConfig,
@@ -37,7 +37,11 @@ class Toolbox:  # invoker
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
-        self.callback_handler = CallbackHandler(agent_config=agent_config, initial_context=initial_context)
+        self.tools: list[BaseTool] = []
+        self.initial_context = initial_context or {}
+
+        self.callback_handler = CallbackHandler(agent_config=agent_config)
+        self.initial_context = initial_context
         # Initialize a list for the BaseTool objects and one list each for each langchain callback type
         self._initialize_known_lists()
 
@@ -54,16 +58,17 @@ class Toolbox:  # invoker
                 except KeyError:
                     raise KeyError(f"Tool {tool_class_name} not registered\n Registered tools: {str(self.available_tools)}")
 
-                self.callback_handler.register_ob_tool(obtool, initial_context=initial_context)
+                self.callback_handler.register_ob_tool(obtool)
                 self.register_obtool(obtool)
-
         else:
-            # add all tools
-            # self.tools = [obtool.tool for obtool in self.available_tools.values()]
-            # add no tools
-            self.tools = [self.available_tools['OBToolDoNothing'].tool]
+            # add the "do nothing" tool
+            obtool = self.available_tools["OBToolDoNothing"]
+            self.callback_handler.register_ob_tool(obtool)
+            self.register_obtool(obtool)
 
+        logger.debug(f"Registered tools: {self.tools}")
 
+            # self.tools = [self.available_tools['OBToolDoNothing'].tool]
 
 
     def _initialize_known_lists(self, *args, **kwargs):
@@ -99,4 +104,5 @@ class Toolbox:  # invoker
             raise TypeError(f"Tool {tool} is not a subclass of OBTool")
 
     def get_tools(self):
-        return [tool() for tool in self.tools]
+        tools = [tool(tool_input=json.dumps(self.initial_context)) for tool in self.tools]
+        return tools

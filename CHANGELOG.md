@@ -13,11 +13,17 @@ All notable changes to this project will be documented in this file. See
 
 # CHANGELOG
 
+## v1.2.0-dev.2 (2024-06-19)
 
+### Feature
+
+* feat: Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([`c8a4a40`](https://github.com/svange/openbrain/commit/c8a4a404d7dfa76fefb28c374a1a4362db8b8c3a))
 
 ## v1.2.0-dev.1 (2024-06-11)
 
 ### Chore
+
+* chore(release): release 1.2.0-dev.1 ([`264c4ea`](https://github.com/svange/openbrain/commit/264c4ea4e8d64d83aeb486dc054f96c1197fd8ec))
 
 * chore: merge main back into dev ([`aff8c26`](https://github.com/svange/openbrain/commit/aff8c265d8e97a05cc5a3f7bdd333a6d1931520a))
 
@@ -28,7 +34,6 @@ All notable changes to this project will be documented in this file. See
 ### Feature
 
 * feat: Tools framework updated ([`fa2e64d`](https://github.com/svange/openbrain/commit/fa2e64d3a660e8ffe952d417e070f667f48541ff))
-
 
 ## v1.1.0 (2024-02-03)
 
@@ -47,7 +52,6 @@ All notable changes to this project will be documented in this file. See
 
 * feat: adding optional initial_context dictionary to agent creation, allowing for information like initiating user&#39;s information to be injected into the agent&#39;s memory. ([`0e8feaa`](https://github.com/svange/openbrain/commit/0e8feaa9b6b0da1de74ff76eba44200b739de070))
 
-
 ## v1.1.0-dev.1 (2024-02-03)
 
 ### Chore
@@ -61,7 +65,6 @@ All notable changes to this project will be documented in this file. See
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`271967a`](https://github.com/svange/openbrain/commit/271967a39d140fa6d954c29844ee1cf36ec5a19e))
-
 
 ## v1.0.6 (2024-01-16)
 
@@ -83,7 +86,6 @@ All notable changes to this project will be documented in this file. See
 
 * Merge remote-tracking branch &#39;origin/main&#39; ([`d9f51fb`](https://github.com/svange/openbrain/commit/d9f51fbeb61ea03a4484f360a55e1cdc710553eb))
 
-
 ## v1.0.5 (2023-11-23)
 
 ### Build
@@ -103,7 +105,6 @@ All notable changes to this project will be documented in this file. See
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/main&#39; ([`8649da5`](https://github.com/svange/openbrain/commit/8649da545af1bd4e4e90dead569b77e6ed6699f0))
-
 
 ## v1.0.5-dev.1 (2023-11-23)
 
@@ -134,7 +135,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * fix: update gradio to work with new environment variables. ([`396ab70`](https://github.com/svange/openbrain/commit/396ab709d4e3f0962fffb25e71168cc28349384f))
 
-
 ## v1.0.4 (2023-11-13)
 
 ### Chore
@@ -155,7 +155,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * Merge branch &#39;dev&#39; ([`5341bbe`](https://github.com/svange/openbrain/commit/5341bbe4b741af8d8b7ac0ce66f33eb60b4a19c5))
 
-
 ## v1.0.3 (2023-11-13)
 
 ### Chore
@@ -172,7 +171,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * fix: catching AWS client error to allow for no-infra testing in CI pipelines. ([`7f5c401`](https://github.com/svange/openbrain/commit/7f5c40133266d6fd70656f3dfdb84b8b90738e82))
 
-
 ## v1.0.2 (2023-11-13)
 
 ### Build
@@ -188,7 +186,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 ### Bug Fixes
 
 * removing import exceptions in favor of logging warnings so Chalice can stop complaining. ([4f66cbf](https://github.com/svange/openbrain/commit/4f66cbf1497534c3355c04278570eb62962afb05)) ([`e413078`](https://github.com/svange/openbrain/commit/e4130784a82630d25f9ba3daf8912359ecf763a1))
-
 
 ## v1.0.2-dev.1 (2023-11-13)
 
@@ -207,7 +204,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/main&#39; ([`d8da56d`](https://github.com/svange/openbrain/commit/d8da56dc2920fbe5e75f956b67a9aaf9b4c1d41d))
-
 
 ## v1.0.1 (2023-11-10)
 
@@ -229,7 +225,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 * tuning ci pipeline ([7f9df0d](https://github.com/svange/openbrain/commit/7f9df0d740bead7856b52a02d4ff37bd92b2ebe1))
 * tuning ci pipeline ([6330be2](https://github.com/svange/openbrain/commit/6330be25eff009ac9602b3855795e047b35c1e21))
 * tuning ci pipeline ([971cfbd](https://github.com/svange/openbrain/commit/971cfbded58aa64a358ae64ecd18616e350806d4)) ([`b573f45`](https://github.com/svange/openbrain/commit/b573f4512ad0e58b902496c8a70a2d0534603c64))
-
 
 ## v0.23.0-dev.8 (2023-11-10)
 
@@ -253,7 +248,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * Merge branch &#39;dev&#39; ([`e7676c5`](https://github.com/svange/openbrain/commit/e7676c510351fc094a1bb63554a847ca8ba48901))
 
-
 ## v0.23.0-dev.7 (2023-11-10)
 
 ### Chore
@@ -263,7 +257,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 ### Fix
 
 * fix: tuning ci pipeline ([`7f9df0d`](https://github.com/svange/openbrain/commit/7f9df0d740bead7856b52a02d4ff37bd92b2ebe1))
-
 
 ## v0.23.0-dev.6 (2023-11-10)
 
@@ -279,7 +272,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`c1cf7d4`](https://github.com/svange/openbrain/commit/c1cf7d4dfc94682f2b0be34af189b192904660b2))
 
-
 ## v0.23.0-dev.5 (2023-11-10)
 
 ### Chore
@@ -289,7 +281,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 ### Fix
 
 * fix: tuning ci pipeline ([`971cfbd`](https://github.com/svange/openbrain/commit/971cfbded58aa64a358ae64ecd18616e350806d4))
-
 
 ## v1.0.0 (2023-11-10)
 
@@ -365,7 +356,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * fix: adding skip ci to automatic commit messages ([`5c07136`](https://github.com/svange/openbrain/commit/5c07136c5d214a8d6050071f03f0236ef4087306))
 
-
 ## v0.23.0-dev.4 (2023-11-10)
 
 ### Chore
@@ -386,7 +376,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`d0652e8`](https://github.com/svange/openbrain/commit/d0652e86620bd120a59a72d44ada15bef1600119))
 
-
 ## v0.23.0-dev.3 (2023-11-10)
 
 ### Chore
@@ -397,7 +386,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * fix: ignoring changelog for trailing whitespace check ([`a5fe800`](https://github.com/svange/openbrain/commit/a5fe800665a110cfa94a75a74d1d58f9213e2ce5))
 
-
 ## v0.23.0-dev.2 (2023-11-10)
 
 ### Chore
@@ -407,7 +395,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 ### Feature
 
 * feat: decoupling from central infrastructure. ([`1173b10`](https://github.com/svange/openbrain/commit/1173b1013dac5304a37c194f81e20240e8304002))
-
 
 ## v0.23.0-dev.1 (2023-11-10)
 
@@ -742,7 +729,6 @@ BREAKING-CHANGE: Module initialization and required env vars have changed... gla
 #	pyproject.toml
 #	tests/test_21_agent_tools.py ([`f1a159a`](https://github.com/svange/openbrain/commit/f1a159a3a3c78254f99113f52148f6b683dd5a24))
 
-
 ## v0.22.0 (2023-10-25)
 
 ### Chore
@@ -777,7 +763,6 @@ BREAKING-CHANGE: Module initialization and required env vars have changed... gla
 
 * Merge branch &#39;main&#39; into dev ([`72c28ce`](https://github.com/svange/openbrain/commit/72c28cea44f9c2f9d2e2d1040d77c883fda31499))
 
-
 ## v0.21.0 (2023-10-17)
 
 ### Chore
@@ -796,7 +781,6 @@ BREAKING-CHANGE: Module initialization and required env vars have changed... gla
 
 * feat: demote many info log statements to debug statements ([`fdd91fe`](https://github.com/svange/openbrain/commit/fdd91fe55b7bbfbdd4c46742cc11b0b1eca9f492))
 
-
 ## v0.20.0 (2023-10-17)
 
 ### Chore
@@ -814,7 +798,6 @@ BREAKING-CHANGE: Module initialization and required env vars have changed... gla
 * feat: remove promptlayer support ([`d99e26e`](https://github.com/svange/openbrain/commit/d99e26eef05c3eb31dd26f5aed513262282148ae))
 
 * feat: remove promptlayer support ([`c72b163`](https://github.com/svange/openbrain/commit/c72b1632630dd8c5477c990b33b3919964d694a2))
-
 
 ## v0.19.0 (2023-10-16)
 
@@ -869,7 +852,6 @@ BREAKING-CHANGE: Module initialization and required env vars have changed... gla
 
 * Create FUNDING.yml ([`9a72f0c`](https://github.com/svange/openbrain/commit/9a72f0c7c0bc67fd8790edd1e49ece5d4705fddf))
 
-
 ## v0.18.1 (2023-10-08)
 
 ### Chore
@@ -885,7 +867,6 @@ BREAKING-CHANGE: Module initialization and required env vars have changed... gla
 ### Fix
 
 * fix: ob-tuner PORT type error. ([`98b0f3c`](https://github.com/svange/openbrain/commit/98b0f3cffb32d0de394c69dd03f26425cb420ca4))
-
 
 ## v0.18.0 (2023-10-08)
 
@@ -915,7 +896,6 @@ BREAKING-CHANGE: Module initialization and required env vars have changed... gla
 
 * feat: add GRADIO_PORT env var to allow a single instance to host several gradios ([`8f45495`](https://github.com/svange/openbrain/commit/8f4549582cb7d0a14c8a7dea9ff9daca8105dc4e))
 
-
 ## v0.17.1 (2023-10-06)
 
 ### Chore
@@ -931,7 +911,6 @@ BREAKING-CHANGE: Module initialization and required env vars have changed... gla
 ### Fix
 
 * fix: fixing ci/cd so pre-releases don&#39;t always release. ([`f724422`](https://github.com/svange/openbrain/commit/f7244220be1a1da43979bce421383ffd41e4c0bd))
-
 
 ## v0.17.0 (2023-10-06)
 
@@ -951,7 +930,6 @@ BREAKING-CHANGE: Module initialization and required env vars have changed... gla
 
 feat: &#39;ob --profile-name &lt;PROFILE_NAME&gt; &lt;MESSAGE&gt;` implemented for customized completions. ([`558d44b`](https://github.com/svange/openbrain/commit/558d44bf495a3d4d440cdd085688f8e22dea464b))
 
-
 ## v0.16.0 (2023-10-04)
 
 ### Chore
@@ -967,7 +945,6 @@ feat: &#39;ob --profile-name &lt;PROFILE_NAME&gt; &lt;MESSAGE&gt;` implemented f
 ### Feature
 
 * feat: ob-tuner updated to use in memory ORM, controllable by .env file. ([`47ba771`](https://github.com/svange/openbrain/commit/47ba771399c37bc4e07a56db1b561da035e5a5ed))
-
 
 ## v0.15.1 (2023-10-04)
 
@@ -1001,7 +978,6 @@ feat: &#39;ob --profile-name &lt;PROFILE_NAME&gt; &lt;MESSAGE&gt;` implemented f
 #	openbrain/__init__.py
 #	pyproject.toml ([`54bac11`](https://github.com/svange/openbrain/commit/54bac110e2b1c9efd74c1f18e62735d05ebe2a72))
 
-
 ## v0.15.0 (2023-10-01)
 
 ### Chore
@@ -1018,7 +994,6 @@ feat: &#39;ob --profile-name &lt;PROFILE_NAME&gt; &lt;MESSAGE&gt;` implemented f
 
 * feat: demote gradio to be an optional dependency so that package fits in lambdas by default. Install with -E to get gradio. ([`0595a08`](https://github.com/svange/openbrain/commit/0595a083b06edf1e82efefc50640ef2d460b820c))
 
-
 ## v0.14.1 (2023-09-30)
 
 ### Chore
@@ -1034,7 +1009,6 @@ feat: &#39;ob --profile-name &lt;PROFILE_NAME&gt; &lt;MESSAGE&gt;` implemented f
 ### Fix
 
 * fix: support python 3.10 by resolving dependencies for python 3.10 (pydantic_core module missing issue). Second attempt :( ([`52c4545`](https://github.com/svange/openbrain/commit/52c4545dfd8304b3bcf958c680b392abccfbed7f))
-
 
 ## v0.14.0 (2023-09-30)
 
@@ -1066,7 +1040,6 @@ feat: &#39;ob --profile-name &lt;PROFILE_NAME&gt; &lt;MESSAGE&gt;` implemented f
 
 # Conflicts:
 #	poetry.lock ([`ef5d897`](https://github.com/svange/openbrain/commit/ef5d8970c13e2dce327d4aa92aa9b43bffb6b7d9))
-
 
 ## v0.13.0 (2023-09-29)
 
@@ -1184,7 +1157,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * feat: in memory DB for locally running full system. ([`f0ba078`](https://github.com/svange/openbrain/commit/f0ba078ba70c8c5152d258349cfd707bbc454073))
 
-
 ## v0.12.0 (2023-09-27)
 
 ### Build
@@ -1234,7 +1206,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 * bump: updating license ([`0dd3a77`](https://github.com/svange/openbrain/commit/0dd3a7701238e6786392bb3ac2a49fb8776a3605))
 
 * bump: updating license ([`a96dd89`](https://github.com/svange/openbrain/commit/a96dd895a54f332a90ff0cfd8f0e686470944847))
-
 
 ## v0.11.1 (2023-09-26)
 
@@ -1422,7 +1393,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * bump: Fixing metadata and github actions ([`4bc07ad`](https://github.com/svange/openbrain/commit/4bc07adf75eacadfa5432af7667eba7741084884))
 
-
 ## v0.11.2 (2023-09-26)
 
 ### Build
@@ -1456,7 +1426,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * fix: added more granularity to CI/CD system and attempting to bring prereleases. ([`f4e02ea`](https://github.com/svange/openbrain/commit/f4e02ea9d53899068336d765bfa815b6a199ef40))
 
-
 ## v0.11.0 (2023-09-25)
 
 ### Chore
@@ -1480,7 +1449,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 # Conflicts:
 #	pyproject.toml ([`42d847c`](https://github.com/svange/openbrain/commit/42d847cd5e2cdcef9684b7a96ab46f8ddc7fc076))
 
-
 ## v0.10.8 (2023-09-25)
 
 ### Chore
@@ -1501,7 +1469,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`5ba8170`](https://github.com/svange/openbrain/commit/5ba8170a38007753b3d38415e8085b4cdcfbfe02))
 
-
 ## v0.10.7 (2023-09-25)
 
 ### Chore
@@ -1521,7 +1488,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`7bee378`](https://github.com/svange/openbrain/commit/7bee378f6e07308ae12623a1425ab8c06cdbc630))
-
 
 ## v0.10.6 (2023-09-25)
 
@@ -1598,7 +1564,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * bump: ci/cd ([`13cb480`](https://github.com/svange/openbrain/commit/13cb48002bcea357b0f438b9979d2585bf717d35))
 
-
 ## v0.10.5 (2023-09-24)
 
 ### Fix
@@ -1611,13 +1576,11 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * bump: ci/cd ([`a6d31a9`](https://github.com/svange/openbrain/commit/a6d31a9be04430b3ce8b61d96243429df2bf8013))
 
-
 ## v0.10.4 (2023-09-24)
 
 ### Fix
 
 * fix: working on semantic versioning. ([`a2099e9`](https://github.com/svange/openbrain/commit/a2099e9d621cb8a1331157e16e41569f21b9aa21))
-
 
 ## v0.10.3 (2023-09-24)
 
@@ -1659,7 +1622,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * bump: version 0.10.1 → 0.10.2 ([`a859742`](https://github.com/svange/openbrain/commit/a859742ae9c7253d371747b18c28905aed1d0220))
 
-
 ## v0.10.2 (2023-09-24)
 
 ### Fix
@@ -1670,7 +1632,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * bump: version 0.10.1 → 0.10.2 ([`179d2cd`](https://github.com/svange/openbrain/commit/179d2cd47510a2b1a4c9dcccbf4e3764f27e09aa))
 
-
 ## v0.10.1 (2023-09-24)
 
 ### Fix
@@ -1680,7 +1641,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 ### Unknown
 
 * bump: version 0.10.0 → 0.10.1 ([`8a96312`](https://github.com/svange/openbrain/commit/8a96312d0aa971596ba45bcf69734e66d08619e4))
-
 
 ## v0.10.0 (2023-09-24)
 
@@ -1699,7 +1659,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 * bump: version 0.9.0 → 0.10.0 ([`9790cfe`](https://github.com/svange/openbrain/commit/9790cfea373097c4b660775a81d3bc4fd2bb6401))
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`465bc82`](https://github.com/svange/openbrain/commit/465bc825e48678d71756784e8cc0dc2e69c287a7))
-
 
 ## v0.9.0 (2023-09-24)
 
@@ -1725,7 +1684,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * bump: version 0.8.0 → 0.9.0 ([`4da1cc4`](https://github.com/svange/openbrain/commit/4da1cc494ca20744b2eead50fc26fd528f13d19f))
 
-
 ## v0.8.0 (2023-09-24)
 
 ### Build
@@ -1740,7 +1698,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * bump: version 0.7.0 → 0.8.0 ([`04eae40`](https://github.com/svange/openbrain/commit/04eae404ad22d69c1969965a20ebb044c8445c14))
 
-
 ## v0.7.0 (2023-09-24)
 
 ### Unknown
@@ -1748,7 +1705,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 * 0.7.0
 
 Automatically generated by python-semantic-release ([`700255f`](https://github.com/svange/openbrain/commit/700255f2bef5c848b874e686a88a39b3d2a08770))
-
 
 ## v0.6.0 (2023-09-24)
 
@@ -1758,13 +1714,11 @@ Automatically generated by python-semantic-release ([`700255f`](https://github.c
 
 Automatically generated by python-semantic-release ([`2fce710`](https://github.com/svange/openbrain/commit/2fce710b5dc35729e14859be07cf774adf9727ff))
 
-
 ## v0.5.1 (2023-09-24)
 
 ### Unknown
 
 * lets try commitizen and sematic releases ([`1bbb25f`](https://github.com/svange/openbrain/commit/1bbb25ffc7c3e5dcaaff37731d0581320cbf3dea))
-
 
 ## v0.5.0 (2023-09-23)
 
@@ -1970,7 +1924,6 @@ PR ci/dev -&gt; main ([`9df186f`](https://github.com/svange/openbrain/commit/9df
 
 * add gh_pat env var ([`ac87fa6`](https://github.com/svange/openbrain/commit/ac87fa6c582e83b9fcb145b0682bebd0647d588c))
 
-
 ## v0.4.11 (2023-09-23)
 
 ### Chore
@@ -2061,7 +2014,6 @@ PR ci/dev -&gt; main ([`9141165`](https://github.com/svange/openbrain/commit/914
 
 * bugfixing #pr ([`e4724b0`](https://github.com/svange/openbrain/commit/e4724b00f8fef5b7b9d889ed77cbf4f634e7a3fd))
 
-
 ## v0.4.10 (2023-09-22)
 
 ### Unknown
@@ -2090,7 +2042,6 @@ Merge pull request #28 ([`7b62ea6`](https://github.com/svange/openbrain/commit/7
 
 * tweaked readme... sorry ([`a0391d4`](https://github.com/svange/openbrain/commit/a0391d4311f0c3b5834fb254322ec5ef7cd007ef))
 
-
 ## v0.4.9 (2023-09-22)
 
 ### Unknown
@@ -2100,7 +2051,6 @@ Merge pull request #28 ([`7b62ea6`](https://github.com/svange/openbrain/commit/7
 * Merge pull request #27
 
 🤖📦🐍 style/update-readmes → main ([`e6cc5e7`](https://github.com/svange/openbrain/commit/e6cc5e7733b531dc6e6f405354c70b04b55dda1d))
-
 
 ## v0.4.8 (2023-09-22)
 
@@ -2137,7 +2087,6 @@ Added guard so that PRs aren&#39;t always submitted upon pushes to this branch. 
 
 * update README.md and start enforcing code quality. ([`2226f1b`](https://github.com/svange/openbrain/commit/2226f1bb7b95f4b33e23e508b78b19a20ac425e4))
 
-
 ## v0.4.7 (2023-09-22)
 
 ### Unknown
@@ -2158,7 +2107,6 @@ Added guard so that PRs aren&#39;t always submitted upon pushes to this branch. 
 
 * re-enabling pipeline steps ([`00f5839`](https://github.com/svange/openbrain/commit/00f583956c3be99cbaf2bcbeaee81c2bb81dab9b))
 
-
 ## v0.4.6 (2023-09-22)
 
 ### Unknown
@@ -2173,7 +2121,6 @@ Added guard so that PRs aren&#39;t always submitted upon pushes to this branch. 
 
 * re-enabling pipeline steps ([`6381757`](https://github.com/svange/openbrain/commit/63817576ca9306f4d737c3ec0792b1448617d202))
 
-
 ## v0.4.5 (2023-09-22)
 
 ### Unknown
@@ -2184,13 +2131,11 @@ Added guard so that PRs aren&#39;t always submitted upon pushes to this branch. 
 
 * Working CI/CD pipeline tested, but no tests on main branch commits yet. ([`7f643da`](https://github.com/svange/openbrain/commit/7f643da9da25205e7b17519e72884ba99654556e))
 
-
 ## v0.4.4 (2023-09-22)
 
 ### Unknown
 
 * Working CI/CD pipeline tested, but no tests on main branch commits yet. ([`9366090`](https://github.com/svange/openbrain/commit/9366090fdd6402b664df67cf796de4387f51c3cb))
-
 
 ## v0.4.3 (2023-09-22)
 
@@ -2198,13 +2143,11 @@ Added guard so that PRs aren&#39;t always submitted upon pushes to this branch. 
 
 * Working CI/CD pipeline tested, but no tests on main branch commits yet. ([`c4e8baa`](https://github.com/svange/openbrain/commit/c4e8baa5a384e6afded5536c5e4353ea329e1598))
 
-
 ## v0.4.2 (2023-09-22)
 
 ### Unknown
 
 * Working CI/CD pipeline tested, but no tests on main branch commits yet. ([`32261d4`](https://github.com/svange/openbrain/commit/32261d4fe7fe1dd85d86d6847ecd241d66b13dc9))
-
 
 ## v0.4.1 (2023-09-22)
 
@@ -2213,7 +2156,6 @@ Added guard so that PRs aren&#39;t always submitted upon pushes to this branch. 
 * Working CI/CD pipeline tested, but no tests on main branch commits yet. ([`67f6e97`](https://github.com/svange/openbrain/commit/67f6e97a41e8e7c2251f8ee6779dfc2fba300112))
 
 * Working CI/CD pipeline tested, but no tests on main branch commits yet. ([`5663f0c`](https://github.com/svange/openbrain/commit/5663f0c2528152a0e93b60deb317e1f0d5ea8d8b))
-
 
 ## v0.4.0 (2023-09-22)
 
@@ -2351,13 +2293,11 @@ Stood up first CI/CD pipeline for semantic versioning with github actions, and p
 
 * tweaking ([`f30d3bd`](https://github.com/svange/openbrain/commit/f30d3bd78568bb31d97f8a69f5c2fd3ae08b0f92))
 
-
 ## v0.2.12 (2023-09-21)
 
 ### Unknown
 
 * tweaking ([`55b60dc`](https://github.com/svange/openbrain/commit/55b60dcca8f75f8d7993bf7dd2c820f97a6f63de))
-
 
 ## v0.2.11 (2023-09-21)
 
@@ -2365,13 +2305,11 @@ Stood up first CI/CD pipeline for semantic versioning with github actions, and p
 
 * removed smever in an attempt to make github play along. ([`f4d651f`](https://github.com/svange/openbrain/commit/f4d651f37451f8ea775432cbde5d47cfc8d0f3ba))
 
-
 ## v0.2.10 (2023-09-21)
 
 ### Unknown
 
 * removed smever in an attempt to make github play along. ([`d589fc7`](https://github.com/svange/openbrain/commit/d589fc73aa316c15e223a7225e762224080621da))
-
 
 ## v0.2.9 (2023-09-21)
 
@@ -2379,13 +2317,11 @@ Stood up first CI/CD pipeline for semantic versioning with github actions, and p
 
 * updated dependencies ([`996a12b`](https://github.com/svange/openbrain/commit/996a12b2e44dbb160fda6352172c0b1cdabb5070))
 
-
 ## v0.2.7 (2023-09-21)
 
 ### Unknown
 
 * updated dependencies ([`27d3a7b`](https://github.com/svange/openbrain/commit/27d3a7beb276246009f1a43fa5d4c286234eab95))
-
 
 ## v0.2.6 (2023-09-21)
 
@@ -2393,13 +2329,11 @@ Stood up first CI/CD pipeline for semantic versioning with github actions, and p
 
 * updated dependencies ([`21e50c5`](https://github.com/svange/openbrain/commit/21e50c59bf11a728b8ef8aabe4b10d3e0a74009b))
 
-
 ## v0.2.5 (2023-09-21)
 
 ### Unknown
 
 * updated CONTRIBUTING.md ([`dd0b5a2`](https://github.com/svange/openbrain/commit/dd0b5a27d5755fd91f810a6f9e040c3790decd90))
-
 
 ## v0.2.4 (2023-09-21)
 
@@ -2416,7 +2350,6 @@ Stood up first CI/CD pipeline for semantic versioning with github actions, and p
 * Setting up CI/CD pipeline and workflow ([`494e23d`](https://github.com/svange/openbrain/commit/494e23dbea902c301e691b45c58e3184d578a53e))
 
 * Setting up CI/CD pipeline and workflow ([`f9ef366`](https://github.com/svange/openbrain/commit/f9ef366174de6884718400c8040923d70dae084b))
-
 
 ## v0.2.0 (2023-09-21)
 

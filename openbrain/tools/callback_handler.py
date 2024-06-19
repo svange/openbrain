@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Union, Optional
 
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.schema import BaseMessage, LLMResult, AgentAction, AgentFinish
@@ -16,9 +16,8 @@ class CallbackHandler(BaseCallbackHandler):
 
     registered_callbacks: list[OBCallbackHandlerFunctionProtocol] = []
 
-    def __init__(self, initial_context: dict, agent_config: AgentConfig, *args, **kwargs):
+    def __init__(self, agent_config: AgentConfig, *args, **kwargs):
         super().__init__()
-        self.initial_context = initial_context or {}
         self.agent_config = agent_config
 
     # Using dynamic method names to register callbacks and run them
@@ -26,7 +25,8 @@ class CallbackHandler(BaseCallbackHandler):
     # make sure the function extends langchain.tools.BaseTool
     # make sure the function accepts the following kwargs (it can ignore): lead, agent, agent_input
 
-    def register_ob_tool(self, obtool: OBTool, initial_context: dict = None):
+    def register_ob_tool(self, obtool: OBTool):
+
         callbacks = [
             getattr(obtool, attr)
             for attr in dir(obtool)

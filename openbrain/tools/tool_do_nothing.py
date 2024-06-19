@@ -9,6 +9,7 @@ from openbrain.tools.obtool import OBTool
 
 from openbrain.util import get_logger
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
+from openbrain.tools.models.context_aware_tool import ContextAwareToolMixin
 
 logger = get_logger()
 
@@ -26,12 +27,13 @@ class DoNothingAdaptor(BaseModel):
 
 
 # LangChain tool
-class DoNothingTool(BaseTool):
+class DoNothingTool(BaseTool, ContextAwareToolMixin):
     name = TOOL_NAME
     description = """Never useful."""
     args_schema: type[BaseModel] = DoNothingAdaptor
     handle_tool_error = True
     verbose = True
+
 
     def _run(self, *args, **kwargs) -> str:
         # This seemingly does nothing. All the work is done in the callback handler. This function is here for
