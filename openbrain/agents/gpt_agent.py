@@ -183,6 +183,7 @@ class GptAgent:
 
         logger.info(f"{kwargs=}")
 
+
         try:
             response_message = self.agent.run(user_message, callbacks=[self.toolbox.callback_handler])
 

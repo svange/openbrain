@@ -102,7 +102,7 @@ class Recordable(Serializable, metaclass=ABCMeta):
         item = response.get("Item", {})
 
         if item is None or len(item) == 0:
-            raise LookupError(
+             raise LookupError(
                 f"Failed to find: {table=} | {hash_key_name=} | {hash_key_value=} | {range_key_name=} | {range_key_value=}"
             )
         # return dynamo_obj_to_python_obj(item)

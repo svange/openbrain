@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import datetime
-from ast import literal_eval
 from typing import Any, Optional
 
 import boto3
@@ -10,6 +8,7 @@ from langchain.tools.base import BaseTool
 from pydantic import BaseModel, Extra, Field
 
 from openbrain.orm.model_agent_config import AgentConfig
+from openbrain.tools.models.context_aware_tool import ContextAwareToolMixin
 from openbrain.tools.obtool import OBTool
 from openbrain.agents.exceptions import AgentToolIncompleteLeadError, AgentToolIncompleteContactError
 from openbrain.tools.models.model_leadmo_contact import LeadmoContact
@@ -36,13 +35,12 @@ class LeadmoStopConversationAdaptor(BaseModel):
 
 
 # LangChain tool
-class LeadmoStopConversationTool(BaseTool):
+class LeadmoStopConversationTool(BaseTool, ContextAwareToolMixin):
     name = TOOL_NAME
     description = """Useful to signal that this conversation should end for one of the following reasons: natural end of conversation, abuse by the user, user responds with '1'."""
     args_schema: type[BaseModel] = LeadmoStopConversationAdaptor
     handle_tool_error = True
     verbose = True
-
     def _run(self, *args, **kwargs) -> str:
         # This seemingly does nothing. All the work is done in the callback handler. This function is here for
         # the metadata.

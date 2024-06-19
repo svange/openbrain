@@ -27,6 +27,9 @@ class OBTool:
     on_agent_finish: OBCallbackHandlerFunctionProtocol
     tool: BaseTool
 
+    def __init__(self, initial_context: dict = None, *args, **kwargs):
+        self.initial_context = initial_context or {}
+
     @classmethod
     def send_event(cls, event_detail: str, event_source: str = Defaults.OB_TOOL_EVENT_SOURCE.value) -> Any:
         """Send an event to eventbus."""
@@ -55,3 +58,7 @@ class OBTool:
                 raise
 
         return response
+
+    # def register_context(self, context: dict):
+    #     self.context = context
+    #     return self.context
