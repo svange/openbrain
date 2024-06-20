@@ -72,6 +72,7 @@ NOTE: There is currently no fee for using the service, but it's using my persona
 
 ## AI Agent Tools
 - **leadmo_update_contact**: Update a contact in Lead Momentum.
+- **leadmo_stop_conversation**: Stop a conversation in Lead Momentum.
 - **connect_with_agent**: Connect with an agent in Lead Momentum.
 
 ## Quick Start
