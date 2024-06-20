@@ -1,3 +1,16 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.4.3](https://github.com/svange/openbrain/compare/v1.4.2...v1.4.3) (2024-06-20)
+
+
+### Bug Fixes
+
+* bump commit ([16a9d1b](https://github.com/svange/openbrain/commit/16a9d1b7a1980cd69deb8e34a2053d437ce4b9b8))
+* removing initial context from initial message to AI and moving it to the metadata plane. ([57e3f11](https://github.com/svange/openbrain/commit/57e3f11d6722713f9db9203dd1e69fd2c3807f3e))
+
 # CHANGELOG
 
 ## v1.4.3-dev.1 (2024-06-19)
