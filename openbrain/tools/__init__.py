@@ -32,4 +32,5 @@ def import_submodules(package_name):
         result[name] = r
     return result
 
+
 register_obtool_classes()
