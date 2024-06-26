@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.6](https://github.com/svange/openbrain/compare/v1.4.5...v1.4.6) (2024-06-26)
+
+
+### Bug Fixes
+
+* send_lead_to_crm broken tool stopping ob from loading entirely. ([4399a2b](https://github.com/svange/openbrain/commit/4399a2bd677a6303c8e49ae31130778f67be8a6b))
+
 ## [1.4.5](https://github.com/svange/openbrain/compare/v1.4.4...v1.4.5) (2024-06-26)
 
 
