@@ -108,7 +108,7 @@ def test_get_agent_from_chat_session(incoming_chat_session):
     agent_state = {
         "frozen_agent_memory": retrieved_chat_session.frozen_agent_memory,
         "frozen_agent_config": retrieved_chat_session.frozen_agent_config,
-        "frozen_lead": retrieved_chat_session.frozen_lead,
+        # "frozen_lead": retrieved_chat_session.frozen_lead,
     }
     agent = GptAgent.deserialize(state=agent_state)
     # frozen_lead = json.loads(retrieved_chat_session.frozen_lead)

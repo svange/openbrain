@@ -22,7 +22,7 @@ class ChatSession(ORMModel):
     frozen_agent_memory: bytes = Field(description="The frozen agent memory", repr=False)
     frozen_agent_config: str = Field(description="The frozen agent config", repr=False)
     # serialized_agent = JSONAttribute()
-    frozen_lead: Optional[str] = Field(default=None, description="The frozen lead", repr=False)
+    # frozen_lead: Optional[str] = Field(default=None, description="The frozen lead", repr=False)
     session_id: str = Field(
         default_factory=ulid.ULID().to_uuid().__str__,
         description="The session_id associated with this ChatSession",
