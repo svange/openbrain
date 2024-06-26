@@ -1,6 +1,16 @@
 # CHANGELOG
 
+## v1.4.10-dev.2 (2024-06-26)
+
+### Fix
+
+* fix: fixing tools... ([`80f33ad`](https://github.com/svange/openbrain/commit/80f33ad44fa61340584d7fa978853fe4d8d47e26))
+
 ## v1.4.10-dev.1 (2024-06-26)
+
+### Chore
+
+* chore(release): release 1.4.10-dev.1 ([`c0c3d79`](https://github.com/svange/openbrain/commit/c0c3d79836b16d0e1922a6092c259c55bae4a37e))
 
 ### Fix
 
