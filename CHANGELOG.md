@@ -1,19 +1,37 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v1.4.8-dev.1 (2024-06-26)
+
+### Fix
+
+* fix: fixing tools... ([`c91c452`](https://github.com/svange/openbrain/commit/c91c45201d6712517fa5d21761ee90c3d095b88c))
+
+## v1.4.7 (2024-06-26)
+
+### Chore
+
+* chore(release): 1.4.7 [skip ci]
 
 ## [1.4.7](https://github.com/svange/openbrain/compare/v1.4.6...v1.4.7) (2024-06-26)
-
 
 ### Bug Fixes
 
 * fixing tools... ([58c98cd](https://github.com/svange/openbrain/commit/58c98cd0f4f42707de7c075cd039bfae4baa13c5))
-* merging change into main ([5a614e4](https://github.com/svange/openbrain/commit/5a614e4ba9c0572c3df13dda8c0fd6c6a68a4e51))
+* merging change into main ([5a614e4](https://github.com/svange/openbrain/commit/5a614e4ba9c0572c3df13dda8c0fd6c6a68a4e51)) ([`623badf`](https://github.com/svange/openbrain/commit/623badf76bbd0a0e0374ac23ea5878997042dc5c))
 
-# CHANGELOG
+### Fix
+
+* fix: merging change into main ([`5a614e4`](https://github.com/svange/openbrain/commit/5a614e4ba9c0572c3df13dda8c0fd6c6a68a4e51))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`1dc6fd4`](https://github.com/svange/openbrain/commit/1dc6fd43bd0377aa211991626c6de1896aa128ea))
 
 ## v1.4.7-dev.1 (2024-06-26)
+
+### Chore
+
+* chore(release): release 1.4.7-dev.1 ([`ab4be5e`](https://github.com/svange/openbrain/commit/ab4be5e799a25350042f935bd30fef9c952239cd))
 
 ### Fix
 
