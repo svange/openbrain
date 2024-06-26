@@ -23,9 +23,10 @@ class Toolbox:  # invoker
     tool_friendly_names: dict[str:OBTool] = {
         "leadmo_update_contact": "OBToolLeadmoUpdateContact",
         "leadmo_stop_conversation": "OBToolLeadmoStopConversation",
-        # "send_lead_to_crm": "OBToolLeadmoCreateContact",
         "leadmo_create_contact": "OBToolLeadmoCreateContact",
         "tester": "OBToolTester",
+        "send_lead_to_crm": "OBToolLeadmoCreateContact", # TODO: get rid of this, it's only here to support a legacy name for this tool
+
     }
 
     available_tools: dict[str:OBTool] = {}
