@@ -24,10 +24,12 @@ def register_obtool_classes():
 def import_submodules(package_name):
     """Import all submodules of a module, recursively"""
     package = sys.modules[package_name]
-    return {
-        name: importlib.import_module(package_name + "." + name)
-        for loader, name, is_pkg in pkgutil.walk_packages(package.__path__)
-    }
-
+    result = {}
+    for loader, name, is_pkg in pkgutil.walk_packages(package.__path__):
+        if not name.startswith("tool_"):
+            continue
+        r = importlib.import_module(package_name + "." + name)
+        result[name] = r
+    return result
 
 register_obtool_classes()
