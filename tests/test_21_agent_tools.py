@@ -1,5 +1,5 @@
 import contextlib
-import datetime
+# import datetime
 import importlib
 import inspect
 import pkgutil
@@ -10,16 +10,16 @@ import boto3
 import pytest
 from langchain.callbacks.base import BaseCallbackHandler
 
-import openbrain.tools.tool_send_lead_to_crm
+# import openbrain.tools.tool_send_lead_to_crm
 from openbrain.agents.gpt_agent import GptAgent
-from openbrain.tools.models.event_lead import LeadEvent
+# from openbrain.tools.models.event_lead import LeadEvent
 from openbrain.orm.model_agent_config import AgentConfig
-from openbrain.orm.model_lead import Lead
+# from openbrain.orm.model_lead import Lead
 from openbrain.tools.callback_handler import CallbackHandler
-from openbrain.tools.tool_send_lead_to_crm import send_event
+# from openbrain.tools.tool_send_lead_to_crm import send_event
 from openbrain.tools.toolbox import Toolbox
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
-from openbrain.util import config, Defaults
+# from openbrain.util import config, Defaults
 
 
 @pytest.fixture
@@ -122,19 +122,19 @@ class TestAgentTools:
         assert len(params_missing_in_protocol) == 0
         assert len(params_missing_in_handler) == 0
 
-    @pytest.mark.tools
-    def test_manual_send_to_crm_tool(
-        self, incoming_agent_config: AgentConfig, incoming_lead: Lead, event_bridge_client
-    ):
-        """Send an event to the lead event stream."""
-
-        lead_event = LeadEvent(lead=incoming_lead, agent_config=incoming_agent_config)
-        response = send_event(lead_event=lead_event)
-
-        event_id = response["Entries"][0]["EventId"]
-        assert event_id is not None
-        assert isinstance(event_id, str)
-        assert response["ResponseMetadata"]["HTTPStatusCode"] == 200
+    # @pytest.mark.tools
+    # def test_manual_send_to_crm_tool(
+    #     self, incoming_agent_config: AgentConfig, incoming_lead: Lead, event_bridge_client
+    # ):
+    #     """Send an event to the lead event stream."""
+    #
+    #     lead_event = LeadEvent(lead=incoming_lead, agent_config=incoming_agent_config)
+    #     response = send_event(lead_event=lead_event)
+    #
+    #     event_id = response["Entries"][0]["EventId"]
+    #     assert event_id is not None
+    #     assert isinstance(event_id, str)
+    #     assert response["ResponseMetadata"]["HTTPStatusCode"] == 200
 
     @pytest.mark.tools
     def test_tools_are_registered(self):

@@ -5,14 +5,14 @@ from langchain.tools import BaseTool
 from openbrain.tools.callback_handler import CallbackHandler
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 from openbrain.orm.model_agent_config import AgentConfig
-from openbrain.orm.model_lead import Lead
+# from openbrain.orm.model_lead import Lead
 from openbrain.tools.obtool import OBTool
 
 from openbrain.util import get_logger
 
-from openbrain.tools.tool_leadmo_update_contact import OBToolLeadmoUpdateContact
-from openbrain.tools.tool_leadmo_stop_conversation import OBToolLeadmoStopConversation
-from openbrain.tools.tool_send_lead_to_crm import OBToolSendToCRM
+# from openbrain.tools.tool_leadmo_update_contact import OBToolLeadmoUpdateContact
+# from openbrain.tools.tool_leadmo_stop_conversation import OBToolLeadmoStopConversation
+# from openbrain.tools.tool_send_lead_to_crm import OBToolSendToCRM
 
 logger = get_logger()
 
