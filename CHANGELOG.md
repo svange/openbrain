@@ -1,6 +1,16 @@
 # CHANGELOG
 
+## v1.4.3-dev.2 (2024-06-26)
+
+### Fix
+
+* fix: cleaning up tool abstraction. Standardizing event details to include only &#34;context&#34; and &#34;ai_input&#34;. ([`795346b`](https://github.com/svange/openbrain/commit/795346b284a19c90f1e50704a7383093518fedf6))
+
 ## v1.4.3-dev.1 (2024-06-19)
+
+### Chore
+
+* chore(release): release 1.4.3-dev.1 ([`8ce0526`](https://github.com/svange/openbrain/commit/8ce052639432c3a7abdc6f9fbc203e6ada13be36))
 
 ### Fix
 
