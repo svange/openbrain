@@ -1,3 +1,16 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.4.5](https://github.com/svange/openbrain/compare/v1.4.4...v1.4.5) (2024-06-26)
+
+
+### Bug Fixes
+
+* fixing tool error, still using lead artifacts after they were deprecated. ([fb30621](https://github.com/svange/openbrain/commit/fb30621af7b362b1b6486f0eca55448096a9b9ce))
+* merging change into main ([ce61a91](https://github.com/svange/openbrain/commit/ce61a9193f8443673843cd5b7c5d47d555f85789))
+
 # CHANGELOG
 
 ## v1.4.3-dev.3 (2024-06-26)
