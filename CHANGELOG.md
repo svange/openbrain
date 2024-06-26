@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.4](https://github.com/svange/openbrain/compare/v1.4.3...v1.4.4) (2024-06-26)
+
+
+### Bug Fixes
+
+* cleaning up tool abstraction. Standardizing event details to include only "context" and "ai_input". ([795346b](https://github.com/svange/openbrain/commit/795346b284a19c90f1e50704a7383093518fedf6))
+* merging change into main ([6b363f2](https://github.com/svange/openbrain/commit/6b363f278dd45e953828af77293206f1c41b8c0c))
+
 ## [1.4.3](https://github.com/svange/openbrain/compare/v1.4.2...v1.4.3) (2024-06-20)
 
 
