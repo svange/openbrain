@@ -10,7 +10,7 @@ from openbrain.agents.gpt_agent import GptAgent
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.orm.model_chat_message import ChatMessage
 from openbrain.orm.model_chat_session import ChatSession
-from openbrain.orm.model_lead import Lead
+# from openbrain.orm.model_lead import Lead
 from openbrain.util import config, Defaults
 
 
@@ -113,18 +113,17 @@ def reset(
     if OB_MODE == Defaults.OB_MODE_LOCAL.value:
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
-        lead = Lead(client_id=_client_id)
-        gpt_agent = GptAgent(agent_config=agent_config, lead=lead)
+        # lead = Lead(client_id=_client_id)
+        gpt_agent = GptAgent(agent_config=agent_config)
 
         frozen_agent_memory = gpt_agent.serialize()["frozen_agent_memory"]
         frozen_agent_config = gpt_agent.serialize()["frozen_agent_config"]
-        frozen_lead = gpt_agent.serialize()["frozen_lead"]
-
+        # frozen_lead = gpt_agent.serialize()["frozen_lead"]
         chat_session = ChatSession(
             client_id=_client_id,
             frozen_agent_memory=frozen_agent_memory,
             frozen_agent_config=frozen_agent_config,
-            frozen_lead=frozen_lead,
+            # frozen_lead=frozen_lead,
         )
         session_id = chat_session.session_id
         session_state["session_id"] = session_id
