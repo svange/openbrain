@@ -1,30 +1,57 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v1.4.7-dev.1 (2024-06-26)
+
+### Fix
+
+* fix: fixing tools... ([`58c98cd`](https://github.com/svange/openbrain/commit/58c98cd0f4f42707de7c075cd039bfae4baa13c5))
+
+## v1.4.6 (2024-06-26)
+
+### Chore
+
+* chore(release): 1.4.6 [skip ci]
 
 ## [1.4.6](https://github.com/svange/openbrain/compare/v1.4.5...v1.4.6) (2024-06-26)
 
-
 ### Bug Fixes
 
-* send_lead_to_crm broken tool stopping ob from loading entirely. ([4399a2b](https://github.com/svange/openbrain/commit/4399a2bd677a6303c8e49ae31130778f67be8a6b))
+* send_lead_to_crm broken tool stopping ob from loading entirely. ([4399a2b](https://github.com/svange/openbrain/commit/4399a2bd677a6303c8e49ae31130778f67be8a6b)) ([`cf7a384`](https://github.com/svange/openbrain/commit/cf7a3840ee081bfffc6076e3a708a9c8d77ea157))
 
-## [1.4.5](https://github.com/svange/openbrain/compare/v1.4.4...v1.4.5) (2024-06-26)
+### Unknown
 
-
-### Bug Fixes
-
-* fixing tool error, still using lead artifacts after they were deprecated. ([fb30621](https://github.com/svange/openbrain/commit/fb30621af7b362b1b6486f0eca55448096a9b9ce))
-* merging change into main ([ce61a91](https://github.com/svange/openbrain/commit/ce61a9193f8443673843cd5b7c5d47d555f85789))
-
-# CHANGELOG
+* Merge branch &#39;refs/heads/dev&#39; ([`fda864f`](https://github.com/svange/openbrain/commit/fda864fd0e417beac133b8ed6038e3f55df0b2ed))
 
 ## v1.4.3-dev.4 (2024-06-26)
+
+### Chore
+
+* chore(release): release 1.4.3-dev.4 ([`9d7f1ab`](https://github.com/svange/openbrain/commit/9d7f1ab53b7bbae9e7b4662852a7ca2744a25384))
 
 ### Fix
 
 * fix: send_lead_to_crm broken tool stopping ob from loading entirely. ([`4399a2b`](https://github.com/svange/openbrain/commit/4399a2bd677a6303c8e49ae31130778f67be8a6b))
+
+## v1.4.5 (2024-06-26)
+
+### Chore
+
+* chore(release): 1.4.5 [skip ci]
+
+## [1.4.5](https://github.com/svange/openbrain/compare/v1.4.4...v1.4.5) (2024-06-26)
+
+### Bug Fixes
+
+* fixing tool error, still using lead artifacts after they were deprecated. ([fb30621](https://github.com/svange/openbrain/commit/fb30621af7b362b1b6486f0eca55448096a9b9ce))
+* merging change into main ([ce61a91](https://github.com/svange/openbrain/commit/ce61a9193f8443673843cd5b7c5d47d555f85789)) ([`ea01ebc`](https://github.com/svange/openbrain/commit/ea01ebcae72a828af8cb9ca654d7b18e2d0c6e71))
+
+### Fix
+
+* fix: merging change into main ([`ce61a91`](https://github.com/svange/openbrain/commit/ce61a9193f8443673843cd5b7c5d47d555f85789))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`f31aeee`](https://github.com/svange/openbrain/commit/f31aeee4335ee19b85a5ef70b02bd8618f62c28e))
 
 ## v1.4.3-dev.3 (2024-06-26)
 
