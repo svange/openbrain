@@ -17,12 +17,15 @@ from openbrain.tools.models.model_leadmo_contact_adaptor import LeadmoContactAda
 
 logger = get_logger()
 
-TOOL_NAME = "leadmo_update_contact"
+TOOL_NAME = "leadmo_create_contact"
 
 
-class LeadmoUpdateContactTool(BaseTool, ContextAwareToolMixin):
+# Utility classes and functions
+
+# LangChain tool
+class LeadmoCreateContactTool(BaseTool, ContextAwareToolMixin):
     name = TOOL_NAME
-    description = """Useful when you want to update a user's information in our system, based on learned details from the conversation."""
+    description = """Useful when you want create a new contact in our system, based on learned details from the conversation."""
     args_schema: type[BaseModel] = LeadmoContactAdaptor
     handle_tool_error = True
     verbose = True
@@ -54,8 +57,8 @@ def on_tool_error(agent_config: AgentConfig = None, agent_input=None, *args, **k
     pass
 
 
-class OBToolLeadmoUpdateContact(OBTool):
+class OBToolLeadmoCreateContact(OBTool):
     name: str = TOOL_NAME
-    tool: BaseTool = LeadmoUpdateContactTool
+    tool: BaseTool = LeadmoCreateContactTool
     on_tool_start: OBCallbackHandlerFunctionProtocol = on_tool_start
     on_tool_error: OBCallbackHandlerFunctionProtocol = on_tool_error
