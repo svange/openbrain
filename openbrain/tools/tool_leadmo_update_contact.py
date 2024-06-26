@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from ast import literal_eval
 from typing import Any, Optional
 
@@ -9,8 +10,6 @@ from pydantic import BaseModel, Extra, Field
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.tools.models.context_aware_tool import ContextAwareToolMixin
 from openbrain.tools.obtool import OBTool
-from openbrain.agents.exceptions import AgentToolIncompleteLeadError, AgentToolIncompleteContactError
-from openbrain.tools.models.model_leadmo_contact import LeadmoContact
 
 from openbrain.util import get_logger
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
@@ -46,7 +45,7 @@ class LeadmoContactAdaptor(BaseModel):
 # LangChain tool
 class LeadmoUpdateContactTool(BaseTool, ContextAwareToolMixin):
     name = TOOL_NAME
-    description = """Useful when you want to update a user's information based on new infromation from the conversation."""
+    description = """Useful when you want to update a user's information in our system, based on learned details from the conversation."""
     args_schema: type[BaseModel] = LeadmoContactAdaptor
     handle_tool_error = True
     verbose = True
@@ -54,49 +53,19 @@ class LeadmoUpdateContactTool(BaseTool, ContextAwareToolMixin):
     def _run(self, *args, **kwargs) -> str:
         # This seemingly does nothing. All the work is done in the callback handler. This function is here for
         # the metadata.
-        initial_context = literal_eval(self.tool_input)
-        contact_info_from_conversation = kwargs
+        context = literal_eval(self.tool_input)
+        event_detail = {
+            "context": context,
+            "ai_input": kwargs
+        }
 
-        required_fields = ["contactId", "phone"]
-        leadmo_contact_from_context = LeadmoContact(**initial_context)
-
-        # Check if all required fields are present
-        for field in required_fields:
-            if not getattr(leadmo_contact_from_context, field):
-                raise AgentToolIncompleteLeadError(
-                    f"Required field {field} is missing from the metadata. Perhaps this tool should not be enabled for this profile."
-                )
-
-
-        leadmo_contact_from_conversation = LeadmoContactAdaptor(**contact_info_from_conversation)
-
-        constructed_contact_dict = {}
-        for key, value in leadmo_contact_from_context.dict().items():
-            # If the conversation yielded updated information, use that, otherwise use the information from the CRM
-            if leadmo_contact_from_conversation[key]:
-                constructed_contact_dict[key] = leadmo_contact_from_conversation[key]
-            else:
-                constructed_contact_dict[key] = value
-
-        constructed_leadmo_contact = LeadmoContact(**constructed_contact_dict)
-
-        if not constructed_leadmo_contact.phone:
-            raise AgentToolIncompleteContactError(
-                "No email address is known for this user, ask the user for an email address and try again."
-            )
-
-        if not constructed_leadmo_contact.contactId:
-            raise AgentToolIncompleteContactError(
-                "Error updating information, notify an agent."
-            )
-
-        response = OBTool.send_event(event_source=TOOL_NAME, event_detail=constructed_leadmo_contact.to_json())
+        response = OBTool.send_event(event_source=TOOL_NAME, event_detail=json.dump(event_detail))
 
         return response
 
 
     def _arun(self, ticker: str):
-        raise NotImplementedError("connect_with_agent does not support async")
+        raise NotImplementedError(f"{TOOL_NAME} does not support async")
 
 
 # on_tool_start
