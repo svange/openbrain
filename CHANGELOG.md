@@ -1,31 +1,62 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v1.4.3-dev.3 (2024-06-26)
+
+### Fix
+
+* fix: fixing tool error, still using lead artifacts after they were deprecated. ([`fb30621`](https://github.com/svange/openbrain/commit/fb30621af7b362b1b6486f0eca55448096a9b9ce))
+
+### Unknown
+
+* Merge branch &#39;refs/heads/main&#39; into dev ([`64d3507`](https://github.com/svange/openbrain/commit/64d3507c85d2ccda1790c8620c386dd2e5a32cd1))
+
+## v1.4.4 (2024-06-26)
+
+### Chore
+
+* chore(release): 1.4.4 [skip ci]
 
 ## [1.4.4](https://github.com/svange/openbrain/compare/v1.4.3...v1.4.4) (2024-06-26)
 
-
 ### Bug Fixes
 
-* cleaning up tool abstraction. Standardizing event details to include only "context" and "ai_input". ([795346b](https://github.com/svange/openbrain/commit/795346b284a19c90f1e50704a7383093518fedf6))
-* merging change into main ([6b363f2](https://github.com/svange/openbrain/commit/6b363f278dd45e953828af77293206f1c41b8c0c))
+* cleaning up tool abstraction. Standardizing event details to include only &#34;context&#34; and &#34;ai_input&#34;. ([795346b](https://github.com/svange/openbrain/commit/795346b284a19c90f1e50704a7383093518fedf6))
+* merging change into main ([6b363f2](https://github.com/svange/openbrain/commit/6b363f278dd45e953828af77293206f1c41b8c0c)) ([`948f0e2`](https://github.com/svange/openbrain/commit/948f0e299c748d74b074d6fe1a9c62d4e7a43b3c))
 
-## [1.4.3](https://github.com/svange/openbrain/compare/v1.4.2...v1.4.3) (2024-06-20)
+### Fix
 
+* fix: merging change into main ([`6b363f2`](https://github.com/svange/openbrain/commit/6b363f278dd45e953828af77293206f1c41b8c0c))
 
-### Bug Fixes
+### Unknown
 
-* bump commit ([16a9d1b](https://github.com/svange/openbrain/commit/16a9d1b7a1980cd69deb8e34a2053d437ce4b9b8))
-* removing initial context from initial message to AI and moving it to the metadata plane. ([57e3f11](https://github.com/svange/openbrain/commit/57e3f11d6722713f9db9203dd1e69fd2c3807f3e))
-
-# CHANGELOG
+* Merge remote-tracking branch &#39;origin/main&#39; ([`bb55f4f`](https://github.com/svange/openbrain/commit/bb55f4fd9c5087c22f9a0b6ae78d335cbfc6d4fb))
 
 ## v1.4.3-dev.2 (2024-06-26)
+
+### Chore
+
+* chore(release): release 1.4.3-dev.2 ([`01fac2c`](https://github.com/svange/openbrain/commit/01fac2c68321c7ee42764e1ede3e1c2f4ba90128))
 
 ### Fix
 
 * fix: cleaning up tool abstraction. Standardizing event details to include only &#34;context&#34; and &#34;ai_input&#34;. ([`795346b`](https://github.com/svange/openbrain/commit/795346b284a19c90f1e50704a7383093518fedf6))
+
+## v1.4.3 (2024-06-20)
+
+### Chore
+
+* chore(release): 1.4.3 [skip ci]
+
+## [1.4.3](https://github.com/svange/openbrain/compare/v1.4.2...v1.4.3) (2024-06-20)
+
+### Bug Fixes
+
+* bump commit ([16a9d1b](https://github.com/svange/openbrain/commit/16a9d1b7a1980cd69deb8e34a2053d437ce4b9b8))
+* removing initial context from initial message to AI and moving it to the metadata plane. ([57e3f11](https://github.com/svange/openbrain/commit/57e3f11d6722713f9db9203dd1e69fd2c3807f3e)) ([`7f1ffcd`](https://github.com/svange/openbrain/commit/7f1ffcdfbe99c71624faf5f7296546dbd7806d87))
+
+### Fix
+
+* fix: bump commit ([`16a9d1b`](https://github.com/svange/openbrain/commit/16a9d1b7a1980cd69deb8e34a2053d437ce4b9b8))
 
 ## v1.4.3-dev.1 (2024-06-19)
 
