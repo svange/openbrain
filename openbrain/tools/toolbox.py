@@ -10,9 +10,9 @@ from openbrain.tools.obtool import OBTool
 
 from openbrain.util import get_logger
 
-# from openbrain.tools.tool_leadmo_update_contact import OBToolLeadmoUpdateContact
-# from openbrain.tools.tool_leadmo_stop_conversation import OBToolLeadmoStopConversation
-# from openbrain.tools.tool_send_lead_to_crm import OBToolSendToCRM
+from openbrain.tools.tool_leadmo_update_contact import OBToolLeadmoUpdateContact
+from openbrain.tools.tool_leadmo_stop_conversation import OBToolLeadmoStopConversation
+from openbrain.tools.tool_leadmo_create_contact import OBToolLeadmoCreateContact
 
 logger = get_logger()
 
@@ -24,7 +24,7 @@ class Toolbox:  # invoker
         "leadmo_update_contact": "OBToolLeadmoUpdateContact",
         "leadmo_stop_conversation": "OBToolLeadmoStopConversation",
         # "send_lead_to_crm": "OBToolLeadmoCreateContact",
-        "leadmo_create_conversation": "OBToolLeadmoCreateContact",
+        "leadmo_create_contact": "OBToolLeadmoCreateContact",
         "tester": "OBToolTester",
     }
 
