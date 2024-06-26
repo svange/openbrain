@@ -15,11 +15,11 @@ from openbrain.agents.gpt_agent import GptAgent
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.orm.model_chat_message import ChatMessage
 from openbrain.orm.model_chat_session import ChatSession
-from openbrain.orm.model_lead import Lead
+# from openbrain.orm.model_lead import Lead
 from tests.generator_agent_configs import generate_agent_config
 from tests.generator_chat_messages import generate_chat_message
 from tests.generator_chat_sessions import generate_chat_session
-from tests.generator_leads import generate_lead
+# from tests.generator_leads import generate_lead
 
 
 # load_dotenv()
@@ -79,32 +79,32 @@ def default_agent_config():
     return AgentConfig()
 
 
-@pytest.fixture(scope="module", params=range(NUMBER_OF_SAMPLES))
-def clean_leads(request):
-    return (generate_lead() for _ in range(request.param))
+# @pytest.fixture(scope="module", params=range(NUMBER_OF_SAMPLES))
+# def clean_leads(request):
+#     return (generate_lead() for _ in range(request.param))
+#
+#
+# @pytest.fixture(scope="module", params=range(NUMBER_OF_SAMPLES))
+# def dirty_leads(request):
+#     return (generate_lead(try_to_break_shit=True) for _ in range(request.param))
 
-
-@pytest.fixture(scope="module", params=range(NUMBER_OF_SAMPLES))
-def dirty_leads(request):
-    return (generate_lead(try_to_break_shit=True) for _ in range(request.param))
-
-
-@pytest.fixture(scope="module")
-def default_lead():
-    return Lead(client_id="lead_test_fixture")
-
-
-@pytest.fixture(scope="module")
-def simple_lead():
-    return Lead(
-        client_id="simple_lead_test_fixture",
-        session_id=str(ulid.ULID().to_uuid()),
-        full_name="Buck Futter",
-        state_of_residence="FL",
-        email_address="test@test.test",
-        phone="3134581546",
-        med_list=["aspirin", "motrin"],
-    )
+#
+# @pytest.fixture(scope="module")
+# def default_lead():
+#     return Lead(client_id="lead_test_fixture")
+#
+#
+# @pytest.fixture(scope="module")
+# def simple_lead():
+#     return Lead(
+#         client_id="simple_lead_test_fixture",
+#         session_id=str(ulid.ULID().to_uuid()),
+#         full_name="Buck Futter",
+#         state_of_residence="FL",
+#         email_address="test@test.test",
+#         phone="3134581546",
+#         med_list=["aspirin", "motrin"],
+#     )
 
 
 @pytest.fixture(scope="module", params=range(NUMBER_OF_SAMPLES))
@@ -130,13 +130,13 @@ def simple_chat_message():
 
 
 @pytest.fixture
-def simple_chat_session(default_agent_config, simple_lead):
+def simple_chat_session(default_agent_config):
     # Randomly select 4 alphanumeric characters
     r_client_id = "".join(random.choices(string.ascii_uppercase + string.digits, k=4))
 
     client_id = f"t_{r_client_id}"
     agent_config = default_agent_config
-    lead = simple_lead
+    # lead = simple_lead
     gpt_agent = GptAgent(agent_config=agent_config)
     agent_response = gpt_agent.handle_user_message("Hello!")
     assert agent_response is not None

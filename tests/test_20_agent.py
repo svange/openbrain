@@ -6,7 +6,6 @@ from langchain.schema import BaseMemory
 
 from openbrain.agents.gpt_agent import GptAgent
 from openbrain.orm.model_agent_config import AgentConfig
-from openbrain.orm.model_lead import Lead
 
 
 @pytest.fixture
@@ -15,10 +14,10 @@ def incoming_agent_config(default_agent_config):
     return outgoing_agent_config
 
 
-@pytest.fixture
-def incoming_lead(simple_lead):
-    outgoing_lead = simple_lead
-    return outgoing_lead
+# @pytest.fixture
+# def incoming_lead(simple_lead):
+#     outgoing_lead = simple_lead
+#     return outgoing_lead
 
 @pytest.fixture
 def initial_context():
@@ -28,7 +27,7 @@ def initial_context():
 class TestAgent:
     @retry.retry(delay=1, tries=1)
     @pytest.mark.integration_tests
-    def test_gpt_agent_creation_no_tools(self, incoming_agent_config: AgentConfig, incoming_lead: Lead):
+    def test_gpt_agent_creation_no_tools(self, incoming_agent_config: AgentConfig):
 
         gpt_agent = GptAgent(incoming_agent_config)
         assert gpt_agent.tools is not None
@@ -44,7 +43,7 @@ class TestAgent:
 
     @retry.retry(delay=1, tries=1)
     @pytest.mark.integration_tests
-    def test_gpt_agent_creation_tools(self, incoming_agent_config: AgentConfig, incoming_lead: Lead):
+    def test_gpt_agent_creation_tools(self, incoming_agent_config: AgentConfig):
         incoming_agent_config.tools = ['leadmo_update_contact']
 
         gpt_agent = GptAgent(incoming_agent_config)
@@ -62,7 +61,7 @@ class TestAgent:
 
     @retry.retry(delay=1, tries=2)
     @pytest.mark.integration_tests
-    def test_serialize_deserialize_agent(self, incoming_agent_config: AgentConfig, incoming_lead: Lead):
+    def test_serialize_deserialize_agent(self, incoming_agent_config: AgentConfig):
         # unique_agent_config = agent_config_fixture
         gpt_agent = GptAgent(agent_config=incoming_agent_config)
         response_message = gpt_agent.handle_user_message("I see 25 blue birds!")

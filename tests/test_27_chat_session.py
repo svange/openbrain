@@ -8,7 +8,7 @@ from langchain.schema import BaseMemory
 
 from openbrain.agents.gpt_agent import GptAgent
 from openbrain.orm.model_chat_session import ChatSession
-from openbrain.orm.model_lead import Lead
+# from openbrain.orm.model_lead import Lead
 
 
 @pytest.fixture
