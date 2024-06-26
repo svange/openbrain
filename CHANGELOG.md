@@ -1,3 +1,16 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.4.8](https://github.com/svange/openbrain/compare/v1.4.7...v1.4.8) (2024-06-26)
+
+
+### Bug Fixes
+
+* fixing tools... ([c91c452](https://github.com/svange/openbrain/commit/c91c45201d6712517fa5d21761ee90c3d095b88c))
+* merging change into main ([4c1c91f](https://github.com/svange/openbrain/commit/4c1c91f0e50d6c8d7fa94a158bd0e1670736ef4b))
+
 # CHANGELOG
 
 ## v1.4.8-dev.1 (2024-06-26)
