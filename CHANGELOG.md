@@ -1,19 +1,40 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v1.4.9-dev.1 (2024-06-26)
+
+### Fix
+
+* fix: fixing tools... ([`e6b2ac9`](https://github.com/svange/openbrain/commit/e6b2ac9a089b67285555056cee33d2e3ccdcf91b))
+
+### Unknown
+
+* Merge branch &#39;refs/heads/main&#39; into dev
+
+# Conflicts:
+#	CHANGELOG.md ([`036a485`](https://github.com/svange/openbrain/commit/036a485b463820bc010539267bff2dace32d1e89))
+
+## v1.4.8 (2024-06-26)
+
+### Chore
+
+* chore(release): 1.4.8 [skip ci]
 
 ## [1.4.8](https://github.com/svange/openbrain/compare/v1.4.7...v1.4.8) (2024-06-26)
-
 
 ### Bug Fixes
 
 * fixing tools... ([c91c452](https://github.com/svange/openbrain/commit/c91c45201d6712517fa5d21761ee90c3d095b88c))
-* merging change into main ([4c1c91f](https://github.com/svange/openbrain/commit/4c1c91f0e50d6c8d7fa94a158bd0e1670736ef4b))
+* merging change into main ([4c1c91f](https://github.com/svange/openbrain/commit/4c1c91f0e50d6c8d7fa94a158bd0e1670736ef4b)) ([`fc93b6b`](https://github.com/svange/openbrain/commit/fc93b6b52fe4e43f71fb47798416a61317526229))
 
-# CHANGELOG
+### Fix
+
+* fix: merging change into main ([`4c1c91f`](https://github.com/svange/openbrain/commit/4c1c91f0e50d6c8d7fa94a158bd0e1670736ef4b))
 
 ## v1.4.8-dev.1 (2024-06-26)
+
+### Chore
+
+* chore(release): release 1.4.8-dev.1 ([`ba4cb17`](https://github.com/svange/openbrain/commit/ba4cb179b703025407d1a32cf6f11176a7ccce6b))
 
 ### Fix
 
