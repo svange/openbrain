@@ -1,6 +1,16 @@
 # CHANGELOG
 
+## v1.4.3-dev.4 (2024-06-26)
+
+### Fix
+
+* fix: send_lead_to_crm broken tool stopping ob from loading entirely. ([`4399a2b`](https://github.com/svange/openbrain/commit/4399a2bd677a6303c8e49ae31130778f67be8a6b))
+
 ## v1.4.3-dev.3 (2024-06-26)
+
+### Chore
+
+* chore(release): release 1.4.3-dev.3 ([`199e64f`](https://github.com/svange/openbrain/commit/199e64f3450c511d8252b748932c71f760829a4e))
 
 ### Fix
 
