@@ -1,31 +1,37 @@
 # CHANGELOG
 
-## v1.4.15-dev.1 (2024-06-27)
+## v1.4.16-dev.1 (2024-06-27)
 
 ### Fix
 
-* fix: removing context from callback_handler. ([`900ce00`](https://github.com/svange/openbrain/commit/900ce006b79ca2ad174e982710d7416a0e330f2e))
+* fix: adding debug statements to callback handler. ([`fba443c`](https://github.com/svange/openbrain/commit/fba443c10c615002854bf2c78152fc4b7c9a8835))
 
 ### Unknown
 
-* Merge branch &#39;refs/heads/main&#39; into dev ([`2894370`](https://github.com/svange/openbrain/commit/2894370a039cdd6d22bec2dc6b3aad6396967a1d))
+* Merge branch &#39;refs/heads/main&#39; into dev ([`2c9edc9`](https://github.com/svange/openbrain/commit/2c9edc9d2bb84bff1ea6fec4ff6338e079476733))
 
-## v1.4.14 (2024-06-27)
+## v1.4.15 (2024-06-27)
 
 ### Chore
 
-* chore(release): 1.4.14 [skip ci]
+* chore(release): 1.4.15 [skip ci]
 
 ## [1.4.15](https://github.com/svange/openbrain/compare/v1.4.14...v1.4.15) (2024-06-27)
 
 ### Bug Fixes
 
 * merging change into main ([dd678cb](https://github.com/svange/openbrain/commit/dd678cb56e798dc65ca54e9b8682f7798856040e))
-* removing context from callback_handler. ([900ce00](https://github.com/svange/openbrain/commit/900ce006b79ca2ad174e982710d7416a0e330f2e))
+* removing context from callback_handler. ([900ce00](https://github.com/svange/openbrain/commit/900ce006b79ca2ad174e982710d7416a0e330f2e)) ([`64295ae`](https://github.com/svange/openbrain/commit/64295ae6de9740d6b359ec9d1d25cc26e6eb2b20))
 
-# CHANGELOG
+### Fix
+
+* fix: merging change into main ([`dd678cb`](https://github.com/svange/openbrain/commit/dd678cb56e798dc65ca54e9b8682f7798856040e))
 
 ## v1.4.15-dev.1 (2024-06-27)
+
+### Chore
+
+* chore(release): release 1.4.15-dev.1 ([`0b0f131`](https://github.com/svange/openbrain/commit/0b0f131742a5204b4d956e944ff976f7297b3620))
 
 ### Fix
 
