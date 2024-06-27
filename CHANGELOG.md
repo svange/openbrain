@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.14](https://github.com/svange/openbrain/compare/v1.4.13...v1.4.14) (2024-06-27)
+
+
+### Bug Fixes
+
+* adding context to deserialize funciton so that rehydrated agents have proper context in their tools upon session continuation. ([9c554db](https://github.com/svange/openbrain/commit/9c554db1fc5d335bb978d3ef0c60b3c68deb599d))
+* merging change into main ([fa0d4e7](https://github.com/svange/openbrain/commit/fa0d4e74d851d8ff8597a854e5220218bd5ed9c2))
+
 ## [1.4.13](https://github.com/svange/openbrain/compare/v1.4.12...v1.4.13) (2024-06-27)
 
 
