@@ -1,3 +1,16 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.4.16](https://github.com/svange/openbrain/compare/v1.4.15...v1.4.16) (2024-06-27)
+
+
+### Bug Fixes
+
+* adding debug statements to callback handler. ([fba443c](https://github.com/svange/openbrain/commit/fba443c10c615002854bf2c78152fc4b7c9a8835))
+* merging change into main ([9e84ebe](https://github.com/svange/openbrain/commit/9e84ebee8a04ebdb3ca36268c0771fd1e56f8b50))
+
 # CHANGELOG
 
 ## v1.4.16-dev.1 (2024-06-27)
