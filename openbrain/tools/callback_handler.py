@@ -41,7 +41,7 @@ class CallbackHandler(BaseCallbackHandler):
             callback_name = callback.__name__
             if callback_name == handler_method_name:
                 logger.info(f"Running callback {callback_name}")
-                responses[callback_name] = callback(context=self.initial_context, agent_config=self.agent_config, *args, **kwargs)
+                responses[callback_name] = callback(agent_config=self.agent_config, *args, **kwargs)
         return responses
 
     # Langchain callbacks
