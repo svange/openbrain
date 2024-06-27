@@ -47,6 +47,7 @@ class CallbackHandler(BaseCallbackHandler):
     # Langchain callbacks
     def on_tool_start(self, serialized: dict[str, Any], input_str: str, **kwargs: Any) -> Any:
         """Run when tool starts running."""
+        logger.debug(f"Running on_tool_start\n{serialized=}\n{input_str=}\n{kwargs=}")
         kwargs.update({"serialized": serialized, "input_str": input_str})
         responses = self.run_callbacks("on_tool_start", **kwargs)
         return responses
