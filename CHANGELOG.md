@@ -1,31 +1,67 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v1.4.15-dev.1 (2024-06-27)
+
+### Fix
+
+* fix: removing context from callback_handler. ([`900ce00`](https://github.com/svange/openbrain/commit/900ce006b79ca2ad174e982710d7416a0e330f2e))
+
+### Unknown
+
+* Merge branch &#39;refs/heads/main&#39; into dev ([`2894370`](https://github.com/svange/openbrain/commit/2894370a039cdd6d22bec2dc6b3aad6396967a1d))
+
+## v1.4.14 (2024-06-27)
+
+### Chore
+
+* chore(release): 1.4.14 [skip ci]
 
 ## [1.4.14](https://github.com/svange/openbrain/compare/v1.4.13...v1.4.14) (2024-06-27)
-
 
 ### Bug Fixes
 
 * adding context to deserialize funciton so that rehydrated agents have proper context in their tools upon session continuation. ([9c554db](https://github.com/svange/openbrain/commit/9c554db1fc5d335bb978d3ef0c60b3c68deb599d))
-* merging change into main ([fa0d4e7](https://github.com/svange/openbrain/commit/fa0d4e74d851d8ff8597a854e5220218bd5ed9c2))
+* merging change into main ([fa0d4e7](https://github.com/svange/openbrain/commit/fa0d4e74d851d8ff8597a854e5220218bd5ed9c2)) ([`3557e04`](https://github.com/svange/openbrain/commit/3557e047863572c9ab9118205c2ba96e537d3729))
 
-## [1.4.13](https://github.com/svange/openbrain/compare/v1.4.12...v1.4.13) (2024-06-27)
+### Fix
 
+* fix: merging change into main ([`fa0d4e7`](https://github.com/svange/openbrain/commit/fa0d4e74d851d8ff8597a854e5220218bd5ed9c2))
 
-### Bug Fixes
+### Unknown
 
-* fixing tools... ([4fcaec7](https://github.com/svange/openbrain/commit/4fcaec7623d787115817b31d536ae41a9c4a6028))
-* merging change into main ([93115d8](https://github.com/svange/openbrain/commit/93115d87da24ce0fbc4595ef4d581ea42145334b))
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`4c357d4`](https://github.com/svange/openbrain/commit/4c357d4a9ad3ac2cd02f833ae37a54be492b3226))
 
-# CHANGELOG
+* Merge branch &#39;refs/heads/main&#39; into dev
+
+# Conflicts:
+#	CHANGELOG.md ([`4fadd09`](https://github.com/svange/openbrain/commit/4fadd09859d64d6e44b1f4ce5195b645b5e00c15))
 
 ## v1.4.13-dev.2 (2024-06-27)
+
+### Chore
+
+* chore(release): release 1.4.13-dev.2 ([`b305eeb`](https://github.com/svange/openbrain/commit/b305eeb50519d334cf4615ce3828f1a2778990bb))
 
 ### Fix
 
 * fix: adding context to deserialize funciton so that rehydrated agents have proper context in their tools upon session continuation. ([`9c554db`](https://github.com/svange/openbrain/commit/9c554db1fc5d335bb978d3ef0c60b3c68deb599d))
+
+## v1.4.13 (2024-06-27)
+
+### Chore
+
+* chore(release): 1.4.13 [skip ci]
+
+## [1.4.13](https://github.com/svange/openbrain/compare/v1.4.12...v1.4.13) (2024-06-27)
+
+### Bug Fixes
+
+* fixing tools... ([4fcaec7](https://github.com/svange/openbrain/commit/4fcaec7623d787115817b31d536ae41a9c4a6028))
+* merging change into main ([93115d8](https://github.com/svange/openbrain/commit/93115d87da24ce0fbc4595ef4d581ea42145334b)) ([`267d2df`](https://github.com/svange/openbrain/commit/267d2df63853f4dbb7292f7b9dbd8e4f7d157ab2))
+
+### Fix
+
+* fix: merging change into main ([`93115d8`](https://github.com/svange/openbrain/commit/93115d87da24ce0fbc4595ef4d581ea42145334b))
 
 ## v1.4.13-dev.1 (2024-06-27)
 
