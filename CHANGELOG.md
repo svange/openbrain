@@ -1,3 +1,16 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.4.15](https://github.com/svange/openbrain/compare/v1.4.14...v1.4.15) (2024-06-27)
+
+
+### Bug Fixes
+
+* merging change into main ([dd678cb](https://github.com/svange/openbrain/commit/dd678cb56e798dc65ca54e9b8682f7798856040e))
+* removing context from callback_handler. ([900ce00](https://github.com/svange/openbrain/commit/900ce006b79ca2ad174e982710d7416a0e330f2e))
+
 # CHANGELOG
 
 ## v1.4.15-dev.1 (2024-06-27)
