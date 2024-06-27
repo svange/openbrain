@@ -13,7 +13,17 @@ All notable changes to this project will be documented in this file. See
 
 # CHANGELOG
 
+## v1.4.13-dev.2 (2024-06-27)
+
+### Fix
+
+* fix: adding context to deserialize funciton so that rehydrated agents have proper context in their tools upon session continuation. ([`9c554db`](https://github.com/svange/openbrain/commit/9c554db1fc5d335bb978d3ef0c60b3c68deb599d))
+
 ## v1.4.13-dev.1 (2024-06-27)
+
+### Chore
+
+* chore(release): release 1.4.13-dev.1 ([`be3902b`](https://github.com/svange/openbrain/commit/be3902b2834be1485b7ecee584954a3dd62c9e85))
 
 ### Fix
 
