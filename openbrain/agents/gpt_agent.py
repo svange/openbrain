@@ -153,7 +153,7 @@ class GptAgent:
         return agent_executor
 
     @classmethod
-    def deserialize(cls, state: dict[str, str | bytes]) -> GptAgent:
+    def deserialize(cls, state: dict[str, str | bytes], context: dict = None) -> GptAgent:
         """Reconstructs an agent from a serialized agent memory and initial config."""
         frozen_memory = state["frozen_agent_memory"]
         frozen_agent_config = state["frozen_agent_config"]
@@ -164,7 +164,11 @@ class GptAgent:
         agent_memory = pickle.loads(frozen_memory)
 
         initial_config = AgentConfig(**thawed_agent_config)
-        agent = GptAgent(agent_config=initial_config, memory=agent_memory)
+
+        if context:
+            agent = GptAgent(agent_config=initial_config, memory=agent_memory, initial_context=context)
+        else:
+            agent = GptAgent(agent_config=initial_config, memory=agent_memory)
         return agent
 
     def serialize(self) -> dict[str, str | bytes]:
