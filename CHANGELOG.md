@@ -1,29 +1,68 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v1.4.13-dev.1 (2024-06-27)
+
+### Fix
+
+* fix: fixing tools... ([`4fcaec7`](https://github.com/svange/openbrain/commit/4fcaec7623d787115817b31d536ae41a9c4a6028))
+
+## v1.4.12 (2024-06-26)
+
+### Chore
+
+* chore(release): 1.4.12 [skip ci]
 
 ## [1.4.12](https://github.com/svange/openbrain/compare/v1.4.11...v1.4.12) (2024-06-26)
 
-
 ### Bug Fixes
 
-* fixing tools... ([c746b8c](https://github.com/svange/openbrain/commit/c746b8c67461ef8799456b35ff42a2f9621ea9f2))
+* fixing tools... ([c746b8c](https://github.com/svange/openbrain/commit/c746b8c67461ef8799456b35ff42a2f9621ea9f2)) ([`2ad09c9`](https://github.com/svange/openbrain/commit/2ad09c9a7d1d0ca58ee89e1af67a9ed36c072652))
+
+### Fix
+
+* fix: fixing tools... ([`c746b8c`](https://github.com/svange/openbrain/commit/c746b8c67461ef8799456b35ff42a2f9621ea9f2))
+
+### Unknown
+
+* Merge branch &#39;refs/heads/dev&#39; ([`47d3218`](https://github.com/svange/openbrain/commit/47d3218133e3e7852679299c5baf4df5ac270ce0))
+
+## v1.4.11 (2024-06-26)
+
+### Chore
+
+* chore(release): 1.4.11 [skip ci]
 
 ## [1.4.11](https://github.com/svange/openbrain/compare/v1.4.10...v1.4.11) (2024-06-26)
 
-
 ### Bug Fixes
 
-* fixing tools... ([80f33ad](https://github.com/svange/openbrain/commit/80f33ad44fa61340584d7fa978853fe4d8d47e26))
+* fixing tools... ([80f33ad](https://github.com/svange/openbrain/commit/80f33ad44fa61340584d7fa978853fe4d8d47e26)) ([`8b901ce`](https://github.com/svange/openbrain/commit/8b901cebf463ce97683be38826276ece11c95272))
 
-# CHANGELOG
+### Unknown
+
+* Merge branch &#39;refs/heads/dev&#39; ([`0bbd246`](https://github.com/svange/openbrain/commit/0bbd246db1a87c7587fed0386ab748f7da8a53b5))
 
 ## v1.4.10-dev.2 (2024-06-26)
+
+### Chore
+
+* chore(release): release 1.4.10-dev.2 ([`ab50a35`](https://github.com/svange/openbrain/commit/ab50a35c0ad47fd0b364c08c8eafdb47d8a26845))
 
 ### Fix
 
 * fix: fixing tools... ([`80f33ad`](https://github.com/svange/openbrain/commit/80f33ad44fa61340584d7fa978853fe4d8d47e26))
+
+## v1.4.10 (2024-06-26)
+
+### Chore
+
+* chore(release): 1.4.10 [skip ci]
+
+## [1.4.10](https://github.com/svange/openbrain/compare/v1.4.9...v1.4.10) (2024-06-26)
+
+### Bug Fixes
+
+* fixing tools... ([4757349](https://github.com/svange/openbrain/commit/475734996b165936728f4eef4c3c354cc9c65b1d)) ([`1dfa712`](https://github.com/svange/openbrain/commit/1dfa712320ee9b650b2d0c211d2373d64d00ab54))
 
 ## v1.4.10-dev.1 (2024-06-26)
 
@@ -47,13 +86,6 @@ All notable changes to this project will be documented in this file. See
 ### Chore
 
 * chore(release): 1.4.9 [skip ci]
-
-## [1.4.10](https://github.com/svange/openbrain/compare/v1.4.9...v1.4.10) (2024-06-26)
-
-
-### Bug Fixes
-
-* fixing tools... ([4757349](https://github.com/svange/openbrain/commit/475734996b165936728f4eef4c3c354cc9c65b1d))
 
 ## [1.4.9](https://github.com/svange/openbrain/compare/v1.4.8...v1.4.9) (2024-06-26)
 
