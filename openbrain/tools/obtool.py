@@ -33,7 +33,7 @@ class OBTool:
     @classmethod
     def send_event(cls, event_detail: str, event_source: str = Defaults.OB_TOOL_EVENT_SOURCE.value) -> Any:
         """Send an event to eventbus."""
-        logger.debug(f"Sending lead to Lead Momentum: {event_detail}")
+        logger.info(f"Sending lead to Lead Momentum: {event_detail}")
 
         # Send event to eventbus
         event_bus_friendly_name = config.EVENTBUS_NAME
@@ -50,12 +50,13 @@ class OBTool:
         ]
         try:
             response = event_bus_client.put_events(Entries=entries)
-            print(response["Entries"])
-        except ParamValidationError:
+            logger.info(response["Entries"])
+        except ParamValidationError as e:
             if config.OB_MODE == Defaults.OB_MODE_LOCAL.value:
-                print(f"LOCAL_MODE: Can't send to CRM in local mode.")
+                logger.info(f"{e=}")
+                logger.info(f"LOCAL_MODE: Can't send to CRM in local mode.")
             else:
-                raise
+                raise e
 
         return response
 

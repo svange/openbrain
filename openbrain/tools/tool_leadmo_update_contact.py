@@ -49,7 +49,10 @@ class LeadmoUpdateContactTool(BaseTool, ContextAwareToolMixin):
             "ai_input": kwargs
         }
 
-        response = OBTool.send_event(event_source=TOOL_NAME, event_detail=json.dumps(event_detail))
+        event_detail_string = json.dumps(event_detail)
+        logger.info(f"event_detail_string: {event_detail_string}")
+
+        response = OBTool.send_event(event_source=TOOL_NAME, event_detail=event_detail_string)
 
         return response
 
