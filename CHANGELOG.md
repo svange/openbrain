@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.20](https://github.com/svange/openbrain/compare/v1.4.19...v1.4.20) (2024-06-28)
+
+
+### Bug Fixes
+
+* fixing tools... ([a66b780](https://github.com/svange/openbrain/commit/a66b780cbd34f4259c130bf9baaa8afe099cf4aa))
+
 ## [1.4.19](https://github.com/svange/openbrain/compare/v1.4.18...v1.4.19) (2024-06-28)
 
 
