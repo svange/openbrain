@@ -33,6 +33,6 @@ def get_api_key(location_id, leadmo_agent_table_name):
 
 def conditional_idempotent(func):
     persistence_layer = DynamoDBPersistenceLayer(table_name=os.getenv('IDEMPOTENCY_TABLE_NAME', 'ObIdempotencyTable-Dev'))
-    if os.getenv("DEPLOYED"):
+    if os.getenv("IDEMPOTENT"):
         return idempotent(persistence_store=persistence_layer)(func)
     return func
