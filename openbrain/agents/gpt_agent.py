@@ -185,7 +185,7 @@ class GptAgent:
     def handle_user_message(self, user_message: str, **kwargs) -> str:
         """Send message to agent"""
 
-        logger.info(f"{kwargs=}")
+        logger.debug(f"{kwargs=}")
 
 
         try:

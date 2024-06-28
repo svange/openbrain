@@ -34,11 +34,14 @@ class LeadmoUpdateContactTool(BaseTool, ContextAwareToolMixin):
     def _run(self, *args, **kwargs) -> str:
         # This seemingly does nothing. All the work is done in the callback handler. This function is here for
         # the metadata.
-        logger.info(f"args: {args}")
-        logger.info(f"kwargs: {kwargs}")
-        logger.info(f"dir(self): {dir(self)}")
+        logger.debug(f"args: {args}")
+        logger.debug(f"kwargs: {kwargs}")
+        tool_input = self.tool_input
 
-        tool_input = kwargs.get("tool_input")
+        tool_input_type = type(tool_input)
+        logger.info(f"tool_input_type: {tool_input_type}")
+        logger.info(f"tool_input: {tool_input}")
+
         context = literal_eval(self.tool_input)
 
         event_detail = {

@@ -43,7 +43,7 @@ class LeadmoCreateContactTool(BaseTool, ContextAwareToolMixin):
         logger.debug(f"dir(self): {dir(self)}")
 
         context = literal_eval(self.tool_input)
-        logger.info(f"Context: {context}")
+        logger.debug(f"Context: {context}")
         event_detail = {
             "context": context,
             "ai_input": kwargs
