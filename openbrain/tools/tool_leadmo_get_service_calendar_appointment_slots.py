@@ -57,7 +57,7 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
         populate_by_name = True
 
     name = TOOL_NAME
-    description = """Useful when you want need to know appointment slots are available for scheduling."""
+    description = """Useful when you want need to know appointment slots are available for scheduling. The output of this tool is a list of available appointment slots, for you to use in conversation."""
     args_schema: type[BaseModel] = LeadmoAvailableAppointmentSlotsAdaptor
     handle_tool_error = True
     verbose = True

@@ -27,6 +27,7 @@ class DefaultSettings(Enum):
                        "get_current_time",
                        "leadmo_get_simple_calendar_appointment_slots",
                        "leadmo_create_appointment",
+                       "leadmo_create_contact",
                        "tester"
                        ]
 

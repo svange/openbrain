@@ -38,7 +38,7 @@ def tester_agent_config(default_agent_config):
 
 @pytest.fixture
 def leadmo_tool_tester_agent_config():
-    LEADMO_TOOL_TESTER_AGENT_SYSTEM_MESSAGE = '''You are a tester, testing your ability to use any tools available to you. When asked to trigger a tool, you will trigger the tool, generating appropriate values for testing, and return the output of the tool.'''
+    LEADMO_TOOL_TESTER_AGENT_SYSTEM_MESSAGE = '''You are testing your ability to use any tools available. When asked to trigger a tool, you will trigger the tool, generating appropriate values for testing, and report the success or failure or the tool. If the tool is succesful, ensure that your response contains the word success. If the tool fails, ensure that your response contains the word fail.'''
     LEADMO_TOOL_TESTER_AGENT_ICEBREAKER = '''Ready to test!'''
 
     agent_config = AgentConfig()
@@ -121,20 +121,6 @@ class TestAgentTools:
         assert len(params_missing_in_protocol) == 0
         assert len(params_missing_in_handler) == 0
 
-    # @pytest.mark.tools
-    # def test_manual_send_to_crm_tool(
-    #     self, incoming_agent_config: AgentConfig, incoming_lead: Lead, event_bridge_client
-    # ):
-    #     """Send an event to the lead event stream."""
-    #
-    #     lead_event = LeadEvent(lead=incoming_lead, agent_config=incoming_agent_config)
-    #     response = send_event(lead_event=lead_event)
-    #
-    #     event_id = response["Entries"][0]["EventId"]
-    #     assert event_id is not None
-    #     assert isinstance(event_id, str)
-    #     assert response["ResponseMetadata"]["HTTPStatusCode"] == 200
-
     @pytest.mark.tools
     def test_tools_are_registered(self):
         """Test that the tools are registered."""
@@ -170,12 +156,23 @@ class TestAgentTools:
         assert "rambutan" in response
 
     @pytest.mark.tools
+    def test_leadmo_create_contact_tool(self, leadmo_tool_tester_agent_config):
+        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
+        response = agent.handle_user_message("Create a contact.")
+        assert response is not None
+        assert "success" in response.casefold()
+
+
+    @pytest.mark.tools
     def test_leadmo_update_contact_tool(self, leadmo_tool_tester_agent_config):
         initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
         agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
         response = agent.handle_user_message("Update the contact.")
         assert response is not None
+        assert "success" in response.casefold()
 
 
     @pytest.mark.tools
@@ -185,6 +182,8 @@ class TestAgentTools:
         agent = GptAgent(agent_config=tester_agent_config, initial_context=initial_context)
         response = agent.handle_user_message("Get the current time.")
         assert response is not None
+        current_year = datetime.datetime.now().year
+        assert str(current_year) in response.casefold()
 
     @pytest.mark.tools
     def test_get_simple_calendar_appointment_slots_tool(self, leadmo_tool_tester_agent_config):
@@ -196,8 +195,25 @@ class TestAgentTools:
 
         # get current_time from library
         current_time = datetime.datetime.now().isoformat()
-        response = agent.handle_user_message(f"It is currently {current_time}. What appointment times do I have available in 3 days?")
+        response = agent.handle_user_message(f"It is currently {current_time}. What appointment times do I have available in 3 days? If the tool triggerred successfully, ensure the word 'success' is in your response. If the tool fails, ensure the word 'success' is not in your respond, and instead, ensure the word failure is in your response.")
         assert response is not None
+        assert "success" in response.casefold()
+
+    def test_leadmo_create_appointment_tool(self, leadmo_tool_tester_agent_config):
+        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
+        response = agent.handle_user_message("Create an appointment.")
+        assert response is not None
+        assert "success" in response.casefold()
+
+    def test_leadmo_stop_conversation_tool(self, leadmo_tool_tester_agent_config):
+        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
+        response = agent.handle_user_message("Stop the conversation.")
+        assert response is not None
+        assert "success" in response.casefold()
 
     # @pytest.mark.tools
     # @pytest.mark.expected_failure

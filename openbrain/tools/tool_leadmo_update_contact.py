@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 import json
-from ast import literal_eval
-from typing import Any, Optional
+from typing import Any
 
 from langchain.tools.base import BaseTool
 from pydantic import BaseModel, Extra, Field
@@ -32,16 +31,7 @@ class LeadmoUpdateContactTool(BaseTool, ContextAwareToolMixin):
     verbose = True
 
     def _run(self, *args, **kwargs) -> str:
-        # This seemingly does nothing. All the work is done in the callback handler. This function is here for
-        # the metadata.
-        logger.debug(f"args: {args}")
-        logger.debug(f"kwargs: {kwargs}")
         tool_input = self.tool_input
-
-        tool_input_type = type(tool_input)
-        logger.info(f"tool_input_type: {tool_input_type}")
-        logger.info(f"tool_input: {tool_input}")
-
         context = json.loads(tool_input)
 
         event_detail = {

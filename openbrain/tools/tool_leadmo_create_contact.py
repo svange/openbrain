@@ -35,21 +35,18 @@ class LeadmoCreateContactTool(BaseTool, ContextAwareToolMixin):
     verbose = True
 
     def _run(self, *args, **kwargs) -> str:
-        # This seemingly does nothing. All the work is done in the callback handler. This function is here for
-        # the metadata.
-        logger.debug(f"self.tool_input: {self.tool_input}")
-        logger.debut(f"args: {args}")
-        logger.debug(f"kwargs: {kwargs}")
-        logger.debug(f"dir(self): {dir(self)}")
+        tool_input = self.tool_input
+        context = json.loads(tool_input)
 
-        context = literal_eval(self.tool_input)
-        logger.debug(f"Context: {context}")
         event_detail = {
             "context": context,
             "ai_input": kwargs
         }
 
-        response = OBTool.send_event(event_source=TOOL_NAME, event_detail=json.dump(event_detail))
+        event_detail_string = json.dumps(event_detail)
+        logger.info(f"event_detail_string: {event_detail_string}")
+
+        response = OBTool.send_event(event_source=TOOL_NAME, event_detail=event_detail_string)
 
         return response
 
