@@ -31,6 +31,10 @@ class LeadmoStopConversationAdaptor(BaseModel):
 
 # LangChain tool
 class LeadmoStopConversationTool(BaseTool, ContextAwareToolMixin):
+    class Config:
+        extra = Extra.allow
+        populate_by_name = True
+
     name = TOOL_NAME
     description = """Useful to signal that this conversation should end for one of the following reasons: natural end of conversation, abuse by the user, user responds with '1'."""
     args_schema: type[BaseModel] = LeadmoStopConversationAdaptor

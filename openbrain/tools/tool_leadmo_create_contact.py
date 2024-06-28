@@ -24,6 +24,10 @@ TOOL_NAME = "leadmo_create_contact"
 
 # LangChain tool
 class LeadmoCreateContactTool(BaseTool, ContextAwareToolMixin):
+    class Config:
+        extra = Extra.allow
+        populate_by_name = True
+
     name = TOOL_NAME
     description = """Useful when you want create a new contact in our system, based on learned details from the conversation."""
     args_schema: type[BaseModel] = LeadmoContactAdaptor

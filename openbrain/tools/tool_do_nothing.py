@@ -28,6 +28,10 @@ class DoNothingAdaptor(BaseModel):
 
 # LangChain tool
 class DoNothingTool(BaseTool, ContextAwareToolMixin):
+    class Config:
+        extra = Extra.allow
+        populate_by_name = True
+
     name = TOOL_NAME
     description = """Never useful."""
     args_schema: type[BaseModel] = DoNothingAdaptor

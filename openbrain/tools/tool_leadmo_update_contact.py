@@ -21,6 +21,10 @@ TOOL_NAME = "leadmo_update_contact"
 
 
 class LeadmoUpdateContactTool(BaseTool, ContextAwareToolMixin):
+    class Config:
+        extra = Extra.allow
+        populate_by_name = True
+
     name = TOOL_NAME
     description = """Useful when you want to update a user's information in our system, based on learned details from the conversation."""
     args_schema: type[BaseModel] = LeadmoContactAdaptor
@@ -35,8 +39,8 @@ class LeadmoUpdateContactTool(BaseTool, ContextAwareToolMixin):
         logger.info(f"dir(self): {dir(self)}")
 
         tool_input = kwargs.get("tool_input")
+        context = literal_eval(self.tool_input)
 
-        context = literal_eval(tool_input)
         event_detail = {
             "context": context,
             "ai_input": kwargs
