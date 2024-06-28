@@ -20,7 +20,7 @@ from openbrain.tools.callback_handler import CallbackHandler
 from openbrain.tools.toolbox import Toolbox
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 # from openbrain.util import config, Defaults
-from generator_leadmo_contact import generate_leadmo_contact, generate_ai_leadmo_contact
+from tests.generator_leadmo_contact import generate_leadmo_contact, generate_ai_leadmo_contact
 
 
 @pytest.fixture
