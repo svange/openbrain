@@ -4,7 +4,9 @@ import datetime
 import json
 from typing import Any, Optional
 
+import boto3
 import requests
+from botocore.exceptions import ClientError
 from dateutil.tz import tz
 from langchain.tools.base import BaseTool
 from pydantic import BaseModel, Extra, Field
@@ -23,6 +25,7 @@ LLS_API_URL = 'https://api.landlinescrubber.com/api/check_number'
 DEFAULT_ORIGIN = os.getenv('DEFAULT_ORIGIN', 'https://localhost:5173')
 IDEMPOTENCY_TABLE_NAME = os.getenv('IDEMPOTENCY_TABLE_NAME', 'ObIdempotencyTable-Dev')
 LEADMO_AGENT_TABLE_NAME = os.getenv("LEADMO_AGENT_TABLE_NAME", "LeadmoAgentTable-Dev")
+SECRET_NAME = os.getenv("SECRET_NAME", "ObSecrets-Dev")
 
 
 # INFRA_TOPIC_NAME = os.getenv('INFRA_TOPIC_NAME')
@@ -39,7 +42,31 @@ class LLSAdaptor(BaseModel):
 
 
 def get_lls_api_key():
-    raise NotImplementedError("get_lls_api_key is not implemented yet.")
+    # Get key value from secret 'lls_api_key' in the `OBSecrets' secret manager
+    global SECRET_NAME
+    secret_name = SECRET_NAME
+    region_name = "us-east-1"
+
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(
+        service_name='secretsmanager',
+        region_name=region_name
+    )
+
+    try:
+        get_secret_value_response = client.get_secret_value(
+            SecretId=secret_name
+        )
+    except ClientError as e:
+        # For a list of exceptions thrown, see
+        # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+        raise e
+
+    secret = get_secret_value_response['SecretString']
+    secret_dict = json.loads(secret)
+    lls_api_key = secret_dict["lls_api_key"]
+    return lls_api_key
 
 
 class LLSScrubberPhoneNumberTool(BaseTool, ContextAwareToolMixin):
