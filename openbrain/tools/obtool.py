@@ -7,7 +7,6 @@ from langchain.tools import BaseTool
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 from openbrain.util import logger, Defaults, config
 
-
 class OBTool:
     """A tool for GptAgents. Tools consist of the main langchain extended BaseTool and any callbacks needed to supplement"""
 
