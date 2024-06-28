@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.0](https://github.com/svange/openbrain/compare/v1.6.0...v1.7.0) (2024-06-28)
+
+
+### Features
+
+* chaing LeadmoAppointment and adaptor to use v1 api objects (changing fields) - removing ai's phone input. ([3219924](https://github.com/svange/openbrain/commit/3219924317283150e166bdcf3a1268a0314a4194))
+
 ## [1.6.0](https://github.com/svange/openbrain/compare/v1.5.0...v1.6.0) (2024-06-28)
 
 
