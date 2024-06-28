@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.0](https://github.com/svange/openbrain/compare/v1.4.26...v1.5.0) (2024-06-28)
+
+
+### Features
+
+* adding tools: leadmo_get_simple_calendar_appointment_slots, leadmo_create_appointment, get_current_time ([5ec2ee8](https://github.com/svange/openbrain/commit/5ec2ee84d0bf016761988f3618cdf90c2adfc279))
+
 ## [1.4.26](https://github.com/svange/openbrain/compare/v1.4.25...v1.4.26) (2024-06-28)
 
 
