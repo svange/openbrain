@@ -3,7 +3,8 @@ from typing import Optional
 from faker import Faker
 from pydantic import BaseModel, Field
 
-from openbrain.tools.models.model_leadmo_contact_adaptor import LeadmoContactAdaptor
+from openbrain.tools.models.model_leadmo_contact import LeadmoContactAdaptor
+
 
 class LeadmoContact(BaseModel):
     """Internal ORM representing LeadmoContact."""

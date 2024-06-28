@@ -13,24 +13,21 @@ from openbrain.tools.obtool import OBTool
 
 from openbrain.util import get_logger
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
-from openbrain.tools.models.model_leadmo_contact import LeadmoContactAdaptor
+from openbrain.tools.models.model_leadmo_appointment import LeadmoAppointmentAdaptor
 
 logger = get_logger()
 
-TOOL_NAME = "leadmo_create_contact"
-
-
-# Utility classes and functions
+TOOL_NAME = "leadmo_create_appointment"
 
 # LangChain tool
-class LeadmoCreateContactTool(BaseTool, ContextAwareToolMixin):
+class LeadmoCreateAppointmentTool(BaseTool, ContextAwareToolMixin):
     class Config:
         extra = Extra.allow
         populate_by_name = True
 
     name = TOOL_NAME
-    description = """Useful when you want create a new contact in our system, based on learned details from the conversation."""
-    args_schema: type[BaseModel] = LeadmoContactAdaptor
+    description = """Useful when you have negotiated an appointment time with the user and want to book the appointment."""
+    args_schema: type[BaseModel] = LeadmoAppointmentAdaptor
     handle_tool_error = True
     verbose = True
 
@@ -67,8 +64,8 @@ def on_tool_error(agent_config: AgentConfig = None, agent_input=None, *args, **k
     pass
 
 
-class OBToolLeadmoCreateContact(OBTool):
+class OBToolLeadmoCreateAppointment(OBTool):
     name: str = TOOL_NAME
-    tool: BaseTool = LeadmoCreateContactTool
+    tool: BaseTool = LeadmoCreateAppointmentTool
     on_tool_start: OBCallbackHandlerFunctionProtocol = on_tool_start
     on_tool_error: OBCallbackHandlerFunctionProtocol = on_tool_error

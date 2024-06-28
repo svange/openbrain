@@ -13,7 +13,7 @@ from openbrain.tools.obtool import OBTool
 
 from openbrain.util import get_logger
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
-from openbrain.tools.models.model_leadmo_contact_adaptor import LeadmoContactAdaptor
+from openbrain.tools.models.model_leadmo_contact import LeadmoContactAdaptor
 
 logger = get_logger()
 
@@ -42,7 +42,7 @@ class LeadmoUpdateContactTool(BaseTool, ContextAwareToolMixin):
         logger.info(f"tool_input_type: {tool_input_type}")
         logger.info(f"tool_input: {tool_input}")
 
-        context = literal_eval(self.tool_input)
+        context = json.loads(tool_input)
 
         event_detail = {
             "context": context,

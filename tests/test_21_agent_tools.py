@@ -1,7 +1,9 @@
 import contextlib
+import datetime
 # import datetime
 import importlib
 import inspect
+import os
 import pkgutil
 import sys
 from ast import literal_eval
@@ -28,7 +30,7 @@ def tester_agent_config(default_agent_config):
     profile_name = "tester"
     system_message = "You are being tested for your ability to use tools. Use the tools available to you when appropriate."
     ice_breaker = "Hello, I am a test agent."
-    tools = ["tester"]
+    tools = ["tester", "get_current_time"]
 
     agent_config = AgentConfig(profile_name=profile_name, system_message=system_message, ice_breaker=ice_breaker, tools=tools)
 
@@ -36,24 +38,20 @@ def tester_agent_config(default_agent_config):
 
 @pytest.fixture
 def leadmo_tool_tester_agent_config():
+    LEADMO_TOOL_TESTER_AGENT_SYSTEM_MESSAGE = '''You are a tester, testing your ability to use any tools available to you. When asked to trigger a tool, you will trigger the tool, generating appropriate values for testing, and return the output of the tool.'''
+    LEADMO_TOOL_TESTER_AGENT_ICEBREAKER = '''Ready to test!'''
+
     agent_config = AgentConfig()
-    agent_config.profile_name = "leadmo_update_tester"
-    agent_config.tools = ["leadmo_update_contact", "leadmo_create_contact", "leadmo_stop_conversation"]
+    agent_config.profile_name = "leadmo_tool_tester"
+    agent_config.tools = ["leadmo_update_contact", "leadmo_create_contact", "leadmo_stop_conversation", "leadmo_get_simple_calendar_appointment_slots", "leadmo_create_appointment"]
 
-    public_default_agent_config = AgentConfig()
-    LEADMO_AGENT_SYSTEM_MESSAGE = '''You are a tester, testing your ability to use any tools available to you. When asked to trigger a tool, you will trigger the tool, generating appropriate values for testing, and return the output of the tool.'''
+    agent_config.profile_name = 'leadmo_tool_tester'
+    agent_config.system_message = LEADMO_TOOL_TESTER_AGENT_SYSTEM_MESSAGE
+    agent_config.icebreaker = LEADMO_TOOL_TESTER_AGENT_ICEBREAKER
+    agent_config.executor_max_execution_time = 20
+    agent_config.executor_max_iterations = 5
 
-    LEADMO_AGENT_ICEBREAKER = '''Ready to test!'''
-    public_leadmo_agent_config = public_default_agent_config.to_dict()
-    public_leadmo_agent_config['profile_name'] = 'leadmo_tool_tester'
-    public_leadmo_agent_config['system_message'] = LEADMO_AGENT_SYSTEM_MESSAGE
-    public_leadmo_agent_config['icebreaker'] = LEADMO_AGENT_ICEBREAKER
-    public_leadmo_agent_config['executor_max_execution_time'] = 20
-    public_leadmo_agent_config['executor_max_iterations'] = 5
-    public_leadmo_agent_config = AgentConfig(**public_leadmo_agent_config)
-
-
-    return public_leadmo_agent_config
+    return agent_config
 
 @pytest.fixture
 def event_bridge_client():
@@ -180,7 +178,26 @@ class TestAgentTools:
         assert response is not None
 
 
+    @pytest.mark.tools
+    def test_get_current_time_tool(self, tester_agent_config):
+        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
+        agent = GptAgent(agent_config=tester_agent_config, initial_context=initial_context)
+        response = agent.handle_user_message("Get the current time.")
+        assert response is not None
+
+    @pytest.mark.tools
+    def test_get_simple_calendar_appointment_slots_tool(self, leadmo_tool_tester_agent_config):
+        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+        initial_context['api_key'] = os.getenv('DEV_LEADMO_BEARER_TOKEN')
+        initial_context['calendarId'] = 'asGgwlPqqu6s17W084uE'
+
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
+
+        # get current_time from library
+        current_time = datetime.datetime.now().isoformat()
+        response = agent.handle_user_message(f"It is currently {current_time}. What appointment times do I have available in 3 days?")
+        assert response is not None
 
     # @pytest.mark.tools
     # @pytest.mark.expected_failure

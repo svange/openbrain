@@ -24,6 +24,9 @@ class DefaultSettings(Enum):
                        "leadmo_stop_conversation",
                        "connect_with_agent",
                        "send_lead_to_crm",  # TODO get rid of this, it's only here to support a legacy name for this tool
+                       "get_current_time",
+                       "leadmo_get_simple_calendar_appointment_slots",
+                       "leadmo_create_appointment",
                        "tester"
                        ]
 
