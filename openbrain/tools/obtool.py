@@ -47,6 +47,7 @@ class OBTool:
                 "Time": datetime.datetime.now().isoformat(),
             }
         ]
+        logger.info(f"{entries=}")
         try:
             response = event_bus_client.put_events(Entries=entries)
             logger.info(response["Entries"])
