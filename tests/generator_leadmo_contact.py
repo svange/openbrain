@@ -91,7 +91,7 @@ def generate_leadmo_contact(try_to_break_shit: bool = False, contact_id: str = N
     if location_id:
         leadmo_contact_dict['locationId'] = location_id
 
-    leadmo_contact = LeadmoContact(**leadmo_contact_dict)
+    leadmo_contact = LeadmoContact(**leadmo_contact_dict).model_dump()
 
     return leadmo_contact
 
@@ -120,6 +120,6 @@ def generate_ai_leadmo_contact(try_to_break_shit: bool = False):
         'current_medications': meds
     }
 
-    leadmo_contact = LeadmoContactAdaptor(**leadmo_contact_dict)
+    leadmo_contact = LeadmoContactAdaptor(**leadmo_contact_dict).model_dump()
 
     return leadmo_contact

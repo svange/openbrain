@@ -20,6 +20,7 @@ from openbrain.tools.callback_handler import CallbackHandler
 from openbrain.tools.toolbox import Toolbox
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 # from openbrain.util import config, Defaults
+from generator_leadmo_contact import generate_leadmo_contact, generate_ai_leadmo_contact
 
 
 @pytest.fixture
@@ -34,17 +35,17 @@ def tester_agent_config(default_agent_config):
     return agent_config
 
 @pytest.fixture
-def leadmo_update_contact_agent_config():
+def leadmo_tool_tester_agent_config():
     agent_config = AgentConfig()
     agent_config.profile_name = "leadmo_update_tester"
-    agent_config.tools = ["leadmo_update_contact"]
+    agent_config.tools = ["leadmo_update_contact", "leadmo_create_contact", "leadmo_stop_conversation"]
 
     public_default_agent_config = AgentConfig()
-    LEADMO_AGENT_SYSTEM_MESSAGE = '''You are a helpful assistant tasked with chatting with users and updating their contact information. Your main objective is to gather the user's full name, date of birth, state of residence, email, and optionally a phone number while engaging them in conversation. You will ask for the user's information one item at a time. Once all of this information is gathered, you may update the user's contact information.'''
+    LEADMO_AGENT_SYSTEM_MESSAGE = '''You are a tester, testing your ability to use any tools available to you. When asked to trigger a tool, you will trigger the tool, generating appropriate values for testing, and return the output of the tool.'''
 
-    LEADMO_AGENT_ICEBREAKER = '''Hi! How can I help you with your health insurance today?'''
+    LEADMO_AGENT_ICEBREAKER = '''Ready to test!'''
     public_leadmo_agent_config = public_default_agent_config.to_dict()
-    public_leadmo_agent_config['profile_name'] = 'leadmo'
+    public_leadmo_agent_config['profile_name'] = 'leadmo_tool_tester'
     public_leadmo_agent_config['system_message'] = LEADMO_AGENT_SYSTEM_MESSAGE
     public_leadmo_agent_config['icebreaker'] = LEADMO_AGENT_ICEBREAKER
     public_leadmo_agent_config['executor_max_execution_time'] = 20
@@ -171,11 +172,11 @@ class TestAgentTools:
         assert "rambutan" in response
 
     @pytest.mark.tools
-    def test_leadmo_update_contact_tool(self, leadmo_update_contact_agent_config):
+    def test_leadmo_update_contact_tool(self, leadmo_tool_tester_agent_config):
+        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        initial_context = literal_eval("{'agent_config': 'woxom', 'client_id': 'public', 'reset': 'false', 'message': 'null', 'location_id': 'HbTkOpUVUXtrMQ5wkwxD', 'contact_id': '8LDRBvYKbVyhXymqMurF', 'firstName': 'Harry', 'last_name': 'Potter', 'name': 'Harry Potter', 'phone': '(619) 410-3847', 'email': '', 'address1': 'undefined', 'city': '', 'state': 'undefined', 'country': 'US', 'postalCode': 'undefined', 'companyName': '', 'medications': 'null', 'dateOfBirth': ''}")
-        agent = GptAgent(agent_config=leadmo_update_contact_agent_config, initial_context=initial_context)
-        response = agent.handle_user_message("Hello, My date of birth is April 1, 2010.")
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
+        response = agent.handle_user_message("Update the contact.")
         assert response is not None
 
 
