@@ -21,7 +21,7 @@ from aws_lambda_powertools import Logger, Tracer
 from dateutil import parser
 
 
-LLS_API_URL = 'https://rest.gohighlevel.com/v1/appointments/slots/'
+LEADMO_API_V1_GET_APPOINTMENT_SLOTS_URL = 'https://rest.gohighlevel.com/v1/appointments/slots/'
 
 DEFAULT_ORIGIN = os.getenv('DEFAULT_ORIGIN', 'https://localhost:5173')
 IDEMPOTENCY_TABLE_NAME = os.getenv('IDEMPOTENCY_TABLE_NAME', 'ObIdempotencyTable-Dev')
@@ -65,7 +65,7 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
     def _run(self, *args, **kwargs) -> str:
         global DEFAULT_ORIGIN
         global IDEMPOTENCY_TABLE_NAME
-        global LLS_API_URL
+        global LEADMO_API_V1_GET_APPOINTMENT_SLOTS_URL
         global LEADMO_AGENT_TABLE_NAME
 
         context = json.loads(self.tool_input)
