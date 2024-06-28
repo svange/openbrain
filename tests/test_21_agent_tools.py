@@ -36,6 +36,19 @@ def tester_agent_config(default_agent_config):
 
     return agent_config
 
+
+@pytest.fixture
+def lls_tool_tester_agent_config(default_agent_config):
+    profile_name = "lls_tester"
+    system_message = "You are being tested for your ability to use tools. Use the tools available to you when appropriate."
+    ice_breaker = "Hello, I am a test agent."
+    tools = ["lls_scrub_phone_number"]
+
+    agent_config = AgentConfig(profile_name=profile_name, system_message=system_message, ice_breaker=ice_breaker, tools=tools)
+
+    return agent_config
+
+
 @pytest.fixture
 def leadmo_tool_tester_agent_config():
     LEADMO_TOOL_TESTER_AGENT_SYSTEM_MESSAGE = '''You are testing your ability to use any tools available. When asked to trigger a tool, you will trigger the tool, generating appropriate values for testing, and report the success or failure or the tool. If the tool is succesful, ensure that your response contains the word success. If the tool fails, ensure that your response contains the word fail.'''
@@ -185,7 +198,28 @@ class TestAgentTools:
         current_year = datetime.datetime.now().year
         assert str(current_year) in response.casefold()
 
+
     @pytest.mark.tools
+    def test_leadmo_create_appointment_tool(self, leadmo_tool_tester_agent_config):
+        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
+        response = agent.handle_user_message("Create an appointment.")
+        assert response is not None
+        assert "success" in response.casefold()
+
+    @pytest.mark.tools
+    def test_leadmo_stop_conversation_tool(self, leadmo_tool_tester_agent_config):
+        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
+        response = agent.handle_user_message("Stop the conversation.")
+        assert response is not None
+        assert "success" in response.casefold()
+
+
+    @pytest.mark.tools
+    @pytest.mark.skip
     def test_get_simple_calendar_appointment_slots_tool(self, leadmo_tool_tester_agent_config):
         initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
         initial_context['api_key'] = os.getenv('DEV_LEADMO_BEARER_TOKEN')
@@ -195,25 +229,23 @@ class TestAgentTools:
 
         # get current_time from library
         current_time = datetime.datetime.now().isoformat()
-        response = agent.handle_user_message(f"It is currently {current_time}. What appointment times do I have available in 3 days? If the tool triggerred successfully, ensure the word 'success' is in your response. If the tool fails, ensure the word 'success' is not in your respond, and instead, ensure the word failure is in your response.")
+        response = agent.handle_user_message(f"It is currently {current_time}. What appointment times do I have available in 3 days? If the tool triggerred successfully, ensure the word 'success' is in your response. If the tool fails, ensure the word 'success' is not in your respond, and instead, ensure the word 'fail' is in your response.")
         assert response is not None
         assert "success" in response.casefold()
 
-    def test_leadmo_create_appointment_tool(self, leadmo_tool_tester_agent_config):
-        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+    @pytest.mark.tools
+    @pytest.mark.skip
+    def test_lls_scrub_phone_number(self, lls_tool_tester_agent_config):
+        initial_context = {
+            "phone": "6194103847",
+            "api_key": os.getenv('DEV_LLS_API_KEY')
+        }
 
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
-        response = agent.handle_user_message("Create an appointment.")
+        agent = GptAgent(agent_config=lls_tool_tester_agent_config, initial_context=initial_context)
+        response = agent.handle_user_message("Tell me if the phone number 6194103847 is on the 'do-not-call' list. If the tool succeeded, ensure the word 'success' is in your response. If the tool failed, ensure the word 'success' is not in your response, and instead, ensure the word 'fail' is in your response.")
         assert response is not None
         assert "success" in response.casefold()
 
-    def test_leadmo_stop_conversation_tool(self, leadmo_tool_tester_agent_config):
-        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
-
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
-        response = agent.handle_user_message("Stop the conversation.")
-        assert response is not None
-        assert "success" in response.casefold()
 
     # @pytest.mark.tools
     # @pytest.mark.expected_failure

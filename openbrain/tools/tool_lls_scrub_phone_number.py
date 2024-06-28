@@ -16,12 +16,9 @@ from openbrain.tools.obtool import OBTool
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 
 import os
-from openbrain.tools.util_leadmo_tools import get_api_key
 from aws_lambda_powertools import Logger, Tracer
-from dateutil import parser
 
-
-LLS_API_URL = 'https://rest.gohighlevel.com/v1/appointments/slots/'
+LLS_API_URL = 'https://api.landlinescrubber.com/api/check_number'
 
 DEFAULT_ORIGIN = os.getenv('DEFAULT_ORIGIN', 'https://localhost:5173')
 IDEMPOTENCY_TABLE_NAME = os.getenv('IDEMPOTENCY_TABLE_NAME', 'ObIdempotencyTable-Dev')
@@ -32,33 +29,27 @@ LEADMO_AGENT_TABLE_NAME = os.getenv("LEADMO_AGENT_TABLE_NAME", "LeadmoAgentTable
 tracer = Tracer()  # Sets service name from env var
 logger = Logger()
 
-TOOL_NAME = "leadmo_get_simple_calendar_appointment_slots"
+TOOL_NAME = "lls_scrub_phone_number"
 
 
 # Utility classes and functions
-class LeadmoAvailableAppointmentSlotsAdaptor(BaseModel):
-    """Adaptor class for Lead Momentum get available appointment slots tool."""
-    class Config:
-        extra = Extra.allow
-        populate_by_name = True
-        validate_assignment = True
-
-    # locationId: str
-    # api_key: str
-    startTime: str = Field(..., description="Start time for your query in ISO format. You only want the blocked slots after this time.")
-    endTime: str = Field(..., description="End time for your query in ISO format. You only want the blocked slots before this time.")
-    timezone: str = Field(..., description="Timezone for the query. If not provided, the default timezone will be used.")
+class LLSAdaptor(BaseModel):
+    """Adaptor class for Landline Scrubber tool."""
+    phone: str = Field(..., description="Phone number to use for query")
 
 
-# LangChain tool
-class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixin):
+def get_lls_api_key():
+    raise NotImplementedError("get_lls_api_key is not implemented yet.")
+
+
+class LLSScrubberPhoneNumberTool(BaseTool, ContextAwareToolMixin):
     class Config:
         extra = Extra.allow
         populate_by_name = True
 
     name = TOOL_NAME
-    description = """Useful when you want need to know appointment slots are available for scheduling. The output of this tool is a list of available appointment slots, for you to use in conversation."""
-    args_schema: type[BaseModel] = LeadmoAvailableAppointmentSlotsAdaptor
+    description = """Useful when you want need to know if a phone number is on the 'Do Not Call List', or if you want to know if a phone number is a landline or mobile number."""
+    args_schema: type[BaseModel] = LLSAdaptor
     handle_tool_error = True
     verbose = True
 
@@ -69,26 +60,12 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
         global LEADMO_AGENT_TABLE_NAME
 
         context = json.loads(self.tool_input)
-
-        location_id = context.get("locationId")
-        calendar_id = context.get("calendarId")
+        phone = kwargs.get("phone", None)
         api_key = context.get("api_key", None)
-        timezone = kwargs.get("timezone", 'UTC')
-        standardized_tz = tz.gettz(timezone)
-
-        start_time_iso = kwargs.get("startTime")
-        end_time_iso = kwargs.get("endTime")
-
-        # convert to epoch
-        start_time = parser.parse(start_time_iso).astimezone(standardized_tz)
-        end_time = parser.parse(end_time_iso).astimezone(standardized_tz)
-
-        start_time_epoch = int(start_time.timestamp() * 1000)
-        end_time_epoch = int(end_time.timestamp() * 1000)
 
         try:
             if not api_key:
-                api_key = get_api_key(location_id, LEADMO_AGENT_TABLE_NAME)
+                api_key = get_lls_api_key()
         except Exception as e:
             logger.error(f"Exception while getting API key: {e}")
             raise e
@@ -96,20 +73,15 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
         headers = {
             "Content-Type": "application/json",
             "Origin": DEFAULT_ORIGIN,
-            "Authorization": f'Bearer {api_key}'
         }
 
         query_params = {
-            'calendarId': calendar_id,
-            'startDate': str(start_time_epoch),
-            'endDate': str(end_time_epoch)
+            'p': phone,
+            'k': api_key
         }
-        if timezone:
-            query_params['timezone'] = timezone
-
         query_params_str = '&'.join([f'{k}={v}' for k, v in query_params.items()])
 
-        url = LEADMO_API_V1_GET_APPOINTMENT_SLOTS_URL + '?' + query_params_str
+        url = LLS_API_URL + '?' + query_params_str
 
         try:
 
@@ -117,12 +89,10 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
             response = api_response.json()
 
         except Exception as e:
-            logger.info("Failed to get info from Lead Momentum.")
+            logger.info("Failed to get info from Landline Scrubber.")
             raise e
 
-
         return response
-
 
     def _arun(self, ticker: str):
         raise NotImplementedError(f"{TOOL_NAME} does not support async")
@@ -137,8 +107,8 @@ def on_tool_error(agent_config: AgentConfig = None, agent_input=None, *args, **k
     pass
 
 
-class OBToolLeadmoGetSimpleCalendarAppointmentSlots(OBTool):
+class OBToolLLSScrubPhoneNumberTool(OBTool):
     name: str = TOOL_NAME
-    tool: BaseTool = LeadmoGetSimpleCalendarAppointmentSlotsTool
+    tool: BaseTool = LLSScrubberPhoneNumberTool
     on_tool_start: OBCallbackHandlerFunctionProtocol = on_tool_start
     on_tool_error: OBCallbackHandlerFunctionProtocol = on_tool_error

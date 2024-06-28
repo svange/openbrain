@@ -29,6 +29,7 @@ class Toolbox:  # invoker
         "get_current_time": "OBToolGetCurrentTime",
         "leadmo_get_simple_calendar_appointment_slots": "OBToolLeadmoGetSimpleCalendarAppointmentSlots",
         "leadmo_create_appointment": "OBToolLeadmoCreateAppointment",
+        "lls_scrub_phone_number": "OBToolLLSScrubPhoneNumberTool",
         "send_lead_to_crm": "OBToolLeadmoCreateContact", # TODO: get rid of this, it's only here to support a legacy name for this tool
 
     }

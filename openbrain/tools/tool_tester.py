@@ -7,7 +7,6 @@ from typing import Any
 from langchain.tools.base import BaseTool
 from pydantic import BaseModel, Extra
 from openbrain.orm.model_agent_config import AgentConfig
-from openbrain.tools.models.context_aware_tool import ContextAwareToolMixin
 from openbrain.tools.obtool import OBTool
 
 from openbrain.util import get_logger
