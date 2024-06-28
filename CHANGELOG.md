@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.0](https://github.com/svange/openbrain/compare/v1.7.1...v1.8.0) (2024-06-28)
+
+
+### Features
+
+* adding lls tool (needs work to get secret API key in place. ([b21db7b](https://github.com/svange/openbrain/commit/b21db7b0c1ee0af8d78576071392b6f5512a8dc7))
+
 ## [1.7.1](https://github.com/svange/openbrain/compare/v1.7.0...v1.7.1) (2024-06-28)
 
 
