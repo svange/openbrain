@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.0](https://github.com/svange/openbrain/compare/v1.5.0...v1.6.0) (2024-06-28)
+
+
+### Features
+
+* chaing LeadmoAppointment and adaptor to use v1 api objects (changing fields) ([dedd5a2](https://github.com/svange/openbrain/commit/dedd5a2e9d46fb66b4d0e4653a32a53c022ab473))
+
 ## [1.5.0](https://github.com/svange/openbrain/compare/v1.4.26...v1.5.0) (2024-06-28)
 
 
