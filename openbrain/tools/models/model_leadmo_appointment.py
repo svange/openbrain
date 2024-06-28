@@ -9,7 +9,7 @@ class LeadmoAppointmentAdaptor(BaseModel):
     # title: str = Field(..., description="The title of the appointment.")
     # appointmentLocation: str = Field(..., description="The location of the appointment. This can be 'zoom', 'phone', 'in-person', etc.")
     #
-    phone: str = Field(..., description="The phone number of the contact for whom the appointment is being scheduled. Example: +1 888-888-8888")
+    # phone: str = Field(..., description="The phone number of the contact for whom the appointment is being scheduled. Example: +1 888-888-8888")
     selectedSlot: str = Field(..., description="The time slot of the appointment. Example: 2021-02-05T11:00:00+05:30")
     selectedTimezone: str = Field(..., description="The timezone of the appointment. Example: Asia/Calcutta")
     title: str = Field(..., description="The title of the appointment. Example: Best Event")
