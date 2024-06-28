@@ -1,4 +1,9 @@
+import os
+
 import boto3
+from aws_lambda_powertools.utilities.idempotency import idempotent, DynamoDBPersistenceLayer
+
+
 def get_api_key(location_id, leadmo_agent_table_name):
     """Get API key from the database."""
 
@@ -25,3 +30,9 @@ def get_api_key(location_id, leadmo_agent_table_name):
             f"Failed to find API key: {location_id=}"
         )
     return api_key
+
+def conditional_idempotent(func):
+    persistence_layer = DynamoDBPersistenceLayer(table_name=os.getenv('IDEMPOTENCY_TABLE_NAME', 'ObIdempotencyTable-Dev'))
+    if os.getenv("DEPLOYED"):
+        return idempotent(persistence_store=persistence_layer)(func)
+    return func
