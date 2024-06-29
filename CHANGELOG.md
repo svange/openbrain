@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.0](https://github.com/svange/openbrain/compare/v1.11.0...v1.12.0) (2024-06-29)
+
+
+### Features
+
+* adding debug statements ([10efd2c](https://github.com/svange/openbrain/commit/10efd2c3029f27d64b5a89a2701ab2feb2bc23d9))
+
 ## [1.11.0](https://github.com/svange/openbrain/compare/v1.10.0...v1.11.0) (2024-06-29)
 
 
