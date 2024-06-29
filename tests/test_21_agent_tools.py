@@ -193,7 +193,7 @@ class TestAgentTools:
         initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
         agent = GptAgent(agent_config=tester_agent_config, initial_context=initial_context)
-        response = agent.handle_user_message("Get the current time.")
+        response = agent.handle_user_message("Get the current year.")
         assert response is not None
         current_year = datetime.datetime.now().year
         assert str(current_year) in response.casefold()
