@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.0](https://github.com/svange/openbrain/compare/v1.12.0...v1.13.0) (2024-06-29)
+
+
+### Features
+
+* adding time to initial message to create agent. ([6597d1a](https://github.com/svange/openbrain/commit/6597d1a5b851d4a5f2e167d2e88124e8c2083159))
+
 ## [1.12.0](https://github.com/svange/openbrain/compare/v1.11.0...v1.12.0) (2024-06-29)
 
 
