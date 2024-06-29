@@ -47,7 +47,7 @@ class LeadmoAvailableAppointmentSlotsAdaptor(BaseModel):
     # api_key: str
     startTime: str = Field(..., description="Start time for your query in ISO format. You only want the blocked slots after this time.")
     endTime: str = Field(..., description="End time for your query in ISO format. You only want the blocked slots before this time.")
-    timezone: str = Field(..., description="Timezone for the query. If not provided, the default timezone will be used.")
+    timezone: str = Field(..., description="Timezone for the query. If not provided, UTC will be used.")
 
 
 # LangChain tool
@@ -67,6 +67,14 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
         global IDEMPOTENCY_TABLE_NAME
         global LEADMO_API_V1_GET_APPOINTMENT_SLOTS_URL
         global LEADMO_AGENT_TABLE_NAME
+
+        logger.info(f"Running {TOOL_NAME} tool.")
+        logger.info(f"Tool input: {self.tool_input}")
+        logger.info(f"{kwargs=}")
+        logger.info(f"{DEFAULT_ORIGIN=}")
+        logger.info(f"{IDEMPOTENCY_TABLE_NAME=}")
+        logger.info(f"{LEADMO_API_V1_GET_APPOINTMENT_SLOTS_URL=}")
+        logger.info(f"{LEADMO_AGENT_TABLE_NAME=}")
 
         context = json.loads(self.tool_input)
 
