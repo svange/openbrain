@@ -68,31 +68,36 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
         global LEADMO_API_V1_GET_APPOINTMENT_SLOTS_URL
         global LEADMO_AGENT_TABLE_NAME
 
-        logger.info(f"Running {TOOL_NAME} tool.")
         logger.info(f"Tool input: {self.tool_input}")
         logger.info(f"{kwargs=}")
-        logger.info(f"{DEFAULT_ORIGIN=}")
-        logger.info(f"{IDEMPOTENCY_TABLE_NAME=}")
-        logger.info(f"{LEADMO_API_V1_GET_APPOINTMENT_SLOTS_URL=}")
-        logger.info(f"{LEADMO_AGENT_TABLE_NAME=}")
 
-        context = json.loads(self.tool_input)
+        try:
+            context = json.loads(self.tool_input)
+            location_id = context.get("locationId")
+            calendar_id = context.get("calendarId")
+            api_key = context.get("api_key", None)
+            timezone = kwargs.get("timezone", 'UTC')
 
-        location_id = context.get("locationId")
-        calendar_id = context.get("calendarId")
-        api_key = context.get("api_key", None)
-        timezone = kwargs.get("timezone", 'UTC')
-        standardized_tz = tz.gettz(timezone)
+        except Exception as e:
+            logger.error(f"Exception while getting context: {e}")
+            raise e
 
-        start_time_iso = kwargs.get("startTime")
-        end_time_iso = kwargs.get("endTime")
+        try:
+            standardized_tz = tz.gettz(timezone)
 
-        # convert to epoch
-        start_time = parser.parse(start_time_iso).astimezone(standardized_tz)
-        end_time = parser.parse(end_time_iso).astimezone(standardized_tz)
+            start_time_iso = kwargs.get("startTime")
+            end_time_iso = kwargs.get("endTime")
 
-        start_time_epoch = int(start_time.timestamp() * 1000)
-        end_time_epoch = int(end_time.timestamp() * 1000)
+            # convert to epoch
+            start_time = parser.parse(start_time_iso).astimezone(standardized_tz)
+            end_time = parser.parse(end_time_iso).astimezone(standardized_tz)
+
+            start_time_epoch = int(start_time.timestamp() * 1000)
+            end_time_epoch = int(end_time.timestamp() * 1000)
+        except Exception as e:
+            logger.error(f"Exception while converting time to epoch: {e}")
+            raise e
+
 
         try:
             if not api_key:
@@ -127,8 +132,6 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
         except Exception as e:
             logger.info("Failed to get info from Lead Momentum.")
             raise e
-
-
         return response
 
 
