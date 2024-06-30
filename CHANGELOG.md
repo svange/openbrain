@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.0](https://github.com/svange/openbrain/compare/v1.16.0...v1.17.0) (2024-06-30)
+
+
+### Features
+
+* enabling timezone in get_current_time tool. ([8eb2198](https://github.com/svange/openbrain/commit/8eb2198618ad77239a60ac28fe4a357446d67bc6))
+
 ## [1.16.0](https://github.com/svange/openbrain/compare/v1.15.0...v1.16.0) (2024-06-30)
 
 
