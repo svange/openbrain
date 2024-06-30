@@ -30,6 +30,7 @@ class Toolbox:  # invoker
         "leadmo_get_simple_calendar_appointment_slots": "OBToolLeadmoGetSimpleCalendarAppointmentSlots",
         "leadmo_create_appointment": "OBToolLeadmoCreateAppointment",
         "lls_scrub_phone_number": "OBToolLLSScrubPhoneNumberTool",
+        "leadmo_get_contact_info_from_context": "OBToolLeadmoGetContactInfoFromContext",
         "send_lead_to_crm": "OBToolLeadmoCreateContact", # TODO: get rid of this, it's only here to support a legacy name for this tool
 
     }
@@ -69,7 +70,7 @@ class Toolbox:  # invoker
                 self.register_obtool(obtool)
         else:
             # add the "do nothing" tool
-            obtool = self.available_tools["OBToolDoNothing"]
+            obtool = self.available_tools["OBToolGetCurrentTime"]
             self.callback_handler.register_ob_tool(obtool)
             self.register_obtool(obtool)
 

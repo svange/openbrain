@@ -29,6 +29,7 @@ class DefaultSettings(Enum):
                        "leadmo_create_appointment",
                        "leadmo_create_contact",
                        "lls_scrub_phone_number",
+                       "leadmo_get_contact_info_from_context",
                        "tester"
                        ]
 

@@ -31,7 +31,7 @@ class TestAgent:
 
         gpt_agent = GptAgent(incoming_agent_config)
         assert gpt_agent.tools is not None
-        assert getattr(gpt_agent.tools[0], 'name') == 'do_nothing'
+        assert getattr(gpt_agent.tools[0], 'name') == 'get_current_time'
         assert len(gpt_agent.tools) == 1
         assert True
 
