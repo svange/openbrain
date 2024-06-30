@@ -29,7 +29,7 @@ class LeadmoGetContactInfoFromContextTool(BaseTool, ContextAwareToolMixin):
         extra = Extra.allow
 
     name = TOOL_NAME
-    description = """Useful when you need to know the information our Customer Relations Management system has on our customer."""
+    description = """Useful when you need to know the information our Customer Relations Management system has on our customer. The context is intormation about the customer from the CRM."""
     args_schema: type[BaseModel] = LeadmoGetContactInfoFromContextAdaptor
     handle_tool_error = True
     verbose = True
