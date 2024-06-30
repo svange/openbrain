@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.0](https://github.com/svange/openbrain/compare/v1.15.0...v1.16.0) (2024-06-30)
+
+
+### Features
+
+* added tool leadmo_get_contact_information_from_context ([632bab4](https://github.com/svange/openbrain/commit/632bab4a4f337c6062215f90a40b45d928a959e9))
+
 ## [1.15.0](https://github.com/svange/openbrain/compare/v1.14.0...v1.15.0) (2024-06-30)
 
 
