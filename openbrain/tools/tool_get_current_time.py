@@ -21,7 +21,7 @@ TOOL_NAME = "get_current_time"
 # Utility classes and functions
 class TimeRequestAdapter(BaseModel):
     """The schema for the tool's input."""
-    # timezone: Optional[str] = Field(default="UTC", description="The timezone for your query.")
+    timezone: Optional[str] = Field(default="UTC", description="The timezone for your query.")
 
 
 # LangChain tool
