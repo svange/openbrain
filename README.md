@@ -1,5 +1,5 @@
 # OpenBrain
-![ci status](https://github.com/svange/openbrain/actions/workflows/pipeline.yml/badge.svg?branch=main)
+![ci status](https://github.com/svange/openbrain/actions/workflows/pipeline-prod.yml/badge.svg?branch=main)
 ![PyPI - Version](https://img.shields.io/pypi/v/openbrain)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
