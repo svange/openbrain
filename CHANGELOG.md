@@ -16,6 +16,20 @@
 
 * chore(release): 1.17.0 [skip ci]
 
+## [1.19.0](https://github.com/svange/openbrain/compare/v1.18.0...v1.19.0) (2024-07-01)
+
+
+### Features
+
+* Fix CI badge ([5b53977](https://github.com/svange/openbrain/commit/5b53977df8cabc6c1f9b10f52a48f2132f4d078d))
+
+## [1.18.0](https://github.com/svange/openbrain/compare/v1.17.0...v1.18.0) (2024-07-01)
+
+
+### Features
+
+* Documentation update. Re-enabled some tool tests. ([c3a8016](https://github.com/svange/openbrain/commit/c3a80167df9228def5ffb9e967570601ddc99ead))
+
 ## [1.17.0](https://github.com/svange/openbrain/compare/v1.16.0...v1.17.0) (2024-06-30)
 
 ### Features
