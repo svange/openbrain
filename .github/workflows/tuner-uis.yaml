@@ -1,0 +1,6 @@
+name: Push Gradio to EC2
+
+on:
+  workflow_dispatch:
+
+jobs:

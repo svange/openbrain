@@ -1,0 +1,12 @@
+[Unit]
+Description=OpenBrain Tuner
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -m openbrain.app
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 
@@ -6,29 +7,34 @@ import gradio as gr
 import requests
 from dotenv import load_dotenv
 
+
+load_dotenv('.')
+GRADIO_INFRA_STACK_NAME = os.environ.get("GRADIO_INFRA_STACK_NAME", None)
+
+if GRADIO_INFRA_STACK_NAME:
+    os.environ["INFRA_STACK_NAME"] = GRADIO_INFRA_STACK_NAME
+
+import openbrain.orm.model_agent_config
 from openbrain.agents.gpt_agent import GptAgent
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.orm.model_chat_message import ChatMessage
 from openbrain.orm.model_chat_session import ChatSession
-# from openbrain.orm.model_lead import Lead
 from openbrain.util import config, Defaults
 
-
-load_dotenv()
 
 OB_MODE = config.OB_MODE
 CHAT_ENDPOINT = os.environ.get("OB_API_URL", "") + "/chat"
 
 DEFAULT_ORIGIN = os.environ.get("DEFAULT_ORIGIN", "https://localhost:5173")
-OB_PROVIDER_API_KEY = os.environ.get("OB_PROVIDER_API_KEY", "")
-
-
+OB_PROVIDER_API_KEY = os.environ.get("GRADIO_OB_PROVIDER_API_KEY", "")
+GRADIO_PASSWORD = os.environ.get("GRADIO_PASSWORD", None)
 DEFAULT_CLIENT_ID = Defaults.DEFAULT_CLIENT_ID.value
 DEFAULT_PROFILE_NAME = Defaults.DEFAULT_PROFILE_NAME.value
-PORT = int(os.environ.get("GRADIO_PORT", 7861))
+PORT = int(os.environ.get("GRADIO_PORT", 7860))
 
 if OB_MODE == Defaults.OB_MODE_LOCAL.value:
     from openbrain.orm.model_common_base import InMemoryDb
+
 
 logging.basicConfig(filename="app.log", encoding="utf-8", level=logging.DEBUG)
 
@@ -46,7 +52,6 @@ def chat(message, chat_history, _profile_name, session_state, _client_id):
         agent_state = {
             "frozen_agent_memory": chat_session.frozen_agent_memory,
             "frozen_agent_config": chat_session.frozen_agent_config,
-            "frozen_lead": chat_session.frozen_lead,
         }
         gpt_agent = GptAgent.deserialize(state=agent_state)
 
@@ -54,14 +59,12 @@ def chat(message, chat_history, _profile_name, session_state, _client_id):
 
         frozen_agent_memory = gpt_agent.serialize()["frozen_agent_memory"]
         frozen_agent_config = gpt_agent.serialize()["frozen_agent_config"]
-        frozen_lead = gpt_agent.serialize()["frozen_lead"]
 
         chat_session = ChatSession(
             session_id=session_id,
             client_id=_client_id,
             frozen_agent_memory=frozen_agent_memory,
             frozen_agent_config=frozen_agent_config,
-            frozen_lead=frozen_lead,
         )
         chat_session.save()
 
@@ -101,6 +104,7 @@ def reset(
     _message,
     chat_history,
     session_state,
+    tools
 ):
     chat_message = ChatMessage(
         client_id=_client_id,
@@ -113,17 +117,14 @@ def reset(
     if OB_MODE == Defaults.OB_MODE_LOCAL.value:
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
-        # lead = Lead(client_id=_client_id)
         gpt_agent = GptAgent(agent_config=agent_config)
 
         frozen_agent_memory = gpt_agent.serialize()["frozen_agent_memory"]
         frozen_agent_config = gpt_agent.serialize()["frozen_agent_config"]
-        # frozen_lead = gpt_agent.serialize()["frozen_lead"]
         chat_session = ChatSession(
             client_id=_client_id,
             frozen_agent_memory=frozen_agent_memory,
             frozen_agent_config=frozen_agent_config,
-            # frozen_lead=frozen_lead,
         )
         session_id = chat_session.session_id
         session_state["session_id"] = session_id
@@ -165,6 +166,7 @@ def save(
     _promptlayer_api_key,
     client_id,
     outgoing_webhook_url,
+    tools
 ):
     if _profile_name.strip() == "":
         gr.Error("Personalization key can't be blank.")
@@ -187,6 +189,7 @@ def save(
         promptlayer_api_key=str(_promptlayer_api_key),
         client_id=str(client_id),
         outgoing_webhook_url=str(outgoing_webhook_url),
+        tools=tools,
     )
 
     # Upload the preferences to the DynamoDB database
@@ -203,7 +206,7 @@ def load(_profile_name: str, _client_id: str):
     if not _client_id:
         _client_id = DEFAULT_CLIENT_ID
     retrieved_agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
-
+    _tools = retrieved_agent_config.tools
     _agent_config = [
         str(retrieved_agent_config.icebreaker),
         str(retrieved_agent_config.executor_chat_model),
@@ -218,6 +221,7 @@ def load(_profile_name: str, _client_id: str):
         str(retrieved_agent_config.promptlayer_api_key),
         str(retrieved_agent_config.client_id),
         str(retrieved_agent_config.outgoing_webhook_url),
+        _tools
     ]
 
     # Return a success message
@@ -229,8 +233,8 @@ def is_settings_set():
 
 
 def auth(username, password):
-    if username in ["sam", "mike", "adam"]:
-        if password == "BieberFever!":
+    if username in ["admin"]:
+        if password == GRADIO_PASSWORD:
             return True
     return False
 
@@ -258,7 +262,7 @@ def get_available_profile_names() -> list:
 with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
     session_state = gr.State(value={"session_id": "", "session": requests.Session(), "agent": None})
     session_apikey = gr.State(value="")
-    with gr.Accordion("Tuning", elem_classes="accordion", visible=is_settings_set()) as prompts_box:
+    with gr.Accordion("Tuning", elem_classes="accordion", visible=is_settings_set(), open=False) as prompts_box:
         gr.Markdown(
             "Changes to these settings are used to set up a conversation using the Reset button and will not "
             "be reflected until the next 'Reset'"
@@ -317,6 +321,10 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 # executor_completion_model = gr.Dropdown( choices=["text-davinci-003", "text-davinci-002",
                 # "text-curie-001", "text-babbage-001", "text-ada-001"], label="Executor Completion Model",
                 # info="This is the model used when Executor Model Type is set to 'completion'" )
+
+            with gr.Row() as preferences_row3:
+                tool_names = openbrain.orm.model_agent_config.DefaultSettings.AVAILABLE_TOOLS.value
+                tools = gr.CheckboxGroup(tool_names, label="Tools", info="Select tools to enable for the agent")
 
         with gr.Tab("API Keys and contact info") as api_keys_tab:
             outgoing_webhook_url = gr.Textbox(
@@ -391,6 +399,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     promptlayer_api_key,
                     client_id,
                     outgoing_webhook_url,
+                    tools,
                 ]
 
                 load_button.click(load, inputs=[profile_name, client_id], outputs=preferences)
@@ -411,52 +420,64 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                         promptlayer_api_key,
                         client_id,
                         outgoing_webhook_url,
+                        tools
                     ],
                 )
 
     chatbot = gr.Chatbot()
 
     with gr.Row() as chat_row:
-        with gr.Column(scale=4) as chat_column:
-            msg = gr.Textbox()
-        with gr.Column(scale=1) as chat_button_column:
-            chat_button = gr.Button("Chat", variant="primary")
-            reset_agent = gr.Button("Reset", variant="secondary")
-
-            msg.submit(
-                chat,
-                [msg, chatbot, profile_name, session_state, client_id],
-                [msg, chatbot, session_state],
+        with gr.Accordion("Context", open=False) as context_accordian:
+            context = gr.Textbox(
+                label="Context",
+                placeholder="Enter your context here",
+                info="The context of the conversation.",
+                show_label=False,
             )
 
-            chat_button.click(
-                fn=chat,
-                inputs=[msg, chatbot, profile_name, session_state, client_id],
-                outputs=[msg, chatbot, session_state],
-            )
+        with gr.Accordion("Chat") as chat_accordian:
 
-            reset_agent.click(
-                fn=reset,
-                inputs=[
-                    icebreaker,
-                    chat_model,
-                    system_message,
-                    prompt_layer_tags,
-                    max_iterations,
-                    max_execution_time,
-                    executor_temp,
-                    profile_name,
-                    executor_model_type,
-                    openai_api_key,
-                    promptlayer_api_key,
-                    client_id,
-                    outgoing_webhook_url,
-                    msg,
-                    chatbot,
-                    session_state,
-                ],
-                outputs=[msg, chatbot, session_state],
-            )
+            with gr.Column(scale=4) as chat_column:
+                msg = gr.Textbox()
+            with gr.Column(scale=1) as chat_button_column:
+                chat_button = gr.Button("Chat", variant="primary")
+                reset_agent = gr.Button("Reset", variant="secondary")
+
+                msg.submit(
+                    chat,
+                    [msg, chatbot, profile_name, session_state, client_id],
+                    [msg, chatbot, session_state],
+                )
+
+                chat_button.click(
+                    fn=chat,
+                    inputs=[msg, chatbot, profile_name, session_state, client_id],
+                    outputs=[msg, chatbot, session_state],
+                )
+
+                reset_agent.click(
+                    fn=reset,
+                    inputs=[
+                        icebreaker,
+                        chat_model,
+                        system_message,
+                        prompt_layer_tags,
+                        max_iterations,
+                        max_execution_time,
+                        executor_temp,
+                        profile_name,
+                        executor_model_type,
+                        openai_api_key,
+                        promptlayer_api_key,
+                        client_id,
+                        outgoing_webhook_url,
+                        msg,
+                        chatbot,
+                        session_state,
+                        tools
+                    ],
+                    outputs=[msg, chatbot, session_state],
+                )
 
 
 def main():
@@ -472,7 +493,7 @@ def main():
         server_name="0.0.0.0",
         server_port=PORT,
         show_tips=True,
-        auth=auth,
+        # auth=auth,
         auth_message="Please login to continue",
     )
 
