@@ -338,13 +338,14 @@ jobs:
   deploy-gradio_uis:
     runs-on: ubuntu-latest
     name: Deploy Gradio UIs
-    needs: [publish-release]
+#    needs: [publish-release]
 
     steps:
       - name: Deploy ob-dev environment to EC2
         uses: appleboy/ssh-action@v1.0.3
         env:
-          GRADIO_ENV_FILE: /etc/ob-dev.env
+          GRADIO_PREFIX: ob-dev
+          GRADIO_ENV_FILE: ~/ob-dev.env
           INFRA_STACK_NAME: ObApiTest
           OB_API_URL: https://dev-api.openbra.in
           DEFAULT_ORIGIN: https://dev-www.openbra.in
@@ -358,7 +359,7 @@ jobs:
             pip install openbrain[gradio] -U
 
             #################################
-            # Create environment file in /etc
+            # Create environment file in ~
             #################################
             cat <<EOF > ${GRADIO_ENV_FILE}
             INFRA_STACK_NAME=${INFRA_STACK_NAME}
@@ -372,7 +373,11 @@ jobs:
             AWS_PROFILE=${AWS_PROFILE}
             EOF
 
-            cat <<EOF > /etc/systemd/system/openbrain-ob-dev.service
+            #################################
+            # Create systemd file in /etc
+            #################################
+            mkdir -p /home/ubuntu/.local/share/systemd/user/${GRADIO_PREFIX}.service
+            cat <<EOF > /home/ubuntu/.local/share/systemd/user/${GRADIO_PREFIX}.service
             [Unit]
             Description=OpenBrain API ob-dev environment
             After=network.target
@@ -384,15 +389,15 @@ jobs:
             RestartSec=5
             StandardOutput=syslog
             StandardError=syslog
-            SyslogIdentifier=openbrain-ob-dev
-            EnvironmentFile=/etc/ob-dev.env
+            SyslogIdentifier=${GRADIO_PREFIX}
+            EnvironmentFile=~/${GRADIO_ENV_FILE}
 
             [Install]
             WantedBy=multi-user.target
             EOF
 
             systemctl daemon-reload
-            systemctl restart openbrain-ob-dev
+            systemctl restart ${GRADIO_PREFIX}.service
 
 
 
