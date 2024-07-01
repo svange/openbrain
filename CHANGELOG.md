@@ -1,10 +1,22 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v1.4.16-dev.6 (2024-07-01)
+
+### Feature
+
+* feat: updating UI ([`cc4f160`](https://github.com/svange/openbrain/commit/cc4f1601fe476563775a7cf519b0bd5f40a31a15))
+
+### Unknown
+
+* Merge branch &#39;refs/heads/main&#39; into dev ([`e2f74bc`](https://github.com/svange/openbrain/commit/e2f74bc727d92e988095f32dec781edb3e97dc3c))
+
+## v1.20.0 (2024-07-01)
+
+### Chore
+
+* chore(release): 1.20.0 [skip ci]
 
 ## [1.20.0](https://github.com/svange/openbrain/compare/v1.19.0...v1.20.0) (2024-07-01)
-
 
 ### Features
 
@@ -12,11 +24,17 @@ All notable changes to this project will be documented in this file. See
 * Documentation update. ([e21dec7](https://github.com/svange/openbrain/commit/e21dec7e6913706ed2b29ee593b352a44b42e2fc))
 * Documentation update. ([801d4ca](https://github.com/svange/openbrain/commit/801d4cae9d9d7cd499a8da9f3e49d95ba48949d3))
 * Setting up ec2 pipeline for gradio UIs ([b9d34d8](https://github.com/svange/openbrain/commit/b9d34d89c7bd4ced3e90c7eb507d46e664634345))
-* updating UI ([3327831](https://github.com/svange/openbrain/commit/332783181b9df7c6c4fd9b6625fc2b7abe362431))
+* updating UI ([3327831](https://github.com/svange/openbrain/commit/332783181b9df7c6c4fd9b6625fc2b7abe362431)) ([`c7f95ae`](https://github.com/svange/openbrain/commit/c7f95aef3b9e791151add4507f164e96a85e5146))
 
-# CHANGELOG
+### Feature
+
+* feat: updating UI ([`3327831`](https://github.com/svange/openbrain/commit/332783181b9df7c6c4fd9b6625fc2b7abe362431))
 
 ## v1.4.16-dev.5 (2024-07-01)
+
+### Chore
+
+* chore(release): release 1.4.16-dev.5 ([`ae18983`](https://github.com/svange/openbrain/commit/ae189836edb8ae5a79542f3f1f6b6e2e35f8299a))
 
 ### Feature
 
