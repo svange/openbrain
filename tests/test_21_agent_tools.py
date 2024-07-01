@@ -219,7 +219,6 @@ class TestAgentTools:
 
 
     @pytest.mark.tools
-    @pytest.mark.skip
     def test_get_simple_calendar_appointment_slots_tool(self, leadmo_tool_tester_agent_config):
         initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
         initial_context['api_key'] = os.getenv('DEV_LEADMO_BEARER_TOKEN')
@@ -234,7 +233,6 @@ class TestAgentTools:
         assert "success" in response.casefold()
 
     @pytest.mark.tools
-    @pytest.mark.skip
     def test_lls_scrub_phone_number(self, lls_tool_tester_agent_config):
         initial_context = {
             "phone": "6194103847",
