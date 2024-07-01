@@ -16,9 +16,6 @@
 
 [//]: # (![CD &#40;staging&#41;]&#40;https://github.com/svange/openbrain/actions/workflows/deploy-dev.yml/badge.svg&#41;)
 
-
-🚧 **Under active development, expect instability until v1 (targeting September 2024).** 🚧
-
 ## Links
 
 ---
@@ -71,9 +68,33 @@ NOTE: There is currently no fee for using the service, but it's using my persona
 - **Event-Driven Architecture**: Extensible through cloud-based event handling.
 
 ## AI Agent Tools
+### Context
+OpenBrain tools get input rom 2 sources: the agent's input values, and input values from "context". The "context" is any undocumented key/value pair. This is done in order to allow the agent to call tools that require sensitive information that we don't want the AI to have access to.
+
+### Tools
+OpenBrain tools are categorized into 2 types: information retrieval tools, and action tools. Information retrieval tools are tools that get information from a 3rd party service or library and make that information available to the AI. Action tools, on the other hand, are tools that perform an action, such as updating a CRM, sending an email, etc. These "action tools" all operate in the same way, by taking the agent's input and context as input, and returning a creating an event on the the event mesh.
+
+Tools need adaptors, so even action tools need OpenBrain support in order to make the AI aware of what input parameters these action tools require. Information retrieval tools, on the other hand, can not be implemented trivially using an event mesh, as the AI needs to be aware of the information that was retrieved immediately, so these tools are implemented directly in openBrain.
+
+#### Generic Tools
+These tools are available to all agents. Each tool is listed by name with a brief description of its functionality, and lists the required context keys.
+
+- **get_current_time**: Get the current time.
+  - N/A
+
+#### 3rd party services
+- **lls_scrub_phone_number**: Get DNC information for a phone number.
+  - api_key (optional): The API key for the LLS service. If not provided, the default key will be used from AWS Secrets Manager.
+
+#### CRM support for Lead Momentum
 - **leadmo_update_contact**: Update a contact in Lead Momentum.
 - **leadmo_stop_conversation**: Stop a conversation in Lead Momentum.
-- **connect_with_agent**: Connect with an agent in Lead Momentum.
+- **leadmo_create_contact**: Create a contact in Lead Momentum.
+- **leadmo_delete_contact**: Delete a contact in Lead Momentum.
+- **leadmo_get_contact_details_from_context**: Get contact details from this request's context to be made available to the AI.
+- **leadmo_get_simple_calendar-appointment_slots**: Get available appointment slots from Lead Momentum.
+- **leadmo_create_appointment**: Create an appointment in Lead Momentum.
+
 
 ## Quick Start
 ```bash
