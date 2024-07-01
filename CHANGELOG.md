@@ -1,6 +1,16 @@
 # CHANGELOG
 
+## v1.4.16-dev.4 (2024-07-01)
+
+### Feature
+
+* feat: Cleaning up docs. ([`96bdbcd`](https://github.com/svange/openbrain/commit/96bdbcde06863e4bb51f34da65cccd6f5564eed7))
+
 ## v1.4.16-dev.3 (2024-07-01)
+
+### Chore
+
+* chore(release): release 1.4.16-dev.3 ([`1cc746e`](https://github.com/svange/openbrain/commit/1cc746e53a98ff614563cdf28162b1045432d3a2))
 
 ### Unknown
 
