@@ -1,189 +1,443 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v1.4.16-dev.2 (2024-07-01)
+
+### Feature
+
+* feat: Documentation update. ([`801d4ca`](https://github.com/svange/openbrain/commit/801d4cae9d9d7cd499a8da9f3e49d95ba48949d3))
+
+### Unknown
+
+* Merge branch &#39;refs/heads/main&#39; into dev ([`79cb531`](https://github.com/svange/openbrain/commit/79cb531b0709a3a1c9b9c55115e3645658a802d2))
+
+## v1.17.0 (2024-06-30)
+
+### Chore
+
+* chore(release): 1.17.0 [skip ci]
 
 ## [1.17.0](https://github.com/svange/openbrain/compare/v1.16.0...v1.17.0) (2024-06-30)
 
-
 ### Features
 
-* enabling timezone in get_current_time tool. ([8eb2198](https://github.com/svange/openbrain/commit/8eb2198618ad77239a60ac28fe4a357446d67bc6))
+* enabling timezone in get_current_time tool. ([8eb2198](https://github.com/svange/openbrain/commit/8eb2198618ad77239a60ac28fe4a357446d67bc6)) ([`ce954d6`](https://github.com/svange/openbrain/commit/ce954d63a111a3d983019704a1745333e22a7a2e))
+
+### Feature
+
+* feat: enabling timezone in get_current_time tool. ([`8eb2198`](https://github.com/svange/openbrain/commit/8eb2198618ad77239a60ac28fe4a357446d67bc6))
+
+## v1.16.0 (2024-06-30)
+
+### Chore
+
+* chore(release): 1.16.0 [skip ci]
 
 ## [1.16.0](https://github.com/svange/openbrain/compare/v1.15.0...v1.16.0) (2024-06-30)
 
-
 ### Features
 
-* added tool leadmo_get_contact_information_from_context ([632bab4](https://github.com/svange/openbrain/commit/632bab4a4f337c6062215f90a40b45d928a959e9))
+* added tool leadmo_get_contact_information_from_context ([632bab4](https://github.com/svange/openbrain/commit/632bab4a4f337c6062215f90a40b45d928a959e9)) ([`e2dc9e7`](https://github.com/svange/openbrain/commit/e2dc9e7b8a3172c815b047fe5b52085d75ed76e6))
+
+### Feature
+
+* feat: added tool leadmo_get_contact_information_from_context ([`632bab4`](https://github.com/svange/openbrain/commit/632bab4a4f337c6062215f90a40b45d928a959e9))
+
+## v1.15.0 (2024-06-30)
+
+### Chore
+
+* chore(release): 1.15.0 [skip ci]
 
 ## [1.15.0](https://github.com/svange/openbrain/compare/v1.14.0...v1.15.0) (2024-06-30)
 
-
 ### Features
 
-* added tool leadmo_get_contact_information_from_context ([15f9e69](https://github.com/svange/openbrain/commit/15f9e6984bf351cf3773b1bec3fdd241a5accf37))
+* added tool leadmo_get_contact_information_from_context ([15f9e69](https://github.com/svange/openbrain/commit/15f9e6984bf351cf3773b1bec3fdd241a5accf37)) ([`3850846`](https://github.com/svange/openbrain/commit/38508468edaf9492f43e1f090d63e8d42a2b7004))
+
+### Feature
+
+* feat: added tool leadmo_get_contact_information_from_context ([`15f9e69`](https://github.com/svange/openbrain/commit/15f9e6984bf351cf3773b1bec3fdd241a5accf37))
+
+## v1.14.0 (2024-06-29)
+
+### Chore
+
+* chore(release): 1.14.0 [skip ci]
 
 ## [1.14.0](https://github.com/svange/openbrain/compare/v1.13.0...v1.14.0) (2024-06-29)
 
-
 ### Features
 
-* improving time message to initial message to create agent. ([14779d5](https://github.com/svange/openbrain/commit/14779d514779ef90551c400b15090b1b9ebac4cc))
+* improving time message to initial message to create agent. ([14779d5](https://github.com/svange/openbrain/commit/14779d514779ef90551c400b15090b1b9ebac4cc)) ([`acc2604`](https://github.com/svange/openbrain/commit/acc2604f5fbe286d9a6237589b8f57fd3d5b4be0))
+
+### Feature
+
+* feat: improving time message to initial message to create agent. ([`14779d5`](https://github.com/svange/openbrain/commit/14779d514779ef90551c400b15090b1b9ebac4cc))
+
+## v1.13.0 (2024-06-29)
+
+### Chore
+
+* chore(release): 1.13.0 [skip ci]
 
 ## [1.13.0](https://github.com/svange/openbrain/compare/v1.12.0...v1.13.0) (2024-06-29)
 
-
 ### Features
 
-* adding time to initial message to create agent. ([6597d1a](https://github.com/svange/openbrain/commit/6597d1a5b851d4a5f2e167d2e88124e8c2083159))
+* adding time to initial message to create agent. ([6597d1a](https://github.com/svange/openbrain/commit/6597d1a5b851d4a5f2e167d2e88124e8c2083159)) ([`6efb37c`](https://github.com/svange/openbrain/commit/6efb37c87f5ef84ddb0d798603d121ecb987d6a5))
+
+### Feature
+
+* feat: adding time to initial message to create agent. ([`6597d1a`](https://github.com/svange/openbrain/commit/6597d1a5b851d4a5f2e167d2e88124e8c2083159))
+
+## v1.12.0 (2024-06-29)
+
+### Chore
+
+* chore(release): 1.12.0 [skip ci]
 
 ## [1.12.0](https://github.com/svange/openbrain/compare/v1.11.0...v1.12.0) (2024-06-29)
 
-
 ### Features
 
-* adding debug statements ([10efd2c](https://github.com/svange/openbrain/commit/10efd2c3029f27d64b5a89a2701ab2feb2bc23d9))
+* adding debug statements ([10efd2c](https://github.com/svange/openbrain/commit/10efd2c3029f27d64b5a89a2701ab2feb2bc23d9)) ([`a503b45`](https://github.com/svange/openbrain/commit/a503b45e1e46259574d778a753599e2b16b83b6d))
+
+### Feature
+
+* feat: adding debug statements ([`10efd2c`](https://github.com/svange/openbrain/commit/10efd2c3029f27d64b5a89a2701ab2feb2bc23d9))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`950f9a0`](https://github.com/svange/openbrain/commit/950f9a0dd6fdf95c4bdc7a311d5e32bd2785727b))
+
+## v1.11.0 (2024-06-29)
+
+### Chore
+
+* chore(release): 1.11.0 [skip ci]
 
 ## [1.11.0](https://github.com/svange/openbrain/compare/v1.10.0...v1.11.0) (2024-06-29)
 
-
 ### Features
 
-* adding lls tool (needs work to get secret API key in place. ([b581687](https://github.com/svange/openbrain/commit/b5816879f96c90a03484517dfbf4d78baf56af03))
+* adding lls tool (needs work to get secret API key in place. ([b581687](https://github.com/svange/openbrain/commit/b5816879f96c90a03484517dfbf4d78baf56af03)) ([`4bad321`](https://github.com/svange/openbrain/commit/4bad321c63f676fa68e0c0d9af5bb7d2474ca13b))
+
+### Feature
+
+* feat: adding lls tool (needs work to get secret API key in place. ([`b581687`](https://github.com/svange/openbrain/commit/b5816879f96c90a03484517dfbf4d78baf56af03))
+
+## v1.10.0 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.10.0 [skip ci]
 
 ## [1.10.0](https://github.com/svange/openbrain/compare/v1.9.0...v1.10.0) (2024-06-28)
 
-
 ### Features
 
-* adding lls tool (needs work to get secret API key in place. ([cc54fce](https://github.com/svange/openbrain/commit/cc54fce7ca4f47f9d81d05a82c38606acc40f99f))
+* adding lls tool (needs work to get secret API key in place. ([cc54fce](https://github.com/svange/openbrain/commit/cc54fce7ca4f47f9d81d05a82c38606acc40f99f)) ([`05b952d`](https://github.com/svange/openbrain/commit/05b952dd95101fdab8280968587b1f13bc6f4a46))
+
+### Feature
+
+* feat: adding lls tool (needs work to get secret API key in place. ([`cc54fce`](https://github.com/svange/openbrain/commit/cc54fce7ca4f47f9d81d05a82c38606acc40f99f))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`93c5390`](https://github.com/svange/openbrain/commit/93c5390c3ffae9ab6f18b6df7365e4108dd2b126))
+
+## v1.9.0 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.9.0 [skip ci]
 
 ## [1.9.0](https://github.com/svange/openbrain/compare/v1.8.0...v1.9.0) (2024-06-28)
 
-
 ### Features
 
-* adding lls tool (needs work to get secret API key in place. ([535557f](https://github.com/svange/openbrain/commit/535557f7118ec5dbf3740c529eeeb91295878491))
+* adding lls tool (needs work to get secret API key in place. ([535557f](https://github.com/svange/openbrain/commit/535557f7118ec5dbf3740c529eeeb91295878491)) ([`87a6dce`](https://github.com/svange/openbrain/commit/87a6dceb1476a3b950e19d144e7d0e68ffc62911))
+
+### Feature
+
+* feat: adding lls tool (needs work to get secret API key in place. ([`535557f`](https://github.com/svange/openbrain/commit/535557f7118ec5dbf3740c529eeeb91295878491))
+
+## v1.8.0 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.8.0 [skip ci]
 
 ## [1.8.0](https://github.com/svange/openbrain/compare/v1.7.1...v1.8.0) (2024-06-28)
 
-
 ### Features
 
-* adding lls tool (needs work to get secret API key in place. ([b21db7b](https://github.com/svange/openbrain/commit/b21db7b0c1ee0af8d78576071392b6f5512a8dc7))
+* adding lls tool (needs work to get secret API key in place. ([b21db7b](https://github.com/svange/openbrain/commit/b21db7b0c1ee0af8d78576071392b6f5512a8dc7)) ([`b96cd6e`](https://github.com/svange/openbrain/commit/b96cd6e6b34f4f844e55157b8453799489c760f5))
+
+### Feature
+
+* feat: adding lls tool (needs work to get secret API key in place. ([`b21db7b`](https://github.com/svange/openbrain/commit/b21db7b0c1ee0af8d78576071392b6f5512a8dc7))
+
+## v1.7.1 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.7.1 [skip ci]
 
 ## [1.7.1](https://github.com/svange/openbrain/compare/v1.7.0...v1.7.1) (2024-06-28)
 
-
 ### Bug Fixes
 
-* cleaning up tools and adding tests for ensuring the agent is triggering the tools correctly. ([54ea871](https://github.com/svange/openbrain/commit/54ea87169f2f9f7e467dae1196eb8a8df10f3141))
+* cleaning up tools and adding tests for ensuring the agent is triggering the tools correctly. ([54ea871](https://github.com/svange/openbrain/commit/54ea87169f2f9f7e467dae1196eb8a8df10f3141)) ([`ee978b9`](https://github.com/svange/openbrain/commit/ee978b9628719f0e9f857dba40be617a3874a84c))
+
+### Fix
+
+* fix: cleaning up tools and adding tests for ensuring the agent is triggering the tools correctly. ([`54ea871`](https://github.com/svange/openbrain/commit/54ea87169f2f9f7e467dae1196eb8a8df10f3141))
+
+## v1.7.0 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.7.0 [skip ci]
 
 ## [1.7.0](https://github.com/svange/openbrain/compare/v1.6.0...v1.7.0) (2024-06-28)
 
-
 ### Features
 
-* chaing LeadmoAppointment and adaptor to use v1 api objects (changing fields) - removing ai's phone input. ([3219924](https://github.com/svange/openbrain/commit/3219924317283150e166bdcf3a1268a0314a4194))
+* chaing LeadmoAppointment and adaptor to use v1 api objects (changing fields) - removing ai&#39;s phone input. ([3219924](https://github.com/svange/openbrain/commit/3219924317283150e166bdcf3a1268a0314a4194)) ([`6f9817b`](https://github.com/svange/openbrain/commit/6f9817b36985c3f5cb2d14b90891904fdd1bd4bf))
+
+### Feature
+
+* feat: chaing LeadmoAppointment and adaptor to use v1 api objects (changing fields) - removing ai&#39;s phone input. ([`3219924`](https://github.com/svange/openbrain/commit/3219924317283150e166bdcf3a1268a0314a4194))
+
+## v1.6.0 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.6.0 [skip ci]
 
 ## [1.6.0](https://github.com/svange/openbrain/compare/v1.5.0...v1.6.0) (2024-06-28)
 
-
 ### Features
 
-* chaing LeadmoAppointment and adaptor to use v1 api objects (changing fields) ([dedd5a2](https://github.com/svange/openbrain/commit/dedd5a2e9d46fb66b4d0e4653a32a53c022ab473))
+* chaing LeadmoAppointment and adaptor to use v1 api objects (changing fields) ([dedd5a2](https://github.com/svange/openbrain/commit/dedd5a2e9d46fb66b4d0e4653a32a53c022ab473)) ([`cd178e0`](https://github.com/svange/openbrain/commit/cd178e0ed67cad3e752c5efebf97524b09b98dc5))
+
+### Feature
+
+* feat: chaing LeadmoAppointment and adaptor to use v1 api objects (changing fields) ([`dedd5a2`](https://github.com/svange/openbrain/commit/dedd5a2e9d46fb66b4d0e4653a32a53c022ab473))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`f7e8249`](https://github.com/svange/openbrain/commit/f7e8249485b50235f4cf6748d72e0ee27813d709))
+
+## v1.5.0 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.5.0 [skip ci]
 
 ## [1.5.0](https://github.com/svange/openbrain/compare/v1.4.26...v1.5.0) (2024-06-28)
 
-
 ### Features
 
-* adding tools: leadmo_get_simple_calendar_appointment_slots, leadmo_create_appointment, get_current_time ([5ec2ee8](https://github.com/svange/openbrain/commit/5ec2ee84d0bf016761988f3618cdf90c2adfc279))
+* adding tools: leadmo_get_simple_calendar_appointment_slots, leadmo_create_appointment, get_current_time ([5ec2ee8](https://github.com/svange/openbrain/commit/5ec2ee84d0bf016761988f3618cdf90c2adfc279)) ([`091a0fd`](https://github.com/svange/openbrain/commit/091a0fd3f2a47c2799be3db23c9b4966f3ab7f9f))
+
+### Feature
+
+* feat: adding tools: leadmo_get_simple_calendar_appointment_slots, leadmo_create_appointment, get_current_time ([`5ec2ee8`](https://github.com/svange/openbrain/commit/5ec2ee84d0bf016761988f3618cdf90c2adfc279))
+
+## v1.4.26 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.4.26 [skip ci]
 
 ## [1.4.26](https://github.com/svange/openbrain/compare/v1.4.25...v1.4.26) (2024-06-28)
 
-
 ### Bug Fixes
 
-* adding tool utilities ([2212b34](https://github.com/svange/openbrain/commit/2212b34001933a5ae6f4bdc336dd09740cc78932))
+* adding tool utilities ([2212b34](https://github.com/svange/openbrain/commit/2212b34001933a5ae6f4bdc336dd09740cc78932)) ([`05aaff4`](https://github.com/svange/openbrain/commit/05aaff49a9407b223f429df61c547c191c677513))
+
+### Fix
+
+* fix: adding tool utilities ([`2212b34`](https://github.com/svange/openbrain/commit/2212b34001933a5ae6f4bdc336dd09740cc78932))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`cffd264`](https://github.com/svange/openbrain/commit/cffd264076873a469d8b61b62816ad0733f058a5))
+
+## v1.4.25 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.4.25 [skip ci]
 
 ## [1.4.25](https://github.com/svange/openbrain/compare/v1.4.24...v1.4.25) (2024-06-28)
 
-
 ### Bug Fixes
 
-* adding tool utilities ([b19cde3](https://github.com/svange/openbrain/commit/b19cde3da2155b20f52f3d45966372a0942c0217))
+* adding tool utilities ([b19cde3](https://github.com/svange/openbrain/commit/b19cde3da2155b20f52f3d45966372a0942c0217)) ([`28de6be`](https://github.com/svange/openbrain/commit/28de6bed45171a512ec1ea627f06f020a436b889))
+
+### Fix
+
+* fix: adding tool utilities ([`b19cde3`](https://github.com/svange/openbrain/commit/b19cde3da2155b20f52f3d45966372a0942c0217))
+
+## v1.4.24 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.4.24 [skip ci]
 
 ## [1.4.24](https://github.com/svange/openbrain/compare/v1.4.23...v1.4.24) (2024-06-28)
 
-
 ### Bug Fixes
 
-* adding tool utilities ([030821d](https://github.com/svange/openbrain/commit/030821d0d62d7dee19818e3bc9df33ee7af64107))
+* adding tool utilities ([030821d](https://github.com/svange/openbrain/commit/030821d0d62d7dee19818e3bc9df33ee7af64107)) ([`4a7e602`](https://github.com/svange/openbrain/commit/4a7e602a9236223a5ffa00a262c97d33f1dcd42f))
+
+### Fix
+
+* fix: adding tool utilities ([`030821d`](https://github.com/svange/openbrain/commit/030821d0d62d7dee19818e3bc9df33ee7af64107))
+
+## v1.4.23 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.4.23 [skip ci]
 
 ## [1.4.23](https://github.com/svange/openbrain/compare/v1.4.22...v1.4.23) (2024-06-28)
 
-
 ### Bug Fixes
 
-* fixing tools... ([5f531d4](https://github.com/svange/openbrain/commit/5f531d4cf7010fea1f5d2194983c47d1374ead3d))
+* fixing tools... ([5f531d4](https://github.com/svange/openbrain/commit/5f531d4cf7010fea1f5d2194983c47d1374ead3d)) ([`e21c0cf`](https://github.com/svange/openbrain/commit/e21c0cf73a2e96653b49d721c117f340a7fd168b))
+
+### Fix
+
+* fix: fixing tools... ([`5f531d4`](https://github.com/svange/openbrain/commit/5f531d4cf7010fea1f5d2194983c47d1374ead3d))
+
+## v1.4.22 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.4.22 [skip ci]
 
 ## [1.4.22](https://github.com/svange/openbrain/compare/v1.4.21...v1.4.22) (2024-06-28)
-
 
 ### Bug Fixes
 
 * fixing tools... ([a46272c](https://github.com/svange/openbrain/commit/a46272cd2fe09b15a69b58c0a7a8efbd915c0ba5))
 * fixing tools... ([4816169](https://github.com/svange/openbrain/commit/4816169ed0d55379c48936d7c32bb505012aa8a4))
-* fixing tools... ([e192cbe](https://github.com/svange/openbrain/commit/e192cbe6f1fa12cf185e61d0f518d9a1f1d0a264))
+* fixing tools... ([e192cbe](https://github.com/svange/openbrain/commit/e192cbe6f1fa12cf185e61d0f518d9a1f1d0a264)) ([`915b3ec`](https://github.com/svange/openbrain/commit/915b3ec748cdc95cefc32f658518d6308b07c89c))
+
+### Fix
+
+* fix: fixing tools... ([`a46272c`](https://github.com/svange/openbrain/commit/a46272cd2fe09b15a69b58c0a7a8efbd915c0ba5))
+
+* fix: fixing tools... ([`4816169`](https://github.com/svange/openbrain/commit/4816169ed0d55379c48936d7c32bb505012aa8a4))
+
+* fix: fixing tools... ([`e192cbe`](https://github.com/svange/openbrain/commit/e192cbe6f1fa12cf185e61d0f518d9a1f1d0a264))
+
+## v1.4.21 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.4.21 [skip ci]
 
 ## [1.4.21](https://github.com/svange/openbrain/compare/v1.4.20...v1.4.21) (2024-06-28)
 
-
 ### Bug Fixes
 
-* fixing tools... ([0ebb448](https://github.com/svange/openbrain/commit/0ebb448e54be3fafccffdb85d5e3f3d216a5af67))
+* fixing tools... ([0ebb448](https://github.com/svange/openbrain/commit/0ebb448e54be3fafccffdb85d5e3f3d216a5af67)) ([`9210c02`](https://github.com/svange/openbrain/commit/9210c022c2d9512b62ba8019d004ff3ef6a21e09))
+
+### Fix
+
+* fix: fixing tools... ([`0ebb448`](https://github.com/svange/openbrain/commit/0ebb448e54be3fafccffdb85d5e3f3d216a5af67))
+
+## v1.4.20 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.4.20 [skip ci]
 
 ## [1.4.20](https://github.com/svange/openbrain/compare/v1.4.19...v1.4.20) (2024-06-28)
 
-
 ### Bug Fixes
 
-* fixing tools... ([a66b780](https://github.com/svange/openbrain/commit/a66b780cbd34f4259c130bf9baaa8afe099cf4aa))
+* fixing tools... ([a66b780](https://github.com/svange/openbrain/commit/a66b780cbd34f4259c130bf9baaa8afe099cf4aa)) ([`4d78a7b`](https://github.com/svange/openbrain/commit/4d78a7b42e47f1de08b703f33adae6568b1d9090))
+
+### Fix
+
+* fix: fixing tools... ([`a66b780`](https://github.com/svange/openbrain/commit/a66b780cbd34f4259c130bf9baaa8afe099cf4aa))
+
+## v1.4.19 (2024-06-28)
+
+### Chore
+
+* chore(release): 1.4.19 [skip ci]
 
 ## [1.4.19](https://github.com/svange/openbrain/compare/v1.4.18...v1.4.19) (2024-06-28)
 
-
 ### Bug Fixes
 
-* fixing tools... ([71725f9](https://github.com/svange/openbrain/commit/71725f9f0bc20df8fc06db79bb036033e3063b75))
+* fixing tools... ([71725f9](https://github.com/svange/openbrain/commit/71725f9f0bc20df8fc06db79bb036033e3063b75)) ([`971ea26`](https://github.com/svange/openbrain/commit/971ea269dc0d811753316a9a49645d149c808758))
+
+### Fix
+
+* fix: fixing tools... ([`71725f9`](https://github.com/svange/openbrain/commit/71725f9f0bc20df8fc06db79bb036033e3063b75))
+
+## v1.4.18 (2024-06-27)
+
+### Chore
+
+* chore(release): 1.4.18 [skip ci]
 
 ## [1.4.18](https://github.com/svange/openbrain/compare/v1.4.17...v1.4.18) (2024-06-27)
 
-
 ### Bug Fixes
 
-* fixing tools... ([eab9d50](https://github.com/svange/openbrain/commit/eab9d50d82dfbfa924b939955dbbe916e14791a4))
+* fixing tools... ([eab9d50](https://github.com/svange/openbrain/commit/eab9d50d82dfbfa924b939955dbbe916e14791a4)) ([`b5e6e24`](https://github.com/svange/openbrain/commit/b5e6e24c1d54d8449b77656b16ddb053d2c152b2))
+
+### Fix
+
+* fix: fixing tools... ([`eab9d50`](https://github.com/svange/openbrain/commit/eab9d50d82dfbfa924b939955dbbe916e14791a4))
+
+## v1.4.17 (2024-06-27)
+
+### Chore
+
+* chore(release): 1.4.17 [skip ci]
 
 ## [1.4.17](https://github.com/svange/openbrain/compare/v1.4.16...v1.4.17) (2024-06-27)
 
-
 ### Bug Fixes
 
-* fixing tools... ([a9238fe](https://github.com/svange/openbrain/commit/a9238fe0af3daa47651bbd6d586febe789c72949))
+* fixing tools... ([a9238fe](https://github.com/svange/openbrain/commit/a9238fe0af3daa47651bbd6d586febe789c72949)) ([`c3103ef`](https://github.com/svange/openbrain/commit/c3103ef86a4a2ea0e60282a56da32237614a936c))
+
+### Fix
+
+* fix: fixing tools... ([`a9238fe`](https://github.com/svange/openbrain/commit/a9238fe0af3daa47651bbd6d586febe789c72949))
+
+## v1.4.16 (2024-06-27)
+
+### Chore
+
+* chore(release): 1.4.16 [skip ci]
 
 ## [1.4.16](https://github.com/svange/openbrain/compare/v1.4.15...v1.4.16) (2024-06-27)
-
 
 ### Bug Fixes
 
 * adding debug statements to callback handler. ([fba443c](https://github.com/svange/openbrain/commit/fba443c10c615002854bf2c78152fc4b7c9a8835))
-* merging change into main ([9e84ebe](https://github.com/svange/openbrain/commit/9e84ebee8a04ebdb3ca36268c0771fd1e56f8b50))
+* merging change into main ([9e84ebe](https://github.com/svange/openbrain/commit/9e84ebee8a04ebdb3ca36268c0771fd1e56f8b50)) ([`0c32015`](https://github.com/svange/openbrain/commit/0c320150d84bc870de65a496b1939490f90a0a1c))
 
-# CHANGELOG
+### Fix
+
+* fix: merging change into main ([`9e84ebe`](https://github.com/svange/openbrain/commit/9e84ebee8a04ebdb3ca36268c0771fd1e56f8b50))
 
 ## v1.4.16-dev.1 (2024-06-27)
+
+### Chore
+
+* chore(release): release 1.4.16-dev.1 ([`bff8651`](https://github.com/svange/openbrain/commit/bff86519abafe09691ac1fff5e2a6556b437ae7f))
 
 ### Fix
 
