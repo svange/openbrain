@@ -1,6 +1,16 @@
 # CHANGELOG
 
+## v1.4.16-dev.5 (2024-07-01)
+
+### Feature
+
+* feat: Setting up ec2 pipeline for gradio UIs ([`b9d34d8`](https://github.com/svange/openbrain/commit/b9d34d89c7bd4ced3e90c7eb507d46e664634345))
+
 ## v1.4.16-dev.4 (2024-07-01)
+
+### Chore
+
+* chore(release): release 1.4.16-dev.4 ([`d169f60`](https://github.com/svange/openbrain/commit/d169f600041ecb3b6fe39f846a731b0edad6dc36))
 
 ### Feature
 
