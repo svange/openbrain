@@ -1,3 +1,19 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.20.0](https://github.com/svange/openbrain/compare/v1.19.0...v1.20.0) (2024-07-01)
+
+
+### Features
+
+* Cleaning up docs. ([96bdbcd](https://github.com/svange/openbrain/commit/96bdbcde06863e4bb51f34da65cccd6f5564eed7))
+* Documentation update. ([e21dec7](https://github.com/svange/openbrain/commit/e21dec7e6913706ed2b29ee593b352a44b42e2fc))
+* Documentation update. ([801d4ca](https://github.com/svange/openbrain/commit/801d4cae9d9d7cd499a8da9f3e49d95ba48949d3))
+* Setting up ec2 pipeline for gradio UIs ([b9d34d8](https://github.com/svange/openbrain/commit/b9d34d89c7bd4ced3e90c7eb507d46e664634345))
+* updating UI ([3327831](https://github.com/svange/openbrain/commit/332783181b9df7c6c4fd9b6625fc2b7abe362431))
+
 # CHANGELOG
 
 ## v1.4.16-dev.5 (2024-07-01)
