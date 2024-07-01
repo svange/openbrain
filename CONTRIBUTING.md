@@ -21,7 +21,18 @@ Thank you for your interest in contributing to OpenBrain! This guide will help y
     cz commit
     ```
 
-4. **AWS Credentials**: Ensure you have AWS credentials configured for testing.
+5. **AWS Credentials**: Ensure you have AWS credentials configured for testing.
+
+
+## Creating or Changing .env file (or .env.openbrain, .env.woxom, etc.)
+The .env file is used for local testing and for creating secrets in the github repo and AWS Secrets Manager. You can start with the template example.env.
+
+After changing the .env file (e.g. adding a new secret needed by the infrastructure or a test), ensure the .env file has the appropriate AWS profile, github token, etc and then run the `manage_ci_secrets.py` script to update the secrets in AWS Secrets Manager and Github.
+
+```pwsh
+pipenv run python manage_secrets.py --github -v .env # or .env.openbrain, .env.woxom, etc.
+```
+This creates/updates a github secret in the github repo, to be made available for github actions. Github actions obfuscates these secrets in the logs and uses them to create/populate the appropriate AWS secret store.
 
 ## Setting Up the Development Environment
 
