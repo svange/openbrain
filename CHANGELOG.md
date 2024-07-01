@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.0](https://github.com/svange/openbrain/compare/v1.18.0...v1.19.0) (2024-07-01)
+
+
+### Features
+
+* Fix CI badge ([5b53977](https://github.com/svange/openbrain/commit/5b53977df8cabc6c1f9b10f52a48f2132f4d078d))
+
 ## [1.18.0](https://github.com/svange/openbrain/compare/v1.17.0...v1.18.0) (2024-07-01)
 
 
