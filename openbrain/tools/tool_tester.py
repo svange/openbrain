@@ -7,7 +7,6 @@ from typing import Any
 from langchain.tools.base import BaseTool
 from pydantic import BaseModel, Extra
 from openbrain.orm.model_agent_config import AgentConfig
-from openbrain.tools.models.context_aware_tool import ContextAwareToolMixin
 from openbrain.tools.obtool import OBTool
 
 from openbrain.util import get_logger
@@ -37,9 +36,9 @@ def on_tool_start(agent_config: AgentConfig, input_str: str, **kwargs) -> Any:
 
 def on_tool_error(agent_config: AgentConfig = None, agent_input=None, *args, **kwargs) -> Any:
     input = literal_eval(agent_input)
-    logger.info(f"Input: {input}")
-    logger.info(f"Agent Config: {agent_config}")
-    logger.info(f"kwargs: {kwargs}")
+    logger.debug(f"Input: {input}")
+    logger.debug(f"Agent Config: {agent_config}")
+    logger.debug(f"kwargs: {kwargs}")
 
 
 # LangChain tool

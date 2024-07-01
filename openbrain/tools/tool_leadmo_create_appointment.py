@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import json
-from typing import Any
+from ast import literal_eval
+from typing import Any, Optional
 
 from langchain.tools.base import BaseTool
 from pydantic import BaseModel, Extra, Field
@@ -12,21 +13,21 @@ from openbrain.tools.obtool import OBTool
 
 from openbrain.util import get_logger
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
-from openbrain.tools.models.model_leadmo_contact import LeadmoContactAdaptor
+from openbrain.tools.models.model_leadmo_appointment import LeadmoAppointmentAdaptor
 
 logger = get_logger()
 
-TOOL_NAME = "leadmo_update_contact"
+TOOL_NAME = "leadmo_create_appointment"
 
-
-class LeadmoUpdateContactTool(BaseTool, ContextAwareToolMixin):
+# LangChain tool
+class LeadmoCreateAppointmentTool(BaseTool, ContextAwareToolMixin):
     class Config:
         extra = Extra.allow
         populate_by_name = True
 
     name = TOOL_NAME
-    description = """Useful when you want to update a user's information in our system, based on learned details from the conversation."""
-    args_schema: type[BaseModel] = LeadmoContactAdaptor
+    description = """Useful when you have negotiated an appointment time with the user and want to book the appointment."""
+    args_schema: type[BaseModel] = LeadmoAppointmentAdaptor
     handle_tool_error = True
     verbose = True
 
@@ -60,8 +61,8 @@ def on_tool_error(agent_config: AgentConfig = None, agent_input=None, *args, **k
     pass
 
 
-class OBToolLeadmoUpdateContact(OBTool):
+class OBToolLeadmoCreateAppointment(OBTool):
     name: str = TOOL_NAME
-    tool: BaseTool = LeadmoUpdateContactTool
+    tool: BaseTool = LeadmoCreateAppointmentTool
     on_tool_start: OBCallbackHandlerFunctionProtocol = on_tool_start
     on_tool_error: OBCallbackHandlerFunctionProtocol = on_tool_error

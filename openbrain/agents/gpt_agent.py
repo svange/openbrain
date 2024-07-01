@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime
 import json
 import pickle
 from json import JSONDecodeError
@@ -93,7 +94,7 @@ class GptAgent:
         tools = self.tools
 
         # Function agents are special, so we build them differently # TODO: Time to make a class...
-        initial_message = "Hi!"
+        initial_message = f"Hi, this conversation is starting on {datetime.datetime.now().strftime('%A, %B %d, %Y %I:%M %p')}, and may span several days."
 
         # if self.initial_context:
         #     readable_list = [k + ": " + v for k, v in self.initial_context.items()]
@@ -185,7 +186,7 @@ class GptAgent:
     def handle_user_message(self, user_message: str, **kwargs) -> str:
         """Send message to agent"""
 
-        logger.info(f"{kwargs=}")
+        logger.debug(f"{kwargs=}")
 
 
         try:

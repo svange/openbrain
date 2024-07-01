@@ -1,3 +1,186 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.17.0](https://github.com/svange/openbrain/compare/v1.16.0...v1.17.0) (2024-06-30)
+
+
+### Features
+
+* enabling timezone in get_current_time tool. ([8eb2198](https://github.com/svange/openbrain/commit/8eb2198618ad77239a60ac28fe4a357446d67bc6))
+
+## [1.16.0](https://github.com/svange/openbrain/compare/v1.15.0...v1.16.0) (2024-06-30)
+
+
+### Features
+
+* added tool leadmo_get_contact_information_from_context ([632bab4](https://github.com/svange/openbrain/commit/632bab4a4f337c6062215f90a40b45d928a959e9))
+
+## [1.15.0](https://github.com/svange/openbrain/compare/v1.14.0...v1.15.0) (2024-06-30)
+
+
+### Features
+
+* added tool leadmo_get_contact_information_from_context ([15f9e69](https://github.com/svange/openbrain/commit/15f9e6984bf351cf3773b1bec3fdd241a5accf37))
+
+## [1.14.0](https://github.com/svange/openbrain/compare/v1.13.0...v1.14.0) (2024-06-29)
+
+
+### Features
+
+* improving time message to initial message to create agent. ([14779d5](https://github.com/svange/openbrain/commit/14779d514779ef90551c400b15090b1b9ebac4cc))
+
+## [1.13.0](https://github.com/svange/openbrain/compare/v1.12.0...v1.13.0) (2024-06-29)
+
+
+### Features
+
+* adding time to initial message to create agent. ([6597d1a](https://github.com/svange/openbrain/commit/6597d1a5b851d4a5f2e167d2e88124e8c2083159))
+
+## [1.12.0](https://github.com/svange/openbrain/compare/v1.11.0...v1.12.0) (2024-06-29)
+
+
+### Features
+
+* adding debug statements ([10efd2c](https://github.com/svange/openbrain/commit/10efd2c3029f27d64b5a89a2701ab2feb2bc23d9))
+
+## [1.11.0](https://github.com/svange/openbrain/compare/v1.10.0...v1.11.0) (2024-06-29)
+
+
+### Features
+
+* adding lls tool (needs work to get secret API key in place. ([b581687](https://github.com/svange/openbrain/commit/b5816879f96c90a03484517dfbf4d78baf56af03))
+
+## [1.10.0](https://github.com/svange/openbrain/compare/v1.9.0...v1.10.0) (2024-06-28)
+
+
+### Features
+
+* adding lls tool (needs work to get secret API key in place. ([cc54fce](https://github.com/svange/openbrain/commit/cc54fce7ca4f47f9d81d05a82c38606acc40f99f))
+
+## [1.9.0](https://github.com/svange/openbrain/compare/v1.8.0...v1.9.0) (2024-06-28)
+
+
+### Features
+
+* adding lls tool (needs work to get secret API key in place. ([535557f](https://github.com/svange/openbrain/commit/535557f7118ec5dbf3740c529eeeb91295878491))
+
+## [1.8.0](https://github.com/svange/openbrain/compare/v1.7.1...v1.8.0) (2024-06-28)
+
+
+### Features
+
+* adding lls tool (needs work to get secret API key in place. ([b21db7b](https://github.com/svange/openbrain/commit/b21db7b0c1ee0af8d78576071392b6f5512a8dc7))
+
+## [1.7.1](https://github.com/svange/openbrain/compare/v1.7.0...v1.7.1) (2024-06-28)
+
+
+### Bug Fixes
+
+* cleaning up tools and adding tests for ensuring the agent is triggering the tools correctly. ([54ea871](https://github.com/svange/openbrain/commit/54ea87169f2f9f7e467dae1196eb8a8df10f3141))
+
+## [1.7.0](https://github.com/svange/openbrain/compare/v1.6.0...v1.7.0) (2024-06-28)
+
+
+### Features
+
+* chaing LeadmoAppointment and adaptor to use v1 api objects (changing fields) - removing ai's phone input. ([3219924](https://github.com/svange/openbrain/commit/3219924317283150e166bdcf3a1268a0314a4194))
+
+## [1.6.0](https://github.com/svange/openbrain/compare/v1.5.0...v1.6.0) (2024-06-28)
+
+
+### Features
+
+* chaing LeadmoAppointment and adaptor to use v1 api objects (changing fields) ([dedd5a2](https://github.com/svange/openbrain/commit/dedd5a2e9d46fb66b4d0e4653a32a53c022ab473))
+
+## [1.5.0](https://github.com/svange/openbrain/compare/v1.4.26...v1.5.0) (2024-06-28)
+
+
+### Features
+
+* adding tools: leadmo_get_simple_calendar_appointment_slots, leadmo_create_appointment, get_current_time ([5ec2ee8](https://github.com/svange/openbrain/commit/5ec2ee84d0bf016761988f3618cdf90c2adfc279))
+
+## [1.4.26](https://github.com/svange/openbrain/compare/v1.4.25...v1.4.26) (2024-06-28)
+
+
+### Bug Fixes
+
+* adding tool utilities ([2212b34](https://github.com/svange/openbrain/commit/2212b34001933a5ae6f4bdc336dd09740cc78932))
+
+## [1.4.25](https://github.com/svange/openbrain/compare/v1.4.24...v1.4.25) (2024-06-28)
+
+
+### Bug Fixes
+
+* adding tool utilities ([b19cde3](https://github.com/svange/openbrain/commit/b19cde3da2155b20f52f3d45966372a0942c0217))
+
+## [1.4.24](https://github.com/svange/openbrain/compare/v1.4.23...v1.4.24) (2024-06-28)
+
+
+### Bug Fixes
+
+* adding tool utilities ([030821d](https://github.com/svange/openbrain/commit/030821d0d62d7dee19818e3bc9df33ee7af64107))
+
+## [1.4.23](https://github.com/svange/openbrain/compare/v1.4.22...v1.4.23) (2024-06-28)
+
+
+### Bug Fixes
+
+* fixing tools... ([5f531d4](https://github.com/svange/openbrain/commit/5f531d4cf7010fea1f5d2194983c47d1374ead3d))
+
+## [1.4.22](https://github.com/svange/openbrain/compare/v1.4.21...v1.4.22) (2024-06-28)
+
+
+### Bug Fixes
+
+* fixing tools... ([a46272c](https://github.com/svange/openbrain/commit/a46272cd2fe09b15a69b58c0a7a8efbd915c0ba5))
+* fixing tools... ([4816169](https://github.com/svange/openbrain/commit/4816169ed0d55379c48936d7c32bb505012aa8a4))
+* fixing tools... ([e192cbe](https://github.com/svange/openbrain/commit/e192cbe6f1fa12cf185e61d0f518d9a1f1d0a264))
+
+## [1.4.21](https://github.com/svange/openbrain/compare/v1.4.20...v1.4.21) (2024-06-28)
+
+
+### Bug Fixes
+
+* fixing tools... ([0ebb448](https://github.com/svange/openbrain/commit/0ebb448e54be3fafccffdb85d5e3f3d216a5af67))
+
+## [1.4.20](https://github.com/svange/openbrain/compare/v1.4.19...v1.4.20) (2024-06-28)
+
+
+### Bug Fixes
+
+* fixing tools... ([a66b780](https://github.com/svange/openbrain/commit/a66b780cbd34f4259c130bf9baaa8afe099cf4aa))
+
+## [1.4.19](https://github.com/svange/openbrain/compare/v1.4.18...v1.4.19) (2024-06-28)
+
+
+### Bug Fixes
+
+* fixing tools... ([71725f9](https://github.com/svange/openbrain/commit/71725f9f0bc20df8fc06db79bb036033e3063b75))
+
+## [1.4.18](https://github.com/svange/openbrain/compare/v1.4.17...v1.4.18) (2024-06-27)
+
+
+### Bug Fixes
+
+* fixing tools... ([eab9d50](https://github.com/svange/openbrain/commit/eab9d50d82dfbfa924b939955dbbe916e14791a4))
+
+## [1.4.17](https://github.com/svange/openbrain/compare/v1.4.16...v1.4.17) (2024-06-27)
+
+
+### Bug Fixes
+
+* fixing tools... ([a9238fe](https://github.com/svange/openbrain/commit/a9238fe0af3daa47651bbd6d586febe789c72949))
+
+## [1.4.16](https://github.com/svange/openbrain/compare/v1.4.15...v1.4.16) (2024-06-27)
+
+
+### Bug Fixes
+
+* adding debug statements to callback handler. ([fba443c](https://github.com/svange/openbrain/commit/fba443c10c615002854bf2c78152fc4b7c9a8835))
+* merging change into main ([9e84ebe](https://github.com/svange/openbrain/commit/9e84ebee8a04ebdb3ca36268c0771fd1e56f8b50))
+
 # CHANGELOG
 
 ## v1.4.16-dev.1 (2024-06-27)
