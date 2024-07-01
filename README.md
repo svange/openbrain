@@ -1,5 +1,5 @@
 # OpenBrain
-![ci status](https://github.com/svange/openbrain/actions/workflows/pipeline-prod.yml/badge.svg?branch=main)
+![ci status](https://github.com/svange/openbrain/actions/workflows/deploy-prod.yml/badge.svg?branch=main)
 ![PyPI - Version](https://img.shields.io/pypi/v/openbrain)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 <a href="https://github.com/psf/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
@@ -15,9 +15,6 @@
 [//]: # (![CI &#40;pre-release&#41;]&#40;https://github.com/svange/openbrain/actions/workflows/publish-prerelease.yml/badge.svg&#41;)
 
 [//]: # (![CD &#40;staging&#41;]&#40;https://github.com/svange/openbrain/actions/workflows/deploy-dev.yml/badge.svg&#41;)
-
-
-🚧 **Under active development, expect instability until v1 (targeting September 2024).** 🚧
 
 ## Links
 
