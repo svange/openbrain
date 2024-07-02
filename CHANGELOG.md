@@ -1,3 +1,17 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.21.0](https://github.com/svange/openbrain/compare/v1.20.0...v1.21.0) (2024-07-02)
+
+
+### Features
+
+* updating pipeline, removing UI deployments, moving to ob-api. ([93ee354](https://github.com/svange/openbrain/commit/93ee35441a26aeff7dc6d2b6205df5f0547210b1))
+* updating pipeline, removing UI deployments, moving to ob-api. ([8fac7b9](https://github.com/svange/openbrain/commit/8fac7b93430448e3362315488102734238ed4dc7))
+* updating UI ([cc4f160](https://github.com/svange/openbrain/commit/cc4f1601fe476563775a7cf519b0bd5f40a31a15))
+
 # CHANGELOG
 
 ## v1.4.16-dev.7 (2024-07-02)
