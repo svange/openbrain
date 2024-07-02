@@ -21,7 +21,27 @@ from openbrain.orm.model_chat_message import ChatMessage
 from openbrain.orm.model_chat_session import ChatSession
 from openbrain.util import config, Defaults
 
-
+EXAMPLE_CONTEXT = '''
+{
+    "firstName": "Samuel",
+    "lastName": "Vange",
+    "name": "Sam Vange",
+    "dateOfBirth": "1970-04-01",
+    "phone": "+16197966726",
+    "email": "samuelvange@gmail.com",
+    "address1": "1234 5th St N",
+    "city": "San Diego",
+    "state": "CA",
+    "country": "US",
+    "postalCode": "92108",
+    "companyName": "Augmenting Integrations",
+    "website": "openbra.in",
+    "medications": "vicodin",
+    "calendarId": "asGgwlPqqu6s17W084uE",
+    "contactId": "8LDRBvYKbVyhXymqMurF",
+    "locationId": "HbTkOpUVUXtrMQ5wkwxD"
+}
+'''.strip()
 OB_MODE = config.OB_MODE
 CHAT_ENDPOINT = os.environ.get("OB_API_URL", "") + "/chat"
 
@@ -172,14 +192,14 @@ def save(
     _icebreaker,
     _chat_model,
     _system_message,
-    _prompt_layer_tags,
+    # _prompt_layer_tags,
     _max_iterations,
     _max_execution_time,
     _executor_temp,
     _profile_name,
     _executor_model_type,
     _openai_api_key,
-    _promptlayer_api_key,
+    # _promptlayer_api_key,
     client_id,
     outgoing_webhook_url,
     tools
@@ -195,14 +215,14 @@ def save(
         icebreaker=str(_icebreaker),
         executor_chat_model=str(_chat_model),
         system_message=str(_system_message),
-        prompt_layer_tags=str(_prompt_layer_tags),
+        # prompt_layer_tags=str(_prompt_layer_tags),
         executor_max_iterations=str(_max_iterations),
         executor_max_execution_time=str(_max_execution_time),
         executor_temp=str(_executor_temp),
         profile_name=str(_profile_name),
         executor_model_type=str(_executor_model_type),
         openai_api_key=str(_openai_api_key),
-        promptlayer_api_key=str(_promptlayer_api_key),
+        # promptlayer_api_key=str(_promptlayer_api_key),
         client_id=str(client_id),
         outgoing_webhook_url=str(outgoing_webhook_url),
         tools=tools,
@@ -227,14 +247,14 @@ def load(_profile_name: str, _client_id: str):
         str(retrieved_agent_config.icebreaker),
         str(retrieved_agent_config.executor_chat_model),
         str(retrieved_agent_config.system_message),
-        str(retrieved_agent_config.prompt_layer_tags),
+        # str(retrieved_agent_config.prompt_layer_tags),
         str(retrieved_agent_config.executor_max_iterations),
         str(retrieved_agent_config.executor_max_execution_time),
         str(retrieved_agent_config.executor_temp),
         str(retrieved_agent_config.profile_name),
         str(retrieved_agent_config.executor_model_type),
         str(retrieved_agent_config.openai_api_key),
-        str(retrieved_agent_config.promptlayer_api_key),
+        # str(retrieved_agent_config.promptlayer_api_key),
         str(retrieved_agent_config.client_id),
         str(retrieved_agent_config.outgoing_webhook_url),
         _tools
@@ -308,10 +328,10 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 )
 
             with gr.Row() as preferences_row2:
-                prompt_layer_tags = gr.Textbox(
-                    label="Prompt Layer Tags",
-                    info="A comma separated string containing the tags to be used in the " "prompt layer.",
-                )
+                # prompt_layer_tags = gr.Textbox(
+                #     label="Prompt Layer Tags",
+                #     info="A comma separated string containing the tags to be used in the " "prompt layer.",
+                # )
                 executor_model_type = gr.Dropdown(
                     choices=[
                         "chat",
@@ -354,11 +374,11 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 info="The API key for OpenAI's API",
                 type="password",
             )
-            promptlayer_api_key = gr.Textbox(
-                label="Prompt Layer API Key",
-                info="The API key for Prompt Layer's API",
-                type="password",
-            )
+            # promptlayer_api_key = gr.Textbox(
+            #     label="Prompt Layer API Key",
+            #     info="The API key for Prompt Layer's API",
+            #     type="password",
+            # )
 
         with gr.Tab("System Message") as long_text_row1:
             system_message = gr.TextArea(
@@ -382,20 +402,22 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
     with gr.Accordion("Save and Load") as submit_accordion:
         with gr.Row() as submit_row:
-            with gr.Column(scale=4) as key_text_column:
-                client_id = gr.Textbox(
-                    label="Client ID",
-                    info="Your client ID. If left blank, defaults to 'public'.",
-                    type="text",
-                )
-                client_id.value = DEFAULT_CLIENT_ID
-                profile_name = gr.Dropdown(
-                    allow_custom_value=True,
-                    label="Profile Name",
-                    info="Enter a unique string to save your preferences. This will " "allow you to load your preferences later.",
-                    choices=get_available_profile_names(),
-                )
-                profile_name.value = DEFAULT_PROFILE_NAME
+            with gr.Column(scale=3) as key_text_column:
+                with gr.Row() as key_text_row:
+                    client_id = gr.Textbox(
+                        label="Client ID",
+                        info="Your client ID. Defaults to 'public'.",
+                        type="text",
+                    )
+                    client_id.value = DEFAULT_CLIENT_ID
+
+                    profile_name = gr.Dropdown(
+                        allow_custom_value=True,
+                        label="Profile Name",
+                        info="The name of your AgentConfig. Defaults to 'public'",
+                        choices=get_available_profile_names(),
+                    )
+                    profile_name.value = DEFAULT_PROFILE_NAME
 
             with gr.Column(scale=1) as submit_column:
                 load_button = gr.Button(value="Load", variant="primary")
@@ -404,7 +426,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     icebreaker,
                     chat_model,
                     system_message,
-                    prompt_layer_tags,
+                    # prompt_layer_tags,
                     max_iterations,
                     max_execution_time,
                     executor_temp,
@@ -412,7 +434,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     executor_model_type,
                     # executor_completion_model,
                     openai_api_key,
-                    promptlayer_api_key,
+                    # promptlayer_api_key,
                     client_id,
                     outgoing_webhook_url,
                     tools,
@@ -426,86 +448,71 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                         icebreaker,
                         chat_model,
                         system_message,
-                        prompt_layer_tags,
+                        # prompt_layer_tags,
                         max_iterations,
                         max_execution_time,
                         executor_temp,
                         profile_name,
                         executor_model_type,
                         openai_api_key,
-                        promptlayer_api_key,
+                        # promptlayer_api_key,
                         client_id,
                         outgoing_webhook_url,
                         tools
                     ],
                 )
 
-    chatbot = gr.Chatbot()
+    with gr.Accordion("Chat") as chat_accordian:
 
-    with gr.Row() as chat_row:
-        with gr.Column(scale=1) as context_container:
-            with gr.Accordion("Context", open=True) as context_accordian:
-                default_text = '''{
-                    "firstName": "Samuel",
-                    "lastName": "Vange",
-                    "name": "Sam Vange",
-                    "dateOfBirth": "1970-04-01",
-                    "phone": "+16197966726",
-                    "email": "samuelvange@gmail.com",
-                    "address1": "1234 5th St N",
-                    "city": "San Diego",
-                    "state": "CA",
-                    "country": "US",
-                    "postalCode": "92108",
-                    "companyName": "Augmenting Integrations",
-                    "website": "openbra.in",
-                    "medications": "vicodin",
-                    "calendarId": "asGgwlPqqu6s17W084uE",
-                    "contactId": "8LDRBvYKbVyhXymqMurF",
-                    "locationId": "HbTkOpUVUXtrMQ5wkwxD"
-                }
-                '''
-                context = gr.Textbox(
-                    label="Context",
-                    info="The context for the conversation.",
-                    show_label=False,
-                    lines=5,
-                    value=default_text,
-                )
+        with gr.Row() as chat_row:
 
-        with gr.Column(scale=2) as chat_container:
+            with gr.Column(scale=2) as chat_container:
 
-            with gr.Accordion("Chat") as chat_accordian:
+                with gr.Accordion("Chat") as chat_box_accordian:
 
-                with gr.Column(scale=4) as chat_column:
-                    msg = gr.Textbox()
-                with gr.Column(scale=1) as chat_button_column:
-                    chat_button = gr.Button("Chat", variant="primary")
-                    reset_agent = gr.Button("Reset", variant="secondary")
+                    with gr.Column(scale=2) as chat_column:
+                        chatbot = gr.Chatbot()
 
-                    msg.submit(
-                        chat,
-                        [msg, chatbot, profile_name, session_state, client_id, context],
-                        [msg, chatbot, session_state, context],
-                    )
+                        msg = gr.Textbox()
 
-                    chat_button.click(
-                        fn=chat,
-                        inputs=[msg, chatbot, profile_name, session_state, client_id, context],
-                        outputs=[msg, chatbot, session_state, context],
-                    )
+            with gr.Column(scale=1) as context_container:
+                with gr.Accordion("Context", open=True) as context_accordian:
+                    with gr.Column(scale=1) as chat_button_column:
 
-                    reset_agent.click(
-                        fn=reset,
-                        inputs=[
-                            client_id,
-                            profile_name,
-                            chatbot,
-                            session_state,
-                            context
-                        ],
-                        outputs=[msg, chatbot, session_state, context],
-                    )
+                        context = gr.Textbox(
+                            label="Context",
+                            info="The context for the conversation.",
+                            show_label=False,
+                            lines=4,
+                            value=EXAMPLE_CONTEXT,
+                        )
+
+                        chat_button = gr.Button("Chat", variant="primary")
+                        reset_agent = gr.Button("Reset", variant="secondary")
+
+                        msg.submit(
+                            chat,
+                            [msg, chatbot, profile_name, session_state, client_id, context],
+                            [msg, chatbot, session_state, context],
+                        )
+
+                        chat_button.click(
+                            fn=chat,
+                            inputs=[msg, chatbot, profile_name, session_state, client_id, context],
+                            outputs=[msg, chatbot, session_state, context],
+                        )
+
+                        reset_agent.click(
+                            fn=reset,
+                            inputs=[
+                                client_id,
+                                profile_name,
+                                chatbot,
+                                session_state,
+                                context
+                            ],
+                            outputs=[msg, chatbot, session_state, context],
+                        )
 
 
 def main():
@@ -515,7 +522,7 @@ def main():
         server_name="0.0.0.0",
         server_port=PORT,
         show_tips=True,
-        auth=auth,
+        # auth=auth,
         auth_message="Please login to continue",
     )
 

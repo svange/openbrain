@@ -31,39 +31,29 @@ Resources:
             Action:
               - cloudformation:DescribeStacks
             Resource: !Sub 'arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/${AWS::StackName}/*'
+          - Effect: Allow
+            Action:
+              - sns:Publish
+            Resource:
+              - !Sub 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:ObInfra-${ResourceSuffix}'
+              - !Sub 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:ObBusiness-${ResourceSuffix}'
 
-  #  ObToolEventRule:
-#    Type: AWS::Events::Rule
-#    Properties:
-#      Name: !Sub
-#        - 'ObToolEventRule-${ResourceSuffix}'
-#        - ResourceSuffix: !Ref ResourceSuffix
-#      EventBusName: !Ref EventBusName
-#      EventPattern:
-#        source:
-#          - !Ref ObToolEventSource
-#        detail-type:
-#          - !Ref ObToolEventDetailType
-#      State: ENABLED
-#      Targets:
-#        - Arn: !GetAtt ObCrmToolLambda.Arn
-#          Id: openbrain-crm-tool-lambda
-#  ObCrmToolLambda:
-#    Type: AWS::Serverless::Function
-#    Properties:
-#      Handler: index.handler
-#      FunctionName: !Sub
-#        - 'ObCrmToolLambda-${ResourceSuffix}'
-#        - ResourceSuffix: !Ref ResourceSuffix
-#      Runtime: python3.10
-#      CodeUri: ./src/tools/send_lead_to_crm.py
-#      Events:
-#        MyEvent:
-#          Type: CloudWatchEvent
-#          Properties:
-#            Pattern:
-#              source:
-#                - !Ref ObToolEventSource
+  InfraTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Sub
+        - 'ObInfra-${ResourceSuffix}'
+        - ResourceSuffix: !Ref ResourceSuffix
+      DisplayName: Infrastructure Notifications
+
+  BusinessTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Sub
+        - 'ObBusiness-${ResourceSuffix}'
+        - ResourceSuffix: !Ref ResourceSuffix
+      DisplayName: Business Notifications
+
   #######################################################
   # Tables
   #######################################################
