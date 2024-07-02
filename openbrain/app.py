@@ -513,7 +513,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 with gr.Tab("Actions"):
                     with gr.Accordion("Action Events") as events_accordian:
                         events = get_action_events()
-                        events = gr.Json(value=events, label="Recorded Action Events")
+                        events = gr.Json(value=events, label="Recorded Action Events", every=30)
 
                 chat_button = gr.Button("Chat", variant="primary")
                 reset_agent = gr.Button("Reset", variant="secondary")
