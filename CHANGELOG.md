@@ -1,6 +1,16 @@
 # CHANGELOG
 
+## v1.4.16-dev.7 (2024-07-02)
+
+### Feature
+
+* feat: updating pipeline, removing UI deployments, moving to ob-api. ([`8fac7b9`](https://github.com/svange/openbrain/commit/8fac7b93430448e3362315488102734238ed4dc7))
+
 ## v1.4.16-dev.6 (2024-07-01)
+
+### Chore
+
+* chore(release): release 1.4.16-dev.6 ([`80a4dc5`](https://github.com/svange/openbrain/commit/80a4dc5d76443b569fb88494c1da898158a3d78e))
 
 ### Feature
 
