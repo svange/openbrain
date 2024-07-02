@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.38.0](https://github.com/svange/openbrain/compare/v1.37.0...v1.38.0) (2024-07-02)
+
+
+### Features
+
+* Added action table reporter to gradio ([d42ed2a](https://github.com/svange/openbrain/commit/d42ed2aa0dedf321ae229931c7f5c511665933e8))
+
+
+### Bug Fixes
+
+* cleaning up remaining remnants of "lead" objects ([d4ff823](https://github.com/svange/openbrain/commit/d4ff823a472633d8c204c6ce08c359300abd34bf))
+
 ## [1.37.0](https://github.com/svange/openbrain/compare/v1.36.0...v1.37.0) (2024-07-02)
 
 
