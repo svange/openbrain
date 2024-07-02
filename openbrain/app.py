@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+from decimal import Decimal
 
 import boto3
 import gradio as gr
@@ -277,14 +278,22 @@ def auth(username, password):
 dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table(config.ACTION_TABLE_NAME)
 
+
+class CustomJsonEncoder(json.JSONEncoder):
+
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            return float(obj)
+        return super(CustomJsonEncoder, self).default(obj)
+
+
 def get_action_events():
     try:
         dynamodb = boto3.resource("dynamodb")
         table = dynamodb.Table(config.ACTION_TABLE_NAME)
-        # Get the last 2 action events
         response = table.scan()
         items = response["Items"]
-        ret = json.dumps(items)
+        ret = json.dumps(items, cls=CustomJsonEncoder, indent=4, sort_keys=True)
     except Exception as e:
         ret = json.dumps({"exception": e.__str__()})
     return json.dumps(ret)
