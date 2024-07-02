@@ -1,20 +1,34 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v1.22.0-dev.1 (2024-07-02)
+
+### Feature
+
+* feat: re-enabling auth in gradio ([`0813333`](https://github.com/svange/openbrain/commit/081333322986a514ee839a379e31a7a91a944985))
+
+## v1.21.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.21.0 [skip ci]
 
 ## [1.21.0](https://github.com/svange/openbrain/compare/v1.20.0...v1.21.0) (2024-07-02)
-
 
 ### Features
 
 * updating pipeline, removing UI deployments, moving to ob-api. ([93ee354](https://github.com/svange/openbrain/commit/93ee35441a26aeff7dc6d2b6205df5f0547210b1))
 * updating pipeline, removing UI deployments, moving to ob-api. ([8fac7b9](https://github.com/svange/openbrain/commit/8fac7b93430448e3362315488102734238ed4dc7))
-* updating UI ([cc4f160](https://github.com/svange/openbrain/commit/cc4f1601fe476563775a7cf519b0bd5f40a31a15))
+* updating UI ([cc4f160](https://github.com/svange/openbrain/commit/cc4f1601fe476563775a7cf519b0bd5f40a31a15)) ([`fde4550`](https://github.com/svange/openbrain/commit/fde45501e0068fdd6acad7561cf2c8b86ef222d0))
 
-# CHANGELOG
+### Feature
+
+* feat: updating pipeline, removing UI deployments, moving to ob-api. ([`93ee354`](https://github.com/svange/openbrain/commit/93ee35441a26aeff7dc6d2b6205df5f0547210b1))
 
 ## v1.4.16-dev.7 (2024-07-02)
+
+### Chore
+
+* chore(release): release 1.4.16-dev.7 ([`0cef0b0`](https://github.com/svange/openbrain/commit/0cef0b0f0e0cfcba5d7a0c547bebd065d6d32510))
 
 ### Feature
 
