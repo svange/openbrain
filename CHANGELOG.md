@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.34.0](https://github.com/svange/openbrain/compare/v1.33.0...v1.34.0) (2024-07-02)
+
+
+### Features
+
+* Added action table reporter to gradio ([44f56d3](https://github.com/svange/openbrain/commit/44f56d3ec5a2dca5d23ead858687ceeba07b3f8e))
+
 ## [1.33.0](https://github.com/svange/openbrain/compare/v1.32.0...v1.33.0) (2024-07-02)
 
 
