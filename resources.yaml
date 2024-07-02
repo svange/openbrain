@@ -26,7 +26,7 @@ Resources:
             Resource:
               - !GetAtt ObSessionTable.Arn
               - !GetAtt ObAgentConfigTable.Arn
-              - !GetAtt ObLeadTable.Arn
+#              - !GetAtt ObLeadTable.Arn
               - !GetAtt ObActionTable.Arn
           - Effect: Allow
             Action:
@@ -96,25 +96,25 @@ Resources:
       TableName: !Sub
         - 'ObAgentConfigTable-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
-  ObLeadTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: client_id
-          AttributeType: S
-        - AttributeName: lead_id
-          AttributeType: S
-      KeySchema:
-        - AttributeName: client_id
-          KeyType: HASH
-        - AttributeName: lead_id
-          KeyType: RANGE
-      ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5
-      TableName: !Sub
-        - 'ObLeadTable-${ResourceSuffix}'
-        - ResourceSuffix: !Ref ResourceSuffix
+#  ObLeadTable:
+#    Type: AWS::DynamoDB::Table
+#    Properties:
+#      AttributeDefinitions:
+#        - AttributeName: client_id
+#          AttributeType: S
+#        - AttributeName: lead_id
+#          AttributeType: S
+#      KeySchema:
+#        - AttributeName: client_id
+#          KeyType: HASH
+#        - AttributeName: lead_id
+#          KeyType: RANGE
+#      ProvisionedThroughput:
+#        ReadCapacityUnits: 5
+#        WriteCapacityUnits: 5
+#      TableName: !Sub
+#        - 'ObLeadTable-${ResourceSuffix}'
+#        - ResourceSuffix: !Ref ResourceSuffix
 
   ObActionTable:
     Type: AWS::DynamoDB::Table
@@ -157,9 +157,9 @@ Outputs:
     ObAgentConfigTableName:
         Description: ObAgentConfigTable
         Value: !Ref ObAgentConfigTable
-    ObLeadTableName:
-        Description: ObLeadTable
-        Value: !Ref ObLeadTable
+#    ObLeadTableName:
+#        Description: ObLeadTable
+#        Value: !Ref ObLeadTable
     ObActionTableName:
         Description: ObActionTable
         Value: !Ref ObActionTable

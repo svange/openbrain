@@ -6,7 +6,6 @@ import inspect
 import os
 import pkgutil
 import sys
-from ast import literal_eval
 
 import boto3
 import pytest
@@ -78,10 +77,10 @@ def incoming_agent_config(default_agent_config):
     return outgoing_agent_config
 
 
-@pytest.fixture
-def incoming_lead(simple_lead):
-    outgoing_lead = simple_lead
-    return outgoing_lead
+# @pytest.fixture
+# def incoming_lead(simple_lead):
+#     outgoing_lead = simple_lead
+#     return outgoing_lead
 
 
 class TestAgentTools:

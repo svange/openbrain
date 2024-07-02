@@ -1,5 +1,4 @@
 import json
-import logging
 import os
 from decimal import Decimal
 
@@ -7,7 +6,6 @@ import boto3
 import gradio as gr
 import requests
 from dotenv import load_dotenv
-
 
 load_dotenv()
 GRADIO_INFRA_STACK_NAME = os.environ.get("GRADIO_INFRA_STACK_NAME", None)
@@ -21,6 +19,11 @@ from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.orm.model_chat_message import ChatMessage
 from openbrain.orm.model_chat_session import ChatSession
 from openbrain.util import config, Defaults
+import logging
+
+logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename="app.log", encoding="utf-8", level=logging.INFO)
 
 EXAMPLE_CONTEXT = '''
 {
@@ -56,16 +59,37 @@ PORT = int(os.environ.get("GRADIO_PORT", 7860))
 if OB_MODE == Defaults.OB_MODE_LOCAL.value:
     from openbrain.orm.model_common_base import InMemoryDb
 
-
-logging.basicConfig(filename="app.log", encoding="utf-8", level=logging.DEBUG)
+def get_debug_text():
+    try:
+        aws_region = config.AWS_REGION
+        aws_profile = os.environ.get("AWS_PROFILE", "UNKNOWN")
+        logger.info(f"OB_MODE: {OB_MODE}")
+        logger.info(f"CHAT_ENDPOINT: {CHAT_ENDPOINT}")
+        logger.info(f"DEFAULT_ORIGIN: {DEFAULT_ORIGIN}")
+        logger.info(f"OB_PROVIDER_API_KEY: {OB_PROVIDER_API_KEY}")
+        logger.info(f"GRADIO_PASSWORD: {GRADIO_PASSWORD}")
+        logger.info(f"DEFAULT_CLIENT_ID: {DEFAULT_CLIENT_ID}")
+        logger.info(f"DEFAULT_PROFILE_NAME: {DEFAULT_PROFILE_NAME}")
+        logger.info(f"PORT: {PORT}")
+        logger.info(f"INFRA_STACK_NAME: {config.INFRA_STACK_NAME}")
+        logger.info(f"SESSION_TABLE_NAME: {config.SESSION_TABLE_NAME}")
+        logger.info(f"AGENT_CONFIG_TABLE_NAME: {config.AGENT_CONFIG_TABLE_NAME}")
+        logger.info(f"ACTION_TABLE_NAME: {config.ACTION_TABLE_NAME}")
+        logger.info(f"AWS_REGION: {aws_region}")
+        logger.info(f"AWS_PROFILE: {aws_profile}")
+        with open("app.log", "r") as f:
+            lines = f.readlines()[-20:]
+            return "\n".join(lines)
+    except Exception as e:
+        return e.__str__()
 
 
 def chat(message, chat_history, _profile_name, session_state, _client_id, _context):
     # Make a POST request to the chat endpoint
-
     session_id = session_state["session_id"]
     context_dict = json.loads(_context)
-    chat_message = ChatMessage(agent_config=_profile_name, client_id=_client_id, reset=False, message=message, session_id=session_id, **context_dict )
+    chat_message = ChatMessage(agent_config=_profile_name, client_id=_client_id, reset=False, message=message,
+                               session_id=session_id, **context_dict)
 
     new_context = None
 
@@ -103,6 +127,7 @@ def chat(message, chat_history, _profile_name, session_state, _client_id, _conte
         chat_message_dump["session_id"] = session_id
 
         response = session.post(CHAT_ENDPOINT, json=chat_message_dump)
+        logger.info(f"Response: {response.json()}")
         response_message = response.json()["message"]
         session_state["session"] = session
 
@@ -122,14 +147,12 @@ def chat(message, chat_history, _profile_name, session_state, _client_id, _conte
 
 
 def reset(
-    _client_id,
-    _profile_name,
-    chat_history,
-    session_state,
-    _context
+        _client_id,
+        _profile_name,
+        chat_history,
+        session_state,
+        _context
 ):
-
-
     context_dict = json.loads(_context)
     chat_message = ChatMessage(
         client_id=_client_id,
@@ -163,11 +186,12 @@ def reset(
         # Make a POST request to the reset endpoint
         session = session_state["session"]
         headers = {
-                "x-api-key": OB_PROVIDER_API_KEY,
-                "origin": DEFAULT_ORIGIN,
-             }
+            "x-api-key": OB_PROVIDER_API_KEY,
+            "origin": DEFAULT_ORIGIN,
+        }
         session.headers.update(headers)
         response = session.post(url=CHAT_ENDPOINT, json=chat_message_dump)
+        logger.info(f"Response: {response.json()}")
         session_id = response.cookies["Session"]
         session_state["session_id"] = session_id
         session_state["session"] = session
@@ -190,20 +214,20 @@ def reset(
 
 
 def save(
-    _icebreaker,
-    _chat_model,
-    _system_message,
-    # _prompt_layer_tags,
-    _max_iterations,
-    _max_execution_time,
-    _executor_temp,
-    _profile_name,
-    _executor_model_type,
-    _openai_api_key,
-    # _promptlayer_api_key,
-    client_id,
-    outgoing_webhook_url,
-    tools
+        _icebreaker,
+        _chat_model,
+        _system_message,
+        # _prompt_layer_tags,
+        _max_iterations,
+        _max_execution_time,
+        _executor_temp,
+        _profile_name,
+        _executor_model_type,
+        _openai_api_key,
+        # _promptlayer_api_key,
+        client_id,
+        outgoing_webhook_url,
+        tools
 ):
     if _profile_name.strip() == "":
         gr.Error("Personalization key can't be blank.")
@@ -231,6 +255,7 @@ def save(
 
     # Upload the preferences to the DynamoDB database
     agent_config.save()
+    logger.info(f"AgentConfig saved: {agent_config.to_json()}")
 
     # Return a success message
     return "Preferences saved successfully."
@@ -242,7 +267,13 @@ def load(_profile_name: str, _client_id: str):
     # Upload the preferences to the DynamoDB database
     if not _client_id:
         _client_id = DEFAULT_CLIENT_ID
-    retrieved_agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
+    try:
+        retrieved_agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
+        logger.info(f"AgentConfig retrieved: {retrieved_agent_config.to_json()}")
+    except Exception as e:
+        logger.error(f"Error: {e}")
+        return f"Error: {e}"
+
     _tools = retrieved_agent_config.tools
     _agent_config = [
         str(retrieved_agent_config.icebreaker),
@@ -275,6 +306,7 @@ def auth(username, password):
             return True
     return False
 
+
 dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table(config.ACTION_TABLE_NAME)
 
@@ -288,6 +320,7 @@ class CustomJsonEncoder(json.JSONEncoder):
 
 
 def get_action_events():
+    logger.info("Getting action events...")
     try:
         dynamodb = boto3.resource("dynamodb")
         table = dynamodb.Table(config.ACTION_TABLE_NAME)
@@ -299,9 +332,13 @@ def get_action_events():
     return json.dumps(ret)
 
 
+
+
 def get_available_profile_names() -> list:
+    logger.info("Getting available profile names...")
     # logger.warning("get_available_profile_names() is not implemented")
     # Get AgentConfig table
+
     if OB_MODE == Defaults.OB_MODE_LOCAL.value:
         try:
             lst = list(InMemoryDb.instance[config.AGENT_CONFIG_TABLE_NAME][DEFAULT_CLIENT_ID].keys())
@@ -333,7 +370,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 max_iterations = gr.Number(
                     label="Max Iterations",
                     info="The number of steps the executor can take before the conversation is terminated with an "
-                    "error message.",
+                         "error message.",
                 )
                 max_execution_time = gr.Slider(
                     minimum=0,
@@ -341,7 +378,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     label="Max Execution Time",
                     step=0.5,
                     info="The maximum amount of time the executor can take before the "
-                    "conversation is terminated with an error message.",
+                         "conversation is terminated with an error message.",
                 )
                 executor_temp = gr.Slider(
                     minimum=0,
@@ -410,8 +447,8 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 label="System Message",
                 placeholder="Enter your system message here",
                 info="The System Message. This message is a part of every context with "
-                "ChatGPT, and is therefore the most influential, and expensive place to "
-                "add text",
+                     "ChatGPT, and is therefore the most influential, and expensive place to "
+                     "add text",
                 show_label=False,
             )
 
@@ -422,6 +459,19 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 placeholder="Enter your icebreaker here",
                 show_label=False,
                 info="The first message to be sent to the user.",
+            )
+
+        with gr.Tab("Debugging") as debug_tab:
+            debug_text = get_debug_text()
+            debug_text = gr.Textbox(
+                label="Debug",
+                info="Debugging information",
+                show_label=False,
+                lines=20,
+                value=debug_text,
+                interactive=False,
+                autoscroll=True,
+                show_copy_button=True,
             )
 
     with gr.Accordion("Save and Load") as submit_accordion:
@@ -487,13 +537,9 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 )
 
     with gr.Accordion("Chat") as chat_accordian:
-
         with gr.Row() as chat_row:
-
             with gr.Column(scale=2) as chat_container:
-
                 with gr.Accordion("Chat") as chat_box_accordian:
-
                     with gr.Column(scale=2) as chat_column:
                         chatbot = gr.Chatbot()
 
@@ -501,7 +547,6 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
             with gr.Column(scale=1) as context_container:
                 with gr.Tab("Context"):
-
                     with gr.Accordion("Context", open=True) as context_accordian:
                         context = gr.Textbox(
                             label="Context",
