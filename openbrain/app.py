@@ -39,12 +39,14 @@ if OB_MODE == Defaults.OB_MODE_LOCAL.value:
 logging.basicConfig(filename="app.log", encoding="utf-8", level=logging.DEBUG)
 
 
-def chat(message, chat_history, _profile_name, session_state, _client_id):
+def chat(message, chat_history, _profile_name, session_state, _client_id, _context):
     # Make a POST request to the chat endpoint
 
     session_id = session_state["session_id"]
+    context_dict = json.loads(_context)
+    chat_message = ChatMessage(agent_config=_profile_name, client_id=_client_id, reset=False, message=message, session_id=session_id, **context_dict )
 
-    chat_message = ChatMessage(client_id=_client_id, reset=False, message=message, session_id=session_id)
+    new_context = None
 
     response_message = None
     if OB_MODE == Defaults.OB_MODE_LOCAL.value:
@@ -76,42 +78,48 @@ def chat(message, chat_history, _profile_name, session_state, _client_id):
                 "origin": DEFAULT_ORIGIN,
             }
         )
-        response = session.post(CHAT_ENDPOINT, json=chat_message.to_json())
+        chat_message_dump = chat_message.model_dump()
+        chat_message_dump["session_id"] = session_id
+
+        response = session.post(CHAT_ENDPOINT, json=chat_message_dump)
         response_message = response.json()["message"]
         session_state["session"] = session
+
+        response_dict = response.json()
+        response_dict.pop("message")
+        response_dict.pop("session_id")
+        original_context = json.loads(_context)
+        response_dict.update(original_context)
+        new_context = json.dumps(response_dict, indent=4, sort_keys=True)
+
     session_state["last_response"] = response_message
 
     chat_history.append([message, response_message])
 
     # Return the response from the API
-    return ["", chat_history, session_state]
+    return ["", chat_history, session_state, new_context]
 
 
 def reset(
-    _icebreaker,
-    _chat_model,
-    _system_message,
-    _prompt_layer_tags,
-    _max_iterations,
-    _max_execution_time,
-    _executor_temp,
-    _profile_name,
-    _executor_model_type,
-    _openai_api_key,
-    _promptlayer_api_key,
     _client_id,
-    _outgoing_webhook_url,
-    _message,
+    _profile_name,
     chat_history,
     session_state,
-    tools
+    _context
 ):
+
+
+    context_dict = json.loads(_context)
     chat_message = ChatMessage(
         client_id=_client_id,
         reset=True,
-        message="no message",
         agent_config=_profile_name,
+        message="Hi",
+        **context_dict
     )
+
+    chat_message_dump = chat_message.model_dump()
+    chat_message_dump.pop("message")
 
     response = None
     if OB_MODE == Defaults.OB_MODE_LOCAL.value:
@@ -133,13 +141,12 @@ def reset(
     else:
         # Make a POST request to the reset endpoint
         session = session_state["session"]
-        session.headers.update(
-            {
+        headers = {
                 "x-api-key": OB_PROVIDER_API_KEY,
                 "origin": DEFAULT_ORIGIN,
              }
-        )
-        response = session.post(CHAT_ENDPOINT, json=chat_message.to_json())
+        session.headers.update(headers)
+        response = session.post(url=CHAT_ENDPOINT, json=chat_message_dump)
         session_id = response.cookies["Session"]
         session_state["session_id"] = session_id
         session_state["session"] = session
@@ -148,8 +155,17 @@ def reset(
     message = f"Please wait, fetching new agent..."
     chat_history.append([message, response_message])
 
+    response_dict = response.json()
+    response_dict.pop("message")
+    response_dict.pop("session_id")
+
+    original_context = json.loads(_context)
+
+    response_dict.update(original_context)
+    new_context = json.dumps(response_dict, indent=4, sort_keys=True)
+
     # Return the response from the API
-    return ["", chat_history, session_state]
+    return ["", chat_history, session_state, new_context]
 
 
 def save(
@@ -427,66 +443,72 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
     chatbot = gr.Chatbot()
 
     with gr.Row() as chat_row:
-        with gr.Accordion("Context", open=False) as context_accordian:
-            context = gr.Textbox(
-                label="Context",
-                placeholder="Enter your context here",
-                info="The context of the conversation.",
-                show_label=False,
-            )
-
-        with gr.Accordion("Chat") as chat_accordian:
-
-            with gr.Column(scale=4) as chat_column:
-                msg = gr.Textbox()
-            with gr.Column(scale=1) as chat_button_column:
-                chat_button = gr.Button("Chat", variant="primary")
-                reset_agent = gr.Button("Reset", variant="secondary")
-
-                msg.submit(
-                    chat,
-                    [msg, chatbot, profile_name, session_state, client_id],
-                    [msg, chatbot, session_state],
+        with gr.Column(scale=1) as context_container:
+            with gr.Accordion("Context", open=True, scale=1) as context_accordian:
+                default_text = '''{
+                    "firstName": "Samuel",
+                    "lastName": "Vange",
+                    "name": "Sam Vange",
+                    "dateOfBirth": "1970-04-01",
+                    "phone": "+16197966726",
+                    "email": "samuelvange@gmail.com",
+                    "address1": "1234 5th St N",
+                    "city": "San Diego",
+                    "state": "CA",
+                    "country": "US",
+                    "postalCode": "92108",
+                    "companyName": "Augmenting Integrations",
+                    "website": "openbra.in",
+                    "medications": "vicodin",
+                    "calendarId": "asGgwlPqqu6s17W084uE",
+                    "contactId": "8LDRBvYKbVyhXymqMurF",
+                    "locationId": "HbTkOpUVUXtrMQ5wkwxD"
+                }
+                '''
+                context = gr.Textbox(
+                    label="Context",
+                    info="The context for the conversation.",
+                    show_label=False,
+                    lines=5,
+                    value=default_text,
                 )
 
-                chat_button.click(
-                    fn=chat,
-                    inputs=[msg, chatbot, profile_name, session_state, client_id],
-                    outputs=[msg, chatbot, session_state],
-                )
+        with gr.Column(scale=2) as chat_container:
 
-                reset_agent.click(
-                    fn=reset,
-                    inputs=[
-                        icebreaker,
-                        chat_model,
-                        system_message,
-                        prompt_layer_tags,
-                        max_iterations,
-                        max_execution_time,
-                        executor_temp,
-                        profile_name,
-                        executor_model_type,
-                        openai_api_key,
-                        promptlayer_api_key,
-                        client_id,
-                        outgoing_webhook_url,
-                        msg,
-                        chatbot,
-                        session_state,
-                        tools
-                    ],
-                    outputs=[msg, chatbot, session_state],
-                )
+            with gr.Accordion("Chat", scale=2) as chat_accordian:
+
+                with gr.Column(scale=4) as chat_column:
+                    msg = gr.Textbox()
+                with gr.Column(scale=1) as chat_button_column:
+                    chat_button = gr.Button("Chat", variant="primary")
+                    reset_agent = gr.Button("Reset", variant="secondary")
+
+                    msg.submit(
+                        chat,
+                        [msg, chatbot, profile_name, session_state, client_id, context],
+                        [msg, chatbot, session_state, context],
+                    )
+
+                    chat_button.click(
+                        fn=chat,
+                        inputs=[msg, chatbot, profile_name, session_state, client_id, context],
+                        outputs=[msg, chatbot, session_state, context],
+                    )
+
+                    reset_agent.click(
+                        fn=reset,
+                        inputs=[
+                            client_id,
+                            profile_name,
+                            chatbot,
+                            session_state,
+                            context
+                        ],
+                        outputs=[msg, chatbot, session_state, context],
+                    )
 
 
 def main():
-    # auth = gr.auth(username="admin", password="admin")'
-    # main_block.launch(auth=auth, auth_message="Please login to continue", share=False, debug=True,
-    #                   server_name="0.0.0.0", server_port=7861, show_tips=True, )
-    # reset the public default profile
-    # agent_config = AgentConfig(client_id=DEFAULT_CLIENT_ID, profile_name=DEFAULT_PROFILE_NAME)
-    # agent_config.save()
     main_block.launch(
         debug=True,
         share=False,
