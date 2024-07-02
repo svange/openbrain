@@ -278,16 +278,16 @@ dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table(config.ACTION_TABLE_NAME)
 
 def get_action_events():
-    dynamodb = boto3.resource("dynamodb")
-    table = dynamodb.Table(config.ACTION_TABLE_NAME)
-    # Get the last 2 action events
-    response = table.scan()
-    items = response["Items"]
-
-    if not items:
-        return json.dumps(["Could not find any items. This could be because of an environment mismatch or a table name error."])
-
-    return json.dumps(items)
+    try:
+        dynamodb = boto3.resource("dynamodb")
+        table = dynamodb.Table(config.ACTION_TABLE_NAME)
+        # Get the last 2 action events
+        response = table.scan()
+        items = response["Items"]
+        ret = json.dumps(items)
+    except Exception as e:
+        ret = json.dumps({"exception": e.__str__()})
+    return json.dumps(ret)
 
 
 def get_available_profile_names() -> list:
