@@ -128,9 +128,9 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
-#      TableName: !Sub
-#        - 'ObActionTable-${ResourceSuffix}'
-#        - ResourceSuffix: !Ref ResourceSuffix
+      TableName: !Sub
+        - 'ObActionTable-${ResourceSuffix}'
+        - ResourceSuffix: !Ref ResourceSuffix
 
 
 #  LeadmoContactTable:
