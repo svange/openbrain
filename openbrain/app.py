@@ -444,7 +444,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
     with gr.Row() as chat_row:
         with gr.Column(scale=1) as context_container:
-            with gr.Accordion("Context", open=True, scale=1) as context_accordian:
+            with gr.Accordion("Context", open=True) as context_accordian:
                 default_text = '''{
                     "firstName": "Samuel",
                     "lastName": "Vange",
@@ -475,7 +475,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
         with gr.Column(scale=2) as chat_container:
 
-            with gr.Accordion("Chat", scale=2) as chat_accordian:
+            with gr.Accordion("Chat") as chat_accordian:
 
                 with gr.Column(scale=4) as chat_column:
                     msg = gr.Textbox()
