@@ -8,7 +8,7 @@ import requests
 from dotenv import load_dotenv
 
 
-load_dotenv('.')
+load_dotenv()
 GRADIO_INFRA_STACK_NAME = os.environ.get("GRADIO_INFRA_STACK_NAME", None)
 
 if GRADIO_INFRA_STACK_NAME:
