@@ -49,7 +49,7 @@ class Defaults(Enum):
     """Default values for environment variables and other constants."""
 
     SESSION_TABLE_NAME = None
-    LEAD_TABLE_NAME = None
+    # LEAD_TABLE_NAME = None
     AGENT_CONFIG_TABLE_NAME = None
     ACTION_TABLE_NAME = None
     # SECRET_STORE_NAME = "ObSecrets"
@@ -60,7 +60,7 @@ class Defaults(Enum):
     # DB Tables
     INFRA_STACK_NAME = "OpenBrain"
     SESSION_TABLE_PUBLISHED_NAME = "ObSessionTableName"
-    LEAD_TABLE_PUBLISHED_NAME = "ObLeadTableName"
+    # LEAD_TABLE_PUBLISHED_NAME = "ObLeadTableName"
     AGENT_CONFIG_TABLE_PUBLISHED_NAME = "ObAgentConfigTableName"
     ACTION_TABLE_PUBLISHED_NAME = "ObActionTableName"
     # SECRET_STORE_PUBLISHED_NAME = "OpenbrainSecretStore"
@@ -96,9 +96,9 @@ class Config:
     SESSION_TABLE_NAME: str = field(
         default=os.environ.get(Defaults.SESSION_TABLE_NAME.name, Defaults.SESSION_TABLE_NAME.value)
     )
-    LEAD_TABLE_NAME: str = field(
-        default=os.environ.get(Defaults.LEAD_TABLE_NAME.name, Defaults.LEAD_TABLE_NAME.value)
-    )
+    # LEAD_TABLE_NAME: str = field(
+    #     default=os.environ.get(Defaults.LEAD_TABLE_NAME.name, Defaults.LEAD_TABLE_NAME.value)
+    # )
     AGENT_CONFIG_TABLE_NAME: str = field(
         default=os.environ.get(
             Defaults.AGENT_CONFIG_TABLE_NAME.name, Defaults.AGENT_CONFIG_TABLE_NAME.value
@@ -114,11 +114,11 @@ class Config:
             Defaults.SESSION_TABLE_PUBLISHED_NAME.name, Defaults.SESSION_TABLE_PUBLISHED_NAME.value
         )
     )
-    LEAD_TABLE_PUBLISHED_NAME: str = field(
-        default=os.environ.get(
-            Defaults.LEAD_TABLE_PUBLISHED_NAME.name, Defaults.LEAD_TABLE_PUBLISHED_NAME.value
-        )
-    )
+    # LEAD_TABLE_PUBLISHED_NAME: str = field(
+    #     default=os.environ.get(
+    #         Defaults.LEAD_TABLE_PUBLISHED_NAME.name, Defaults.LEAD_TABLE_PUBLISHED_NAME.value
+    #     )
+    # )
     AGENT_CONFIG_TABLE_PUBLISHED_NAME: str = field(
         default=os.environ.get(
             Defaults.AGENT_CONFIG_TABLE_PUBLISHED_NAME.name,
