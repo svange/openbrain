@@ -62,7 +62,7 @@ class Defaults(Enum):
     SESSION_TABLE_PUBLISHED_NAME = "ObSessionTableName"
     LEAD_TABLE_PUBLISHED_NAME = "ObLeadTableName"
     AGENT_CONFIG_TABLE_PUBLISHED_NAME = "ObAgentConfigTableName"
-    # ACTION_TABLE_PUBLISHED_NAME = "ObActionTableName"
+    ACTION_TABLE_PUBLISHED_NAME = "ObActionTableName"
     # SECRET_STORE_PUBLISHED_NAME = "OpenbrainSecretStore"
 
     # Other Values with defaults
@@ -104,10 +104,10 @@ class Config:
             Defaults.AGENT_CONFIG_TABLE_NAME.name, Defaults.AGENT_CONFIG_TABLE_NAME.value
         )
     )
-    # ACTION_TABLE_NAME: str = field(
-    #     default=os.environ.get(
-    #         Defaults.ACTION_TABLE_NAME.name, Defaults.ACTION_TABLE_NAME.value)
-    # )
+    ACTION_TABLE_NAME: str = field(
+        default=os.environ.get(
+            Defaults.ACTION_TABLE_NAME.name, Defaults.ACTION_TABLE_NAME.value)
+    )
 
     SESSION_TABLE_PUBLISHED_NAME: str = field(
         default=os.environ.get(
@@ -125,12 +125,12 @@ class Config:
             Defaults.AGENT_CONFIG_TABLE_PUBLISHED_NAME.value,
         )
     )
-    # ACTION_TABLE_PUBLISHED_NAME: str = field(
-    #     default=os.environ.get(
-    #         Defaults.ACTION_TABLE_PUBLISHED_NAME.name,
-    #         Defaults.ACTION_TABLE_PUBLISHED_NAME.value,
-    #     )
-    # )
+    ACTION_TABLE_PUBLISHED_NAME: str = field(
+        default=os.environ.get(
+            Defaults.ACTION_TABLE_PUBLISHED_NAME.name,
+            Defaults.ACTION_TABLE_PUBLISHED_NAME.value,
+        )
+    )
 
     # MISC RESOURCES
     EVENTBUS_NAME: str = field(
