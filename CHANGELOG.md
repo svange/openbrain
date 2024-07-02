@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.25.0](https://github.com/svange/openbrain/compare/v1.24.0...v1.25.0) (2024-07-02)
+
+
+### Features
+
+* adding sns topic for testing ([54af4dc](https://github.com/svange/openbrain/commit/54af4dc96fc71f5c0220d8220b92e8742d62a082))
+
 ## [1.24.0](https://github.com/svange/openbrain/compare/v1.23.0...v1.24.0) (2024-07-02)
 
 
