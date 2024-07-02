@@ -21,8 +21,7 @@ from openbrain.orm.model_chat_session import ChatSession
 from openbrain.util import config, Defaults
 import logging
 
-logger = logging.getLogger(__name__)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("Gradio")
 logging.basicConfig(filename="app.log", encoding="utf-8", level=logging.INFO)
 
 EXAMPLE_CONTEXT = '''
