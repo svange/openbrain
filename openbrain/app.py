@@ -283,12 +283,11 @@ def get_action_events():
     # Get the last 2 action events
     response = table.scan()
     items = response["Items"]
-    last_2_items = items[-2:]
 
-    if not last_2_items:
+    if not items:
         return json.dumps(["Could not find any items. This could be because of an environment mismatch or a table name error."])
 
-    return json.dumps(last_2_items)
+    return json.dumps(items)
 
 
 def get_available_profile_names() -> list:
