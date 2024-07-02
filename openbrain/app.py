@@ -493,7 +493,7 @@ def main():
         server_name="0.0.0.0",
         server_port=PORT,
         show_tips=True,
-        # auth=auth,
+        auth=auth,
         auth_message="Please login to continue",
     )
 
