@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.29.0](https://github.com/svange/openbrain/compare/v1.28.0...v1.29.0) (2024-07-02)
+
+
+### Features
+
+* Action table functionality to record actions ([4cd866d](https://github.com/svange/openbrain/commit/4cd866d9ed169022bb19b2cea0d26c9638836805))
+
 ## [1.28.0](https://github.com/svange/openbrain/compare/v1.27.0...v1.28.0) (2024-07-02)
 
 
