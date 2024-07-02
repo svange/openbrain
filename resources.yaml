@@ -27,6 +27,7 @@ Resources:
               - !GetAtt ObSessionTable.Arn
               - !GetAtt ObAgentConfigTable.Arn
               - !GetAtt ObLeadTable.Arn
+              - !GetAtt ObActionTable.Arn
           - Effect: Allow
             Action:
               - cloudformation:DescribeStacks
@@ -115,6 +116,23 @@ Resources:
         - 'ObLeadTable-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
 
+  ObActionTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: action_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: action_id
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+#      TableName: !Sub
+#        - 'ObActionTable-${ResourceSuffix}'
+#        - ResourceSuffix: !Ref ResourceSuffix
+
+
 #  LeadmoContactTable:
 #    Type: AWS::DynamoDB::Table
 #    Properties:
@@ -142,6 +160,9 @@ Outputs:
     ObLeadTableName:
         Description: ObLeadTable
         Value: !Ref ObLeadTable
+    ObActionTableName:
+        Description: ObActionTable
+        Value: !Ref ObActionTable
     CommonAccessPolicyArn:
         Description: CommonAccessPolicyArn
         Value: !Ref CommonAccessPolicy

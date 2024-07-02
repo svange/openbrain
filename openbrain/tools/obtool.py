@@ -2,6 +2,7 @@ import datetime
 from typing import Any
 
 import boto3
+import ulid
 from botocore.exceptions import ParamValidationError
 from langchain.tools import BaseTool
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
@@ -9,7 +10,6 @@ from openbrain.util import logger, Defaults, config
 
 class OBTool:
     """A tool for GptAgents. Tools consist of the main langchain extended BaseTool and any callbacks needed to supplement"""
-
     on_llm_start: OBCallbackHandlerFunctionProtocol
     on_chat_model_start: OBCallbackHandlerFunctionProtocol
     on_llm_new_token: OBCallbackHandlerFunctionProtocol
@@ -28,6 +28,23 @@ class OBTool:
 
     def __init__(self, initial_context: dict = None, *args, **kwargs):
         self.initial_context = initial_context or {}
+
+    @classmethod
+    def record_action(cls, event, response):
+        dynamodb = boto3.resource("dynamodb")
+        table = dynamodb.Table(config.ACTION_TABLE_NAME.value)
+
+        item = {
+            "action_id": ulid.ULID().to_uuid().__str__(),
+            "event": event,
+            "response": response,
+        }
+
+        action_response = table.put_item(
+            Item=item
+        )
+        return action_response
+
 
     @classmethod
     def send_event(cls, event_detail: str, event_source: str = Defaults.OB_TOOL_EVENT_SOURCE.value) -> Any:
@@ -57,6 +74,10 @@ class OBTool:
                 logger.info(f"LOCAL_MODE: Can't send to CRM in local mode.")
             else:
                 raise e
+        try:
+            cls.record_action(event=event_source, response=response)
+        except Exception as e:
+            logger.error(f"Error recording action: {e}")
 
         return response
 
