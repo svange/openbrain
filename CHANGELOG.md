@@ -1,3 +1,20 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.22.0](https://github.com/svange/openbrain/compare/v1.21.0...v1.22.0) (2024-07-02)
+
+
+### Features
+
+* re-enabling auth in gradio ([0813333](https://github.com/svange/openbrain/commit/081333322986a514ee839a379e31a7a91a944985))
+
+
+### Bug Fixes
+
+* re-enabling auth in gradio ([7b3d583](https://github.com/svange/openbrain/commit/7b3d583baefb66660b028e7125d180584b7ab177))
+
 # CHANGELOG
 
 ## v1.22.0-dev.1 (2024-07-02)
