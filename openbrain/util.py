@@ -159,7 +159,11 @@ class Config:
             logger.warning(
                 f"Environment variable OB_MODE={self.OB_MODE} must be one of {self.RECOGNIZED_OB_MODES}"
             )
-        self.set_dynamic_values()
+
+        try:
+            self.set_dynamic_values()
+        except Exception as e:
+            logger.error(f"Error setting dynamic values: {e}")
 
     def set_dynamic_values(self):
         _logger = get_logger()

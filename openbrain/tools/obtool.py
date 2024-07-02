@@ -32,7 +32,7 @@ class OBTool:
     @classmethod
     def record_action(cls, event, response):
         dynamodb = boto3.resource("dynamodb")
-        table = dynamodb.Table(config.ACTION_TABLE_NAME.value)
+        table = dynamodb.Table(config.ACTION_TABLE_NAME)
 
         item = {
             "action_id": ulid.ULID().to_uuid().__str__(),
@@ -75,7 +75,7 @@ class OBTool:
             else:
                 raise e
         try:
-            cls.record_action(event=event_source, response=response)
+            cls.record_action(event=entries, response=response)
         except Exception as e:
             logger.error(f"Error recording action: {e}")
 
