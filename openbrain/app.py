@@ -274,6 +274,22 @@ def auth(username, password):
             return True
     return False
 
+dynamodb = boto3.resource("dynamodb")
+table = dynamodb.Table(config.ACTION_TABLE_NAME)
+
+def get_action_events():
+    dynamodb = boto3.resource("dynamodb")
+    table = dynamodb.Table(config.ACTION_TABLE_NAME)
+    # Get the last 2 action events
+    response = table.scan()
+    items = response["Items"]
+    last_2_items = items[-2:]
+
+    if not last_2_items:
+        return json.dumps(["Could not find any items. This could be because of an environment mismatch or a table name error."])
+
+    return json.dumps(last_2_items)
+
 
 def get_available_profile_names() -> list:
     # logger.warning("get_available_profile_names() is not implemented")
@@ -476,9 +492,9 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                         msg = gr.Textbox()
 
             with gr.Column(scale=1) as context_container:
-                with gr.Accordion("Context", open=True) as context_accordian:
-                    with gr.Column(scale=1) as chat_button_column:
+                with gr.Tab("Context"):
 
+                    with gr.Accordion("Context", open=True) as context_accordian:
                         context = gr.Textbox(
                             label="Context",
                             info="The context for the conversation.",
@@ -486,33 +502,37 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                             lines=4,
                             value=EXAMPLE_CONTEXT,
                         )
+                with gr.Tab("Actions"):
+                    with gr.Accordion("Action Events") as events_accordian:
+                        events = get_action_events()
+                        events = gr.Json(value=events, label="Recorded Action Events")
 
-                        chat_button = gr.Button("Chat", variant="primary")
-                        reset_agent = gr.Button("Reset", variant="secondary")
+                chat_button = gr.Button("Chat", variant="primary")
+                reset_agent = gr.Button("Reset", variant="secondary")
 
-                        msg.submit(
-                            chat,
-                            [msg, chatbot, profile_name, session_state, client_id, context],
-                            [msg, chatbot, session_state, context],
-                        )
+                msg.submit(
+                    chat,
+                    [msg, chatbot, profile_name, session_state, client_id, context],
+                    [msg, chatbot, session_state, context],
+                )
 
-                        chat_button.click(
-                            fn=chat,
-                            inputs=[msg, chatbot, profile_name, session_state, client_id, context],
-                            outputs=[msg, chatbot, session_state, context],
-                        )
+                chat_button.click(
+                    fn=chat,
+                    inputs=[msg, chatbot, profile_name, session_state, client_id, context],
+                    outputs=[msg, chatbot, session_state, context],
+                )
 
-                        reset_agent.click(
-                            fn=reset,
-                            inputs=[
-                                client_id,
-                                profile_name,
-                                chatbot,
-                                session_state,
-                                context
-                            ],
-                            outputs=[msg, chatbot, session_state, context],
-                        )
+                reset_agent.click(
+                    fn=reset,
+                    inputs=[
+                        client_id,
+                        profile_name,
+                        chatbot,
+                        session_state,
+                        context
+                    ],
+                    outputs=[msg, chatbot, session_state, context],
+                )
 
 
 def main():
