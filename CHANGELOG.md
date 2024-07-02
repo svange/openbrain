@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.24.0](https://github.com/svange/openbrain/compare/v1.23.0...v1.24.0) (2024-07-02)
+
+
+### Features
+
+* gradio mvp... again ([a93744e](https://github.com/svange/openbrain/commit/a93744e4ab643dec2d6892de5f7f56c18cb6d85d))
+
 ## [1.23.0](https://github.com/svange/openbrain/compare/v1.22.0...v1.23.0) (2024-07-02)
 
 
