@@ -17,8 +17,11 @@ from openbrain.orm.model_chat_session import ChatSession
 from openbrain.util import config, Defaults
 import logging
 
+from io import StringIO
+
+log_stream = StringIO()
+logging.basicConfig(stream=log_stream, level=logging.INFO, format='%(levelname)s :: %(message)s')
 logger = logging.getLogger("Gradio")
-logging.basicConfig(filename="app.log", encoding="utf-8", level=logging.INFO, filemode="w")
 
 EXAMPLE_CONTEXT = '''
 {
@@ -78,9 +81,7 @@ logger.info(("-" * 60) + "PROGRAM RUNNING" + ("-" * 60))
 
 def get_debug_text(_debug_text = None) -> str:
     try:
-        with open("app.log", "r") as f:
-            lines = f.readlines()
-            ret = "".join(lines)
+        ret = log_stream.getvalue()
     except Exception as e:
         ret = e.__str__()
 
