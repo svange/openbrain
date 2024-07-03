@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## v2.0.0-dev.2 (2024-07-03)
+
+### Breaking
+
+* fix: New UI to support tool FW.
+
+BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent tools now accept context. The &#39;email&#39; parameter has become OBE by context. Lead object has been eliminated in favor of more general &#39;context&#39; approach. ([`a74bd1f`](https://github.com/svange/openbrain/commit/a74bd1fb2b66c667fcf5da5b29d8f77f3ab528b2))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`5241418`](https://github.com/svange/openbrain/commit/52414186f507df1bfa1640abb5f7f931e446a5cd))
+
 ## v2.0.0-dev.1 (2024-07-03)
 
 ### Breaking
@@ -7,6 +19,10 @@
 * fix: New UI to support tool FW.
 
 BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent tools now accept context. The &#39;email&#39; parameter has become OBE by context. Lead object has been eliminated in favor of more general &#39;context&#39; approach. ([`4aa23b6`](https://github.com/svange/openbrain/commit/4aa23b6fe0387b5fa95bc4e8be12134d157ef242))
+
+### Chore
+
+* chore(release): release 2.0.0-dev.1 ([`5d98991`](https://github.com/svange/openbrain/commit/5d98991951d16e2e5d985081d4db8bee6b143300))
 
 ## v1.22.0-dev.2 (2024-07-03)
 
