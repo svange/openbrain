@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.0](https://github.com/svange/openbrain/compare/v2.5.0...v2.6.0) (2024-07-03)
+
+
+### Features
+
+* Cleanup UI functionality for local and non-api modes ([efdf09c](https://github.com/svange/openbrain/commit/efdf09c45d170a5ecbebb9287bb1be3f7bc9d485))
+
 ## [2.5.0](https://github.com/svange/openbrain/compare/v2.4.0...v2.5.0) (2024-07-03)
 
 
