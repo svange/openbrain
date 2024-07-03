@@ -61,21 +61,24 @@ logger.info(("-" * 60) + "PROGRAM INITIALIZING" + ("-" * 60))
 
 aws_region = config.AWS_REGION
 aws_profile = os.environ.get("AWS_PROFILE", "UNKNOWN")
-obfuscated_api_key = OB_PROVIDER_API_KEY[:4] + "*" * (len(OB_PROVIDER_API_KEY) - 4) + OB_PROVIDER_API_KEY[-2:]
+obfuscated_api_key = OB_PROVIDER_API_KEY[:2] + "*" * (len(OB_PROVIDER_API_KEY) - 4) + OB_PROVIDER_API_KEY[-2:]
+obfuscated_password = GRADIO_PASSWORD[:2] + "*" * (len(GRADIO_PASSWORD) - 4)
+
+logger.info(f"AWS_REGION: {aws_region}")
+logger.info(f"AWS_PROFILE: {aws_profile}")
 logger.info(f"OB_MODE: {OB_MODE}")
+
+logger.info(f"OB_PROVIDER_API_KEY: {obfuscated_api_key}")
+logger.info(f"GRADIO_PASSWORD: {obfuscated_password}")
+
 logger.info(f"CHAT_ENDPOINT: {CHAT_ENDPOINT}")
 logger.info(f"DEFAULT_ORIGIN: {DEFAULT_ORIGIN}")
-logger.info(f"OB_PROVIDER_API_KEY: {OB_PROVIDER_API_KEY}")
-logger.info(f"GRADIO_PASSWORD: {GRADIO_PASSWORD}")
-logger.info(f"DEFAULT_CLIENT_ID: {DEFAULT_CLIENT_ID}")
-logger.info(f"DEFAULT_PROFILE_NAME: {DEFAULT_PROFILE_NAME}")
 logger.info(f"PORT: {PORT}")
+
 logger.info(f"INFRA_STACK_NAME: {config.INFRA_STACK_NAME}")
 logger.info(f"SESSION_TABLE_NAME: {config.SESSION_TABLE_NAME}")
 logger.info(f"AGENT_CONFIG_TABLE_NAME: {config.AGENT_CONFIG_TABLE_NAME}")
 logger.info(f"ACTION_TABLE_NAME: {config    .ACTION_TABLE_NAME}")
-logger.info(f"AWS_REGION: {aws_region}")
-logger.info(f"AWS_PROFILE: {aws_profile}")
 
 logger.info(("-" * 60) + "PROGRAM RUNNING" + ("-" * 60))
 
