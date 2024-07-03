@@ -1,154 +1,387 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v1.22.0-dev.2 (2024-07-03)
+
+### Fix
+
+* fix: cleaning up UI based debugging. ([`668eafc`](https://github.com/svange/openbrain/commit/668eafc49577ac76703fe6278fe926d71e80f921))
+
+### Unknown
+
+* Merge branch &#39;refs/heads/main&#39; into dev
+
+# Conflicts:
+#	CHANGELOG.md ([`c26b099`](https://github.com/svange/openbrain/commit/c26b099092502d04f035c6318e78a9c225c7edf9))
+
+## v1.38.2 (2024-07-03)
+
+### Chore
+
+* chore(release): 1.38.2 [skip ci]
 
 ## [1.38.2](https://github.com/svange/openbrain/compare/v1.38.1...v1.38.2) (2024-07-03)
 
-
 ### Bug Fixes
 
-* cleaning up UI based debugging. ([825994d](https://github.com/svange/openbrain/commit/825994d8927e52c68d5d3c95b335e9058ad2cfbc))
+* cleaning up UI based debugging. ([825994d](https://github.com/svange/openbrain/commit/825994d8927e52c68d5d3c95b335e9058ad2cfbc)) ([`70fd7e2`](https://github.com/svange/openbrain/commit/70fd7e241d64f7cc021bfab33c0add6ed63ee988))
+
+### Fix
+
+* fix: cleaning up UI based debugging. ([`825994d`](https://github.com/svange/openbrain/commit/825994d8927e52c68d5d3c95b335e9058ad2cfbc))
+
+## v1.38.1 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.38.1 [skip ci]
 
 ## [1.38.1](https://github.com/svange/openbrain/compare/v1.38.0...v1.38.1) (2024-07-02)
 
-
 ### Bug Fixes
 
-* cleaning up remaining remnants of "lead" objects ([1b372b5](https://github.com/svange/openbrain/commit/1b372b571c2695000b2a52038d086bf7dd1fb0c7))
+* cleaning up remaining remnants of &#34;lead&#34; objects ([1b372b5](https://github.com/svange/openbrain/commit/1b372b571c2695000b2a52038d086bf7dd1fb0c7)) ([`7206632`](https://github.com/svange/openbrain/commit/7206632114b16d345bf912572f8a7a651a32ccfe))
+
+### Fix
+
+* fix: cleaning up remaining remnants of &#34;lead&#34; objects ([`1b372b5`](https://github.com/svange/openbrain/commit/1b372b571c2695000b2a52038d086bf7dd1fb0c7))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`8bb9d03`](https://github.com/svange/openbrain/commit/8bb9d03cfba70f68802e8a2eb5edf918a8ab3dd1))
+
+## v1.38.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.38.0 [skip ci]
 
 ## [1.38.0](https://github.com/svange/openbrain/compare/v1.37.0...v1.38.0) (2024-07-02)
-
 
 ### Features
 
 * Added action table reporter to gradio ([d42ed2a](https://github.com/svange/openbrain/commit/d42ed2aa0dedf321ae229931c7f5c511665933e8))
 
-
 ### Bug Fixes
 
-* cleaning up remaining remnants of "lead" objects ([d4ff823](https://github.com/svange/openbrain/commit/d4ff823a472633d8c204c6ce08c359300abd34bf))
+* cleaning up remaining remnants of &#34;lead&#34; objects ([d4ff823](https://github.com/svange/openbrain/commit/d4ff823a472633d8c204c6ce08c359300abd34bf)) ([`cc4609d`](https://github.com/svange/openbrain/commit/cc4609dd002686113e9d246ab12cfefd9e37574d))
+
+### Feature
+
+* feat: Added action table reporter to gradio ([`d42ed2a`](https://github.com/svange/openbrain/commit/d42ed2aa0dedf321ae229931c7f5c511665933e8))
+
+### Fix
+
+* fix: cleaning up remaining remnants of &#34;lead&#34; objects ([`d4ff823`](https://github.com/svange/openbrain/commit/d4ff823a472633d8c204c6ce08c359300abd34bf))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`0eb7576`](https://github.com/svange/openbrain/commit/0eb7576d1b5613829da66676c61bcfc30d27d195))
+
+## v1.37.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.37.0 [skip ci]
 
 ## [1.37.0](https://github.com/svange/openbrain/compare/v1.36.0...v1.37.0) (2024-07-02)
 
-
 ### Features
 
-* Added action table reporter to gradio ([d8c5337](https://github.com/svange/openbrain/commit/d8c533724486fa6c5189a643eb6d95bfd0a6029b))
+* Added action table reporter to gradio ([d8c5337](https://github.com/svange/openbrain/commit/d8c533724486fa6c5189a643eb6d95bfd0a6029b)) ([`cf28f4a`](https://github.com/svange/openbrain/commit/cf28f4a4d1abf73d36dd5c8b5a2a62684962231f))
+
+### Feature
+
+* feat: Added action table reporter to gradio ([`d8c5337`](https://github.com/svange/openbrain/commit/d8c533724486fa6c5189a643eb6d95bfd0a6029b))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`7495f16`](https://github.com/svange/openbrain/commit/7495f16e2652bbdceccd73b3f45721c30c13e091))
+
+## v1.36.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.36.0 [skip ci]
 
 ## [1.36.0](https://github.com/svange/openbrain/compare/v1.35.0...v1.36.0) (2024-07-02)
 
-
 ### Features
 
-* Added action table reporter to gradio ([f5b9d1e](https://github.com/svange/openbrain/commit/f5b9d1e29c4876b774e0e5448df19e2554b4de57))
+* Added action table reporter to gradio ([f5b9d1e](https://github.com/svange/openbrain/commit/f5b9d1e29c4876b774e0e5448df19e2554b4de57)) ([`56cfc3f`](https://github.com/svange/openbrain/commit/56cfc3f62bb91d9974915d28c157dbab1adc68ec))
+
+### Feature
+
+* feat: Added action table reporter to gradio ([`f5b9d1e`](https://github.com/svange/openbrain/commit/f5b9d1e29c4876b774e0e5448df19e2554b4de57))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`5a45223`](https://github.com/svange/openbrain/commit/5a45223d0a99ea6e984109e47542a4855d84d40b))
+
+## v1.35.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.35.0 [skip ci]
 
 ## [1.35.0](https://github.com/svange/openbrain/compare/v1.34.0...v1.35.0) (2024-07-02)
 
-
 ### Features
 
-* Added action table reporter to gradio ([5566e74](https://github.com/svange/openbrain/commit/5566e74c1ae91807a29a0c8d3790b75686bf747b))
+* Added action table reporter to gradio ([5566e74](https://github.com/svange/openbrain/commit/5566e74c1ae91807a29a0c8d3790b75686bf747b)) ([`d1c9454`](https://github.com/svange/openbrain/commit/d1c945474089f5c819994a94fe2d39f8d5b9f97b))
+
+### Feature
+
+* feat: Added action table reporter to gradio ([`5566e74`](https://github.com/svange/openbrain/commit/5566e74c1ae91807a29a0c8d3790b75686bf747b))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`8cd9c35`](https://github.com/svange/openbrain/commit/8cd9c354a808d4d1b494354568b1caed78ae8f71))
+
+## v1.34.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.34.0 [skip ci]
 
 ## [1.34.0](https://github.com/svange/openbrain/compare/v1.33.0...v1.34.0) (2024-07-02)
 
-
 ### Features
 
-* Added action table reporter to gradio ([44f56d3](https://github.com/svange/openbrain/commit/44f56d3ec5a2dca5d23ead858687ceeba07b3f8e))
+* Added action table reporter to gradio ([44f56d3](https://github.com/svange/openbrain/commit/44f56d3ec5a2dca5d23ead858687ceeba07b3f8e)) ([`721d426`](https://github.com/svange/openbrain/commit/721d426f49b201b3d9882422c92dc1705771cbff))
+
+### Feature
+
+* feat: Added action table reporter to gradio ([`44f56d3`](https://github.com/svange/openbrain/commit/44f56d3ec5a2dca5d23ead858687ceeba07b3f8e))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`c4a2d3a`](https://github.com/svange/openbrain/commit/c4a2d3a1d0d3fb1e1601f2f978e885276e2154d9))
+
+## v1.33.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.33.0 [skip ci]
 
 ## [1.33.0](https://github.com/svange/openbrain/compare/v1.32.0...v1.33.0) (2024-07-02)
 
-
 ### Features
 
-* Added action table reporter to gradio ([1d56aa2](https://github.com/svange/openbrain/commit/1d56aa26623f84ecbd51cde10e309788d60a3da7))
+* Added action table reporter to gradio ([1d56aa2](https://github.com/svange/openbrain/commit/1d56aa26623f84ecbd51cde10e309788d60a3da7)) ([`c7dadf7`](https://github.com/svange/openbrain/commit/c7dadf7094e510004dbc55964cc02e5df573c432))
+
+### Feature
+
+* feat: Added action table reporter to gradio ([`1d56aa2`](https://github.com/svange/openbrain/commit/1d56aa26623f84ecbd51cde10e309788d60a3da7))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`f9588d8`](https://github.com/svange/openbrain/commit/f9588d8c83e080c6fca73c3053118889cf392177))
+
+## v1.32.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.32.0 [skip ci]
 
 ## [1.32.0](https://github.com/svange/openbrain/compare/v1.31.0...v1.32.0) (2024-07-02)
 
-
 ### Features
 
-* Added action table reporter to gradio ([dbc0c00](https://github.com/svange/openbrain/commit/dbc0c00b889a5da7455ccb8f7281b3c3ad2f01bb))
+* Added action table reporter to gradio ([dbc0c00](https://github.com/svange/openbrain/commit/dbc0c00b889a5da7455ccb8f7281b3c3ad2f01bb)) ([`d9469f6`](https://github.com/svange/openbrain/commit/d9469f627069703bff01052ce83896b08791a488))
+
+### Feature
+
+* feat: Added action table reporter to gradio ([`dbc0c00`](https://github.com/svange/openbrain/commit/dbc0c00b889a5da7455ccb8f7281b3c3ad2f01bb))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`3301e5b`](https://github.com/svange/openbrain/commit/3301e5b8faddb1a3ab87ebc08af24b7e3cd72675))
+
+## v1.31.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.31.0 [skip ci]
 
 ## [1.31.0](https://github.com/svange/openbrain/compare/v1.30.0...v1.31.0) (2024-07-02)
 
-
 ### Features
 
-* Action table functionality to record actions debug ([c55592f](https://github.com/svange/openbrain/commit/c55592f43a74f077bbebb83b52696b08a3d6690d))
+* Action table functionality to record actions debug ([c55592f](https://github.com/svange/openbrain/commit/c55592f43a74f077bbebb83b52696b08a3d6690d)) ([`ef08f04`](https://github.com/svange/openbrain/commit/ef08f04ec9740eaa498c8e283f5d2f5e20a31045))
+
+### Feature
+
+* feat: Action table functionality to record actions debug ([`c55592f`](https://github.com/svange/openbrain/commit/c55592f43a74f077bbebb83b52696b08a3d6690d))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`e786dc9`](https://github.com/svange/openbrain/commit/e786dc976926df534fa01b22cfc4449784d00993))
+
+## v1.30.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.30.0 [skip ci]
 
 ## [1.30.0](https://github.com/svange/openbrain/compare/v1.29.0...v1.30.0) (2024-07-02)
 
-
 ### Features
 
-* Action table functionality to record actions debug ([b68c962](https://github.com/svange/openbrain/commit/b68c962cb5c8d5b012ab9ea01c06274e31a4556e))
+* Action table functionality to record actions debug ([b68c962](https://github.com/svange/openbrain/commit/b68c962cb5c8d5b012ab9ea01c06274e31a4556e)) ([`6e1c3cb`](https://github.com/svange/openbrain/commit/6e1c3cb052ba81e9236e4ca92e8654316ab89ea5))
+
+### Feature
+
+* feat: Action table functionality to record actions debug ([`b68c962`](https://github.com/svange/openbrain/commit/b68c962cb5c8d5b012ab9ea01c06274e31a4556e))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`940982e`](https://github.com/svange/openbrain/commit/940982eb6879cfb599cef2a0ddb689738a3cf703))
+
+## v1.29.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.29.0 [skip ci]
 
 ## [1.29.0](https://github.com/svange/openbrain/compare/v1.28.0...v1.29.0) (2024-07-02)
 
-
 ### Features
 
-* Action table functionality to record actions ([4cd866d](https://github.com/svange/openbrain/commit/4cd866d9ed169022bb19b2cea0d26c9638836805))
+* Action table functionality to record actions ([4cd866d](https://github.com/svange/openbrain/commit/4cd866d9ed169022bb19b2cea0d26c9638836805)) ([`59a1abe`](https://github.com/svange/openbrain/commit/59a1abeb122533b940e0e2d8c3f665122863b7dd))
+
+### Feature
+
+* feat: Action table functionality to record actions ([`4cd866d`](https://github.com/svange/openbrain/commit/4cd866d9ed169022bb19b2cea0d26c9638836805))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`b2f6c90`](https://github.com/svange/openbrain/commit/b2f6c900a594aa4a3212a782288e77f6eb01d228))
+
+## v1.28.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.28.0 [skip ci]
 
 ## [1.28.0](https://github.com/svange/openbrain/compare/v1.27.0...v1.28.0) (2024-07-02)
 
-
 ### Features
 
-* Action table functionality to record actions ([50b4de2](https://github.com/svange/openbrain/commit/50b4de22343053aad58e5231c10111f9103bcf8f))
+* Action table functionality to record actions ([50b4de2](https://github.com/svange/openbrain/commit/50b4de22343053aad58e5231c10111f9103bcf8f)) ([`a0a34a8`](https://github.com/svange/openbrain/commit/a0a34a83832b3df8fe56879f860f98c1e50fe71e))
+
+### Feature
+
+* feat: Action table functionality to record actions ([`50b4de2`](https://github.com/svange/openbrain/commit/50b4de22343053aad58e5231c10111f9103bcf8f))
+
+## v1.27.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.27.0 [skip ci]
 
 ## [1.27.0](https://github.com/svange/openbrain/compare/v1.26.0...v1.27.0) (2024-07-02)
 
-
 ### Features
 
-* debugging ([7d794a7](https://github.com/svange/openbrain/commit/7d794a7ffc2ddeaa99560ab8cfc562902377f424))
+* debugging ([7d794a7](https://github.com/svange/openbrain/commit/7d794a7ffc2ddeaa99560ab8cfc562902377f424)) ([`060d316`](https://github.com/svange/openbrain/commit/060d3165f25b1916003712998786644f0ba62f30))
+
+### Feature
+
+* feat: debugging ([`7d794a7`](https://github.com/svange/openbrain/commit/7d794a7ffc2ddeaa99560ab8cfc562902377f424))
+
+## v1.26.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.26.0 [skip ci]
 
 ## [1.26.0](https://github.com/svange/openbrain/compare/v1.25.0...v1.26.0) (2024-07-02)
 
-
 ### Features
 
-* adding action table ([ae0948c](https://github.com/svange/openbrain/commit/ae0948ccd229f81dcad5e121a0df20815aa061d8))
+* adding action table ([ae0948c](https://github.com/svange/openbrain/commit/ae0948ccd229f81dcad5e121a0df20815aa061d8)) ([`60b2c9c`](https://github.com/svange/openbrain/commit/60b2c9c5e3080f2f59650978f51bf7c61e461006))
+
+### Feature
+
+* feat: adding action table ([`ae0948c`](https://github.com/svange/openbrain/commit/ae0948ccd229f81dcad5e121a0df20815aa061d8))
+
+## v1.25.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.25.0 [skip ci]
 
 ## [1.25.0](https://github.com/svange/openbrain/compare/v1.24.0...v1.25.0) (2024-07-02)
 
-
 ### Features
 
-* adding sns topic for testing ([54af4dc](https://github.com/svange/openbrain/commit/54af4dc96fc71f5c0220d8220b92e8742d62a082))
+* adding sns topic for testing ([54af4dc](https://github.com/svange/openbrain/commit/54af4dc96fc71f5c0220d8220b92e8742d62a082)) ([`6834448`](https://github.com/svange/openbrain/commit/6834448bdea35f02fcac47f3a70d3f7d7b2771c2))
+
+### Feature
+
+* feat: adding sns topic for testing ([`54af4dc`](https://github.com/svange/openbrain/commit/54af4dc96fc71f5c0220d8220b92e8742d62a082))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`6ba1643`](https://github.com/svange/openbrain/commit/6ba16436c2ca9864e2cdf8aedf37199a0cd8a4f3))
+
+## v1.24.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.24.0 [skip ci]
 
 ## [1.24.0](https://github.com/svange/openbrain/compare/v1.23.0...v1.24.0) (2024-07-02)
 
-
 ### Features
 
-* gradio mvp... again ([a93744e](https://github.com/svange/openbrain/commit/a93744e4ab643dec2d6892de5f7f56c18cb6d85d))
+* gradio mvp... again ([a93744e](https://github.com/svange/openbrain/commit/a93744e4ab643dec2d6892de5f7f56c18cb6d85d)) ([`f4d491a`](https://github.com/svange/openbrain/commit/f4d491a8a0e1d957f66823d4cc7a7c68376926d6))
+
+### Feature
+
+* feat: gradio mvp... again ([`a93744e`](https://github.com/svange/openbrain/commit/a93744e4ab643dec2d6892de5f7f56c18cb6d85d))
+
+## v1.23.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.23.0 [skip ci]
 
 ## [1.23.0](https://github.com/svange/openbrain/compare/v1.22.0...v1.23.0) (2024-07-02)
 
-
 ### Features
 
-* gradio mvp... again ([dea06ab](https://github.com/svange/openbrain/commit/dea06ab8e7b1eaf1b569ec22239597ff07f7b87e))
+* gradio mvp... again ([dea06ab](https://github.com/svange/openbrain/commit/dea06ab8e7b1eaf1b569ec22239597ff07f7b87e)) ([`c62700d`](https://github.com/svange/openbrain/commit/c62700d01fc2bc2353c30cfccc479d5d9462a5f3))
+
+### Feature
+
+* feat: gradio mvp... again ([`dea06ab`](https://github.com/svange/openbrain/commit/dea06ab8e7b1eaf1b569ec22239597ff07f7b87e))
+
+## v1.22.0 (2024-07-02)
+
+### Chore
+
+* chore(release): 1.22.0 [skip ci]
 
 ## [1.22.0](https://github.com/svange/openbrain/compare/v1.21.0...v1.22.0) (2024-07-02)
-
 
 ### Features
 
 * re-enabling auth in gradio ([0813333](https://github.com/svange/openbrain/commit/081333322986a514ee839a379e31a7a91a944985))
 
-
 ### Bug Fixes
 
-* re-enabling auth in gradio ([7b3d583](https://github.com/svange/openbrain/commit/7b3d583baefb66660b028e7125d180584b7ab177))
+* re-enabling auth in gradio ([7b3d583](https://github.com/svange/openbrain/commit/7b3d583baefb66660b028e7125d180584b7ab177)) ([`b7dbcaa`](https://github.com/svange/openbrain/commit/b7dbcaa0071837759331183bacb92a86f46f31a9))
 
-# CHANGELOG
+### Fix
+
+* fix: re-enabling auth in gradio ([`7b3d583`](https://github.com/svange/openbrain/commit/7b3d583baefb66660b028e7125d180584b7ab177))
 
 ## v1.22.0-dev.1 (2024-07-02)
+
+### Chore
+
+* chore(release): release 1.22.0-dev.1 ([`24adaf2`](https://github.com/svange/openbrain/commit/24adaf2ac9bcce847dca87b1cdfe12838696f500))
 
 ### Feature
 
