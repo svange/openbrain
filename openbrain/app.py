@@ -543,11 +543,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 info="The API key for OpenAI's API",
                 type="password",
             )
-            # promptlayer_api_key = gr.Textbox(
-            #     label="Prompt Layer API Key",
-            #     info="The API key for Prompt Layer's API",
-            #     type="password",
-            # )
+
 
     with gr.Accordion("Save and Load") as submit_accordion:
         with gr.Row() as submit_row:
