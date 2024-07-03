@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.2](https://github.com/svange/openbrain/compare/v2.7.1...v2.7.2) (2024-07-03)
+
+
+### Bug Fixes
+
+* fixing "wrong-infra" gradio bug ([e9fd5bf](https://github.com/svange/openbrain/commit/e9fd5bf2f9ca4cd9859ff4c0a19e1b18dd11b6f8))
+
 ## [2.7.1](https://github.com/svange/openbrain/compare/v2.7.0...v2.7.1) (2024-07-03)
 
 
