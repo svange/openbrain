@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.0](https://github.com/svange/openbrain/compare/v2.6.0...v2.7.0) (2024-07-03)
+
+
+### Features
+
+* Adding dynamic compontents to Gradio ([8f35ba4](https://github.com/svange/openbrain/commit/8f35ba44c408ee8a18527aac9dd0a3bd0d29edeb))
+
 ## [2.6.0](https://github.com/svange/openbrain/compare/v2.5.0...v2.6.0) (2024-07-03)
 
 
