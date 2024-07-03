@@ -5,13 +5,17 @@ import boto3
 import gradio as gr
 import requests
 from dotenv import load_dotenv
-from pydantic import BaseModel
-from openbrain.tools import Toolbox
-from openbrain.tools.obtool import OBTool
 
 load_dotenv()
-os.environ["INFRA_STACK_NAME"] = os.environ.get("GRADIO_INFRA_STACK_NAME", "LOCAL")
 
+## IMPORTANT: This is a local environment variable that is used to determine the stack name for the infrastructure.
+## Must be set before importing openbrain
+
+os.environ["INFRA_STACK_NAME"] = os.environ.get("GRADIO_INFRA_STACK_NAME", "LOCAL")
+INFRA_STACK_NAME = os.environ.get("INFRA_STACK_NAME")
+
+
+from openbrain.tools import Toolbox
 import openbrain.orm.model_agent_config
 from openbrain.agents.gpt_agent import GptAgent
 from openbrain.orm.model_agent_config import AgentConfig
@@ -103,6 +107,8 @@ logger.info(f"AGENT_CONFIG_TABLE_NAME: {config.AGENT_CONFIG_TABLE_NAME}")
 logger.info(f"ACTION_TABLE_NAME: {config    .ACTION_TABLE_NAME}")
 
 logger.info(("-" * 60) + "PROGRAM RUNNING" + ("-" * 60))
+
+print(log_stream.getvalue(), flush=True)
 
 def get_debug_text(_debug_text = None) -> str:
     try:
