@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.3](https://github.com/svange/openbrain/compare/v2.7.2...v2.7.3) (2024-07-03)
+
+
+### Bug Fixes
+
+* added last 4 cloudwatch logs tab to gradio interface ([1a30511](https://github.com/svange/openbrain/commit/1a30511e0ac4e3b470370304a8112d8775a633b0))
+
 ## [2.7.2](https://github.com/svange/openbrain/compare/v2.7.1...v2.7.2) (2024-07-03)
 
 
