@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.1](https://github.com/svange/openbrain/compare/v2.7.0...v2.7.1) (2024-07-03)
+
+
+### Bug Fixes
+
+* bump commit ([6e235c8](https://github.com/svange/openbrain/commit/6e235c81e6e57899799f8c3eb16218fc73fa7b9c))
+
 ## [2.7.0](https://github.com/svange/openbrain/compare/v2.6.0...v2.7.0) (2024-07-03)
 
 
