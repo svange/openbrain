@@ -17,8 +17,11 @@ from openbrain.orm.model_chat_session import ChatSession
 from openbrain.util import config, Defaults
 import logging
 
+from io import StringIO
+
+log_stream = StringIO()
+logging.basicConfig(stream=log_stream, level=logging.INFO, format='%(levelname)s :: %(message)s')
 logger = logging.getLogger("Gradio")
-logging.basicConfig(filename="app.log", encoding="utf-8", level=logging.INFO, filemode="w")
 
 EXAMPLE_CONTEXT = '''
 {
@@ -58,6 +61,7 @@ logger.info(("-" * 60) + "PROGRAM INITIALIZING" + ("-" * 60))
 
 aws_region = config.AWS_REGION
 aws_profile = os.environ.get("AWS_PROFILE", "UNKNOWN")
+obfuscated_api_key = OB_PROVIDER_API_KEY[:4] + "*" * (len(OB_PROVIDER_API_KEY) - 4) + OB_PROVIDER_API_KEY[-2:]
 logger.info(f"OB_MODE: {OB_MODE}")
 logger.info(f"CHAT_ENDPOINT: {CHAT_ENDPOINT}")
 logger.info(f"DEFAULT_ORIGIN: {DEFAULT_ORIGIN}")
@@ -77,9 +81,7 @@ logger.info(("-" * 60) + "PROGRAM RUNNING" + ("-" * 60))
 
 def get_debug_text(_debug_text = None) -> str:
     try:
-        with open("app.log", "r") as f:
-            lines = f.readlines()
-            ret = "".join(lines)
+        ret = log_stream.getvalue()
     except Exception as e:
         ret = e.__str__()
 
