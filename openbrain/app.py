@@ -24,6 +24,8 @@ import logging
 logger = logging.getLogger("Gradio")
 logging.basicConfig(filename="app.log", encoding="utf-8", level=logging.INFO)
 
+
+
 EXAMPLE_CONTEXT = '''
 {
     "firstName": "Samuel",
@@ -58,29 +60,38 @@ PORT = int(os.environ.get("GRADIO_PORT", 7860))
 if OB_MODE == Defaults.OB_MODE_LOCAL.value:
     from openbrain.orm.model_common_base import InMemoryDb
 
-def get_debug_text():
+aws_region = config.AWS_REGION
+aws_profile = os.environ.get("AWS_PROFILE", "UNKNOWN")
+logger.info(f"OB_MODE: {OB_MODE}")
+logger.info(f"CHAT_ENDPOINT: {CHAT_ENDPOINT}")
+logger.info(f"DEFAULT_ORIGIN: {DEFAULT_ORIGIN}")
+logger.info(f"OB_PROVIDER_API_KEY: {OB_PROVIDER_API_KEY}")
+logger.info(f"GRADIO_PASSWORD: {GRADIO_PASSWORD}")
+logger.info(f"DEFAULT_CLIENT_ID: {DEFAULT_CLIENT_ID}")
+logger.info(f"DEFAULT_PROFILE_NAME: {DEFAULT_PROFILE_NAME}")
+logger.info(f"PORT: {PORT}")
+logger.info(f"INFRA_STACK_NAME: {config.INFRA_STACK_NAME}")
+logger.info(f"SESSION_TABLE_NAME: {config.SESSION_TABLE_NAME}")
+logger.info(f"AGENT_CONFIG_TABLE_NAME: {config.AGENT_CONFIG_TABLE_NAME}")
+logger.info(f"ACTION_TABLE_NAME: {config.ACTION_TABLE_NAME}")
+logger.info(f"AWS_REGION: {aws_region}")
+logger.info(f"AWS_PROFILE: {aws_profile}")
+
+
+def get_debug_text(_debug_text = None) -> str:
     try:
-        aws_region = config.AWS_REGION
-        aws_profile = os.environ.get("AWS_PROFILE", "UNKNOWN")
-        logger.info(f"OB_MODE: {OB_MODE}")
-        logger.info(f"CHAT_ENDPOINT: {CHAT_ENDPOINT}")
-        logger.info(f"DEFAULT_ORIGIN: {DEFAULT_ORIGIN}")
-        logger.info(f"OB_PROVIDER_API_KEY: {OB_PROVIDER_API_KEY}")
-        logger.info(f"GRADIO_PASSWORD: {GRADIO_PASSWORD}")
-        logger.info(f"DEFAULT_CLIENT_ID: {DEFAULT_CLIENT_ID}")
-        logger.info(f"DEFAULT_PROFILE_NAME: {DEFAULT_PROFILE_NAME}")
-        logger.info(f"PORT: {PORT}")
-        logger.info(f"INFRA_STACK_NAME: {config.INFRA_STACK_NAME}")
-        logger.info(f"SESSION_TABLE_NAME: {config.SESSION_TABLE_NAME}")
-        logger.info(f"AGENT_CONFIG_TABLE_NAME: {config.AGENT_CONFIG_TABLE_NAME}")
-        logger.info(f"ACTION_TABLE_NAME: {config.ACTION_TABLE_NAME}")
-        logger.info(f"AWS_REGION: {aws_region}")
-        logger.info(f"AWS_PROFILE: {aws_profile}")
         with open("app.log", "r") as f:
-            lines = f.readlines()[-20:]
-            return "\n".join(lines)
+            lines = f.readlines()
+            if len(lines) > 25:
+                lines = lines[-25:]
+            ret = "".join(lines)
     except Exception as e:
-        return e.__str__()
+        ret = e.__str__()
+
+    if _debug_text:
+        _debug_text = ret
+
+    return ret
 
 
 def chat(message, chat_history, _profile_name, session_state, _client_id, _context):
@@ -318,7 +329,7 @@ class CustomJsonEncoder(json.JSONEncoder):
         return super(CustomJsonEncoder, self).default(obj)
 
 
-def get_action_events():
+def get_action_events(_events=None):
     logger.info("Getting action events...")
     try:
         dynamodb = boto3.resource("dynamodb")
@@ -328,9 +339,10 @@ def get_action_events():
         ret = json.dumps(items, cls=CustomJsonEncoder, indent=4, sort_keys=True)
     except Exception as e:
         ret = json.dumps({"exception": e.__str__()})
+
+    if _events:
+        _events = ret
     return json.dumps(ret)
-
-
 
 
 def get_available_profile_names() -> list:
@@ -461,17 +473,20 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
             )
 
         with gr.Tab("Debugging") as debug_tab:
-            debug_text = get_debug_text()
             debug_text = gr.Textbox(
                 label="Debug",
                 info="Debugging information",
                 show_label=False,
                 lines=20,
-                value=debug_text,
+                value=get_debug_text,
                 interactive=False,
                 autoscroll=True,
                 show_copy_button=True,
+                # every=5.0,
             )
+            refresh_button = gr.Button("Refresh", variant="secondary")
+            refresh_button.click(get_debug_text, inputs=[debug_text], outputs=[debug_text])
+
 
     with gr.Accordion("Save and Load") as submit_accordion:
         with gr.Row() as submit_row:
@@ -510,7 +525,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     # promptlayer_api_key,
                     client_id,
                     outgoing_webhook_url,
-                    tools,
+                    tools
                 ]
 
                 load_button.click(load, inputs=[profile_name, client_id], outputs=preferences)
@@ -556,8 +571,10 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                         )
                 with gr.Tab("Actions"):
                     with gr.Accordion("Action Events") as events_accordian:
-                        events = get_action_events()
-                        events = gr.Json(value=events, label="Recorded Action Events", every=30)
+                        events_str = get_action_events()
+                        events = gr.Json(value=events_str, label="Recorded Action Events")
+                        refresh_events_button = gr.Button("Refresh", size="sm", variant="secondary")
+                        refresh_events_button.click(get_action_events, inputs=[events], outputs=[events])
 
                 chat_button = gr.Button("Chat", variant="primary")
                 reset_agent = gr.Button("Reset", variant="secondary")
