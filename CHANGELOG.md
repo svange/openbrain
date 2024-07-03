@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.38.2](https://github.com/svange/openbrain/compare/v1.38.1...v1.38.2) (2024-07-03)
+
+
+### Bug Fixes
+
+* cleaning up UI based debugging. ([825994d](https://github.com/svange/openbrain/commit/825994d8927e52c68d5d3c95b335e9058ad2cfbc))
+
 ## [1.38.1](https://github.com/svange/openbrain/compare/v1.38.0...v1.38.1) (2024-07-02)
 
 
