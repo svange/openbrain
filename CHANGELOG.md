@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.5](https://github.com/svange/openbrain/compare/v2.7.4...v2.7.5) (2024-07-03)
+
+
+### Bug Fixes
+
+* enabling queing in gradio ([14938ef](https://github.com/svange/openbrain/commit/14938ef3dc6c99b0aa210f4e90100924a5c6d4e8))
+
 ## [2.7.4](https://github.com/svange/openbrain/compare/v2.7.3...v2.7.4) (2024-07-03)
 
 
