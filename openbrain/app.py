@@ -58,6 +58,7 @@ logger.info(("-" * 60) + "PROGRAM INITIALIZING" + ("-" * 60))
 
 aws_region = config.AWS_REGION
 aws_profile = os.environ.get("AWS_PROFILE", "UNKNOWN")
+obfuscated_api_key = OB_PROVIDER_API_KEY[:4] + "*" * (len(OB_PROVIDER_API_KEY) - 4) + OB_PROVIDER_API_KEY[-2:]
 logger.info(f"OB_MODE: {OB_MODE}")
 logger.info(f"CHAT_ENDPOINT: {CHAT_ENDPOINT}")
 logger.info(f"DEFAULT_ORIGIN: {DEFAULT_ORIGIN}")
