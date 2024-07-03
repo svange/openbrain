@@ -794,7 +794,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
 def main():
     if GRADIO_PASSWORD:
-        main_block.launch(
+        main_block.queue(max_size=20).launch(
             debug=True,
             share=False,
             server_name="0.0.0.0",
@@ -803,7 +803,7 @@ def main():
             auth_message="Please login to continue",
         )
     else:
-        main_block.launch(
+        main_block.queue(max_size=20).launch(
             debug=True,
             share=False,
             server_name="0.0.0.0",
