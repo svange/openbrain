@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.0](https://github.com/svange/openbrain/compare/v2.4.0...v2.5.0) (2024-07-03)
+
+
+### Features
+
+* experimenting with recording the latest action for display on gradio. ([8240895](https://github.com/svange/openbrain/commit/824089556ccf46ed1d30a699226d6292d5fce7ea))
+
 ## [2.4.0](https://github.com/svange/openbrain/compare/v2.3.0...v2.4.0) (2024-07-03)
 
 
