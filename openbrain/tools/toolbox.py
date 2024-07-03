@@ -5,15 +5,14 @@ from langchain.tools import BaseTool
 from openbrain.tools.callback_handler import CallbackHandler
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 from openbrain.orm.model_agent_config import AgentConfig
-# from openbrain.orm.model_lead import Lead
 from openbrain.tools.obtool import OBTool
 
 from openbrain.util import get_logger
 
-from openbrain.tools.tool_leadmo_update_contact import OBToolLeadmoUpdateContact
-from openbrain.tools.tool_leadmo_stop_conversation import OBToolLeadmoStopConversation
-from openbrain.tools.tool_leadmo_create_contact import OBToolLeadmoCreateContact
-from openbrain.tools.tool_get_current_time import OBToolGetCurrentTime
+# from openbrain.tools.tool_leadmo_update_contact import OBToolLeadmoUpdateContact
+# from openbrain.tools.tool_leadmo_stop_conversation import OBToolLeadmoStopConversation
+# from openbrain.tools.tool_leadmo_create_contact import OBToolLeadmoCreateContact
+# from openbrain.tools.tool_get_current_time import OBToolGetCurrentTime
 
 logger = get_logger()
 
@@ -25,17 +24,18 @@ class Toolbox:  # invoker
         "leadmo_update_contact": "OBToolLeadmoUpdateContact",
         "leadmo_stop_conversation": "OBToolLeadmoStopConversation",
         "leadmo_create_contact": "OBToolLeadmoCreateContact",
-        "tester": "OBToolTester",
-        "get_current_time": "OBToolGetCurrentTime",
         "leadmo_get_simple_calendar_appointment_slots": "OBToolLeadmoGetSimpleCalendarAppointmentSlots",
         "leadmo_create_appointment": "OBToolLeadmoCreateAppointment",
-        "lls_scrub_phone_number": "OBToolLLSScrubPhoneNumberTool",
         "leadmo_get_contact_info_from_context": "OBToolLeadmoGetContactInfoFromContext",
-        "send_lead_to_crm": "OBToolLeadmoCreateContact", # TODO: get rid of this, it's only here to support a legacy name for this tool
+
+        "lls_scrub_phone_number": "OBToolLLSScrubPhoneNumberTool",
+        "tester": "OBToolTester",
+        "get_current_time": "OBToolGetCurrentTime",
 
     }
 
     available_tools: dict[str:OBTool] = {}
+    discovered_tools = []
 
     def __init__(
         self,
@@ -108,6 +108,8 @@ class Toolbox:  # invoker
     def register_available_obtool(cls, tool: type[OBTool]):
         if issubclass(tool, OBTool) and tool != OBTool:
             cls.available_tools[tool.__name__] = tool
+            cls.discovered_tools.append(tool)
+
         else:
             raise TypeError(f"Tool {tool} is not a subclass of OBTool")
 

@@ -5,6 +5,9 @@ import boto3
 import gradio as gr
 import requests
 from dotenv import load_dotenv
+from pydantic import BaseModel
+from openbrain.tools import Toolbox
+from openbrain.tools.obtool import OBTool
 
 load_dotenv()
 os.environ["INFRA_STACK_NAME"] = os.environ.get("GRADIO_INFRA_STACK_NAME", "LOCAL")
@@ -44,6 +47,25 @@ EXAMPLE_CONTEXT = '''
     "locationId": "HbTkOpUVUXtrMQ5wkwxD"
 }
 '''.strip()
+
+HELP_TEXT = """# Agent Configurations
+## Loading an Agent's Settings
+Choose an agent by selecting a profile_name and a client_id. The agent's settings will be loaded into the form. You can then modify the settings and save them. You can also reset the agent to its initial state. This will load the agent's configuration into Gradio for inspection and modification.
+
+## Saving an Agent's Settings
+Once all required agent fields are filled out, click the Save button to save the agent's settings. The settings will be saved to the DynamoDB database. You can then load the agent's settings at a later time.
+
+> :warning: ** Do not modify AgentConfigs in the public or leadmo client_id's, they may be overwritten by devops pipelines.**
+
+# Context
+Some tools require some information from the incoming API call. You can send a contact's personal information like 'firstName', 'lastName', 'dob', etc. in the your request (for LeadMomentum, see the custom webhook message). This information is the context for the conversation.
+
+# Events
+Events either gather information or perform an action. Action events are replayable, best-effort, ephemeral functions. Tools that perform an action, such as updating a Lead Momentum contact create action events. Events are stored in a DynamoDB table and can be retrieved for debugging purposes. You can see if your event triggered using the Action Events tab.
+
+# Debugging
+The Debug tab shows the logs from the program. If you encounter any issues, you can copy the logs and send them to the Sam for debugging."""
+
 OB_MODE = config.OB_MODE
 CHAT_ENDPOINT = os.environ.get("OB_API_URL", "") + "/chat"
 
@@ -181,7 +203,7 @@ def reset(
         logger.info("No API key found, trying to use local mode for agent interactions...")
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
-        gpt_agent = GptAgent(agent_config=agent_config, context=_context)
+        gpt_agent = GptAgent(agent_config=agent_config, initial_context=_context)
 
         frozen_agent_memory = gpt_agent.serialize()["frozen_agent_memory"]
         frozen_agent_config = gpt_agent.serialize()["frozen_agent_config"]
@@ -194,6 +216,7 @@ def reset(
         session_state["session_id"] = session_id
         chat_session.save()
         response_message = gpt_agent.agent_config.icebreaker
+        response_dict = {}
     else:
         # Make a POST request to the reset endpoint
         session = session_state["session"]
@@ -209,12 +232,12 @@ def reset(
         session_state["session"] = session
         session_state["last_response"] = response
         response_message = response.json()["message"]
+        response_dict = response.json()
+        response_dict.pop("message")
+        response_dict.pop("session_id")
+
     message = f"Please wait, fetching new agent..."
     chat_history.append([message, response_message])
-
-    response_dict = response.json()
-    response_dict.pop("message")
-    response_dict.pop("session_id")
 
     original_context = json.loads(_context)
 
@@ -341,6 +364,41 @@ def get_action_events(_events=None):
         _events = ret
     return json.dumps(ret, cls=CustomJsonEncoder, indent=4, sort_keys=True)
 
+def get_available_tool_descriptions():
+    tool_descriptions = []
+
+    for tool in Toolbox.discovered_tools:
+        tool_name = tool.name
+        tool_instance = tool.tool()
+        tool_description = tool_instance.description
+        fields = tool_instance.args_schema.model_fields
+        # args_string = json.dumps(fields, indent=2, cls=CustomJsonEncoder, sort_keys=True)
+        # args_string = fields.__str__()
+        args_string = ''
+        if not fields:
+            args_string = "'No args'"
+        for field in fields:
+            field_str = fields[field].__str__()
+            args_string += f"{field}: {field_str}\n"
+
+
+
+        tool_description = f"""
+## Tool: {tool_name}
+
+#### Description
+{tool_description}
+
+#### Args
+```python
+{args_string}
+```
+---"""
+
+        tool_descriptions.append(tool_description)
+
+    tool_descriptions_string = "\n".join(tool_descriptions)
+    return tool_descriptions_string
 
 def get_available_profile_names() -> list:
     logger.info("Getting available profile names...")
@@ -367,13 +425,34 @@ def get_available_profile_names() -> list:
 with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
     session_state = gr.State(value={"session_id": "", "session": requests.Session(), "agent": None})
     session_apikey = gr.State(value="")
-    with gr.Accordion("Tuning", elem_classes="accordion", visible=is_settings_set(), open=False) as prompts_box:
-        gr.Markdown(
-            "Changes to these settings are used to set up a conversation using the Reset button and will not "
-            "be reflected until the next 'Reset'"
-        )
+    with gr.Accordion("Help and information", elem_classes="accordion", visible=is_settings_set(), open=False) as help_box:
+        with gr.Tab("Help and Information") as help_tab:
+            gr.Markdown(value=HELP_TEXT)
+
+        with gr.Tab("Available Tools") as tools_tab:
+            gr.Markdown(value=get_available_tool_descriptions())
+
+        with gr.Tab("Gradio Debugging") as debug_tab:
+            debug_text = gr.Textbox(
+                label="Debug",
+                info="Debugging information",
+                show_label=False,
+                lines=20,
+                value=get_debug_text,
+                interactive=False,
+                autoscroll=True,
+                show_copy_button=True,
+                every=1.0,
+            )
+            # refresh_button = gr.Button("Refresh", variant="secondary")
+            # refresh_button.click(get_debug_text, inputs=[debug_text], outputs=[debug_text])
+    with gr.Accordion("Configuration and Tuning", elem_classes="accordion", visible=is_settings_set(), open=False) as prompts_box:
 
         with gr.Tab("LLM Tuning") as tuninig_tab:
+            gr.Markdown(
+                "Changes to these settings are used to set up a conversation using the Reset button and will not "
+                "be reflected until the next 'Reset'"
+            )
             with gr.Row() as preferences_row1:
                 max_iterations = gr.Number(
                     label="Max Iterations",
@@ -429,25 +508,8 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
             with gr.Row() as preferences_row3:
                 tool_names = openbrain.orm.model_agent_config.DefaultSettings.AVAILABLE_TOOLS.value
+                tool_names.sort()
                 tools = gr.CheckboxGroup(tool_names, label="Tools", info="Select tools to enable for the agent")
-
-        with gr.Tab("API Keys and contact info") as api_keys_tab:
-            outgoing_webhook_url = gr.Textbox(
-                label="Outgoing Webhook URL",
-                info="LeadMomentum webhook URL",
-                type="text",
-            )
-
-            openai_api_key = gr.Textbox(
-                label="OpenAI API Key",
-                info="The API key for OpenAI's API",
-                type="password",
-            )
-            # promptlayer_api_key = gr.Textbox(
-            #     label="Prompt Layer API Key",
-            #     info="The API key for Prompt Layer's API",
-            #     type="password",
-            # )
 
         with gr.Tab("System Message") as long_text_row1:
             system_message = gr.TextArea(
@@ -469,21 +531,23 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 info="The first message to be sent to the user.",
             )
 
-        with gr.Tab("Debugging") as debug_tab:
-            debug_text = gr.Textbox(
-                label="Debug",
-                info="Debugging information",
-                show_label=False,
-                lines=20,
-                value=get_debug_text,
-                interactive=False,
-                autoscroll=True,
-                show_copy_button=True,
-                # every=5.0,
+        with gr.Tab("API Keys and contact info") as api_keys_tab:
+            outgoing_webhook_url = gr.Textbox(
+                label="Outgoing Webhook URL",
+                info="LeadMomentum webhook URL",
+                type="text",
             )
-            refresh_button = gr.Button("Refresh", variant="secondary")
-            refresh_button.click(get_debug_text, inputs=[debug_text], outputs=[debug_text])
 
+            openai_api_key = gr.Textbox(
+                label="OpenAI API Key",
+                info="The API key for OpenAI's API",
+                type="password",
+            )
+            # promptlayer_api_key = gr.Textbox(
+            #     label="Prompt Layer API Key",
+            #     info="The API key for Prompt Layer's API",
+            #     type="password",
+            # )
 
     with gr.Accordion("Save and Load") as submit_accordion:
         with gr.Row() as submit_row:
@@ -499,7 +563,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     profile_name = gr.Dropdown(
                         allow_custom_value=True,
                         label="Profile Name",
-                        info="The name of your AgentConfig. Defaults to 'public'",
+                        info="The name of your AgentConfig. Defaults to 'default'",
                         choices=get_available_profile_names(),
                     )
                     profile_name.value = DEFAULT_PROFILE_NAME
@@ -557,19 +621,22 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                         msg = gr.Textbox()
 
             with gr.Column(scale=1) as context_container:
+
                 with gr.Tab("Context"):
                     with gr.Accordion("Context", open=True) as context_accordian:
                         context = gr.Textbox(
                             label="Context",
-                            info="The context for the conversation.",
+                            info="Additional context for tools",
                             show_label=False,
+                            show_copy_button=True,
                             lines=4,
                             value=EXAMPLE_CONTEXT,
                         )
                 with gr.Tab("Actions"):
                     with gr.Accordion("Action Events") as events_accordian:
-                        events_str = get_action_events()
-                        events = gr.Json(value=events_str, label="Recorded Action Events")
+                        # events_str = get_action_events()
+                        # events = gr.Json(value=events_str, label="Latest action event recorded.")
+                        events = gr.Json(value=get_action_events, every=15.0, label="Latest action event recorded.")
                         refresh_events_button = gr.Button("Refresh", size="sm", variant="secondary")
                         refresh_events_button.click(get_action_events, inputs=[events], outputs=[events])
 
@@ -608,7 +675,6 @@ def main():
             share=False,
             server_name="0.0.0.0",
             server_port=PORT,
-            show_tips=True,
             auth=auth,
             auth_message="Please login to continue",
         )
@@ -618,7 +684,6 @@ def main():
             share=False,
             server_name="0.0.0.0",
             server_port=PORT,
-            show_tips=True,
         )
 
 

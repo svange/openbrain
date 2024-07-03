@@ -131,23 +131,3 @@ class TestAgent:
         assert "blue" in response_message.lower()
 
 
-    @pytest.mark.ci_cd
-    @pytest.mark.integration_tests
-    @pytest.mark.skip(reason="This method of using context is deprecated. This relied on the agent being automatically aware of the email addres by way of injecion into the conversation. Now, the API is responsible for metadata, so the test and method for this case must be reworked.")
-    # expected failure
-    def test_initial_context_email(self, incoming_agent_config: AgentConfig, initial_context: dict[str, str]):
-        assert initial_context["email"] is not None
-        email = initial_context["email"]
-
-        messages = [
-            "What's my email address?",
-        ]
-
-        # GIVE INFO
-        message = messages.pop(0)
-        gpt_agent = GptAgent(agent_config=incoming_agent_config, initial_context=initial_context)
-        response_message = gpt_agent.handle_user_message(message)
-
-        assert response_message is not None
-        assert isinstance(response_message, str)
-        assert email in response_message

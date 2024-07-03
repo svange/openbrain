@@ -4,6 +4,7 @@ from typing import Optional, TypeAlias
 
 import ulid
 from pydantic import BaseModel, Field
+
 from openbrain.util import config, Defaults
 
 if config.OB_MODE == Defaults.OB_MODE_LOCAL.value:
@@ -20,17 +21,16 @@ class DefaultSettings(Enum):
     """Default settings for the agent config"""
 
     # Tools
-    AVAILABLE_TOOLS = ["leadmo_update_contact",
-                       "leadmo_stop_conversation",
-                       "connect_with_agent",
-                       "send_lead_to_crm",  # TODO get rid of this, it's only here to support a legacy name for this tool
-                       "get_current_time",
-                       "leadmo_get_simple_calendar_appointment_slots",
-                       "leadmo_create_appointment",
-                       "leadmo_create_contact",
-                       "lls_scrub_phone_number",
-                       "leadmo_get_contact_info_from_context",
-                       "tester"
+    AVAILABLE_TOOLS = [
+                        "get_current_time",
+                        "tester",
+                        "leadmo_update_contact",
+                        "leadmo_stop_conversation",
+                        "leadmo_get_simple_calendar_appointment_slots",
+                        "leadmo_create_appointment",
+                        "leadmo_create_contact",
+                        "lls_scrub_phone_number",
+                        "leadmo_get_contact_info_from_context"
                        ]
 
     TOOLS = []
