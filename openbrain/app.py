@@ -341,7 +341,7 @@ def get_action_events(_events=None):
 
     if _events:
         _events = ret
-    return json.dumps(ret)
+    return json.dumps(ret, cls=CustomJsonEncoder, indent=4, sort_keys=True)
 
 
 def get_available_profile_names() -> list:
