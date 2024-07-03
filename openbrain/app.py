@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 from decimal import Decimal
@@ -121,6 +122,103 @@ def get_debug_text(_debug_text = None) -> str:
 
     return ret
 
+
+def get_aws_cloudwatch_logs():
+    """Get cloudwatch logs for the agent we are interacting with"""
+    logger.info("Getting AWS Cloudwatch logs...")
+    try:
+        cloudwatch = boto3.client("logs")
+        target_log_group_name_prefix = f'/aws/lambda/{INFRA_STACK_NAME}-APIHandler'
+        # get list of log groups and find the one with GRADIO_INFRA_STACK_NAME's value in it's name
+        log_groups = cloudwatch.describe_log_groups(logGroupNamePrefix=target_log_group_name_prefix)
+
+        logger.info(f"Found {len(log_groups['logGroups'])} log groups.")
+        target_log_group = log_groups["logGroups"][0]["logGroupName"]
+        logger.info(f"Target log group: {target_log_group}")
+
+        if not target_log_group:
+            return "No log group found"
+
+        # get the log streams for the log group
+        log_streams = cloudwatch.describe_log_streams(logGroupName=target_log_group, orderBy="LastEventTime", descending=True)
+
+        # get the latest log stream
+        latest_log_stream = log_streams["logStreams"][0]["logStreamName"]
+
+        # get the log events
+        log_events = cloudwatch.get_log_events(logGroupName=target_log_group, logStreamName=latest_log_stream)
+
+        events_string = ""
+        match_prefix = '{"level":"'
+        counter = 0
+        max_events = 4
+        for event in log_events["events"]:
+            message = event["message"]
+            if message.startswith(match_prefix):
+                try:
+                    message_dict = json.loads(message)
+
+                    new_dict = {
+                        "level": message_dict["level"],
+                        "location": message_dict["location"],
+                        "message": message_dict["message"],
+                        "timestamp": message_dict["timestamp"],
+                        "function_name": message_dict["function_name"],
+                        "request_path": message_dict["request_path"],
+                        "xray_trace_id": message_dict["xray_trace_id"],
+                    }
+
+
+                except Exception as e:
+                    new_dict = {
+                        "ERROR PARSING MESSAGE": message,
+                    }
+
+                message = json.dumps(new_dict, indent=2)
+                counter += 1
+
+                events_string += message + ",\n"
+            if counter > max_events:
+                break
+
+        # remove the last comma
+        events_string = events_string[:-2]
+        # formatted_message = '''```python\n''' + events_string + '''\n```'''
+        formatted_message = '[\n' + events_string + '\n]'
+        return formatted_message
+    except Exception as e:
+        return e.__str__()
+
+
+
+
+
+
+
+
+def get_aws_xray_trace_summaries(id=None):
+    '''Get x-ray logs from AWS'''
+    client = boto3.client('xray')
+    this_year = datetime.datetime.now().year
+    this_month = datetime.datetime.now().month
+    this_day = datetime.datetime.now().day
+    yesterday = (datetime.datetime.now() - datetime.timedelta(days=1)).day
+
+    if id:
+        response = client.get_trace_summaries(
+            StartTime=datetime.datetime(this_year, this_month, yesterday),
+            EndTime=datetime.datetime(this_year, this_month, this_day),
+            Sampling=False,
+            FilterExpression=f"traceId = {id}"
+        )
+    else:
+        response = client.get_trace_summaries(
+            StartTime=datetime.datetime(this_year, this_month, yesterday),
+            EndTime=datetime.datetime(this_year, this_month, this_day),
+            Sampling=False,
+        )
+
+    return response
 
 def chat(message, chat_history, _profile_name, session_state, _client_id, _context):
     # Make a POST request to the chat endpoint
@@ -452,6 +550,22 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
             )
             # refresh_button = gr.Button("Refresh", variant="secondary")
             # refresh_button.click(get_debug_text, inputs=[debug_text], outputs=[debug_text])
+
+        with gr.Tab("Agent Debugging") as agent_debug_tab:
+            agent_debug_text = gr.JSON(
+                label="Debug",
+                # info="Debugging information",
+                show_label=False,
+                # lines=20,
+                value=get_aws_cloudwatch_logs,
+                # interactive=False,
+                # autoscroll=True,
+                # show_copy_button=True,
+                every=3.0,
+            )
+            # refresh_button = gr.Button("Refresh", variant="secondary")
+            # refresh_button.click(get_debug_text, inputs=[debug_text], outputs=[debug_text])
+
     with gr.Accordion("Configuration and Tuning", elem_classes="accordion", visible=is_settings_set(), open=False) as prompts_box:
 
         with gr.Tab("LLM Tuning") as tuninig_tab:
