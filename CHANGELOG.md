@@ -1,3 +1,15 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [2.3.0](https://github.com/svange/openbrain/compare/v2.2.0...v2.3.0) (2024-07-03)
+
+
+### Features
+
+* improved logging in gradio - obfuscating secret from logs ([02008e4](https://github.com/svange/openbrain/commit/02008e46080eceac3d551e05a5023ab415de02af))
+
 # CHANGELOG
 
 ## v2.0.0-dev.3 (2024-07-03)
