@@ -1,3 +1,151 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.38.2](https://github.com/svange/openbrain/compare/v1.38.1...v1.38.2) (2024-07-03)
+
+
+### Bug Fixes
+
+* cleaning up UI based debugging. ([825994d](https://github.com/svange/openbrain/commit/825994d8927e52c68d5d3c95b335e9058ad2cfbc))
+
+## [1.38.1](https://github.com/svange/openbrain/compare/v1.38.0...v1.38.1) (2024-07-02)
+
+
+### Bug Fixes
+
+* cleaning up remaining remnants of "lead" objects ([1b372b5](https://github.com/svange/openbrain/commit/1b372b571c2695000b2a52038d086bf7dd1fb0c7))
+
+## [1.38.0](https://github.com/svange/openbrain/compare/v1.37.0...v1.38.0) (2024-07-02)
+
+
+### Features
+
+* Added action table reporter to gradio ([d42ed2a](https://github.com/svange/openbrain/commit/d42ed2aa0dedf321ae229931c7f5c511665933e8))
+
+
+### Bug Fixes
+
+* cleaning up remaining remnants of "lead" objects ([d4ff823](https://github.com/svange/openbrain/commit/d4ff823a472633d8c204c6ce08c359300abd34bf))
+
+## [1.37.0](https://github.com/svange/openbrain/compare/v1.36.0...v1.37.0) (2024-07-02)
+
+
+### Features
+
+* Added action table reporter to gradio ([d8c5337](https://github.com/svange/openbrain/commit/d8c533724486fa6c5189a643eb6d95bfd0a6029b))
+
+## [1.36.0](https://github.com/svange/openbrain/compare/v1.35.0...v1.36.0) (2024-07-02)
+
+
+### Features
+
+* Added action table reporter to gradio ([f5b9d1e](https://github.com/svange/openbrain/commit/f5b9d1e29c4876b774e0e5448df19e2554b4de57))
+
+## [1.35.0](https://github.com/svange/openbrain/compare/v1.34.0...v1.35.0) (2024-07-02)
+
+
+### Features
+
+* Added action table reporter to gradio ([5566e74](https://github.com/svange/openbrain/commit/5566e74c1ae91807a29a0c8d3790b75686bf747b))
+
+## [1.34.0](https://github.com/svange/openbrain/compare/v1.33.0...v1.34.0) (2024-07-02)
+
+
+### Features
+
+* Added action table reporter to gradio ([44f56d3](https://github.com/svange/openbrain/commit/44f56d3ec5a2dca5d23ead858687ceeba07b3f8e))
+
+## [1.33.0](https://github.com/svange/openbrain/compare/v1.32.0...v1.33.0) (2024-07-02)
+
+
+### Features
+
+* Added action table reporter to gradio ([1d56aa2](https://github.com/svange/openbrain/commit/1d56aa26623f84ecbd51cde10e309788d60a3da7))
+
+## [1.32.0](https://github.com/svange/openbrain/compare/v1.31.0...v1.32.0) (2024-07-02)
+
+
+### Features
+
+* Added action table reporter to gradio ([dbc0c00](https://github.com/svange/openbrain/commit/dbc0c00b889a5da7455ccb8f7281b3c3ad2f01bb))
+
+## [1.31.0](https://github.com/svange/openbrain/compare/v1.30.0...v1.31.0) (2024-07-02)
+
+
+### Features
+
+* Action table functionality to record actions debug ([c55592f](https://github.com/svange/openbrain/commit/c55592f43a74f077bbebb83b52696b08a3d6690d))
+
+## [1.30.0](https://github.com/svange/openbrain/compare/v1.29.0...v1.30.0) (2024-07-02)
+
+
+### Features
+
+* Action table functionality to record actions debug ([b68c962](https://github.com/svange/openbrain/commit/b68c962cb5c8d5b012ab9ea01c06274e31a4556e))
+
+## [1.29.0](https://github.com/svange/openbrain/compare/v1.28.0...v1.29.0) (2024-07-02)
+
+
+### Features
+
+* Action table functionality to record actions ([4cd866d](https://github.com/svange/openbrain/commit/4cd866d9ed169022bb19b2cea0d26c9638836805))
+
+## [1.28.0](https://github.com/svange/openbrain/compare/v1.27.0...v1.28.0) (2024-07-02)
+
+
+### Features
+
+* Action table functionality to record actions ([50b4de2](https://github.com/svange/openbrain/commit/50b4de22343053aad58e5231c10111f9103bcf8f))
+
+## [1.27.0](https://github.com/svange/openbrain/compare/v1.26.0...v1.27.0) (2024-07-02)
+
+
+### Features
+
+* debugging ([7d794a7](https://github.com/svange/openbrain/commit/7d794a7ffc2ddeaa99560ab8cfc562902377f424))
+
+## [1.26.0](https://github.com/svange/openbrain/compare/v1.25.0...v1.26.0) (2024-07-02)
+
+
+### Features
+
+* adding action table ([ae0948c](https://github.com/svange/openbrain/commit/ae0948ccd229f81dcad5e121a0df20815aa061d8))
+
+## [1.25.0](https://github.com/svange/openbrain/compare/v1.24.0...v1.25.0) (2024-07-02)
+
+
+### Features
+
+* adding sns topic for testing ([54af4dc](https://github.com/svange/openbrain/commit/54af4dc96fc71f5c0220d8220b92e8742d62a082))
+
+## [1.24.0](https://github.com/svange/openbrain/compare/v1.23.0...v1.24.0) (2024-07-02)
+
+
+### Features
+
+* gradio mvp... again ([a93744e](https://github.com/svange/openbrain/commit/a93744e4ab643dec2d6892de5f7f56c18cb6d85d))
+
+## [1.23.0](https://github.com/svange/openbrain/compare/v1.22.0...v1.23.0) (2024-07-02)
+
+
+### Features
+
+* gradio mvp... again ([dea06ab](https://github.com/svange/openbrain/commit/dea06ab8e7b1eaf1b569ec22239597ff07f7b87e))
+
+## [1.22.0](https://github.com/svange/openbrain/compare/v1.21.0...v1.22.0) (2024-07-02)
+
+
+### Features
+
+* re-enabling auth in gradio ([0813333](https://github.com/svange/openbrain/commit/081333322986a514ee839a379e31a7a91a944985))
+
+
+### Bug Fixes
+
+* re-enabling auth in gradio ([7b3d583](https://github.com/svange/openbrain/commit/7b3d583baefb66660b028e7125d180584b7ab177))
+
 # CHANGELOG
 
 ## v1.22.0-dev.1 (2024-07-02)

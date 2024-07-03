@@ -1,9 +1,5 @@
 from __future__ import annotations
-
-import os
-
 from pydantic import BaseModel, Field, Extra
-
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.util import config, Defaults
 
@@ -37,10 +33,6 @@ class ChatMessage(ORMModel, BaseModel):
         description="The message to send to the agent, ignored when resetting the session",
     )
 
-    email: str | None = Field(
-        default=None,
-        description="DEPRECATED - The email of the user initiating the chat",
-    )
 
     @classmethod
     def get(cls, *args, **kwargs) -> ChatMessage:

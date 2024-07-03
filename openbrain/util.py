@@ -49,8 +49,9 @@ class Defaults(Enum):
     """Default values for environment variables and other constants."""
 
     SESSION_TABLE_NAME = None
-    LEAD_TABLE_NAME = None
+    # LEAD_TABLE_NAME = None
     AGENT_CONFIG_TABLE_NAME = None
+    ACTION_TABLE_NAME = None
     # SECRET_STORE_NAME = "ObSecrets"
 
     # Central Infrastructure
@@ -59,8 +60,9 @@ class Defaults(Enum):
     # DB Tables
     INFRA_STACK_NAME = "OpenBrain"
     SESSION_TABLE_PUBLISHED_NAME = "ObSessionTableName"
-    LEAD_TABLE_PUBLISHED_NAME = "ObLeadTableName"
+    # LEAD_TABLE_PUBLISHED_NAME = "ObLeadTableName"
     AGENT_CONFIG_TABLE_PUBLISHED_NAME = "ObAgentConfigTableName"
+    ACTION_TABLE_PUBLISHED_NAME = "ObActionTableName"
     # SECRET_STORE_PUBLISHED_NAME = "OpenbrainSecretStore"
 
     # Other Values with defaults
@@ -94,13 +96,17 @@ class Config:
     SESSION_TABLE_NAME: str = field(
         default=os.environ.get(Defaults.SESSION_TABLE_NAME.name, Defaults.SESSION_TABLE_NAME.value)
     )
-    LEAD_TABLE_NAME: str = field(
-        default=os.environ.get(Defaults.LEAD_TABLE_NAME.name, Defaults.LEAD_TABLE_NAME.value)
-    )
+    # LEAD_TABLE_NAME: str = field(
+    #     default=os.environ.get(Defaults.LEAD_TABLE_NAME.name, Defaults.LEAD_TABLE_NAME.value)
+    # )
     AGENT_CONFIG_TABLE_NAME: str = field(
         default=os.environ.get(
             Defaults.AGENT_CONFIG_TABLE_NAME.name, Defaults.AGENT_CONFIG_TABLE_NAME.value
         )
+    )
+    ACTION_TABLE_NAME: str = field(
+        default=os.environ.get(
+            Defaults.ACTION_TABLE_NAME.name, Defaults.ACTION_TABLE_NAME.value)
     )
 
     SESSION_TABLE_PUBLISHED_NAME: str = field(
@@ -108,15 +114,21 @@ class Config:
             Defaults.SESSION_TABLE_PUBLISHED_NAME.name, Defaults.SESSION_TABLE_PUBLISHED_NAME.value
         )
     )
-    LEAD_TABLE_PUBLISHED_NAME: str = field(
-        default=os.environ.get(
-            Defaults.LEAD_TABLE_PUBLISHED_NAME.name, Defaults.LEAD_TABLE_PUBLISHED_NAME.value
-        )
-    )
+    # LEAD_TABLE_PUBLISHED_NAME: str = field(
+    #     default=os.environ.get(
+    #         Defaults.LEAD_TABLE_PUBLISHED_NAME.name, Defaults.LEAD_TABLE_PUBLISHED_NAME.value
+    #     )
+    # )
     AGENT_CONFIG_TABLE_PUBLISHED_NAME: str = field(
         default=os.environ.get(
             Defaults.AGENT_CONFIG_TABLE_PUBLISHED_NAME.name,
             Defaults.AGENT_CONFIG_TABLE_PUBLISHED_NAME.value,
+        )
+    )
+    ACTION_TABLE_PUBLISHED_NAME: str = field(
+        default=os.environ.get(
+            Defaults.ACTION_TABLE_PUBLISHED_NAME.name,
+            Defaults.ACTION_TABLE_PUBLISHED_NAME.value,
         )
     )
 
@@ -148,6 +160,7 @@ class Config:
                 f"Environment variable OB_MODE={self.OB_MODE} must be one of {self.RECOGNIZED_OB_MODES}"
             )
         self.set_dynamic_values()
+
 
     def set_dynamic_values(self):
         _logger = get_logger()
