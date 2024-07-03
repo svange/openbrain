@@ -1,6 +1,18 @@
 # CHANGELOG
 
+## v2.0.0-dev.1 (2024-07-03)
+
+### Breaking
+
+* fix: New UI to support tool FW.
+
+BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent tools now accept context. The &#39;email&#39; parameter has become OBE by context. Lead object has been eliminated in favor of more general &#39;context&#39; approach. ([`4aa23b6`](https://github.com/svange/openbrain/commit/4aa23b6fe0387b5fa95bc4e8be12134d157ef242))
+
 ## v1.22.0-dev.2 (2024-07-03)
+
+### Chore
+
+* chore(release): release 1.22.0-dev.2 ([`54ce89a`](https://github.com/svange/openbrain/commit/54ce89abdd1459e3cb36b429ad1e2f2029892602))
 
 ### Fix
 
