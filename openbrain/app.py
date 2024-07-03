@@ -7,7 +7,7 @@ import requests
 from dotenv import load_dotenv
 
 load_dotenv()
-os.environ["INFRA_STACK_NAME"] = os.environ.get("GRADIO_INFRA_STACK_NAME", None)
+os.environ["INFRA_STACK_NAME"] = os.environ.get("GRADIO_INFRA_STACK_NAME", "LOCAL")
 
 import openbrain.orm.model_agent_config
 from openbrain.agents.gpt_agent import GptAgent
@@ -25,12 +25,12 @@ logger = logging.getLogger("Gradio")
 
 EXAMPLE_CONTEXT = '''
 {
-    "firstName": "Samuel",
-    "lastName": "Vange",
-    "name": "Sam Vange",
+    "firstName": "Deez",
+    "lastName": "Nutzington",
+    "name": "Your mother",
     "dateOfBirth": "1970-04-01",
     "phone": "+16197966726",
-    "email": "samuelvange@gmail.com",
+    "email": "e@my.ass",
     "address1": "1234 5th St N",
     "city": "San Diego",
     "state": "CA",
@@ -62,7 +62,7 @@ logger.info(("-" * 60) + "PROGRAM INITIALIZING" + ("-" * 60))
 aws_region = config.AWS_REGION
 aws_profile = os.environ.get("AWS_PROFILE", "UNKNOWN")
 obfuscated_api_key = OB_PROVIDER_API_KEY[:2] + "*" * (len(OB_PROVIDER_API_KEY) - 4) + OB_PROVIDER_API_KEY[-2:]
-obfuscated_password = GRADIO_PASSWORD[:2] + "*" * (len(GRADIO_PASSWORD) - 4)
+obfuscated_password = GRADIO_PASSWORD[:2] + "*" * (len(GRADIO_PASSWORD) - 4) if GRADIO_PASSWORD else None
 
 logger.info(f"AWS_REGION: {aws_region}")
 logger.info(f"AWS_PROFILE: {aws_profile}")
@@ -104,13 +104,14 @@ def chat(message, chat_history, _profile_name, session_state, _client_id, _conte
     new_context = None
 
     response_message = None
-    if OB_MODE == Defaults.OB_MODE_LOCAL.value:
+    if not OB_PROVIDER_API_KEY:
+        logger.info("No API key found, trying to use local mode for agent interactions...")
         chat_session = ChatSession.get(session_id=session_id, client_id=_client_id)
         agent_state = {
             "frozen_agent_memory": chat_session.frozen_agent_memory,
             "frozen_agent_config": chat_session.frozen_agent_config,
         }
-        gpt_agent = GptAgent.deserialize(state=agent_state)
+        gpt_agent = GptAgent.deserialize(state=agent_state, context=_context)
 
         response_message = gpt_agent.handle_user_message(message)
 
@@ -176,10 +177,11 @@ def reset(
     chat_message_dump.pop("message")
 
     response = None
-    if OB_MODE == Defaults.OB_MODE_LOCAL.value:
+    if not OB_PROVIDER_API_KEY:
+        logger.info("No API key found, trying to use local mode for agent interactions...")
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
-        gpt_agent = GptAgent(agent_config=agent_config)
+        gpt_agent = GptAgent(agent_config=agent_config, context=_context)
 
         frozen_agent_memory = gpt_agent.serialize()["frozen_agent_memory"]
         frozen_agent_config = gpt_agent.serialize()["frozen_agent_config"]
@@ -315,10 +317,6 @@ def auth(username, password):
         if password == GRADIO_PASSWORD:
             return True
     return False
-
-
-dynamodb = boto3.resource("dynamodb")
-table = dynamodb.Table(config.ACTION_TABLE_NAME)
 
 
 class CustomJsonEncoder(json.JSONEncoder):
@@ -604,15 +602,24 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
 
 def main():
-    main_block.launch(
-        debug=True,
-        share=False,
-        server_name="0.0.0.0",
-        server_port=PORT,
-        show_tips=True,
-        auth=auth,
-        auth_message="Please login to continue",
-    )
+    if GRADIO_PASSWORD:
+        main_block.launch(
+            debug=True,
+            share=False,
+            server_name="0.0.0.0",
+            server_port=PORT,
+            show_tips=True,
+            auth=auth,
+            auth_message="Please login to continue",
+        )
+    else:
+        main_block.launch(
+            debug=True,
+            share=False,
+            server_name="0.0.0.0",
+            server_port=PORT,
+            show_tips=True,
+        )
 
 
 if "__main__" == __name__:
