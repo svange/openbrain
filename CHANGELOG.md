@@ -1,37 +1,65 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v2.0.0-dev.3 (2024-07-03)
+
+### Feature
+
+* feat: improved logging in gradio - obfuscating secret from logs ([`02008e4`](https://github.com/svange/openbrain/commit/02008e46080eceac3d551e05a5023ab415de02af))
+
+### Unknown
+
+* Merge branch &#39;refs/heads/main&#39; into dev ([`6cef9a6`](https://github.com/svange/openbrain/commit/6cef9a6ad5eddacf6804bab9075ffabf9fe7e129))
+
+## v2.2.0 (2024-07-03)
+
+### Chore
+
+* chore(release): 2.2.0 [skip ci]
 
 ## [2.2.0](https://github.com/svange/openbrain/compare/v2.1.0...v2.2.0) (2024-07-03)
 
-
 ### Features
 
-* improved logging in gradio - obfuscating secret from logs ([fa70793](https://github.com/svange/openbrain/commit/fa70793145be8c692b027093328bf7ac393d7972))
+* improved logging in gradio - obfuscating secret from logs ([fa70793](https://github.com/svange/openbrain/commit/fa70793145be8c692b027093328bf7ac393d7972)) ([`5dd590a`](https://github.com/svange/openbrain/commit/5dd590ab3e3e1ed5c2d80d4384b743bc880a5231))
+
+### Feature
+
+* feat: improved logging in gradio - obfuscating secret from logs ([`fa70793`](https://github.com/svange/openbrain/commit/fa70793145be8c692b027093328bf7ac393d7972))
+
+## v2.1.0 (2024-07-03)
+
+### Chore
+
+* chore(release): 2.1.0 [skip ci]
 
 ## [2.1.0](https://github.com/svange/openbrain/compare/v2.0.0...v2.1.0) (2024-07-03)
 
-
 ### Features
 
-* improved logging in gradio - obfuscating secret from logs ([3bda49c](https://github.com/svange/openbrain/commit/3bda49cb8473bcad22a8299521580ccb1f30d34c))
+* improved logging in gradio - obfuscating secret from logs ([3bda49c](https://github.com/svange/openbrain/commit/3bda49cb8473bcad22a8299521580ccb1f30d34c)) ([`5ece1fe`](https://github.com/svange/openbrain/commit/5ece1fea33d2cb1cbd2b127d85d1c3e7535937fe))
+
+### Feature
+
+* feat: improved logging in gradio - obfuscating secret from logs ([`3bda49c`](https://github.com/svange/openbrain/commit/3bda49cb8473bcad22a8299521580ccb1f30d34c))
+
+## v2.0.0 (2024-07-03)
+
+### Chore
+
+* chore(release): 2.0.0 [skip ci]
 
 ## [2.0.0](https://github.com/svange/openbrain/compare/v1.38.2...v2.0.0) (2024-07-03)
 
-
 ### ⚠ BREAKING CHANGES
 
-* Infrastructure must now be deployed for OB app to run. Agent tools now accept context. The 'email' parameter has become OBE by context. Lead object has been eliminated in favor of more general 'context' approach.
-* Infrastructure must now be deployed for OB app to run. Agent tools now accept context. The 'email' parameter has become OBE by context. Lead object has been eliminated in favor of more general 'context' approach.
+* Infrastructure must now be deployed for OB app to run. Agent tools now accept context. The &#39;email&#39; parameter has become OBE by context. Lead object has been eliminated in favor of more general &#39;context&#39; approach.
+* Infrastructure must now be deployed for OB app to run. Agent tools now accept context. The &#39;email&#39; parameter has become OBE by context. Lead object has been eliminated in favor of more general &#39;context&#39; approach.
 
 ### Bug Fixes
 
 * cleaning up UI based debugging. ([668eafc](https://github.com/svange/openbrain/commit/668eafc49577ac76703fe6278fe926d71e80f921))
 * New UI to support tool FW. ([a74bd1f](https://github.com/svange/openbrain/commit/a74bd1fb2b66c667fcf5da5b29d8f77f3ab528b2))
-* New UI to support tool FW. ([4aa23b6](https://github.com/svange/openbrain/commit/4aa23b6fe0387b5fa95bc4e8be12134d157ef242))
-
-# CHANGELOG
+* New UI to support tool FW. ([4aa23b6](https://github.com/svange/openbrain/commit/4aa23b6fe0387b5fa95bc4e8be12134d157ef242)) ([`286007e`](https://github.com/svange/openbrain/commit/286007e86ebdfdefd0a9b7f037656be47827ab6a))
 
 ## v2.0.0-dev.2 (2024-07-03)
 
@@ -40,6 +68,10 @@ All notable changes to this project will be documented in this file. See
 * fix: New UI to support tool FW.
 
 BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent tools now accept context. The &#39;email&#39; parameter has become OBE by context. Lead object has been eliminated in favor of more general &#39;context&#39; approach. ([`a74bd1f`](https://github.com/svange/openbrain/commit/a74bd1fb2b66c667fcf5da5b29d8f77f3ab528b2))
+
+### Chore
+
+* chore(release): release 2.0.0-dev.2 ([`2151b1a`](https://github.com/svange/openbrain/commit/2151b1a351f7593cfdda80f738f41507741f64da))
 
 ### Unknown
 
