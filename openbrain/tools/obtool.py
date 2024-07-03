@@ -30,7 +30,8 @@ class OBTool:
         self.initial_context = initial_context or {}
 
     @classmethod
-    def record_action(cls, event, response):
+    def record_action(cls, event, response, latest=False):
+
         dynamodb = boto3.resource("dynamodb")
         table = dynamodb.Table(config.ACTION_TABLE_NAME)
 
@@ -43,13 +44,27 @@ class OBTool:
         action_response = table.put_item(
             Item=item
         )
+
+        if latest:
+            try:
+                table.put_item(
+                    Item={
+                        "action_id": "latest",
+                        "event": event,
+                        "response": response,
+                    }
+                )
+            except Exception as e:
+                logger.error(f"Error recording latest action: {e}")
+                pass
+
         return action_response
 
 
     @classmethod
     def send_event(cls, event_detail: str, event_source: str = Defaults.OB_TOOL_EVENT_SOURCE.value) -> Any:
         """Send an event to eventbus."""
-        logger.info(f"Sending lead to Lead Momentum: {event_detail}")
+        logger.info(f"Sending event: {event_detail}")
 
         # Send event to eventbus
         event_bus_friendly_name = config.EVENTBUS_NAME
@@ -79,8 +94,9 @@ class OBTool:
         except Exception as e:
             logger.error(f"Error recording action: {e}")
 
-        return response
+        try:
+            cls.record_action(event=entries, response=response, latest=True)
+        except Exception as e:
+            logger.error(f"Error recording latest action: {e}")
 
-    # def register_context(self, context: dict):
-    #     self.context = context
-    #     return self.context
+        return response

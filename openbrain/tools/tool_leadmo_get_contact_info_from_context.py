@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from typing import Any
 
 from langchain.tools.base import BaseTool
@@ -37,7 +38,36 @@ class LeadmoGetContactInfoFromContextTool(BaseTool, ContextAwareToolMixin):
     def _run(self, *args, **kwargs) -> str:
         tool_input = self.tool_input
         context = json.loads(tool_input)
-        return context
+
+        def camel_to_snake(name):
+            name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+            return re.sub('([a-z0-9])([A-Z])', r'\1_\2', name).lower()
+
+        forbidden_keys_pascal_case = [
+                "sessionId",
+                "contactId",
+                "locationId",
+                "apiKey",
+                "calendarId",
+                "appointmentId",
+                "medications",
+            ]
+
+        forbidden_keys_snake_case = [camel_to_snake(key) for key in forbidden_keys_pascal_case]
+
+        forbidden_keys = forbidden_keys_pascal_case + forbidden_keys_snake_case
+
+        for key in forbidden_keys:
+            if key in context:
+                del context[key]
+
+        try:
+            context_string = json.dumps(context)
+        except Exception as e:
+            logger.error(f"Failed to convert context to string: {e}")
+            context_string = str(context)
+
+        return context_string
 
 
     def _arun(self, ticker: str):

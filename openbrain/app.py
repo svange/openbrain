@@ -330,13 +330,12 @@ class CustomJsonEncoder(json.JSONEncoder):
 
 
 def get_action_events(_events=None):
-    logger.info("Getting action events...")
+    logger.info("Getting latest action...")
     try:
         dynamodb = boto3.resource("dynamodb")
         table = dynamodb.Table(config.ACTION_TABLE_NAME)
-        response = table.scan()
-        items = response["Items"][-2:0]
-        ret = json.dumps(items, cls=CustomJsonEncoder, indent=4, sort_keys=True)
+        response = table.get_item(Key={"action_id": "latest"})
+        ret = response.get("Item", {})
     except Exception as e:
         ret = json.dumps({"exception": e.__str__()})
 
