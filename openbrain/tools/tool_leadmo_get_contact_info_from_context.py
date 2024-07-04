@@ -36,8 +36,10 @@ class LeadmoGetContactInfoFromContextTool(BaseTool, ContextAwareToolMixin):
     verbose = True
 
     def _run(self, *args, **kwargs) -> str:
-        tool_input = self.tool_input
-        context = json.loads(tool_input)
+        tool_input = json.loads(self.tool_input)
+        context = json.loads(tool_input.get('context'))
+        agent_config = tool_input.get("agent_config")
+        session_id = tool_input.get("session_id")
 
         def camel_to_snake(name):
             name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
@@ -66,6 +68,9 @@ class LeadmoGetContactInfoFromContextTool(BaseTool, ContextAwareToolMixin):
         except Exception as e:
             logger.error(f"Failed to convert context to string: {e}")
             context_string = str(context)
+
+        if agent_config.get("record_action"):
+            OBTool.record_action(event=TOOL_NAME, response=context_string, latest=True, session_id=session_id)
 
         return context_string
 

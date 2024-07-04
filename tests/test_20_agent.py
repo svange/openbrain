@@ -20,7 +20,7 @@ def incoming_agent_config(default_agent_config):
 #     return outgoing_lead
 
 @pytest.fixture
-def initial_context():
+def context():
     return {"email": "e@my.ass"}
 
 

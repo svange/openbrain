@@ -32,8 +32,10 @@ class LeadmoCreateAppointmentTool(BaseTool, ContextAwareToolMixin):
     verbose = True
 
     def _run(self, *args, **kwargs) -> str:
-        tool_input = self.tool_input
-        context = json.loads(tool_input)
+        tool_input = json.loads(self.tool_input)
+        context = json.loads(tool_input.get('context'))
+        agent_config = tool_input.get("agent_config")
+        session_id = tool_input.get("session_id")
 
         event_detail = {
             "context": context,
@@ -44,6 +46,9 @@ class LeadmoCreateAppointmentTool(BaseTool, ContextAwareToolMixin):
         logger.info(f"event_detail_string: {event_detail_string}")
 
         response = OBTool.send_event(event_source=TOOL_NAME, event_detail=event_detail_string)
+
+        if agent_config.get("record_action"):
+            OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
 
         return response
 

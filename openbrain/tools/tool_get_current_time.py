@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 import datetime
+import json
 from typing import Any, Optional
 
 from langchain.tools.base import BaseTool
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, Extra
 
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.tools.models.context_aware_tool import ContextAwareToolMixin
@@ -26,6 +27,9 @@ class TimeRequestAdapter(BaseModel):
 
 # LangChain tool
 class GetCurrentTimeTool(BaseTool, ContextAwareToolMixin):
+    class Config:
+        extra = Extra.allow
+        populate_by_name = True
     name = TOOL_NAME
     description = """Useful when you need to know the current time."""
     args_schema: type[BaseModel] = TimeRequestAdapter
@@ -33,8 +37,16 @@ class GetCurrentTimeTool(BaseTool, ContextAwareToolMixin):
     verbose = True
 
     def _run(self, *args, **kwargs) -> str:
-        # timezone = kwargs.get("timezone")
+        tool_input = json.loads(self.tool_input)
+        context = json.loads(tool_input.get('context'))
+        agent_config = tool_input.get("agent_config")
+        session_id = tool_input.get("session_id")
+
         current_time = datetime.datetime.now()
+
+        if agent_config.get("record_action"):
+            OBTool.record_action(event=TOOL_NAME, response=current_time, latest=True, session_id=session_id)
+
         return current_time.isoformat()
 
     def _arun(self, ticker: str):

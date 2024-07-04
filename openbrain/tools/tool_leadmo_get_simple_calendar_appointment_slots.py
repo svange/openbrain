@@ -68,43 +68,35 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
         global LEADMO_API_V1_GET_APPOINTMENT_SLOTS_URL
         global LEADMO_AGENT_TABLE_NAME
 
-        logger.info(f"Tool input: {self.tool_input}")
-        logger.info(f"{kwargs=}")
+        tool_input = json.loads(self.tool_input)
+        context = json.loads(tool_input.get('context'))
+        agent_config = tool_input.get("agent_config")
+        session_id = tool_input.get("session_id")
 
-        try:
-            context = json.loads(self.tool_input)
-            location_id = context.get("locationId")
-            calendar_id = context.get("calendarId")
-            api_key = context.get("api_key", None)
-            timezone = kwargs.get("timezone", 'UTC')
+        location_id = context.get("locationId")
+        calendar_id = context.get("calendarId")
+        timezone = kwargs.get("timezone", 'UTC')
 
-        except Exception as e:
-            logger.error(f"Exception while getting context: {e}")
-            raise e
-
-        try:
-            standardized_tz = tz.gettz(timezone)
-
-            start_time_iso = kwargs.get("startTime")
-            end_time_iso = kwargs.get("endTime")
-
-            # convert to epoch
-            start_time = parser.parse(start_time_iso).astimezone(standardized_tz)
-            end_time = parser.parse(end_time_iso).astimezone(standardized_tz)
-
-            start_time_epoch = int(start_time.timestamp() * 1000)
-            end_time_epoch = int(end_time.timestamp() * 1000)
-        except Exception as e:
-            logger.error(f"Exception while converting time to epoch: {e}")
-            raise e
+        api_key = context.get("api_key", get_api_key(location_id, LEADMO_AGENT_TABLE_NAME))
 
 
-        try:
-            if not api_key:
-                api_key = get_api_key(location_id, LEADMO_AGENT_TABLE_NAME)
-        except Exception as e:
-            logger.error(f"Exception while getting API key: {e}")
-            raise e
+        if not location_id:
+            raise ValueError("Location ID is required for this tool.")
+        if not calendar_id:
+            raise ValueError("Calendar ID is required for this tool.")
+
+
+        standardized_tz = tz.gettz(timezone)
+        start_time_iso = kwargs.get("startTime")
+        end_time_iso = kwargs.get("endTime")
+
+        # convert to epoch
+        start_time = parser.parse(start_time_iso).astimezone(standardized_tz)
+        end_time = parser.parse(end_time_iso).astimezone(standardized_tz)
+
+        start_time_epoch = int(start_time.timestamp() * 1000)
+        end_time_epoch = int(end_time.timestamp() * 1000)
+
 
         headers = {
             "Content-Type": "application/json",
@@ -132,6 +124,10 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
         except Exception as e:
             logger.info("Failed to get info from Lead Momentum.")
             raise e
+
+        if agent_config.get("record_action"):
+            OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
+
         return response
 
 

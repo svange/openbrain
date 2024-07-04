@@ -26,17 +26,20 @@ class OBTool:
     on_agent_finish: OBCallbackHandlerFunctionProtocol
     tool: BaseTool
 
-    def __init__(self, initial_context: dict = None, *args, **kwargs):
-        self.initial_context = initial_context or {}
+    def __init__(self, context: dict = None, *args, **kwargs):
+        self.context = context or {}
 
     @classmethod
-    def record_action(cls, event, response, latest=False):
+    def record_action(cls, event, response, latest=False, session_id=None):
+        """Record an action in the action table."""
 
+        if not session_id:
+            session_id = "no-session-" + ulid.ULID().to_uuid().__str__()
         dynamodb = boto3.resource("dynamodb")
         table = dynamodb.Table(config.ACTION_TABLE_NAME)
 
         item = {
-            "action_id": ulid.ULID().to_uuid().__str__(),
+            "action_id": session_id,
             "event": event,
             "response": response,
         }

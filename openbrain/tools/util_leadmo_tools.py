@@ -20,15 +20,16 @@ def get_api_key(location_id, leadmo_agent_table_name):
         )
 
         item = response.get("Item")
+        if item is None or len(item) == 0:
+            raise LookupError(
+                f"Found 0 items for location_id: {location_id} in the database."
+            )
+
         api_key = item.get("api_key").get("S")
     except Exception as e:
-        print("Failed to get API key from the database.")
+        print("Failed to get API key from the database. Client error.")
         raise e
 
-    if item is None or len(item) == 0:
-        raise LookupError(
-            f"Failed to find API key: {location_id=}"
-        )
     return api_key
 
 def conditional_idempotent(func):

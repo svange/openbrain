@@ -75,6 +75,8 @@ class DefaultSettings(Enum):
         "text-davinci-003",
         "gpt-3.5-turbo-16k",
     ]
+    RECORD_TOOL_ACTIONS: bool = False
+    RECORD_CONVERSATIONS: bool = True
 
 
 class AgentConfig(ORMModel, BaseModel):
@@ -84,15 +86,10 @@ class AgentConfig(ORMModel, BaseModel):
         table_name = config.AGENT_CONFIG_TABLE_NAME
         region = config.AWS_REGION
 
-    # Tools
-    # @staticmethod
-    # def available_tools():
-    #     """Return a list of available tools"""
-    #     return DefaultSettings.AVAILABLE_TOOLS.value
 
-    def get_enabled_tool_names(self):
-        """Return a list of enabled tool names"""
-        return [tool for tool, enabled in self.tools.items() if enabled]
+    # def get_enabled_tool_names(self):
+    #     """Return a list of enabled tool names"""
+    #     return [tool for tool, enabled in self.tools.items() if enabled]
 
 
     # Tracking
@@ -186,6 +183,14 @@ class AgentConfig(ORMModel, BaseModel):
         # default={tool: False for tool in list(DefaultSettings.AVAILABLE_TOOLS.value)},
         default=[],
         description="A list of tool names indicating which tools to enable",
+    )
+    record_tool_actions: bool = Field(
+        default=bool(DefaultSettings.RECORD_TOOL_ACTIONS.value),
+        description="If true, records all tool actions in S3 for analysis",
+    )
+    record_conversations: bool = Field(
+        default=bool(DefaultSettings.RECORD_CONVERSATIONS.value),
+        description="If true, records all conversations in S3 for analysis",
     )
 
 

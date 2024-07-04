@@ -32,16 +32,18 @@ logger = get_logger()
 class GptAgent:
     working_memory: BaseChatMemory
 
-    def __init__(self, agent_config: AgentConfig, memory: BaseChatMemory = None, initial_context: dict = None, **kwargs):
+    def __init__(self, agent_config: AgentConfig, memory: BaseChatMemory = None, context: dict = None, **kwargs):
         # Initialize the agent config
-        self.initial_context = initial_context or {}
+        self.context = context or {}
         # self.lead = lead
         self.agent_config = agent_config
         self.client_id = agent_config.client_id
         self.session_id = agent_config.session_id
+        self.record_action = agent_config.record_action
+        self.record_conversation = agent_config.record_conversation
 
         # Initialize the agent
-        self.toolbox = Toolbox(agent_config=self.agent_config, initial_context=initial_context, **kwargs)
+        self.toolbox = Toolbox(agent_config=self.agent_config, context=context, **kwargs)
 
         self.tools = self.toolbox.get_tools()
         # self.tools = [ConnectWithAgentTool()]
@@ -96,8 +98,8 @@ class GptAgent:
         # Function agents are special, so we build them differently # TODO: Time to make a class...
         initial_message = f"Hi, this conversation is starting on {datetime.datetime.now().strftime('%A, %B %d, %Y %I:%M %p')}, and may span several days."
 
-        # if self.initial_context:
-        #     readable_list = [k + ": " + v for k, v in self.initial_context.items()]
+        # if self.context:
+        #     readable_list = [k + ": " + v for k, v in self.context.items()]
         #     initial_message = "To begin, here is some information about me: " + ", ".join(readable_list)
 
         if self.agent_config.executor_model_type == "function":
@@ -167,7 +169,7 @@ class GptAgent:
         initial_config = AgentConfig(**thawed_agent_config)
 
         if context:
-            agent = GptAgent(agent_config=initial_config, memory=agent_memory, initial_context=context)
+            agent = GptAgent(agent_config=initial_config, memory=agent_memory, context=context)
         else:
             agent = GptAgent(agent_config=initial_config, memory=agent_memory)
         return agent
@@ -185,9 +187,6 @@ class GptAgent:
 
     def handle_user_message(self, user_message: str, **kwargs) -> str:
         """Send message to agent"""
-
-        logger.debug(f"{kwargs=}")
-
 
         try:
             response_message = self.agent.run(user_message, callbacks=[self.toolbox.callback_handler])
@@ -208,8 +207,9 @@ class GptAgent:
             logger.error("Exception: " + str(e))
             raise
 
-        # ensure that the state is saved after every message
-        # self._snapshot_state()  # ensure that the memory is saved after every message
+        if self.record_conversation:
+            self._rw_memory.chat_memory.add_user_message(user_message)
+            self._rw_memory.chat_memory.add_ai_message(response_message)
         return response_message
 
 

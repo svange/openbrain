@@ -38,6 +38,18 @@ Resources:
             Resource:
               - !Sub 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:ObInfra-${ResourceSuffix}'
               - !Sub 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:ObBusiness-${ResourceSuffix}'
+          - Effect: Allow
+            Action:
+              - s3:PutObject
+              - s3:GetObject
+            Resource: !Sub
+              - 'arn:aws:s3:::ObBucket-${ResourceSuffix}/*'
+
+  ObBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: authenticated-read
+      BucketName: ObBucket-${ResourceSuffix}
 
   InfraTopic:
     Type: AWS::SNS::Topic
@@ -166,3 +178,7 @@ Outputs:
     CommonAccessPolicyArn:
         Description: CommonAccessPolicyArn
         Value: !Ref CommonAccessPolicy
+
+    ObBucketName:
+        Description: ObBucketName
+        Value: !Ref ObBucket

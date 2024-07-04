@@ -56,8 +56,12 @@ class TesterTool(BaseTool):
     def _run(self, *args, **kwargs) -> str:
         # This seemingly does nothing. All the work is done in the callback handler. This function is here for
         # the metadata.
-        initial_context = literal_eval(self.tool_input)
-        random_word_from_agent_creation = initial_context.get("random_word_from_agent_creation")
+        tool_input = json.loads(self.tool_input)
+        context = json.loads(tool_input.get('context'))
+        agent_config = tool_input.get("agent_config")
+        session_id = tool_input.get("session_id")
+
+        random_word_from_agent_creation = context.get("random_word_from_agent_creation")
         random_word_from_conversation = kwargs.get("random_word_from_conversation")
 
         event_detail_dict = {
@@ -73,6 +77,8 @@ class TesterTool(BaseTool):
         # )
         response = f"Respond to the user with the words: {random_word_from_agent_creation} {random_word_from_conversation}"
 
+        if agent_config.get("record_action"):
+            OBTool.record_action(event=TOOL_NAME, response=event_response, latest=True, session_id=session_id)
         return response
 
 
@@ -80,7 +86,7 @@ class TesterTool(BaseTool):
         raise NotImplementedError("tester does not support async")
 
     # def register_context(self, context: dict):
-    #     self.initial_context = context
+    #     self.context = context
 
 
 # on_tool_start

@@ -161,17 +161,17 @@ class TestAgentTools:
     @pytest.mark.tools
     def test_tester_tool(self, tester_agent_config: AgentConfig):
         """Test the tester tool."""
-        initial_context = {"random_word_from_agent_creation": "rambutan"}
-        agent = GptAgent(agent_config=tester_agent_config, initial_context=initial_context)
+        context = {"random_word_from_agent_creation": "rambutan"}
+        agent = GptAgent(agent_config=tester_agent_config, context=context)
         response = agent.handle_user_message("Your random word is banana.")
         assert "banana" in response
         assert "rambutan" in response
 
     @pytest.mark.tools
     def test_leadmo_create_contact_tool(self, leadmo_tool_tester_agent_config):
-        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context)
         response = agent.handle_user_message("Create a contact.")
         assert response is not None
         assert "success" in response.casefold()
@@ -179,9 +179,9 @@ class TestAgentTools:
 
     @pytest.mark.tools
     def test_leadmo_update_contact_tool(self, leadmo_tool_tester_agent_config):
-        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context)
         response = agent.handle_user_message("Update the contact.")
         assert response is not None
         assert "success" in response.casefold()
@@ -189,9 +189,9 @@ class TestAgentTools:
 
     @pytest.mark.tools
     def test_get_current_time_tool(self, tester_agent_config):
-        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        agent = GptAgent(agent_config=tester_agent_config, initial_context=initial_context)
+        agent = GptAgent(agent_config=tester_agent_config, context=context)
         response = agent.handle_user_message("Get the current year.")
         assert response is not None
         current_year = datetime.datetime.now().year
@@ -200,18 +200,18 @@ class TestAgentTools:
 
     @pytest.mark.tools
     def test_leadmo_create_appointment_tool(self, leadmo_tool_tester_agent_config):
-        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context)
         response = agent.handle_user_message("Create an appointment.")
         assert response is not None
         assert "success" in response.casefold()
 
     @pytest.mark.tools
     def test_leadmo_stop_conversation_tool(self, leadmo_tool_tester_agent_config):
-        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context)
         response = agent.handle_user_message("Stop the conversation.")
         assert response is not None
         assert "success" in response.casefold()
@@ -219,11 +219,11 @@ class TestAgentTools:
 
     @pytest.mark.tools
     def test_get_simple_calendar_appointment_slots_tool(self, leadmo_tool_tester_agent_config):
-        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
-        initial_context['api_key'] = os.getenv('DEV_LEADMO_BEARER_TOKEN')
-        initial_context['calendarId'] = 'asGgwlPqqu6s17W084uE'
+        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+        context['api_key'] = os.getenv('DEV_LEADMO_BEARER_TOKEN')
+        context['calendarId'] = 'asGgwlPqqu6s17W084uE'
 
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context)
 
         # get current_time from library
         current_time = datetime.datetime.now().isoformat()
@@ -233,22 +233,22 @@ class TestAgentTools:
 
     @pytest.mark.tools
     def test_lls_scrub_phone_number(self, lls_tool_tester_agent_config):
-        initial_context = {
+        context = {
             "phone": "6194103847",
             "api_key": os.getenv('DEV_LLS_API_KEY')
         }
 
-        agent = GptAgent(agent_config=lls_tool_tester_agent_config, initial_context=initial_context)
+        agent = GptAgent(agent_config=lls_tool_tester_agent_config, context=context)
         response = agent.handle_user_message("Tell me if the phone number 6194103847 is on the 'do-not-call' list. If the tool succeeded, ensure the word 'success' is in your response. If the tool failed, ensure the word 'success' is not in your response, and instead, ensure the word 'fail' is in your response.")
         assert response is not None
         assert "success" in response.casefold()
 
     @pytest.mark.tools
     def test_get_contact_info_from_context(self, leadmo_tool_tester_agent_config):
-        initial_context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, initial_context=initial_context)
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context)
         response = agent.handle_user_message("What's my first name?")
         assert response is not None
-        first_name = str.casefold(initial_context['firstName'])
+        first_name = str.casefold(context['firstName'])
         assert str(first_name) in response.casefold()

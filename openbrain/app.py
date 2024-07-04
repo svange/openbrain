@@ -315,7 +315,7 @@ def reset(
         logger.info("No API key found, trying to use local mode for agent interactions...")
         # Get a new agent with the specified settings
         agent_config = AgentConfig.get(profile_name=_profile_name, client_id=_client_id)
-        gpt_agent = GptAgent(agent_config=agent_config, initial_context=_context)
+        gpt_agent = GptAgent(agent_config=agent_config, context=_context)
 
         frozen_agent_memory = gpt_agent.serialize()["frozen_agent_memory"]
         frozen_agent_config = gpt_agent.serialize()["frozen_agent_config"]
@@ -372,16 +372,21 @@ def save(
         _executor_model_type,
         _openai_api_key,
         # _promptlayer_api_key,
-        client_id,
-        outgoing_webhook_url,
+        _client_id,
+        _outgoing_webhook_url,
+        _record_tool_actions,
+        _record_conversations,
+
         tools
 ):
     if _profile_name.strip() == "":
         gr.Error("Personalization key can't be blank.")
         return []
 
-    if not client_id:
+    if not _client_id:
         client_id = DEFAULT_CLIENT_ID.value
+    else:
+        client_id = _client_id
 
     agent_config = AgentConfig(
         icebreaker=str(_icebreaker),
@@ -395,8 +400,10 @@ def save(
         executor_model_type=str(_executor_model_type),
         openai_api_key=str(_openai_api_key),
         # promptlayer_api_key=str(_promptlayer_api_key),
-        client_id=str(client_id),
-        outgoing_webhook_url=str(outgoing_webhook_url),
+        client_id=str(_client_id),
+        outgoing_webhook_url=str(_outgoing_webhook_url),
+        record_tool_actions=str(_record_tool_actions),
+        record_conversations=str(_record_conversations),
         tools=tools,
     )
 
@@ -436,6 +443,8 @@ def load(_profile_name: str, _client_id: str):
         # str(retrieved_agent_config.promptlayer_api_key),
         str(retrieved_agent_config.client_id),
         str(retrieved_agent_config.outgoing_webhook_url),
+        bool(retrieved_agent_config.record_tool_actions),
+        bool(retrieved_agent_config.record_conversations),
         _tools
     ]
 
@@ -630,6 +639,10 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     info="Choose gpt-4–0613 or gpt-3.5-turbo-0613 for 'function' models.",
                 )
 
+                with gr.Column() as extra_options_column:
+                    record_tool_actions = gr.Checkbox(label="Record Tool Actions", info="Record tool actions (use 'Actions' box).")
+                    record_conversations = gr.Checkbox(label="Record Conversations", info="NOT YET IMPLEMENTED - Record conversations in the database.")
+
                 # executor_completion_model = gr.Dropdown( choices=["text-davinci-003", "text-davinci-002",
                 # "text-curie-001", "text-babbage-001", "text-ada-001"], label="Executor Completion Model",
                 # info="This is the model used when Executor Model Type is set to 'completion'" )
@@ -710,6 +723,8 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     # promptlayer_api_key,
                     client_id,
                     outgoing_webhook_url,
+                    record_tool_actions,
+                    record_conversations,
                     tools
                 ]
 
@@ -731,6 +746,8 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                         # promptlayer_api_key,
                         client_id,
                         outgoing_webhook_url,
+                        record_tool_actions,
+                        record_conversations,
                         tools
                     ],
                 )

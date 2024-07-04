@@ -85,8 +85,11 @@ class LLSScrubberPhoneNumberTool(BaseTool, ContextAwareToolMixin):
         global IDEMPOTENCY_TABLE_NAME
         global LLS_API_URL
         global LEADMO_AGENT_TABLE_NAME
+        tool_input = json.loads(self.tool_input)
+        context = json.loads(tool_input.get('context'))
+        agent_config = tool_input.get("agent_config")
+        session_id = tool_input.get("session_id")
 
-        context = json.loads(self.tool_input)
         phone = kwargs.get("phone", None)
         api_key = context.get("api_key", None)
 
@@ -118,6 +121,9 @@ class LLSScrubberPhoneNumberTool(BaseTool, ContextAwareToolMixin):
         except Exception as e:
             logger.info("Failed to get info from Landline Scrubber.")
             raise e
+
+        if agent_config.get("record_action"):
+            OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
 
         return response
 

@@ -40,16 +40,17 @@ class Toolbox:  # invoker
     def __init__(
         self,
         agent_config: AgentConfig,
-        initial_context: dict = None,
+        context: dict = None,
         *args,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self.tools: list[BaseTool] = []
-        self.initial_context = initial_context or {}
+        self.context = context or {}
+        self.agent_config = agent_config or None
+        self.session_id = None
 
         self.callback_handler = CallbackHandler(agent_config=agent_config)
-        self.initial_context = initial_context
         # Initialize a list for the BaseTool objects and one list each for each langchain callback type
         self._initialize_known_lists()
 
@@ -114,5 +115,10 @@ class Toolbox:  # invoker
             raise TypeError(f"Tool {tool} is not a subclass of OBTool")
 
     def get_tools(self):
-        tools = [tool(tool_input=json.dumps(self.initial_context)) for tool in self.tools]
+        tool_input = {
+            "agent_config": self.agent_config.to_dict(),
+            "context": json.dumps(self.context),
+            "session_id": self.session_id,
+        }
+        tools = [tool(tool_input=json.dumps(tool_input)) for tool in self.tools]
         return tools
