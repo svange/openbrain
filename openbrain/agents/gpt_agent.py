@@ -208,12 +208,10 @@ class GptAgent:
             raise
 
         try:
-            if self.record_conversations:
-                pass
+            logger.info(f"Record conversation: {self.record_conversations}")
         except Exception as e:
             logger.info(f"This agent config does not have the record_conversation attribute.")
             logger.error(str(e))
-
 
         return response_message
 
