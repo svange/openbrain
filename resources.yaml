@@ -42,13 +42,25 @@ Resources:
             Action:
               - s3:PutObject
               - s3:GetObject
-            Resource: !Sub
-              - 'arn:aws:s3:::ObBucket-${ResourceSuffix}/*'
+            Resource: !Sub 'arn:aws:s3:::ObBucket-${ResourceSuffix}/*'
+
 
   ObBucket:
-    Type: AWS::S3::Bucket
+    Type: 'AWS::S3::Bucket'
     Properties:
-      BucketPolicy:
+      BucketName: !Sub 'ObBucket-${ResourceSuffix}'
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+
+  ObBucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      Bucket:
+        Ref: 'ObBucket'
+      PolicyDocument:
         Version: '2012-10-17'
         Statement:
           - Effect: Allow
@@ -56,9 +68,12 @@ Resources:
             Action:
               - s3:GetObject
               - s3:PutObject
-            Resource: !Sub
-              - 'arn:aws:s3:::ObBucket-${ResourceSuffix}/*'
-      BucketName: !Sub 'ObBucket-${ResourceSuffix}'
+            Resource:
+              Fn::Join:
+                - ''
+                - - 'arn:aws:s3:::'
+                  - Ref: 'ObBucket'
+                  - '/*'
 
   InfraTopic:
     Type: AWS::SNS::Topic
