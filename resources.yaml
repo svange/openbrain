@@ -49,7 +49,7 @@ Resources:
     Type: 'AWS::S3::Bucket'
     Properties:
       BucketName: !Transform
-        Name: 'String'
+        Name: String
         Parameters:
           Operation: Lower
           InputString: !Sub 'ObBucket-${ResourceSuffix}'
