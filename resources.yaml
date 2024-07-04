@@ -49,7 +49,9 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       AccessControl: authenticated-read
-      BucketName: ObBucket-${ResourceSuffix}
+      BucketName: !Sub
+        - 'ObBucket-${ResourceSuffix}'
+        - ResourceSuffix: !Ref ResourceSuffix
 
   InfraTopic:
     Type: AWS::SNS::Topic
