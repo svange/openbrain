@@ -48,7 +48,10 @@ Resources:
   ObBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: !Sub 'ObBucket-${ResourceSuffix}'
+      BucketName: !Transform
+        Name: Lower
+        Parameters:
+          Key: !Sub 'ObBucket-${ResourceSuffix}'
       PublicAccessBlockConfiguration:
         BlockPublicAcls: false
         BlockPublicPolicy: false
