@@ -44,15 +44,9 @@ Resources:
 #              - s3:GetObject
 #            Resource: !GetAtt ObBucket.Arn
 
-
   ObBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: !Transform
-        Name: String
-        Parameters:
-          Operation: Lower
-          InputString: !Sub 'ObBucket-${ResourceSuffix}'
       PublicAccessBlockConfiguration:
         BlockPublicAcls: false
         BlockPublicPolicy: false
