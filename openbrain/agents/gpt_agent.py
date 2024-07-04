@@ -39,8 +39,8 @@ class GptAgent:
         self.agent_config = agent_config
         self.client_id = agent_config.client_id
         self.session_id = agent_config.session_id
-        self.record_action = agent_config.record_action
-        self.record_conversation = agent_config.record_conversation
+        self.record_tool_actions = agent_config.record_tool_actions
+        self.record_conversations = agent_config.record_conversations
 
         # Initialize the agent
         self.toolbox = Toolbox(agent_config=self.agent_config, context=context, **kwargs)
@@ -207,9 +207,14 @@ class GptAgent:
             logger.error("Exception: " + str(e))
             raise
 
-        if self.record_conversation:
-            self._rw_memory.chat_memory.add_user_message(user_message)
-            self._rw_memory.chat_memory.add_ai_message(response_message)
+        try:
+            if self.record_conversations:
+                pass
+        except Exception as e:
+            logger.info(f"This agent config does not have the record_conversation attribute.")
+            logger.error(str(e))
+
+
         return response_message
 
 
