@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.0](https://github.com/svange/openbrain/compare/v2.7.5...v2.8.0) (2024-07-04)
+
+
+### Features
+
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([c9ba466](https://github.com/svange/openbrain/commit/c9ba4662d635fd517c3c45e39faafaa039f0f926))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([6ab3167](https://github.com/svange/openbrain/commit/6ab3167bb24dee39e45b4fc9884af4192f12ca1e))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([7005aea](https://github.com/svange/openbrain/commit/7005aea6cb0eca4488496381787c7f9d0351446e))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([e3bfb75](https://github.com/svange/openbrain/commit/e3bfb7584c6d4480323297cfa3a0f175e71c64a0))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([aeab3cd](https://github.com/svange/openbrain/commit/aeab3cdd574ab54760c8d54e81989e3e947e7025))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([c091fb8](https://github.com/svange/openbrain/commit/c091fb868cbde09d11dabeb28e661e6e0a328dec))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([c36f6a6](https://github.com/svange/openbrain/commit/c36f6a6ee90fd6ae4fe757fcee4156bde7f79c8e))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([40d8296](https://github.com/svange/openbrain/commit/40d8296783aedd08552a358616f650a994cc8dac))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([3fe7424](https://github.com/svange/openbrain/commit/3fe742401faa6784c4f96e01f26c95ee340ecebb))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([82d1adb](https://github.com/svange/openbrain/commit/82d1adbf55f3c41a57b4f784123888766c2c7e53))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([024b815](https://github.com/svange/openbrain/commit/024b81532bda1b5911b883939712f5f683c0fb2c))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([64deca6](https://github.com/svange/openbrain/commit/64deca6fb26b53edde58e9784235cf3989de97a7))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([69b0cc4](https://github.com/svange/openbrain/commit/69b0cc4a041010d25515c06119d10232b194d321))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([467792d](https://github.com/svange/openbrain/commit/467792deaa466779e6fb095ee040e2073dbb148c))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([368a0d2](https://github.com/svange/openbrain/commit/368a0d2ccb0aefb39e45d6c0b4d53fdf8a34c2f0))
+
 ## [2.7.5](https://github.com/svange/openbrain/compare/v2.7.4...v2.7.5) (2024-07-03)
 
 
