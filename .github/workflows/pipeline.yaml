@@ -105,7 +105,7 @@ jobs:
               --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
               --no-fail-on-empty-changeset \
               --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE} \
-              --parameter-overrides ResourceSuffix=Publish
+              --parameter-overrides ResourceSuffix=Publish bucketName=ob-publish
 
       - name: Skip tests if release commit
         if: "contains(github.event.head_commit.message, 'chore(release):')"

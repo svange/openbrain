@@ -3,6 +3,10 @@ Parameters:
     Description: Suffix to append to all resources
     Type: String
     Default: ""
+  BucketName:
+    Description: Name of the S3 bucket
+    Type: String
+    Default: ""
 
 Resources:
   #######################################################
@@ -44,9 +48,11 @@ Resources:
 #              - s3:GetObject
 #            Resource: !GetAtt ObBucket.Arn
 
+
   ObBucket:
     Type: 'AWS::S3::Bucket'
     Properties:
+      BucketName: !ref BucketName
       PublicAccessBlockConfiguration:
         BlockPublicAcls: false
         BlockPublicPolicy: false
