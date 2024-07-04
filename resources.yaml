@@ -42,7 +42,7 @@ Resources:
             Action:
               - s3:PutObject
               - s3:GetObject
-            Resource: !Sub 'arn:aws:s3:::ObBucket-${ResourceSuffix}/*'
+            Resource: !GetAtt ObBucket.Arn
 
 
   ObBucket:
