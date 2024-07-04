@@ -58,9 +58,7 @@ Resources:
               - s3:PutObject
             Resource: !Sub
               - 'arn:aws:s3:::ObBucket-${ResourceSuffix}/*'
-      BucketName: !Sub
-        - 'ObBucket-${ResourceSuffix}'
-        - ResourceSuffix: !Ref ResourceSuffix
+      BucketName: !Sub 'ObBucket-${ResourceSuffix}'
 
   InfraTopic:
     Type: AWS::SNS::Topic
