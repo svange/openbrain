@@ -52,7 +52,7 @@ class Defaults(Enum):
     # LEAD_TABLE_NAME = None
     AGENT_CONFIG_TABLE_NAME = None
     ACTION_TABLE_NAME = None
-    S3_BUCKET_NAME = None
+
     # SECRET_STORE_NAME = "ObSecrets"
 
     # Central Infrastructure
@@ -64,7 +64,6 @@ class Defaults(Enum):
     # LEAD_TABLE_PUBLISHED_NAME = "ObLeadTableName"
     AGENT_CONFIG_TABLE_PUBLISHED_NAME = "ObAgentConfigTableName"
     ACTION_TABLE_PUBLISHED_NAME = "ObActionTableName"
-    S3_BUCKET_PUBLISHED_NAME = "ObBucketName"
     # SECRET_STORE_PUBLISHED_NAME = "OpenbrainSecretStore"
 
     # Other Values with defaults
