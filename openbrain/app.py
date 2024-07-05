@@ -831,22 +831,29 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     ],
                     outputs=[msg, chatbot, session_state, context],
                 )
+    def get_bottom_text():
+        try:
 
-    try:
-
-        bucket_name = get_bucket_name()
-        dl_url = f"https://{bucket_name}.s3.amazonaws.com/"
-        session_id = session_state.value["session_id"]
-        if not session_id:
-            link_md_text = """No link to display yet, start an agent that records conversations"""
-        else:
+            bucket_name = get_bucket_name()
+            dl_url = f"https://{bucket_name}.s3.amazonaws.com/"
+            session_id = session_state.value["session_id"]
             link_text = f"{dl_url}{session_id}.json"
-            link_md_text = f"[Download Session Data]({link_text})"
-    except Exception as e:
-        link_md_text = """No link to display yet, start an agent that records conversations"""
+        except Exception as e:
+            link_text = """No link to display yet, start an agent that records conversations"""
 
-    file_download = gr.Markdown(
-        value=link_md_text
+        if config.OB_MODE == Defaults.OB_MODE_LOCAL.value:
+            orm_mode = "LOCAL"
+        else:
+            orm_mode = "DYNAMODB"
+
+        api = f"{config.OB_API_URL}/chat" if OB_PROVIDER_API_KEY else "LOCAL"
+
+
+        formatted_text = f"[Download Session Data]({link_text}) | Stack: `{config.INFRA_STACK_NAME}` | ORM Mode: `{orm_mode}` | API: `{api}`"
+        return formatted_text
+    bottom_text = gr.Markdown(
+        value=get_bottom_text,
+        every=1.0
     )
             # key = f"conversations/{session_id}.json"
             # s3 = boto3.client('s3')
