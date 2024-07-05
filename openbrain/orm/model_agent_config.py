@@ -103,11 +103,6 @@ class AgentConfig(ORMModel, BaseModel):
         default=DefaultSettings.CLIENT_ID.value,
         description="The unique id of the client this agent config belongs to",
     )
-    session_id: Optional[str] = Field(
-        default=None,
-        repr=False,
-        description="The session_id this agent config belongs is being used in",
-    )
 
     executor_id: str = Field(
         default_factory=ulid.ULID().to_uuid().__str__,

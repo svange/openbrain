@@ -135,6 +135,11 @@ def get_debug_text(_debug_text = None) -> str:
 def get_aws_cloudwatch_logs(_session_state=None):
     """Get cloudwatch logs for the agent we are interacting with"""
     logger.info("Getting AWS Cloudwatch logs...")
+    if not OB_PROVIDER_API_KEY:
+        # api = f"{CHAT_ENDPOINT}" if OB_PROVIDER_API_KEY else "LOCAL"
+        return json.dumps({
+            "Incompatible mode": "Local mode does not support cloudwatch logs"
+        })
     try:
         cloudwatch = boto3.client("logs")
         target_log_group_name_prefix = f'/aws/lambda/{INFRA_STACK_NAME}-APIHandler'
@@ -193,14 +198,16 @@ def get_aws_cloudwatch_logs(_session_state=None):
         try:
             events_string = events_string[:-2]
         except Exception as e:
-            events_string = "No events found"
+            events_string = json.dumps({
+                "Idle": "No events found"
+            })
         # formatted_message = '''```python\n''' + events_string + '''\n```'''
         formatted_message = '[\n' + events_string + '\n]'
         return formatted_message
     except Exception as e:
-        return {
+        return json.dumps({
             "exception": e.__str__()
-        }
+        })
 
 
 def get_aws_xray_trace_summaries(id=None):
@@ -640,7 +647,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 with gr.Tab(tool.name) as tool_tab:
                     gr.Markdown(value=get_tool_description(tool.name))
 
-        with gr.Tab("Gradio Debugging") as debug_tab:
+        with gr.Tab("Gradio logs") as debug_tab:
             debug_text = gr.Textbox(
                 label="Debug",
                 info="Debugging information",
@@ -655,7 +662,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
             # refresh_button = gr.Button("Refresh", variant="secondary")
             # refresh_button.click(get_debug_text, inputs=[debug_text], outputs=[debug_text])
 
-        with gr.Tab("Agent Debugging") as agent_debug_tab:
+        with gr.Tab("API Logs") as agent_debug_tab:
             agent_debug_text = gr.JSON(
                 label="Debug",
                 # info="Debugging information",
@@ -675,7 +682,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
             # events = gr.Json(value=events_str, label="Latest action event recorded.")
             events = gr.Json(value=get_action_events,
                              # every=15.0,
-                             label="Latest action event recorded.")
+                             label="Latest action recorded.")
 
             refresh_events_button = gr.Button("Refresh", size="sm", variant="secondary")
             refresh_events_button.click(get_action_events, inputs=[events, session_state], outputs=[events])
@@ -901,12 +908,35 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
         value=get_bottom_text(),
         rtl=True
     )
-    # bottom_text_refresh_button = gr.Button("Refresh", variant="secondary")
+
+    # Refresh bottom text
     reset_agent.click(
         get_bottom_text,
         inputs=[session_state],
         outputs=[bottom_text]
     )
+
+    # Refresh agent debug text
+    reset_agent.click(
+        get_aws_cloudwatch_logs,
+        inputs=[session_state],
+        outputs=[agent_debug_text]
+    )
+
+    chat_button.click(
+        get_aws_cloudwatch_logs,
+        inputs=[session_state],
+        outputs=[agent_debug_text]
+    )
+
+    # Refresh Action events
+    reset_agent.click(
+        get_action_events,
+        inputs=[events, session_state],
+        outputs=[events]
+    )
+
+
 
 
 
