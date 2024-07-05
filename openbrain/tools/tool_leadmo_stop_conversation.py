@@ -57,7 +57,7 @@ class LeadmoStopConversationTool(BaseTool, ContextAwareToolMixin):
 
         response = OBTool.send_event(event_source=TOOL_NAME, event_detail=event_detail_string)
 
-        if agent_config.get("record_action"):
+        if agent_config.get("record_tool_actions"):
             OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
 
         return response

@@ -69,7 +69,7 @@ class LeadmoGetContactInfoFromContextTool(BaseTool, ContextAwareToolMixin):
             logger.error(f"Failed to convert context to string: {e}")
             context_string = str(context)
 
-        if agent_config.get("record_action"):
+        if agent_config.get("record_tool_actions"):
             OBTool.record_action(event=TOOL_NAME, response=context_string, latest=True, session_id=session_id)
 
         return context_string

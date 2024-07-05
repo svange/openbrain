@@ -122,7 +122,7 @@ class LLSScrubberPhoneNumberTool(BaseTool, ContextAwareToolMixin):
             logger.info("Failed to get info from Landline Scrubber.")
             raise e
 
-        if agent_config.get("record_action"):
+        if agent_config.get("record_tool_actions"):
             OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
 
         return response

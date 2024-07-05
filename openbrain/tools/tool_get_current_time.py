@@ -44,7 +44,7 @@ class GetCurrentTimeTool(BaseTool, ContextAwareToolMixin):
 
         current_time = datetime.datetime.now()
 
-        if agent_config.get("record_action"):
+        if agent_config.get("record_tool_actions"):
             OBTool.record_action(event=TOOL_NAME, response=current_time, latest=True, session_id=session_id)
 
         return current_time.isoformat()
