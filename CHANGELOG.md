@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.4](https://github.com/svange/openbrain/compare/v2.16.3...v2.16.4) (2024-07-05)
+
+
+### Bug Fixes
+
+* adding pytz dependency ([8769528](https://github.com/svange/openbrain/commit/876952892abfc2e34c022ff079665870204fd9e8))
+* re-added do_nothing tool and attempted record_aciton functionality. ([563267c](https://github.com/svange/openbrain/commit/563267c8aac5cdff888fc5c940f5ebf606b2a446))
+
 ## [2.16.3](https://github.com/svange/openbrain/compare/v2.16.2...v2.16.3) (2024-07-05)
 
 
