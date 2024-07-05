@@ -137,25 +137,6 @@ Resources:
       TableName: !Sub
         - 'ObAgentConfigTable-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
-#  ObLeadTable:
-#    Type: AWS::DynamoDB::Table
-#    Properties:
-#      AttributeDefinitions:
-#        - AttributeName: client_id
-#          AttributeType: S
-#        - AttributeName: lead_id
-#          AttributeType: S
-#      KeySchema:
-#        - AttributeName: client_id
-#          KeyType: HASH
-#        - AttributeName: lead_id
-#          KeyType: RANGE
-#      ProvisionedThroughput:
-#        ReadCapacityUnits: 5
-#        WriteCapacityUnits: 5
-#      TableName: !Sub
-#        - 'ObLeadTable-${ResourceSuffix}'
-#        - ResourceSuffix: !Ref ResourceSuffix
 
   ObActionTable:
     Type: AWS::DynamoDB::Table
@@ -163,9 +144,13 @@ Resources:
       AttributeDefinitions:
         - AttributeName: action_id
           AttributeType: S
+        - AttributeName: session_id
+          AttributeType: S
       KeySchema:
         - AttributeName: action_id
           KeyType: HASH
+        - AttributeName: session_id
+          KeyType: RANGE
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5

@@ -471,12 +471,13 @@ class CustomJsonEncoder(json.JSONEncoder):
         return super(CustomJsonEncoder, self).default(obj)
 
 
-def get_action_events(_events=None):
+def get_action_events(_events=None, _session_state=None):
+    _session_id = _session_state["session_id"]
     logger.info("Getting latest action...")
     try:
         dynamodb = boto3.resource("dynamodb")
         table = dynamodb.Table(config.ACTION_TABLE_NAME)
-        response = table.get_item(Key={"action_id": "latest"})
+        response = table.get_item(Key={"action_id": "latest", "session_id": _session_id})
         ret = response.get("Item", {})
     except Exception as e:
         ret = json.dumps({"exception": e.__str__()})
@@ -779,7 +780,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                         # events = gr.Json(value=events_str, label="Latest action event recorded.")
                         events = gr.Json(value=get_action_events, every=15.0, label="Latest action event recorded.")
                         refresh_events_button = gr.Button("Refresh", size="sm", variant="secondary")
-                        refresh_events_button.click(get_action_events, inputs=[events], outputs=[events])
+                        refresh_events_button.click(get_action_events, inputs=[events, session_state], outputs=[events])
 
                 chat_button = gr.Button("Chat", variant="primary")
                 reset_agent = gr.Button("Reset", variant="secondary")

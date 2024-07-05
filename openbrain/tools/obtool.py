@@ -39,7 +39,8 @@ class OBTool:
         table = dynamodb.Table(config.ACTION_TABLE_NAME)
 
         item = {
-            "action_id": session_id,
+            "action_id": ulid.ULID().to_uuid().__str__(),
+            "session_id": session_id,
             "event": event,
             "response": response,
         }
@@ -53,6 +54,7 @@ class OBTool:
                 table.put_item(
                     Item={
                         "action_id": "latest",
+                        "session_id": session_id,
                         "event": event,
                         "response": response,
                     }
