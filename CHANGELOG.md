@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.3](https://github.com/svange/openbrain/compare/v2.16.2...v2.16.3) (2024-07-05)
+
+
+### Bug Fixes
+
+* record_tool_actions fix ([5c74de3](https://github.com/svange/openbrain/commit/5c74de3fb0f28d4d765e90b26b207c640a1a4498))
+
 ## [2.16.2](https://github.com/svange/openbrain/compare/v2.16.1...v2.16.2) (2024-07-05)
 
 
