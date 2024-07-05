@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.0](https://github.com/svange/openbrain/compare/v2.10.0...v2.11.0) (2024-07-05)
+
+
+### Features
+
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([31d6ea8](https://github.com/svange/openbrain/commit/31d6ea8114740334797687ffcc5a3f5074f69932))
+
 ## [2.10.0](https://github.com/svange/openbrain/compare/v2.9.0...v2.10.0) (2024-07-05)
 
 
