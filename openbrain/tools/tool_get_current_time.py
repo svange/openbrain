@@ -47,6 +47,15 @@ class GetCurrentTimeTool(BaseTool, ContextAwareToolMixin):
         tz = pytz.timezone(timezone)
 
         current_time = datetime.datetime.now().astimezone(tz).__str__()
+        try:
+            logger.info(f"agent_config.record_tool_actions: {agent_config.get('record_tool_actions')}")
+        except:
+            logger.info(f"could not get agent_config.get(record_tool_actions)")
+
+        try:
+            logger.info(f"agent_config.record_tool_actions: {agent_config.record_tool_actions}")
+        except:
+            logger.info(f"could not get agent_config.record_tool_actions")
 
         if agent_config.get("record_tool_actions"):
             OBTool.record_action(event=TOOL_NAME, response=current_time, latest=True, session_id=session_id)
