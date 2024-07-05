@@ -186,7 +186,7 @@ Outputs:
 #    ObLeadTableName:
 #        Description: ObLeadTable
 #        Value: !Ref ObLeadTable
-    ObEventActionTableName:
+    ObActionTableName:
         Description: ObEventActionTable
         Value: !Ref ObEventActionTable
     CommonAccessPolicyArn:
