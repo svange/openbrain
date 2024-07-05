@@ -44,7 +44,7 @@ class GptAgent:
         self.record_conversations = agent_config.record_conversations
 
         # Initialize the agent
-        self.toolbox = Toolbox(agent_config=self.agent_config, context=context, **kwargs)
+        self.toolbox = Toolbox(agent_config=self.agent_config, context=context, session_id=self.session_id, **kwargs)
 
         self.tools = self.toolbox.get_tools()
         # self.tools = [ConnectWithAgentTool()]

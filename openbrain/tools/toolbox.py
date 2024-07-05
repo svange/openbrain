@@ -41,6 +41,7 @@ class Toolbox:  # invoker
         self,
         agent_config: AgentConfig,
         context: dict = None,
+        session_id: str = None,
         *args,
         **kwargs,
     ):
