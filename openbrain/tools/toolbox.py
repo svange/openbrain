@@ -49,7 +49,12 @@ class Toolbox:  # invoker
         self.tools: list[BaseTool] = []
         self.context = context or {}
         self.agent_config = agent_config or None
-        self.session_id = None
+
+        if session_id:
+            logger.info(f"Initializing toolbox, session ID: {session_id}")
+            self.session_id = session_id
+        else:
+            logger.info("Initializing toolbox, no session ID provided")
 
         self.callback_handler = CallbackHandler(agent_config=agent_config)
         # Initialize a list for the BaseTool objects and one list each for each langchain callback type

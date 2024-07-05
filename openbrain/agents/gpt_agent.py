@@ -38,13 +38,12 @@ class GptAgent:
         # self.lead = lead
         self.agent_config = agent_config
         self.client_id = agent_config.client_id
-        self.session_id = session_id
 
         self.record_tool_actions = agent_config.record_tool_actions
         self.record_conversations = agent_config.record_conversations
 
         # Initialize the agent
-        self.toolbox = Toolbox(agent_config=self.agent_config, context=context, session_id=self.session_id, **kwargs)
+        self.toolbox = Toolbox(agent_config=self.agent_config, context=context, session_id=session_id, **kwargs)
 
         self.tools = self.toolbox.get_tools()
         # self.tools = [ConnectWithAgentTool()]
