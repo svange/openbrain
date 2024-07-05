@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.7](https://github.com/svange/openbrain/compare/v2.16.6...v2.16.7) (2024-07-05)
+
+
+### Bug Fixes
+
+* adding logging to troubleshoot why get_current_time tool won't record action ([1ff5830](https://github.com/svange/openbrain/commit/1ff5830eca91bbaf60f588ed036c565fc9e4ccac))
+
 ## [2.16.6](https://github.com/svange/openbrain/compare/v2.16.5...v2.16.6) (2024-07-05)
 
 
