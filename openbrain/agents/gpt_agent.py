@@ -32,13 +32,14 @@ logger = get_logger()
 class GptAgent:
     working_memory: BaseChatMemory
 
-    def __init__(self, agent_config: AgentConfig, memory: BaseChatMemory = None, context: dict = None, **kwargs):
+    def __init__(self, agent_config: AgentConfig, memory: BaseChatMemory = None, context: dict = None, session_id: str = None, **kwargs):
         # Initialize the agent config
         self.context = context or {}
         # self.lead = lead
         self.agent_config = agent_config
         self.client_id = agent_config.client_id
-        self.session_id = agent_config.session_id
+        self.session_id = session_id
+
         self.record_tool_actions = agent_config.record_tool_actions
         self.record_conversations = agent_config.record_conversations
 
@@ -156,7 +157,7 @@ class GptAgent:
         return agent_executor
 
     @classmethod
-    def deserialize(cls, state: dict[str, str | bytes], context: dict = None) -> GptAgent:
+    def deserialize(cls, state: dict[str, str | bytes], context: dict = None, session_id = None) -> GptAgent:
         """Reconstructs an agent from a serialized agent memory and initial config."""
         frozen_memory = state["frozen_agent_memory"]
         frozen_agent_config = state["frozen_agent_config"]
@@ -167,11 +168,17 @@ class GptAgent:
         agent_memory = pickle.loads(frozen_memory)
 
         initial_config = AgentConfig(**thawed_agent_config)
-
+        args = {
+            "agent_config": initial_config,
+            "memory": agent_memory,
+        }
         if context:
-            agent = GptAgent(agent_config=initial_config, memory=agent_memory, context=context)
-        else:
-            agent = GptAgent(agent_config=initial_config, memory=agent_memory)
+            args["context"] = context
+
+        if session_id:
+            args["session_id"] = session_id
+
+        agent = GptAgent(**args)
         return agent
 
     def serialize(self) -> dict[str, str | bytes]:
