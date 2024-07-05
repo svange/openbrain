@@ -491,6 +491,24 @@ def get_action_events(_events=None, _session_state=None):
         _events = ret
     return json.dumps(ret, cls=CustomJsonEncoder, indent=4, sort_keys=True)
 
+def get_bucket_name():
+    try:
+        infra_stack_name = config.INFRA_STACK_NAME
+        # Get tablename from outputs of INFRA_STACK
+        cfn = boto3.client('cloudformation')
+        response = cfn.describe_stacks(StackName=infra_stack_name)
+        outputs = response["Stacks"][0]["Outputs"]
+        for output in outputs:
+            if output["OutputKey"] == "ObBucketName":
+                bucket = output["OutputValue"]
+                break
+        else:
+            raise Exception("Bucket name not found in outputs")
+        return bucket
+    except Exception as e:
+        raise e
+
+
 def get_available_tool_descriptions():
     tool_descriptions = []
 
@@ -813,6 +831,27 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     ],
                     outputs=[msg, chatbot, session_state, context],
                 )
+
+    try:
+
+        bucket_name = get_bucket_name()
+        dl_url = f"https://{bucket_name}.s3.amazonaws.com/"
+        session_id = session_state.value["session_id"]
+        if not session_id:
+            link_md_text = """No link to display yet, start an agent that records conversations"""
+        else:
+            link_text = f"{dl_url}{session_id}.json"
+            link_md_text = f"[Download Session Data]({link_text})"
+    except Exception as e:
+        link_md_text = """No link to display yet, start an agent that records conversations"""
+
+    file_download = gr.Markdown(
+        value=link_md_text
+    )
+            # key = f"conversations/{session_id}.json"
+            # s3 = boto3.client('s3')
+            # s3.download_file(bucket_name, key, f"{session_id}.json")
+
 
 
 def main():
