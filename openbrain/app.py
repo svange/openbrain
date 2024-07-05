@@ -470,9 +470,18 @@ class CustomJsonEncoder(json.JSONEncoder):
 def get_action_events(_events=None, _session_state=None):
     try:
         _session_id = _session_state["session_id"]
+        if not _session_id:
+            raise AssertionError("Session started, but session_is blank")
     except TypeError as e:
-        _session_id = "no-session"
+        return json.dumps({
+            "Idle": "Working..."
+        })
+    except AssertionError as e:
+        return json.dumps({
+            "Idle": f"Start a conversation to begin monitoring for events"
+        })
     logger.info("Getting latest action...")
+
     try:
         dynamodb = boto3.resource("dynamodb")
         table = dynamodb.Table(config.ACTION_TABLE_NAME)
@@ -502,6 +511,27 @@ def get_bucket_name():
     except Exception as e:
         raise e
 
+def get_tool_description(tool_name):
+    for tool in Toolbox.discovered_tools:
+        if tool_name == tool.name:
+
+            tool_instance = tool.tool()
+            tool_description = tool_instance.description
+            fields = tool_instance.args_schema.model_fields
+            args_string = ''
+            if not fields:
+                args_string = "'No args'"
+            for field in fields:
+                field_str = fields[field].__str__()
+                args_string += f"{field}: {field_str}\n"
+            tool_description = f"""#### Description
+{tool_description}
+
+#### Args
+```python
+{args_string}
+```"""
+            return tool_description
 
 def get_available_tool_descriptions():
     tool_descriptions = []
@@ -511,17 +541,12 @@ def get_available_tool_descriptions():
         tool_instance = tool.tool()
         tool_description = tool_instance.description
         fields = tool_instance.args_schema.model_fields
-        # args_string = json.dumps(fields, indent=2, cls=CustomJsonEncoder, sort_keys=True)
-        # args_string = fields.__str__()
         args_string = ''
         if not fields:
             args_string = "'No args'"
         for field in fields:
             field_str = fields[field].__str__()
             args_string += f"{field}: {field_str}\n"
-
-
-
         tool_description = f"""
 ## Tool: {tool_name}
 
@@ -564,7 +589,7 @@ def get_available_profile_names() -> list:
 def get_bottom_text(_session_state=None):
     try:
         bucket_name = get_bucket_name()
-        dl_url = f"https://{bucket_name}.s3.amazonaws.com/"
+        dl_url = f"https://{bucket_name}.s3.amazonaws.com/conversations/"
         _session_id = _session_state.get("session_id").lower()
         link_text = f"conversations/{dl_url}{_session_id}.json"
         link_text_md = f"| [Download Session Data]({link_text}) "
@@ -593,11 +618,16 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
     session_state = gr.State(value={"session_id": "", "session": requests.Session(), "agent": None})
     session_apikey = gr.State(value="")
     with gr.Accordion("Help and information", elem_classes="accordion", visible=is_settings_set(), open=False) as help_box:
-        with gr.Tab("Help and Information") as help_tab:
+        with gr.Tab("Debugging Tools and Help") as help_tab:
             gr.Markdown(value=HELP_TEXT)
 
-        with gr.Tab("Available Tools") as tools_tab:
-            gr.Markdown(value=get_available_tool_descriptions())
+        with gr.Tab("Agent Tool Descriptions") as tools_tab:
+            # gr.Markdown(value=get_available_tool_descriptions())
+            gr.Markdown(value="An illustration of how the AI sees the tools. These descriptions influence when and how the AI uses the tools.")
+            tools = Toolbox.discovered_tools
+            for tool in tools:
+                with gr.Tab(tool.name) as tool_tab:
+                    gr.Markdown(value=get_tool_description(tool.name))
 
         with gr.Tab("Gradio Debugging") as debug_tab:
             debug_text = gr.Textbox(
@@ -626,12 +656,18 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 # show_copy_button=True,
                 every=3.0,
             )
-            # refresh_button = gr.Button("Refresh", variant="secondary")
-            # refresh_button.click(get_debug_text, inputs=[debug_text], outputs=[debug_text])
+
+        with gr.Tab("Actions"):
+            with gr.Accordion("Action Events") as events_accordian:
+                # events_str = get_action_events()
+                # events = gr.Json(value=events_str, label="Latest action event recorded.")
+                events = gr.Json(value=get_action_events, every=15.0, label="Latest action event recorded.")
+                refresh_events_button = gr.Button("Refresh", size="sm", variant="secondary")
+                refresh_events_button.click(get_action_events, inputs=[events, session_state], outputs=[events])
 
     with gr.Accordion("Configuration and Tuning", elem_classes="accordion", visible=is_settings_set(), open=False) as prompts_box:
 
-        with gr.Tab("LLM Tuning") as tuninig_tab:
+        with gr.Tab("LLM Parameters") as tuninig_tab:
             gr.Markdown(
                 "Changes to these settings are used to set up a conversation using the Reset button and will not "
                 "be reflected until the next 'Reset'"
@@ -798,7 +834,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     ],
                 )
 
-    with gr.Accordion("Chat") as chat_accordian:
+    with gr.Accordion("Interact with Agent") as chat_accordian:
         with gr.Row() as chat_row:
             with gr.Column(scale=2) as chat_container:
                 with gr.Accordion("Chat") as chat_box_accordian:
@@ -809,8 +845,8 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
             with gr.Column(scale=1) as context_container:
 
-                with gr.Tab("Context"):
-                    with gr.Accordion("Context", open=True) as context_accordian:
+
+                with gr.Accordion("Context", open=True) as context_accordian:
                         context = gr.Textbox(
                             label="Context",
                             info="Additional context for tools",
@@ -819,13 +855,6 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                             lines=4,
                             value=EXAMPLE_CONTEXT,
                         )
-                with gr.Tab("Actions"):
-                    with gr.Accordion("Action Events") as events_accordian:
-                        # events_str = get_action_events()
-                        # events = gr.Json(value=events_str, label="Latest action event recorded.")
-                        events = gr.Json(value=get_action_events, every=15.0, label="Latest action event recorded.")
-                        refresh_events_button = gr.Button("Refresh", size="sm", variant="secondary")
-                        refresh_events_button.click(get_action_events, inputs=[events, session_state], outputs=[events])
 
                 chat_button = gr.Button("Chat", variant="primary")
                 reset_agent = gr.Button("Reset", variant="secondary")
@@ -866,7 +895,6 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
     )
 
 
-    # bottom_text.outputs = [session_state]
 
 # key = f"conversations/{session_id}.json"
         # s3 = boto3.client('s3')
