@@ -833,11 +833,10 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 )
     def get_bottom_text():
         try:
-
             bucket_name = get_bucket_name()
             dl_url = f"https://{bucket_name}.s3.amazonaws.com/"
-            session_id = session_state.value["session_id"]
-            link_text = f"{dl_url}{session_id}.json"
+            _session_id = session_state.value["session_id"]
+            link_text = f"{dl_url}{_session_id}.json"
         except Exception as e:
             link_text = """No link to display yet, start an agent that records conversations"""
 
@@ -846,10 +845,17 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
         else:
             orm_mode = "DYNAMODB"
 
+        if not _session_id:
+            _session_id = "no-session"
+
         api = f"{config.OB_API_URL}/chat" if OB_PROVIDER_API_KEY else "LOCAL"
 
+        if not link_text:
+            link_text_md = f"[Download Session Data]({link_text}) "
+        else:
+            link_text_md = "`Start a recorded conversation for link`"
 
-        formatted_text = f"[Download Session Data]({link_text}) | Stack: `{config.INFRA_STACK_NAME}` | ORM Mode: `{orm_mode}` | API: `{api}`"
+        formatted_text = f"| {link_text_md} | Session: `{_session_id}` | Stack: `{config.INFRA_STACK_NAME}` | ORM Mode: `{orm_mode}` | API: `{api}` |"
         return formatted_text
     bottom_text = gr.Markdown(
         value=get_bottom_text,
