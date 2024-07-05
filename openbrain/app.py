@@ -728,7 +728,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                         "function",
                     ],
                     label="Chat Model Type",
-                    info="Function models are special OpenAI fine-tuned versions of chat models GPT-3.5 and GPT-4.",
+                    info="Function models use tools better.",
                 )
 
                 chat_model = gr.Dropdown(
@@ -740,7 +740,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                         "gpt-3.5-turbo",
                     ],
                     label="Executor Chat Model",
-                    info="Choose gpt-4–0613 or gpt-3.5-turbo-0613 for 'function' models.",
+                    info="Choose gpt-4–0613 or gpt-3.5-turbo-0613 for function models.",
                 )
 
                 with gr.Column() as extra_options_column:
