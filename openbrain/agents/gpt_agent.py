@@ -157,7 +157,7 @@ class GptAgent:
         return agent_executor
 
     @classmethod
-    def deserialize(cls, state: dict[str, str | bytes], context: dict = None, session_id = None) -> GptAgent:
+    def deserialize(cls, state: dict[str, str | bytes], context: dict = None, session_id: str = None) -> GptAgent:
         """Reconstructs an agent from a serialized agent memory and initial config."""
         frozen_memory = state["frozen_agent_memory"]
         frozen_agent_config = state["frozen_agent_config"]
@@ -173,10 +173,16 @@ class GptAgent:
             "memory": agent_memory,
         }
         if context:
+            logger.info(f"Deserializing agent with {context=}")
             args["context"] = context
+        else:
+            logger.info("Deserialzing agent with no session_id")
 
         if session_id:
+            logger.info(f"Deserializing agent with {session_id=}")
             args["session_id"] = session_id
+        else:
+            logger.info("Deserializing agent with no session_id")
 
         agent = GptAgent(**args)
         return agent
