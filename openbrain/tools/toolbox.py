@@ -55,6 +55,7 @@ class Toolbox:  # invoker
             self.session_id = session_id
         else:
             logger.info("Initializing toolbox, no session ID provided")
+            self.session_id = None
 
         self.callback_handler = CallbackHandler(agent_config=agent_config)
         # Initialize a list for the BaseTool objects and one list each for each langchain callback type
