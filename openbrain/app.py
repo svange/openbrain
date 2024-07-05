@@ -164,7 +164,7 @@ def get_aws_cloudwatch_logs():
             message = event["message"]
             if message.startswith(match_prefix):
                 try:
-                    message_dict = json.loads(message)
+                    message_dict = json.loads(message, parse_float=Decimal)
 
                     new_dict = {
                         "level": message_dict["level"],
@@ -592,7 +592,8 @@ def get_bottom_text(_session_state=None):
         dl_url = f"https://{bucket_name}.s3.amazonaws.com/conversations/"
         _session_id = _session_state.get("session_id").lower()
         link_text = f"conversations/{dl_url}{_session_id}.json"
-        link_text_md = f"| [Download Session Data]({link_text}) "
+        # link_text_md = f"| [Download Session Data]({link_text}) "
+        link_text_md = f"| {link_text} "
         f"| {link_text_md} |"
     except Exception as e:
         _session_id = "no-session"
