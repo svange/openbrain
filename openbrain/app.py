@@ -195,7 +195,9 @@ def get_aws_cloudwatch_logs():
         formatted_message = '[\n' + events_string + '\n]'
         return formatted_message
     except Exception as e:
-        return e.__str__()
+        return {
+            "exception": e.__str__()
+        }
 
 
 
@@ -472,7 +474,10 @@ class CustomJsonEncoder(json.JSONEncoder):
 
 
 def get_action_events(_events=None, _session_state=None):
-    _session_id = _session_state["session_id"]
+    try:
+        _session_id = _session_state["session_id"]
+    except TypeError as e:
+        _session_id = "no-session"
     logger.info("Getting latest action...")
     try:
         dynamodb = boto3.resource("dynamodb")
