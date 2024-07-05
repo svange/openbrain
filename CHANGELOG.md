@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.0](https://github.com/svange/openbrain/compare/v2.13.0...v2.14.0) (2024-07-05)
+
+
+### Features
+
+* adding session download link to gradio. ([4298a10](https://github.com/svange/openbrain/commit/4298a109bb7ad981c792d5c4b90b98679384966c))
+
 ## [2.13.0](https://github.com/svange/openbrain/compare/v2.12.0...v2.13.0) (2024-07-05)
 
 
