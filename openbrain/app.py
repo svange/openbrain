@@ -200,12 +200,6 @@ def get_aws_cloudwatch_logs():
         }
 
 
-
-
-
-
-
-
 def get_aws_xray_trace_summaries(id=None):
     '''Get x-ray logs from AWS'''
     client = boto3.client('xray')
@@ -297,7 +291,7 @@ def reset(
         _client_id,
         _profile_name,
         chat_history,
-        session_state,
+        _session_state,
         _context
 ):
     context_dict = json.loads(_context)
@@ -327,13 +321,13 @@ def reset(
             frozen_agent_config=frozen_agent_config,
         )
         session_id = chat_session.session_id
-        session_state["session_id"] = session_id
+        _session_state["session_id"] = session_id
         chat_session.save()
         response_message = gpt_agent.agent_config.icebreaker
         response_dict = {}
     else:
         # Make a POST request to the reset endpoint
-        session = session_state["session"]
+        session = _session_state["session"]
         headers = {
             "x-api-key": OB_PROVIDER_API_KEY,
             "origin": DEFAULT_ORIGIN,
@@ -342,9 +336,9 @@ def reset(
         response = session.post(url=CHAT_ENDPOINT, json=chat_message_dump)
         logger.info(f"Response: {response.json()}")
         session_id = response.cookies["Session"]
-        session_state["session_id"] = session_id
-        session_state["session"] = session
-        session_state["last_response"] = response
+        _session_state["session_id"] = session_id
+        _session_state["session"] = session
+        _session_state["last_response"] = response
         response_message = response.json()["message"]
         response_dict = response.json()
         response_dict.pop("message")
@@ -359,7 +353,7 @@ def reset(
     new_context = json.dumps(response_dict, indent=4, sort_keys=True)
 
     # Return the response from the API
-    return ["", chat_history, session_state, new_context]
+    return ["", chat_history, _session_state, new_context]
 
 
 def save(
@@ -565,6 +559,34 @@ def get_available_profile_names() -> list:
         response = table.scan()
         # return the profile names with client_id == 'public'
         return [item["profile_name"] for item in response["Items"] if item["client_id"] == DEFAULT_CLIENT_ID]
+
+
+def get_bottom_text(_session_state=None):
+    try:
+        bucket_name = get_bucket_name()
+        dl_url = f"https://{bucket_name}.s3.amazonaws.com/"
+        _session_id = _session_state.get("session_id").lower()
+        link_text = f"conversations/{dl_url}{_session_id}.json"
+        link_text_md = f"| [Download Session Data]({link_text}) "
+        f"| {link_text_md} |"
+    except Exception as e:
+        _session_id = "no-session"
+        link_text_md = ''
+
+    if config.OB_MODE == Defaults.OB_MODE_LOCAL.value:
+        orm_mode = "LOCAL"
+    else:
+        orm_mode = "DYNAMODB"
+
+    # if not _session_id:
+    #     _session_id = "no-session"
+
+
+    api = f"{CHAT_ENDPOINT}" if OB_PROVIDER_API_KEY else "LOCAL"
+
+    infra_stack_name = os.environ["INFRA_STACK_NAME"]
+    formatted_text = link_text_md + f"| Session: `{_session_id}` | Stack: `{aws_profile}:{infra_stack_name}` | ORM Mode: `{orm_mode}` | API: `{api}` |"
+    return formatted_text
 
 
 with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
@@ -831,39 +853,24 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     ],
                     outputs=[msg, chatbot, session_state, context],
                 )
-    def get_bottom_text():
-        try:
-            bucket_name = get_bucket_name()
-            dl_url = f"https://{bucket_name}.s3.amazonaws.com/"
-            _session_id = session_state.value["session_id"]
-            link_text = f"{dl_url}{_session_id}.json"
-        except Exception as e:
-            link_text = """No link to display yet, start an agent that records conversations"""
 
-        if config.OB_MODE == Defaults.OB_MODE_LOCAL.value:
-            orm_mode = "LOCAL"
-        else:
-            orm_mode = "DYNAMODB"
-
-        if not _session_id:
-            _session_id = "no-session"
-
-        api = f"{config.OB_API_URL}/chat" if OB_PROVIDER_API_KEY else "LOCAL"
-
-        if not link_text:
-            link_text_md = f"[Download Session Data]({link_text}) "
-        else:
-            link_text_md = "`Start a recorded conversation for link`"
-
-        formatted_text = f"| {link_text_md} | Session: `{_session_id}` | Stack: `{config.INFRA_STACK_NAME}` | ORM Mode: `{orm_mode}` | API: `{api}` |"
-        return formatted_text
     bottom_text = gr.Markdown(
-        value=get_bottom_text,
-        every=1.0
+        value=get_bottom_text(),
+        rtl=True
     )
-            # key = f"conversations/{session_id}.json"
-            # s3 = boto3.client('s3')
-            # s3.download_file(bucket_name, key, f"{session_id}.json")
+    # bottom_text_refresh_button = gr.Button("Refresh", variant="secondary")
+    reset_agent.click(
+        get_bottom_text,
+        inputs=[session_state],
+        outputs=[bottom_text]
+    )
+
+
+    # bottom_text.outputs = [session_state]
+
+# key = f"conversations/{session_id}.json"
+        # s3 = boto3.client('s3')
+        # s3.download_file(bucket_name, key, f"{session_id}.json")
 
 
 
