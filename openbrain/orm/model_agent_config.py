@@ -192,7 +192,8 @@ class AgentConfig(ORMModel, BaseModel):
     )
     record_conversations: bool = Field(
         default=bool(DefaultSettings.RECORD_CONVERSATIONS.value),
-        description="If true, records all conversations in S3 for analysis",
+        description="If true, records all conversations in S3 for analysis. This is not implemented in OpenBrain, "
+                    "but should be implemented in your API.",
     )
 
 
