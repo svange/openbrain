@@ -31,7 +31,7 @@ Resources:
               - !GetAtt ObSessionTable.Arn
               - !GetAtt ObAgentConfigTable.Arn
 #              - !GetAtt ObLeadTable.Arn
-              - !GetAtt ObActionTable.Arn
+              - !GetAtt ObEventActionTable.Arn
           - Effect: Allow
             Action:
               - cloudformation:DescribeStacks
@@ -138,7 +138,7 @@ Resources:
         - 'ObAgentConfigTable-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
 
-  ObActionTable:
+  ObEventActionTable:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
@@ -155,7 +155,7 @@ Resources:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
       TableName: !Sub
-        - 'ObActionTable-${ResourceSuffix}'
+        - 'ObEventActionTable-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
 
 
@@ -186,9 +186,9 @@ Outputs:
 #    ObLeadTableName:
 #        Description: ObLeadTable
 #        Value: !Ref ObLeadTable
-    ObActionTableName:
-        Description: ObActionTable
-        Value: !Ref ObActionTable
+    ObEventActionTableName:
+        Description: ObEventActionTable
+        Value: !Ref ObEventActionTable
     CommonAccessPolicyArn:
         Description: CommonAccessPolicyArn
         Value: !Ref CommonAccessPolicy

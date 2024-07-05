@@ -75,7 +75,7 @@ class DefaultSettings(Enum):
         "text-davinci-003",
         "gpt-3.5-turbo-16k",
     ]
-    RECORD_TOOL_ACTIONS: bool = False
+    RECORD_TOOL_ACTIONS: bool = True
     RECORD_CONVERSATIONS: bool = True
 
 
