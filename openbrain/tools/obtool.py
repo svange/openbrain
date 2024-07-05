@@ -32,9 +32,10 @@ class OBTool:
     @classmethod
     def record_action(cls, event, response, latest=False, session_id=None):
         """Record an action in the action table."""
+        logger.info(f"Recording action for session {session_id}: {event=}, {response=}")
 
         if not session_id:
-            session_id = "no-session-" + ulid.ULID().to_uuid().__str__()
+            session_id = "no-session"
         dynamodb = boto3.resource("dynamodb")
         table = dynamodb.Table(config.ACTION_TABLE_NAME)
 

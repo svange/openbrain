@@ -30,8 +30,10 @@ def tester_agent_config(default_agent_config):
     system_message = "You are being tested for your ability to use tools. Use the tools available to you when appropriate."
     ice_breaker = "Hello, I am a test agent."
     tools = ["tester", "get_current_time"]
+    record_tool_actions = True
+    record_conversations = True
 
-    agent_config = AgentConfig(profile_name=profile_name, system_message=system_message, ice_breaker=ice_breaker, tools=tools)
+    agent_config = AgentConfig(profile_name=profile_name, system_message=system_message, ice_breaker=ice_breaker, tools=tools, record_tool_actions=record_tool_actions, record_conversations=record_conversations)
 
     return agent_config
 
@@ -42,8 +44,10 @@ def lls_tool_tester_agent_config(default_agent_config):
     system_message = "You are being tested for your ability to use tools. Use the tools available to you when appropriate."
     ice_breaker = "Hello, I am a test agent."
     tools = ["lls_scrub_phone_number"]
+    record_tool_actions = True
+    record_conversations = True
 
-    agent_config = AgentConfig(profile_name=profile_name, system_message=system_message, ice_breaker=ice_breaker, tools=tools)
+    agent_config = AgentConfig(profile_name=profile_name, system_message=system_message, ice_breaker=ice_breaker, tools=tools, record_tool_actions=record_tool_actions, record_conversations=record_conversations)
 
     return agent_config
 
@@ -56,6 +60,8 @@ def leadmo_tool_tester_agent_config():
     agent_config = AgentConfig()
     agent_config.profile_name = "leadmo_tool_tester"
     agent_config.tools = ["leadmo_update_contact", "leadmo_create_contact", "leadmo_stop_conversation", "leadmo_get_simple_calendar_appointment_slots", "leadmo_create_appointment", "leadmo_get_contact_info_from_context"]
+    agent_config.record_tool_actions = True
+    agent_config.record_conversations = True
 
     agent_config.profile_name = 'leadmo_tool_tester'
     agent_config.system_message = LEADMO_TOOL_TESTER_AGENT_SYSTEM_MESSAGE

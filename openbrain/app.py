@@ -738,7 +738,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
                 with gr.Column() as extra_options_column:
                     record_tool_actions = gr.Checkbox(label="Record Tool Actions", info="Record tool actions (use 'Actions' box).")
-                    record_conversations = gr.Checkbox(label="Record Conversations", info="NOT YET IMPLEMENTED - Record conversations in the database.")
+                    record_conversations = gr.Checkbox(label="Record Conversations", info="Record conversations in S3. Downloadable link will appear below conversation.")
 
                 # executor_completion_model = gr.Dropdown( choices=["text-davinci-003", "text-davinci-002",
                 # "text-curie-001", "text-babbage-001", "text-ada-001"], label="Executor Completion Model",

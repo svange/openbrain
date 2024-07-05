@@ -33,15 +33,17 @@ class DefaultSettings(Enum):
                         "leadmo_get_contact_info_from_context"
                        ]
 
-    TOOLS = []
+    TOOLS = [
+        "get_current_time",
+    ]
 
     # Default Settings
     EMAIL_ADDRESS = "example@email.com"
     PROFILE_NAME = Defaults.DEFAULT_PROFILE_NAME.value
     EXECUTOR_MODEL_TYPE = "function"
     EXECUTOR_TEMP = 0.0
-    MAX_EXECUTION_TIME = 10
-    MAX_ITERATIONS = 3
+    MAX_EXECUTION_TIME = 45
+    MAX_ITERATIONS = 10
     ENABLE_PROMPT_LAYER = False
     EXECUTOR_CHAT_MODEL = "gpt-3.5-turbo-0613"
     EXECUTOR_COMPLETION_MODEL = "text-davinci-003"
@@ -75,8 +77,8 @@ class DefaultSettings(Enum):
         "text-davinci-003",
         "gpt-3.5-turbo-16k",
     ]
-    RECORD_TOOL_ACTIONS: bool = True
-    RECORD_CONVERSATIONS: bool = True
+    RECORD_TOOL_ACTIONS: bool = False
+    RECORD_CONVERSATIONS: bool = False
 
 
 class AgentConfig(ORMModel, BaseModel):

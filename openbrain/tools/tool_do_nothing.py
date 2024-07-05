@@ -1,10 +1,8 @@
 from __future__ import annotations
 
-import datetime
 import json
 from typing import Any, Optional
 
-import pytz
 from langchain.tools.base import BaseTool
 from pydantic import BaseModel, Field, Extra
 
@@ -17,23 +15,23 @@ from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 
 logger = get_logger()
 
-TOOL_NAME = "get_current_time"
+TOOL_NAME = "get_do_nothing"
 
 
 # Utility classes and functions
-class TimeRequestAdapter(BaseModel):
+class DoNothingAdapter(BaseModel):
     """The schema for the tool's input."""
-    timezone: Optional[str] = Field(default="UTC", description="The timezone for your query.")
+    input: Optional[str] = Field(default="", description="indicates nothing")
 
 
 # LangChain tool
-class GetCurrentTimeTool(BaseTool, ContextAwareToolMixin):
+class DoNothingTool(BaseTool, ContextAwareToolMixin):
     class Config:
         extra = Extra.allow
         populate_by_name = True
     name = TOOL_NAME
-    description = """Useful when you need to know the current time."""
-    args_schema: type[BaseModel] = TimeRequestAdapter
+    description = """Does nothing."""
+    args_schema: type[BaseModel] = DoNothingAdapter
     handle_tool_error = True
     verbose = True
 
@@ -43,15 +41,16 @@ class GetCurrentTimeTool(BaseTool, ContextAwareToolMixin):
         agent_config = tool_input.get("agent_config")
         session_id = tool_input.get("session_id")
 
-        timezone = tool_input.get("timezone", "UTC")
-        tz = pytz.timezone(timezone)
-
-        current_time = datetime.datetime.now().astimezone(tz).__str__()
-
         if agent_config.get("record_tool_actions"):
-            OBTool.record_action(event=TOOL_NAME, response=current_time, latest=True, session_id=session_id)
+            try:
+                context_str = json.dumps(context)
+            except:
+                context_str = json.dumps({
+                    "error": "Could not convert context to json",
+                })
+            OBTool.record_action(event=TOOL_NAME, response=context_str, latest=True, session_id=session_id)
 
-        return current_time
+        return "successfully did nothing"
 
     def _arun(self, ticker: str):
         raise NotImplementedError(f"{TOOL_NAME} does not support async")
@@ -67,8 +66,8 @@ def on_tool_error(agent_config: AgentConfig = None, agent_input=None, *args, **k
     pass
 
 
-class OBToolGetCurrentTime(OBTool):
+class OBToolDoNothing(OBTool):
     name: str = TOOL_NAME
-    tool: BaseTool = GetCurrentTimeTool
+    tool: BaseTool = DoNothingTool
     on_tool_start: OBCallbackHandlerFunctionProtocol = on_tool_start
     on_tool_error: OBCallbackHandlerFunctionProtocol = on_tool_error
