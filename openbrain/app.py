@@ -1,6 +1,7 @@
 import datetime
 import json
 import os
+import re
 from decimal import Decimal
 import boto3
 import gradio as gr
@@ -131,7 +132,7 @@ def get_debug_text(_debug_text = None) -> str:
     return ret
 
 
-def get_aws_cloudwatch_logs():
+def get_aws_cloudwatch_logs(_session_state=None):
     """Get cloudwatch logs for the agent we are interacting with"""
     logger.info("Getting AWS Cloudwatch logs...")
     try:
@@ -157,40 +158,42 @@ def get_aws_cloudwatch_logs():
         log_events = cloudwatch.get_log_events(logGroupName=target_log_group, logStreamName=latest_log_stream)
 
         events_string = ""
-        match_prefix = '{"level":"'
+        # match_prefix = '{"level":"'
+
+        # target_xray_trace_id = _session_state['last_response'].headers['x-amzn-trace-id']
+        # target_xray_trace_id = re.sub(r';.*', '', target_xray_trace_id.replace("Root=", ""))
+        max_events = 10
         counter = 0
-        max_events = 4
         for event in log_events["events"]:
             message = event["message"]
-            if message.startswith(match_prefix):
-                try:
-                    message_dict = json.loads(message, parse_float=Decimal)
+            # if target_xray_trace_id in message:
+            try:
+                message_dict = json.loads(message, parse_float=Decimal)
 
-                    new_dict = {
-                        "level": message_dict["level"],
-                        "location": message_dict["location"],
-                        "message": message_dict["message"],
-                        "timestamp": message_dict["timestamp"],
-                        "function_name": message_dict["function_name"],
-                        "request_path": message_dict["request_path"],
-                        "xray_trace_id": message_dict["xray_trace_id"],
-                    }
+                new_dict = {
+                    "level": message_dict["level"],
+                    "location": message_dict["location"],
+                    "message": message_dict["message"],
+                    "timestamp": message_dict["timestamp"],
+                    "function_name": message_dict["function_name"],
+                    "request_path": message_dict["request_path"],
+                    "xray_trace_id": message_dict["xray_trace_id"],
+                }
+            except Exception as e:
+                continue
 
+            message = json.dumps(new_dict, indent=2)
+            counter += 1
 
-                except Exception as e:
-                    new_dict = {
-                        "ERROR PARSING MESSAGE": message,
-                    }
-
-                message = json.dumps(new_dict, indent=2)
-                counter += 1
-
-                events_string += message + ",\n"
+            events_string += message + ",\n"
             if counter > max_events:
                 break
 
         # remove the last comma
-        events_string = events_string[:-2]
+        try:
+            events_string = events_string[:-2]
+        except Exception as e:
+            events_string = "No events found"
         # formatted_message = '''```python\n''' + events_string + '''\n```'''
         formatted_message = '[\n' + events_string + '\n]'
         return formatted_message
@@ -278,8 +281,9 @@ def chat(message, chat_history, _profile_name, session_state, _client_id, _conte
         original_context = json.loads(_context)
         response_dict.update(original_context)
         new_context = json.dumps(response_dict, indent=4, sort_keys=True)
+        session_state["last_response"] = response
 
-    session_state["last_response"] = response_message
+    # session_state["last_response"] = response_message
 
     chat_history.append([message, response_message])
 
@@ -591,13 +595,19 @@ def get_bottom_text(_session_state=None):
         bucket_name = get_bucket_name()
         dl_url = f"https://{bucket_name}.s3.amazonaws.com/conversations/"
         _session_id = _session_state.get("session_id").lower()
-        link_text = f"conversations/{dl_url}{_session_id}.json"
+        link_text = f"{dl_url}{_session_id}.json"
         # link_text_md = f"| [Download Session Data]({link_text}) "
-        link_text_md = f"| {link_text} "
-        f"| {link_text_md} |"
+        link_text_md = f"| [Download Session Data]({link_text}) "
+
+        xray_trace_id = _session_state['last_response'].headers['x-amzn-trace-id']
+        xray_trace_id = re.sub(r';.*', '', xray_trace_id.replace("Root=", ""))
+
+        xray_trace_id_md = f"| [X-Ray](https://console.aws.amazon.com/xray/home?region=us-east-1#/traces/{xray_trace_id}) "
+
     except Exception as e:
         _session_id = "no-session"
         link_text_md = ''
+        xray_trace_id_md = ''
 
     if config.OB_MODE == Defaults.OB_MODE_LOCAL.value:
         orm_mode = "LOCAL"
@@ -611,7 +621,7 @@ def get_bottom_text(_session_state=None):
     api = f"{CHAT_ENDPOINT}" if OB_PROVIDER_API_KEY else "LOCAL"
 
     infra_stack_name = os.environ["INFRA_STACK_NAME"]
-    formatted_text = link_text_md + f"| Session: `{_session_id}` | Stack: `{aws_profile}:{infra_stack_name}` | ORM Mode: `{orm_mode}` | API: `{api}` |"
+    formatted_text = xray_trace_id_md + link_text_md + f"| Session: `{_session_id}` | Stack: `{aws_profile}:{infra_stack_name}` | ORM Mode: `{orm_mode}` | API: `{api}` |"
     return formatted_text
 
 
@@ -655,16 +665,20 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 # interactive=False,
                 # autoscroll=True,
                 # show_copy_button=True,
-                every=3.0,
+                # every=3.0,
             )
+            refresh_logs_button = gr.Button("Refresh", size="sm", variant="secondary")
+            refresh_logs_button.click(get_aws_cloudwatch_logs, inputs=[session_state], outputs=[agent_debug_text])
 
         with gr.Tab("Actions"):
-            with gr.Accordion("Action Events") as events_accordian:
-                # events_str = get_action_events()
-                # events = gr.Json(value=events_str, label="Latest action event recorded.")
-                events = gr.Json(value=get_action_events, every=15.0, label="Latest action event recorded.")
-                refresh_events_button = gr.Button("Refresh", size="sm", variant="secondary")
-                refresh_events_button.click(get_action_events, inputs=[events, session_state], outputs=[events])
+            # events_str = get_action_events()
+            # events = gr.Json(value=events_str, label="Latest action event recorded.")
+            events = gr.Json(value=get_action_events,
+                             # every=15.0,
+                             label="Latest action event recorded.")
+
+            refresh_events_button = gr.Button("Refresh", size="sm", variant="secondary")
+            refresh_events_button.click(get_action_events, inputs=[events, session_state], outputs=[events])
 
     with gr.Accordion("Configuration and Tuning", elem_classes="accordion", visible=is_settings_set(), open=False) as prompts_box:
 
@@ -838,11 +852,10 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
     with gr.Accordion("Interact with Agent") as chat_accordian:
         with gr.Row() as chat_row:
             with gr.Column(scale=2) as chat_container:
-                with gr.Accordion("Chat") as chat_box_accordian:
-                    with gr.Column(scale=2) as chat_column:
-                        chatbot = gr.Chatbot()
+                with gr.Column(scale=2) as chat_column:
+                    chatbot = gr.Chatbot()
 
-                        msg = gr.Textbox()
+                    msg = gr.Textbox()
 
             with gr.Column(scale=1) as context_container:
 
