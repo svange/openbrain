@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.10](https://github.com/svange/openbrain/compare/v2.16.9...v2.16.10) (2024-07-05)
+
+
+### Bug Fixes
+
+* adding session_id as param for ToolBox, now the tools should have the session_id in the context. ([bcf1f59](https://github.com/svange/openbrain/commit/bcf1f5929aea0e12b1fedc98c5428baba682b076))
+* adding session_id as param for ToolBox, now the tools should have the session_id in the context. ([9c3e1eb](https://github.com/svange/openbrain/commit/9c3e1eb127a18948c3c433db658c52e8f4ec8809))
+
 ## [2.16.9](https://github.com/svange/openbrain/compare/v2.16.8...v2.16.9) (2024-07-05)
 
 

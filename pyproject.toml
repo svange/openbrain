@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "openbrain"
-version = "2.16.9"
+version = "2.16.10"
 description = "A package to interact with generative AI and build specialized generative AI workflows. This project is dual-licensed under AGPL-3.0 and a separate commercial license."
 authors = ["Samuel Vange <7166607+svange@users.noreply.github.com>"]
 readme = "README.md"
