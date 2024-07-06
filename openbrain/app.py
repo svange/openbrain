@@ -821,10 +821,10 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
             tool_names.sort()
             tools = gr.CheckboxGroup(tool_names, label="Tools", info="Select tools to enable for the agent")
 
-
+            gr.Markdown(value="Tool descriptions as presented to the AI. Confusing text here could lead to inconsistent use of tools.")
             _tools = Toolbox.discovered_tools
-            for _tool in _tools:
-                with gr.Accordion() as tool_accordion:
+            with gr.Column() as tool_accordion:
+                for _tool in _tools:
                     with gr.Tab(_tool.name):
                         gr.Markdown(value=get_tool_description(_tool.name))
 

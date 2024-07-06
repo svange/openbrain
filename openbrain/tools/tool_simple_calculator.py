@@ -30,7 +30,7 @@ class Operator(Enum):
     MODULUS = "%"
     EXPONENTIATION = "**"
     FLOOR_DIVISION = "//"
-    SQUARE_ROOT = "√"
+    SQUARE_ROOT = "sqrt"
     SQUARE = "^2"
     CUBE = "^3"
     INVERSE = "1/x"
@@ -51,8 +51,8 @@ class Operator(Enum):
 class SimpleCalculatorAdaptor(BaseModel):
     """The schema for the tool's input."""
     operation: Operator = Field(description=f"""The operation to perform. One of: {' '.join(["'" + op.value + "'" for op in Operator])}""")
-    left_value: Decimal = Field(default=0, description="left value of formula.")
-    right_value: Optional[Decimal] = Field(default=0, description="right value of formula.")
+    left_value: Decimal = Field(description="left value of formula.")
+    right_value: Optional[Decimal] = Field(default=None, description="right value of formula.")
 
 
 # LangChain tool
