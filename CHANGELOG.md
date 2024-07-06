@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/svange/openbrain/compare/v3.0.0...v3.0.1) (2024-07-06)
+
+
+### Bug Fixes
+
+* UI bug fixes, tool_do_nothing had bad name, simple calculator description was poo poo. ([a75399c](https://github.com/svange/openbrain/commit/a75399c2ef79b147a6aa9413e072d820605f28b8))
+
 ## [3.0.0](https://github.com/svange/openbrain/compare/v2.16.11...v3.0.0) (2024-07-06)
 
 
