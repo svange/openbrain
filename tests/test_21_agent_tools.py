@@ -5,7 +5,9 @@ import importlib
 import inspect
 import os
 import pkgutil
+import random
 import sys
+from decimal import Decimal
 
 import boto3
 import pytest
@@ -25,11 +27,11 @@ from tests.generator_leadmo_contact import generate_leadmo_contact, generate_ai_
 
 
 @pytest.fixture
-def tester_agent_config(default_agent_config):
+def simple_tool_tester_agent_config(default_agent_config):
     profile_name = "tester"
     system_message = "You are being tested for your ability to use tools. Use the tools available to you when appropriate."
     ice_breaker = "Hello, I am a test agent."
-    tools = ["tester", "get_current_time"]
+    tools = ["tester", "get_current_time", "simple_calculator"]
     record_tool_actions = True
     record_conversations = True
 
@@ -165,13 +167,154 @@ class TestAgentTools:
             assert tool is not None
 
     @pytest.mark.tools
-    def test_tester_tool(self, tester_agent_config: AgentConfig):
+    def test_tester_tool(self, simple_tool_tester_agent_config: AgentConfig):
         """Test the tester tool."""
         context = {"random_word_from_agent_creation": "rambutan"}
-        agent = GptAgent(agent_config=tester_agent_config, context=context)
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context)
         response = agent.handle_user_message("Your random word is banana.")
         assert "banana" in response
         assert "rambutan" in response
+
+    @pytest.mark.tools
+    def test_get_current_time_tool(self, simple_tool_tester_agent_config):
+        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context)
+        response = agent.handle_user_message("Get the current year.")
+        assert response is not None
+        current_year = datetime.datetime.now().year
+        assert str(current_year) in response.casefold()
+
+    @pytest.mark.tools
+    def test_simple_calculator_tool(self, simple_tool_tester_agent_config):
+        left_number = Decimal(random.randint(-10000, 10000))
+        right_number = Decimal(random.randint(-10000, 10000))
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        response = agent.handle_user_message(f"Calculate {left_number} + {right_number}.")
+        assert response is not None
+        assert str(left_number + right_number) in response.casefold().replace(',', '')
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        response = agent.handle_user_message(f"Calculate {left_number} - {right_number}.")
+        assert response is not None
+        result = left_number - right_number
+        assert str(result) in response.casefold().replace(',', '')
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        response = agent.handle_user_message(f"Calculate {left_number} * {right_number}.")
+        assert response is not None
+        result = left_number * right_number
+        assert str(result) in response.casefold().replace(',', '')
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        response = agent.handle_user_message(f"Calculate {left_number} / {right_number}.")
+        assert response is not None
+        result = left_number / right_number
+        assert str(result)[:4] in response.casefold().replace(',', '')
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        response = agent.handle_user_message(f"Calculate {left_number} // {right_number}.")
+        assert response is not None
+        result = left_number // right_number
+        assert str(result) in response.casefold().replace(',', '')
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        response = agent.handle_user_message(f"Calculate {left_number} % {right_number}.")
+        assert response is not None
+        result = left_number % right_number
+        assert str(result) in response.casefold().replace(',', '')
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        response = agent.handle_user_message(f"Calculate {left_number} ** {right_number}.")
+        assert response is not None
+        result = left_number ** right_number
+        assert str(result)[:4] in response.casefold().replace(',', '')
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        response = agent.handle_user_message(f"Calculate the square root of {left_number}.")
+        assert response is not None
+        result = left_number.sqrt()
+        assert str(result)[:4] in response.casefold().replace(',', '')
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        response = agent.handle_user_message(f"Calculate {left_number} cubed.")
+        assert response is not None
+        result = left_number ** Decimal(3)
+        assert str(result) in response.casefold().replace(',', '')
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        response = agent.handle_user_message(f"Calculate the inverse of {left_number}.")
+        assert response is not None
+        result = Decimal(1) / left_number
+        assert str(result)[:4] in response.casefold().replace(',', '')
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        response = agent.handle_user_message(f"Calculate the negation of {left_number}.")
+        assert response is not None
+        result = -left_number
+        assert str(result) in response.casefold().replace(',', '')
+
+    @pytest.mark.tools
+    @pytest.mark.xfail(reason="This fills up the context windows and gets the AI to fail to use tools correctly")
+    def test_simple_calculator_tool_overload_context(self, simple_tool_tester_agent_config):
+        left_number = Decimal(random.randint(-10000, 10000))
+        right_number = Decimal(random.randint(-10000, 10000))
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        response = agent.handle_user_message(f"Calculate {left_number} + {right_number}.")
+        assert response is not None
+        assert str(left_number + right_number) in response.casefold().replace(',', '')
+
+        response = agent.handle_user_message(f"Calculate {left_number} - {right_number}.")
+        assert response is not None
+        result = left_number - right_number
+        assert str(result) in response.casefold().replace(',', '')
+
+        response = agent.handle_user_message(f"Calculate {left_number} * {right_number}.")
+        assert response is not None
+        result = left_number * right_number
+        assert str(result) in response.casefold().replace(',', '')
+
+        response = agent.handle_user_message(f"Calculate {left_number} / {right_number}.")
+        assert response is not None
+        result = left_number / right_number
+        assert str(result)[:4] in response.casefold().replace(',', '')
+
+        response = agent.handle_user_message(f"Calculate {left_number} // {right_number}.")
+        assert response is not None
+        result = left_number // right_number
+        assert str(result) in response.casefold().replace(',', '')
+
+        response = agent.handle_user_message(f"Calculate {left_number} % {right_number}.")
+        assert response is not None
+        result = left_number % right_number
+        assert str(result) in response.casefold().replace(',', '')
+
+        response = agent.handle_user_message(f"Calculate {left_number} ** {right_number}.")
+        assert response is not None
+        result = left_number ** right_number
+        assert str(result)[:4] in response.casefold().replace(',', '')
+
+        response = agent.handle_user_message(f"Calculate the square root of {left_number}.")
+        assert response is not None
+        result = left_number ** Decimal(0.5)
+        assert str(result)[:4] in response.casefold().replace(',', '')
+
+        response = agent.handle_user_message(f"Calculate {left_number} cubed.")
+        assert response is not None
+        result = left_number ** Decimal(3)
+        assert str(result) in response.casefold().replace(',', '')
+
+        response = agent.handle_user_message(f"Calculate the inverse of {left_number}.")
+        assert response is not None
+        result = Decimal(1) / left_number
+        assert str(result)[:4] in response.casefold().replace(',', '')
+
+        response = agent.handle_user_message(f"Calculate the negation of {left_number}.")
+        assert response is not None
+        result = -left_number
+        assert str(result) in response.casefold().replace(',', '')
 
     @pytest.mark.tools
     def test_leadmo_create_contact_tool(self, leadmo_tool_tester_agent_config):
@@ -191,18 +334,6 @@ class TestAgentTools:
         response = agent.handle_user_message("Update the contact.")
         assert response is not None
         assert "success" in response.casefold()
-
-
-    @pytest.mark.tools
-    def test_get_current_time_tool(self, tester_agent_config):
-        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
-
-        agent = GptAgent(agent_config=tester_agent_config, context=context)
-        response = agent.handle_user_message("Get the current year.")
-        assert response is not None
-        current_year = datetime.datetime.now().year
-        assert str(current_year) in response.casefold()
-
 
     @pytest.mark.tools
     def test_leadmo_create_appointment_tool(self, leadmo_tool_tester_agent_config):

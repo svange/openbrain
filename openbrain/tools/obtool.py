@@ -32,6 +32,7 @@ class OBTool:
     @classmethod
     def record_action(cls, event, response, latest=False, session_id=None):
         """Record an action in the action table."""
+        response = str(response)
         logger.info(f"Recording action for session {session_id}: {event=}, {response=}")
 
         if not session_id:

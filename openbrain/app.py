@@ -3,6 +3,8 @@ import json
 import os
 import re
 from decimal import Decimal
+from json import JSONDecodeError
+
 import boto3
 import gradio as gr
 import requests
@@ -34,6 +36,9 @@ logger = logging.getLogger("Gradio")
 
 EXAMPLE_CONTEXT = '''
 {
+    "locationId": "HbTkOpUVUXtrMQ5wkwxD",
+    "calendarId": "asGgwlPqqu6s17W084uE",
+    "contactId": "8LDRBvYKbVyhXymqMurF",
     "firstName": "Deez",
     "lastName": "Nutzington",
     "name": "Your mother",
@@ -47,10 +52,7 @@ EXAMPLE_CONTEXT = '''
     "postalCode": "92108",
     "companyName": "Augmenting Integrations",
     "website": "openbra.in",
-    "medications": "vicodin",
-    "calendarId": "asGgwlPqqu6s17W084uE",
-    "contactId": "8LDRBvYKbVyhXymqMurF",
-    "locationId": "HbTkOpUVUXtrMQ5wkwxD"
+    "medications": "vicodin"
 }
 '''.strip()
 
@@ -176,21 +178,23 @@ def get_aws_cloudwatch_logs(_session_state=None):
                 message_dict = json.loads(message, parse_float=Decimal)
 
                 new_dict = {
-                    "level": message_dict["level"],
-                    "location": message_dict["location"],
-                    "message": message_dict["message"],
-                    "timestamp": message_dict["timestamp"],
-                    "function_name": message_dict["function_name"],
-                    "request_path": message_dict["request_path"],
-                    "xray_trace_id": message_dict["xray_trace_id"],
+                    "level": message_dict.get("level", None),
+                    "location": message_dict.get("location", None),
+                    "message": message_dict.get("message", None),
+                    "timestamp": message_dict.get("timestamp", None),
+                    "function_name": message_dict.get("function_name", None),
+                    "request_path": message_dict.get("request_path", None),
+                    "xray_trace_id": message_dict.get("xray_trace_id", None),
                 }
-            except Exception as e:
+            except JSONDecodeError as e:
+                continue
+            except KeyError as e:
                 continue
 
             message = json.dumps(new_dict, indent=2)
-            counter += 1
 
             events_string += message + ",\n"
+            counter += 1
             if counter > max_events:
                 break
 
@@ -234,19 +238,22 @@ def get_aws_xray_trace_summaries(id=None):
 
     return response
 
-def chat(message, chat_history, _profile_name, session_state, _client_id, _context):
+def chat(message, chat_history, _profile_name, _session_state, _client_id, _context):
     # Make a POST request to the chat endpoint
-    session_id = session_state["session_id"]
+    session_id = _session_state["session_id"]
     context_dict = json.loads(_context)
     chat_message = ChatMessage(agent_config=_profile_name, client_id=_client_id, reset=False, message=message,
                                session_id=session_id, **context_dict)
 
-    new_context = None
-
-    response_message = None
     if not OB_PROVIDER_API_KEY:
         logger.info("No API key found, trying to use local mode for agent interactions...")
-        chat_session = ChatSession.get(session_id=session_id, client_id=_client_id)
+        try:
+            chat_session = ChatSession.get(session_id=session_id, client_id=_client_id)
+        except Exception as e:
+            logger.info("No chat session found, resetting instead...")
+            return reset(_client_id, _profile_name, chat_history, _session_state, _context)
+
+
         agent_state = {
             "frozen_agent_memory": chat_session.frozen_agent_memory,
             "frozen_agent_config": chat_session.frozen_agent_config,
@@ -265,9 +272,10 @@ def chat(message, chat_history, _profile_name, session_state, _client_id, _conte
             frozen_agent_config=frozen_agent_config,
         )
         chat_session.save()
+        new_context = _context
 
     else:
-        session = session_state["session"]
+        session = _session_state["session"]
         session.headers.update(
             {
                 "x-api-key": OB_PROVIDER_API_KEY,
@@ -280,7 +288,7 @@ def chat(message, chat_history, _profile_name, session_state, _client_id, _conte
         response = session.post(CHAT_ENDPOINT, json=chat_message_dump)
         logger.info(f"Response: {response.json()}")
         response_message = response.json()["message"]
-        session_state["session"] = session
+        _session_state["session"] = session
 
         response_dict = response.json()
         response_dict.pop("message")
@@ -288,14 +296,14 @@ def chat(message, chat_history, _profile_name, session_state, _client_id, _conte
         original_context = json.loads(_context)
         response_dict.update(original_context)
         new_context = json.dumps(response_dict, indent=4, sort_keys=True)
-        session_state["last_response"] = response
+        _session_state["last_response"] = response
 
     # session_state["last_response"] = response_message
 
     chat_history.append([message, response_message])
 
     # Return the response from the API
-    return ["", chat_history, session_state, new_context]
+    return ["", chat_history, _session_state, new_context]
 
 
 def reset(
@@ -361,7 +369,7 @@ def reset(
     original_context = json.loads(_context)
 
     response_dict.update(original_context)
-    new_context = json.dumps(response_dict, indent=4, sort_keys=True)
+    new_context = json.dumps(response_dict, indent=4)
 
     # Return the response from the API
     return ["", chat_history, _session_state, new_context]
@@ -369,18 +377,19 @@ def reset(
 
 def save(
         _icebreaker,
-        _chat_model,
+        # _chat_model,
         _system_message,
+        _llm,
         # _prompt_layer_tags,
         _max_iterations,
         _max_execution_time,
         _executor_temp,
         _profile_name,
-        _executor_model_type,
-        _openai_api_key,
+        # _executor_model_type,
+        # _openai_api_key,
         # _promptlayer_api_key,
         _client_id,
-        _outgoing_webhook_url,
+        # _outgoing_webhook_url,
         _record_tool_actions,
         _record_conversations,
 
@@ -397,18 +406,19 @@ def save(
 
     agent_config = AgentConfig(
         icebreaker=str(_icebreaker),
-        executor_chat_model=str(_chat_model),
+        # executor_chat_model=str(_chat_model),
         system_message=str(_system_message),
+        llm=str(_llm),
         # prompt_layer_tags=str(_prompt_layer_tags),
         executor_max_iterations=str(_max_iterations),
         executor_max_execution_time=str(_max_execution_time),
         executor_temp=str(_executor_temp),
         profile_name=str(_profile_name),
-        executor_model_type=str(_executor_model_type),
-        openai_api_key=str(_openai_api_key),
+        # executor_model_type=str(_executor_model_type),
+        # openai_api_key=str(_openai_api_key),
         # promptlayer_api_key=str(_promptlayer_api_key),
         client_id=str(_client_id),
-        outgoing_webhook_url=str(_outgoing_webhook_url),
+        # outgoing_webhook_url=str(_outgoing_webhook_url),
         record_tool_actions=str(_record_tool_actions),
         record_conversations=str(_record_conversations),
         tools=tools,
@@ -438,25 +448,37 @@ def load(_profile_name: str, _client_id: str):
     _tools = retrieved_agent_config.tools
     _agent_config = [
         str(retrieved_agent_config.icebreaker),
-        str(retrieved_agent_config.executor_chat_model),
+        # str(retrieved_agent_config.executor_chat_model),
         str(retrieved_agent_config.system_message),
+        str(retrieved_agent_config.llm),
         # str(retrieved_agent_config.prompt_layer_tags),
         str(retrieved_agent_config.executor_max_iterations),
         str(retrieved_agent_config.executor_max_execution_time),
         str(retrieved_agent_config.executor_temp),
         str(retrieved_agent_config.profile_name),
-        str(retrieved_agent_config.executor_model_type),
-        str(retrieved_agent_config.openai_api_key),
+        # str(retrieved_agent_config.executor_model_type),
+        # str(retrieved_agent_config.openai_api_key),
         # str(retrieved_agent_config.promptlayer_api_key),
         str(retrieved_agent_config.client_id),
-        str(retrieved_agent_config.outgoing_webhook_url),
+        # str(retrieved_agent_config.outgoing_webhook_url),
         bool(retrieved_agent_config.record_tool_actions),
         bool(retrieved_agent_config.record_conversations),
         _tools
     ]
+    llm_name = retrieved_agent_config.llm
+    if llm_name in openbrain.orm.model_agent_config.FUNCTION_LANGUAGE_MODELS:
+        llm_type = "function"
+    elif llm_name in openbrain.orm.model_agent_config.CHAT_LANGUAGE_MODELS:
+        llm_type = "chat"
+    elif llm_name in openbrain.orm.model_agent_config.COMPLETION_LANGUAGE_MODELS:
+        llm_type = "completion"
 
+    else:
+        raise ValueError(f"Language model {llm_name} not found in any of the language model lists")
+
+    ret = [*_agent_config, llm_type]
     # Return a success message
-    return _agent_config
+    return ret
 
 
 def is_settings_set():
@@ -498,6 +520,8 @@ def get_action_events(_events=None, _session_state=None):
         table = dynamodb.Table(config.ACTION_TABLE_NAME)
         response = table.get_item(Key={"action_id": "latest", "session_id": _session_id})
         ret = response.get("Item", {})
+    except KeyError as e:
+        ret = json.dumps({"exception": "Event not found for this session, perhaps one wasn't sent yet in this conversation"})
     except Exception as e:
         ret = json.dumps({"exception": e.__str__()})
 
@@ -632,6 +656,48 @@ def get_bottom_text(_session_state=None):
     return formatted_text
 
 
+def get_gpt_agent_logs():
+    if OB_PROVIDER_API_KEY:
+        return "Not yet implemented for remote mode"
+
+    _logger = openbrain.util.get_logger()
+    # Get the StringIO handler from this logger
+    handlers = _logger.handlers
+    for handler in handlers:
+        if isinstance(handler.stream, StringIO):
+            log_stream = handler.stream
+            break
+    else:
+        return "No logs found"
+
+    try:
+        ret = log_stream.getvalue()
+    except Exception as e:
+        ret = e.__str__()
+
+    return ret
+
+
+
+def get_llm_choices(llm_types=None):
+    """Get the available LLM choices based on the selected types"""
+    if not llm_types:
+        llm_types = ['function']
+    available_llms = []
+    known_llm_types = openbrain.orm.model_agent_config.EXECUTOR_MODEL_TYPES
+    for llm_type in llm_types:
+        if llm_type == "function":
+            available_llms += openbrain.orm.model_agent_config.FUNCTION_LANGUAGE_MODELS
+        elif llm_type == "chat":
+            available_llms += openbrain.orm.model_agent_config.CHAT_LANGUAGE_MODELS
+        elif llm_type == "completion":
+            available_llms += openbrain.orm.model_agent_config.COMPLETION_LANGUAGE_MODELS
+        else:
+            logger.error(f"Unknown LLM type: {llm_type}, must be one of {known_llm_types}")
+            continue
+    return gr.Dropdown.update(choices=available_llms)
+
+
 with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
     session_state = gr.State(value={"session_id": "", "session": requests.Session(), "agent": None})
     session_apikey = gr.State(value="")
@@ -677,6 +743,22 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
             refresh_logs_button = gr.Button("Refresh", size="sm", variant="secondary")
             refresh_logs_button.click(get_aws_cloudwatch_logs, inputs=[session_state], outputs=[agent_debug_text])
 
+        with gr.Tab("Agent Logs") as agent_logs:
+            agent_debug_text = gr.Textbox(
+                value=get_gpt_agent_logs,
+                label="Debug",
+                info="GptAgent logs",
+                show_label=False,
+                lines=20,
+                interactive=False,
+                autoscroll=True,
+                show_copy_button=True,
+                every=3.0,
+            )
+            refresh_logs_button = gr.Button("Refresh", size="sm", variant="secondary")
+            refresh_logs_button.click(get_aws_cloudwatch_logs, inputs=[session_state], outputs=[agent_debug_text])
+
+
         with gr.Tab("Actions"):
             # events_str = get_action_events()
             # events = gr.Json(value=events_str, label="Latest action event recorded.")
@@ -694,65 +776,58 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 "Changes to these settings are used to set up a conversation using the Reset button and will not "
                 "be reflected until the next 'Reset'"
             )
+
             with gr.Row() as preferences_row1:
-                max_iterations = gr.Number(
-                    label="Max Iterations",
-                    info="The number of steps the executor can take before the conversation is terminated with an "
-                         "error message.",
+                options = openbrain.orm.model_agent_config.EXECUTOR_MODEL_TYPES
+                default_llm_types = ["function"]
+                llm_types = gr.CheckboxGroup(
+                    choices=options,
+                    label="LLM Types",
+                    info="List only the types of agents you are interested in.",
+                    value=default_llm_types,
+                )
+                original_choices = openbrain.orm.model_agent_config.FUNCTION_LANGUAGE_MODELS
+                # original_value = openbrain.orm.model_agent_config.FUNCTION_LANGUAGE_MODELS[0]
+                llm = gr.Dropdown(
+                    choices=original_choices,
+                    # value=original_value,
+                    label="LLM",
+                    info="The language model to use for completion"
+                )
+                llm_types.change(get_llm_choices, inputs=[llm_types], outputs=[llm])
+
+                with gr.Column() as extra_options_column:
+                    record_tool_actions = gr.Checkbox(label="Record Tool Actions", info="Record tool actions (use 'Actions' box).")
+                    record_conversations = gr.Checkbox(label="Record Conversations", info="Record conversations.")
+
+                # executor_completion_model = gr.Dropdown( choices=["text-davinci-003", "text-davinci-002",
+                # "text-curie-001", "text-babbage-001", "text-ada-001"], label="Executor Completion Model",
+                # info="This is the model used when Executor Model Type is set to 'completion'" )
+
+            with gr.Row() as preferences_row2:
+
+                executor_temp = gr.Slider(
+                    minimum=0,
+                    maximum=2,
+                    label="Temperature",
+                    step=0.1,
+                    info="Higher temperature for 'spicy' agents.",
                 )
                 max_execution_time = gr.Slider(
                     minimum=0,
                     maximum=30,
                     label="Max Execution Time",
                     step=0.5,
-                    info="The maximum amount of time the executor can take before the "
-                         "conversation is terminated with an error message.",
+                    info="Maximum agent response time before termination.",
                 )
-                executor_temp = gr.Slider(
-                    minimum=0,
-                    maximum=2,
-                    label="ExecutorLLM Temp",
-                    step=0.1,
-                    info="Higher temperatures will result in more random responses.",
+                max_iterations = gr.Number(
+                    label="Max Iterations",
+                    info="Number of steps an agent can take for a response before termination.",
                 )
-
-            with gr.Row() as preferences_row2:
-                # prompt_layer_tags = gr.Textbox(
-                #     label="Prompt Layer Tags",
-                #     info="A comma separated string containing the tags to be used in the " "prompt layer.",
-                # )
-                executor_model_type = gr.Dropdown(
-                    choices=[
-                        "chat",
-                        # 'completion',
-                        "function",
-                    ],
-                    label="Chat Model Type",
-                    info="Function models use tools better.",
-                )
-
-                chat_model = gr.Dropdown(
-                    choices=[
-                        "gpt-4–0613",
-                        "gpt-3.5-turbo-0613",
-                        "gpt-4",
-                        "gpt-4-32k",
-                        "gpt-3.5-turbo",
-                    ],
-                    label="Executor Chat Model",
-                    info="Choose gpt-4–0613 or gpt-3.5-turbo-0613 for function models.",
-                )
-
-                with gr.Column() as extra_options_column:
-                    record_tool_actions = gr.Checkbox(label="Record Tool Actions", info="Record tool actions (use 'Actions' box).")
-                    record_conversations = gr.Checkbox(label="Record Conversations", info="Record conversations in S3. Downloadable link will appear below conversation.")
-
-                # executor_completion_model = gr.Dropdown( choices=["text-davinci-003", "text-davinci-002",
-                # "text-curie-001", "text-babbage-001", "text-ada-001"], label="Executor Completion Model",
-                # info="This is the model used when Executor Model Type is set to 'completion'" )
 
             with gr.Row() as preferences_row3:
-                tool_names = openbrain.orm.model_agent_config.DefaultSettings.AVAILABLE_TOOLS.value
+                # tool_names = openbrain.orm.model_agent_config.DefaultSettings.AVAILABLE_TOOLS.value
+                tool_names = [tool.name for tool in Toolbox.discovered_tools]
                 tool_names.sort()
                 tools = gr.CheckboxGroup(tool_names, label="Tools", info="Select tools to enable for the agent")
 
@@ -775,20 +850,6 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 show_label=False,
                 info="The first message to be sent to the user.",
             )
-
-        with gr.Tab("API Keys and contact info") as api_keys_tab:
-            outgoing_webhook_url = gr.Textbox(
-                label="Outgoing Webhook URL",
-                info="LeadMomentum webhook URL",
-                type="text",
-            )
-
-            openai_api_key = gr.Textbox(
-                label="OpenAI API Key",
-                info="The API key for OpenAI's API",
-                type="password",
-            )
-
 
     with gr.Accordion("Save and Load") as submit_accordion:
         with gr.Row() as submit_row:
@@ -814,22 +875,24 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 save_button = gr.Button(value="Save", variant="secondary")
                 preferences = [
                     icebreaker,
-                    chat_model,
+                    # chat_model,
                     system_message,
+                    llm,
                     # prompt_layer_tags,
                     max_iterations,
                     max_execution_time,
                     executor_temp,
                     profile_name,
-                    executor_model_type,
+                    # executor_model_type,
                     # executor_completion_model,
-                    openai_api_key,
+                    # openai_api_key,
                     # promptlayer_api_key,
                     client_id,
-                    outgoing_webhook_url,
+                    # outgoing_webhook_url,
                     record_tool_actions,
                     record_conversations,
-                    tools
+                    tools,
+                    llm_types
                 ]
 
                 load_button.click(load, inputs=[profile_name, client_id], outputs=preferences)
@@ -838,18 +901,19 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     save,
                     inputs=[
                         icebreaker,
-                        chat_model,
+                        # chat_model,
                         system_message,
+                        llm,
                         # prompt_layer_tags,
                         max_iterations,
                         max_execution_time,
                         executor_temp,
                         profile_name,
-                        executor_model_type,
-                        openai_api_key,
+                        # executor_model_type,
+                        # openai_api_key,
                         # promptlayer_api_key,
                         client_id,
-                        outgoing_webhook_url,
+                        # outgoing_webhook_url,
                         record_tool_actions,
                         record_conversations,
                         tools

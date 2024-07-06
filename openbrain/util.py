@@ -1,6 +1,8 @@
+import logging
 import os
 from dataclasses import dataclass, field, asdict
 from enum import Enum
+from io import StringIO
 
 import boto3
 from aws_lambda_powertools import (
@@ -19,10 +21,14 @@ load_dotenv()
 
 
 def get_logger() -> Logger:
-    logger = Logger(service=f"{__name__}")
+    _logger = Logger(service=f"{__name__}")
+    log_stream = StringIO()
+    string_handler = logging.StreamHandler(log_stream)
+    _logger.addHandler(string_handler)
+    # logging.basicConfig(stream=log_stream, level=logging.INFO, format='%(levelname)s :: %(message)s')
     # boto3.set_stream_logger()
     # boto3.set_stream_logger("botocore")
-    return logger
+    return _logger
 
 
 def get_metrics() -> Metrics:

@@ -31,6 +31,9 @@ class Toolbox:  # invoker
         "lls_scrub_phone_number": "OBToolLLSScrubPhoneNumberTool",
         "tester": "OBToolTester",
         "get_current_time": "OBToolGetCurrentTime",
+        "simple_calculator": "OBToolSimpleCalculator",
+
+        "do_nothing": "OBToolDoNothing"
 
     }
 

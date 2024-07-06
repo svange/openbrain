@@ -15,6 +15,24 @@ def incoming_agent_config(default_agent_config):
 
 
 class TestAgentConfig:
+
+    @pytest.mark.orm_tests
+    def test_default_agent_config(self):
+        default_agent_config = AgentConfig()
+        assert default_agent_config is not None
+        assert default_agent_config.profile_name == "default"
+        assert default_agent_config.client_id == "public"
+        default_agent_config.save()
+        agent_config = AgentConfig.get("default", "public")
+        assert agent_config is not None
+        assert agent_config.profile_name == "default"
+        assert agent_config.client_id == "public"
+
+        for attribute in default_agent_config.model_dump().keys():
+            assert hasattr(agent_config, attribute)
+            assert getattr(agent_config, attribute) == getattr(default_agent_config, attribute)
+
+
     # Test to validate fundamental operations on AgentConfig
     @pytest.mark.orm_tests
     def test_agent_config_operations(self, incoming_agent_config):
@@ -121,7 +139,7 @@ class TestAgentConfig:
         changed_fields = {
             "executor_max_iterations": 7,
             "executor_temp": 0.69,
-            "prompt_layer_tags": "banana",
+            # "prompt_layer_tags": "banana",
         }
         for key, value in changed_fields.items():
             setattr(modified_agent_config, key, value)

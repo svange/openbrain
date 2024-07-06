@@ -1,7 +1,10 @@
+import datetime
 import os
+import random
 from enum import Enum
 from typing import Optional, TypeAlias
 
+import pytz
 import ulid
 from pydantic import BaseModel, Field
 
@@ -16,83 +19,87 @@ from openbrain.util import config, Defaults
 
 TAgentConfig: TypeAlias = "AgentConfig"
 
+EXECUTOR_MODEL_TYPES = [
+    "function",
+    "chat",
+    "completion"]
+
+COMPLETION_LANGUAGE_MODELS = [
+    "davinci-002"
+    "babbage-002"
+]
+CHAT_LANGUAGE_MODELS = [
+    "gpt-4-32k",
+    "text-davinci-003",
+    "gpt-3.5-turbo-16k",
+]
+FUNCTION_LANGUAGE_MODELS = [
+    "gpt-4o",
+    "gpt-4o-2024-05-13",
+    "gpt-4-turbo",
+    "gpt-4-turbo-2024-04-09",
+    "gpt-4-turbo-preview",
+    "gpt-4-0125-preview",
+    "gpt-4-1106-preview",
+    "gpt-4",
+    "gpt-4-0613",
+    "gpt-3.5-turbo",
+    "gpt-3.5-turbo-0125",
+    "gpt-3.5-turbo-1106",
+    "gpt-3.5-turbo-0613"
+]
 
 class DefaultSettings(Enum):
     """Default settings for the agent config"""
-
-    # Tools
-    AVAILABLE_TOOLS = [
-                        "get_current_time",
-                        "tester",
-                        "leadmo_update_contact",
-                        "leadmo_stop_conversation",
-                        "leadmo_get_simple_calendar_appointment_slots",
-                        "leadmo_create_appointment",
-                        "leadmo_create_contact",
-                        "lls_scrub_phone_number",
-                        "leadmo_get_contact_info_from_context"
-                       ]
-
-    TOOLS = [
-        "get_current_time",
-    ]
-
-    # Default Settings
-    EMAIL_ADDRESS = "example@email.com"
+    CLIENT_ID = Defaults.DEFAULT_CLIENT_ID.value
     PROFILE_NAME = Defaults.DEFAULT_PROFILE_NAME.value
-    EXECUTOR_MODEL_TYPE = "function"
+
+    ICEBREAKER = """Ahoy! Ready to get started? What's up?"""
+    SYSTEM_MESSAGE = "You are a helpful assistant showing off your capabilities as an AI assistant. You speak like a stereotypical reddit user."
+
     EXECUTOR_TEMP = 0.0
     MAX_EXECUTION_TIME = 45
     MAX_ITERATIONS = 10
-    ENABLE_PROMPT_LAYER = False
-    EXECUTOR_CHAT_MODEL = "gpt-3.5-turbo-0613"
-    EXECUTOR_COMPLETION_MODEL = "text-davinci-003"
-    PROMPT_LAYER_TAGS = ""
-    OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
-    PROMPTLAYER_API_KEY = os.environ.get("PROMPTLAYER_API_KEY", "")
-    CLIENT_ID = Defaults.DEFAULT_CLIENT_ID.value
 
-    # Main Templates
-    ICEBREAKER = """Hi! Can I get help you get in touch with an agent?"""
-    CHAT_SALES_AGENT_SYSTEM_MESSAGE = """You are a highly skilled Software Developer with a keen eye for design
-    patterns. You always think about your suggestions step-by-step in order to come up with the best answer. You
-    criticize your own work and suggestions made to you. Your only loyalty is to the code. You are a Software
-    Developer and you are here to help."""
-    OUTGOING_WEBHOOK_URL = "default_outgoing_webhook_url"
+    LLM = "gpt-3.5-turbo-0613"
+    TOOLS = []
 
-    EXECUTOR_MODEL_TYPES = ["function", "chat", "completion"]
-    EXECUTOR_COMPLETION_MODELS = [
-        "gpt-4–0613",
-        "gpt-3.5-turbo-0613",
-        "gpt-4",
-        "gpt-4-32k",
-        "gpt-3.5-turbo",
-    ]
-    EXECUTOR_CHAT_MODELS = [
-        "gpt-4–0613",
-        "gpt-3.5-turbo-0613",
-        "gpt-4",
-        "gpt-4-32k",
-        "gpt-3.5-turbo",
-        "text-davinci-003",
-        "gpt-3.5-turbo-16k",
-    ]
     RECORD_TOOL_ACTIONS: bool = False
     RECORD_CONVERSATIONS: bool = False
 
 
 class AgentConfig(ORMModel, BaseModel):
     """Represents the values for the tunable parameters of the agent"""
+    @staticmethod
+    def dynamic_system_message():
+        greetings = [
+            "Welcome! Ready to explore?",
+            "Hello! How can I make your day better?",
+            "Hi there! Excited to assist you today."
+        ]
+
+        central_time_zone = pytz.timezone("America/Chicago")
+        time_of_day = datetime.datetime.now(central_time_zone).hour
+        if 5 <= time_of_day < 12:
+            time_specific_greeting = "Good morning! Let's start the day with a smile. 😊"
+        elif 12 <= time_of_day < 18:
+            time_specific_greeting = "Good afternoon! What can I do for you?"
+        else:
+            time_specific_greeting = "Good evening! Can I help you wind down or gear up for tomorrow?"
+
+        fun_facts = [
+            "Did you know? The first AI program was written in 1951.",
+            "Fun fact: AI can learn to play video games by itself.",
+            "Here's a tip: Break down big tasks into smaller, manageable ones for better productivity.",
+            "AI insight: Machine learning models can predict outcomes based on data from the past."
+        ]
+
+        return f"{random.choice(greetings)} {time_specific_greeting} {random.choice(fun_facts)}"
+
 
     class Meta:
         table_name = config.AGENT_CONFIG_TABLE_NAME
         region = config.AWS_REGION
-
-
-    # def get_enabled_tool_names(self):
-    #     """Return a list of enabled tool names"""
-    #     return [tool for tool, enabled in self.tools.items() if enabled]
-
 
     # Tracking
     profile_name: str = Field(
@@ -111,7 +118,7 @@ class AgentConfig(ORMModel, BaseModel):
 
     # Prompts
     system_message: str = Field(
-        default=DefaultSettings.CHAT_SALES_AGENT_SYSTEM_MESSAGE.value,
+        default=DefaultSettings.SYSTEM_MESSAGE.value,
         repr=False,
         description="The system message to send to the user when they first start chatting with the agent",
     )
@@ -120,19 +127,11 @@ class AgentConfig(ORMModel, BaseModel):
         description="The first message to send to the user when they first start chatting with the agent",
     )
 
-    # Tuning
-    executor_model_type: str = Field(
-        default=DefaultSettings.EXECUTOR_MODEL_TYPE.value,
-        description="The type of model to use for the executor",
+    llm: str = Field(
+        default=DefaultSettings.LLM.value,
+        description="The name of the OpenAI language model to use for the executor",
     )
-    executor_chat_model: str = Field(
-        default=DefaultSettings.EXECUTOR_CHAT_MODEL.value,
-        description="The chat model to use for the executor",
-    )
-    executor_completion_model: str = Field(
-        default=DefaultSettings.EXECUTOR_CHAT_MODEL.value,
-        description="The completion model to use for the executor",
-    )
+
     executor_max_iterations: int = Field(
         default=DefaultSettings.MAX_ITERATIONS.value,
         description="The maximum number of iterations to run the executor for",
@@ -147,33 +146,33 @@ class AgentConfig(ORMModel, BaseModel):
     )
 
     # Debugging
-    prompt_layer_tags: str = Field(
-        default=DefaultSettings.PROMPT_LAYER_TAGS.value,
-        repr=False,
-        description="The tags to use for the prompt layer",
-    )
+    # prompt_layer_tags: str = Field(
+    #     default=DefaultSettings.PROMPT_LAYER_TAGS.value,
+    #     repr=False,
+    #     description="The tags to use for the prompt layer",
+    # )
 
-    # API Keys
-    openai_api_key: Optional[str] = Field(
-        default=None,
-        repr=False,
-        description="OpenAI API key to use with this specific configuration",
-    )
-    promptlayer_api_key: Optional[str] = Field(
-        default=None,
-        repr=False,
-        description="PromptLayer API key to use with this specific configuration",
-    )
+    # # API Keys
+    # openai_api_key: Optional[str] = Field(
+    #     default=None,
+    #     repr=False,
+    #     description="OpenAI API key to use with this specific configuration",
+    # )
+    # promptlayer_api_key: Optional[str] = Field(
+    #     default=None,
+    #     repr=False,
+    #     description="PromptLayer API key to use with this specific configuration",
+    # )
 
     # Integrations
-    outgoing_webhook_url: Optional[str] = Field(
-        default=DefaultSettings.OUTGOING_WEBHOOK_URL.value,
-        description="The outgoing webhook url to send leads to",
-    )
-    email_address: Optional[str] = Field(
-        default=DefaultSettings.EMAIL_ADDRESS.value,
-        description="The email address associated with this client",
-    )
+    # outgoing_webhook_url: Optional[str] = Field(
+    #     default=DefaultSettings.OUTGOING_WEBHOOK_URL.value,
+    #     description="The outgoing webhook url to send leads to",
+    # )
+    # email_address: Optional[str] = Field(
+    #     default=DefaultSettings.EMAIL_ADDRESS.value,
+    #     description="The email address associated with this client",
+    # )
 
     tools: Optional[list[str]] = Field(
         # default=[tool: False for tool in DefaultSettings.AVAILABLE_TOOLS.value]
@@ -190,7 +189,6 @@ class AgentConfig(ORMModel, BaseModel):
         description="If true, records all conversations in S3 for analysis. This is not implemented in OpenBrain, "
                     "but should be implemented in your API.",
     )
-
 
     def save(self):
         """Save the agent config to the database"""

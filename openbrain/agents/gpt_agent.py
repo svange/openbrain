@@ -18,7 +18,8 @@ from langchain.schema import OutputParserException, SystemMessage
 from openbrain.agents.exceptions import (
     AgentError,
 )
-from openbrain.orm.model_agent_config import AgentConfig
+from openbrain.orm.model_agent_config import AgentConfig, FUNCTION_LANGUAGE_MODELS, CHAT_LANGUAGE_MODELS, \
+    COMPLETION_LANGUAGE_MODELS
 # from openbrain.orm.model_lead import Lead
 from openbrain.tools.toolbox import Toolbox
 from openbrain.util import get_logger
@@ -35,22 +36,15 @@ class GptAgent:
     def __init__(self, agent_config: AgentConfig, memory: BaseChatMemory = None, context: dict = None, session_id: str = None, **kwargs):
         # Initialize the agent config
         self.context = context or {}
-        # self.lead = lead
         self.agent_config = agent_config
         self.client_id = agent_config.client_id
 
         self.record_tool_actions = agent_config.record_tool_actions
         self.record_conversations = agent_config.record_conversations
 
-        # Initialize the agent
         self.toolbox = Toolbox(agent_config=self.agent_config, context=context, session_id=session_id, **kwargs)
-
         self.tools = self.toolbox.get_tools()
-        # self.tools = [ConnectWithAgentTool()]
-
         self._rw_memory: ConversationBufferMemory
-        # self.callbacks: List[BaseCallbackHandler] = [CallbackHandler(lead=self.lead)]
-        # self.shared_memory: ReadOnlySharedMemory
         try:
             self.agent = self._get_new_agent(
                 memory=memory,
@@ -68,7 +62,7 @@ class GptAgent:
         # Set up API keys
 
         # Model name
-        model_name = self.agent_config.executor_chat_model
+        model_name = self.agent_config.llm
 
         # Model Temperature
         model_temp = self.agent_config.executor_temp
@@ -82,7 +76,7 @@ class GptAgent:
         # System Message
         system_message = self.agent_config.system_message
 
-        openai.api_key = self.agent_config.openai_api_key
+        # openai.api_key = self.agent_config.openai_api_key
 
         llm = ChatOpenAI(
             temperature=model_temp,
@@ -95,14 +89,9 @@ class GptAgent:
         # Tools
         tools = self.tools
 
-        # Function agents are special, so we build them differently # TODO: Time to make a class...
         initial_message = f"Hi, this conversation is starting on {datetime.datetime.now().strftime('%A, %B %d, %Y %I:%M %p')}, and may span several days."
 
-        # if self.context:
-        #     readable_list = [k + ": " + v for k, v in self.context.items()]
-        #     initial_message = "To begin, here is some information about me: " + ", ".join(readable_list)
-
-        if self.agent_config.executor_model_type == "function":
+        if self.agent_config.llm in FUNCTION_LANGUAGE_MODELS:
             if memory is None:
                 memory = ConversationBufferMemory(memory_key="memory", return_messages=True)
                 memory.save_context({"input": initial_message}, {"output": self.agent_config.icebreaker})
@@ -126,9 +115,11 @@ class GptAgent:
                 max_execution_time=max_execution_time,
                 # callbacks=self.callbacks,
             )
-        else:
+        elif self.agent_config.llm in COMPLETION_LANGUAGE_MODELS + CHAT_LANGUAGE_MODELS:
             if memory is None:
                 memory = ConversationSummaryBufferMemory(memory_key="chat_history", return_messages=True, llm=llm)
+                memory.save_context({"input": initial_message}, {"output": self.agent_config.icebreaker})
+
             prompt = langchain.agents.ConversationalChatAgent.create_prompt(
                 tools=tools,
                 system_message=system_message,
