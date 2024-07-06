@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.11](https://github.com/svange/openbrain/compare/v2.16.10...v2.16.11) (2024-07-05)
+
+
+### Bug Fixes
+
+* recording infrastructure in place, and UI supports it. ([b11cf0c](https://github.com/svange/openbrain/commit/b11cf0ce6d6194fbb194a2517ffd82fdbea3fb75))
+
 ## [2.16.10](https://github.com/svange/openbrain/compare/v2.16.9...v2.16.10) (2024-07-05)
 
 
