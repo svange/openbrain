@@ -50,7 +50,7 @@ class Operator(Enum):
 
 class SimpleCalculatorAdaptor(BaseModel):
     """The schema for the tool's input."""
-    operation: Operator = Field(description=f"The operation to perform. One of: {Operator.__str__}")
+    operation: Operator = Field(description=f"""The operation to perform. One of: {' '.join(["'" + op.value + "'" for op in Operator])}""")
     left_value: Decimal = Field(default=0, description="left value of formula.")
     right_value: Optional[Decimal] = Field(default=0, description="right value of formula.")
 

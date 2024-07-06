@@ -657,8 +657,6 @@ def get_bottom_text(_session_state=None):
 
 
 def get_gpt_agent_logs():
-    if OB_PROVIDER_API_KEY:
-        return "Not yet implemented for remote mode"
 
     _logger = openbrain.util.get_logger()
     # Get the StringIO handler from this logger
@@ -704,14 +702,6 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
     with gr.Accordion("Help and information", elem_classes="accordion", visible=is_settings_set(), open=False) as help_box:
         with gr.Tab("Debugging Tools and Help") as help_tab:
             gr.Markdown(value=HELP_TEXT)
-
-        with gr.Tab("Agent Tool Descriptions") as tools_tab:
-            # gr.Markdown(value=get_available_tool_descriptions())
-            gr.Markdown(value="An illustration of how the AI sees the tools. These descriptions influence when and how the AI uses the tools.")
-            tools = Toolbox.discovered_tools
-            for tool in tools:
-                with gr.Tab(tool.name) as tool_tab:
-                    gr.Markdown(value=get_tool_description(tool.name))
 
         with gr.Tab("Gradio logs") as debug_tab:
             debug_text = gr.Textbox(
@@ -825,11 +815,21 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     info="Number of steps an agent can take for a response before termination.",
                 )
 
-            with gr.Row() as preferences_row3:
-                # tool_names = openbrain.orm.model_agent_config.DefaultSettings.AVAILABLE_TOOLS.value
-                tool_names = [tool.name for tool in Toolbox.discovered_tools]
-                tool_names.sort()
-                tools = gr.CheckboxGroup(tool_names, label="Tools", info="Select tools to enable for the agent")
+        with gr.Tab("Tools") as preferences_row3:
+
+            tool_names = [tool.name for tool in Toolbox.discovered_tools]
+            tool_names.sort()
+            tools = gr.CheckboxGroup(tool_names, label="Tools", info="Select tools to enable for the agent")
+
+
+            _tools = Toolbox.discovered_tools
+            for _tool in _tools:
+                with gr.Accordion() as tool_accordion:
+                    with gr.Tab(_tool.name):
+                        gr.Markdown(value=get_tool_description(_tool.name))
+
+
+            # tool_names = openbrain.orm.model_agent_config.DefaultSettings.AVAILABLE_TOOLS.value
 
         with gr.Tab("System Message") as long_text_row1:
             system_message = gr.TextArea(

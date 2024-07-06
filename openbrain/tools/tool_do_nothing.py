@@ -15,7 +15,7 @@ from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 
 logger = get_logger()
 
-TOOL_NAME = "get_do_nothing"
+TOOL_NAME = "do_nothing"
 
 
 # Utility classes and functions
