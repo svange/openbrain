@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.2](https://github.com/svange/openbrain/compare/v3.0.1...v3.0.2) (2024-07-06)
+
+
+### Bug Fixes
+
+* calculator bugs, test bugs, UI improvements. ([5721804](https://github.com/svange/openbrain/commit/57218046ac7966a129dea9e166907b6907494e32))
+
 ## [3.0.1](https://github.com/svange/openbrain/compare/v3.0.0...v3.0.1) (2024-07-06)
 
 
