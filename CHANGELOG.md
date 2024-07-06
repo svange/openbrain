@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/svange/openbrain/compare/v2.16.11...v3.0.0) (2024-07-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* ORM change in agent_config.
+
+### Features
+
+* further UI improvements, cleaned up agent_config model, added simple_calculator tool. ([9b71c47](https://github.com/svange/openbrain/commit/9b71c471920b151595440beb8358cd811439620e))
+
+
+### Bug Fixes
+
+* recording infrastructure in place, and UI supports it. ([574d84b](https://github.com/svange/openbrain/commit/574d84b736f7d2dd2f713638d74ed2e13a2c013b))
+
 ## [2.16.11](https://github.com/svange/openbrain/compare/v2.16.10...v2.16.11) (2024-07-05)
 
 
