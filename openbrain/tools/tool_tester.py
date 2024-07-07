@@ -54,8 +54,11 @@ class TesterTool(BaseTool):
     # callbacks = [on_tool_start, on_tool_error]
 
     def _run(self, *args, **kwargs) -> str:
-        # This seemingly does nothing. All the work is done in the callback handler. This function is here for
-        # the metadata.
+
+        logger.info(f"Running {TOOL_NAME} tool")
+        logger.debug(f"self.tool_input: {self.tool_input}")
+        logger.debug(f"Kwargs: {kwargs}")
+
         tool_input = json.loads(self.tool_input)
         context = json.loads(tool_input.get('context'))
         agent_config = tool_input.get("agent_config")
