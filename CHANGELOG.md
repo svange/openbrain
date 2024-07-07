@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.4](https://github.com/svange/openbrain/compare/v3.2.3...v3.2.4) (2024-07-07)
+
+
+### Bug Fixes
+
+* reset button was trying to decode context but failing ([63be7d5](https://github.com/svange/openbrain/commit/63be7d53322d2bcf5027166a0bc4cecc2796d4f9))
+
 ## [3.2.3](https://github.com/svange/openbrain/compare/v3.2.2...v3.2.3) (2024-07-07)
 
 
