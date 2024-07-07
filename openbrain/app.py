@@ -443,6 +443,12 @@ def load(_profile_name: str, _client_id: str):
         return f"Error: {e}"
 
     _tools = retrieved_agent_config.tools
+    supported_tools = openbrain.tools.Toolbox.discovered_tools
+
+    for _tool in _tools:
+        if _tool not in supported_tools:
+            _tools.remove(_tool)
+
     _agent_config = [
         str(retrieved_agent_config.icebreaker),
         # str(retrieved_agent_config.executor_chat_model),
@@ -932,14 +938,23 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
 
                 with gr.Accordion("Context", open=True) as context_accordian:
-                        context = gr.Textbox(
-                            label="Context",
-                            info="Additional context for tools",
-                            show_label=False,
-                            show_copy_button=True,
-                            lines=4,
-                            value=EXAMPLE_CONTEXT,
-                        )
+
+                    # leadmo_location_id
+                    # leadmo_contact_id
+                    # leadmo_calendar_id
+
+                    leadmo_location_id = gr.Textbox(label="leadmo_location_id")
+                    leadmo_contact_id = gr.Textbox(label="leadmo_contact_id")
+                    leadmo_calendar_id = gr.Textbox(label="leadmo_calendar_id")
+
+                    context = gr.JSON(
+                        label="Context",
+                        info="Additional context for tools",
+                        show_label=False,
+                        show_copy_button=True,
+                        lines=4,
+                        value=EXAMPLE_CONTEXT,
+                    )
 
                 chat_button = gr.Button("Chat", variant="primary")
                 reset_agent = gr.Button("Reset", variant="secondary")
@@ -983,7 +998,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
     # Refresh agent debug text
     reset_agent.click(
         get_aws_cloudwatch_logs,
-        inputs=[session_state, profile_name, client_id],
+        inputs=[session_state],
         outputs=[agent_debug_text]
     )
 
