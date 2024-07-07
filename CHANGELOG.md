@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.2](https://github.com/svange/openbrain/compare/v3.1.1...v3.1.2) (2024-07-07)
+
+
+### Bug Fixes
+
+* Updating tool_leadmo_update_contact_details age description. ([604fd58](https://github.com/svange/openbrain/commit/604fd58b3db4021dc8ae42d5f9bdfedae496ed34))
+
 ## [3.1.1](https://github.com/svange/openbrain/compare/v3.1.0...v3.1.1) (2024-07-07)
 
 
