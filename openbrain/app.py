@@ -959,7 +959,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     # context_medications = gr.Textbox(label="medications")
 
 
-                    context = gr.JSON(
+                    context = gr.Textbox(
                         label="Context",
                         info="Additional context for tools",
                         show_label=False,
@@ -1039,7 +1039,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
 
 def main():
-    if GRADIO_PASSWORD:
+    if GRADIO_PASSWORD or True:
         main_block.queue(max_size=20).launch(
             debug=True,
             share=False,
