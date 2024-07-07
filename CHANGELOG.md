@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.7](https://github.com/svange/openbrain/compare/v3.2.6...v3.2.7) (2024-07-07)
+
+
+### Bug Fixes
+
+* fix for convert_to_from_utc tool ([694f50e](https://github.com/svange/openbrain/commit/694f50e8bab65f117745e89f378c4ad4833f7f2d))
+
 ## [3.2.6](https://github.com/svange/openbrain/compare/v3.2.5...v3.2.6) (2024-07-07)
 
 
