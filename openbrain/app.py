@@ -310,7 +310,8 @@ def reset(
         _session_state,
         _context
 ):
-    context_dict = json.loads(_context)
+    # context_dict = json.loads(_context)
+    context_dict = _context
     chat_message = ChatMessage(
         client_id=_client_id,
         reset=True,
@@ -363,7 +364,8 @@ def reset(
     message = f"Please wait, fetching new agent..."
     chat_history.append([message, response_message])
 
-    original_context = json.loads(_context)
+    # original_context = json.loads(_context)
+    original_context = _context
 
     response_dict.update(original_context)
     new_context = json.dumps(response_dict, indent=4)
@@ -907,19 +909,13 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     save,
                     inputs=[
                         icebreaker,
-                        # chat_model,
                         system_message,
                         llm,
-                        # prompt_layer_tags,
                         max_iterations,
                         max_execution_time,
                         executor_temp,
                         profile_name,
-                        # executor_model_type,
-                        # openai_api_key,
-                        # promptlayer_api_key,
                         client_id,
-                        # outgoing_webhook_url,
                         record_tool_actions,
                         record_conversations,
                         tools
@@ -982,6 +978,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                     ],
                     outputs=[msg, chatbot, session_state, context],
                 )
+
 
     bottom_text = gr.Markdown(
         value=get_bottom_text(),
