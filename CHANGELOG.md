@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.2](https://github.com/svange/openbrain/compare/v3.2.1...v3.2.2) (2024-07-07)
+
+
+### Bug Fixes
+
+* minor ui bugfix ([dbe0f1b](https://github.com/svange/openbrain/commit/dbe0f1b400d40ebe551faa7313935d7af5f3d984))
+
 ## [3.2.1](https://github.com/svange/openbrain/compare/v3.2.0...v3.2.1) (2024-07-07)
 
 
