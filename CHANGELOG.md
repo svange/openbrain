@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.5](https://github.com/svange/openbrain/compare/v3.2.4...v3.2.5) (2024-07-07)
+
+
+### Bug Fixes
+
+* chat button was trying to decode context but failing ([cd1042c](https://github.com/svange/openbrain/commit/cd1042cbc396187b35c60d84537a0d3f720950f2))
+
 ## [3.2.4](https://github.com/svange/openbrain/compare/v3.2.3...v3.2.4) (2024-07-07)
 
 
