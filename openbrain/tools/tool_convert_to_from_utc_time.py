@@ -17,7 +17,7 @@ from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 
 logger = get_logger()
 
-TOOL_NAME = "convert_to_from_utc_time"
+TOOL_NAME = "convert_to_from_utc"
 
 
 # Utility classes and functions
