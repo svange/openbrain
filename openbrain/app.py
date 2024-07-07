@@ -39,6 +39,7 @@ EXAMPLE_CONTEXT = '''
     "locationId": "HbTkOpUVUXtrMQ5wkwxD",
     "calendarId": "asGgwlPqqu6s17W084uE",
     "contactId": "8LDRBvYKbVyhXymqMurF",
+    "random_word_from_agent_creation": "spatula",
     "firstName": "Deez",
     "lastName": "Nutzington",
     "name": "Your mother",
@@ -122,6 +123,14 @@ logger.info(("-" * 60) + "PROGRAM RUNNING" + ("-" * 60))
 
 print(log_stream.getvalue(), flush=True)
 
+
+tool_names = [tool.name for tool in Toolbox.discovered_tools if not tool.name.startswith("leadmo_")]
+leadmo_tool_names = [tool.name for tool in Toolbox.discovered_tools if tool.name.startswith("leadmo_")]
+
+tool_names.sort()
+leadmo_tool_names.sort()
+TOOL_NAMES = tool_names + leadmo_tool_names
+logger.info(f"Tool names: {TOOL_NAMES}")
 def get_debug_text(_debug_text = None) -> str:
     try:
         ret = log_stream.getvalue()
@@ -238,8 +247,8 @@ def get_aws_xray_trace_summaries(id=None):
 def chat(message, chat_history, _profile_name, _session_state, _client_id, _context):
     # Make a POST request to the chat endpoint
     session_id = _session_state["session_id"]
-    # context_dict = json.loads(_context)
-    context_dict = _context
+    context_dict = json.loads(_context)
+    # context_dict = _context
     chat_message = ChatMessage(agent_config=_profile_name, client_id=_client_id, reset=False, message=message,
                                session_id=session_id, **context_dict)
 
@@ -291,8 +300,8 @@ def chat(message, chat_history, _profile_name, _session_state, _client_id, _cont
         response_dict = response.json()
         response_dict.pop("message")
         response_dict.pop("session_id")
-        # original_context = json.loads(_context)
-        original_context = _context
+        original_context = json.loads(_context)
+        # original_context = _context
         response_dict.update(original_context)
         new_context = json.dumps(response_dict, indent=4, sort_keys=True)
         _session_state["last_response"] = response
@@ -312,8 +321,8 @@ def reset(
         _session_state,
         _context
 ):
-    # context_dict = json.loads(_context)
-    context_dict = _context
+    context_dict = json.loads(_context)
+    # context_dict = _context
     chat_message = ChatMessage(
         client_id=_client_id,
         reset=True,
@@ -366,8 +375,8 @@ def reset(
     message = f"Please wait, fetching new agent..."
     chat_history.append([message, response_message])
 
-    # original_context = json.loads(_context)
-    original_context = _context
+    original_context = json.loads(_context)
+    # original_context = _context
 
     response_dict.update(original_context)
     new_context = json.dumps(response_dict, indent=4)
@@ -393,17 +402,11 @@ def save(
         # _outgoing_webhook_url,
         _record_tool_actions,
         _record_conversations,
-
-        tools
+        _tools
 ):
     if _profile_name.strip() == "":
-        gr.Error("Personalization key can't be blank.")
+        gr.Error("This agent config must have a name (profile_name).")
         return []
-
-    if not _client_id:
-        client_id = DEFAULT_CLIENT_ID.value
-    else:
-        client_id = _client_id
 
     agent_config = AgentConfig(
         icebreaker=str(_icebreaker),
@@ -422,7 +425,7 @@ def save(
         # outgoing_webhook_url=str(_outgoing_webhook_url),
         record_tool_actions=str(_record_tool_actions),
         record_conversations=str(_record_conversations),
-        tools=tools,
+        tools=_tools,
     )
 
     # Upload the preferences to the DynamoDB database
@@ -447,7 +450,7 @@ def load(_profile_name: str, _client_id: str):
         return f"Error: {e}"
 
     _tools = retrieved_agent_config.tools
-    supported_tools = openbrain.tools.Toolbox.discovered_tools
+    supported_tools = TOOL_NAMES
 
     for _tool in _tools:
         if _tool not in supported_tools:
@@ -738,7 +741,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 interactive=False,
                 autoscroll=True,
                 show_copy_button=True,
-                every=3.0,
+                # every=3.0,
             )
             refresh_api_logs_button = gr.Button("Refresh", size="sm", variant="secondary")
             refresh_api_logs_button.click(get_aws_cloudwatch_logs, inputs=[session_state], outputs=[api_debug_text])
@@ -827,9 +830,8 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
         with gr.Tab("Tools") as preferences_row3:
 
-            tool_names = [tool.name for tool in Toolbox.discovered_tools]
-            tool_names.sort()
-            tools = gr.CheckboxGroup(tool_names, label="Tools", info="Select tools to enable for the agent")
+
+            tools = gr.CheckboxGroup(choices=TOOL_NAMES, value=[], label="Tools", info="Select tools to enable for the agent")
 
             gr.Markdown(value="Tool descriptions as presented to the AI. Confusing text here could lead to inconsistent use of tools.")
             _tools = Toolbox.discovered_tools
@@ -885,20 +887,13 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 save_button = gr.Button(value="Save", variant="secondary")
                 preferences = [
                     icebreaker,
-                    # chat_model,
                     system_message,
                     llm,
-                    # prompt_layer_tags,
                     max_iterations,
                     max_execution_time,
                     executor_temp,
                     profile_name,
-                    # executor_model_type,
-                    # executor_completion_model,
-                    # openai_api_key,
-                    # promptlayer_api_key,
                     client_id,
-                    # outgoing_webhook_url,
                     record_tool_actions,
                     record_conversations,
                     tools,
@@ -1039,7 +1034,7 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
 
 def main():
-    if GRADIO_PASSWORD or True:
+    if GRADIO_PASSWORD:
         main_block.queue(max_size=20).launch(
             debug=True,
             share=False,

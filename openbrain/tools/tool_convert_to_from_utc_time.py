@@ -24,7 +24,7 @@ TOOL_NAME = "convert_to_from_utc"
 class ConvertToFromUtcTimeAdaptor(BaseModel):
     """The schema for the tool's input."""
     time: str = Field(description="The time for your query in ISO format. Include the date for best results.")
-    timezone: str = Field(description="Convert to or from this timezone.")
+    timezone: str = Field(description="Convert to or from this timezone. Use pytz notation, example 'America/New_York', 'America/Los_Angeles.")
     to_utc: bool = Field(description="If true, converts the time to UTC. If false, converts from UTC to the provided timezone.")
 
 

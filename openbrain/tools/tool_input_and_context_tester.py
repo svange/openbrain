@@ -63,9 +63,13 @@ class TesterTool(BaseTool):
         context = json.loads(tool_input.get('context'))
         agent_config = tool_input.get("agent_config")
         session_id = tool_input.get("session_id")
-
-        random_word_from_agent_creation = context.get("random_word_from_agent_creation")
         random_word_from_conversation = kwargs.get("random_word_from_conversation")
+
+        try:
+            random_word_from_agent_creation = context.get("random_word_from_agent_creation")
+        except AttributeError as e:
+            double_unwrapped_context = json.loads(context)
+            random_word_from_agent_creation = double_unwrapped_context.get("random_word_from_agent_creation")
 
         event_detail_dict = {
             "random_word_from_agent_creation": random_word_from_agent_creation,
