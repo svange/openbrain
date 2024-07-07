@@ -618,14 +618,13 @@ def get_available_profile_names() -> list:
         return [item["profile_name"] for item in response["Items"] if item["client_id"] == DEFAULT_CLIENT_ID]
 
 
-def get_bottom_text(_session_state=None):
+def get_bottom_text(_session_state=None, _client_id=None, _profile_name=None):
     try:
         bucket_name = get_bucket_name()
-        dl_url = f"https://{bucket_name}.s3.amazonaws.com/conversations/"
         _session_id = _session_state.get("session_id").lower()
-        link_text = f"{dl_url}{_session_id}.json"
+        dl_url = f"https://{bucket_name}.s3.amazonaws.com/conversations/{_client_id}/{_profile_name}/{_session_id}.json"
         # link_text_md = f"| [Download Session Data]({link_text}) "
-        link_text_md = f"| [Download Session Data]({link_text}) "
+        link_text_md = f"| [Download Session Data]({dl_url}) "
 
         xray_trace_id = _session_state['last_response'].headers['x-amzn-trace-id']
         xray_trace_id = re.sub(r';.*', '', xray_trace_id.replace("Root=", ""))
@@ -977,14 +976,14 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
     # Refresh bottom text
     reset_agent.click(
         get_bottom_text,
-        inputs=[session_state],
+        inputs=[session_state, profile_name, client_id],
         outputs=[bottom_text]
     )
 
     # Refresh agent debug text
     reset_agent.click(
         get_aws_cloudwatch_logs,
-        inputs=[session_state],
+        inputs=[session_state, profile_name, client_id],
         outputs=[agent_debug_text]
     )
 
