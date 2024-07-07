@@ -496,9 +496,13 @@ def is_settings_set():
 
 
 def auth(username, password):
+    obfuscated_password = password[:2] + "*" * (len(password) - 4) if password else ""
+    logger.info(f"Authenticating user: {username} with password: {obfuscated_password}")
     if username in ["admin"]:
         if password == GRADIO_PASSWORD:
+            logger.info(f"User {username} authenticated successfully.")
             return True
+    logger.info(f"User {username} authentication failed.")
     return False
 
 
