@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.0](https://github.com/svange/openbrain/compare/v3.3.0...v3.4.0) (2024-07-07)
+
+
+### Features
+
+* debugging ui and utc tool and context tester tool ([4ae38a7](https://github.com/svange/openbrain/commit/4ae38a78b82ae46986a394c566bb662db6ef465c))
+
 ## [3.3.0](https://github.com/svange/openbrain/compare/v3.2.8...v3.3.0) (2024-07-07)
 
 
