@@ -138,10 +138,7 @@ def get_aws_cloudwatch_logs(_session_state=None):
     """Get cloudwatch logs for the agent we are interacting with"""
     logger.info("Getting AWS Cloudwatch logs...")
     if not OB_PROVIDER_API_KEY:
-        # api = f"{CHAT_ENDPOINT}" if OB_PROVIDER_API_KEY else "LOCAL"
-        return json.dumps({
-            "Incompatible mode": "Local mode does not support cloudwatch logs"
-        })
+        return "Local mode... no API to monitor."
     try:
         cloudwatch = boto3.client("logs")
         target_log_group_name_prefix = f'/aws/lambda/{INFRA_STACK_NAME}-APIHandler'
@@ -658,23 +655,27 @@ def get_bottom_text(_session_state=None):
 
 def get_gpt_agent_logs():
 
-    _logger = openbrain.util.get_logger()
     # Get the StringIO handler from this logger
-    handlers = _logger.handlers
-    for handler in handlers:
-        if isinstance(handler.stream, StringIO):
-            log_stream = handler.stream
-            break
-    else:
-        return "No logs found"
 
-    try:
-        ret = log_stream.getvalue()
-    except Exception as e:
-        ret = e.__str__()
+    # api = f"{CHAT_ENDPOINT}" if OB_PROVIDER_API_KEY else "LOCAL"
+    agent_logger = openbrain.util.get_logger()
 
-    return ret
+    # def get_logger() -> Logger:
+    #     _logger = Logger(service=f"{__name__}")
+    #     log_stream = StringIO()
+    #     string_handler = logging.StreamHandler(log_stream)
+    #     _logger.addHandler(string_handler)
+    #     # logging.basicConfig(stream=log_stream, level=logging.INFO, format='%(levelname)s :: %(message)s')
+    #     # boto3.set_stream_logger()
+    #     # boto3.set_stream_logger("botocore")
+    #     return _logger
 
+    for stream in agent_logger.handlers:
+        if isinstance(stream.stream, StringIO):
+            return stream.stream.getvalue().replace("\\n", "\n")
+    return json.dumps({
+        "Error": "Could not find StringIO Agent log streamer"
+    })
 
 
 def get_llm_choices(llm_types=None):
@@ -719,19 +720,19 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
             # refresh_button.click(get_debug_text, inputs=[debug_text], outputs=[debug_text])
 
         with gr.Tab("API Logs") as agent_debug_tab:
-            agent_debug_text = gr.JSON(
+            api_debug_text = gr.TextArea(
                 label="Debug",
                 # info="Debugging information",
                 show_label=False,
-                # lines=20,
+                lines=20,
                 value=get_aws_cloudwatch_logs,
-                # interactive=False,
-                # autoscroll=True,
-                # show_copy_button=True,
-                # every=3.0,
+                interactive=False,
+                autoscroll=True,
+                show_copy_button=True,
+                every=3.0,
             )
-            refresh_logs_button = gr.Button("Refresh", size="sm", variant="secondary")
-            refresh_logs_button.click(get_aws_cloudwatch_logs, inputs=[session_state], outputs=[agent_debug_text])
+            refresh_api_logs_button = gr.Button("Refresh", size="sm", variant="secondary")
+            refresh_api_logs_button.click(get_aws_cloudwatch_logs, inputs=[session_state], outputs=[api_debug_text])
 
         with gr.Tab("Agent Logs") as agent_logs:
             agent_debug_text = gr.Textbox(
@@ -745,8 +746,8 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
                 show_copy_button=True,
                 every=3.0,
             )
-            refresh_logs_button = gr.Button("Refresh", size="sm", variant="secondary")
-            refresh_logs_button.click(get_aws_cloudwatch_logs, inputs=[session_state], outputs=[agent_debug_text])
+            refresh_agent_logs_button = gr.Button("Refresh", size="sm", variant="secondary")
+            refresh_agent_logs_button.click(get_gpt_agent_logs, outputs=[agent_debug_text])
 
 
         with gr.Tab("Actions"):
