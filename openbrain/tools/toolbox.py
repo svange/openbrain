@@ -29,7 +29,8 @@ class Toolbox:  # invoker
         "leadmo_get_contact_info_from_context": "OBToolLeadmoGetContactInfoFromContext",
 
         "lls_scrub_phone_number": "OBToolLLSScrubPhoneNumberTool",
-        "tester": "OBToolTester",
+
+        "input_and_context_tester": "OBToolTester",
         "get_current_time": "OBToolGetCurrentTime",
         "simple_calculator": "OBToolSimpleCalculator",
 

@@ -31,7 +31,7 @@ def simple_tool_tester_agent_config(default_agent_config):
     profile_name = "tester"
     system_message = "You are being tested for your ability to use tools. Use the tools available to you when appropriate."
     ice_breaker = "Hello, I am a test agent."
-    tools = ["tester", "get_current_time", "simple_calculator"]
+    tools = ["input_and_context_tester", "get_current_time", "simple_calculator"]
     record_tool_actions = True
     record_conversations = True
 

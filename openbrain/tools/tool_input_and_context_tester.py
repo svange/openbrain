@@ -14,7 +14,7 @@ from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 
 logger = get_logger()
 
-TOOL_NAME = "tester"
+TOOL_NAME = "input_and_context_tester"
 
 
 # Utility classes and functions
