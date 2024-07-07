@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.1](https://github.com/svange/openbrain/compare/v3.4.0...v3.4.1) (2024-07-07)
+
+
+### Bug Fixes
+
+* debugging auth ([8ce1a2b](https://github.com/svange/openbrain/commit/8ce1a2bd6af2be8c80097aa850ea658b4e925339))
+
 ## [3.4.0](https://github.com/svange/openbrain/compare/v3.3.0...v3.4.0) (2024-07-07)
 
 
