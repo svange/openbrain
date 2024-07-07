@@ -34,8 +34,8 @@ class Toolbox:  # invoker
         "get_current_time": "OBToolGetCurrentTime",
         "simple_calculator": "OBToolSimpleCalculator",
 
-        "do_nothing": "OBToolDoNothing"
-
+        "do_nothing": "OBToolDoNothing",
+        "event_mesh_tester": "OBToolEventMeshTester"
     }
 
     available_tools: dict[str:OBTool] = {}

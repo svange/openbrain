@@ -31,7 +31,7 @@ def simple_tool_tester_agent_config(default_agent_config):
     profile_name = "tester"
     system_message = "You are being tested for your ability to use tools. Use the tools available to you when appropriate."
     ice_breaker = "Hello, I am a test agent."
-    tools = ["input_and_context_tester", "get_current_time", "simple_calculator"]
+    tools = ["input_and_context_tester", "get_current_time", "simple_calculator", "event_mesh_tester"]
     record_tool_actions = True
     record_conversations = True
 
@@ -184,6 +184,15 @@ class TestAgentTools:
         assert response is not None
         current_year = datetime.datetime.now().year
         assert str(current_year) in response.casefold()
+
+    @pytest.mark.tools
+    def test_event_mesh_tester_tool(self, simple_tool_tester_agent_config):
+        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context)
+        response = agent.handle_user_message("Send an event to the event mesh and, if succesfull, respond with the word 'success' in your response and the event ID. If sending the event fails, don't use the word 'success' in your response")
+        assert response is not None
+        assert str('success') in response.casefold()
 
     @pytest.mark.tools
     def test_simple_calculator_tool(self, simple_tool_tester_agent_config):
