@@ -628,7 +628,7 @@ def get_bottom_text(_session_state=None, _client_id=None, _profile_name=None):
     try:
         bucket_name = get_bucket_name()
         _session_id = _session_state.get("session_id").lower()
-        dl_url = f"https://{bucket_name}.s3.amazonaws.com/conversations/{_client_id}/{_profile_name}/{_session_id}.json"
+        dl_url = f"https://{bucket_name}.s3.amazonaws.com/conversations/{_profile_name}/{_client_id}/{_session_id}.json"
         # link_text_md = f"| [Download Session Data]({link_text}) "
         link_text_md = f"| [Download Session Data]({dl_url}) "
 
