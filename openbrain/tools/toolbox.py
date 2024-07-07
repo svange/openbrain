@@ -33,6 +33,7 @@ class Toolbox:  # invoker
         "input_and_context_tester": "OBToolTester",
         "get_current_time": "OBToolGetCurrentTime",
         "simple_calculator": "OBToolSimpleCalculator",
+        "convert_to_from_utc": "OBToolConvertToFromUtc",
 
         "do_nothing": "OBToolDoNothing",
         "event_mesh_tester": "OBToolEventMeshTester"

@@ -11,6 +11,7 @@ from decimal import Decimal
 
 import boto3
 import pytest
+import pytz
 from langchain.callbacks.base import BaseCallbackHandler
 
 # import openbrain.tools.tool_send_lead_to_crm
@@ -184,6 +185,30 @@ class TestAgentTools:
         assert response is not None
         current_year = datetime.datetime.now().year
         assert str(current_year) in response.casefold()
+
+    @pytest.mark.tools
+    def test_convert_to_from_utc(self, simple_tool_tester_agent_config):
+        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context)
+        timezone = "US/Pacific"
+        pacific_tz = pytz.timezone(timezone)
+        pacific_time_now = datetime.datetime.now(pacific_tz)
+        pacific_time_hour = pacific_time_now.hour
+
+        utc = pytz.utc
+        utc_time_now = datetime.datetime.now(utc)
+        utc_time_hour = utc_time_now.hour
+
+        response = agent.handle_user_message(f"Convert {pacific_time_now} (US Pacific) to UTC and respond with only the hour")
+        assert response is not None
+        assert str(utc_time_hour) in response.casefold()
+
+
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context)
+        response = agent.handle_user_message(f"Convert {utc_time_now} from UTC to US Pacific time")
+
+        assert str(pacific_time_hour) in response.casefold()
 
     @pytest.mark.tools
     def test_event_mesh_tester_tool(self, simple_tool_tester_agent_config):
