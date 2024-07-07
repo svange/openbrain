@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.0](https://github.com/svange/openbrain/compare/v3.0.2...v3.1.0) (2024-07-07)
+
+
+### Features
+
+* agent logs for local agents in gradio ([6d0a041](https://github.com/svange/openbrain/commit/6d0a041693890c13de259126ef059f9ec3d65a31))
+* debugging ui ([3a2de8f](https://github.com/svange/openbrain/commit/3a2de8f572efb404f5482c5173127432d726f9fc))
+
 ## [3.0.2](https://github.com/svange/openbrain/compare/v3.0.1...v3.0.2) (2024-07-06)
 
 
