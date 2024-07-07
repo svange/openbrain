@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.1](https://github.com/svange/openbrain/compare/v3.2.0...v3.2.1) (2024-07-07)
+
+
+### Bug Fixes
+
+* Adding simple event mesh testing tool ([5148eca](https://github.com/svange/openbrain/commit/5148eca497bbac163e1e1d090e67c23a9b65b775))
+
 ## [3.2.0](https://github.com/svange/openbrain/compare/v3.1.2...v3.2.0) (2024-07-07)
 
 
