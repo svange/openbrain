@@ -238,7 +238,8 @@ def get_aws_xray_trace_summaries(id=None):
 def chat(message, chat_history, _profile_name, _session_state, _client_id, _context):
     # Make a POST request to the chat endpoint
     session_id = _session_state["session_id"]
-    context_dict = json.loads(_context)
+    # context_dict = json.loads(_context)
+    context_dict = _context
     chat_message = ChatMessage(agent_config=_profile_name, client_id=_client_id, reset=False, message=message,
                                session_id=session_id, **context_dict)
 
@@ -290,7 +291,8 @@ def chat(message, chat_history, _profile_name, _session_state, _client_id, _cont
         response_dict = response.json()
         response_dict.pop("message")
         response_dict.pop("session_id")
-        original_context = json.loads(_context)
+        # original_context = json.loads(_context)
+        original_context = _context
         response_dict.update(original_context)
         new_context = json.dumps(response_dict, indent=4, sort_keys=True)
         _session_state["last_response"] = response
@@ -935,13 +937,27 @@ with gr.Blocks(theme="JohnSmith9982/small_and_pretty") as main_block:
 
                 with gr.Accordion("Context", open=True) as context_accordian:
 
-                    # leadmo_location_id
-                    # leadmo_contact_id
-                    # leadmo_calendar_id
 
-                    leadmo_location_id = gr.Textbox(label="leadmo_location_id")
-                    leadmo_contact_id = gr.Textbox(label="leadmo_contact_id")
-                    leadmo_calendar_id = gr.Textbox(label="leadmo_calendar_id")
+
+                    # leadmo_location_id = gr.Textbox(label="leadmo_location_id")
+                    # leadmo_contact_id = gr.Textbox(label="leadmo_contact_id")
+                    # leadmo_calendar_id = gr.Textbox(label="leadmo_calendar_id")
+                    #
+                    # context_firstName = gr.Textbox(label="firstName")
+                    # context_lastName = gr.Textbox(label="lastName")
+                    # context_name = gr.Textbox(label="name")
+                    # context_dateOfBirth = gr.Textbox(label="dateOfBirth")
+                    # context_phone = gr.Textbox(label="phone")
+                    # context_email = gr.Textbox(label="email")
+                    # context_address1 = gr.Textbox(label="address1")
+                    # context_city = gr.Textbox(label="city")
+                    # context_state = gr.Textbox(label="state")
+                    # context_country = gr.Textbox(label="country")
+                    # context_postalCode = gr.Textbox(label="postalCode")
+                    # context_companyName = gr.Textbox(label="companyName")
+                    # context_website = gr.Textbox(label="website")
+                    # context_medications = gr.Textbox(label="medications")
+
 
                     context = gr.JSON(
                         label="Context",
