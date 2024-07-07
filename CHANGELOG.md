@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.1](https://github.com/svange/openbrain/compare/v3.1.0...v3.1.1) (2024-07-07)
+
+
+### Bug Fixes
+
+* changed recording retrieval for new s3 keys that include client_id and profile_name. ([e7720d6](https://github.com/svange/openbrain/commit/e7720d66e1daf8b844567ea2c6242d7e55d36e40))
+
 ## [3.1.0](https://github.com/svange/openbrain/compare/v3.0.2...v3.1.0) (2024-07-07)
 
 
