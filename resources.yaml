@@ -183,7 +183,6 @@ Outputs:
         Export:
           Name: !Sub '${AWS::StackName}-ObSessionTableName'
 
-
     ObAgentConfigTableName:
         Description: ObAgentConfigTable
         Value: !Ref ObAgentConfigTable
