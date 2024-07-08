@@ -180,19 +180,30 @@ Outputs:
     ObSessionTableName:
         Description: ObSessionTable
         Value: !Ref ObSessionTable
+        Export:
+          Name: !Sub '${AWS::StackName}-ObSessionTableName'
+
+
     ObAgentConfigTableName:
         Description: ObAgentConfigTable
         Value: !Ref ObAgentConfigTable
-#    ObLeadTableName:
-#        Description: ObLeadTable
-#        Value: !Ref ObLeadTable
+        Export:
+            Name: !Sub '${AWS::StackName}-ObAgentConfigTableName'
+
     ObActionTableName:
         Description: ObEventActionTable
         Value: !Ref ObEventActionTable
+        Export:
+            Name: !Sub '${AWS::StackName}-ObActionTableName'
+
     CommonAccessPolicyArn:
         Description: CommonAccessPolicyArn
         Value: !Ref CommonAccessPolicy
+        Export:
+            Name: !Sub '${AWS::StackName}-CommonAccessPolicyArn'
 
     ObBucketName:
         Description: ObBucketName
         Value: !Ref ObBucket
+        Export:
+            Name: !Sub '${AWS::StackName}-ObBucketName'

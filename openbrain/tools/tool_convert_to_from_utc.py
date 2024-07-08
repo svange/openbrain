@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 import json
-from typing import Any, Optional
+from typing import Any
 
 import pytz
 from langchain.tools.base import BaseTool
