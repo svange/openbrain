@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.2](https://github.com/svange/openbrain/compare/v3.4.1...v3.4.2) (2024-07-08)
+
+
+### Bug Fixes
+
+* exposing outputs in resource.yaml ([81dbb3a](https://github.com/svange/openbrain/commit/81dbb3a667ec0a5365a2eebb359060338b772c29))
+
 ## [3.4.1](https://github.com/svange/openbrain/compare/v3.4.0...v3.4.1) (2024-07-07)
 
 
