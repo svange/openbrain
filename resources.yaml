@@ -260,8 +260,10 @@ Outputs:
       Export:
         Name: !Sub '${AWS::StackName}-ObActionTableArn'
 
-#    ObActionTableArn:
-#      Description: ObActionTableArn
-#      Value: !GetAtt ObEventActionTable.Arn
-#      Export:
-#          Name: !Sub '${AWS::StackName}-ObActionTableArn'
+
+
+    ObBucketArn:
+        Description: ObBucketArn
+        Value: !GetAtt ObBucket.Arn
+        Export:
+            Name: !Sub '${AWS::StackName}-ObBucketArn'
