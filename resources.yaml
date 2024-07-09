@@ -234,14 +234,14 @@ Outputs:
 
 
 
-    ObActionTable:
+    ObActionTableName:
       Description: ObEventActionTable
       Value: !Ref ObEventActionTable
       Export:
         Name: !Sub '${AWS::StackName}-ObEventActionTableName'
 
 
-    ObEventActionTable:
+    ObEventActionTableName:
         Description: ObEventActionTable
         Value: !Ref ObEventActionTable
         Export:
