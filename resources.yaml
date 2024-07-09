@@ -217,11 +217,11 @@ Outputs:
 
 
 
-    ObBucketArn:
-        Description: ObBucketName
-        Value: !Ref ObBucket.Arn
-        Export:
-              Name: !Sub '${AWS::StackName}-ObBucketArn'
+#    ObBucketArn:
+#        Description: ObBucketName
+#        Value: !Ref ObBucket.Arn
+#        Export:
+#              Name: !Sub '${AWS::StackName}-ObBucketArn'
 
     ObSessionTableArn:
         Description: ObSessionTableArn
