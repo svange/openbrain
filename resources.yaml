@@ -177,11 +177,11 @@ Resources:
 #
 #
 Outputs:
-  ObActionTable:
-    Description: ObActionTable
-    Value: !Ref ObActionTable
-    Export:
-      Name: !Sub '${AWS::StackName}-ObActionTableName'
+    ObActionTable:
+      Description: ObActionTable
+      Value: !Ref ObActionTable
+      Export:
+        Name: !Sub '${AWS::StackName}-ObActionTableName'
 
 
     ObEventActionTable:
