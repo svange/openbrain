@@ -11,7 +11,7 @@ homepage = "https://github.com/svange/openbrain"
 [tool.poetry.scripts]
 ob = "openbrain.cli:cli"
 ob-chat = "openbrain.cli:cli_chat"
-ob-tuner = "openbrain.app:main"
+#ob-tuner = "openbrain.app:main"
 ob-env = "openbrain.cli:cli_env"
 
 [tool.poetry.plugins."commitizen.plugin"] # completely untested
