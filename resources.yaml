@@ -177,18 +177,6 @@ Resources:
 #
 #
 Outputs:
-    ObActionTable:
-      Description: ObEventActionTable
-      Value: !Ref ObEventActionTable
-      Export:
-        Name: !Sub '${AWS::StackName}-ObEventActionTableName'
-
-
-    ObEventActionTable:
-        Description: ObEventActionTable
-        Value: !Ref ObEventActionTable
-        Export:
-            Name: !Sub '${AWS::StackName}-ObEventActionTableName'
 
     ObSessionTableName:
         Description: ObSessionTable
@@ -244,6 +232,22 @@ Outputs:
 
 
 
+
+
+    ObActionTable:
+      Description: ObEventActionTable
+      Value: !Ref ObEventActionTable
+      Export:
+        Name: !Sub '${AWS::StackName}-ObEventActionTableName'
+
+
+    ObEventActionTable:
+        Description: ObEventActionTable
+        Value: !Ref ObEventActionTable
+        Export:
+            Name: !Sub '${AWS::StackName}-ObActionTableName'
+
+
     ObEventActionTableArn:
         Description: ObEventActionTable
         Value: !GetAtt ObEventActionTable.Arn
@@ -254,7 +258,7 @@ Outputs:
       Description: ObEventActionTable
       Value: !GetAtt ObEventActionTable.Arn
       Export:
-        Name: !Sub '${AWS::StackName}-ObEventActionTableArn'
+        Name: !Sub '${AWS::StackName}-ObActionTableArn'
 
 #    ObActionTableArn:
 #      Description: ObActionTableArn
