@@ -177,6 +177,13 @@ Resources:
 #
 #
 Outputs:
+  ObActionTable:
+    Description: ObActionTable
+    Value: !Ref ObActionTable
+    Export:
+      Name: !Sub '${AWS::StackName}-ObActionTableName'
+
+
     ObEventActionTable:
         Description: ObEventActionTable
         Value: !Ref ObEventActionTable
@@ -241,6 +248,12 @@ Outputs:
         Value: !GetAtt ObEventActionTable.Arn
         Export:
             Name: !Sub '${AWS::StackName}-ObEventActionTableArn'
+
+    ObActionTableArn:
+      Description: ObActionTable
+      Value: !GetAtt ObActionTable.Arn
+      Export:
+        Name: !Sub '${AWS::StackName}-ObActionTableArn'
 
 #    ObActionTableArn:
 #      Description: ObActionTableArn
