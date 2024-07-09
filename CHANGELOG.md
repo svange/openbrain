@@ -1,137 +1,367 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v3.5.0-dev.1 (2024-07-09)
+
+### Feature
+
+* feat: Cognito integrated UI ([`cbb2c9e`](https://github.com/svange/openbrain/commit/cbb2c9eeaa3e5fa9daff711177c5de9ff15d35e2))
+
+### Unknown
+
+* fixz: adding outputs to resources.yaml ([`f7ad14e`](https://github.com/svange/openbrain/commit/f7ad14e19f9f0174644520ac3dbdb7eacbb797fa))
+
+* fixz: adding outputs to resources.yaml ([`7da9830`](https://github.com/svange/openbrain/commit/7da983020670dd9bd96f62ee15d938fe839b1904))
+
+* fixz: adding outputs to resources.yaml ([`6a3d8fd`](https://github.com/svange/openbrain/commit/6a3d8fd7d2a3adb4a5d433feb9a50b7a5a499b66))
+
+* fixz: adding outputs to resources.yaml ([`a4f8cb9`](https://github.com/svange/openbrain/commit/a4f8cb9d94cb9e9d44cfb07d4ad2a3b453635c32))
+
+* fixz: adding outputs to resources.yaml ([`7f1c1b2`](https://github.com/svange/openbrain/commit/7f1c1b2cb0d339afce5ceabb80431410f934461d))
+
+* fixz: adding outputs to resources.yaml ([`157537b`](https://github.com/svange/openbrain/commit/157537b2c6f1895d8f6d7aa5d250c9509e04f727))
+
+* fixz: adding outputs to resources.yaml ([`f927918`](https://github.com/svange/openbrain/commit/f927918f78826a0035ddaa47f79d74a92a91a908))
+
+* fixz: adding outputs to resources.yaml ([`b7eb610`](https://github.com/svange/openbrain/commit/b7eb610afd82f0db8a90b1d47d3c67963fd2b33f))
+
+* fixz: adding outputs to resources.yaml ([`ee4790d`](https://github.com/svange/openbrain/commit/ee4790da0a13417a8f4ad36cf0fe1170a0defeb1))
+
+* fixz: adding outputs to resources.yaml ([`a2e6a71`](https://github.com/svange/openbrain/commit/a2e6a71c20f410923a8cac86c751b262f76f1466))
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`cd41c2d`](https://github.com/svange/openbrain/commit/cd41c2df0270058453a3b6c42f420ff0b7b38ddc))
+
+## v3.4.2 (2024-07-08)
+
+### Chore
+
+* chore(release): 3.4.2 [skip ci]
 
 ## [3.4.2](https://github.com/svange/openbrain/compare/v3.4.1...v3.4.2) (2024-07-08)
 
-
 ### Bug Fixes
 
-* exposing outputs in resource.yaml ([81dbb3a](https://github.com/svange/openbrain/commit/81dbb3a667ec0a5365a2eebb359060338b772c29))
+* exposing outputs in resource.yaml ([81dbb3a](https://github.com/svange/openbrain/commit/81dbb3a667ec0a5365a2eebb359060338b772c29)) ([`563859a`](https://github.com/svange/openbrain/commit/563859a297874d3a88e476fd63acf019e718c1e0))
+
+### Fix
+
+* fix: exposing outputs in resource.yaml ([`81dbb3a`](https://github.com/svange/openbrain/commit/81dbb3a667ec0a5365a2eebb359060338b772c29))
+
+### Unknown
+
+* fixz: bump commit ([`a2faf61`](https://github.com/svange/openbrain/commit/a2faf61e4f8756e77dd1e82358009b0fbc342dfc))
+
+## v3.4.1 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.4.1 [skip ci]
 
 ## [3.4.1](https://github.com/svange/openbrain/compare/v3.4.0...v3.4.1) (2024-07-07)
 
-
 ### Bug Fixes
 
-* debugging auth ([8ce1a2b](https://github.com/svange/openbrain/commit/8ce1a2bd6af2be8c80097aa850ea658b4e925339))
+* debugging auth ([8ce1a2b](https://github.com/svange/openbrain/commit/8ce1a2bd6af2be8c80097aa850ea658b4e925339)) ([`4d81541`](https://github.com/svange/openbrain/commit/4d8154131e0d3913e7135b2e18d768e70d5d21e7))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`516ff8b`](https://github.com/svange/openbrain/commit/516ff8b7f497046770b3233a5e14562149ae9280))
+
+## v3.4.0 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.4.0 [skip ci]
 
 ## [3.4.0](https://github.com/svange/openbrain/compare/v3.3.0...v3.4.0) (2024-07-07)
 
-
 ### Features
 
-* debugging ui and utc tool and context tester tool ([4ae38a7](https://github.com/svange/openbrain/commit/4ae38a78b82ae46986a394c566bb662db6ef465c))
+* debugging ui and utc tool and context tester tool ([4ae38a7](https://github.com/svange/openbrain/commit/4ae38a78b82ae46986a394c566bb662db6ef465c)) ([`4b2e954`](https://github.com/svange/openbrain/commit/4b2e9547330e459735e594d553333acf0f35fe53))
+
+### Fix
+
+* fix: debugging auth ([`8ce1a2b`](https://github.com/svange/openbrain/commit/8ce1a2bd6af2be8c80097aa850ea658b4e925339))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`d50eac4`](https://github.com/svange/openbrain/commit/d50eac405c8639632e9a99a3fa02b9dab3949538))
+
+## v3.3.0 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.3.0 [skip ci]
 
 ## [3.3.0](https://github.com/svange/openbrain/compare/v3.2.8...v3.3.0) (2024-07-07)
 
-
 ### Features
 
-* debugging ui ([d927256](https://github.com/svange/openbrain/commit/d92725654204eee8271f281632f4455c9292f01b))
+* debugging ui ([d927256](https://github.com/svange/openbrain/commit/d92725654204eee8271f281632f4455c9292f01b)) ([`28c7c37`](https://github.com/svange/openbrain/commit/28c7c371f438822d2f7dab7ac020e5dc9647acff))
+
+### Feature
+
+* feat: debugging ui and utc tool and context tester tool ([`4ae38a7`](https://github.com/svange/openbrain/commit/4ae38a78b82ae46986a394c566bb662db6ef465c))
+
+* feat: debugging ui ([`d927256`](https://github.com/svange/openbrain/commit/d92725654204eee8271f281632f4455c9292f01b))
+
+## v3.2.8 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.2.8 [skip ci]
 
 ## [3.2.8](https://github.com/svange/openbrain/compare/v3.2.7...v3.2.8) (2024-07-07)
 
-
 ### Bug Fixes
 
-* fix for convert_to_from_utc tool ([08ee49b](https://github.com/svange/openbrain/commit/08ee49b02993572d21e66f444df1ec36471bdd54))
+* fix for convert_to_from_utc tool ([08ee49b](https://github.com/svange/openbrain/commit/08ee49b02993572d21e66f444df1ec36471bdd54)) ([`51e3af6`](https://github.com/svange/openbrain/commit/51e3af678906096684d0dc036f7d6480ea3dfd6b))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`540041b`](https://github.com/svange/openbrain/commit/540041bc824ddf91221384b4c44b3eaf36856afb))
+
+## v3.2.7 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.2.7 [skip ci]
 
 ## [3.2.7](https://github.com/svange/openbrain/compare/v3.2.6...v3.2.7) (2024-07-07)
 
-
 ### Bug Fixes
 
-* fix for convert_to_from_utc tool ([694f50e](https://github.com/svange/openbrain/commit/694f50e8bab65f117745e89f378c4ad4833f7f2d))
+* fix for convert_to_from_utc tool ([694f50e](https://github.com/svange/openbrain/commit/694f50e8bab65f117745e89f378c4ad4833f7f2d)) ([`f9b2c65`](https://github.com/svange/openbrain/commit/f9b2c656d261698763ba87c992d440e1fad3b11b))
+
+### Fix
+
+* fix: fix for convert_to_from_utc tool ([`08ee49b`](https://github.com/svange/openbrain/commit/08ee49b02993572d21e66f444df1ec36471bdd54))
+
+* fix: fix for convert_to_from_utc tool ([`694f50e`](https://github.com/svange/openbrain/commit/694f50e8bab65f117745e89f378c4ad4833f7f2d))
+
+## v3.2.6 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.2.6 [skip ci]
 
 ## [3.2.6](https://github.com/svange/openbrain/compare/v3.2.5...v3.2.6) (2024-07-07)
 
-
 ### Bug Fixes
 
-* added convert_to_from_utc tool ([f48285d](https://github.com/svange/openbrain/commit/f48285d515f84d0110e0ad9af54fb9b49ec6c207))
+* added convert_to_from_utc tool ([f48285d](https://github.com/svange/openbrain/commit/f48285d515f84d0110e0ad9af54fb9b49ec6c207)) ([`7cdbacd`](https://github.com/svange/openbrain/commit/7cdbacd655149a7fc6b39c8dc4978a072bdcd2c5))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`7cdd7ac`](https://github.com/svange/openbrain/commit/7cdd7acae4d41a29624aaf91f1373607c989f792))
+
+## v3.2.5 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.2.5 [skip ci]
 
 ## [3.2.5](https://github.com/svange/openbrain/compare/v3.2.4...v3.2.5) (2024-07-07)
 
-
 ### Bug Fixes
 
-* chat button was trying to decode context but failing ([cd1042c](https://github.com/svange/openbrain/commit/cd1042cbc396187b35c60d84537a0d3f720950f2))
+* chat button was trying to decode context but failing ([cd1042c](https://github.com/svange/openbrain/commit/cd1042cbc396187b35c60d84537a0d3f720950f2)) ([`185d69d`](https://github.com/svange/openbrain/commit/185d69d29bb5369fd07238d7566c63ac1ff27c00))
+
+### Fix
+
+* fix: added convert_to_from_utc tool ([`f48285d`](https://github.com/svange/openbrain/commit/f48285d515f84d0110e0ad9af54fb9b49ec6c207))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`7ac0125`](https://github.com/svange/openbrain/commit/7ac0125c760bb738aec26be0564dea57091a7d89))
+
+## v3.2.4 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.2.4 [skip ci]
 
 ## [3.2.4](https://github.com/svange/openbrain/compare/v3.2.3...v3.2.4) (2024-07-07)
 
-
 ### Bug Fixes
 
-* reset button was trying to decode context but failing ([63be7d5](https://github.com/svange/openbrain/commit/63be7d53322d2bcf5027166a0bc4cecc2796d4f9))
+* reset button was trying to decode context but failing ([63be7d5](https://github.com/svange/openbrain/commit/63be7d53322d2bcf5027166a0bc4cecc2796d4f9)) ([`97d27eb`](https://github.com/svange/openbrain/commit/97d27eb18324e72fdf7979656864cbcab2783c6d))
+
+### Fix
+
+* fix: chat button was trying to decode context but failing ([`cd1042c`](https://github.com/svange/openbrain/commit/cd1042cbc396187b35c60d84537a0d3f720950f2))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`9f059c2`](https://github.com/svange/openbrain/commit/9f059c21f8c8ada81b569810d783e075dfe3b6c2))
+
+## v3.2.3 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.2.3 [skip ci]
 
 ## [3.2.3](https://github.com/svange/openbrain/compare/v3.2.2...v3.2.3) (2024-07-07)
 
-
 ### Bug Fixes
 
-* download link in UI ([a80823c](https://github.com/svange/openbrain/commit/a80823cb98f93430243e28bcba3ad005e64a6a7d))
+* download link in UI ([a80823c](https://github.com/svange/openbrain/commit/a80823cb98f93430243e28bcba3ad005e64a6a7d)) ([`c4d2d7b`](https://github.com/svange/openbrain/commit/c4d2d7bbd6fab598485cc774c96a2c6f60a91c6f))
+
+### Fix
+
+* fix: reset button was trying to decode context but failing ([`63be7d5`](https://github.com/svange/openbrain/commit/63be7d53322d2bcf5027166a0bc4cecc2796d4f9))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`ff75f64`](https://github.com/svange/openbrain/commit/ff75f64d7fc734ac47afdfe286621b944063ae51))
+
+## v3.2.2 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.2.2 [skip ci]
 
 ## [3.2.2](https://github.com/svange/openbrain/compare/v3.2.1...v3.2.2) (2024-07-07)
 
-
 ### Bug Fixes
 
-* minor ui bugfix ([dbe0f1b](https://github.com/svange/openbrain/commit/dbe0f1b400d40ebe551faa7313935d7af5f3d984))
+* minor ui bugfix ([dbe0f1b](https://github.com/svange/openbrain/commit/dbe0f1b400d40ebe551faa7313935d7af5f3d984)) ([`89ab532`](https://github.com/svange/openbrain/commit/89ab53291039f247221fb731a6be375f4a5b8b6b))
+
+### Fix
+
+* fix: download link in UI ([`a80823c`](https://github.com/svange/openbrain/commit/a80823cb98f93430243e28bcba3ad005e64a6a7d))
+
+* fix: minor ui bugfix ([`dbe0f1b`](https://github.com/svange/openbrain/commit/dbe0f1b400d40ebe551faa7313935d7af5f3d984))
+
+## v3.2.1 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.2.1 [skip ci]
 
 ## [3.2.1](https://github.com/svange/openbrain/compare/v3.2.0...v3.2.1) (2024-07-07)
 
-
 ### Bug Fixes
 
-* Adding simple event mesh testing tool ([5148eca](https://github.com/svange/openbrain/commit/5148eca497bbac163e1e1d090e67c23a9b65b775))
+* Adding simple event mesh testing tool ([5148eca](https://github.com/svange/openbrain/commit/5148eca497bbac163e1e1d090e67c23a9b65b775)) ([`4a08e8e`](https://github.com/svange/openbrain/commit/4a08e8e1ec4ac3a1f1ee3b903f0692fd5847333f))
+
+### Fix
+
+* fix: Adding simple event mesh testing tool ([`5148eca`](https://github.com/svange/openbrain/commit/5148eca497bbac163e1e1d090e67c23a9b65b775))
+
+## v3.2.0 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.2.0 [skip ci]
 
 ## [3.2.0](https://github.com/svange/openbrain/compare/v3.1.2...v3.2.0) (2024-07-07)
 
-
 ### Features
 
-* debugging ui ([eb67e77](https://github.com/svange/openbrain/commit/eb67e772a23612aed44f9ab5fbe58e4b43d657c3))
+* debugging ui ([eb67e77](https://github.com/svange/openbrain/commit/eb67e772a23612aed44f9ab5fbe58e4b43d657c3)) ([`6e83df7`](https://github.com/svange/openbrain/commit/6e83df761f0eb2c73618103530d99d449bfea022))
+
+### Feature
+
+* feat: debugging ui ([`eb67e77`](https://github.com/svange/openbrain/commit/eb67e772a23612aed44f9ab5fbe58e4b43d657c3))
+
+## v3.1.2 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.1.2 [skip ci]
 
 ## [3.1.2](https://github.com/svange/openbrain/compare/v3.1.1...v3.1.2) (2024-07-07)
 
-
 ### Bug Fixes
 
-* Updating tool_leadmo_update_contact_details age description. ([604fd58](https://github.com/svange/openbrain/commit/604fd58b3db4021dc8ae42d5f9bdfedae496ed34))
+* Updating tool_leadmo_update_contact_details age description. ([604fd58](https://github.com/svange/openbrain/commit/604fd58b3db4021dc8ae42d5f9bdfedae496ed34)) ([`916a4c8`](https://github.com/svange/openbrain/commit/916a4c88f8cd7a840ff1161d3010ade012ec3ce1))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`35a2200`](https://github.com/svange/openbrain/commit/35a22004df0a19a28cd46786e963f5a418278626))
+
+## v3.1.1 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.1.1 [skip ci]
 
 ## [3.1.1](https://github.com/svange/openbrain/compare/v3.1.0...v3.1.1) (2024-07-07)
 
-
 ### Bug Fixes
 
-* changed recording retrieval for new s3 keys that include client_id and profile_name. ([e7720d6](https://github.com/svange/openbrain/commit/e7720d66e1daf8b844567ea2c6242d7e55d36e40))
+* changed recording retrieval for new s3 keys that include client_id and profile_name. ([e7720d6](https://github.com/svange/openbrain/commit/e7720d66e1daf8b844567ea2c6242d7e55d36e40)) ([`77a3b23`](https://github.com/svange/openbrain/commit/77a3b232d0766034caa05771004fa5df7dd52a24))
+
+### Fix
+
+* fix: Updating tool_leadmo_update_contact_details age description. ([`604fd58`](https://github.com/svange/openbrain/commit/604fd58b3db4021dc8ae42d5f9bdfedae496ed34))
+
+* fix: changed recording retrieval for new s3 keys that include client_id and profile_name. ([`e7720d6`](https://github.com/svange/openbrain/commit/e7720d66e1daf8b844567ea2c6242d7e55d36e40))
+
+## v3.1.0 (2024-07-07)
+
+### Chore
+
+* chore(release): 3.1.0 [skip ci]
 
 ## [3.1.0](https://github.com/svange/openbrain/compare/v3.0.2...v3.1.0) (2024-07-07)
-
 
 ### Features
 
 * agent logs for local agents in gradio ([6d0a041](https://github.com/svange/openbrain/commit/6d0a041693890c13de259126ef059f9ec3d65a31))
-* debugging ui ([3a2de8f](https://github.com/svange/openbrain/commit/3a2de8f572efb404f5482c5173127432d726f9fc))
+* debugging ui ([3a2de8f](https://github.com/svange/openbrain/commit/3a2de8f572efb404f5482c5173127432d726f9fc)) ([`f1fe226`](https://github.com/svange/openbrain/commit/f1fe226de8de37b3e17d3294ed54147c0ce53fa0))
+
+### Feature
+
+* feat: debugging ui ([`3a2de8f`](https://github.com/svange/openbrain/commit/3a2de8f572efb404f5482c5173127432d726f9fc))
+
+* feat: agent logs for local agents in gradio ([`6d0a041`](https://github.com/svange/openbrain/commit/6d0a041693890c13de259126ef059f9ec3d65a31))
+
+## v3.0.2 (2024-07-06)
+
+### Chore
+
+* chore(release): 3.0.2 [skip ci]
 
 ## [3.0.2](https://github.com/svange/openbrain/compare/v3.0.1...v3.0.2) (2024-07-06)
 
-
 ### Bug Fixes
 
-* calculator bugs, test bugs, UI improvements. ([5721804](https://github.com/svange/openbrain/commit/57218046ac7966a129dea9e166907b6907494e32))
+* calculator bugs, test bugs, UI improvements. ([5721804](https://github.com/svange/openbrain/commit/57218046ac7966a129dea9e166907b6907494e32)) ([`f70e132`](https://github.com/svange/openbrain/commit/f70e13234fdc7753876b9bb31ad5c154e94d3fd7))
+
+### Fix
+
+* fix: calculator bugs, test bugs, UI improvements. ([`5721804`](https://github.com/svange/openbrain/commit/57218046ac7966a129dea9e166907b6907494e32))
+
+## v3.0.1 (2024-07-06)
+
+### Chore
+
+* chore(release): 3.0.1 [skip ci]
 
 ## [3.0.1](https://github.com/svange/openbrain/compare/v3.0.0...v3.0.1) (2024-07-06)
 
-
 ### Bug Fixes
 
-* UI bug fixes, tool_do_nothing had bad name, simple calculator description was poo poo. ([a75399c](https://github.com/svange/openbrain/commit/a75399c2ef79b147a6aa9413e072d820605f28b8))
+* UI bug fixes, tool_do_nothing had bad name, simple calculator description was poo poo. ([a75399c](https://github.com/svange/openbrain/commit/a75399c2ef79b147a6aa9413e072d820605f28b8)) ([`21b4aa6`](https://github.com/svange/openbrain/commit/21b4aa6e5f6901529d900ddd054017f177d65922))
+
+### Fix
+
+* fix: UI bug fixes, tool_do_nothing had bad name, simple calculator description was poo poo. ([`a75399c`](https://github.com/svange/openbrain/commit/a75399c2ef79b147a6aa9413e072d820605f28b8))
+
+## v3.0.0 (2024-07-06)
+
+### Breaking
+
+* feat: further UI improvements, cleaned up agent_config model, added simple_calculator tool.
+
+BREAKING-CHANGE: ORM change in agent_config. ([`9b71c47`](https://github.com/svange/openbrain/commit/9b71c471920b151595440beb8358cd811439620e))
+
+### Chore
+
+* chore(release): 3.0.0 [skip ci]
 
 ## [3.0.0](https://github.com/svange/openbrain/compare/v2.16.11...v3.0.0) (2024-07-06)
-
 
 ### ⚠ BREAKING CHANGES
 
@@ -141,150 +371,389 @@ All notable changes to this project will be documented in this file. See
 
 * further UI improvements, cleaned up agent_config model, added simple_calculator tool. ([9b71c47](https://github.com/svange/openbrain/commit/9b71c471920b151595440beb8358cd811439620e))
 
-
 ### Bug Fixes
 
-* recording infrastructure in place, and UI supports it. ([574d84b](https://github.com/svange/openbrain/commit/574d84b736f7d2dd2f713638d74ed2e13a2c013b))
+* recording infrastructure in place, and UI supports it. ([574d84b](https://github.com/svange/openbrain/commit/574d84b736f7d2dd2f713638d74ed2e13a2c013b)) ([`ae7fcdb`](https://github.com/svange/openbrain/commit/ae7fcdb7fa815a7a4ee8d42f54e8ff2af6a7bcff))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`60b0e83`](https://github.com/svange/openbrain/commit/60b0e830fdf1a8b4d3ede1d4006fa6a1074d43b5))
+
+## v2.16.11 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.16.11 [skip ci]
 
 ## [2.16.11](https://github.com/svange/openbrain/compare/v2.16.10...v2.16.11) (2024-07-05)
 
-
 ### Bug Fixes
 
-* recording infrastructure in place, and UI supports it. ([b11cf0c](https://github.com/svange/openbrain/commit/b11cf0ce6d6194fbb194a2517ffd82fdbea3fb75))
+* recording infrastructure in place, and UI supports it. ([b11cf0c](https://github.com/svange/openbrain/commit/b11cf0ce6d6194fbb194a2517ffd82fdbea3fb75)) ([`0eac2b4`](https://github.com/svange/openbrain/commit/0eac2b4463b410bc47d5c416bc693c45489af00f))
+
+### Fix
+
+* fix: recording infrastructure in place, and UI supports it. ([`574d84b`](https://github.com/svange/openbrain/commit/574d84b736f7d2dd2f713638d74ed2e13a2c013b))
+
+* fix: recording infrastructure in place, and UI supports it. ([`b11cf0c`](https://github.com/svange/openbrain/commit/b11cf0ce6d6194fbb194a2517ffd82fdbea3fb75))
+
+## v2.16.10 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.16.10 [skip ci]
 
 ## [2.16.10](https://github.com/svange/openbrain/compare/v2.16.9...v2.16.10) (2024-07-05)
-
 
 ### Bug Fixes
 
 * adding session_id as param for ToolBox, now the tools should have the session_id in the context. ([bcf1f59](https://github.com/svange/openbrain/commit/bcf1f5929aea0e12b1fedc98c5428baba682b076))
-* adding session_id as param for ToolBox, now the tools should have the session_id in the context. ([9c3e1eb](https://github.com/svange/openbrain/commit/9c3e1eb127a18948c3c433db658c52e8f4ec8809))
+* adding session_id as param for ToolBox, now the tools should have the session_id in the context. ([9c3e1eb](https://github.com/svange/openbrain/commit/9c3e1eb127a18948c3c433db658c52e8f4ec8809)) ([`12d00d1`](https://github.com/svange/openbrain/commit/12d00d1d86ddec039adb2b42d9e3081b56bf40fa))
+
+### Fix
+
+* fix: adding session_id as param for ToolBox, now the tools should have the session_id in the context. ([`bcf1f59`](https://github.com/svange/openbrain/commit/bcf1f5929aea0e12b1fedc98c5428baba682b076))
+
+* fix: adding session_id as param for ToolBox, now the tools should have the session_id in the context. ([`9c3e1eb`](https://github.com/svange/openbrain/commit/9c3e1eb127a18948c3c433db658c52e8f4ec8809))
+
+## v2.16.9 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.16.9 [skip ci]
 
 ## [2.16.9](https://github.com/svange/openbrain/compare/v2.16.8...v2.16.9) (2024-07-05)
 
-
 ### Bug Fixes
 
-* adding session_id as param for ToolBox, now the tools should have the session_id in the context. ([be3de80](https://github.com/svange/openbrain/commit/be3de80bed694a4899f92138eaf3894be167e759))
+* adding session_id as param for ToolBox, now the tools should have the session_id in the context. ([be3de80](https://github.com/svange/openbrain/commit/be3de80bed694a4899f92138eaf3894be167e759)) ([`3278c26`](https://github.com/svange/openbrain/commit/3278c263ceb469bbe6b966e61244d97d5a4df26f))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`180202a`](https://github.com/svange/openbrain/commit/180202ad544a8f3a60ebbca252ab6d306aa63880))
+
+## v2.16.8 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.16.8 [skip ci]
 
 ## [2.16.8](https://github.com/svange/openbrain/compare/v2.16.7...v2.16.8) (2024-07-05)
 
-
 ### Bug Fixes
 
-* adding logging to troubleshoot why get_current_time tool won't record action ([9802517](https://github.com/svange/openbrain/commit/98025170835fdb5cc27b54791ff5882e408e6fa4))
+* adding logging to troubleshoot why get_current_time tool won&#39;t record action ([9802517](https://github.com/svange/openbrain/commit/98025170835fdb5cc27b54791ff5882e408e6fa4)) ([`265af3e`](https://github.com/svange/openbrain/commit/265af3ebfb78014db3c0404664ff73915e27ee05))
+
+### Fix
+
+* fix: adding session_id as param for ToolBox, now the tools should have the session_id in the context. ([`be3de80`](https://github.com/svange/openbrain/commit/be3de80bed694a4899f92138eaf3894be167e759))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`816c60f`](https://github.com/svange/openbrain/commit/816c60f7f823893107aed8da72f165464d363819))
+
+## v2.16.7 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.16.7 [skip ci]
 
 ## [2.16.7](https://github.com/svange/openbrain/compare/v2.16.6...v2.16.7) (2024-07-05)
 
-
 ### Bug Fixes
 
-* adding logging to troubleshoot why get_current_time tool won't record action ([1ff5830](https://github.com/svange/openbrain/commit/1ff5830eca91bbaf60f588ed036c565fc9e4ccac))
+* adding logging to troubleshoot why get_current_time tool won&#39;t record action ([1ff5830](https://github.com/svange/openbrain/commit/1ff5830eca91bbaf60f588ed036c565fc9e4ccac)) ([`7be35dd`](https://github.com/svange/openbrain/commit/7be35dd776bf04d82f41cbd60c83b0c2a1b8b3da))
+
+### Fix
+
+* fix: adding logging to troubleshoot why get_current_time tool won&#39;t record action ([`9802517`](https://github.com/svange/openbrain/commit/98025170835fdb5cc27b54791ff5882e408e6fa4))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`272a7ef`](https://github.com/svange/openbrain/commit/272a7ef7c14cdb74717b364c88fa5d23008389e2))
+
+## v2.16.6 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.16.6 [skip ci]
 
 ## [2.16.6](https://github.com/svange/openbrain/compare/v2.16.5...v2.16.6) (2024-07-05)
 
-
 ### Bug Fixes
 
-* adding logging to troubleshoot why get_current_time tool won't record action ([f182656](https://github.com/svange/openbrain/commit/f182656b4e357c89bed376d3c02ef4991dd5495a))
+* adding logging to troubleshoot why get_current_time tool won&#39;t record action ([f182656](https://github.com/svange/openbrain/commit/f182656b4e357c89bed376d3c02ef4991dd5495a)) ([`e4f1c38`](https://github.com/svange/openbrain/commit/e4f1c38cc4f57bca207d445f6a52a12d275f1eb8))
+
+### Fix
+
+* fix: adding logging to troubleshoot why get_current_time tool won&#39;t record action ([`1ff5830`](https://github.com/svange/openbrain/commit/1ff5830eca91bbaf60f588ed036c565fc9e4ccac))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`7f158c5`](https://github.com/svange/openbrain/commit/7f158c5fb90d52dcb2e1c2e20807687a18fe5428))
+
+## v2.16.5 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.16.5 [skip ci]
 
 ## [2.16.5](https://github.com/svange/openbrain/compare/v2.16.4...v2.16.5) (2024-07-05)
 
-
 ### Bug Fixes
 
-* adding logging to troubleshoot why get_current_time tool won't record action ([1451928](https://github.com/svange/openbrain/commit/14519281d3084d183edb8f9f9438376c1f70a13a))
+* adding logging to troubleshoot why get_current_time tool won&#39;t record action ([1451928](https://github.com/svange/openbrain/commit/14519281d3084d183edb8f9f9438376c1f70a13a)) ([`99e22e7`](https://github.com/svange/openbrain/commit/99e22e71e42a11c3a39d49111a07709494fa83bf))
+
+### Fix
+
+* fix: adding logging to troubleshoot why get_current_time tool won&#39;t record action ([`f182656`](https://github.com/svange/openbrain/commit/f182656b4e357c89bed376d3c02ef4991dd5495a))
+
+* fix: adding logging to troubleshoot why get_current_time tool won&#39;t record action ([`1451928`](https://github.com/svange/openbrain/commit/14519281d3084d183edb8f9f9438376c1f70a13a))
+
+## v2.16.4 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.16.4 [skip ci]
 
 ## [2.16.4](https://github.com/svange/openbrain/compare/v2.16.3...v2.16.4) (2024-07-05)
-
 
 ### Bug Fixes
 
 * adding pytz dependency ([8769528](https://github.com/svange/openbrain/commit/876952892abfc2e34c022ff079665870204fd9e8))
-* re-added do_nothing tool and attempted record_aciton functionality. ([563267c](https://github.com/svange/openbrain/commit/563267c8aac5cdff888fc5c940f5ebf606b2a446))
+* re-added do_nothing tool and attempted record_aciton functionality. ([563267c](https://github.com/svange/openbrain/commit/563267c8aac5cdff888fc5c940f5ebf606b2a446)) ([`9653b35`](https://github.com/svange/openbrain/commit/9653b35fa80dda5c9ac69833ef91d8f45e829454))
+
+### Fix
+
+* fix: adding pytz dependency ([`8769528`](https://github.com/svange/openbrain/commit/876952892abfc2e34c022ff079665870204fd9e8))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`cf84cdb`](https://github.com/svange/openbrain/commit/cf84cdbf98b5bb5339955b88b4761785437e60c7))
+
+## v2.16.3 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.16.3 [skip ci]
 
 ## [2.16.3](https://github.com/svange/openbrain/compare/v2.16.2...v2.16.3) (2024-07-05)
 
-
 ### Bug Fixes
 
-* record_tool_actions fix ([5c74de3](https://github.com/svange/openbrain/commit/5c74de3fb0f28d4d765e90b26b207c640a1a4498))
+* record_tool_actions fix ([5c74de3](https://github.com/svange/openbrain/commit/5c74de3fb0f28d4d765e90b26b207c640a1a4498)) ([`c30ce08`](https://github.com/svange/openbrain/commit/c30ce085ac190ed5b58782d4906fc5d6e9d70273))
+
+### Fix
+
+* fix: re-added do_nothing tool and attempted record_aciton functionality. ([`563267c`](https://github.com/svange/openbrain/commit/563267c8aac5cdff888fc5c940f5ebf606b2a446))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`a3e6323`](https://github.com/svange/openbrain/commit/a3e6323530a96ec731b64742c1cf028eb0cd5040))
+
+## v2.16.2 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.16.2 [skip ci]
 
 ## [2.16.2](https://github.com/svange/openbrain/compare/v2.16.1...v2.16.2) (2024-07-05)
 
-
 ### Bug Fixes
 
-* record_tool_actions fix ([7adafa0](https://github.com/svange/openbrain/commit/7adafa009423feab71eb5473f1ee7fe8d0f128ed))
+* record_tool_actions fix ([7adafa0](https://github.com/svange/openbrain/commit/7adafa009423feab71eb5473f1ee7fe8d0f128ed)) ([`f287659`](https://github.com/svange/openbrain/commit/f28765920f7454162533e634407e55b991c2e08a))
+
+### Fix
+
+* fix: record_tool_actions fix ([`5c74de3`](https://github.com/svange/openbrain/commit/5c74de3fb0f28d4d765e90b26b207c640a1a4498))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`1fed383`](https://github.com/svange/openbrain/commit/1fed383075010cd3dffa58718aad8c94eca3e503))
+
+## v2.16.1 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.16.1 [skip ci]
 
 ## [2.16.1](https://github.com/svange/openbrain/compare/v2.16.0...v2.16.1) (2024-07-05)
 
-
 ### Bug Fixes
 
-* record_tool_actions fix ([dfb7f67](https://github.com/svange/openbrain/commit/dfb7f67f106cbacb81254f745f2aedee9cbe3e69))
+* record_tool_actions fix ([dfb7f67](https://github.com/svange/openbrain/commit/dfb7f67f106cbacb81254f745f2aedee9cbe3e69)) ([`bdacf37`](https://github.com/svange/openbrain/commit/bdacf37d9152f89cb65f8c9d37a6be88621fd473))
+
+### Fix
+
+* fix: record_tool_actions fix ([`7adafa0`](https://github.com/svange/openbrain/commit/7adafa009423feab71eb5473f1ee7fe8d0f128ed))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`79f4b29`](https://github.com/svange/openbrain/commit/79f4b29a5721586fde66e21b289f32b8c56899f9))
+
+## v2.16.0 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.16.0 [skip ci]
 
 ## [2.16.0](https://github.com/svange/openbrain/compare/v2.15.0...v2.16.0) (2024-07-05)
 
-
 ### Features
 
-* adding session download link to gradio. ([d566350](https://github.com/svange/openbrain/commit/d56635078f477682f15117408f3ab66b9362227f))
+* adding session download link to gradio. ([d566350](https://github.com/svange/openbrain/commit/d56635078f477682f15117408f3ab66b9362227f)) ([`ad88be7`](https://github.com/svange/openbrain/commit/ad88be786d7f2a1de0457acc2e3c651cdd3af367))
+
+### Feature
+
+* feat: adding session download link to gradio. ([`d566350`](https://github.com/svange/openbrain/commit/d56635078f477682f15117408f3ab66b9362227f))
+
+### Fix
+
+* fix: record_tool_actions fix ([`dfb7f67`](https://github.com/svange/openbrain/commit/dfb7f67f106cbacb81254f745f2aedee9cbe3e69))
+
+## v2.15.0 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.15.0 [skip ci]
 
 ## [2.15.0](https://github.com/svange/openbrain/compare/v2.14.0...v2.15.0) (2024-07-05)
 
-
 ### Features
 
-* adding session download link to gradio. ([73606cc](https://github.com/svange/openbrain/commit/73606cc6d1e855caa793dd8e3d23db06fe73e0d3))
+* adding session download link to gradio. ([73606cc](https://github.com/svange/openbrain/commit/73606cc6d1e855caa793dd8e3d23db06fe73e0d3)) ([`6a8ee9c`](https://github.com/svange/openbrain/commit/6a8ee9cf6cf09eb1807d6d7831f6d774f978a6dd))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`6f75893`](https://github.com/svange/openbrain/commit/6f75893e9aa6e3c2c346169973eb526d546d1e64))
+
+## v2.14.0 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.14.0 [skip ci]
 
 ## [2.14.0](https://github.com/svange/openbrain/compare/v2.13.0...v2.14.0) (2024-07-05)
 
-
 ### Features
 
-* adding session download link to gradio. ([4298a10](https://github.com/svange/openbrain/commit/4298a109bb7ad981c792d5c4b90b98679384966c))
+* adding session download link to gradio. ([4298a10](https://github.com/svange/openbrain/commit/4298a109bb7ad981c792d5c4b90b98679384966c)) ([`8952804`](https://github.com/svange/openbrain/commit/89528047192c380d581baca4bb03ace0dd3e4c1e))
+
+### Feature
+
+* feat: adding session download link to gradio. ([`73606cc`](https://github.com/svange/openbrain/commit/73606cc6d1e855caa793dd8e3d23db06fe73e0d3))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`bf32754`](https://github.com/svange/openbrain/commit/bf32754b5cd327ce79864addc0ce5c6c8e19da04))
+
+## v2.13.0 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.13.0 [skip ci]
 
 ## [2.13.0](https://github.com/svange/openbrain/compare/v2.12.0...v2.13.0) (2024-07-05)
 
-
 ### Features
 
-* adding session download link to gradio. ([604de19](https://github.com/svange/openbrain/commit/604de19b3a26ba0803607bd2734812b17d11b3b6))
+* adding session download link to gradio. ([604de19](https://github.com/svange/openbrain/commit/604de19b3a26ba0803607bd2734812b17d11b3b6)) ([`ebd3a2a`](https://github.com/svange/openbrain/commit/ebd3a2a30350dd481dd5bcdb20150059f67542f7))
+
+### Feature
+
+* feat: adding session download link to gradio. ([`4298a10`](https://github.com/svange/openbrain/commit/4298a109bb7ad981c792d5c4b90b98679384966c))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`184307d`](https://github.com/svange/openbrain/commit/184307d2f62a6b143ab0225bcb4e3aaf975fd501))
+
+## v2.12.0 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.12.0 [skip ci]
 
 ## [2.12.0](https://github.com/svange/openbrain/compare/v2.11.0...v2.12.0) (2024-07-05)
 
-
 ### Features
 
-* adding session download link to gradio. ([f2b44f3](https://github.com/svange/openbrain/commit/f2b44f3bf5d6b4b01816cd80b8b9a61bd2703aed))
+* adding session download link to gradio. ([f2b44f3](https://github.com/svange/openbrain/commit/f2b44f3bf5d6b4b01816cd80b8b9a61bd2703aed)) ([`a550982`](https://github.com/svange/openbrain/commit/a5509827303ef6bbef0a4bd44cd87c6e486092b0))
+
+### Feature
+
+* feat: adding session download link to gradio. ([`604de19`](https://github.com/svange/openbrain/commit/604de19b3a26ba0803607bd2734812b17d11b3b6))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`e429d83`](https://github.com/svange/openbrain/commit/e429d8353664a1ccd65078572cdddd9bcc603cf9))
+
+## v2.11.0 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.11.0 [skip ci]
 
 ## [2.11.0](https://github.com/svange/openbrain/compare/v2.10.0...v2.11.0) (2024-07-05)
 
-
 ### Features
 
-* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([31d6ea8](https://github.com/svange/openbrain/commit/31d6ea8114740334797687ffcc5a3f5074f69932))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([31d6ea8](https://github.com/svange/openbrain/commit/31d6ea8114740334797687ffcc5a3f5074f69932)) ([`66d8061`](https://github.com/svange/openbrain/commit/66d80611cb4b5b1973a3d64364377f0468e7a894))
+
+### Feature
+
+* feat: adding session download link to gradio. ([`f2b44f3`](https://github.com/svange/openbrain/commit/f2b44f3bf5d6b4b01816cd80b8b9a61bd2703aed))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`2938f16`](https://github.com/svange/openbrain/commit/2938f16ce2ab3ba45b1b1fe52b11b9d410556c0e))
+
+## v2.10.0 (2024-07-05)
+
+### Chore
+
+* chore(release): 2.10.0 [skip ci]
 
 ## [2.10.0](https://github.com/svange/openbrain/compare/v2.9.0...v2.10.0) (2024-07-05)
-
 
 ### Features
 
 * adding record triggers to agentconfigs, adding bucket to infra for recordings. ([e9aff28](https://github.com/svange/openbrain/commit/e9aff28ccca022e22e182fbe5e7d1c47263ed3f5))
 * adding record triggers to agentconfigs, adding bucket to infra for recordings. ([d082ce5](https://github.com/svange/openbrain/commit/d082ce5b683262e07416074a18fc61191a009477))
-* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([509364c](https://github.com/svange/openbrain/commit/509364cd86dd88479b8a6997fb3a13ad4d54dda3))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([509364c](https://github.com/svange/openbrain/commit/509364cd86dd88479b8a6997fb3a13ad4d54dda3)) ([`244bf60`](https://github.com/svange/openbrain/commit/244bf602a365b9cb1b1c32f5c72ac26120485ecf))
+
+### Feature
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`31d6ea8`](https://github.com/svange/openbrain/commit/31d6ea8114740334797687ffcc5a3f5074f69932))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`e9aff28`](https://github.com/svange/openbrain/commit/e9aff28ccca022e22e182fbe5e7d1c47263ed3f5))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`d082ce5`](https://github.com/svange/openbrain/commit/d082ce5b683262e07416074a18fc61191a009477))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`509364c`](https://github.com/svange/openbrain/commit/509364cd86dd88479b8a6997fb3a13ad4d54dda3))
+
+## v2.9.0 (2024-07-04)
+
+### Chore
+
+* chore(release): 2.9.0 [skip ci]
 
 ## [2.9.0](https://github.com/svange/openbrain/compare/v2.8.0...v2.9.0) (2024-07-04)
 
-
 ### Features
 
-* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([3392812](https://github.com/svange/openbrain/commit/339281251fa159de53704a8d3ab1123f018de5e0))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([3392812](https://github.com/svange/openbrain/commit/339281251fa159de53704a8d3ab1123f018de5e0)) ([`f5be08c`](https://github.com/svange/openbrain/commit/f5be08c26fc051854933abd413860fc39f7ed3e1))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`7e4d8b6`](https://github.com/svange/openbrain/commit/7e4d8b69ca0016783e049d4a57bc1ef48ed57d46))
+
+## v2.8.0 (2024-07-04)
+
+### Chore
+
+* chore(release): 2.8.0 [skip ci]
 
 ## [2.8.0](https://github.com/svange/openbrain/compare/v2.7.5...v2.8.0) (2024-07-04)
-
 
 ### Features
 
@@ -302,81 +771,219 @@ All notable changes to this project will be documented in this file. See
 * adding record triggers to agentconfigs, adding bucket to infra for recordings. ([64deca6](https://github.com/svange/openbrain/commit/64deca6fb26b53edde58e9784235cf3989de97a7))
 * adding record triggers to agentconfigs, adding bucket to infra for recordings. ([69b0cc4](https://github.com/svange/openbrain/commit/69b0cc4a041010d25515c06119d10232b194d321))
 * adding record triggers to agentconfigs, adding bucket to infra for recordings. ([467792d](https://github.com/svange/openbrain/commit/467792deaa466779e6fb095ee040e2073dbb148c))
-* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([368a0d2](https://github.com/svange/openbrain/commit/368a0d2ccb0aefb39e45d6c0b4d53fdf8a34c2f0))
+* adding record triggers to agentconfigs, adding bucket to infra for recordings. ([368a0d2](https://github.com/svange/openbrain/commit/368a0d2ccb0aefb39e45d6c0b4d53fdf8a34c2f0)) ([`96dcbd8`](https://github.com/svange/openbrain/commit/96dcbd8ec571b03e20b4c6b84c6760cc645d6ad0))
+
+### Feature
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`3392812`](https://github.com/svange/openbrain/commit/339281251fa159de53704a8d3ab1123f018de5e0))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`c9ba466`](https://github.com/svange/openbrain/commit/c9ba4662d635fd517c3c45e39faafaa039f0f926))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`6ab3167`](https://github.com/svange/openbrain/commit/6ab3167bb24dee39e45b4fc9884af4192f12ca1e))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`7005aea`](https://github.com/svange/openbrain/commit/7005aea6cb0eca4488496381787c7f9d0351446e))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`e3bfb75`](https://github.com/svange/openbrain/commit/e3bfb7584c6d4480323297cfa3a0f175e71c64a0))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`aeab3cd`](https://github.com/svange/openbrain/commit/aeab3cdd574ab54760c8d54e81989e3e947e7025))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`c091fb8`](https://github.com/svange/openbrain/commit/c091fb868cbde09d11dabeb28e661e6e0a328dec))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`c36f6a6`](https://github.com/svange/openbrain/commit/c36f6a6ee90fd6ae4fe757fcee4156bde7f79c8e))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`40d8296`](https://github.com/svange/openbrain/commit/40d8296783aedd08552a358616f650a994cc8dac))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`3fe7424`](https://github.com/svange/openbrain/commit/3fe742401faa6784c4f96e01f26c95ee340ecebb))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`82d1adb`](https://github.com/svange/openbrain/commit/82d1adbf55f3c41a57b4f784123888766c2c7e53))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`024b815`](https://github.com/svange/openbrain/commit/024b81532bda1b5911b883939712f5f683c0fb2c))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`64deca6`](https://github.com/svange/openbrain/commit/64deca6fb26b53edde58e9784235cf3989de97a7))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`69b0cc4`](https://github.com/svange/openbrain/commit/69b0cc4a041010d25515c06119d10232b194d321))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`467792d`](https://github.com/svange/openbrain/commit/467792deaa466779e6fb095ee040e2073dbb148c))
+
+* feat: adding record triggers to agentconfigs, adding bucket to infra for recordings. ([`368a0d2`](https://github.com/svange/openbrain/commit/368a0d2ccb0aefb39e45d6c0b4d53fdf8a34c2f0))
+
+## v2.7.5 (2024-07-03)
+
+### Chore
+
+* chore(release): 2.7.5 [skip ci]
 
 ## [2.7.5](https://github.com/svange/openbrain/compare/v2.7.4...v2.7.5) (2024-07-03)
 
-
 ### Bug Fixes
 
-* enabling queing in gradio ([14938ef](https://github.com/svange/openbrain/commit/14938ef3dc6c99b0aa210f4e90100924a5c6d4e8))
+* enabling queing in gradio ([14938ef](https://github.com/svange/openbrain/commit/14938ef3dc6c99b0aa210f4e90100924a5c6d4e8)) ([`e33cb25`](https://github.com/svange/openbrain/commit/e33cb25909569cfe776aa44bcaf1cc37f03f3fb0))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`28fee8d`](https://github.com/svange/openbrain/commit/28fee8d6f053a6e8266df4473cd71c33f36f9fe1))
+
+## v2.7.4 (2024-07-03)
+
+### Chore
+
+* chore(release): 2.7.4 [skip ci]
 
 ## [2.7.4](https://github.com/svange/openbrain/compare/v2.7.3...v2.7.4) (2024-07-03)
 
-
 ### Bug Fixes
 
-* added last 4 cloudwatch logs tab to gradio interface and updated info page ([5cdc571](https://github.com/svange/openbrain/commit/5cdc5713734131cfd84879056a3cd76028d25aff))
+* added last 4 cloudwatch logs tab to gradio interface and updated info page ([5cdc571](https://github.com/svange/openbrain/commit/5cdc5713734131cfd84879056a3cd76028d25aff)) ([`26ea4ef`](https://github.com/svange/openbrain/commit/26ea4ef0090df1c65319aa89492bf0d00edeb0a9))
+
+### Fix
+
+* fix: enabling queing in gradio ([`14938ef`](https://github.com/svange/openbrain/commit/14938ef3dc6c99b0aa210f4e90100924a5c6d4e8))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`4df327f`](https://github.com/svange/openbrain/commit/4df327f1c08c4f12029f3d463075b9c4ac2d8768))
+
+## v2.7.3 (2024-07-03)
+
+### Chore
+
+* chore(release): 2.7.3 [skip ci]
 
 ## [2.7.3](https://github.com/svange/openbrain/compare/v2.7.2...v2.7.3) (2024-07-03)
 
-
 ### Bug Fixes
 
-* added last 4 cloudwatch logs tab to gradio interface ([1a30511](https://github.com/svange/openbrain/commit/1a30511e0ac4e3b470370304a8112d8775a633b0))
+* added last 4 cloudwatch logs tab to gradio interface ([1a30511](https://github.com/svange/openbrain/commit/1a30511e0ac4e3b470370304a8112d8775a633b0)) ([`cb0b424`](https://github.com/svange/openbrain/commit/cb0b424ed3733c6f13e1f2e7c069e968fee7e540))
+
+### Fix
+
+* fix: added last 4 cloudwatch logs tab to gradio interface and updated info page ([`5cdc571`](https://github.com/svange/openbrain/commit/5cdc5713734131cfd84879056a3cd76028d25aff))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`6e6bbe8`](https://github.com/svange/openbrain/commit/6e6bbe808cc81abec27b09e68200186304d16d1a))
+
+## v2.7.2 (2024-07-03)
+
+### Chore
+
+* chore(release): 2.7.2 [skip ci]
 
 ## [2.7.2](https://github.com/svange/openbrain/compare/v2.7.1...v2.7.2) (2024-07-03)
 
-
 ### Bug Fixes
 
-* fixing "wrong-infra" gradio bug ([e9fd5bf](https://github.com/svange/openbrain/commit/e9fd5bf2f9ca4cd9859ff4c0a19e1b18dd11b6f8))
+* fixing &#34;wrong-infra&#34; gradio bug ([e9fd5bf](https://github.com/svange/openbrain/commit/e9fd5bf2f9ca4cd9859ff4c0a19e1b18dd11b6f8)) ([`8d6511a`](https://github.com/svange/openbrain/commit/8d6511a4792db75aecc72850e1c0e2c22f61cd40))
+
+### Fix
+
+* fix: added last 4 cloudwatch logs tab to gradio interface ([`1a30511`](https://github.com/svange/openbrain/commit/1a30511e0ac4e3b470370304a8112d8775a633b0))
+
+* fix: fixing &#34;wrong-infra&#34; gradio bug ([`e9fd5bf`](https://github.com/svange/openbrain/commit/e9fd5bf2f9ca4cd9859ff4c0a19e1b18dd11b6f8))
+
+## v2.7.1 (2024-07-03)
+
+### Chore
+
+* chore(release): 2.7.1 [skip ci]
 
 ## [2.7.1](https://github.com/svange/openbrain/compare/v2.7.0...v2.7.1) (2024-07-03)
 
-
 ### Bug Fixes
 
-* bump commit ([6e235c8](https://github.com/svange/openbrain/commit/6e235c81e6e57899799f8c3eb16218fc73fa7b9c))
+* bump commit ([6e235c8](https://github.com/svange/openbrain/commit/6e235c81e6e57899799f8c3eb16218fc73fa7b9c)) ([`64c2757`](https://github.com/svange/openbrain/commit/64c2757b1ffd20649f8ebc971bf0ea58304af849))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`bcd56bd`](https://github.com/svange/openbrain/commit/bcd56bd64e679dea60eabfce3231ace8019ac724))
+
+## v2.7.0 (2024-07-03)
+
+### Chore
+
+* chore(release): 2.7.0 [skip ci]
 
 ## [2.7.0](https://github.com/svange/openbrain/compare/v2.6.0...v2.7.0) (2024-07-03)
 
-
 ### Features
 
-* Adding dynamic compontents to Gradio ([8f35ba4](https://github.com/svange/openbrain/commit/8f35ba44c408ee8a18527aac9dd0a3bd0d29edeb))
+* Adding dynamic compontents to Gradio ([8f35ba4](https://github.com/svange/openbrain/commit/8f35ba44c408ee8a18527aac9dd0a3bd0d29edeb)) ([`70b51f5`](https://github.com/svange/openbrain/commit/70b51f50b9bcf23f00c197dd76388d4b075833f3))
+
+### Feature
+
+* feat: Adding dynamic compontents to Gradio ([`8f35ba4`](https://github.com/svange/openbrain/commit/8f35ba44c408ee8a18527aac9dd0a3bd0d29edeb))
+
+### Fix
+
+* fix: bump commit ([`6e235c8`](https://github.com/svange/openbrain/commit/6e235c81e6e57899799f8c3eb16218fc73fa7b9c))
+
+## v2.6.0 (2024-07-03)
+
+### Chore
+
+* chore(release): 2.6.0 [skip ci]
 
 ## [2.6.0](https://github.com/svange/openbrain/compare/v2.5.0...v2.6.0) (2024-07-03)
 
-
 ### Features
 
-* Cleanup UI functionality for local and non-api modes ([efdf09c](https://github.com/svange/openbrain/commit/efdf09c45d170a5ecbebb9287bb1be3f7bc9d485))
+* Cleanup UI functionality for local and non-api modes ([efdf09c](https://github.com/svange/openbrain/commit/efdf09c45d170a5ecbebb9287bb1be3f7bc9d485)) ([`fa4e5e8`](https://github.com/svange/openbrain/commit/fa4e5e8e26d186a9966dce837561661c92e8f48e))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`b526523`](https://github.com/svange/openbrain/commit/b526523f654e5305bbb06793feb93b4835dca3ab))
+
+## v2.5.0 (2024-07-03)
+
+### Chore
+
+* chore(release): 2.5.0 [skip ci]
 
 ## [2.5.0](https://github.com/svange/openbrain/compare/v2.4.0...v2.5.0) (2024-07-03)
 
-
 ### Features
 
-* experimenting with recording the latest action for display on gradio. ([8240895](https://github.com/svange/openbrain/commit/824089556ccf46ed1d30a699226d6292d5fce7ea))
+* experimenting with recording the latest action for display on gradio. ([8240895](https://github.com/svange/openbrain/commit/824089556ccf46ed1d30a699226d6292d5fce7ea)) ([`ca8b34d`](https://github.com/svange/openbrain/commit/ca8b34df2cf7884948dc2b468772b2dd4203bf37))
+
+### Feature
+
+* feat: Cleanup UI functionality for local and non-api modes ([`efdf09c`](https://github.com/svange/openbrain/commit/efdf09c45d170a5ecbebb9287bb1be3f7bc9d485))
+
+* feat: experimenting with recording the latest action for display on gradio. ([`8240895`](https://github.com/svange/openbrain/commit/824089556ccf46ed1d30a699226d6292d5fce7ea))
+
+## v2.4.0 (2024-07-03)
+
+### Chore
+
+* chore(release): 2.4.0 [skip ci]
 
 ## [2.4.0](https://github.com/svange/openbrain/compare/v2.3.0...v2.4.0) (2024-07-03)
 
-
 ### Features
 
-* experimenting with recording the latest action for display on gradio. ([952dc56](https://github.com/svange/openbrain/commit/952dc56c4a20645e34ab746a9757915e5aa02d34))
+* experimenting with recording the latest action for display on gradio. ([952dc56](https://github.com/svange/openbrain/commit/952dc56c4a20645e34ab746a9757915e5aa02d34)) ([`d8da4ec`](https://github.com/svange/openbrain/commit/d8da4ece0dfef143e1b977d5d8f48f4e851a4f53))
+
+### Feature
+
+* feat: experimenting with recording the latest action for display on gradio. ([`952dc56`](https://github.com/svange/openbrain/commit/952dc56c4a20645e34ab746a9757915e5aa02d34))
+
+## v2.3.0 (2024-07-03)
+
+### Chore
+
+* chore(release): 2.3.0 [skip ci]
 
 ## [2.3.0](https://github.com/svange/openbrain/compare/v2.2.0...v2.3.0) (2024-07-03)
 
-
 ### Features
 
-* improved logging in gradio - obfuscating secret from logs ([02008e4](https://github.com/svange/openbrain/commit/02008e46080eceac3d551e05a5023ab415de02af))
-
-# CHANGELOG
+* improved logging in gradio - obfuscating secret from logs ([02008e4](https://github.com/svange/openbrain/commit/02008e46080eceac3d551e05a5023ab415de02af)) ([`ed2eaa8`](https://github.com/svange/openbrain/commit/ed2eaa87d02951b429d96ebabbfcd43fc76303aa))
 
 ## v2.0.0-dev.3 (2024-07-03)
+
+### Chore
+
+* chore(release): release 2.0.0-dev.3 ([`380c2a1`](https://github.com/svange/openbrain/commit/380c2a18e3f840c277ee0350e6619e1041ce546d))
 
 ### Feature
 
@@ -439,12 +1046,6 @@ All notable changes to this project will be documented in this file. See
 
 ## v2.0.0-dev.2 (2024-07-03)
 
-### Breaking
-
-* fix: New UI to support tool FW.
-
-BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent tools now accept context. The &#39;email&#39; parameter has become OBE by context. Lead object has been eliminated in favor of more general &#39;context&#39; approach. ([`a74bd1f`](https://github.com/svange/openbrain/commit/a74bd1fb2b66c667fcf5da5b29d8f77f3ab528b2))
-
 ### Chore
 
 * chore(release): release 2.0.0-dev.2 ([`2151b1a`](https://github.com/svange/openbrain/commit/2151b1a351f7593cfdda80f738f41507741f64da))
@@ -456,6 +1057,10 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 ## v2.0.0-dev.1 (2024-07-03)
 
 ### Breaking
+
+* fix: New UI to support tool FW.
+
+BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent tools now accept context. The &#39;email&#39; parameter has become OBE by context. Lead object has been eliminated in favor of more general &#39;context&#39; approach. ([`a74bd1f`](https://github.com/svange/openbrain/commit/a74bd1fb2b66c667fcf5da5b29d8f77f3ab528b2))
 
 * fix: New UI to support tool FW.
 
@@ -510,10 +1115,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * cleaning up remaining remnants of &#34;lead&#34; objects ([1b372b5](https://github.com/svange/openbrain/commit/1b372b571c2695000b2a52038d086bf7dd1fb0c7)) ([`7206632`](https://github.com/svange/openbrain/commit/7206632114b16d345bf912572f8a7a651a32ccfe))
 
-### Fix
-
-* fix: cleaning up remaining remnants of &#34;lead&#34; objects ([`1b372b5`](https://github.com/svange/openbrain/commit/1b372b571c2695000b2a52038d086bf7dd1fb0c7))
-
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/main&#39; ([`8bb9d03`](https://github.com/svange/openbrain/commit/8bb9d03cfba70f68802e8a2eb5edf918a8ab3dd1))
@@ -534,11 +1135,9 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * cleaning up remaining remnants of &#34;lead&#34; objects ([d4ff823](https://github.com/svange/openbrain/commit/d4ff823a472633d8c204c6ce08c359300abd34bf)) ([`cc4609d`](https://github.com/svange/openbrain/commit/cc4609dd002686113e9d246ab12cfefd9e37574d))
 
-### Feature
-
-* feat: Added action table reporter to gradio ([`d42ed2a`](https://github.com/svange/openbrain/commit/d42ed2aa0dedf321ae229931c7f5c511665933e8))
-
 ### Fix
+
+* fix: cleaning up remaining remnants of &#34;lead&#34; objects ([`1b372b5`](https://github.com/svange/openbrain/commit/1b372b571c2695000b2a52038d086bf7dd1fb0c7))
 
 * fix: cleaning up remaining remnants of &#34;lead&#34; objects ([`d4ff823`](https://github.com/svange/openbrain/commit/d4ff823a472633d8c204c6ce08c359300abd34bf))
 
@@ -560,7 +1159,7 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 ### Feature
 
-* feat: Added action table reporter to gradio ([`d8c5337`](https://github.com/svange/openbrain/commit/d8c533724486fa6c5189a643eb6d95bfd0a6029b))
+* feat: Added action table reporter to gradio ([`d42ed2a`](https://github.com/svange/openbrain/commit/d42ed2aa0dedf321ae229931c7f5c511665933e8))
 
 ### Unknown
 
@@ -580,7 +1179,7 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 ### Feature
 
-* feat: Added action table reporter to gradio ([`f5b9d1e`](https://github.com/svange/openbrain/commit/f5b9d1e29c4876b774e0e5448df19e2554b4de57))
+* feat: Added action table reporter to gradio ([`d8c5337`](https://github.com/svange/openbrain/commit/d8c533724486fa6c5189a643eb6d95bfd0a6029b))
 
 ### Unknown
 
@@ -600,7 +1199,7 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 ### Feature
 
-* feat: Added action table reporter to gradio ([`5566e74`](https://github.com/svange/openbrain/commit/5566e74c1ae91807a29a0c8d3790b75686bf747b))
+* feat: Added action table reporter to gradio ([`f5b9d1e`](https://github.com/svange/openbrain/commit/f5b9d1e29c4876b774e0e5448df19e2554b4de57))
 
 ### Unknown
 
@@ -620,7 +1219,7 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 ### Feature
 
-* feat: Added action table reporter to gradio ([`44f56d3`](https://github.com/svange/openbrain/commit/44f56d3ec5a2dca5d23ead858687ceeba07b3f8e))
+* feat: Added action table reporter to gradio ([`5566e74`](https://github.com/svange/openbrain/commit/5566e74c1ae91807a29a0c8d3790b75686bf747b))
 
 ### Unknown
 
@@ -640,7 +1239,7 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 ### Feature
 
-* feat: Added action table reporter to gradio ([`1d56aa2`](https://github.com/svange/openbrain/commit/1d56aa26623f84ecbd51cde10e309788d60a3da7))
+* feat: Added action table reporter to gradio ([`44f56d3`](https://github.com/svange/openbrain/commit/44f56d3ec5a2dca5d23ead858687ceeba07b3f8e))
 
 ### Unknown
 
@@ -660,7 +1259,7 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 ### Feature
 
-* feat: Added action table reporter to gradio ([`dbc0c00`](https://github.com/svange/openbrain/commit/dbc0c00b889a5da7455ccb8f7281b3c3ad2f01bb))
+* feat: Added action table reporter to gradio ([`1d56aa2`](https://github.com/svange/openbrain/commit/1d56aa26623f84ecbd51cde10e309788d60a3da7))
 
 ### Unknown
 
@@ -680,7 +1279,7 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 ### Feature
 
-* feat: Action table functionality to record actions debug ([`c55592f`](https://github.com/svange/openbrain/commit/c55592f43a74f077bbebb83b52696b08a3d6690d))
+* feat: Added action table reporter to gradio ([`dbc0c00`](https://github.com/svange/openbrain/commit/dbc0c00b889a5da7455ccb8f7281b3c3ad2f01bb))
 
 ### Unknown
 
@@ -700,7 +1299,7 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 ### Feature
 
-* feat: Action table functionality to record actions debug ([`b68c962`](https://github.com/svange/openbrain/commit/b68c962cb5c8d5b012ab9ea01c06274e31a4556e))
+* feat: Action table functionality to record actions debug ([`c55592f`](https://github.com/svange/openbrain/commit/c55592f43a74f077bbebb83b52696b08a3d6690d))
 
 ### Unknown
 
@@ -720,7 +1319,7 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 ### Feature
 
-* feat: Action table functionality to record actions ([`4cd866d`](https://github.com/svange/openbrain/commit/4cd866d9ed169022bb19b2cea0d26c9638836805))
+* feat: Action table functionality to record actions debug ([`b68c962`](https://github.com/svange/openbrain/commit/b68c962cb5c8d5b012ab9ea01c06274e31a4556e))
 
 ### Unknown
 
@@ -739,6 +1338,8 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 * Action table functionality to record actions ([50b4de2](https://github.com/svange/openbrain/commit/50b4de22343053aad58e5231c10111f9103bcf8f)) ([`a0a34a8`](https://github.com/svange/openbrain/commit/a0a34a83832b3df8fe56879f860f98c1e50fe71e))
 
 ### Feature
+
+* feat: Action table functionality to record actions ([`4cd866d`](https://github.com/svange/openbrain/commit/4cd866d9ed169022bb19b2cea0d26c9638836805))
 
 * feat: Action table functionality to record actions ([`50b4de2`](https://github.com/svange/openbrain/commit/50b4de22343053aad58e5231c10111f9103bcf8f))
 
@@ -786,10 +1387,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * adding sns topic for testing ([54af4dc](https://github.com/svange/openbrain/commit/54af4dc96fc71f5c0220d8220b92e8742d62a082)) ([`6834448`](https://github.com/svange/openbrain/commit/6834448bdea35f02fcac47f3a70d3f7d7b2771c2))
 
-### Feature
-
-* feat: adding sns topic for testing ([`54af4dc`](https://github.com/svange/openbrain/commit/54af4dc96fc71f5c0220d8220b92e8742d62a082))
-
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/main&#39; ([`6ba1643`](https://github.com/svange/openbrain/commit/6ba16436c2ca9864e2cdf8aedf37199a0cd8a4f3))
@@ -807,6 +1404,8 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 * gradio mvp... again ([a93744e](https://github.com/svange/openbrain/commit/a93744e4ab643dec2d6892de5f7f56c18cb6d85d)) ([`f4d491a`](https://github.com/svange/openbrain/commit/f4d491a8a0e1d957f66823d4cc7a7c68376926d6))
 
 ### Feature
+
+* feat: adding sns topic for testing ([`54af4dc`](https://github.com/svange/openbrain/commit/54af4dc96fc71f5c0220d8220b92e8742d62a082))
 
 * feat: gradio mvp... again ([`a93744e`](https://github.com/svange/openbrain/commit/a93744e4ab643dec2d6892de5f7f56c18cb6d85d))
 
@@ -960,10 +1559,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * Fix CI badge ([5b53977](https://github.com/svange/openbrain/commit/5b53977df8cabc6c1f9b10f52a48f2132f4d078d)) ([`a607c41`](https://github.com/svange/openbrain/commit/a607c416a98d11560d36809e21d6fa686cd7ab9c))
 
-### Feature
-
-* feat: Fix CI badge ([`5b53977`](https://github.com/svange/openbrain/commit/5b53977df8cabc6c1f9b10f52a48f2132f4d078d))
-
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/main&#39; ([`e5c1228`](https://github.com/svange/openbrain/commit/e5c1228c85225d1e34b5dbe1fc57c23c2a20373b))
@@ -982,9 +1577,9 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 ### Feature
 
-* feat: Documentation update. Re-enabled some tool tests. ([`c3a8016`](https://github.com/svange/openbrain/commit/c3a80167df9228def5ffb9e967570601ddc99ead))
+* feat: Fix CI badge ([`5b53977`](https://github.com/svange/openbrain/commit/5b53977df8cabc6c1f9b10f52a48f2132f4d078d))
 
-* feat: Documentation update. ([`e21dec7`](https://github.com/svange/openbrain/commit/e21dec7e6913706ed2b29ee593b352a44b42e2fc))
+* feat: Documentation update. Re-enabled some tool tests. ([`c3a8016`](https://github.com/svange/openbrain/commit/c3a80167df9228def5ffb9e967570601ddc99ead))
 
 ### Unknown
 
@@ -997,6 +1592,8 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 * chore(release): release 1.4.16-dev.2 ([`e6dd978`](https://github.com/svange/openbrain/commit/e6dd97807984199b8c212aaeb0490d6a0c8e8642))
 
 ### Feature
+
+* feat: Documentation update. ([`e21dec7`](https://github.com/svange/openbrain/commit/e21dec7e6913706ed2b29ee593b352a44b42e2fc))
 
 * feat: Documentation update. ([`801d4ca`](https://github.com/svange/openbrain/commit/801d4cae9d9d7cd499a8da9f3e49d95ba48949d3))
 
@@ -1096,10 +1693,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * adding debug statements ([10efd2c](https://github.com/svange/openbrain/commit/10efd2c3029f27d64b5a89a2701ab2feb2bc23d9)) ([`a503b45`](https://github.com/svange/openbrain/commit/a503b45e1e46259574d778a753599e2b16b83b6d))
 
-### Feature
-
-* feat: adding debug statements ([`10efd2c`](https://github.com/svange/openbrain/commit/10efd2c3029f27d64b5a89a2701ab2feb2bc23d9))
-
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/main&#39; ([`950f9a0`](https://github.com/svange/openbrain/commit/950f9a0dd6fdf95c4bdc7a311d5e32bd2785727b))
@@ -1118,6 +1711,8 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 ### Feature
 
+* feat: adding debug statements ([`10efd2c`](https://github.com/svange/openbrain/commit/10efd2c3029f27d64b5a89a2701ab2feb2bc23d9))
+
 * feat: adding lls tool (needs work to get secret API key in place. ([`b581687`](https://github.com/svange/openbrain/commit/b5816879f96c90a03484517dfbf4d78baf56af03))
 
 ## v1.10.0 (2024-06-28)
@@ -1131,10 +1726,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 ### Features
 
 * adding lls tool (needs work to get secret API key in place. ([cc54fce](https://github.com/svange/openbrain/commit/cc54fce7ca4f47f9d81d05a82c38606acc40f99f)) ([`05b952d`](https://github.com/svange/openbrain/commit/05b952dd95101fdab8280968587b1f13bc6f4a46))
-
-### Feature
-
-* feat: adding lls tool (needs work to get secret API key in place. ([`cc54fce`](https://github.com/svange/openbrain/commit/cc54fce7ca4f47f9d81d05a82c38606acc40f99f))
 
 ### Unknown
 
@@ -1153,6 +1744,8 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 * adding lls tool (needs work to get secret API key in place. ([535557f](https://github.com/svange/openbrain/commit/535557f7118ec5dbf3740c529eeeb91295878491)) ([`87a6dce`](https://github.com/svange/openbrain/commit/87a6dceb1476a3b950e19d144e7d0e68ffc62911))
 
 ### Feature
+
+* feat: adding lls tool (needs work to get secret API key in place. ([`cc54fce`](https://github.com/svange/openbrain/commit/cc54fce7ca4f47f9d81d05a82c38606acc40f99f))
 
 * feat: adding lls tool (needs work to get secret API key in place. ([`535557f`](https://github.com/svange/openbrain/commit/535557f7118ec5dbf3740c529eeeb91295878491))
 
@@ -1216,10 +1809,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * chaing LeadmoAppointment and adaptor to use v1 api objects (changing fields) ([dedd5a2](https://github.com/svange/openbrain/commit/dedd5a2e9d46fb66b4d0e4653a32a53c022ab473)) ([`cd178e0`](https://github.com/svange/openbrain/commit/cd178e0ed67cad3e752c5efebf97524b09b98dc5))
 
-### Feature
-
-* feat: chaing LeadmoAppointment and adaptor to use v1 api objects (changing fields) ([`dedd5a2`](https://github.com/svange/openbrain/commit/dedd5a2e9d46fb66b4d0e4653a32a53c022ab473))
-
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/main&#39; ([`f7e8249`](https://github.com/svange/openbrain/commit/f7e8249485b50235f4cf6748d72e0ee27813d709))
@@ -1238,6 +1827,8 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 ### Feature
 
+* feat: chaing LeadmoAppointment and adaptor to use v1 api objects (changing fields) ([`dedd5a2`](https://github.com/svange/openbrain/commit/dedd5a2e9d46fb66b4d0e4653a32a53c022ab473))
+
 * feat: adding tools: leadmo_get_simple_calendar_appointment_slots, leadmo_create_appointment, get_current_time ([`5ec2ee8`](https://github.com/svange/openbrain/commit/5ec2ee84d0bf016761988f3618cdf90c2adfc279))
 
 ## v1.4.26 (2024-06-28)
@@ -1251,10 +1842,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 ### Bug Fixes
 
 * adding tool utilities ([2212b34](https://github.com/svange/openbrain/commit/2212b34001933a5ae6f4bdc336dd09740cc78932)) ([`05aaff4`](https://github.com/svange/openbrain/commit/05aaff49a9407b223f429df61c547c191c677513))
-
-### Fix
-
-* fix: adding tool utilities ([`2212b34`](https://github.com/svange/openbrain/commit/2212b34001933a5ae6f4bdc336dd09740cc78932))
 
 ### Unknown
 
@@ -1273,6 +1860,8 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 * adding tool utilities ([b19cde3](https://github.com/svange/openbrain/commit/b19cde3da2155b20f52f3d45966372a0942c0217)) ([`28de6be`](https://github.com/svange/openbrain/commit/28de6bed45171a512ec1ea627f06f020a436b889))
 
 ### Fix
+
+* fix: adding tool utilities ([`2212b34`](https://github.com/svange/openbrain/commit/2212b34001933a5ae6f4bdc336dd09740cc78932))
 
 * fix: adding tool utilities ([`b19cde3`](https://github.com/svange/openbrain/commit/b19cde3da2155b20f52f3d45966372a0942c0217))
 
@@ -1328,8 +1917,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * fix: fixing tools... ([`4816169`](https://github.com/svange/openbrain/commit/4816169ed0d55379c48936d7c32bb505012aa8a4))
 
-* fix: fixing tools... ([`e192cbe`](https://github.com/svange/openbrain/commit/e192cbe6f1fa12cf185e61d0f518d9a1f1d0a264))
-
 ## v1.4.21 (2024-06-28)
 
 ### Chore
@@ -1343,6 +1930,8 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 * fixing tools... ([0ebb448](https://github.com/svange/openbrain/commit/0ebb448e54be3fafccffdb85d5e3f3d216a5af67)) ([`9210c02`](https://github.com/svange/openbrain/commit/9210c022c2d9512b62ba8019d004ff3ef6a21e09))
 
 ### Fix
+
+* fix: fixing tools... ([`e192cbe`](https://github.com/svange/openbrain/commit/e192cbe6f1fa12cf185e61d0f518d9a1f1d0a264))
 
 * fix: fixing tools... ([`0ebb448`](https://github.com/svange/openbrain/commit/0ebb448e54be3fafccffdb85d5e3f3d216a5af67))
 
@@ -1493,20 +2082,18 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`4c357d4`](https://github.com/svange/openbrain/commit/4c357d4a9ad3ac2cd02f833ae37a54be492b3226))
 
-* Merge branch &#39;refs/heads/main&#39; into dev
-
-# Conflicts:
-#	CHANGELOG.md ([`4fadd09`](https://github.com/svange/openbrain/commit/4fadd09859d64d6e44b1f4ce5195b645b5e00c15))
-
 ## v1.4.13-dev.2 (2024-06-27)
 
 ### Chore
 
 * chore(release): release 1.4.13-dev.2 ([`b305eeb`](https://github.com/svange/openbrain/commit/b305eeb50519d334cf4615ce3828f1a2778990bb))
 
-### Fix
+### Unknown
 
-* fix: adding context to deserialize funciton so that rehydrated agents have proper context in their tools upon session continuation. ([`9c554db`](https://github.com/svange/openbrain/commit/9c554db1fc5d335bb978d3ef0c60b3c68deb599d))
+* Merge branch &#39;refs/heads/main&#39; into dev
+
+# Conflicts:
+#	CHANGELOG.md ([`4fadd09`](https://github.com/svange/openbrain/commit/4fadd09859d64d6e44b1f4ce5195b645b5e00c15))
 
 ## v1.4.13 (2024-06-27)
 
@@ -1524,6 +2111,8 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 ### Fix
 
 * fix: merging change into main ([`93115d8`](https://github.com/svange/openbrain/commit/93115d87da24ce0fbc4595ef4d581ea42145334b))
+
+* fix: adding context to deserialize funciton so that rehydrated agents have proper context in their tools upon session continuation. ([`9c554db`](https://github.com/svange/openbrain/commit/9c554db1fc5d335bb978d3ef0c60b3c68deb599d))
 
 ## v1.4.13-dev.1 (2024-06-27)
 
@@ -1581,6 +2170,12 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * fix: fixing tools... ([`80f33ad`](https://github.com/svange/openbrain/commit/80f33ad44fa61340584d7fa978853fe4d8d47e26))
 
+## v1.4.10-dev.1 (2024-06-26)
+
+### Chore
+
+* chore(release): release 1.4.10-dev.1 ([`c0c3d79`](https://github.com/svange/openbrain/commit/c0c3d79836b16d0e1922a6092c259c55bae4a37e))
+
 ## v1.4.10 (2024-06-26)
 
 ### Chore
@@ -1592,12 +2187,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 ### Bug Fixes
 
 * fixing tools... ([4757349](https://github.com/svange/openbrain/commit/475734996b165936728f4eef4c3c354cc9c65b1d)) ([`1dfa712`](https://github.com/svange/openbrain/commit/1dfa712320ee9b650b2d0c211d2373d64d00ab54))
-
-## v1.4.10-dev.1 (2024-06-26)
-
-### Chore
-
-* chore(release): release 1.4.10-dev.1 ([`c0c3d79`](https://github.com/svange/openbrain/commit/c0c3d79836b16d0e1922a6092c259c55bae4a37e))
 
 ### Fix
 
@@ -1684,10 +2273,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 * fixing tools... ([58c98cd](https://github.com/svange/openbrain/commit/58c98cd0f4f42707de7c075cd039bfae4baa13c5))
 * merging change into main ([5a614e4](https://github.com/svange/openbrain/commit/5a614e4ba9c0572c3df13dda8c0fd6c6a68a4e51)) ([`623badf`](https://github.com/svange/openbrain/commit/623badf76bbd0a0e0374ac23ea5878997042dc5c))
 
-### Fix
-
-* fix: merging change into main ([`5a614e4`](https://github.com/svange/openbrain/commit/5a614e4ba9c0572c3df13dda8c0fd6c6a68a4e51))
-
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/main&#39; ([`1dc6fd4`](https://github.com/svange/openbrain/commit/1dc6fd43bd0377aa211991626c6de1896aa128ea))
@@ -1699,6 +2284,8 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 * chore(release): release 1.4.7-dev.1 ([`ab4be5e`](https://github.com/svange/openbrain/commit/ab4be5e799a25350042f935bd30fef9c952239cd))
 
 ### Fix
+
+* fix: merging change into main ([`5a614e4`](https://github.com/svange/openbrain/commit/5a614e4ba9c0572c3df13dda8c0fd6c6a68a4e51))
 
 * fix: fixing tools... ([`58c98cd`](https://github.com/svange/openbrain/commit/58c98cd0f4f42707de7c075cd039bfae4baa13c5))
 
@@ -1741,10 +2328,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 * fixing tool error, still using lead artifacts after they were deprecated. ([fb30621](https://github.com/svange/openbrain/commit/fb30621af7b362b1b6486f0eca55448096a9b9ce))
 * merging change into main ([ce61a91](https://github.com/svange/openbrain/commit/ce61a9193f8443673843cd5b7c5d47d555f85789)) ([`ea01ebc`](https://github.com/svange/openbrain/commit/ea01ebcae72a828af8cb9ca654d7b18e2d0c6e71))
 
-### Fix
-
-* fix: merging change into main ([`ce61a91`](https://github.com/svange/openbrain/commit/ce61a9193f8443673843cd5b7c5d47d555f85789))
-
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/main&#39; ([`f31aeee`](https://github.com/svange/openbrain/commit/f31aeee4335ee19b85a5ef70b02bd8618f62c28e))
@@ -1756,6 +2339,8 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 * chore(release): release 1.4.3-dev.3 ([`199e64f`](https://github.com/svange/openbrain/commit/199e64f3450c511d8252b748932c71f760829a4e))
 
 ### Fix
+
+* fix: merging change into main ([`ce61a91`](https://github.com/svange/openbrain/commit/ce61a9193f8443673843cd5b7c5d47d555f85789))
 
 * fix: fixing tool error, still using lead artifacts after they were deprecated. ([`fb30621`](https://github.com/svange/openbrain/commit/fb30621af7b362b1b6486f0eca55448096a9b9ce))
 
@@ -1776,23 +2361,9 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 * cleaning up tool abstraction. Standardizing event details to include only &#34;context&#34; and &#34;ai_input&#34;. ([795346b](https://github.com/svange/openbrain/commit/795346b284a19c90f1e50704a7383093518fedf6))
 * merging change into main ([6b363f2](https://github.com/svange/openbrain/commit/6b363f278dd45e953828af77293206f1c41b8c0c)) ([`948f0e2`](https://github.com/svange/openbrain/commit/948f0e299c748d74b074d6fe1a9c62d4e7a43b3c))
 
-### Fix
-
-* fix: merging change into main ([`6b363f2`](https://github.com/svange/openbrain/commit/6b363f278dd45e953828af77293206f1c41b8c0c))
-
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/main&#39; ([`bb55f4f`](https://github.com/svange/openbrain/commit/bb55f4fd9c5087c22f9a0b6ae78d335cbfc6d4fb))
-
-## v1.4.3-dev.2 (2024-06-26)
-
-### Chore
-
-* chore(release): release 1.4.3-dev.2 ([`01fac2c`](https://github.com/svange/openbrain/commit/01fac2c68321c7ee42764e1ede3e1c2f4ba90128))
-
-### Fix
-
-* fix: cleaning up tool abstraction. Standardizing event details to include only &#34;context&#34; and &#34;ai_input&#34;. ([`795346b`](https://github.com/svange/openbrain/commit/795346b284a19c90f1e50704a7383093518fedf6))
 
 ## v1.4.3 (2024-06-20)
 
@@ -1809,7 +2380,19 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 ### Fix
 
+* fix: merging change into main ([`6b363f2`](https://github.com/svange/openbrain/commit/6b363f278dd45e953828af77293206f1c41b8c0c))
+
 * fix: bump commit ([`16a9d1b`](https://github.com/svange/openbrain/commit/16a9d1b7a1980cd69deb8e34a2053d437ce4b9b8))
+
+## v1.4.3-dev.2 (2024-06-26)
+
+### Chore
+
+* chore(release): release 1.4.3-dev.2 ([`01fac2c`](https://github.com/svange/openbrain/commit/01fac2c68321c7ee42764e1ede3e1c2f4ba90128))
+
+### Fix
+
+* fix: cleaning up tool abstraction. Standardizing event details to include only &#34;context&#34; and &#34;ai_input&#34;. ([`795346b`](https://github.com/svange/openbrain/commit/795346b284a19c90f1e50704a7383093518fedf6))
 
 ## v1.4.3-dev.1 (2024-06-19)
 
@@ -1859,8 +2442,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * fix: Merge branch &#39;refs/heads/main&#39; into dev ([`5d2b3e6`](https://github.com/svange/openbrain/commit/5d2b3e646b7c1ec14ead5d145f90d9f008a9a367))
 
-* fix: removing initial context from initial message to AI and moving it to the metadata plane ([`190f31f`](https://github.com/svange/openbrain/commit/190f31fe335fd530edfe54aa873ad332e238ad48))
-
 ## v1.4.1 (2024-06-19)
 
 ### Chore
@@ -1877,16 +2458,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 ### Fix
 
 * fix: bump commit ([`bba2622`](https://github.com/svange/openbrain/commit/bba26226ee90ba93da78a2c52c0062e8dc5723df))
-
-## v1.2.0-dev.4 (2024-06-19)
-
-### Chore
-
-* chore(release): release 1.2.0-dev.4 ([`db4ba6c`](https://github.com/svange/openbrain/commit/db4ba6cf99819ee1ea4351f400d98ef2281b806b))
-
-### Fix
-
-* fix:  bump commit ([`33ea41c`](https://github.com/svange/openbrain/commit/33ea41cb8fb2310094b5d06d73932de101a7221c))
 
 ## v1.4.0 (2024-06-19)
 
@@ -1906,17 +2477,7 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * feat: Changes to ChatMessage ORM model pushed to release. ([`4efe453`](https://github.com/svange/openbrain/commit/4efe453a109fc108c1ed91d0ad091c78ddfbb948))
 
-## v1.2.0-dev.3 (2024-06-19)
-
-### Chore
-
-* chore(release): release 1.2.0-dev.3 ([`4496c18`](https://github.com/svange/openbrain/commit/4496c187c00e8909b800f5e9224c4283adec8f9d))
-
-### Feature
-
 * feat: Changes to ChatMessage ORM model pushed to release. ([`f2d7354`](https://github.com/svange/openbrain/commit/f2d7354fc125511fae3c6390e42590877a622404))
-
-* feat: updating ChatMessage ORM object to allow extra fields for initial_context ([`e64566c`](https://github.com/svange/openbrain/commit/e64566c862b98494c4dcae5fd5ad5d24ca398d80))
 
 ## v1.3.0 (2024-06-19)
 
@@ -1935,17 +2496,11 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * feat: Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([`36a85a2`](https://github.com/svange/openbrain/commit/36a85a2dea83d646fba8163734add45399b0a8b6))
 
-## v1.2.0-dev.2 (2024-06-19)
-
-### Chore
-
-* chore(release): release 1.2.0-dev.2 ([`3011808`](https://github.com/svange/openbrain/commit/3011808d76b482c44373587be8805eec49008053))
-
-### Feature
-
-* feat: Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([`c8a4a40`](https://github.com/svange/openbrain/commit/c8a4a404d7dfa76fefb28c374a1a4362db8b8c3a))
-
 ## v1.2.0 (2024-06-11)
+
+### Build
+
+* build: update packages to latest available ([`736a47c`](https://github.com/svange/openbrain/commit/736a47cf82c20c163ff7b06b589a2e9c1e6dde99))
 
 ### Chore
 
@@ -1962,11 +2517,41 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * feat: Tools framework updated ([`3aece69`](https://github.com/svange/openbrain/commit/3aece69d02dcf1c36b0081a683c312cb6a3abb48))
 
+### Fix
+
+* fix: removing initial context from initial message to AI and moving it to the metadata plane ([`190f31f`](https://github.com/svange/openbrain/commit/190f31fe335fd530edfe54aa873ad332e238ad48))
+
+## v1.2.0-dev.4 (2024-06-19)
+
+### Chore
+
+* chore(release): release 1.2.0-dev.4 ([`db4ba6c`](https://github.com/svange/openbrain/commit/db4ba6cf99819ee1ea4351f400d98ef2281b806b))
+
+### Fix
+
+* fix:  bump commit ([`33ea41c`](https://github.com/svange/openbrain/commit/33ea41cb8fb2310094b5d06d73932de101a7221c))
+
+## v1.2.0-dev.3 (2024-06-19)
+
+### Chore
+
+* chore(release): release 1.2.0-dev.3 ([`4496c18`](https://github.com/svange/openbrain/commit/4496c187c00e8909b800f5e9224c4283adec8f9d))
+
+### Feature
+
+* feat: updating ChatMessage ORM object to allow extra fields for initial_context ([`e64566c`](https://github.com/svange/openbrain/commit/e64566c862b98494c4dcae5fd5ad5d24ca398d80))
+
+## v1.2.0-dev.2 (2024-06-19)
+
+### Chore
+
+* chore(release): release 1.2.0-dev.2 ([`3011808`](https://github.com/svange/openbrain/commit/3011808d76b482c44373587be8805eec49008053))
+
+### Feature
+
+* feat: Tools framework updated, initial_context added and tools can now get external inputs (from the agent config and api) as well as the standard message as input. ([`c8a4a40`](https://github.com/svange/openbrain/commit/c8a4a404d7dfa76fefb28c374a1a4362db8b8c3a))
+
 ## v1.2.0-dev.1 (2024-06-11)
-
-### Build
-
-* build: update packages to latest available ([`736a47c`](https://github.com/svange/openbrain/commit/736a47cf82c20c163ff7b06b589a2e9c1e6dde99))
 
 ### Chore
 
@@ -2025,10 +2610,6 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * added newlines for demo ([297e672](https://github.com/svange/openbrain/commit/297e6724a4b4fd2942d7779c33bfe2aa1eeab7d7)) ([`909d6d4`](https://github.com/svange/openbrain/commit/909d6d4e3a3313c9494bcfe914abb8cfc830176b))
 
-### Fix
-
-* fix: added newlines for demo ([`297e672`](https://github.com/svange/openbrain/commit/297e6724a4b4fd2942d7779c33bfe2aa1eeab7d7))
-
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/main&#39; ([`d9f51fb`](https://github.com/svange/openbrain/commit/d9f51fbeb61ea03a4484f360a55e1cdc710553eb))
@@ -2049,9 +2630,9 @@ BREAKING CHANGE: Infrastructure must now be deployed for OB app to run. Agent to
 
 * update gradio to work with new environment variables. ([396ab70](https://github.com/svange/openbrain/commit/396ab709d4e3f0962fffb25e71168cc28349384f)) ([`662e6d5`](https://github.com/svange/openbrain/commit/662e6d5a04606d94bb785a21efa829b732209663))
 
-### Unknown
+### Fix
 
-* Merge remote-tracking branch &#39;origin/main&#39; ([`8649da5`](https://github.com/svange/openbrain/commit/8649da545af1bd4e4e90dead569b77e6ed6699f0))
+* fix: added newlines for demo ([`297e672`](https://github.com/svange/openbrain/commit/297e6724a4b4fd2942d7779c33bfe2aa1eeab7d7))
 
 ## v1.0.5-dev.1 (2023-11-23)
 
@@ -2082,6 +2663,10 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * fix: update gradio to work with new environment variables. ([`396ab70`](https://github.com/svange/openbrain/commit/396ab709d4e3f0962fffb25e71168cc28349384f))
 
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`8649da5`](https://github.com/svange/openbrain/commit/8649da545af1bd4e4e90dead569b77e6ed6699f0))
+
 ## v1.0.4 (2023-11-13)
 
 ### Chore
@@ -2101,6 +2686,12 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 ### Unknown
 
 * Merge branch &#39;dev&#39; ([`5341bbe`](https://github.com/svange/openbrain/commit/5341bbe4b741af8d8b7ac0ce66f33eb60b4a19c5))
+
+## v1.0.2-dev.1 (2023-11-13)
+
+### Chore
+
+* chore(release): release 1.0.2-dev.1 ([`5233fa2`](https://github.com/svange/openbrain/commit/5233fa27159a72aeea2750a8c3d8865ae688e047))
 
 ## v1.0.3 (2023-11-13)
 
@@ -2134,16 +2725,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * removing import exceptions in favor of logging warnings so Chalice can stop complaining. ([4f66cbf](https://github.com/svange/openbrain/commit/4f66cbf1497534c3355c04278570eb62962afb05)) ([`e413078`](https://github.com/svange/openbrain/commit/e4130784a82630d25f9ba3daf8912359ecf763a1))
 
-## v1.0.2-dev.1 (2023-11-13)
-
-### Chore
-
-* chore(release): release 1.0.2-dev.1 ([`5233fa2`](https://github.com/svange/openbrain/commit/5233fa27159a72aeea2750a8c3d8865ae688e047))
-
-### Documentation
-
-* docs: added info about the SAM template ([`b7b90f4`](https://github.com/svange/openbrain/commit/b7b90f4c658394bd490ce3a4c670c1e729734e31))
-
 ### Fix
 
 * fix: removing import exceptions in favor of logging warnings so Chalice can stop complaining. ([`4f66cbf`](https://github.com/svange/openbrain/commit/4f66cbf1497534c3355c04278570eb62962afb05))
@@ -2173,6 +2754,10 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 * tuning ci pipeline ([6330be2](https://github.com/svange/openbrain/commit/6330be25eff009ac9602b3855795e047b35c1e21))
 * tuning ci pipeline ([971cfbd](https://github.com/svange/openbrain/commit/971cfbded58aa64a358ae64ecd18616e350806d4)) ([`b573f45`](https://github.com/svange/openbrain/commit/b573f4512ad0e58b902496c8a70a2d0534603c64))
 
+### Documentation
+
+* docs: added info about the SAM template ([`b7b90f4`](https://github.com/svange/openbrain/commit/b7b90f4c658394bd490ce3a4c670c1e729734e31))
+
 ## v0.23.0-dev.8 (2023-11-10)
 
 ### Build
@@ -2191,10 +2776,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * fix: skipping unnecessary steps in pipeline ([`4e3a67f`](https://github.com/svange/openbrain/commit/4e3a67f2dca2f6cb453d8cbcb5e5f8063c0253a1))
 
-### Unknown
-
-* Merge branch &#39;dev&#39; ([`e7676c5`](https://github.com/svange/openbrain/commit/e7676c510351fc094a1bb63554a847ca8ba48901))
-
 ## v0.23.0-dev.7 (2023-11-10)
 
 ### Chore
@@ -2205,15 +2786,15 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * fix: tuning ci pipeline ([`7f9df0d`](https://github.com/svange/openbrain/commit/7f9df0d740bead7856b52a02d4ff37bd92b2ebe1))
 
+### Unknown
+
+* Merge branch &#39;dev&#39; ([`e7676c5`](https://github.com/svange/openbrain/commit/e7676c510351fc094a1bb63554a847ca8ba48901))
+
 ## v0.23.0-dev.6 (2023-11-10)
 
 ### Chore
 
 * chore(release): release 0.23.0-dev.6 ([`4c62d40`](https://github.com/svange/openbrain/commit/4c62d405a0159b310b72414139d6069294f594cc))
-
-### Fix
-
-* fix: tuning ci pipeline ([`6330be2`](https://github.com/svange/openbrain/commit/6330be25eff009ac9602b3855795e047b35c1e21))
 
 ### Unknown
 
@@ -2226,6 +2807,8 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 * chore(release): release 0.23.0-dev.5 [skip ci] ([`8960f7e`](https://github.com/svange/openbrain/commit/8960f7e610a79b00dc390563aaa9a6d8c070828e))
 
 ### Fix
+
+* fix: tuning ci pipeline ([`6330be2`](https://github.com/svange/openbrain/commit/6330be25eff009ac9602b3855795e047b35c1e21))
 
 * fix: tuning ci pipeline ([`971cfbd`](https://github.com/svange/openbrain/commit/971cfbded58aa64a358ae64ecd18616e350806d4))
 
@@ -2315,8 +2898,6 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * fix: adding skip ci to automatic commit messages ([`b456a24`](https://github.com/svange/openbrain/commit/b456a24cbb17058ffc68180d0855c2aa8e36f45d))
 
-* fix: ignoring changelog for trailing whitespace check ([`d9b7de3`](https://github.com/svange/openbrain/commit/d9b7de36a5689cf58c4f25df1fe1898fa0b7880f))
-
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`bd14552`](https://github.com/svange/openbrain/commit/bd14552b42582092d6afb8f231f61d7767d07771))
@@ -2330,6 +2911,8 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 * chore(release): release 0.23.0-dev.3 ([`4af20c2`](https://github.com/svange/openbrain/commit/4af20c2a397d4d28d2878bbf29f9a3ee64a9feb8))
 
 ### Fix
+
+* fix: ignoring changelog for trailing whitespace check ([`d9b7de3`](https://github.com/svange/openbrain/commit/d9b7de36a5689cf58c4f25df1fe1898fa0b7880f))
 
 * fix: ignoring changelog for trailing whitespace check ([`a5fe800`](https://github.com/svange/openbrain/commit/a5fe800665a110cfa94a75a74d1d58f9213e2ce5))
 
@@ -2726,8 +3309,6 @@ BREAKING-CHANGE: Module initialization and required env vars have changed... gla
 
 * feat: demote many info log statements to debug statements ([`6dee4bb`](https://github.com/svange/openbrain/commit/6dee4bba5c6baf2bc793661d1af0c65403a3a39c))
 
-* feat: demote many info log statements to debug statements ([`fdd91fe`](https://github.com/svange/openbrain/commit/fdd91fe55b7bbfbdd4c46742cc11b0b1eca9f492))
-
 ## v0.20.0 (2023-10-17)
 
 ### Chore
@@ -2743,8 +3324,6 @@ BREAKING-CHANGE: Module initialization and required env vars have changed... gla
 ### Feature
 
 * feat: remove promptlayer support ([`d99e26e`](https://github.com/svange/openbrain/commit/d99e26eef05c3eb31dd26f5aed513262282148ae))
-
-* feat: remove promptlayer support ([`c72b163`](https://github.com/svange/openbrain/commit/c72b1632630dd8c5477c990b33b3919964d694a2))
 
 ## v0.19.0 (2023-10-16)
 
@@ -2778,6 +3357,10 @@ BREAKING-CHANGE: Module initialization and required env vars have changed... gla
 * docs: Adding GitHub FUNDING.yml ([`59a0a56`](https://github.com/svange/openbrain/commit/59a0a561de33d974d0fe508ee2e4d0f54aa17d74))
 
 ### Feature
+
+* feat: demote many info log statements to debug statements ([`fdd91fe`](https://github.com/svange/openbrain/commit/fdd91fe55b7bbfbdd4c46742cc11b0b1eca9f492))
+
+* feat: remove promptlayer support ([`c72b163`](https://github.com/svange/openbrain/commit/c72b1632630dd8c5477c990b33b3919964d694a2))
 
 * feat: Fallback scheme for environment variables and better output when initializing. ([`d797a8b`](https://github.com/svange/openbrain/commit/d797a8bf040485eacf6c3259b30d0bc61dd13b65))
 
@@ -3385,10 +3968,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * CI/CD pipeline is ready! Semantic motherfucking releases!!! ([64134be](https://github.com/svange/openbrain/commit/64134bee1dde452e5314448c900531ef45c38357)) ([`fbbda8e`](https://github.com/svange/openbrain/commit/fbbda8e243fc6eb85e4e6ec91dec80912eb11790))
 
-### Feature
-
-* feat: CI/CD pipeline is ready! Semantic motherfucking releases!!! ([`64134be`](https://github.com/svange/openbrain/commit/64134bee1dde452e5314448c900531ef45c38357))
-
 ### Unknown
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev
@@ -3408,9 +3987,9 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * disabled pytest temporarily ([098aca8](https://github.com/svange/openbrain/commit/098aca8f85c210e9dad6ccf8e373574bf502401a)) ([`71b740f`](https://github.com/svange/openbrain/commit/71b740f14182dd3a5a2f87f2d0d3a1a361225eb1))
 
-### Fix
+### Feature
 
-* fix: disabled pytest temporarily ([`098aca8`](https://github.com/svange/openbrain/commit/098aca8f85c210e9dad6ccf8e373574bf502401a))
+* feat: CI/CD pipeline is ready! Semantic motherfucking releases!!! ([`64134be`](https://github.com/svange/openbrain/commit/64134bee1dde452e5314448c900531ef45c38357))
 
 ### Unknown
 
@@ -3430,7 +4009,7 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 ### Fix
 
-* fix: disabled pytest temporarily ([`9b2db9f`](https://github.com/svange/openbrain/commit/9b2db9fc00bde9695177a2f1dc9ee471cf61ffc3))
+* fix: disabled pytest temporarily ([`098aca8`](https://github.com/svange/openbrain/commit/098aca8f85c210e9dad6ccf8e373574bf502401a))
 
 ### Unknown
 
@@ -3465,9 +4044,9 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 * disabled pytest temporarily ([f40db8e](https://github.com/svange/openbrain/commit/f40db8e294a50e3b6fd4d9bad97027addd73afcf))
 * disabled pytest temporarily ([9013b3c](https://github.com/svange/openbrain/commit/9013b3c601b9824f39a131fe167d44161cd3e3ba)) ([`a727ed6`](https://github.com/svange/openbrain/commit/a727ed65e248b0ccedc543e73d77182f69129b5c))
 
-* chore: Merge remote-tracking branch &#39;origin/main&#39; ([`19fa657`](https://github.com/svange/openbrain/commit/19fa657e44eb6c6cae003d687a56ccc5b76da594))
-
 ### Fix
+
+* fix: disabled pytest temporarily ([`9b2db9f`](https://github.com/svange/openbrain/commit/9b2db9fc00bde9695177a2f1dc9ee471cf61ffc3))
 
 * fix: disabled pytest temporarily ([`d80c08c`](https://github.com/svange/openbrain/commit/d80c08c7634e0d62b95cd81806a40cd6bdfc143e))
 
@@ -3503,15 +4082,15 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`08fa30e`](https://github.com/svange/openbrain/commit/08fa30ed54ea14d4f76e93f9ed9d2aa2965ac1bf))
 
-* bump: ci/cd ([`42dcec5`](https://github.com/svange/openbrain/commit/42dcec50429f9748a5e2ea19d4daa3f360f15e5c))
-
-* bump: ci/cd ([`e43752c`](https://github.com/svange/openbrain/commit/e43752cbe7334147f4c1deafeceb2f9526cc06c2))
-
 * bump: ci/cd ([`c31dc0a`](https://github.com/svange/openbrain/commit/c31dc0a8dfef536e778f5113d9ba5c189b1ec8bc))
 
 * bump: ci/cd ([`13cb480`](https://github.com/svange/openbrain/commit/13cb48002bcea357b0f438b9979d2585bf717d35))
 
 ## v0.10.5 (2023-09-24)
+
+### Chore
+
+* chore: Merge remote-tracking branch &#39;origin/main&#39; ([`19fa657`](https://github.com/svange/openbrain/commit/19fa657e44eb6c6cae003d687a56ccc5b76da594))
 
 ### Fix
 
@@ -3523,6 +4102,10 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * bump: ci/cd ([`a6d31a9`](https://github.com/svange/openbrain/commit/a6d31a9be04430b3ce8b61d96243429df2bf8013))
 
+* bump: ci/cd ([`42dcec5`](https://github.com/svange/openbrain/commit/42dcec50429f9748a5e2ea19d4daa3f360f15e5c))
+
+* bump: ci/cd ([`e43752c`](https://github.com/svange/openbrain/commit/e43752cbe7334147f4c1deafeceb2f9526cc06c2))
+
 ## v0.10.4 (2023-09-24)
 
 ### Fix
@@ -3533,19 +4116,15 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 ### Build
 
-* build: fixing semantic release ([`89d8a8d`](https://github.com/svange/openbrain/commit/89d8a8dc037b00bcb91758d8b6fe0bbddf28385b))
-
 * build: fixing semantic release ([`a199079`](https://github.com/svange/openbrain/commit/a1990798465ec2a60171aeb0490ad3dc67da7414))
 
-### Chore
-
-* chore: updated LICENSE.md ([`034d214`](https://github.com/svange/openbrain/commit/034d214dd60c73826572f91b69d5c5d9303432e8))
+* build: fixing semantic release ([`89d8a8d`](https://github.com/svange/openbrain/commit/89d8a8dc037b00bcb91758d8b6fe0bbddf28385b))
 
 ### Fix
 
-* fix: update ci and deps ([`7214806`](https://github.com/svange/openbrain/commit/7214806443a5d3aced198743f71cf227b4581f8e))
-
 * fix: update ci and deps ([`59bf0fd`](https://github.com/svange/openbrain/commit/59bf0fd8980620ca4b0cb890e0e5e316d52fa5e2))
+
+* fix: update ci and deps ([`7214806`](https://github.com/svange/openbrain/commit/7214806443a5d3aced198743f71cf227b4581f8e))
 
 ### Unknown
 
@@ -3555,9 +4134,9 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * Merge remote-tracking branch &#39;origin/main&#39; ([`7abbac1`](https://github.com/svange/openbrain/commit/7abbac1072a2440ce66e37bdb94d243ef513d844))
 
-* Merge remote-tracking branch &#39;origin/main&#39; ([`5875912`](https://github.com/svange/openbrain/commit/5875912a8e34dea41e426b8d3ff3107881e54816))
-
 * Merge remote-tracking branch &#39;origin/main&#39; ([`b32155a`](https://github.com/svange/openbrain/commit/b32155a91acd9aba3fd7525db26e8c1dc532d621))
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`5875912`](https://github.com/svange/openbrain/commit/5875912a8e34dea41e426b8d3ff3107881e54816))
 
 * bump: update dependencies ([`26e21c5`](https://github.com/svange/openbrain/commit/26e21c55f7350a85f3e9a6c7d1b6f4a2eb997c0d))
 
@@ -3566,8 +4145,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 * Merge remote-tracking branch &#39;origin/main&#39; ([`624950e`](https://github.com/svange/openbrain/commit/624950e9c7a0966287af54d78623df95f3816414))
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`1997121`](https://github.com/svange/openbrain/commit/199712155c06a9feb87819fc2336453e25ad03fa))
-
-* bump: version 0.10.1 → 0.10.2 ([`a859742`](https://github.com/svange/openbrain/commit/a859742ae9c7253d371747b18c28905aed1d0220))
 
 ## v0.10.2 (2023-09-24)
 
@@ -3578,6 +4155,8 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 ### Unknown
 
 * bump: version 0.10.1 → 0.10.2 ([`179d2cd`](https://github.com/svange/openbrain/commit/179d2cd47510a2b1a4c9dcccbf4e3764f27e09aa))
+
+* bump: version 0.10.1 → 0.10.2 ([`a859742`](https://github.com/svange/openbrain/commit/a859742ae9c7253d371747b18c28905aed1d0220))
 
 ## v0.10.1 (2023-09-24)
 
@@ -3590,16 +4169,6 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 * bump: version 0.10.0 → 0.10.1 ([`8a96312`](https://github.com/svange/openbrain/commit/8a96312d0aa971596ba45bcf69734e66d08619e4))
 
 ## v0.10.0 (2023-09-24)
-
-### Feature
-
-* feat: adding dev branch back into ci/cd ([`731da0d`](https://github.com/svange/openbrain/commit/731da0d91a95f04e14dd3724939c78ebf903d116))
-
-* feat: adding dev branch back into ci/cd ([`59bd06f`](https://github.com/svange/openbrain/commit/59bd06f8747a6231e95f13983426655c73bbcc57))
-
-* feat: adding dev branch back into ci/cd ([`3aa021b`](https://github.com/svange/openbrain/commit/3aa021bf029ee1380ce4fc971ea618e5c30a28e9))
-
-* feat: adding dev branch back into ci/cd ([`f667569`](https://github.com/svange/openbrain/commit/f66756933c475dd78cbae00e92ccbf447607a667))
 
 ### Unknown
 
@@ -3615,7 +4184,19 @@ chore: bot pr ([`f4bb6f4`](https://github.com/svange/openbrain/commit/f4bb6f4637
 
 * build: implementing commitizen, pre-commit, github actions, and semantic release ([`8bd5306`](https://github.com/svange/openbrain/commit/8bd5306781b790eb37eeb51026c965d6f10085bc))
 
+### Chore
+
+* chore: updated LICENSE.md ([`034d214`](https://github.com/svange/openbrain/commit/034d214dd60c73826572f91b69d5c5d9303432e8))
+
 ### Feature
+
+* feat: adding dev branch back into ci/cd ([`731da0d`](https://github.com/svange/openbrain/commit/731da0d91a95f04e14dd3724939c78ebf903d116))
+
+* feat: adding dev branch back into ci/cd ([`59bd06f`](https://github.com/svange/openbrain/commit/59bd06f8747a6231e95f13983426655c73bbcc57))
+
+* feat: adding dev branch back into ci/cd ([`3aa021b`](https://github.com/svange/openbrain/commit/3aa021bf029ee1380ce4fc971ea618e5c30a28e9))
+
+* feat: adding dev branch back into ci/cd ([`f667569`](https://github.com/svange/openbrain/commit/f66756933c475dd78cbae00e92ccbf447607a667))
 
 * feat: adding dev branch back into ci/cd ([`af6f046`](https://github.com/svange/openbrain/commit/af6f046106fafec032593d6a853d66075d0cddb3))
 
@@ -3903,13 +4484,13 @@ PR ci/dev -&gt; main ([`9141165`](https://github.com/svange/openbrain/commit/914
 # Conflicts:
 #	.github/workflows/dev.yml ([`caaa765`](https://github.com/svange/openbrain/commit/caaa7655828c6e2499fa6d3c1ae850c564cca54d))
 
-* updating pipeline for work on dev branch #pr ([`f5860fd`](https://github.com/svange/openbrain/commit/f5860fd7d696dac0d8170a6aababb1e13b48014f))
-
-* updating pipeline for work on dev branch #pr ([`96f1331`](https://github.com/svange/openbrain/commit/96f1331ba9142824c9ca30f74d4373878220d8c0))
-
 * Merge pull request #30
 
 * updating pipeline for work on dev branch #test #pr ([`bd23f33`](https://github.com/svange/openbrain/commit/bd23f33a69138dded3a692c324fef4b7c6063713))
+
+* updating pipeline for work on dev branch #pr ([`f5860fd`](https://github.com/svange/openbrain/commit/f5860fd7d696dac0d8170a6aababb1e13b48014f))
+
+* updating pipeline for work on dev branch #pr ([`96f1331`](https://github.com/svange/openbrain/commit/96f1331ba9142824c9ca30f74d4373878220d8c0))
 
 * updating pipeline for work on dev branch #test #pr ([`61c565b`](https://github.com/svange/openbrain/commit/61c565b57f57fe8e0be597b77273d4a9da15eb59))
 
@@ -3919,6 +4500,35 @@ PR ci/dev -&gt; main ([`9141165`](https://github.com/svange/openbrain/commit/914
 #	.github/workflows/semantic-branches.yml ([`f39698b`](https://github.com/svange/openbrain/commit/f39698b32658d36b0786497887998c3a9bf5be9b))
 
 * stopping pr from triggering conditionally, just always pr, hopefully, each branch will just have a single, updating PR. ([`b0719cb`](https://github.com/svange/openbrain/commit/b0719cb51ae4b0eddd75ef2bf2b304b83109310d))
+
+* bugfixing #pr ([`4914654`](https://github.com/svange/openbrain/commit/4914654cd188877a652675b721b3e37290d2c2d7))
+
+* Merge remote-tracking branch &#39;origin/fix/pipeline-not-releasing-on-master-only-on-refs&#39; into fix/pipeline-not-releasing-on-master-only-on-refs ([`a2489fe`](https://github.com/svange/openbrain/commit/a2489fe8cca37f5ee5d2bd52dda93c0f47ce0c84))
+
+* bugfixing #pr ([`e4724b0`](https://github.com/svange/openbrain/commit/e4724b00f8fef5b7b9d889ed77cbf4f634e7a3fd))
+
+* bugfixing #pr ([`355b97d`](https://github.com/svange/openbrain/commit/355b97d19ec47d87e8e7823599bddfb405f0a443))
+
+* bugfixing #pr ([`d05b21c`](https://github.com/svange/openbrain/commit/d05b21c7554fefaaefae5f26179607220973ef48))
+
+* Merge remote-tracking branch &#39;origin/fix/pipeline-not-releasing-on-master-only-on-refs&#39; into fix/pipeline-not-releasing-on-master-only-on-refs ([`f67756f`](https://github.com/svange/openbrain/commit/f67756f5282267f27bdd0b5f0c27a1e517953e55))
+
+* bugfixing ([`69fc1b9`](https://github.com/svange/openbrain/commit/69fc1b9bfc444b12574423c6e22854da57361c1e))
+
+* bugfixing #pr ([`5afeaee`](https://github.com/svange/openbrain/commit/5afeaeee6dcdca8640fc3cf14e4de9c1f23042df))
+
+* Merge remote-tracking branch &#39;origin/fix/pipeline-not-releasing-on-master-only-on-refs&#39; into fix/pipeline-not-releasing-on-master-only-on-refs ([`5e29fd1`](https://github.com/svange/openbrain/commit/5e29fd1464ff9f85c25d350665c3b898d03e29c5))
+
+* trying regex in pyproject.toml ([`e8056dd`](https://github.com/svange/openbrain/commit/e8056dd0ab8f6ed7e92f48b9f4b52f63c27f32f2))
+
+* trying regex in pyproject.toml #pr ([`dd7c77a`](https://github.com/svange/openbrain/commit/dd7c77a1b11b4f444e2cca13f534d3dd50520a37))
+
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into fix/pipeline-not-releasing-on-master-only-on-refs
+
+# Conflicts:
+#	.github/workflows/semantic-branches.yml ([`32caec3`](https://github.com/svange/openbrain/commit/32caec39ae13a68466afd8dba13e6e6a8276c1b9))
+
+* Fixing pipeline ([`cd99171`](https://github.com/svange/openbrain/commit/cd99171e612768b61c3d6f62d268393af2c4a6e8))
 
 * Merge pull request #29
 
@@ -3948,19 +4558,6 @@ PR ci/dev -&gt; main ([`9141165`](https://github.com/svange/openbrain/commit/914
 
 * bugfixing #pr ([`99d2e42`](https://github.com/svange/openbrain/commit/99d2e42b2bb32d75db93586224f8947e2e0a9f2b))
 
-* bugfixing #pr ([`4914654`](https://github.com/svange/openbrain/commit/4914654cd188877a652675b721b3e37290d2c2d7))
-
-* Merge remote-tracking branch &#39;origin/fix/pipeline-not-releasing-on-master-only-on-refs&#39; into fix/pipeline-not-releasing-on-master-only-on-refs ([`a2489fe`](https://github.com/svange/openbrain/commit/a2489fe8cca37f5ee5d2bd52dda93c0f47ce0c84))
-
-* Merge branch &#39;main&#39; of github.com:/svange/openbrain into fix/pipeline-not-releasing-on-master-only-on-refs
-
-# Conflicts:
-#	.github/workflows/semantic-branches.yml ([`32caec3`](https://github.com/svange/openbrain/commit/32caec39ae13a68466afd8dba13e6e6a8276c1b9))
-
-* Fixing pipeline ([`cd99171`](https://github.com/svange/openbrain/commit/cd99171e612768b61c3d6f62d268393af2c4a6e8))
-
-* bugfixing #pr ([`e4724b0`](https://github.com/svange/openbrain/commit/e4724b00f8fef5b7b9d889ed77cbf4f634e7a3fd))
-
 ## v0.4.10 (2023-09-22)
 
 ### Unknown
@@ -3968,22 +4565,6 @@ PR ci/dev -&gt; main ([`9141165`](https://github.com/svange/openbrain/commit/914
 * AUTO-PR ci/fix/pipeline-not-releasing-on-master-only-on-refs -&gt; main (#28)
 
 Merge pull request #28 ([`7b62ea6`](https://github.com/svange/openbrain/commit/7b62ea6c6ce7397bce3c047ce86c1d261798cb38))
-
-* bugfixing #pr ([`355b97d`](https://github.com/svange/openbrain/commit/355b97d19ec47d87e8e7823599bddfb405f0a443))
-
-* bugfixing #pr ([`d05b21c`](https://github.com/svange/openbrain/commit/d05b21c7554fefaaefae5f26179607220973ef48))
-
-* Merge remote-tracking branch &#39;origin/fix/pipeline-not-releasing-on-master-only-on-refs&#39; into fix/pipeline-not-releasing-on-master-only-on-refs ([`f67756f`](https://github.com/svange/openbrain/commit/f67756f5282267f27bdd0b5f0c27a1e517953e55))
-
-* bugfixing #pr ([`5afeaee`](https://github.com/svange/openbrain/commit/5afeaeee6dcdca8640fc3cf14e4de9c1f23042df))
-
-* bugfixing ([`69fc1b9`](https://github.com/svange/openbrain/commit/69fc1b9bfc444b12574423c6e22854da57361c1e))
-
-* Merge remote-tracking branch &#39;origin/fix/pipeline-not-releasing-on-master-only-on-refs&#39; into fix/pipeline-not-releasing-on-master-only-on-refs ([`5e29fd1`](https://github.com/svange/openbrain/commit/5e29fd1464ff9f85c25d350665c3b898d03e29c5))
-
-* trying regex in pyproject.toml #pr ([`dd7c77a`](https://github.com/svange/openbrain/commit/dd7c77a1b11b4f444e2cca13f534d3dd50520a37))
-
-* trying regex in pyproject.toml ([`e8056dd`](https://github.com/svange/openbrain/commit/e8056dd0ab8f6ed7e92f48b9f4b52f63c27f32f2))
 
 * tweaked readme... and pipeline, sorry ([`56ad92c`](https://github.com/svange/openbrain/commit/56ad92cb60bb12ead0ed11fa1796474795a483ea))
 
@@ -4032,8 +4613,6 @@ Added guard so that PRs aren&#39;t always submitted upon pushes to this branch. 
 # Conflicts:
 #	README.md ([`1230463`](https://github.com/svange/openbrain/commit/12304630491001dd4a40120801150127db5521e5))
 
-* update README.md and start enforcing code quality. ([`2226f1b`](https://github.com/svange/openbrain/commit/2226f1bb7b95f4b33e23e508b78b19a20ac425e4))
-
 ## v0.4.7 (2023-09-22)
 
 ### Unknown
@@ -4050,9 +4629,9 @@ Added guard so that PRs aren&#39;t always submitted upon pushes to this branch. 
 
 * Merge branch &#39;main&#39; of github.com:/svange/openbrain into style/ci-cd-… ([`b52af2b`](https://github.com/svange/openbrain/commit/b52af2b47df6d4b616caef768404cc6d75210511))
 
-* Merge branch &#39;main&#39; of github.com:/svange/openbrain into style/ci-cd-standup ([`c9a4796`](https://github.com/svange/openbrain/commit/c9a479656578089f7c5902c1f3b6d9b4428e388f))
+* update README.md and start enforcing code quality. ([`2226f1b`](https://github.com/svange/openbrain/commit/2226f1bb7b95f4b33e23e508b78b19a20ac425e4))
 
-* re-enabling pipeline steps ([`00f5839`](https://github.com/svange/openbrain/commit/00f583956c3be99cbaf2bcbeaee81c2bb81dab9b))
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into style/ci-cd-standup ([`c9a4796`](https://github.com/svange/openbrain/commit/c9a479656578089f7c5902c1f3b6d9b4428e388f))
 
 ## v0.4.6 (2023-09-22)
 
@@ -4064,15 +4643,17 @@ Added guard so that PRs aren&#39;t always submitted upon pushes to this branch. 
 
 * re-enabling pipeline steps ([`a23f325`](https://github.com/svange/openbrain/commit/a23f3258901ae8037c78f2505bd690f7e495764b))
 
-* Merge branch &#39;main&#39; of github.com:/svange/openbrain into style/ci-cd-standup ([`11868ad`](https://github.com/svange/openbrain/commit/11868ade0dbd33116f38027ec440cab4a09c8b28))
+* re-enabling pipeline steps ([`00f5839`](https://github.com/svange/openbrain/commit/00f583956c3be99cbaf2bcbeaee81c2bb81dab9b))
 
-* re-enabling pipeline steps ([`6381757`](https://github.com/svange/openbrain/commit/63817576ca9306f4d737c3ec0792b1448617d202))
+* Merge branch &#39;main&#39; of github.com:/svange/openbrain into style/ci-cd-standup ([`11868ad`](https://github.com/svange/openbrain/commit/11868ade0dbd33116f38027ec440cab4a09c8b28))
 
 ## v0.4.5 (2023-09-22)
 
 ### Unknown
 
 * Updating README badge (#23) ([`941f738`](https://github.com/svange/openbrain/commit/941f73832068275f7d8be81afc0ba90bf1b08436))
+
+* re-enabling pipeline steps ([`6381757`](https://github.com/svange/openbrain/commit/63817576ca9306f4d737c3ec0792b1448617d202))
 
 * Updating README badge ([`e74c885`](https://github.com/svange/openbrain/commit/e74c8851c23080d5aa8b2ed50594e68699b17c9a))
 
@@ -4230,8 +4811,6 @@ Stood up first CI/CD pipeline for semantic versioning with github actions, and p
 
 * Merge branch &#39;features/cicd-pipeline&#39; of github.com:/svange/openbrain into dev ([`26b1c68`](https://github.com/svange/openbrain/commit/26b1c68c383c4070056fcf8211a20e7260daf86e))
 
-* Standing up CI/CD ([`f30c329`](https://github.com/svange/openbrain/commit/f30c32937f7e544a591ada2b08dfc127ccf6592d))
-
 * Standing up CI/CD ([`887752f`](https://github.com/svange/openbrain/commit/887752fc5998e409283205d5bc9afd0bb8a41e95))
 
 * tweaking ([`ed74c90`](https://github.com/svange/openbrain/commit/ed74c902f452b0c0dc958af9f786bcaccc60c9c6))
@@ -4257,6 +4836,8 @@ Stood up first CI/CD pipeline for semantic versioning with github actions, and p
 ### Unknown
 
 * removed smever in an attempt to make github play along. ([`d589fc7`](https://github.com/svange/openbrain/commit/d589fc73aa316c15e223a7225e762224080621da))
+
+* Standing up CI/CD ([`f30c329`](https://github.com/svange/openbrain/commit/f30c32937f7e544a591ada2b08dfc127ccf6592d))
 
 ## v0.2.9 (2023-09-21)
 
@@ -4290,13 +4871,13 @@ Stood up first CI/CD pipeline for semantic versioning with github actions, and p
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`51c3427`](https://github.com/svange/openbrain/commit/51c3427f4dea191d9f579851fd321aec1ce3e16d))
 
-* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`3e618f2`](https://github.com/svange/openbrain/commit/3e618f291c280cce7b3c7e5a065c3610526dd48e))
-
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`f8e76a2`](https://github.com/svange/openbrain/commit/f8e76a2bec3d59bdfe34308093a389db6b0874f1))
 
-* Setting up CI/CD pipeline and workflow ([`494e23d`](https://github.com/svange/openbrain/commit/494e23dbea902c301e691b45c58e3184d578a53e))
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`3e618f2`](https://github.com/svange/openbrain/commit/3e618f291c280cce7b3c7e5a065c3610526dd48e))
 
 * Setting up CI/CD pipeline and workflow ([`f9ef366`](https://github.com/svange/openbrain/commit/f9ef366174de6884718400c8040923d70dae084b))
+
+* Setting up CI/CD pipeline and workflow ([`494e23d`](https://github.com/svange/openbrain/commit/494e23dbea902c301e691b45c58e3184d578a53e))
 
 ## v0.2.0 (2023-09-21)
 
@@ -4312,9 +4893,9 @@ Stood up first CI/CD pipeline for semantic versioning with github actions, and p
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`d8050fa`](https://github.com/svange/openbrain/commit/d8050fa9ee898207197bb049376bb7f74a325dbf))
 
-* Setting up CI/CD pipeline and workflow ([`cbde9ba`](https://github.com/svange/openbrain/commit/cbde9baaf63d6a7c88e69003c53d0221ff221cdc))
-
 * Setting up CI/CD pipeline and workflow ([`48b6978`](https://github.com/svange/openbrain/commit/48b69786436591da4c406d20482a072e1b78fbe7))
+
+* Setting up CI/CD pipeline and workflow ([`cbde9ba`](https://github.com/svange/openbrain/commit/cbde9baaf63d6a7c88e69003c53d0221ff221cdc))
 
 * Updated README.md ([`0808e6a`](https://github.com/svange/openbrain/commit/0808e6a287ff8a8ad0f2f0c906499b603b66458f))
 
@@ -4329,6 +4910,8 @@ Stood up first CI/CD pipeline for semantic versioning with github actions, and p
 #	ci_cd.py
 #	pyproject.toml
 #	template.yaml ([`9b0aad0`](https://github.com/svange/openbrain/commit/9b0aad0a8b922a9d924bb432e5262f0b2bada93d))
+
+* initial commit ([`9e7ea40`](https://github.com/svange/openbrain/commit/9e7ea403a357a8bb9563c077e134dbdf7ab31fae))
 
 * Updated README.md ([`2ff9ccc`](https://github.com/svange/openbrain/commit/2ff9ccc953ae8cd3004ac5224281764862065144))
 
@@ -4352,17 +4935,15 @@ Stood up first CI/CD pipeline for semantic versioning with github actions, and p
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`5afb255`](https://github.com/svange/openbrain/commit/5afb2555e8cf85ac1470aa9f524d9b0592348315))
 
-* troubleshooting ci/cd pipeline ([`c221f35`](https://github.com/svange/openbrain/commit/c221f3523e9ffc98c96cb531e9ad49f8145aa5ea))
-
 * troubleshooting ci/cd pipeline ([`ca73a78`](https://github.com/svange/openbrain/commit/ca73a7841345f7bc03d7d75b4ee31979bdf0a3dd))
+
+* troubleshooting ci/cd pipeline ([`c221f35`](https://github.com/svange/openbrain/commit/c221f3523e9ffc98c96cb531e9ad49f8145aa5ea))
 
 * Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`e6990ed`](https://github.com/svange/openbrain/commit/e6990ed016b2edf742ccfcfc33b00fab966a0116))
 
-* initial commit ([`9626530`](https://github.com/svange/openbrain/commit/96265303eb71cdb1e30d39346b883b21041b1ce0))
-
 * initial commit ([`9c8c944`](https://github.com/svange/openbrain/commit/9c8c94400152a7b2b41e7190196387908bb0097f))
 
-* initial commit ([`9e7ea40`](https://github.com/svange/openbrain/commit/9e7ea403a357a8bb9563c077e134dbdf7ab31fae))
+* initial commit ([`9626530`](https://github.com/svange/openbrain/commit/96265303eb71cdb1e30d39346b883b21041b1ce0))
 
 * initial commit ([`b8bdfce`](https://github.com/svange/openbrain/commit/b8bdfce01a57ce5d4f96d877892a50df3d590f2d))
 
