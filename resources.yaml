@@ -181,7 +181,7 @@ Outputs:
         Description: ObEventActionTable
         Value: !Ref ObEventActionTable
         Export:
-            Name: !Sub '${AWS::StackName}-ObEventActionTable'
+            Name: !Sub '${AWS::StackName}-ObEventActionTableName'
 
     ObSessionTableName:
         Description: ObSessionTable
@@ -195,11 +195,11 @@ Outputs:
         Export:
             Name: !Sub '${AWS::StackName}-ObAgentConfigTableName'
 
-    ObActionTableName:
-        Description: ObEventActionTable
-        Value: !Ref ObEventActionTable
-        Export:
-            Name: !Sub '${AWS::StackName}-ObActionTableName'
+#    ObActionTableName:
+#        Description: ObEventActionTable
+#        Value: !Ref ObEventActionTable
+#        Export:
+#            Name: !Sub '${AWS::StackName}-ObActionTableName'
 
     CommonAccessPolicyArn:
         Description: CommonAccessPolicyArn
@@ -240,10 +240,10 @@ Outputs:
         Description: ObEventActionTable
         Value: !GetAtt ObEventActionTable.Arn
         Export:
-            Name: !Sub '${AWS::StackName}-ObEventActionTable'
+            Name: !Sub '${AWS::StackName}-ObEventActionTableArn'
 
-    ObActionTableArn:
-      Description: ObActionTableArn
-      Value: !GetAtt ObEventActionTable.Arn
-      Export:
-          Name: !Sub '${AWS::StackName}-ObActionTableArn'
+#    ObActionTableArn:
+#      Description: ObActionTableArn
+#      Value: !GetAtt ObEventActionTable.Arn
+#      Export:
+#          Name: !Sub '${AWS::StackName}-ObActionTableArn'
