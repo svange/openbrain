@@ -1,26 +1,58 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v3.5.0-dev.2 (2024-07-11)
+
+### Feature
+
+* feat: adding ClientTable ([`285fa72`](https://github.com/svange/openbrain/commit/285fa72058a9a83e4bd894668a2c1ddce00235c3))
+
+* feat: adding client table (WIP) ([`6ae2c2f`](https://github.com/svange/openbrain/commit/6ae2c2fa1914d22d1f6d4992f9493e851e45d1dd))
+
+### Unknown
+
+* Merge branch &#39;refs/heads/main&#39; into dev
+
+# Conflicts:
+#	CHANGELOG.md ([`7014378`](https://github.com/svange/openbrain/commit/7014378f2ee3f03e0fe6ca47f65c2adbb9d5f0f2))
+
+## v3.6.0 (2024-07-11)
+
+### Chore
+
+* chore(release): 3.6.0 [skip ci]
 
 ## [3.6.0](https://github.com/svange/openbrain/compare/v3.5.0...v3.6.0) (2024-07-11)
 
-
 ### Features
 
-* OIDC!!!, updated interface and minor bug fixes ([b8f43b9](https://github.com/svange/openbrain/commit/b8f43b95c3f21f01d1d10903299e11d414c0f9a7))
+* OIDC!!!, updated interface and minor bug fixes ([b8f43b9](https://github.com/svange/openbrain/commit/b8f43b95c3f21f01d1d10903299e11d414c0f9a7)) ([`d403a75`](https://github.com/svange/openbrain/commit/d403a75edea56837001c20ef65a0216589283eb6))
+
+### Feature
+
+* feat: OIDC!!!, updated interface and minor bug fixes ([`b8f43b9`](https://github.com/svange/openbrain/commit/b8f43b95c3f21f01d1d10903299e11d414c0f9a7))
+
+## v3.5.0 (2024-07-09)
+
+### Chore
+
+* chore(release): 3.5.0 [skip ci]
 
 ## [3.5.0](https://github.com/svange/openbrain/compare/v3.4.2...v3.5.0) (2024-07-09)
-
 
 ### Features
 
 * Cognito integrated UI ([cbb2c9e](https://github.com/svange/openbrain/commit/cbb2c9eeaa3e5fa9daff711177c5de9ff15d35e2))
-* Federated auth in UI ([ba9eb6a](https://github.com/svange/openbrain/commit/ba9eb6a532cde5d2f1e1749c19a8faf47571a0c6))
+* Federated auth in UI ([ba9eb6a](https://github.com/svange/openbrain/commit/ba9eb6a532cde5d2f1e1749c19a8faf47571a0c6)) ([`5bd1304`](https://github.com/svange/openbrain/commit/5bd13040193983b0eb5ee4822ce85dbb1e0bb400))
 
-# CHANGELOG
+### Feature
+
+* feat: Federated auth in UI ([`ba9eb6a`](https://github.com/svange/openbrain/commit/ba9eb6a532cde5d2f1e1749c19a8faf47571a0c6))
 
 ## v3.5.0-dev.1 (2024-07-09)
+
+### Chore
+
+* chore(release): release 3.5.0-dev.1 ([`eed4e37`](https://github.com/svange/openbrain/commit/eed4e3713ed959e5ea4ddab4a232b354ca8b1a36))
 
 ### Feature
 
