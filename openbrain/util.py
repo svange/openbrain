@@ -55,12 +55,9 @@ class Defaults(Enum):
     """Default values for environment variables and other constants."""
 
     SESSION_TABLE_NAME = None
-    # LEAD_TABLE_NAME = None
     AGENT_CONFIG_TABLE_NAME = None
     ACTION_TABLE_NAME = None
-    # CLIENT_TABLE_NAME = "ObClientTable"
-
-    # SECRET_STORE_NAME = "ObSecrets"
+    CLIENT_TABLE_NAME = None
 
     # Central Infrastructure
     EVENTBUS_NAME = "ObEventBus"
@@ -68,10 +65,9 @@ class Defaults(Enum):
     # DB Tables
     INFRA_STACK_NAME = "OpenBrain"
     SESSION_TABLE_PUBLISHED_NAME = "ObSessionTableName"
-    # LEAD_TABLE_PUBLISHED_NAME = "ObLeadTableName"
     AGENT_CONFIG_TABLE_PUBLISHED_NAME = "ObAgentConfigTableName"
     ACTION_TABLE_PUBLISHED_NAME = "ObActionTableName"
-    # SECRET_STORE_PUBLISHED_NAME = "OpenbrainSecretStore"
+    CLIENT_TABLE_PUBLISHED_NAME = "ObClientTableName"
 
     # Other Values with defaults
     DEFAULT_CLIENT_ID = "public"
@@ -117,6 +113,11 @@ class Config:
             Defaults.ACTION_TABLE_NAME.name, Defaults.ACTION_TABLE_NAME.value)
     )
 
+    Client_TABLE_NAME: str = field(
+        default=os.environ.get(
+            Defaults.CLIENT_TABLE_NAME.name, Defaults.CLIENT_TABLE_NAME.value)
+    )
+
     SESSION_TABLE_PUBLISHED_NAME: str = field(
         default=os.environ.get(
             Defaults.SESSION_TABLE_PUBLISHED_NAME.name, Defaults.SESSION_TABLE_PUBLISHED_NAME.value
@@ -137,6 +138,13 @@ class Config:
         default=os.environ.get(
             Defaults.ACTION_TABLE_PUBLISHED_NAME.name,
             Defaults.ACTION_TABLE_PUBLISHED_NAME.value,
+        )
+    )
+
+    CLIENT_TABLE_PUBLISHED_NAME: str = field(
+        default=os.environ.get(
+            Defaults.CLIENT_TABLE_PUBLISHED_NAME.name,
+            Defaults.CLIENT_TABLE_PUBLISHED_NAME.value,
         )
     )
 
@@ -191,7 +199,7 @@ class Config:
             )
 
             # If the friendly name is using the default, emit a warning
-            if attrib_published_name == defaults[attrib]:
+            if attrib_published_name == defaults.get(attrib):
                 _logger.debug(
                     f"{attrib} is using the default friendly name. Do you have this infrastructure deployed?"
                 )
@@ -207,7 +215,7 @@ class Config:
             try:
                 resource_name = self._get_resource_from_central_infra(attrib_published_name)
                 setattr(self, attrib, resource_name)
-            except ClientError as e:
+            except Exception as e:
                 print(
                     f"ERROR: Can't find {attrib} in environment variables or central infrastructure"
                 )

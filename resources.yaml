@@ -31,6 +31,7 @@ Resources:
               - !GetAtt ObSessionTable.Arn
               - !GetAtt ObAgentConfigTable.Arn
               - !GetAtt ObEventActionTable.Arn
+              - !GetAtt ObClientTable.Arn
           - Effect: Allow
             Action:
               - cloudformation:DescribeStacks
@@ -189,6 +190,12 @@ Outputs:
         Export:
             Name: !Sub '${AWS::StackName}-ObAgentConfigTableName'
 
+    ObClientTableName:
+        Description: ObClientTable
+        Value: !Ref ObClientTable
+        Export:
+            Name: !Sub '${AWS::StackName}-ObClientTableName'
+
 #    ObActionTableName:
 #        Description: ObEventActionTable
 #        Value: !Ref ObEventActionTable
@@ -259,7 +266,11 @@ Outputs:
       Export:
         Name: !Sub '${AWS::StackName}-ObActionTableArn'
 
-
+    ObClientTableArn:
+        Description: ObClientTableArn
+        Value: !GetAtt ObClientTable.Arn
+        Export:
+            Name: !Sub '${AWS::StackName}-ObClientTableArn'
 
     ObBucketArn:
         Description: ObBucketArn
