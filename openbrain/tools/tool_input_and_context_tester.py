@@ -27,7 +27,7 @@ class TesterAdaptor(BaseModel):
         # validate_assignment = True
 
     random_word_from_conversation: str
-    # random_word_from_agent_creation: str
+    # random_word: str
 
 def on_tool_start(agent_config: AgentConfig, input_str: str, **kwargs) -> Any:
     """Function to run during callback handler's on_llm_start event."""
@@ -66,13 +66,13 @@ class TesterTool(BaseTool):
         random_word_from_conversation = kwargs.get("random_word_from_conversation")
 
         try:
-            random_word_from_agent_creation = context.get("random_word_from_agent_creation")
+            random_word = context.get("random_word")
         except AttributeError as e:
             double_unwrapped_context = json.loads(context)
-            random_word_from_agent_creation = double_unwrapped_context.get("random_word_from_agent_creation")
+            random_word = double_unwrapped_context.get("random_word")
 
         event_detail_dict = {
-            "random_word_from_agent_creation": random_word_from_agent_creation,
+            "random_word": random_word,
             "random_word_from_conversation": random_word_from_conversation
         }
 
@@ -82,7 +82,7 @@ class TesterTool(BaseTool):
         # response = (
         #     "Successfully ran tool. Repeat the word to the user."
         # )
-        response = f"Respond to the user with the words: {random_word_from_agent_creation} {random_word_from_conversation}"
+        response = f"Respond to the user with the words: {random_word} {random_word_from_conversation}"
 
         if agent_config.get("record_tool_actions"):
             OBTool.record_action(event=TOOL_NAME, response=event_response, latest=True, session_id=session_id)

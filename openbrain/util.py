@@ -58,6 +58,7 @@ class Defaults(Enum):
     # LEAD_TABLE_NAME = None
     AGENT_CONFIG_TABLE_NAME = None
     ACTION_TABLE_NAME = None
+    # CLIENT_TABLE_NAME = "ObClientTable"
 
     # SECRET_STORE_NAME = "ObSecrets"
 

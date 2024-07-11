@@ -1,3 +1,23 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [3.6.0](https://github.com/svange/openbrain/compare/v3.5.0...v3.6.0) (2024-07-11)
+
+
+### Features
+
+* OIDC!!!, updated interface and minor bug fixes ([b8f43b9](https://github.com/svange/openbrain/commit/b8f43b95c3f21f01d1d10903299e11d414c0f9a7))
+
+## [3.5.0](https://github.com/svange/openbrain/compare/v3.4.2...v3.5.0) (2024-07-09)
+
+
+### Features
+
+* Cognito integrated UI ([cbb2c9e](https://github.com/svange/openbrain/commit/cbb2c9eeaa3e5fa9daff711177c5de9ff15d35e2))
+* Federated auth in UI ([ba9eb6a](https://github.com/svange/openbrain/commit/ba9eb6a532cde5d2f1e1749c19a8faf47571a0c6))
+
 # CHANGELOG
 
 ## v3.5.0-dev.1 (2024-07-09)
