@@ -170,7 +170,7 @@ class TestAgentTools:
     @pytest.mark.tools
     def test_tester_tool(self, simple_tool_tester_agent_config: AgentConfig):
         """Test the tester tool."""
-        context = {"random_word_from_agent_creation": "rambutan"}
+        context = {"random_word": "rambutan"}
         agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context)
         response = agent.handle_user_message("Your random word is banana.")
         assert "banana" in response
@@ -372,6 +372,8 @@ class TestAgentTools:
     @pytest.mark.tools
     def test_leadmo_create_appointment_tool(self, leadmo_tool_tester_agent_config):
         context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+        context['calendarId'] = 'asGgwlPqqu6s17W084uE'
+        # context['api_key'] = os.getenv('DEV_LEADMO_BEARER_TOKEN')
 
         agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context)
         response = agent.handle_user_message("Create an appointment.")

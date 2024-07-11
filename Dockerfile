@@ -23,5 +23,5 @@ EXPOSE 80
 # Define environment variable
 ENV PYTHONPATH=/usr/src/app:/usr/src/app/ob-tuner:/usr/src/app/openbrain:$PYTHONPATH
 # Run app.py when the container launches
-WORKDIR /usr/src/app/openbrain
-CMD ["python", "app.py"]
+WORKDIR /usr/src/app
+CMD ["python", "openbrain/app.py"]
