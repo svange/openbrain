@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 
 from openbrain.ob_tuner.main_page import main_block as io
 from openbrain.ob_tuner.landing_page import landing_page
+from openbrain.orm.model_client import Client
 load_dotenv()
 
 CUSTOM_PATH = "/gradio"
@@ -73,6 +74,34 @@ def callback(request: Request, code: str):
         # Handle error response
         return JSONResponse(status_code=response.status_code, content={"message": "Authentication failed"})
 
+def reconcile_user(decoded_token: dict, disable=True):
+    if disable:
+        return
+
+    fields_of_interest = ["cognito:groups", "email_verified", "cognito:preferred_role", "cognito:username", "cognito:roles", "token_use", "email"]
+
+    user_info = {}
+    for field in fields_of_interest:
+        try:
+            user_info[field] = decoded_token[field]
+        except KeyError:
+            user_info[field] = None
+
+    # create or update the user
+    try:
+        user = Client.get(user_info["cognito:username"])
+        user.email = user_info["email"]
+        user.roles = user_info["cognito:roles"]
+    except Client.DoesNotExist:
+        user = Client(
+            client_id=user_info["cognito:username"],
+            email=user_info["email"],
+            roles=user_info["cognito:roles"],
+        )
+
+    user.save()
+
+
 
 def get_user(request: Request) -> str or None:
     try:
@@ -85,7 +114,9 @@ def get_user(request: Request) -> str or None:
             # Decode the token. Add 'options={"verify_signature": False}' if you don't want to verify the token's signature
             decoded_token = jwt.decode(id_token, options={"verify_signature": False}, algorithms=["RS256"])
             # Extract the email address and return it
-            return decoded_token.get("email")
+            reconcile_user(decoded_token)
+            client_id = decoded_token.get("cognito:username")
+            return client_id
         except jwt.PyJWTError as e:
             # Handle decoding error (e.g., token is expired or invalid)
             print(f"Token decoding error: {e}")

@@ -30,7 +30,6 @@ Resources:
             Resource:
               - !GetAtt ObSessionTable.Arn
               - !GetAtt ObAgentConfigTable.Arn
-#              - !GetAtt ObLeadTable.Arn
               - !GetAtt ObEventActionTable.Arn
           - Effect: Allow
             Action:
@@ -158,24 +157,24 @@ Resources:
         - 'ObEventActionTable-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
 
+  ObClientTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: client_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: client_id
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      TableName: !Sub
+        - 'ObClientTable-${ResourceSuffix}'
+        - ResourceSuffix: !Ref ResourceSuffix
 
-#  LeadmoContactTable:
-#    Type: AWS::DynamoDB::Table
-#    Properties:
-#      AttributeDefinitions:
-#        - AttributeName: client_id
-#          AttributeType: S
-#      KeySchema:
-#        - AttributeName: client_id
-#          KeyType: HASH
-#      ProvisionedThroughput:
-#        ReadCapacityUnits: 5
-#        WriteCapacityUnits: 5
-#      TableName: !Sub
-#        - 'LeadmoContactTable-${ResourceSuffix}'
-#        - ResourceSuffix: !Ref ResourceSuffix
-#
-#
+
+
 Outputs:
 
     ObSessionTableName:
