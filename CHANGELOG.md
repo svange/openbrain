@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.0](https://github.com/svange/openbrain/compare/v3.5.0...v3.6.0) (2024-07-11)
+
+
+### Features
+
+* OIDC!!!, updated interface and minor bug fixes ([b8f43b9](https://github.com/svange/openbrain/commit/b8f43b95c3f21f01d1d10903299e11d414c0f9a7))
+
 ## [3.5.0](https://github.com/svange/openbrain/compare/v3.4.2...v3.5.0) (2024-07-09)
 
 
