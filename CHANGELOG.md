@@ -1,6 +1,16 @@
 # CHANGELOG
 
+## v3.5.0-dev.3 (2024-07-12)
+
+### Feature
+
+* feat: adding ClientTable ([`79694d3`](https://github.com/svange/openbrain/commit/79694d301725a11509cdf25915d8d8eebfa9cd63))
+
 ## v3.5.0-dev.2 (2024-07-11)
+
+### Chore
+
+* chore(release): release 3.5.0-dev.2 ([`2c406df`](https://github.com/svange/openbrain/commit/2c406df2d1c5db1f9f3daeb3b36f3e21b6057257))
 
 ### Feature
 
