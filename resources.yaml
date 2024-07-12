@@ -196,33 +196,20 @@ Outputs:
         Export:
             Name: !Sub '${AWS::StackName}-ObClientTableName'
 
-#    ObActionTableName:
-#        Description: ObEventActionTable
-#        Value: !Ref ObEventActionTable
-#        Export:
-#            Name: !Sub '${AWS::StackName}-ObActionTableName'
+    ObActionTableName:
+      Description: ObEventActionTable
+      Value: !Ref ObEventActionTable
+      Export:
+        Name: !Sub '${AWS::StackName}-ObEventActionTableName'
 
-    CommonAccessPolicyArn:
-        Description: CommonAccessPolicyArn
-        Value: !Ref CommonAccessPolicy
+    ObEventActionTableName:
+        Description: ObEventActionTable
+        Value: !Ref ObEventActionTable
         Export:
-            Name: !Sub '${AWS::StackName}-CommonAccessPolicyArn'
-
-    ObBucketName:
-        Description: ObBucketName
-        Value: !Ref ObBucket
-        Export:
-            Name: !Sub '${AWS::StackName}-ObBucketName'
+            Name: !Sub '${AWS::StackName}-ObActionTableName'
 
 
 
-
-
-#    ObBucketArn:
-#        Description: ObBucketName
-#        Value: !Ref ObBucket.Arn
-#        Export:
-#              Name: !Sub '${AWS::StackName}-ObBucketArn'
 
     ObSessionTableArn:
         Description: ObSessionTableArn
@@ -235,24 +222,6 @@ Outputs:
         Value: !GetAtt ObAgentConfigTable.Arn
         Export:
             Name: !Sub '${AWS::StackName}-ObAgentConfigTableArn'
-
-
-
-
-
-    ObActionTableName:
-      Description: ObEventActionTable
-      Value: !Ref ObEventActionTable
-      Export:
-        Name: !Sub '${AWS::StackName}-ObEventActionTableName'
-
-
-    ObEventActionTableName:
-        Description: ObEventActionTable
-        Value: !Ref ObEventActionTable
-        Export:
-            Name: !Sub '${AWS::StackName}-ObActionTableName'
-
 
     ObEventActionTableArn:
         Description: ObEventActionTable
@@ -277,3 +246,17 @@ Outputs:
         Value: !GetAtt ObBucket.Arn
         Export:
             Name: !Sub '${AWS::StackName}-ObBucketArn'
+
+
+
+    CommonAccessPolicyArn:
+        Description: CommonAccessPolicyArn
+        Value: !Ref CommonAccessPolicy
+        Export:
+            Name: !Sub '${AWS::StackName}-CommonAccessPolicyArn'
+
+    ObBucketName:
+        Description: ObBucketName
+        Value: !Ref ObBucket
+        Export:
+            Name: !Sub '${AWS::StackName}-ObBucketName'
