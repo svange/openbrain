@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0](https://github.com/svange/openbrain/compare/v3.7.0...v4.0.0) (2024-07-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Moved away from LeadmoAgentTable and to a more general ClientTable
+* Moved away from LeadmoAgentTable and to a more general ClientTable
+
+### Features
+
+* adding ClientTable ([8d6eedc](https://github.com/svange/openbrain/commit/8d6eedc1302c2ba90669dc944763ed9db02300ea))
+* adding ClientTable ([935f28c](https://github.com/svange/openbrain/commit/935f28cf20adea71f4e72f155f3dc625ae4f759d))
+
 ## [3.7.0](https://github.com/svange/openbrain/compare/v3.6.0...v3.7.0) (2024-07-13)
 
 
