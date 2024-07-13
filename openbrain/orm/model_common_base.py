@@ -107,12 +107,14 @@ class Recordable(Serializable, metaclass=ABCMeta):
                     IndexName=index,
                     KeyConditionExpression=Key(hash_key_name).eq(hash_key_value)
                 )
+                item = response.get("Items", {})[0]
+
             else:
                 response = table.get_item(Key={hash_key_name: hash_key_value})
+                item = response.get("Item", {})
         else:
             response = table.get_item(Key={hash_key_name: hash_key_value, range_key_name: range_key_value})
-
-        item = response.get("Item", {})
+            item = response.get("Item", {})
 
         if item is None or len(item) == 0:
              raise LookupError(

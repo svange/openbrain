@@ -173,7 +173,7 @@ Resources:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
       TableName: !Sub
-        - 'ObClientTable${ResourceSuffix}'
+        - 'ObClientTable-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
       GlobalSecondaryIndexes:
         - IndexName: LocationIndex

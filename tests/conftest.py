@@ -19,6 +19,8 @@ from openbrain.orm.model_chat_session import ChatSession
 from tests.generator_agent_configs import generate_agent_config
 from tests.generator_chat_messages import generate_chat_message
 from tests.generator_chat_sessions import generate_chat_session
+from tests.generator_clients import generate_client
+
 # from tests.generator_leads import generate_lead
 
 
@@ -128,6 +130,10 @@ def simple_chat_message():
     chat_message = ChatMessage(message=message, client_id="public")
     return chat_message
 
+@pytest.fixture(scope="module")
+def simple_client():
+    client = generate_client()
+    return client
 
 @pytest.fixture
 def simple_chat_session(default_agent_config):
