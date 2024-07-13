@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.2](https://github.com/svange/openbrain/compare/v4.0.1...v4.0.2) (2024-07-13)
+
+
+### Bug Fixes
+
+* updating client model with defaults ([a0bd7a4](https://github.com/svange/openbrain/commit/a0bd7a40651fc7cbb38553c2e8007f8261b3442c))
+
 ## [4.0.1](https://github.com/svange/openbrain/compare/v4.0.0...v4.0.1) (2024-07-13)
 
 
