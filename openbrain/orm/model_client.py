@@ -42,7 +42,7 @@ class Client(ORMModel, BaseModel):
     @classmethod
     def get(cls, email=None, location_id=None) -> TClient:
         """Get a client from the database"""
-        if email is None and location_id is None:
+        if (not email) and (not location_id):
             raise ValueError("Either email or location_id must be provided")
 
         if email:
