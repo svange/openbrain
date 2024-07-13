@@ -3,32 +3,17 @@ import os
 import boto3
 from aws_lambda_powertools.utilities.idempotency import idempotent, DynamoDBPersistenceLayer
 
+from openbrain.orm.model_client import Client
 
-def get_api_key(location_id, leadmo_agent_table_name):
+
+def get_leadmo_api_key(location_id):
     """Get API key from the database."""
 
-    client = boto3.client('dynamodb')
+    if not location_id:
+        raise ValueError("location_id is required.")
 
-    try:
-        response = client.get_item(
-            Key={
-                'location_id': {
-                    'S': location_id,
-                }
-            },
-            TableName=leadmo_agent_table_name,
-        )
-
-        item = response.get("Item")
-        if item is None or len(item) == 0:
-            raise LookupError(
-                f"Found 0 items for location_id: {location_id} in the database."
-            )
-
-        api_key = item.get("api_key").get("S")
-    except Exception as e:
-        print("Failed to get API key from the database. Client error.")
-        raise e
+    client = Client.get(location_id=location_id)
+    api_key = client.leadmo_api_key
 
     return api_key
 

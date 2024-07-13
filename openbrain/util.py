@@ -113,7 +113,7 @@ class Config:
             Defaults.ACTION_TABLE_NAME.name, Defaults.ACTION_TABLE_NAME.value)
     )
 
-    Client_TABLE_NAME: str = field(
+    CLIENT_TABLE_NAME: str = field(
         default=os.environ.get(
             Defaults.CLIENT_TABLE_NAME.name, Defaults.CLIENT_TABLE_NAME.value)
     )

@@ -5,6 +5,7 @@ from typing import TypeAlias
 
 import boto3
 from pydantic import BaseModel, Extra
+from boto3.dynamodb.conditions import Key
 
 from openbrain.util import config, get_logger
 
@@ -86,16 +87,28 @@ class Recordable(Serializable, metaclass=ABCMeta):
         return boto3.resource("dynamodb")
 
     @classmethod
-    def _get(cls, hash_key_name: str, hash_key_value: str, table_name: str, range_key_name: str = None
-, range_key_value: str = None) -> dict:
+    def _get(cls,
+             hash_key_name: str,
+             hash_key_value: str,
+             table_name: str,
+             range_key_name: str = None,
+             range_key_value: str = None,
+             index=None) -> dict:
         """Get an object from the database."""
         dynamodb = cls._get_dynamo_client()
         table = dynamodb.Table(table_name)
         logger.debug(
-            f"Retrieving object: {table=} | {hash_key_name=} | {hash_key_value=} | {range_key_name=} | {range_key_value=}"
+            f"Retrieving object: {table=} | {hash_key_name=} | {hash_key_value=} | {range_key_name=} | {range_key_value=} | {index=}"
         )
         if range_key_name is None:
-            response = table.get_item(Key={hash_key_name: hash_key_value})
+            if index:
+                # response = table.get_item(Key={hash_key_name: hash_key_value})
+                response = table.query(
+                    IndexName=index,
+                    KeyConditionExpression=Key(hash_key_name).eq(hash_key_value)
+                )
+            else:
+                response = table.get_item(Key={hash_key_name: hash_key_value})
         else:
             response = table.get_item(Key={hash_key_name: hash_key_value, range_key_name: range_key_value})
 
@@ -166,7 +179,13 @@ class Ephemeral(Serializable, metaclass=ABCMeta):
     """Base class for in memory objects as an alternative to cloud (for demo purposes)."""
 
     @classmethod
-    def _get(cls, range_key_name: str, range_key_value: str, hash_key_name: str, hash_key_value: str, table_name: str) -> dict:
+    def _get(cls,
+             table_name: str,
+             range_key_name: str = None,
+             range_key_value: str = None,
+             hash_key_name: str = None,
+             hash_key_value: str = None,
+             index: str = None ) -> dict:
         """Get an object from the DICT."""
         object_dict = InMemoryDb()
         if not object_dict.get(table_name):

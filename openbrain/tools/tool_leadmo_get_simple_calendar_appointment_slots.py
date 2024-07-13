@@ -16,7 +16,7 @@ from openbrain.tools.obtool import OBTool
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 
 import os
-from openbrain.tools.util_leadmo_tools import get_api_key
+from openbrain.tools.util_leadmo_tools import get_leadmo_api_key
 from aws_lambda_powertools import Logger, Tracer
 from dateutil import parser
 
@@ -25,7 +25,6 @@ LEADMO_API_V1_GET_APPOINTMENT_SLOTS_URL = 'https://rest.gohighlevel.com/v1/appoi
 
 DEFAULT_ORIGIN = os.getenv('DEFAULT_ORIGIN', 'https://localhost:5173')
 IDEMPOTENCY_TABLE_NAME = os.getenv('IDEMPOTENCY_TABLE_NAME', 'ObIdempotencyTable-Dev')
-LEADMO_AGENT_TABLE_NAME = os.getenv("LEADMO_AGENT_TABLE_NAME", "LeadmoAgentTable-Dev")
 
 
 # INFRA_TOPIC_NAME = os.getenv('INFRA_TOPIC_NAME')
@@ -66,7 +65,6 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
         global DEFAULT_ORIGIN
         global IDEMPOTENCY_TABLE_NAME
         global LEADMO_API_V1_GET_APPOINTMENT_SLOTS_URL
-        global LEADMO_AGENT_TABLE_NAME
 
         tool_input = json.loads(self.tool_input)
         context = json.loads(tool_input.get('context'))
@@ -77,14 +75,19 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
         calendar_id = context.get("calendarId")
         timezone = kwargs.get("timezone", 'UTC')
 
-        api_key = context.get("api_key", get_api_key(location_id, LEADMO_AGENT_TABLE_NAME))
+        # Lead Momentum requests from the workflow come in with location_id's
+        if location_id:
+            try:
+                api_key = get_leadmo_api_key(location_id)
+            except Exception as e:
+                api_key = context.get("api_key")
 
 
-        if not location_id:
-            raise ValueError("Location ID is required for this tool.")
-        if not calendar_id:
-            raise ValueError("Calendar ID is required for this tool.")
-
+        if not calendar_id and not api_key:
+            response = "System error: Can't get appointment times. Inform the user of other ways to contact us, and apologize for the inconveinence."
+            if agent_config.get("record_tool_actions"):
+                OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
+            return response
 
         standardized_tz = tz.gettz(timezone)
         start_time_iso = kwargs.get("startTime")

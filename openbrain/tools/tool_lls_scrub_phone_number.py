@@ -24,7 +24,6 @@ LLS_API_URL = 'https://api.landlinescrubber.com/api/check_number'
 
 DEFAULT_ORIGIN = os.getenv('DEFAULT_ORIGIN', 'https://localhost:5173')
 IDEMPOTENCY_TABLE_NAME = os.getenv('IDEMPOTENCY_TABLE_NAME', 'ObIdempotencyTable-Dev')
-LEADMO_AGENT_TABLE_NAME = os.getenv("LEADMO_AGENT_TABLE_NAME", "LeadmoAgentTable-Dev")
 SECRET_NAME = os.getenv("SECRET_NAME", "ObSecrets-Dev")
 
 
@@ -84,7 +83,6 @@ class LLSScrubberPhoneNumberTool(BaseTool, ContextAwareToolMixin):
         global DEFAULT_ORIGIN
         global IDEMPOTENCY_TABLE_NAME
         global LLS_API_URL
-        global LEADMO_AGENT_TABLE_NAME
         tool_input = json.loads(self.tool_input)
         context = json.loads(tool_input.get('context'))
         agent_config = tool_input.get("agent_config")

@@ -32,30 +32,39 @@ class Client(ORMModel, BaseModel):
         region = config.AWS_REGION
 
     def save(self):
-        """Save the agent config to the database"""
+        """Save the client to the database"""
         return self._save(
-            table_name=config.AGENT_CONFIG_TABLE_NAME,
-            hash_key_name="client_id",
-            range_key_name="profile_name",
-            hash_key_value=self.client_id,
-            range_key_value=self.profile_name,
+            table_name=config.CLIENT_TABLE_NAME,
+            hash_key_name="email",
+            hash_key_value=self.email,
         )
 
     @classmethod
-    def get(cls, profile_name, client_id) -> TClient:
-        """Get an agent config from the database"""
-        agent_config = cls._get(
-            table_name=config.AGENT_CONFIG_TABLE_NAME,
-            hash_key_name="client_id",
-            range_key_name="profile_name",
-            hash_key_value=client_id,
-            range_key_value=profile_name,
-        )
-        return cls(**agent_config)
+    def get(cls, email=None, location_id=None) -> TClient:
+        """Get a client from the database"""
+        if email is None and location_id is None:
+            raise ValueError("Either email or location_id must be provided")
+
+        if email:
+            client = cls._get(
+                table_name=config.CLIENT_TABLE_NAME,
+                hash_key_name="email",
+                hash_key_value=email
+            )
+        elif location_id:
+            client = cls._get(
+                table_name=config.CLIENT_TABLE_NAME,
+                hash_key_name="leadmo_location_id",
+                hash_key_value=location_id,
+                index="leadmo_location_id"
+            )
+        else:
+            raise ValueError("Either email or location_id must be provided")
+        return cls(**client)
 
     def refresh(self):
-        """Update this agent config with the latest values from the database"""
-        agent_config_from_db = AgentConfig.get(profile_name=self.profile_name, client_id=self.client_id)
+        """Update this client with the latest values from the database"""
+        client_from_db = Client.get(email=self.email)
 
-        for key, value in agent_config_from_db.dict().items():
+        for key, value in client_from_db.dict().items():
             setattr(self, key, value)
