@@ -173,7 +173,7 @@ Resources:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
       TableName: !Sub
-        - 'ObClientTable-${ResourceSuffix}'
+        - 'ObClientTable${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
       GlobalSecondaryIndexes:
         - IndexName: LocationIndex
@@ -187,6 +187,33 @@ Resources:
             WriteCapacityUnits: 5
 
 
+#  ObClientTable:
+#    Type: AWS::DynamoDB::Table
+#    Properties:
+#      AttributeDefinitions:
+#        - AttributeName: email
+#          AttributeType: S
+#        - AttributeName: leadmo_location_id
+#          AttributeType: S
+#      KeySchema:
+#        - AttributeName: email
+#          KeyType: HASH
+#      ProvisionedThroughput:
+#        ReadCapacityUnits: 5
+#        WriteCapacityUnits: 5
+#      TableName: !Sub
+#        - 'ObClientTable-${ResourceSuffix}'
+#        - ResourceSuffix: !Ref ResourceSuffix
+#      GlobalSecondaryIndexes:
+#        - IndexName: LocationIndex
+#          KeySchema:
+#            - AttributeName: leadmo_location_id
+#              KeyType: HASH
+#          Projection:
+#            ProjectionType: ALL
+#          ProvisionedThroughput:
+#            ReadCapacityUnits: 5
+#            WriteCapacityUnits: 5
 Outputs:
 
     ObSessionTableName:
