@@ -56,7 +56,7 @@ class Client(ORMModel, BaseModel):
                 table_name=config.CLIENT_TABLE_NAME,
                 hash_key_name="leadmo_location_id",
                 hash_key_value=location_id,
-                index="leadmo_location_id"
+                index="LocationIndex"
             )
         else:
             raise ValueError("Either email or location_id must be provided")

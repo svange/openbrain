@@ -164,6 +164,8 @@ Resources:
       AttributeDefinitions:
         - AttributeName: email
           AttributeType: S
+        - AttributeName: leadmo_location_id
+          AttributeType: S
       KeySchema:
         - AttributeName: email
           KeyType: HASH
@@ -174,18 +176,15 @@ Resources:
         - 'ObClientTable-${ResourceSuffix}'
         - ResourceSuffix: !Ref ResourceSuffix
       GlobalSecondaryIndexes:
-        - IndexName: location_id index
+        - IndexName: LocationIndex
           KeySchema:
             - AttributeName: leadmo_location_id
               KeyType: HASH
-            - AttributeName: email
-              KeyType: RANGE
           Projection:
-            ProjectionType: KEYS_ONLY
+            ProjectionType: ALL
           ProvisionedThroughput:
             ReadCapacityUnits: 5
             WriteCapacityUnits: 5
-
 
 
 Outputs:
