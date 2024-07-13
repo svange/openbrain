@@ -102,7 +102,6 @@ def reconcile_user(decoded_token: dict, disable=True):
     user.save()
 
 
-
 def get_user(request: Request) -> str or None:
     try:
         id_token = request.cookies["id_token"]
