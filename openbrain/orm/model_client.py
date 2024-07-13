@@ -23,9 +23,9 @@ class Client(ORMModel, BaseModel):
     email: str = Field(description="The email of the client")
     # roles: Optional[list[str]] = Field(description="The roles of the client")
 
-    leadmo_api_key: Optional[str] = Field(description="The API key for the Leadmo API")
-    leadmo_location_id: Optional[str] = Field(description="The location ID for the Leadmo API")
-    lls_api_key: Optional[str] = Field(description="The API key for the LLS API")
+    leadmo_api_key: Optional[str] = Field(default=None, description="The API key for the Leadmo API")
+    leadmo_location_id: Optional[str] = Field(default=None, description="The location ID for the Leadmo API")
+    lls_api_key: Optional[str] = Field(default=None, description="The API key for the LLS API")
 
     class Meta:
         table_name = config.CLIENT_TABLE_NAME
