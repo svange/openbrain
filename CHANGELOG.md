@@ -1,8 +1,26 @@
 # CHANGELOG
 
-## v3.5.0-dev.4 (2024-07-13)
+## v3.5.0-dev.5 (2024-07-13)
 
 ### Feature
+
+* feat: adding ClientTable GSI ([`aceb799`](https://github.com/svange/openbrain/commit/aceb799e888ba502a5ecb02f7ee7423c4ae5d8a9))
+
+* feat: adding ClientTable GSI ([`dac4480`](https://github.com/svange/openbrain/commit/dac44800efe228ccd5f0ecc313126cbcf5a501ab))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`a910241`](https://github.com/svange/openbrain/commit/a910241aeb254279a37f6e80fd155b21adb3d9c0))
+
+## v3.5.0-dev.4 (2024-07-13)
+
+### Chore
+
+* chore(release): release 3.5.0-dev.4 ([`1c28640`](https://github.com/svange/openbrain/commit/1c286404f180dc16545d5ae57de165787bc87411))
+
+### Feature
+
+* feat: adding ClientTable GSI ([`60fe9b7`](https://github.com/svange/openbrain/commit/60fe9b7593bdc4a8b7c39a93c2df356649fa7963))
 
 * feat: adding ClientTable GSI ([`d78972f`](https://github.com/svange/openbrain/commit/d78972fda4f1ef25258e7f1184feec4913ff7849))
 
