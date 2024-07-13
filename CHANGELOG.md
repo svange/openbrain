@@ -1,6 +1,20 @@
 # CHANGELOG
 
+## v3.5.0-dev.4 (2024-07-13)
+
+### Feature
+
+* feat: adding ClientTable GSI ([`d78972f`](https://github.com/svange/openbrain/commit/d78972fda4f1ef25258e7f1184feec4913ff7849))
+
+* feat: adding ClientTable GSI ([`eac3c83`](https://github.com/svange/openbrain/commit/eac3c8375f6f456bb44961ec0e1344358082f381))
+
+* feat: adding ClientTable GSI ([`a9fca26`](https://github.com/svange/openbrain/commit/a9fca2636ad39d8a33fd6ef907b6b7842b3735dd))
+
 ## v3.5.0-dev.3 (2024-07-12)
+
+### Chore
+
+* chore(release): release 3.5.0-dev.3 ([`5db5e86`](https://github.com/svange/openbrain/commit/5db5e86c400e693492c0df9fc78c0e943c213fd5))
 
 ### Feature
 
