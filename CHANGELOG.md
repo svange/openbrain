@@ -1,3 +1,23 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [3.7.0](https://github.com/svange/openbrain/compare/v3.6.0...v3.7.0) (2024-07-13)
+
+
+### Features
+
+* adding client table (WIP) ([6ae2c2f](https://github.com/svange/openbrain/commit/6ae2c2fa1914d22d1f6d4992f9493e851e45d1dd))
+* adding ClientTable ([79694d3](https://github.com/svange/openbrain/commit/79694d301725a11509cdf25915d8d8eebfa9cd63))
+* adding ClientTable ([285fa72](https://github.com/svange/openbrain/commit/285fa72058a9a83e4bd894668a2c1ddce00235c3))
+* adding ClientTable GSI ([aceb799](https://github.com/svange/openbrain/commit/aceb799e888ba502a5ecb02f7ee7423c4ae5d8a9))
+* adding ClientTable GSI ([dac4480](https://github.com/svange/openbrain/commit/dac44800efe228ccd5f0ecc313126cbcf5a501ab))
+* adding ClientTable GSI ([60fe9b7](https://github.com/svange/openbrain/commit/60fe9b7593bdc4a8b7c39a93c2df356649fa7963))
+* adding ClientTable GSI ([d78972f](https://github.com/svange/openbrain/commit/d78972fda4f1ef25258e7f1184feec4913ff7849))
+* adding ClientTable GSI ([eac3c83](https://github.com/svange/openbrain/commit/eac3c8375f6f456bb44961ec0e1344358082f381))
+* adding ClientTable GSI ([a9fca26](https://github.com/svange/openbrain/commit/a9fca2636ad39d8a33fd6ef907b6b7842b3735dd))
+
 # CHANGELOG
 
 ## v3.5.0-dev.5 (2024-07-13)
