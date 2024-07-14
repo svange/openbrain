@@ -20,36 +20,21 @@
 
 ## Links
 
----
-> **NOTE**: The following links demonstrate resources that are works in progress, these are the main issues that will get addressed eventually, and that make this project difficult to use locally.
----
-
-- [OpenBrain Portal](https://portal.openbra.in):
-  - _**Needs styling**_
-  - Sign up for OpenBra.in as a service. Get an API key and start using the API. Swagger UI available once subscribed to the API.
-  - This method does not require you to use the library or to deploy any infrastructure. Just grab an API key, and you can simply start with `axios` or the `requests` library (or whatever your language provides for making HTTP requests).
-- [Agent Tuner](http://tuner.openbra.in:7863/?__theme=dark):
-  - **_Needs SSO and DNS_**
+--
+- [Agent Tuner](https://tuner.openbra.in):
   - A Gradio interface to create, test, save, and load sets of agent configurations.
-  - Agent properties change over time, so the following list is illustrative only to give an idea of what an agent configuration is:
-    - **profile_name**: A unique name for the agent configuration. The reference to the configuration.
-    - **system_message**: This is the LLM system message. It can heavily influence the agent's apparent expertise, style, tone, goal, personality, etc.
-    - **iceBreaker**: A predictable prompt that the agent will use to start the conversation.
-    - **temperature**: A number between 0 and 1 that controls how "creative" the agent is. 0 is very literal, 1 is very creative.
-    - **...**: ...
-  - Agent configurations allows your API calls to start sessions with a specific agent configuration (i.e. lead-bot, professor, therapist, etc.).
+  - Agent configurations allows your API calls to start sessions with a specific agent configuration (i.e. lead-bot, cold-caller, x-bot, etc.).
+
 - [Demo Agent Page](https://dev-www.openbra.in):
-  - **_Needs styling to hide cold start and to make it look presentable_**
-  - An example page that's using the API to present a tool wielding agent to visitors.
+  - An example page that's using the agent from the public demo API.
   - This page uses an identity registered with [OpenBrain Portal](https://portal.openbra.in).
-  - This page is using the [OpenBrain API](https://dev-api.openbra.in) to interact with LLMs.
+  - This page is using the [OpenBrain API](https://dev-api.openbra.in) API to interact with LLMs.
   - This page is configured to use the profile called "default", but it can, of course, use any stored agent configuration.
 
-OpenBrain is a tool-wielding, cloud native, LLM agent platform. It provides APIs and tools to configure, store, and retrieve LangChain agents, making your chat sessions and workflows stateful and persistent. You will find in-memory and DynamoDB ORM options as well as a SAM template for deploying the necessary resources for stateless agents to your AWS.
+- [OpenBrain Portal](https://portal.openbra.in):
+  - Sign up for OpenBra.in as a service. Get an API key and start using the API. Swagger UI available once subscribed to the API.
+  - This method does not require you to use the library or to deploy any infrastructure. Just grab an API key, and you can simply start with `axios` or the `requests` library (or whatever your language provides for making HTTP requests).
 
-OpenBrain agents are stateful by nature, so they can remember things about you and your conversation. They can also use tools, so you can use the same agent to chat and to perform actions. This project provides a mechanisms to integrate with an API to store the state of the agent as a session, so that the agent can be used asynchronously from any source in a serverless environment.
-
-Interactions with the agent can be injected into any application easily by constructing a query, choosing an agent configuration, and pre-processing your data through that agent before sending it of for further processing.
 
 ## Openbrain as a Service
 To test Openbrain as a service, do the following:
@@ -57,14 +42,13 @@ To test Openbrain as a service, do the following:
 2. Log in to the portal and subscribe to the Openbrain service.
 3. Navigate to your dashboard in the portal and use your API keys to interact with the API.
 4. A swagger UI and SDKs are available for subscribers.
-5. (Optional) deploy the infrastructure to your AWS account using the SAM template provided in this repository (`resources.yaml`).
 
 NOTE: There is currently no fee for using the service, but it's using my personal AWS and OpenAI accounts, so I'll pull the plug immediately if it becomes expensive.
 
 ## Features
 
 - **Infrastructure as Code**: Deploy to AWS using CodePipeline and SAM.
-- **Interactive Agent Tuner**: A GUI to modify and test agent configurations.
+- **Interactive Agent Tuner**: A GUI to modify and test agent configurations available as Python package ob-tuner.
 - **Command-Line Interface**: Use `ob` for quick completions and `ob-chat` for an interactive session.
 - **Flexible Configuration**: Customizable agents through DynamoDB backed ORM.
 - **Event-Driven Architecture**: Extensible through cloud-based event handling.
