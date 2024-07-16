@@ -192,8 +192,9 @@ class AgentConfig(ORMModel, BaseModel):
 
     def save(self):
         """Save the agent config to the database"""
+        table_name = config.AGENT_CONFIG_TABLE_NAME or "agent_config_table"
         return self._save(
-            table_name=config.AGENT_CONFIG_TABLE_NAME,
+            table_name=table_name,
             hash_key_name="client_id",
             range_key_name="profile_name",
             hash_key_value=self.client_id,
@@ -203,8 +204,9 @@ class AgentConfig(ORMModel, BaseModel):
     @classmethod
     def get(cls, profile_name, client_id) -> TAgentConfig:
         """Get an agent config from the database"""
+        table_name = config.AGENT_CONFIG_TABLE_NAME or "agent_config_table"
         agent_config = cls._get(
-            table_name=config.AGENT_CONFIG_TABLE_NAME,
+            table_name=table_name,
             hash_key_name="client_id",
             range_key_name="profile_name",
             hash_key_value=client_id,

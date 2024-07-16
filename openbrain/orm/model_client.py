@@ -33,8 +33,9 @@ class Client(ORMModel, BaseModel):
 
     def save(self):
         """Save the client to the database"""
+        table_name = config.CLIENT_TABLE_NAME or "client_table"
         return self._save(
-            table_name=config.CLIENT_TABLE_NAME,
+            table_name=table_name,
             hash_key_name="email",
             hash_key_value=self.email,
         )
@@ -45,15 +46,17 @@ class Client(ORMModel, BaseModel):
         if (not email) and (not location_id):
             raise ValueError("Either email or location_id must be provided")
 
+        table_name = config.CLIENT_TABLE_NAME or "client_table"
+
         if email:
             client = cls._get(
-                table_name=config.CLIENT_TABLE_NAME,
+                table_name=table_name,
                 hash_key_name="email",
                 hash_key_value=email
             )
         elif location_id:
             client = cls._get(
-                table_name=config.CLIENT_TABLE_NAME,
+                table_name=table_name,
                 hash_key_name="leadmo_location_id",
                 hash_key_value=location_id,
                 index="LocationIndex"
