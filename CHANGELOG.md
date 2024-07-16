@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.4](https://github.com/svange/openbrain/compare/v4.0.3...v4.0.4) (2024-07-16)
+
+
+### Bug Fixes
+
+* no table names in ephemeral ORM model causing crashes in ob_tuner ([1813867](https://github.com/svange/openbrain/commit/1813867dc57317ad6d30f27e7b590bf3f9ffb919))
+
 ## [4.0.3](https://github.com/svange/openbrain/compare/v4.0.2...v4.0.3) (2024-07-14)
 
 
