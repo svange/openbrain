@@ -1,4 +1,5 @@
 # OpenBrain
+
 ![ci status](https://github.com/svange/openbrain/actions/workflows/pipeline.yaml/badge.svg?branch=main)
 ![ci status](https://github.com/svange/openbrain/actions/workflows/pipeline.yaml/badge.svg?branch=dev)
 
@@ -10,69 +11,79 @@
 [![Made with GH Actions](https://img.shields.io/badge/CI-GitHub_Actions-blue?logo=github-actions&logoColor=white)](https://github.com/features/actions "Go to GitHub Actions homepage")
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-[//]: # (![CI]&#40;https://github.com/svange/openbrain/actions/workflows/publish-release.yml/badge.svg&#41;)
-
-[//]: # (![Tests]&#40;https://github.com/svange/openbrain/actions/workflows/run-tests.yml/badge.svg&#41;)
-
-[//]: # (![CI &#40;pre-release&#41;]&#40;https://github.com/svange/openbrain/actions/workflows/publish-prerelease.yml/badge.svg&#41;)
-
-[//]: # (![CD &#40;staging&#41;]&#40;https://github.com/svange/openbrain/actions/workflows/deploy-dev.yml/badge.svg&#41;)
-
 ## Links
 
---
-- [Agent Tuner](https://tuner.openbra.in):
+- [AI Agent Tuner](https://tuner.openbra.in):
+
   - A Gradio interface to create, test, save, and load sets of agent configurations.
   - Agent configurations allows your API calls to start sessions with a specific agent configuration (i.e. lead-bot, cold-caller, x-bot, etc.).
-
 - [Demo Agent Page](https://dev-www.openbra.in):
+
   - An example page that's using the agent from the public demo API.
   - This page uses an identity registered with [OpenBrain Portal](https://portal.openbra.in).
   - This page is using the [OpenBrain API](https://dev-api.openbra.in) API to interact with LLMs.
   - This page is configured to use the profile called "default", but it can, of course, use any stored agent configuration.
-
 - [OpenBrain Portal](https://portal.openbra.in):
-  - Sign up for OpenBra.in as a service. Get an API key and start using the API. Swagger UI available once subscribed to the API.
+
+  - Sign up for OpenBra.in as a service. Get an API key and start using the API.
   - This method does not require you to use the library or to deploy any infrastructure. Just grab an API key, and you can simply start with `axios` or the `requests` library (or whatever your language provides for making HTTP requests).
 
+![ob_tuner.png](assets/ob_tuner.png)
 
 ## Openbrain as a Service
+
 To test Openbrain as a service, do the following:
+
 1. Register at [https://portal.openbra.in](https://portal.openbra.in).
 2. Log in to the portal and subscribe to the Openbrain service.
-3. Navigate to your dashboard in the portal and use your API keys to interact with the API.
-4. A swagger UI and SDKs are available for subscribers.
+3. Subscribe to the API in the OpenBra.in portal.
+4. Navigate to your dashboard in the portal to find and use your API keys.
 
 NOTE: There is currently no fee for using the service, but it's using my personal AWS and OpenAI accounts, so I'll pull the plug immediately if it becomes expensive.
 
-## Features
-
-- **Infrastructure as Code**: Deploy to AWS using CodePipeline and SAM.
-- **Interactive Agent Tuner**: A GUI to modify and test agent configurations available as Python package ob-tuner.
+- **Interactive Agent Tuner**: Integrates with deployable web interface `ob-tuner`.
 - **Command-Line Interface**: Use `ob` for quick completions and `ob-chat` for an interactive session.
-- **Flexible Configuration**: Customizable agents through DynamoDB backed ORM.
-- **Event-Driven Architecture**: Extensible through cloud-based event handling.
+- **Flexible Configuration**: Customizable, persistent agent configurations.
+- **Event-Driven Architecture**: Tools that operate on the real world send events to the event bus.
 
 ## AI Agent Tools
+
 ### Context
-OpenBrain tools get input rom 2 sources: the agent's input values, and input values from "context". The "context" is any undocumented key/value pair. This is done in order to allow the agent to call tools that require sensitive information that we don't want the AI to have access to.
+
+OpenBrain agents can use tools, and those tools get input rom 2 sources: the agent's input values, and input values from "context". The "context" is any undocumented key/value pair. This is done in order to allow the agent to call tools that require sensitive information that we don't want the AI to have access to.
+
+```json
+{
+  "client_id": "me@email.com",    // OpenBrain parameter
+  "reset": true,                  // OpenBrain parameter
+  "message": "Do a barrel roll",  // OpenBrain parameter
+  "email": "hotlead@public.com",  // context
+  "firstName": "John",            // context
+  "lastName": "Doe",              // context
+  "phone": "555-555-5555"         // context
+}
+```
 
 ### Tools
+
 OpenBrain tools are categorized into 2 types: information retrieval tools, and action tools. Information retrieval tools are tools that get information from a 3rd party service or library and make that information available to the AI. Action tools, on the other hand, are tools that perform an action, such as updating a CRM, sending an email, etc. These "action tools" all operate in the same way, by taking the agent's input and context as input, and returning a creating an event on the the event mesh.
 
 Tools need adaptors, so even action tools need OpenBrain support in order to make the AI aware of what input parameters these action tools require. Information retrieval tools, on the other hand, can not be implemented trivially using an event mesh, as the AI needs to be aware of the information that was retrieved immediately, so these tools are implemented directly in openBrain.
 
 #### Generic Tools
+
 These tools are available to all agents. Each tool is listed by name with a brief description of its functionality, and lists the required context keys.
 
 - **get_current_time**: Get the current time.
-  - N/A
+- **simple_calculator**: Perform a simple calculation.
 
 #### 3rd party services
+
 - **lls_scrub_phone_number**: Get DNC information for a phone number.
   - api_key (optional): The API key for the LLS service. If not provided, the default key will be used from AWS Secrets Manager.
 
 #### CRM support for Lead Momentum
+
 - **leadmo_update_contact**: Update a contact in Lead Momentum.
 - **leadmo_stop_conversation**: Stop a conversation in Lead Momentum.
 - **leadmo_create_contact**: Create a contact in Lead Momentum.
@@ -81,78 +92,6 @@ These tools are available to all agents. Each tool is listed by name with a brie
 - **leadmo_get_simple_calendar-appointment_slots**: Get available appointment slots from Lead Momentum.
 - **leadmo_create_appointment**: Create an appointment in Lead Momentum.
 
-
-## Quick Start
-```bash
-# TLDR: demo functionality
-pip install openbrain[gradio]
-ob-tuner
-```
-To print an example .env file, use ob-env.
-```bash
-ob-env
-```
-
-
-### Installation
-Gradio is included as an extra dependency. This keeps the base installation small enough to fit in a lambda layer. If you intend to experiment with the `ob-tuner` interface locally, add the `[gradio]` extra to your pip install command.
-
-```bash
-pip install openbrain[gradio]
-```
-
-### Setup .env file
-```bash
-cp .env.example .env  # Edit this file with your own values
-```
-### Deploy Supporting Infrastructure
-The `AgentConfig`s you create in `ob-tuner` can be saved to your DynamoDB tables in AWS, allowing you to reference them in any AWS workflow using the boto3 library.
-
-If you intend to use this project in your API, an AWS SAM template is provided to get you started. You can deploy the template using the following command. You will need to have the AWS CLI installed and configured with your credentials.
-
-:warning: **This will deploy resources to your AWS account.** :warning: You will be charged for these resources. See [AWS Pricing](https://aws.amazon.com/pricing/) for more information.
-
-```bash
-python ci_cd.py -I
-```
-
-## Using OpenBrain
-
-### OpenBrain Gradio Tuner
-To facilitate tuning agent parameters and experimenting with prompts, OpenBrain provides a GUI interface using Gradio. You can use the in-memory object model to store your agent configurations locally. This is controllable by setting `GRADIO_LOCAL=True`, `ORM_LOCAL=True`, `UTIL_LOCAL=True` in your `.env` file.
-
-![img.png](img.png)
-
-```bash
-$ ob-tuner
-Running on local URL:  http://0.0.0.0:7861
-
-To create a public link, set `share=True` in `launch()`.
-Tip: You can show or hide the button for flagging with the `allow_flagging=` kwarg; for example: gr.Interface(..., allow_flagging=False)
-```
-
-### Command Line Completions
-(doesn't work quite like this yet, but that's the idea, currently noisy)
-```bash
-$ ob --profile_name=linux 'change the file permissions of all files that start with a "w" in this directory (recursively) to 042'
-
-find . -type f -name 'w*' -exec chmod 042 {} +
-```
-
-### Command Line Interactive Session
-(doesn't work quite like this yet, but that's the idea)
-```bash
-$ ob-chat
----------- Begin Chat Session ----------
-> OpenBrain: What… is your name?
-User: It is Arthur – King of the Britons.
-> OpenBrain: What… is your quest?
-User: To seek the Holy Grail.
-> OpenBrain: What… is the air-speed velocity of an unladen swallow?
-User: What do you mean? An African or a European swallow?
-> OpenBrain: I don’t know that. Aaaaaaaaagh!
-```
-
 ## Architecture Overview
 
 ### Data Model
@@ -160,14 +99,13 @@ User: What do you mean? An African or a European swallow?
 ```mermaid
 classDiagram
     class ChatMessage {
-        User provided*
         + str: sessionId
         + str: clientId
         + str: message
-        + str: email
         + AgentConfig: agentConfigOverrides
         + str: agentConfig
         + bool: reset
+        + str: context...
     }
 
     class AgentConfig {
@@ -178,9 +116,7 @@ classDiagram
         + ...
         + save()
         + refresh()
-        + load()
-        + delete()
-        + get_all()
+        + get()
     }
 
     class ChatSession {
@@ -188,39 +124,24 @@ classDiagram
         + str: clientId
         + byte: agentMemory
         + AgentConfig: agentConfig
-        + Lead: lead
         + save()
-        + load()
+        + get()
     }
 
-    class Lead {
-        + str: sessionId
-        + str: clientId
-        + str: fullName
-        + str: firstName
-        + str: middleName
-        + str: lastName
-        + List[str]: medications
-        + str: email
-        + ...
-        + save()
-        + refresh()
-        + delete()
-        + load()
-        + get_all()
-    }
 
-    ChatSession "1" *-- "1" Lead: contains
     ChatSession "1" *-- "1" AgentConfig: contains
-%%    ChatMessage "1" *-- "1" AgentConfig: contains
+    langchain_ChatMemory "1" *-- "1" ChatMessage: n messages ingested by agent, stored in memory
 %%    ChatSession "1" *-- "*" ChatMessage: contains
     ChatSession "1" *-- "1" langchain_ChatMemory: from langchain, serialized
 ```
 
 # Data Flow diagram
+
 OpenBrain uses an event driven architecture. The agent sends events to event bus and then the developer can simply write rules and targets for the incoming events once the targets are ready. The following diagram shows the data flow in two parts.
+
 1. The user interaction with the agent and the agent interaction with an event bus.
 2. The event bus and the targets that are triggered by the events.
+
 ```mermaid
 sequenceDiagram
     title Agent Data Flow
