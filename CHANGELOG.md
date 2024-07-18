@@ -1,6 +1,20 @@
 # CHANGELOG
 
+## v4.1.0-dev.1 (2024-07-18)
+
+### Feature
+
+* feat: cleaning up pipeline ([`3cb49e3`](https://github.com/svange/openbrain/commit/3cb49e35a5c706900ea237c60fabf01e33600b1b))
+
 ## v4.0.7-dev.1 (2024-07-18)
+
+### Chore
+
+* chore(release): release 4.0.7-dev.1 [skip ci] ([`a9bf6a9`](https://github.com/svange/openbrain/commit/a9bf6a9a604bf9fe77f27e34c498c1b592b4dbc8))
+
+### Feature
+
+* feat: cleaning up pipeline ([`5f08067`](https://github.com/svange/openbrain/commit/5f08067a54802243fcfc2ba84f310e015089c965))
 
 ### Fix
 
