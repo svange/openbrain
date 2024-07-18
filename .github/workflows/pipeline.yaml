@@ -61,7 +61,7 @@ jobs:
 
       - name: Assume the testing pipeline user role
         if: "!contains(github.event.head_commit.message, 'chore(release):')"
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ env.PIPELINE_USER_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ env.PIPELINE_USER_SECRET_ACCESS_KEY }}
@@ -120,7 +120,7 @@ jobs:
     steps:
     - name: Assume the testing pipeline user role
       if: "!contains(github.event.head_commit.message, 'chore(release):')"
-      uses: aws-actions/configure-aws-credentials@v1-node16
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{ env.PIPELINE_USER_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ env.PIPELINE_USER_SECRET_ACCESS_KEY }}
