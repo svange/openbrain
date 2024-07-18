@@ -52,18 +52,15 @@ jobs:
 
       - uses: aws-actions/setup-sam@v2
         if: "!contains(github.event.head_commit.message, 'chore(release):')"
-
         with:
           use-installer: true
 
       - name: Build resources
         if: "!contains(github.event.head_commit.message, 'chore(release):')"
-
         run: sam build --template ${SAM_TEMPLATE} --use-container
 
       - name: Assume the testing pipeline user role
         if: "!contains(github.event.head_commit.message, 'chore(release):')"
-
         uses: aws-actions/configure-aws-credentials@v1-node16
         with:
           aws-access-key-id: ${{ env.PIPELINE_USER_ACCESS_KEY_ID }}
@@ -116,7 +113,6 @@ jobs:
     name: Run pytest CI/CD tests
     strategy:
       matrix:
-#        python-version: [ "3.10", "3.11" ]
         python-version: [ "3.10" ]
         platform: [ ubuntu-20.04 ]
     runs-on: ${{ matrix.platform }}
@@ -162,7 +158,6 @@ jobs:
       #----------------------------------------------
     - name: Load cached venv
       if: "!contains(github.event.head_commit.message, 'chore(release):')"
-
       id: cached-poetry-dependencies
       uses: actions/cache@v3
       with:

@@ -13,7 +13,7 @@ hooks
 .gitignore
 .pre-commit-config.yaml
 .pre-commit-hooks.yml
-assume-role.sh
+../augint-tools/assume-role.sh
 COMMANDS.md
 Dockerfile
 manage_ci_secrets.py

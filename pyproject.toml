@@ -88,9 +88,8 @@ semver = "commitizen.version_schemes:SemVer"
 [tool.poetry.dependencies]
 python = "^3.10"
 boto3 = "^1.28.51"
-langchain = ">=0.0.295,<0.0.340"
+langchain = "^0.1.0"
 openai = "^0.28.0"
-promptlayer = ">=0.2.9,<0.4.0"
 requests = "^2.31.0"
 pydantic = "^2.3.0"
 aws-lambda-powertools = "^2.25.0"
@@ -98,25 +97,8 @@ python-dotenv = "^1.0.0"
 python-ulid = "^1.1.0"
 aws-xray-sdk = "^2.12.0"
 tiktoken = "^0.5.1"
-#pillow = {version = "^10.0.1", optional = true}
-gradio = { version = "^4.37.2", optional = true }
-#image = {version = "^1.5.33", optional = true}
 pytz = "^2024.1"
 itsdangerous = "^2.2.0"
-
-
-[tool.poetry.extras]
-gradio = [
-    "gradio",
-    "pycryptodome",
-    "fastapi",
-    "openbrain",
-    "starlette",
-    "authlib",
-    "pyjwt",
-    "uvicorn"
-]
-#gradio = ["image"]
 
 
 [tool.poetry.group.dev.dependencies]
