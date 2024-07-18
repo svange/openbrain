@@ -53,7 +53,7 @@ def cli(client_id, profile_name, message):
 @click.command()
 def cli_env():
     """Print the .env.example file to stdout."""
-    with open(".env.example", "r") as f:
+    with open("../.env.example", "r") as f:
         print(f.read())
 
 
