@@ -1,6 +1,20 @@
 # CHANGELOG
 
+## v3.5.0-dev.8 (2024-07-18)
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`8f64ced`](https://github.com/svange/openbrain/commit/8f64ced4c191a965f481d8996fecaddacc563e44))
+
 ## v3.5.0-dev.7 (2024-07-18)
+
+### Chore
+
+* chore(release): release 3.5.0-dev.7 ([`fddcbde`](https://github.com/svange/openbrain/commit/fddcbde461b74d09bca53224f351071e1fae44fe))
+
+### Fix
+
+* fix: testing aws pipeline actions that aren&#39;t tied to node16 ([`75492f0`](https://github.com/svange/openbrain/commit/75492f09eb4bfd63bf8657accbdc35df7f013ccb))
 
 ### Unknown
 
