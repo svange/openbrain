@@ -1,54 +1,135 @@
-# Changelog
+# CHANGELOG
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## v4.0.7-dev.1 (2024-07-18)
+
+### Fix
+
+* fix: splitting variables and secrets and reconfiguring pipeline to use new structure. Also added an indicator to skip the ci pipeline if pyproject.toml ([`4c93fda`](https://github.com/svange/openbrain/commit/4c93fda98a4bd196f0295c21ae709151da762ba6))
+
+## v4.0.6 (2024-07-18)
+
+### Chore
+
+* chore(release): 4.0.6 [skip ci]
 
 ## [4.0.6](https://github.com/svange/openbrain/compare/v4.0.5...v4.0.6) (2024-07-18)
 
-
 ### Bug Fixes
 
-* testing aws pipeline actions that aren't tied to node16 ([75492f0](https://github.com/svange/openbrain/commit/75492f09eb4bfd63bf8657accbdc35df7f013ccb))
+* testing aws pipeline actions that aren&#39;t tied to node16 ([75492f0](https://github.com/svange/openbrain/commit/75492f09eb4bfd63bf8657accbdc35df7f013ccb))
 * updating langchain to 1.x, and adding pyproject.toml to repo ([847f91f](https://github.com/svange/openbrain/commit/847f91fb3931ad0114b758d5572af8fe2e485095))
-* updating langchain to 1.x, and adding pyproject.toml to repo ([6674bcb](https://github.com/svange/openbrain/commit/6674bcbd59f670f92155ae150692aa6d645ffd32))
+* updating langchain to 1.x, and adding pyproject.toml to repo ([6674bcb](https://github.com/svange/openbrain/commit/6674bcbd59f670f92155ae150692aa6d645ffd32)) ([`3b4cde4`](https://github.com/svange/openbrain/commit/3b4cde48f1c1a86a19b60b26b528cf301fb90919))
+
+### Documentation
+
+* docs:  Cleaning up README.md to reflect current project ([`29847e6`](https://github.com/svange/openbrain/commit/29847e6f8e7fd2b1c9a9ad8ff4c0f16d30d30e43))
+
+### Unknown
+
+* Merge branch &#39;refs/heads/main&#39; into dev
+
+# Conflicts:
+#	README.md ([`53a44b3`](https://github.com/svange/openbrain/commit/53a44b3c39ebefea6ea81ef6766cdbc7502b7b30))
+
+## v4.0.5 (2024-07-16)
+
+### Chore
+
+* chore(release): 4.0.5 [skip ci]
 
 ## [4.0.5](https://github.com/svange/openbrain/compare/v4.0.4...v4.0.5) (2024-07-16)
 
-
 ### Bug Fixes
 
-* no table names in ephemeral ORM model causing crashes in ob_tuner ([799d910](https://github.com/svange/openbrain/commit/799d910d879cb2b467813b2299afbb2b79c39ce3))
+* no table names in ephemeral ORM model causing crashes in ob_tuner ([799d910](https://github.com/svange/openbrain/commit/799d910d879cb2b467813b2299afbb2b79c39ce3)) ([`5813c7f`](https://github.com/svange/openbrain/commit/5813c7fc9d52ee7709e34b9510387df3fcae8500))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`924c286`](https://github.com/svange/openbrain/commit/924c2866ad2bcee4d6ea409af58959c126d2dae3))
+
+## v4.0.4 (2024-07-16)
+
+### Chore
+
+* chore(release): 4.0.4 [skip ci]
 
 ## [4.0.4](https://github.com/svange/openbrain/compare/v4.0.3...v4.0.4) (2024-07-16)
 
-
 ### Bug Fixes
 
-* no table names in ephemeral ORM model causing crashes in ob_tuner ([1813867](https://github.com/svange/openbrain/commit/1813867dc57317ad6d30f27e7b590bf3f9ffb919))
+* no table names in ephemeral ORM model causing crashes in ob_tuner ([1813867](https://github.com/svange/openbrain/commit/1813867dc57317ad6d30f27e7b590bf3f9ffb919)) ([`e6fe407`](https://github.com/svange/openbrain/commit/e6fe407b34a29ac1f14a5dd2fefa807dd1f7ca53))
+
+### Fix
+
+* fix: no table names in ephemeral ORM model causing crashes in ob_tuner ([`799d910`](https://github.com/svange/openbrain/commit/799d910d879cb2b467813b2299afbb2b79c39ce3))
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/main&#39; ([`14fac23`](https://github.com/svange/openbrain/commit/14fac2304b38c3c6ccc94c9d79fa431949b24145))
+
+## v4.0.3 (2024-07-14)
+
+### Chore
+
+* chore(release): 4.0.3 [skip ci]
 
 ## [4.0.3](https://github.com/svange/openbrain/compare/v4.0.2...v4.0.3) (2024-07-14)
 
-
 ### Bug Fixes
 
-* updating README with new tuner page. ([07781a2](https://github.com/svange/openbrain/commit/07781a2192001d624fbc51d61b30427f38c406dd))
+* updating README with new tuner page. ([07781a2](https://github.com/svange/openbrain/commit/07781a2192001d624fbc51d61b30427f38c406dd)) ([`f89feea`](https://github.com/svange/openbrain/commit/f89feea5cd31752218152194ff4b8421babcacd5))
+
+### Fix
+
+* fix: no table names in ephemeral ORM model causing crashes in ob_tuner ([`1813867`](https://github.com/svange/openbrain/commit/1813867dc57317ad6d30f27e7b590bf3f9ffb919))
+
+* fix: updating README with new tuner page. ([`07781a2`](https://github.com/svange/openbrain/commit/07781a2192001d624fbc51d61b30427f38c406dd))
+
+## v4.0.2 (2024-07-13)
+
+### Chore
+
+* chore(release): 4.0.2 [skip ci]
 
 ## [4.0.2](https://github.com/svange/openbrain/compare/v4.0.1...v4.0.2) (2024-07-13)
 
-
 ### Bug Fixes
 
-* updating client model with defaults ([a0bd7a4](https://github.com/svange/openbrain/commit/a0bd7a40651fc7cbb38553c2e8007f8261b3442c))
+* updating client model with defaults ([a0bd7a4](https://github.com/svange/openbrain/commit/a0bd7a40651fc7cbb38553c2e8007f8261b3442c)) ([`c705446`](https://github.com/svange/openbrain/commit/c7054468030d5a358a5527b8add0919f910206b9))
+
+### Fix
+
+* fix: updating client model with defaults ([`a0bd7a4`](https://github.com/svange/openbrain/commit/a0bd7a40651fc7cbb38553c2e8007f8261b3442c))
+
+## v4.0.1 (2024-07-13)
+
+### Chore
+
+* chore(release): 4.0.1 [skip ci]
 
 ## [4.0.1](https://github.com/svange/openbrain/compare/v4.0.0...v4.0.1) (2024-07-13)
 
-
 ### Bug Fixes
 
-* updating client model with defaults ([3512bee](https://github.com/svange/openbrain/commit/3512beea1925d267a40064fbd41906ba71529fae))
+* updating client model with defaults ([3512bee](https://github.com/svange/openbrain/commit/3512beea1925d267a40064fbd41906ba71529fae)) ([`c8e1955`](https://github.com/svange/openbrain/commit/c8e19555e212d6da6df4d921aff02ceeb70398d1))
+
+### Fix
+
+* fix: updating client model with defaults ([`3512bee`](https://github.com/svange/openbrain/commit/3512beea1925d267a40064fbd41906ba71529fae))
+
+## v4.0.0 (2024-07-13)
+
+### Breaking
+
+* feat: adding ClientTable
+
+BREAKING-CHANGE: Moved away from LeadmoAgentTable and to a more general ClientTable ([`8d6eedc`](https://github.com/svange/openbrain/commit/8d6eedc1302c2ba90669dc944763ed9db02300ea))
+
+### Chore
+
+* chore(release): 4.0.0 [skip ci]
 
 ## [4.0.0](https://github.com/svange/openbrain/compare/v3.7.0...v4.0.0) (2024-07-13)
-
 
 ### ⚠ BREAKING CHANGES
 
@@ -58,10 +139,21 @@ All notable changes to this project will be documented in this file. See
 ### Features
 
 * adding ClientTable ([8d6eedc](https://github.com/svange/openbrain/commit/8d6eedc1302c2ba90669dc944763ed9db02300ea))
-* adding ClientTable ([935f28c](https://github.com/svange/openbrain/commit/935f28cf20adea71f4e72f155f3dc625ae4f759d))
+* adding ClientTable ([935f28c](https://github.com/svange/openbrain/commit/935f28cf20adea71f4e72f155f3dc625ae4f759d)) ([`3bef2bd`](https://github.com/svange/openbrain/commit/3bef2bdc3b1cd53dcfe4e6be2c4a3007b8b87eef))
+
+## v3.7.0 (2024-07-13)
+
+### Breaking
+
+* feat: adding ClientTable
+
+BREAKING-CHANGE: Moved away from LeadmoAgentTable and to a more general ClientTable ([`935f28c`](https://github.com/svange/openbrain/commit/935f28cf20adea71f4e72f155f3dc625ae4f759d))
+
+### Chore
+
+* chore(release): 3.7.0 [skip ci]
 
 ## [3.7.0](https://github.com/svange/openbrain/compare/v3.6.0...v3.7.0) (2024-07-13)
-
 
 ### Features
 
@@ -73,11 +165,13 @@ All notable changes to this project will be documented in this file. See
 * adding ClientTable GSI ([60fe9b7](https://github.com/svange/openbrain/commit/60fe9b7593bdc4a8b7c39a93c2df356649fa7963))
 * adding ClientTable GSI ([d78972f](https://github.com/svange/openbrain/commit/d78972fda4f1ef25258e7f1184feec4913ff7849))
 * adding ClientTable GSI ([eac3c83](https://github.com/svange/openbrain/commit/eac3c8375f6f456bb44961ec0e1344358082f381))
-* adding ClientTable GSI ([a9fca26](https://github.com/svange/openbrain/commit/a9fca2636ad39d8a33fd6ef907b6b7842b3735dd))
-
-# CHANGELOG
+* adding ClientTable GSI ([a9fca26](https://github.com/svange/openbrain/commit/a9fca2636ad39d8a33fd6ef907b6b7842b3735dd)) ([`0b343a5`](https://github.com/svange/openbrain/commit/0b343a5bf8b6aa3669b36179f105ff29e197f0c9))
 
 ## v3.5.0-dev.8 (2024-07-18)
+
+### Chore
+
+* chore(release): release 3.5.0-dev.8 ([`9de4f6e`](https://github.com/svange/openbrain/commit/9de4f6eecc99becfd3e9040598dac3d747182bb6))
 
 ### Unknown
 
