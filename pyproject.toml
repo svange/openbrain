@@ -116,6 +116,7 @@ isort = "^5.12.0"
 pre-commit = "^3.4.0"
 coverage = "^7.3.2"
 pygithub = "^2.1.1"
+augint-tools = "^1.1.0"
 
 [tool.coverage] # not tested
 [tool.coverage.report]
