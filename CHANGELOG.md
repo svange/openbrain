@@ -1,6 +1,16 @@
 # CHANGELOG
 
+## v3.5.0-dev.6 (2024-07-18)
+
+### Fix
+
+* fix: updating langchain to 1.x, and adding pyproject.toml to repo ([`6674bcb`](https://github.com/svange/openbrain/commit/6674bcbd59f670f92155ae150692aa6d645ffd32))
+
 ## v3.5.0-dev.5 (2024-07-13)
+
+### Chore
+
+* chore(release): release 3.5.0-dev.5 ([`1e648ea`](https://github.com/svange/openbrain/commit/1e648ea8262f9d6e4f5de8cd10abfaadfb2a6813))
 
 ### Feature
 
