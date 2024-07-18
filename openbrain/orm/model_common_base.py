@@ -194,6 +194,10 @@ class Ephemeral(Serializable, metaclass=ABCMeta):
             raise LookupError(f"Failed to find: {table_name=}")
         if not object_dict[table_name].get(hash_key_value):
             raise LookupError(f"Failed to find: {hash_key_name=} | {hash_key_value=}")
+
+        if not range_key_name:
+            return object_dict[table_name][hash_key_value].to_dict()
+
         if not object_dict[table_name][hash_key_value].get(range_key_value):
             raise LookupError(f"Failed to find: f{range_key_name=} | {range_key_value=}")
         return object_dict[table_name][hash_key_value][range_key_value].to_dict()

@@ -23,9 +23,9 @@ class Client(ORMModel, BaseModel):
     email: str = Field(description="The email of the client")
     # roles: Optional[list[str]] = Field(description="The roles of the client")
 
-    leadmo_api_key: Optional[str] = Field(description="The API key for the Leadmo API")
-    leadmo_location_id: Optional[str] = Field(description="The location ID for the Leadmo API")
-    lls_api_key: Optional[str] = Field(description="The API key for the LLS API")
+    leadmo_api_key: Optional[str] = Field(default=None, description="The API key for the Leadmo API")
+    leadmo_location_id: Optional[str] = Field(default=None, description="The location ID for the Leadmo API")
+    lls_api_key: Optional[str] = Field(default=None, description="The API key for the LLS API")
 
     class Meta:
         table_name = config.CLIENT_TABLE_NAME
@@ -33,8 +33,9 @@ class Client(ORMModel, BaseModel):
 
     def save(self):
         """Save the client to the database"""
+        table_name = config.CLIENT_TABLE_NAME or "client_table"
         return self._save(
-            table_name=config.CLIENT_TABLE_NAME,
+            table_name=table_name,
             hash_key_name="email",
             hash_key_value=self.email,
         )
@@ -42,18 +43,20 @@ class Client(ORMModel, BaseModel):
     @classmethod
     def get(cls, email=None, location_id=None) -> TClient:
         """Get a client from the database"""
-        if email is None and location_id is None:
+        if (not email) and (not location_id):
             raise ValueError("Either email or location_id must be provided")
+
+        table_name = config.CLIENT_TABLE_NAME or "client_table"
 
         if email:
             client = cls._get(
-                table_name=config.CLIENT_TABLE_NAME,
+                table_name=table_name,
                 hash_key_name="email",
                 hash_key_value=email
             )
         elif location_id:
             client = cls._get(
-                table_name=config.CLIENT_TABLE_NAME,
+                table_name=table_name,
                 hash_key_name="leadmo_location_id",
                 hash_key_value=location_id,
                 index="LocationIndex"

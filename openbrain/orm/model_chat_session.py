@@ -30,8 +30,9 @@ class ChatSession(ORMModel):
 
     def save(self):
         """Save the ChatSession object to the database"""
+        table_name = config.SESSION_TABLE_NAME or "session_table"
         return self._save(
-            table_name=config.SESSION_TABLE_NAME,
+            table_name=table_name,
             hash_key_name="client_id",
             range_key_name="session_id",
             hash_key_value=self.client_id,
@@ -41,8 +42,9 @@ class ChatSession(ORMModel):
     @classmethod
     def get(cls, session_id, client_id) -> Optional["ChatSession"]:
         """Get a ChatSession object from the database"""
+        table_name = config.SESSION_TABLE_NAME or "session_table"
         agent_config = cls._get(
-            table_name=config.SESSION_TABLE_NAME,
+            table_name=table_name,
             hash_key_name="client_id",
             range_key_name="session_id",
             hash_key_value=client_id,

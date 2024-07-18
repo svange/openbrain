@@ -1,3 +1,71 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [4.0.5](https://github.com/svange/openbrain/compare/v4.0.4...v4.0.5) (2024-07-16)
+
+
+### Bug Fixes
+
+* no table names in ephemeral ORM model causing crashes in ob_tuner ([799d910](https://github.com/svange/openbrain/commit/799d910d879cb2b467813b2299afbb2b79c39ce3))
+
+## [4.0.4](https://github.com/svange/openbrain/compare/v4.0.3...v4.0.4) (2024-07-16)
+
+
+### Bug Fixes
+
+* no table names in ephemeral ORM model causing crashes in ob_tuner ([1813867](https://github.com/svange/openbrain/commit/1813867dc57317ad6d30f27e7b590bf3f9ffb919))
+
+## [4.0.3](https://github.com/svange/openbrain/compare/v4.0.2...v4.0.3) (2024-07-14)
+
+
+### Bug Fixes
+
+* updating README with new tuner page. ([07781a2](https://github.com/svange/openbrain/commit/07781a2192001d624fbc51d61b30427f38c406dd))
+
+## [4.0.2](https://github.com/svange/openbrain/compare/v4.0.1...v4.0.2) (2024-07-13)
+
+
+### Bug Fixes
+
+* updating client model with defaults ([a0bd7a4](https://github.com/svange/openbrain/commit/a0bd7a40651fc7cbb38553c2e8007f8261b3442c))
+
+## [4.0.1](https://github.com/svange/openbrain/compare/v4.0.0...v4.0.1) (2024-07-13)
+
+
+### Bug Fixes
+
+* updating client model with defaults ([3512bee](https://github.com/svange/openbrain/commit/3512beea1925d267a40064fbd41906ba71529fae))
+
+## [4.0.0](https://github.com/svange/openbrain/compare/v3.7.0...v4.0.0) (2024-07-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Moved away from LeadmoAgentTable and to a more general ClientTable
+* Moved away from LeadmoAgentTable and to a more general ClientTable
+
+### Features
+
+* adding ClientTable ([8d6eedc](https://github.com/svange/openbrain/commit/8d6eedc1302c2ba90669dc944763ed9db02300ea))
+* adding ClientTable ([935f28c](https://github.com/svange/openbrain/commit/935f28cf20adea71f4e72f155f3dc625ae4f759d))
+
+## [3.7.0](https://github.com/svange/openbrain/compare/v3.6.0...v3.7.0) (2024-07-13)
+
+
+### Features
+
+* adding client table (WIP) ([6ae2c2f](https://github.com/svange/openbrain/commit/6ae2c2fa1914d22d1f6d4992f9493e851e45d1dd))
+* adding ClientTable ([79694d3](https://github.com/svange/openbrain/commit/79694d301725a11509cdf25915d8d8eebfa9cd63))
+* adding ClientTable ([285fa72](https://github.com/svange/openbrain/commit/285fa72058a9a83e4bd894668a2c1ddce00235c3))
+* adding ClientTable GSI ([aceb799](https://github.com/svange/openbrain/commit/aceb799e888ba502a5ecb02f7ee7423c4ae5d8a9))
+* adding ClientTable GSI ([dac4480](https://github.com/svange/openbrain/commit/dac44800efe228ccd5f0ecc313126cbcf5a501ab))
+* adding ClientTable GSI ([60fe9b7](https://github.com/svange/openbrain/commit/60fe9b7593bdc4a8b7c39a93c2df356649fa7963))
+* adding ClientTable GSI ([d78972f](https://github.com/svange/openbrain/commit/d78972fda4f1ef25258e7f1184feec4913ff7849))
+* adding ClientTable GSI ([eac3c83](https://github.com/svange/openbrain/commit/eac3c8375f6f456bb44961ec0e1344358082f381))
+* adding ClientTable GSI ([a9fca26](https://github.com/svange/openbrain/commit/a9fca2636ad39d8a33fd6ef907b6b7842b3735dd))
+
 # CHANGELOG
 
 ## v3.5.0-dev.8 (2024-07-18)
