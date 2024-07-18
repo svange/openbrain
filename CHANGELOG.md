@@ -1,3 +1,24 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [4.1.0](https://github.com/svange/openbrain/compare/v4.0.6...v4.1.0) (2024-07-18)
+
+
+### Features
+
+* cleaning up pipeline ([3cb49e3](https://github.com/svange/openbrain/commit/3cb49e35a5c706900ea237c60fabf01e33600b1b))
+* cleaning up pipeline ([5f08067](https://github.com/svange/openbrain/commit/5f08067a54802243fcfc2ba84f310e015089c965))
+* disabling pre-release to pypi, leaving it in for troubleshooting pypi problems in the future. ([50eec6b](https://github.com/svange/openbrain/commit/50eec6b73ded4ce4d9bc88ecbd82100c22a9c637))
+* re-enabling tags in pipeline, prefering adding the skip ci tag in the commit message of semantic release ([e378d9e](https://github.com/svange/openbrain/commit/e378d9ecf7fa024ffccaecfe7aa7df0a6421b7de))
+
+
+### Bug Fixes
+
+* merging last pre-release commit ([590ee5e](https://github.com/svange/openbrain/commit/590ee5e49a667e18d42e4d8c6fae81c95d001eaa))
+* splitting variables and secrets and reconfiguring pipeline to use new structure. Also added an indicator to skip the ci pipeline if pyproject.toml ([4c93fda](https://github.com/svange/openbrain/commit/4c93fda98a4bd196f0295c21ae709151da762ba6))
+
 # CHANGELOG
 
 ## v4.1.0-dev.2 (2024-07-18)
