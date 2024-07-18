@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.6](https://github.com/svange/openbrain/compare/v4.0.5...v4.0.6) (2024-07-18)
+
+
+### Bug Fixes
+
+* testing aws pipeline actions that aren't tied to node16 ([75492f0](https://github.com/svange/openbrain/commit/75492f09eb4bfd63bf8657accbdc35df7f013ccb))
+* updating langchain to 1.x, and adding pyproject.toml to repo ([847f91f](https://github.com/svange/openbrain/commit/847f91fb3931ad0114b758d5572af8fe2e485095))
+* updating langchain to 1.x, and adding pyproject.toml to repo ([6674bcb](https://github.com/svange/openbrain/commit/6674bcbd59f670f92155ae150692aa6d645ffd32))
+
 ## [4.0.5](https://github.com/svange/openbrain/compare/v4.0.4...v4.0.5) (2024-07-16)
 
 
