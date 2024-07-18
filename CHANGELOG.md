@@ -1,6 +1,16 @@
 # CHANGELOG
 
+## v4.1.0-dev.2 (2024-07-18)
+
+### Feature
+
+* feat: re-enabling tags in pipeline, prefering adding the skip ci tag in the commit message of semantic release ([`e378d9e`](https://github.com/svange/openbrain/commit/e378d9ecf7fa024ffccaecfe7aa7df0a6421b7de))
+
 ## v4.1.0-dev.1 (2024-07-18)
+
+### Chore
+
+* chore(release): release 4.1.0-dev.1 [skip ci] ([`e4bd23e`](https://github.com/svange/openbrain/commit/e4bd23edcfac498f95f029f1022b71b1371328b5))
 
 ### Feature
 
