@@ -1,8 +1,20 @@
 # CHANGELOG
 
+## v3.5.0-dev.7 (2024-07-18)
+
+### Unknown
+
+* Merge remote-tracking branch &#39;origin/dev&#39; into dev ([`f62fde3`](https://github.com/svange/openbrain/commit/f62fde34f4f4bd520989f0646f6b46275173aa87))
+
 ## v3.5.0-dev.6 (2024-07-18)
 
+### Chore
+
+* chore(release): release 3.5.0-dev.6 ([`89073c7`](https://github.com/svange/openbrain/commit/89073c784adf191515237a19dabcda76f34d0b90))
+
 ### Fix
+
+* fix: updating langchain to 1.x, and adding pyproject.toml to repo ([`847f91f`](https://github.com/svange/openbrain/commit/847f91fb3931ad0114b758d5572af8fe2e485095))
 
 * fix: updating langchain to 1.x, and adding pyproject.toml to repo ([`6674bcb`](https://github.com/svange/openbrain/commit/6674bcbd59f670f92155ae150692aa6d645ffd32))
 
