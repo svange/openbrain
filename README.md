@@ -17,6 +17,9 @@
 
   - A Gradio interface to create, test, save, and load sets of agent configurations.
   - Agent configurations allows your API calls to start sessions with a specific agent configuration (i.e. lead-bot, cold-caller, x-bot, etc.).
+
+![OpenBra.in Tuner](assets/ob_tuner.png)
+
 - [Demo Deployed Agent Page](https://www.openbra.in):
 
   - An example page that's using the agent from the public demo API.
@@ -29,23 +32,21 @@
         "profileName": "promoter",
         "message": "Hi, this is a message from the user talking through the website. I want to schedule an appointment or something."
     }
+![OpenBra.in Deployed Example](assets/deployed_demo.png)
 
-    ```
 - [OpenBrain Portal](https://portal.openbra.in):
 
   - Sign up for OpenBra.in as a service. Get an API key and start using the API.
   - This method does not require you to use the library or to deploy any infrastructure. Just grab an API key, and you can simply start with `axios` or the `requests` library (or whatever your language provides for making HTTP requests).
-
-![ob_tuner.png](assets/ob_tuner.png)
+![OpenBra.in Portal](ob_portal/img.png)
 
 ## Openbrain as a Service
 
 To test Openbrain as a service, do the following:
 
 1. Register at [https://portal.openbra.in](https://portal.openbra.in).
-2. Log in to the portal and subscribe to the Openbrain service.
-3. Subscribe to the API in the OpenBra.in portal.
-4. Navigate to your dashboard in the portal to find and use your API keys.
+2. Log in to the portal and subscribe to the Openbrain chat endpoint.
+3. Navigate to your dashboard in the portal to find and use your API keys.
 
 NOTE: There is currently no fee for using the service, but it's using my personal AWS and OpenAI accounts, so I'll pull the plug immediately if it becomes expensive.
 
