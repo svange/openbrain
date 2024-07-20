@@ -26,6 +26,7 @@ class Client(ORMModel, BaseModel):
     leadmo_api_key: Optional[str] = Field(default=None, description="The API key for the Leadmo API")
     leadmo_location_id: Optional[str] = Field(default=None, description="The location ID for the Leadmo API")
     lls_api_key: Optional[str] = Field(default=None, description="The API key for the LLS API")
+    calendar_id: Optional[str] = Field(default=None, description="The calendar ID for the client, used for testing")
 
     class Meta:
         table_name = config.CLIENT_TABLE_NAME
