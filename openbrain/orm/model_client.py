@@ -27,6 +27,18 @@ class Client(ORMModel, BaseModel):
     leadmo_location_id: Optional[str] = Field(default=None, description="The location ID for the Leadmo API")
     lls_api_key: Optional[str] = Field(default=None, description="The API key for the LLS API")
     leadmo_calendar_id: Optional[str] = Field(default=None, description="The calendar ID for the client, used for testing")
+    first_name: Optional[str] = Field(default=None, description="The first name of the client")
+    last_name: Optional[str] = Field(default=None, description="The last name of the client")
+    date_of_birth: Optional[str] = Field(default=None, description="The date of birth of the client")
+    phone: Optional[str] = Field(default=None, description="The phone number of the client")
+    address1: Optional[str] = Field(default=None, description="The address of the client")
+    address2: Optional[str] = Field(default=None, description="The address of the client")
+    city: Optional[str] = Field(default=None, description="The city of the client")
+    state: Optional[str] = Field(default=None, description="The state of the client")
+    country: Optional[str] = Field(default=None, description="The country of the client")
+    postal_code: Optional[str] = Field(default=None, description="The postal code of the client")
+    website: Optional[str] = Field(default=None, description="The website of the client")
+
 
     class Meta:
         table_name = config.CLIENT_TABLE_NAME
