@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.0](https://github.com/svange/openbrain/compare/v4.1.1...v4.2.0) (2024-07-20)
+
+
+### Features
+
+* adding calendar_id to Contact ([c582e12](https://github.com/svange/openbrain/commit/c582e1280f6dc785766ef2fcdb728d0d3b5a0a66))
+
 ## [4.1.1](https://github.com/svange/openbrain/compare/v4.1.0...v4.1.1) (2024-07-19)
 
 
