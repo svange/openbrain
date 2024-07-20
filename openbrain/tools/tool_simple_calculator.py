@@ -105,8 +105,13 @@ class SimpleCalculatorTool(BaseTool, ContextAwareToolMixin):
             except Exception as e:
                 result = f"Error: {e}"
 
+        response = result
+
         if agent_config.get("record_tool_actions"):
-            OBTool.record_action(event=TOOL_NAME, response=result, latest=True, session_id=session_id)
+            logger.info("About to call OBTool.record_action")
+            OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
+        else:
+            logger.info("RECORD_ACTION: Not calling OBTool.record_action")
 
         return result
 

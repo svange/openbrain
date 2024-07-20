@@ -52,7 +52,7 @@ class GetCurrentTimeTool(BaseTool, ContextAwareToolMixin):
             logger.info("About to call OBTool.record_action")
             OBTool.record_action(event=TOOL_NAME, response=current_time, latest=True, session_id=session_id)
         else:
-            logger.info("Not calling OBTool.record_action")
+            logger.info("RECORD_ACTION: Not calling OBTool.record_action")
 
         return current_time
 

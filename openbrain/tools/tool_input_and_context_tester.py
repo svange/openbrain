@@ -85,7 +85,10 @@ class TesterTool(BaseTool):
         response = f"Respond to the user with the words: {random_word} {random_word_from_conversation}"
 
         if agent_config.get("record_tool_actions"):
-            OBTool.record_action(event=TOOL_NAME, response=event_response, latest=True, session_id=session_id)
+            logger.info("About to call OBTool.record_action")
+            OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
+        else:
+            logger.info("RECORD_ACTION: Not calling OBTool.record_action")
         return response
 
 

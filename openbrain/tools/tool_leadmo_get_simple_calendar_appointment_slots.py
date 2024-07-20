@@ -86,7 +86,10 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
         if not calendar_id and not api_key:
             response = "System error: Can't get appointment times. Inform the user of other ways to contact us, and apologize for the inconveinence."
             if agent_config.get("record_tool_actions"):
+                logger.info("About to call OBTool.record_action")
                 OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
+            else:
+                logger.info("RECORD_ACTION: Not calling OBTool.record_action")
             return response
 
         standardized_tz = tz.gettz(timezone)
@@ -129,7 +132,10 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
             raise e
 
         if agent_config.get("record_tool_actions"):
+            logger.info("About to call OBTool.record_action")
             OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
+        else:
+            logger.info("RECORD_ACTION: Not calling OBTool.record_action")
 
         return response
 
