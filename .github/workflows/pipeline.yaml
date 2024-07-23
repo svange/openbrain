@@ -162,7 +162,14 @@ jobs:
       #----------------------------------------------
     - name: Test with pytest
       run: |
-        poetry run pytest tests -m ci_cd
+        poetry run pytest tests
+
+    - name: upload pytest.log
+      uses: actions/upload-artifact@v2
+      with:
+          name: pytest.log
+          path: pytest.log
+
 
     - name: Skip tests if release commit
       run: echo "Skipping tests for release commit"
