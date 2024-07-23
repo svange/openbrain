@@ -50,7 +50,17 @@ class GetCurrentTimeTool(BaseTool, ContextAwareToolMixin):
 
         if agent_config.get("record_tool_actions"):
             logger.info("About to call OBTool.record_action")
-            OBTool.record_action(event=TOOL_NAME, response=current_time, latest=True, session_id=session_id)
+            wrapped_response = {
+                "response": current_time,
+                "context": context,
+                "tool_name": TOOL_NAME,
+                "tool_input": tool_input,
+                "agent_config": agent_config,
+                "session_id": session_id,
+                "timestamp": datetime.datetime.now().isoformat()
+            }
+
+            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, latest=True, session_id=session_id)
         else:
             logger.info("Not calling OBTool.record_action")
 

@@ -96,14 +96,14 @@ class OBTool:
                 logger.info(f"LOCAL_MODE: Can't send to CRM in local mode.")
             else:
                 raise e
-        try:
-            cls.record_action(event=entries, response=response)
-        except Exception as e:
-            logger.error(f"Error recording action: {e}")
+        # try:
+        #     cls.record_action(event=entries, response=response)
+        # except Exception as e:
+        #     logger.error(f"Error recording action: {e}")
 
-        try:
-            cls.record_action(event=entries, response=response, latest=True)
-        except Exception as e:
-            logger.error(f"Error recording latest action: {e}")
+        # try:
+        #     cls.record_action(event=entries, response=response, latest=True)
+        # except Exception as e:
+        #     logger.error(f"Error recording latest action: {e}")
 
         return response

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime
 import json
 import re
 from typing import Any
@@ -70,7 +71,16 @@ class LeadmoGetContactInfoFromContextTool(BaseTool, ContextAwareToolMixin):
             context_string = str(context)
 
         if agent_config.get("record_tool_actions"):
-            OBTool.record_action(event=TOOL_NAME, response=context_string, latest=True, session_id=session_id)
+            wrapped_response = {
+                "response": context_string,
+                "context": context,
+                "tool_name": TOOL_NAME,
+                "tool_input": tool_input,
+                "agent_config": agent_config,
+                "session_id": session_id,
+                "timestamp": datetime.datetime.now().isoformat()
+            }
+            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, latest=True, session_id=session_id)
 
         return context_string
 

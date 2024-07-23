@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime
 import json
 from typing import Any, Optional
 
@@ -48,7 +49,16 @@ class DoNothingTool(BaseTool, ContextAwareToolMixin):
                 context_str = json.dumps({
                     "error": "Could not convert context to json",
                 })
-            OBTool.record_action(event=TOOL_NAME, response=context_str, latest=True, session_id=session_id)
+            wrapped_response = {
+                "response": "successfully did nothing",
+                "context": context_str,
+                "tool_name": TOOL_NAME,
+                "tool_input": tool_input,
+                "agent_config": agent_config,
+                "session_id": session_id,
+                "timestamp": datetime.datetime.now().isoformat()
+            }
+            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, latest=True, session_id=session_id)
 
         return "successfully did nothing"
 

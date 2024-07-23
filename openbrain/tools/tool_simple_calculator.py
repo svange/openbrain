@@ -70,6 +70,7 @@ class SimpleCalculatorTool(BaseTool, ContextAwareToolMixin):
         tool_input = json.loads(self.tool_input)
         agent_config = tool_input.get("agent_config")
         session_id = tool_input.get("session_id")
+        context = json.loads(tool_input.get('context'))
 
         operation = kwargs.get("operation")
         left_value = Decimal(kwargs.get("left_value"))
@@ -106,7 +107,17 @@ class SimpleCalculatorTool(BaseTool, ContextAwareToolMixin):
                 result = f"Error: {e}"
 
         if agent_config.get("record_tool_actions"):
-            OBTool.record_action(event=TOOL_NAME, response=result, latest=True, session_id=session_id)
+            wrapped_response = {
+                "response": result,
+                "context": context,
+                "tool_name": TOOL_NAME,
+                "tool_input": tool_input,
+                "agent_config": agent_config,
+                "session_id": session_id,
+                "timestamp": datetime.datetime.now().isoformat()
+            }
+
+            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, latest=True, session_id=session_id)
 
         return result
 

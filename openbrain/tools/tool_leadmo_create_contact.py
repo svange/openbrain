@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime
 import json
 from ast import literal_eval
 from typing import Any, Optional
@@ -51,7 +52,16 @@ class LeadmoCreateContactTool(BaseTool, ContextAwareToolMixin):
         response = OBTool.send_event(event_source=TOOL_NAME, event_detail=event_detail_string)
 
         if agent_config.get("record_tool_actions"):
-            OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
+            wrapped_response = {
+                "response": response,
+                "context": context,
+                "tool_name": TOOL_NAME,
+                "tool_input": tool_input,
+                "agent_config": agent_config,
+                "session_id": session_id,
+                "timestamp": datetime.datetime.now().isoformat()
+            }
+            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, latest=True, session_id=session_id)
 
 
         return response
