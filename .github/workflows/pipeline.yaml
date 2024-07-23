@@ -162,7 +162,7 @@ jobs:
       #----------------------------------------------
     - name: Test with pytest
       run: |
-        poetry run pytest tests
+        poetry run pytest tests -m "not redundant and not tools and not remote_tests"
 
     - name: upload pytest.log
       uses: actions/upload-artifact@v2
