@@ -63,24 +63,24 @@ jobs:
       #----------------------------------------------
     - name: Install project
       run: poetry install -E docs --no-interaction
-
-    - name: Get version
-      id: put_version_in_file
-      run: |
-        echo "---------------------------------------------------------------------------"
-        poetry run semantic-release version --print-last-released-tag >> last_version.txt
-        echo "Getting next version"
-        echo "---------------------------------------------------------------------------"
-        cat last_version.txt
-        echo "---------------------------------------------------------------------------"
-
-    - name: Set outputs
-      id: vars
-      run: echo "last_ver=$(head -n1 last_version.txt)" >> $GITHUB_OUTPUT
-
-    - name: Check outputs
-      run: |
-        echo "${{ steps.vars.outputs.last_ver }}"
+#
+#    - name: Get version
+#      id: put_version_in_file
+#      run: |
+#        echo "---------------------------------------------------------------------------"
+#        poetry run semantic-release version --print-last-released-tag >> last_version.txt
+#        echo "Getting next version"
+#        echo "---------------------------------------------------------------------------"
+#        cat last_version.txt
+#        echo "---------------------------------------------------------------------------"
+#
+#    - name: Set outputs
+#      id: vars
+#      run: echo "last_ver=$(head -n1 last_version.txt)" >> $GITHUB_OUTPUT
+#
+#    - name: Check outputs
+#      run: |
+#        echo "${{ steps.vars.outputs.last_ver }}"
 
     - name: deploy
       run: |
