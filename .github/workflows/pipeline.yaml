@@ -290,6 +290,6 @@ jobs:
     uses: ./.github/workflows/publish_docs.yml
     secrets: inherit
 
-  deploy_docs_prerelease:
+  deploy_docs_now:
     uses: ./.github/workflows/publish_docs.yml
     secrets: inherit
