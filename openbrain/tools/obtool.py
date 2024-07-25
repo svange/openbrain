@@ -9,7 +9,9 @@ from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 from openbrain.util import logger, Defaults, config
 
 class OBTool:
-    """A tool for GptAgents. Tools consist of the main langchain extended BaseTool and any callbacks needed to supplement"""
+    """
+    A tool for GptAgents. Tools consist of the main langchain extended BaseTool and any callbacks needed to supplement
+    """
     on_llm_start: OBCallbackHandlerFunctionProtocol
     on_chat_model_start: OBCallbackHandlerFunctionProtocol
     on_llm_new_token: OBCallbackHandlerFunctionProtocol
@@ -30,13 +32,18 @@ class OBTool:
         self.context = context or {}
 
     @classmethod
-    def record_action(cls, event, response, latest=False, session_id=None):
-        """Record an action in the action table."""
+    def record_action(cls, event, response, latest=False, session_id="no-session") -> Any:
+        """
+        Record an action in the DynamoDB table. Used for testing/debugging/observability.
+        :param event: The event that triggered the action. Usually the tool name.
+        :param response: The response from the tool. For example, the answer to a calculation or the response object of an API call.
+        :param latest: If True, also record the action as the latest action for the session.
+        :param session_id: The session ID. If not provided, defaults to "no-session".
+        :return:
+        """
         response = str(response)
         logger.info(f"Recording action for session {session_id}: {event=}, {response=}")
 
-        if not session_id:
-            session_id = "no-session"
         dynamodb = boto3.resource("dynamodb")
         table = dynamodb.Table(config.ACTION_TABLE_NAME)
 
@@ -70,7 +77,12 @@ class OBTool:
 
     @classmethod
     def send_event(cls, event_detail: str, event_source: str = Defaults.OB_TOOL_EVENT_SOURCE.value) -> Any:
-        """Send an event to eventbus."""
+        """
+        Send a tool event to the Event Bus.
+        :param event_detail: contains the event details including the context and ai_input
+        :param event_source: used to target event bus rules, indicates the source of the event, usually the name of the tool
+        :return:
+        """
         logger.info(f"Sending event: {event_detail}")
 
         # Send event to eventbus

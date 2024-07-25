@@ -41,6 +41,7 @@ jobs:
 
   deploy-infrastructure:
     name: Deploy infrastructure
+    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -175,7 +176,7 @@ jobs:
       run: echo "Skipping tests for release commit"
 
   publish-prerelease:
-    if: false && github.ref == 'refs/heads/dev'
+    if: github.ref == 'refs/heads/dev'
     needs: [run-tests]
     runs-on: ubuntu-latest
     name: Publish to PyPi test
@@ -278,3 +279,17 @@ jobs:
           pypi_token: ${{ secrets.PYPI_TOKEN }}
           release_branch: ${{ github.ref_name }}
           github_token: ${{ secrets.GH_TOKEN }}
+
+  deploy_docs:
+    needs: [publish-release]
+    uses: ./.github/workflows/publish_docs.yml
+    secrets: inherit
+
+  deploy_docs_prerelease:
+    needs: [publish-prerelease]
+    uses: ./.github/workflows/publish_docs.yml
+    secrets: inherit
+
+  deploy_docs_prerelease:
+    uses: ./.github/workflows/publish_docs.yml
+    secrets: inherit
