@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.5.2](https://github.com/svange/openbrain/compare/v4.5.1...v4.5.2) (2024-07-26)
+
+
+### Bug Fixes
+
+* added ai-input (kwargs) to record-tool-actions records. ([942de58](https://github.com/svange/openbrain/commit/942de58462abb32095490d4f4daae4431e5d6a49))
+
 ## [4.5.1](https://github.com/svange/openbrain/compare/v4.5.0...v4.5.1) (2024-07-26)
 
 
