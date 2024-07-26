@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.5.0](https://github.com/svange/openbrain/compare/v4.4.2...v4.5.0) (2024-07-26)
+
+
+### Features
+
+* adding automatic documentation ([58ea1b9](https://github.com/svange/openbrain/commit/58ea1b955cb90491fad9358ed1ea33a4ef479483))
+* adding automatic documentation ([6881e3d](https://github.com/svange/openbrain/commit/6881e3d49e6b37d65a80c9d4d87c1352613d07cc))
+* adding automatic documentation ([dfcc0f4](https://github.com/svange/openbrain/commit/dfcc0f424b2eabd958d9a43f76c96ae1b0b14386))
+* adding automatic documentation ([5c2adab](https://github.com/svange/openbrain/commit/5c2adab7a71f189a0e4791f576884616ac7c9252))
+* adding automatic documentation ([230bd03](https://github.com/svange/openbrain/commit/230bd03a2cb0aa82b96d121f05b37367cf074a3e))
+
+
+### Bug Fixes
+
+* Added tool inputs and context to the record_tool_action functionality. ([50439f4](https://github.com/svange/openbrain/commit/50439f4dd3fd69cf9159dac762e668de5dfdeafd))
+* adding info to record_tool_actions ([aeca27f](https://github.com/svange/openbrain/commit/aeca27ff18627fa632863613c9e376574fed43fc))
+* adding info to record_tool_actions ([8f27d7d](https://github.com/svange/openbrain/commit/8f27d7d2ed5741ec999088662f47692c2dabe57e))
+* changing tests to use poetry run pytest tests -m "not redundant and not tools and not remote_tests" in teh pipeline because of test requirements (leadmo api keys) ([641b879](https://github.com/svange/openbrain/commit/641b8799abcd7fe023b0f9e089383ae4c2d609bc))
+* changing tests to use poetry run pytest tests -m "not redundant and not tools and not remote_tests" in teh pipeline because of test requirements (leadmo api keys) ([f660856](https://github.com/svange/openbrain/commit/f66085644e1a686ba814c853242b8a68614c5d0d))
+* Making tool's Event Table entries uniform, fixing some tool bugs. ([0b64e96](https://github.com/svange/openbrain/commit/0b64e965bbc9c578bff98e1cf462cd9eef2e2655))
+* updating pipeline to run ALL tests and to upload pytest.yaml. Also, got rid of pytest.ini in favor of pyproject.toml ([8439c9c](https://github.com/svange/openbrain/commit/8439c9c1ead27de5bc74f7234c44c4886575b5b5))
+
 ## [4.4.2](https://github.com/svange/openbrain/compare/v4.4.1...v4.4.2) (2024-07-20)
 
 
