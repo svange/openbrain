@@ -1,4 +1,6 @@
 import datetime
+import json
+from decimal import Decimal
 from typing import Any
 
 import boto3
@@ -32,13 +34,15 @@ class OBTool:
         self.context = context or {}
 
     @classmethod
-    def record_action(cls, event, response, latest=False, session_id="no-session") -> Any:
+    def record_action(cls, event, response, context, tool_input, session_id="no-session", latest=False,) -> Any:
         """
         Record an action in the DynamoDB table. Used for testing/debugging/observability.
         :param event: The event that triggered the action. Usually the tool name.
         :param response: The response from the tool. For example, the answer to a calculation or the response object of an API call.
         :param latest: If True, also record the action as the latest action for the session.
         :param session_id: The session ID. If not provided, defaults to "no-session".
+        :param context: The context of the action. For example, the input to a calculation or the request object of an API call.
+        :param tool_input: The input to the tool. For example, the input to a calculation or the request object of an API call.
         :return:
         """
         response = str(response)
@@ -47,12 +51,14 @@ class OBTool:
         dynamodb = boto3.resource("dynamodb")
         table = dynamodb.Table(config.ACTION_TABLE_NAME)
 
-        item = {
+        item = json.loads(json.dumps({
             "action_id": ulid.ULID().to_uuid().__str__(),
             "session_id": session_id,
             "event": event,
             "response": response,
-        }
+            "context": context,
+            "tool_input": tool_input,
+        }), parse_float=Decimal)
 
         action_response = table.put_item(
             Item=item
@@ -61,12 +67,7 @@ class OBTool:
         if latest:
             try:
                 table.put_item(
-                    Item={
-                        "action_id": "latest",
-                        "session_id": session_id,
-                        "event": event,
-                        "response": response,
-                    }
+                    Item=item
                 )
             except Exception as e:
                 logger.error(f"Error recording latest action: {e}")

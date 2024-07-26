@@ -117,7 +117,7 @@ class SimpleCalculatorTool(BaseTool, ContextAwareToolMixin):
                 "timestamp": datetime.datetime.now().isoformat()
             }
 
-            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, latest=True, session_id=session_id)
+            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, latest=True, session_id=session_id, context=context, tool_input=tool_input)
 
         return result
 
