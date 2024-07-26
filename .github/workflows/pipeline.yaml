@@ -288,7 +288,3 @@ jobs:
     needs: [publish-prerelease]
     uses: ./.github/workflows/publish_docs.yml
     secrets: inherit
-
-  deploy_docs_now:
-    uses: ./.github/workflows/publish_docs.yml
-    secrets: inherit
