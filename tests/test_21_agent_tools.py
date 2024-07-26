@@ -12,6 +12,7 @@ from decimal import Decimal
 import boto3
 import pytest
 import pytz
+import ulid
 from langchain.callbacks.base import BaseCallbackHandler
 
 # import openbrain.tools.tool_send_lead_to_crm
@@ -32,7 +33,7 @@ def simple_tool_tester_agent_config(default_agent_config):
     profile_name = "tester"
     system_message = "You are being tested for your ability to use tools. Use the tools available to you when appropriate."
     ice_breaker = "Hello, I am a test agent."
-    tools = ["input_and_context_tester", "get_current_time", "simple_calculator", "event_mesh_tester"]
+    tools = ["input_and_context_tester", "get_current_time", "simple_calculator", "event_mesh_tester", "convert_to_from_utc"]
     record_tool_actions = True
     record_conversations = True
 
@@ -86,10 +87,10 @@ def incoming_agent_config(default_agent_config):
     return outgoing_agent_config
 
 
-# @pytest.fixture
-# def incoming_lead(simple_lead):
-#     outgoing_lead = simple_lead
-#     return outgoing_lead
+@pytest.fixture
+def session_id():
+    session_id = 'test-ob-' + ulid.ULID().to_uuid().__str__()[9:-1]
+    return session_id
 
 
 class TestAgentTools:
@@ -168,29 +169,29 @@ class TestAgentTools:
             assert tool is not None
 
     @pytest.mark.tools
-    def test_tester_tool(self, simple_tool_tester_agent_config: AgentConfig):
+    def test_input_and_context_tester_tool(self, simple_tool_tester_agent_config: AgentConfig, session_id):
         """Test the tester tool."""
         context = {"random_word": "rambutan"}
-        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context)
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("Your random word is banana.")
         assert "banana" in response
         assert "rambutan" in response
 
     @pytest.mark.tools
-    def test_get_current_time_tool(self, simple_tool_tester_agent_config):
+    def test_get_current_time_tool(self, simple_tool_tester_agent_config, session_id):
         context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context)
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("Get the current year.")
         assert response is not None
         current_year = datetime.datetime.now().year
         assert str(current_year) in response.casefold()
 
     @pytest.mark.tools
-    def test_convert_to_from_utc(self, simple_tool_tester_agent_config):
+    def test_convert_to_from_utc(self, simple_tool_tester_agent_config, session_id):
         context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context)
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context, session_id=session_id)
         timezone = "US/Pacific"
         pacific_tz = pytz.timezone(timezone)
         pacific_time_now = datetime.datetime.now(pacific_tz)
@@ -205,22 +206,22 @@ class TestAgentTools:
         assert str(utc_time_hour) in response.casefold()
 
 
-        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context)
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message(f"Convert {utc_time_now} from UTC to US Pacific time")
 
         assert str(pacific_time_hour) in response.casefold()
 
     @pytest.mark.tools
-    def test_event_mesh_tester_tool(self, simple_tool_tester_agent_config):
+    def test_event_mesh_tester_tool(self, simple_tool_tester_agent_config, session_id):
         context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context)
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("Send an event to the event mesh and, if succesfull, respond with the word 'success' in your response and the event ID. If sending the event fails, don't use the word 'success' in your response")
         assert response is not None
         assert str('success') in response.casefold()
 
     @pytest.mark.tools
-    def test_simple_calculator_tool(self, simple_tool_tester_agent_config):
+    def test_simple_calculator_tool(self, simple_tool_tester_agent_config, session_id):
         left_number = Decimal(random.randint(-10000, 10000))
         right_number = Decimal(random.randint(-10000, 10000))
         #
@@ -265,25 +266,25 @@ class TestAgentTools:
         # result = left_number ** right_number
         # assert str(result)[:4] in response.casefold().replace(',', '')
 
-        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, session_id=session_id)
         response = agent.handle_user_message(f"Calculate the square root of {abs(left_number)}.")
         assert response is not None
         result = abs(left_number).sqrt()
         assert str(result)[:4] in response.casefold().replace(',', '')
 
-        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, session_id=session_id)
         response = agent.handle_user_message(f"Calculate {left_number} cubed.")
         assert response is not None
         result = left_number ** Decimal(3)
         assert str(result) in response.casefold().replace(',', '')
 
-        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, session_id=session_id)
         response = agent.handle_user_message(f"Calculate the inverse of {left_number}.")
         assert response is not None
         result = Decimal(1) / left_number
         assert str(result)[:4] in response.casefold().replace(',', '')
 
-        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, session_id=session_id)
         response = agent.handle_user_message(f"Calculate the negation of {left_number}.")
         assert response is not None
         result = -left_number
@@ -291,11 +292,11 @@ class TestAgentTools:
 
     @pytest.mark.tools
     @pytest.mark.xfail(reason="This fills up the context windows and gets the AI to fail to use tools correctly")
-    def test_simple_calculator_tool_overload_context(self, simple_tool_tester_agent_config):
+    def test_simple_calculator_tool_overload_context(self, simple_tool_tester_agent_config, session_id):
         left_number = Decimal(random.randint(-10000, 10000))
         right_number = Decimal(random.randint(-10000, 10000))
 
-        agent = GptAgent(agent_config=simple_tool_tester_agent_config)
+        agent = GptAgent(agent_config=simple_tool_tester_agent_config, session_id=session_id)
         response = agent.handle_user_message(f"Calculate {left_number} + {right_number}.")
         assert response is not None
         assert str(left_number + right_number) in response.casefold().replace(',', '')
@@ -351,52 +352,52 @@ class TestAgentTools:
         assert str(result) in response.casefold().replace(',', '')
 
     @pytest.mark.tools
-    def test_leadmo_create_contact_tool(self, leadmo_tool_tester_agent_config):
+    def test_leadmo_create_contact_tool(self, leadmo_tool_tester_agent_config, session_id):
         context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context)
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("Create a contact.")
         assert response is not None
         assert "success" in response.casefold()
 
 
     @pytest.mark.tools
-    def test_leadmo_update_contact_tool(self, leadmo_tool_tester_agent_config):
+    def test_leadmo_update_contact_tool(self, leadmo_tool_tester_agent_config, session_id):
         context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context)
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("Update the contact.")
         assert response is not None
         assert "success" in response.casefold()
 
     @pytest.mark.tools
-    def test_leadmo_create_appointment_tool(self, leadmo_tool_tester_agent_config):
+    def test_leadmo_create_appointment_tool(self, leadmo_tool_tester_agent_config, session_id):
         context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
         context['calendarId'] = 'asGgwlPqqu6s17W084uE'
         # context['api_key'] = os.getenv('DEV_LEADMO_BEARER_TOKEN')
 
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context)
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("Create an appointment.")
         assert response is not None
         assert "success" in response.casefold()
 
     @pytest.mark.tools
-    def test_leadmo_stop_conversation_tool(self, leadmo_tool_tester_agent_config):
+    def test_leadmo_stop_conversation_tool(self, leadmo_tool_tester_agent_config, session_id):
         context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context)
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("Stop the conversation.")
         assert response is not None
         assert "success" in response.casefold()
 
 
     @pytest.mark.tools
-    def test_get_simple_calendar_appointment_slots_tool(self, leadmo_tool_tester_agent_config):
+    def test_get_simple_calendar_appointment_slots_tool(self, leadmo_tool_tester_agent_config, session_id):
         context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
         context['api_key'] = os.getenv('DEV_LEADMO_BEARER_TOKEN')
         context['calendarId'] = 'asGgwlPqqu6s17W084uE'
 
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context)
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context, session_id=session_id)
 
         # get current_time from library
         current_time = datetime.datetime.now().isoformat()
@@ -405,22 +406,22 @@ class TestAgentTools:
         assert "success" in response.casefold()
 
     @pytest.mark.tools
-    def test_lls_scrub_phone_number(self, lls_tool_tester_agent_config):
+    def test_lls_scrub_phone_number(self, lls_tool_tester_agent_config, session_id):
         context = {
             "phone": "6194103847",
             "api_key": os.getenv('DEV_LLS_API_KEY')
         }
 
-        agent = GptAgent(agent_config=lls_tool_tester_agent_config, context=context)
+        agent = GptAgent(agent_config=lls_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("Tell me if the phone number 6194103847 is on the 'do-not-call' list. If the tool succeeded, ensure the word 'success' is in your response. If the tool failed, ensure the word 'success' is not in your response, and instead, ensure the word 'fail' is in your response.")
         assert response is not None
         assert "success" in response.casefold()
 
     @pytest.mark.tools
-    def test_get_contact_info_from_context(self, leadmo_tool_tester_agent_config):
+    def test_get_contact_info_from_context(self, leadmo_tool_tester_agent_config, session_id):
         context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
 
-        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context)
+        agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("What's my first name?")
         assert response is not None
         first_name = str.casefold(context['firstName'])

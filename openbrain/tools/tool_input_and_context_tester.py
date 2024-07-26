@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime
 import json
 from ast import literal_eval
 from typing import Any
@@ -71,24 +72,30 @@ class TesterTool(BaseTool):
             double_unwrapped_context = json.loads(context)
             random_word = double_unwrapped_context.get("random_word")
 
-        event_detail_dict = {
-            "random_word": random_word,
-            "random_word_from_conversation": random_word_from_conversation
-        }
+        # event_detail_dict = {
+        #     "random_word": random_word,
+        #     "random_word_from_conversation": random_word_from_conversation
+        # }
 
-        event_detail = json.dumps(event_detail_dict)
+        # event_detail = json.dumps(event_detail_dict)
 
-        event_response = OBTool.send_event(event_source=TOOL_NAME, event_detail=event_detail)
+        # event_response = OBTool.send_event(event_source=TOOL_NAME, event_detail=event_detail)
         # response = (
         #     "Successfully ran tool. Repeat the word to the user."
         # )
         response = f"Respond to the user with the words: {random_word} {random_word_from_conversation}"
 
         if agent_config.get("record_tool_actions"):
-            logger.info("About to call OBTool.record_action")
-            OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
-        else:
-            logger.info("RECORD_ACTION: Not calling OBTool.record_action")
+            wrapped_response = {
+                "response": response,
+                "context": context,
+                "tool_name": TOOL_NAME,
+                "tool_input": tool_input,
+                "agent_config": agent_config,
+                "session_id": session_id,
+                "timestamp": datetime.datetime.now().isoformat()
+            }
+            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, context=context, tool_input=tool_input, session_id=session_id, latest=True)
         return response
 
 

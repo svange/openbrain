@@ -70,6 +70,7 @@ class SimpleCalculatorTool(BaseTool, ContextAwareToolMixin):
         tool_input = json.loads(self.tool_input)
         agent_config = tool_input.get("agent_config")
         session_id = tool_input.get("session_id")
+        context = json.loads(tool_input.get('context'))
 
         operation = kwargs.get("operation")
         left_value = Decimal(kwargs.get("left_value"))
@@ -105,13 +106,18 @@ class SimpleCalculatorTool(BaseTool, ContextAwareToolMixin):
             except Exception as e:
                 result = f"Error: {e}"
 
-        response = result
-
         if agent_config.get("record_tool_actions"):
-            logger.info("About to call OBTool.record_action")
-            OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
-        else:
-            logger.info("RECORD_ACTION: Not calling OBTool.record_action")
+            wrapped_response = {
+                "response": result,
+                "context": context,
+                "tool_name": TOOL_NAME,
+                "tool_input": tool_input,
+                "agent_config": agent_config,
+                "session_id": session_id,
+                "timestamp": datetime.datetime.now().isoformat()
+            }
+
+            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, latest=True, session_id=session_id, context=context, tool_input=tool_input)
 
         return result
 

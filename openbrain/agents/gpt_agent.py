@@ -31,9 +31,18 @@ logger = get_logger()
 
 
 class GptAgent:
+
     working_memory: BaseChatMemory
 
     def __init__(self, agent_config: AgentConfig, memory: BaseChatMemory = None, context: dict = None, session_id: str = None, **kwargs):
+        """
+        Create a new GptAgent with the given agent config. Agents can be initialized and/or rehydrated with `context`. Context is used to initialize tools for the agent without the agent being aware of the values in the context. For example, you may not want something like a customerId to be passed to the agent, as strings like that wastes context space and makes the system more prone to hallucinations.
+
+        :param agent_config: The AgentConfig (see ORM) object that contains the agent's configuration.
+        :param memory: Used when rehydrating an agent from a serialized state.
+        :param context: Anything passed in the context dictionary is used to initialize tools without the agent being aware of the values.
+        :param session_id: A unique identifier for the session. Used to organize and track the conversation.
+        """
         # Initialize the agent config
         self.context = context or {}
         self.agent_config = agent_config
@@ -148,7 +157,13 @@ class GptAgent:
 
     @classmethod
     def deserialize(cls, state: dict[str, str | bytes], context: dict = None, session_id: str = None) -> GptAgent:
-        """Reconstructs an agent from a serialized agent memory and initial config."""
+        """
+        Reconstructs an agent from a serialized agent memory and initial config.
+        :param state: The state object as it was serialized by the serialize method.
+        :param context: A dictionary of context values to be used to initialize the agent's tools.
+        :param session_id: A unique identifier for the session. Used to organize and track the conversation.
+        :return:
+        """
         frozen_memory = state["frozen_agent_memory"]
         frozen_agent_config = state["frozen_agent_config"]
         # frozen_lead = state["frozen_lead"]
@@ -178,7 +193,11 @@ class GptAgent:
         return agent
 
     def serialize(self) -> dict[str, str | bytes]:
-        """Returns a serializable state of the agent, which can be used to reconstruct the agent."""
+        """
+        Serializes the important bits of the agent for cold storage or database.
+
+        :return: a dictionary representing the agent state.
+        """
         memory_snapshot: bytes = pickle.dumps(self.working_memory)  # SERIALIZING DONE HERE
 
         agent_state = {
@@ -189,7 +208,11 @@ class GptAgent:
         return agent_state
 
     def handle_user_message(self, user_message: str, **kwargs) -> str:
-        """Send message to agent"""
+        """
+        Handles a user message and returns the response message.
+        :param user_message: The message from the user.
+        :return: A string response message from the agent.
+        """
 
         try:
             response_message = self.agent.run(user_message, callbacks=[self.toolbox.callback_handler])

@@ -1,6 +1,8 @@
 name: 🚀 Feature request
 description: Suggest an idea for this project
 title: "<One feature request per issue>"
+projects:
+  - "svange/openbrain"
 labels: [feature]
 body:
   - type: textarea

@@ -41,6 +41,7 @@ jobs:
 
   deploy-infrastructure:
     name: Deploy infrastructure
+    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -162,13 +163,20 @@ jobs:
       #----------------------------------------------
     - name: Test with pytest
       run: |
-        poetry run pytest tests -m ci_cd
+        poetry run pytest tests -m "not redundant and not tools and not remote_tests"
+
+    - name: upload pytest.log
+      uses: actions/upload-artifact@v4
+      with:
+          name: pytest.log
+          path: pytest.log
+
 
     - name: Skip tests if release commit
       run: echo "Skipping tests for release commit"
 
   publish-prerelease:
-    if: false && github.ref == 'refs/heads/dev'
+    if: github.ref == 'refs/heads/dev'
     needs: [run-tests]
     runs-on: ubuntu-latest
     name: Publish to PyPi test
@@ -271,3 +279,17 @@ jobs:
           pypi_token: ${{ secrets.PYPI_TOKEN }}
           release_branch: ${{ github.ref_name }}
           github_token: ${{ secrets.GH_TOKEN }}
+
+  deploy_docs:
+    needs: [publish-release]
+    uses: ./.github/workflows/publish_docs.yml
+    secrets: inherit
+
+  deploy_docs_prerelease:
+    needs: [publish-prerelease]
+    uses: ./.github/workflows/publish_docs.yml
+    secrets: inherit
+
+  deploy_docs_now:
+    uses: ./.github/workflows/publish_docs.yml
+    secrets: inherit

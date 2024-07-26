@@ -60,7 +60,16 @@ class ConvertToFromUtcTimeTool(BaseTool, ContextAwareToolMixin):
 
         if agent_config.get("record_tool_actions"):
             logger.info("About to call OBTool.record_action")
-            OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id)
+            wrapped_response = {
+                "response": response,
+                "context": context,
+                "tool_name": TOOL_NAME,
+                "tool_input": tool_input,
+                "agent_config": agent_config,
+                "session_id": session_id,
+                "timestamp": datetime.datetime.now().isoformat()
+            }
+            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, latest=True, session_id=session_id, context=context, tool_input=tool_input)
         else:
             logger.info("RECORD_ACTION: Not calling OBTool.record_action")
 

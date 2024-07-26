@@ -1,0 +1,98 @@
+name: Deploy Sphinx documentation to Pages
+
+on:
+  workflow_call:
+#    inputs:
+#      version:
+#        description: 'Version of the documentation to build'
+#        required: true
+#        type: string
+#    secrets: inherit
+
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+jobs:
+  pages:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: print inputs
+      run: |
+        echo ${{ inputs.version }}
+
+      #----------------------------------------------
+      #       check-out repo and set-up python
+      #----------------------------------------------
+    - name: Check out repository
+      uses: actions/checkout@v4
+    - name: Set up python
+      id: setup-python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+      #----------------------------------------------
+      #  -----  install & configure poetry  -----
+      #----------------------------------------------
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+        installer-parallel: true
+
+      #----------------------------------------------
+      #       load cached venv if cache exists
+      #----------------------------------------------
+    - name: Load cached venv
+
+      id: cached-poetry-dependencies
+      uses: actions/cache@v4
+      with:
+        path: .venv
+        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
+    - name: Install dependencies
+      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      run: poetry install --no-interaction --no-root
+
+      #----------------------------------------------
+      # install your root project, if required
+      #----------------------------------------------
+    - name: Install project
+      run: poetry install -E docs --no-interaction
+#
+#    - name: Get version
+#      id: put_version_in_file
+#      run: |
+#        echo "---------------------------------------------------------------------------"
+#        poetry run semantic-release version --print-last-released-tag >> last_version.txt
+#        echo "Getting next version"
+#        echo "---------------------------------------------------------------------------"
+#        cat last_version.txt
+#        echo "---------------------------------------------------------------------------"
+#
+#    - name: Set outputs
+#      id: vars
+#      run: echo "last_ver=$(head -n1 last_version.txt)" >> $GITHUB_OUTPUT
+#
+#    - name: Check outputs
+#      run: |
+#        echo "${{ steps.vars.outputs.last_ver }}"
+
+    - name: deploy
+      run: |
+        poetry run sphinx-build -b html ./docs/source ./docs/build
+
+#    - id: deployment
+#      uses: sphinx-notes/pages@v3
+#      with:
+#        publish: false
+#        documentation_path: ./docs/source
+
+    - uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GH_TOKEN }}
+        publish_dir: ./docs/build

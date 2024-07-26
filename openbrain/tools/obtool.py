@@ -1,4 +1,6 @@
 import datetime
+import json
+from decimal import Decimal
 from typing import Any
 
 import boto3
@@ -9,7 +11,9 @@ from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 from openbrain.util import logger, Defaults, config
 
 class OBTool:
-    """A tool for GptAgents. Tools consist of the main langchain extended BaseTool and any callbacks needed to supplement"""
+    """
+    A tool for GptAgents. Tools consist of the main langchain extended BaseTool and any callbacks needed to supplement
+    """
     on_llm_start: OBCallbackHandlerFunctionProtocol
     on_chat_model_start: OBCallbackHandlerFunctionProtocol
     on_llm_new_token: OBCallbackHandlerFunctionProtocol
@@ -30,22 +34,31 @@ class OBTool:
         self.context = context or {}
 
     @classmethod
-    def record_action(cls, event, response, latest=False, session_id=None):
-        """Record an action in the action table."""
+    def record_action(cls, event, response, context, tool_input, session_id="no-session", latest=False,) -> Any:
+        """
+        Record an action in the DynamoDB table. Used for testing/debugging/observability.
+        :param event: The event that triggered the action. Usually the tool name.
+        :param response: The response from the tool. For example, the answer to a calculation or the response object of an API call.
+        :param latest: If True, also record the action as the latest action for the session.
+        :param session_id: The session ID. If not provided, defaults to "no-session".
+        :param context: The context of the action. For example, the input to a calculation or the request object of an API call.
+        :param tool_input: The input to the tool. For example, the input to a calculation or the request object of an API call.
+        :return:
+        """
         response = str(response)
         logger.info(f"Recording action for session {session_id}: {event=}, {response=}")
 
-        if not session_id:
-            session_id = "no-session"
         dynamodb = boto3.resource("dynamodb")
         table = dynamodb.Table(config.ACTION_TABLE_NAME)
 
-        item = {
+        item = json.loads(json.dumps({
             "action_id": ulid.ULID().to_uuid().__str__(),
             "session_id": session_id,
             "event": event,
             "response": response,
-        }
+            "context": context,
+            "tool_input": tool_input,
+        }), parse_float=Decimal)
 
         action_response = table.put_item(
             Item=item
@@ -54,12 +67,7 @@ class OBTool:
         if latest:
             try:
                 table.put_item(
-                    Item={
-                        "action_id": "latest",
-                        "session_id": session_id,
-                        "event": event,
-                        "response": response,
-                    }
+                    Item=item
                 )
             except Exception as e:
                 logger.error(f"Error recording latest action: {e}")
@@ -70,7 +78,12 @@ class OBTool:
 
     @classmethod
     def send_event(cls, event_detail: str, event_source: str = Defaults.OB_TOOL_EVENT_SOURCE.value) -> Any:
-        """Send an event to eventbus."""
+        """
+        Send a tool event to the Event Bus.
+        :param event_detail: contains the event details including the context and ai_input
+        :param event_source: used to target event bus rules, indicates the source of the event, usually the name of the tool
+        :return:
+        """
         logger.info(f"Sending event: {event_detail}")
 
         # Send event to eventbus
@@ -100,7 +113,7 @@ class OBTool:
         #     cls.record_action(event=entries, response=response)
         # except Exception as e:
         #     logger.error(f"Error recording action: {e}")
-        #
+
         # try:
         #     cls.record_action(event=entries, response=response, latest=True)
         # except Exception as e:

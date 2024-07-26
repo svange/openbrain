@@ -1,0 +1,12 @@
+augint-tools documentation
+==========================
+
+Command line interface utilities
+
+.. click:: openbrain.cli:cli
+   :prog: ob
+   :nested: full
+
+.. click:: openbrain.cli:cli_chat
+   :prog: ob-chat
+   :nested: full

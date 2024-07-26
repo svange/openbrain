@@ -99,7 +99,10 @@ aws-xray-sdk = "^2.12.0"
 tiktoken = "^0.5.1"
 pytz = "^2024.1"
 itsdangerous = "^2.2.0"
-
+#sphinx = "^7.4.7"
+#sphinx-click = "^6.0.0"
+sphinx-click = { version = "^6.0.0", optional = true }
+sphinx = { version = "^7.4.7", optional = true }
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
@@ -117,6 +120,9 @@ pre-commit = "^3.4.0"
 coverage = "^7.3.2"
 pygithub = "^2.1.1"
 augint-tools = "^1.1.0"
+
+[tool.poetry.extras]
+docs = ["sphinx", "sphinx-click"]
 
 [tool.coverage] # not tested
 [tool.coverage.report]
@@ -146,6 +152,24 @@ omit = [
 
 [tool.pytest.ini_options]
 addopts = '-m "not remote_tests and not redundant"'
+
+log_cli = "true"
+log_cli_level = "DEBUG"
+log_file = "pytest.log"
+log_file_level = "INFO"
+log_format = "%(asctime)s %(levelname)s %(message)s"
+log_date_format = "%Y-%m-%d %H:%M:%S"
+
+markers = [
+    "redundant: marks tests that are redundant",
+    "remote_tests: These tests run against deployed stacks. Not part of any deployment pipeline.",
+    "orm_tests: marks tests that test the orm and the database",
+    "tools: tests agent tools",
+    "no_infra: tests that do not require infrastructure",
+]
+
+env_override_existing_values = 1
+env_files = ".env"
 
 #[tool.ruff]
 #line-length = 130
