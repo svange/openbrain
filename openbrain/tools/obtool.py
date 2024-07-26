@@ -89,6 +89,8 @@ class OBTool:
         # Send event to eventbus
         event_bus_friendly_name = config.EVENTBUS_NAME
         event_bus_client = boto3.client("events")
+
+
         response = None
         entries = [
             {
