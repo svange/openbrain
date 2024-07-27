@@ -46,7 +46,7 @@ class EventMeshTesterTool(BaseTool, ContextAwareToolMixin):
 
         event_detail = json.dumps({"context": context, "ai_input": kwargs})
 
-        response = OBTool.send_event(event_source=TOOL_NAME, event_detail=event_detail)
+        response = OBTool.send_event(tool_name=TOOL_NAME, event_detail=event_detail)
         if agent_config.get("record_tool_actions"):
 
             wrapped_response = {

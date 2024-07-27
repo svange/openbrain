@@ -10,6 +10,8 @@ from langchain.tools import BaseTool
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
 from openbrain.util import logger, Defaults, config
 
+INFRA_STACK_NAME = config.INFRA_STACK_NAME
+
 class OBTool:
     """
     A tool for GptAgents. Tools consist of the main langchain extended BaseTool and any callbacks needed to supplement
@@ -79,11 +81,11 @@ class OBTool:
 
 
     @classmethod
-    def send_event(cls, event_detail: str, event_source: str = Defaults.OB_TOOL_EVENT_SOURCE.value) -> Any:
+    def send_event(cls, event_detail: str, tool_name: str) -> Any:
         """
         Send a tool event to the Event Bus.
         :param event_detail: contains the event details including the context and ai_input
-        :param event_source: used to target event bus rules, indicates the source of the event, usually the name of the tool
+        :param tool_name: name of the tool, used to construct an event source
         :return:
         """
         logger.info(f"Sending event: {event_detail}")
@@ -92,13 +94,12 @@ class OBTool:
         event_bus_friendly_name = config.EVENTBUS_NAME
         event_bus_client = boto3.client("events")
 
-
         response = None
         entries = [
             {
                 "EventBusName": event_bus_friendly_name,
-                "Source": event_source,
-                "DetailType": Defaults.OB_TOOL_EVENT_DETAIL_TYPE.value,
+                "Source": tool_name,
+                "DetailType": config.OB_TOOL_EVENT_DETAIL_TYPE,
                 "Detail": event_detail,
                 "Time": datetime.datetime.now().isoformat(),
             }

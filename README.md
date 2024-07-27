@@ -242,6 +242,8 @@ sequenceDiagram
 
 ```
 
+### Example X-Ray diagram from live test
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.

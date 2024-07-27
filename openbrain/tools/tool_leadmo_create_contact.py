@@ -49,7 +49,7 @@ class LeadmoCreateContactTool(BaseTool, ContextAwareToolMixin):
         event_detail_string = json.dumps(event_detail)
         logger.info(f"event_detail_string: {event_detail_string}")
 
-        response = OBTool.send_event(event_source=TOOL_NAME, event_detail=event_detail_string)
+        response = OBTool.send_event(tool_name=TOOL_NAME, event_detail=event_detail_string)
 
         event = {
             'context': context,

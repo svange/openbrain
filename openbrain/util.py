@@ -168,6 +168,14 @@ class Config:
         default_factory=lambda: [x.value for x in Defaults if x.name.startswith("OB_MODE_")]
     )
 
+    OB_TOOL_EVENT_DETAIL_TYPE: str = field(
+        default=os.environ.get(
+            Defaults.OB_TOOL_EVENT_DETAIL_TYPE.name,
+            Defaults.OB_TOOL_EVENT_DETAIL_TYPE.value + ' - ' + os.environ.get(Defaults.INFRA_STACK_NAME.name, Defaults.INFRA_STACK_NAME.value)
+        )  #TODO: ugly shit
+    )
+
+
     def __post_init__(self):
         if self.OB_MODE not in self.RECOGNIZED_OB_MODES:
             # raise ValueError(f"Environment variable OB_MODE={self.OB_MODE} must be one of {self.RECOGNIZED_OB_MODES}")
