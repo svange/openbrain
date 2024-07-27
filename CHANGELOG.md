@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.0](https://github.com/svange/openbrain/compare/v4.5.3...v5.0.0) (2024-07-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* old events in ob-api will not trigger until their detail-types are updated to `!Sub '${ObToolEventDetailType} - ${AWS::StackName}'`
+
+### Bug Fixes
+
+* Added infra stack name to tool event source to disambiguate tool activations. ([2235c96](https://github.com/svange/openbrain/commit/2235c966b3768e29bc8d69cd2d8b61829ae5f920))
+
 ## [4.5.3](https://github.com/svange/openbrain/compare/v4.5.2...v4.5.3) (2024-07-27)
 
 
