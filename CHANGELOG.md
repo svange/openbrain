@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.5.3](https://github.com/svange/openbrain/compare/v4.5.2...v4.5.3) (2024-07-27)
+
+
+### Bug Fixes
+
+* restructured record_action tool output ([fb69670](https://github.com/svange/openbrain/commit/fb69670004b1189ca8780f0980a4b43207442293))
+
 ## [4.5.2](https://github.com/svange/openbrain/compare/v4.5.1...v4.5.2) (2024-07-26)
 
 
