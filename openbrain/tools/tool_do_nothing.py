@@ -43,22 +43,23 @@ class DoNothingTool(BaseTool, ContextAwareToolMixin):
         session_id = tool_input.get("session_id")
 
         if agent_config.get("record_tool_actions"):
-            try:
-                context_str = json.dumps(context)
-            except:
-                context_str = json.dumps({
-                    "error": "Could not convert context to json",
-                })
+
             wrapped_response = {
                 "response": "successfully did nothing",
-                "context": context_str,
-                "tool_name": TOOL_NAME,
-                "tool_input": tool_input,
-                "agent_config": agent_config,
-                "session_id": session_id,
                 "timestamp": datetime.datetime.now().isoformat()
             }
-            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, latest=True, session_id=session_id, context=context, tool_input=tool_input)
+            event = {
+                'context': context,
+                'ai_input': kwargs
+            }
+            OBTool.record_action(
+                tool_name=TOOL_NAME,
+                event=event,
+                response=wrapped_response,
+                session_id=session_id,
+                latest=True,
+                agent_config=agent_config
+            )
 
         return "successfully did nothing"
 

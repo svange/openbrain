@@ -88,15 +88,20 @@ class TesterTool(BaseTool):
         if agent_config.get("record_tool_actions"):
             wrapped_response = {
                 "response": response,
-                "context": context,
-                "tool_name": TOOL_NAME,
-                "tool_input": tool_input,
-                "agent_config": agent_config,
-                "session_id": session_id,
-                "timestamp": datetime.datetime.now().isoformat(),
-                "ai_input": kwargs
+                "timestamp": datetime.datetime.now().isoformat()
             }
-            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, context=context, tool_input=tool_input, session_id=session_id, latest=True)
+            event = {
+                'context': context,
+                'ai_input': kwargs
+            }
+            OBTool.record_action(
+                tool_name=TOOL_NAME,
+                event=event,
+                response=wrapped_response,
+                session_id=session_id,
+                latest=True,
+                agent_config=agent_config
+            )
         return response
 
 

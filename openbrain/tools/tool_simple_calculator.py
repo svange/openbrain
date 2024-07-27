@@ -108,17 +108,21 @@ class SimpleCalculatorTool(BaseTool, ContextAwareToolMixin):
 
         if agent_config.get("record_tool_actions"):
             wrapped_response = {
-                "response": result,
-                "context": context,
-                "tool_name": TOOL_NAME,
-                "tool_input": tool_input,
-                "agent_config": agent_config,
-                "session_id": session_id,
-                "timestamp": datetime.datetime.now().isoformat(),
-                "ai_input": kwargs
+                "response": str(result),
+                "timestamp": datetime.datetime.now().isoformat()
             }
-
-            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, latest=True, session_id=session_id, context=context, tool_input=tool_input)
+            event = {
+                'context': context,
+                'ai_input': {str(k): str(v) for k, v in kwargs.items()}
+            }
+            OBTool.record_action(
+                tool_name=TOOL_NAME,
+                event=event,
+                response=wrapped_response,
+                session_id=session_id,
+                latest=True,
+                agent_config=agent_config
+            )
 
         return result
 

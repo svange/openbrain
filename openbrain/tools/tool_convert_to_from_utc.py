@@ -56,24 +56,29 @@ class ConvertToFromUtcTimeTool(BaseTool, ContextAwareToolMixin):
         else:
             converted_time = datetime.datetime.fromisoformat(time).astimezone(tz).__str__()
 
-        response = converted_time
 
         if agent_config.get("record_tool_actions"):
             logger.info("About to call OBTool.record_action")
             wrapped_response = {
-                "response": response,
-                "context": context,
-                "tool_name": TOOL_NAME,
-                "tool_input": tool_input,
-                "agent_config": agent_config,
-                "session_id": session_id,
+                "response": converted_time,
                 "timestamp": datetime.datetime.now().isoformat()
             }
-            OBTool.record_action(event=TOOL_NAME, response=wrapped_response, latest=True, session_id=session_id, context=context, tool_input=tool_input)
+            event = {
+                'context': context,
+                'ai_input': kwargs
+            }
+            OBTool.record_action(
+                tool_name=TOOL_NAME,
+                event=event,
+                response=wrapped_response,
+                session_id=session_id,
+                latest=True,
+                agent_config=agent_config
+            )
         else:
             logger.info("RECORD_ACTION: Not calling OBTool.record_action")
 
-        return response
+        return converted_time
 
     def _arun(self, ticker: str):
         raise NotImplementedError(f"{TOOL_NAME} does not support async")
