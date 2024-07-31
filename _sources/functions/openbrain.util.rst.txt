@@ -10,8 +10,6 @@
    
       detect_aws_region
       get_logger
-      get_metrics
-      get_tracer
    
    .. rubric:: Classes
 
