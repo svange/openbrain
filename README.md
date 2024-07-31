@@ -243,7 +243,7 @@ sequenceDiagram
 ```
 
 ### Example X-Ray diagram from live test
-
+![X-Ray trace of full event workflow](assets/x-ray.png)
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.

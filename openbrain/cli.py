@@ -8,7 +8,7 @@ from cmd import Cmd
 
 from openbrain.agents.gpt_agent import GptAgent
 from openbrain.orm.model_agent_config import AgentConfig
-from openbrain.util import config, get_logger, get_tracer, get_metrics, Defaults
+from openbrain.util import Defaults
 
 
 class CliChatBot(Cmd):

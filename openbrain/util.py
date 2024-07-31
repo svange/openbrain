@@ -1,44 +1,20 @@
-import logging
 import os
 from dataclasses import dataclass, field, asdict
 from enum import Enum
-from io import StringIO
 
 import boto3
-from aws_lambda_powertools import (
-    Logger,
-    Metrics,
-    Tracer,
-)
+from aws_lambda_powertools import Logger
 from botocore.exceptions import ClientError, NoCredentialsError
 from dotenv import load_dotenv
-
-from openbrain.exceptions import ObMissingEnvironmentVariable
-
 load_dotenv()
 
-# MODE = os.getenv("MODE", "LOCAL")
-
+APP_NAME = "openbrain"
 
 def get_logger() -> Logger:
-    _logger = Logger(service=f"{__name__}")
-    log_stream = StringIO()
-    string_handler = logging.StreamHandler(log_stream)
-    _logger.addHandler(string_handler)
-    # logging.basicConfig(stream=log_stream, level=logging.INFO, format='%(levelname)s :: %(message)s')
-    # boto3.set_stream_logger()
-    # boto3.set_stream_logger("botocore")
+    log_level = os.environ.get("LOG_LEVEL", "INFO")  # Default to INFO if not set
+    _logger = Logger(service=f"{APP_NAME}", level=log_level)
     return _logger
 
-
-def get_metrics() -> Metrics:
-    metrics = Metrics(service=f"{__name__}")
-    return metrics
-
-
-def get_tracer() -> Tracer:
-    tracer = Tracer(service=f"{__name__}")
-    return tracer
 
 
 def detect_aws_region() -> str:
@@ -286,8 +262,6 @@ class ConfigSingleton:
 
 
 logger = get_logger()
-metrics = get_metrics()
-tracer = get_tracer()
 config = ConfigSingleton()
 if __name__ == "__main__":
     logger.debug(config)
