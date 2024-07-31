@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.0](https://github.com/svange/openbrain/compare/v5.0.0...v5.1.0) (2024-07-31)
+
+
+### Features
+
+* standardizing logging across openbrain and ob-api ([56eefc8](https://github.com/svange/openbrain/commit/56eefc8a4baee12ac1b0ee447c5bd0db6d163a1d))
+
 ## [5.0.0](https://github.com/svange/openbrain/compare/v4.5.3...v5.0.0) (2024-07-27)
 
 
