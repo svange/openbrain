@@ -1,25 +1,20 @@
 from __future__ import annotations
 
-import datetime
 import json
-from typing import Any, Optional
+import os
+from typing import Any
 
-import requests
-from dateutil.tz import tz
+from aws_lambda_powertools import Logger, Tracer
 from langchain.tools.base import BaseTool
+from leadmo_api.util import iso_to_epoch
+from leadmo_api.v1.client import LeadmoApiV1
 from pydantic import BaseModel, Extra, Field
 
 from openbrain.orm.model_agent_config import AgentConfig
 from openbrain.tools.models.context_aware_tool import ContextAwareToolMixin
 from openbrain.tools.obtool import OBTool
-
 from openbrain.tools.protocols import OBCallbackHandlerFunctionProtocol
-
-import os
 from openbrain.tools.util_leadmo_tools import get_leadmo_api_key
-from aws_lambda_powertools import Logger, Tracer
-from dateutil import parser
-
 
 LEADMO_API_V1_GET_APPOINTMENT_SLOTS_URL = 'https://rest.gohighlevel.com/v1/appointments/slots/'
 
@@ -86,47 +81,33 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
         if not calendar_id and not api_key:
             response = "System error: Can't get appointment times. Inform the user of other ways to contact us, and apologize for the inconveinence."
             if agent_config.get("record_tool_actions"):
-                OBTool.record_action(event=TOOL_NAME, response=response, latest=True, session_id=session_id, context=context, tool_input=tool_input)
+                OBTool.record_action(tool_name=TOOL_NAME, response=response, latest=True, session_id=session_id, agent_config=agent_config, event={"ERROR": "No calendar ID or API key when getting appointment slots."})
             return response
 
-        standardized_tz = tz.gettz(timezone)
         start_time_iso = kwargs.get("startTime")
         end_time_iso = kwargs.get("endTime")
 
-        # convert to epoch
-        start_time = parser.parse(start_time_iso).astimezone(standardized_tz)
-        end_time = parser.parse(end_time_iso).astimezone(standardized_tz)
-
-        start_time_epoch = int(start_time.timestamp() * 1000)
-        end_time_epoch = int(end_time.timestamp() * 1000)
-
-
-        headers = {
-            "Content-Type": "application/json",
-            "Origin": DEFAULT_ORIGIN,
-            "Authorization": f'Bearer {api_key}'
-        }
-
-        query_params = {
-            'calendarId': calendar_id,
-            'startDate': str(start_time_epoch),
-            'endDate': str(end_time_epoch)
-        }
-        if timezone:
-            query_params['timezone'] = timezone
-
-        query_params_str = '&'.join([f'{k}={v}' for k, v in query_params.items()])
-
-        url = LEADMO_API_V1_GET_APPOINTMENT_SLOTS_URL + '?' + query_params_str
-
+        leadmo_client = LeadmoApiV1(api_key=api_key)
         try:
-
-            api_response = requests.get(url=url, headers=headers)
-            response = api_response.json()
-
+            response = leadmo_client.get_available_appointment_slots(
+                calendar_id=calendar_id,
+                start_date=start_time_iso,
+                end_date=end_time_iso,
+                timezone=timezone,
+            )
         except Exception as e:
             logger.info("Failed to get info from Lead Momentum.")
             raise e
+
+        info_to_return = {}
+        for event in list(response.items()):
+            date = event[0]
+            slots = event[1].get('slots')
+            slots_for_this_date = []
+            for slot in slots:
+                slots_for_this_date.append(slot)
+
+            info_to_return[date] = slots_for_this_date
 
         if agent_config.get("record_tool_actions"):
             event = {
@@ -142,7 +123,7 @@ class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixi
                 agent_config=agent_config
             )
 
-        return response
+        return json.dumps(info_to_return)
 
 
     def _arun(self, ticker: str):
