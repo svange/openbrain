@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.0](https://github.com/svange/openbrain/compare/v5.1.0...v5.2.0) (2024-08-04)
+
+
+### Features
+
+* get_appointment_slots tool updated to use augint-tools ([ba485d9](https://github.com/svange/openbrain/commit/ba485d9960cc58b345d96f050d4af29d56318535))
+
 ## [5.1.0](https://github.com/svange/openbrain/compare/v5.0.0...v5.1.0) (2024-07-31)
 
 
