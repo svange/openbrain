@@ -8,6 +8,5 @@ openbrain.tools.models.model\_leadmo\_contact
 
    .. autosummary::
    
-      LeadmoContact
       LeadmoContactAdaptor
    

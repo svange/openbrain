@@ -8,6 +8,5 @@ openbrain.tools.models.model\_leadmo\_appointment
 
    .. autosummary::
    
-      LeadmoAppointment
       LeadmoAppointmentAdaptor
    
