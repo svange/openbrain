@@ -20,9 +20,9 @@ from tests.generator_agent_configs import generate_agent_config
 from tests.generator_chat_messages import generate_chat_message
 from tests.generator_chat_sessions import generate_chat_session
 from tests.generator_clients import generate_client
+from loguru import logger
 
 # from tests.generator_leads import generate_lead
-
 
 # load_dotenv()
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
@@ -42,6 +42,22 @@ tests_dir = pathlib.Path(__file__).parent.absolute()
 test_resources_dir = tests_dir / "resources" / "examples"
 
 NUMBER_OF_SAMPLES = 2
+
+
+class Secret:
+    def __init__(self, value):
+        self.value = value
+
+    def __repr__(self):
+        return "Secret(********)"
+
+    def __str___(self):
+        return "*******"
+
+
+@pytest.fixture(scope="module")
+def state():
+    return {}
 
 
 @pytest.fixture

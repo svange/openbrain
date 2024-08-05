@@ -57,7 +57,7 @@ fake_medication_list = [
 ]
 
 
-def generate_leadmo_contact(try_to_break_shit: bool = False, contact_id: str = None, location_id: str = None):
+def generate_leadmo_contact(contact_id: str = None, location_id: str = None):
     firstName = fake.first_name()
     middleName = fake.first_name()
     lastName = fake.last_name()
