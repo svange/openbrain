@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.0](https://github.com/svange/openbrain/compare/v5.2.0...v5.3.0) (2024-08-05)
+
+
+### Features
+
+* using LeadMo client for get_appointment_slots and create_appointment. ([ea2c6f2](https://github.com/svange/openbrain/commit/ea2c6f23a2474a9aacf268e6c9498567639f3c71))
+
 ## [5.2.0](https://github.com/svange/openbrain/compare/v5.1.0...v5.2.0) (2024-08-04)
 
 
