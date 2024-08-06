@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.4](https://github.com/svange/openbrain/compare/v5.3.3...v5.3.4) (2024-08-06)
+
+
+### Bug Fixes
+
+* addressing pydantic deprecation warnings by changing Extras.* to string literals and removing the call to .dict in favor of .model_dump in to_json func. ([22d4e3f](https://github.com/svange/openbrain/commit/22d4e3fcc4a1df3c93d74b4f8536eb48ac7e20eb))
+
 ## [5.3.3](https://github.com/svange/openbrain/compare/v5.3.2...v5.3.3) (2024-08-06)
 
 
