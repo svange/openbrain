@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.5](https://github.com/svange/openbrain/compare/v5.3.4...v5.3.5) (2024-08-06)
+
+
+### Bug Fixes
+
+* updating augint-tools no more exclude_none ([d32c1c8](https://github.com/svange/openbrain/commit/d32c1c8e8612d1b51fee441feb3dabdbfeb5a4ac))
+
 ## [5.3.4](https://github.com/svange/openbrain/compare/v5.3.3...v5.3.4) (2024-08-06)
 
 
