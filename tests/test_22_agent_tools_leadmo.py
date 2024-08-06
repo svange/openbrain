@@ -152,5 +152,5 @@ class TestAgentTools:
         agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("What's my first name?")
         assert response is not None
-        first_name = str.casefold(context['firstName'])
+        first_name = str.casefold(context['first_name'])
         assert str(first_name) in response.casefold()
