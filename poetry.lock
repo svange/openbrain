@@ -190,13 +190,13 @@ tests-no-zope = ["attrs[tests-mypy]", "cloudpickle", "hypothesis", "pympler", "p
 
 [[package]]
 name = "augint-tools"
-version = "1.39.0"
+version = "1.39.1"
 description = "Standard tools for Augmenting Integrations"
 optional = false
 python-versions = "<4.0,>=3.10"
 files = [
-    {file = "augint_tools-1.39.0-py3-none-any.whl", hash = "sha256:30bd52f396a78743d16cb8ec63723bfe380d4667d1d8c0b627d3a7ed787242cb"},
-    {file = "augint_tools-1.39.0.tar.gz", hash = "sha256:c995baf59ea9a6687c4ece6b048756142e06878f9a18d48aa8a84b6bcbfc31e2"},
+    {file = "augint_tools-1.39.1-py3-none-any.whl", hash = "sha256:eba51784c27312835839d0bac143819f25af6d18fa40ef072b5097172458e71b"},
+    {file = "augint_tools-1.39.1.tar.gz", hash = "sha256:dad0dd7edab1587ce960a794d4fe0eb736448f546063ecb89a79f25b0e18a491"},
 ]
 
 [package.dependencies]
@@ -3214,4 +3214,4 @@ docs = ["sphinx", "sphinx-click"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "56fe9cc53ef2b97535ece298fc5ef636fb3fbd3ef1d165f52e58f30361df55a1"
+content-hash = "a1f66a88f7ca62dfa5471d807390b03f19579f719477d109d614bbc34b8aac81"

@@ -1,12 +1,13 @@
 import datetime
 import os
-import boto3
+
 import pytest
 import ulid
-from tests.conftest import Secret, logger
+
 from openbrain.agents.gpt_agent import GptAgent
 from openbrain.orm.model_agent_config import AgentConfig
-from tests.generator_leadmo_contact import generate_leadmo_contact, generate_ai_leadmo_contact
+from tests.conftest import Secret, logger
+from tests.generator_leadmo_contact import generate_leadmo_contact
 
 
 @pytest.fixture
@@ -104,10 +105,11 @@ class TestAgentTools:
 
 
     @pytest.mark.tools
-    def test_leadmo_create_contact_tool(self, leadmo_tool_tester_agent_config, session_id, state, leadmo_calendar_id, leadmo_api_key):
-        context = generate_leadmo_contact(location_id=leadmo_calendar_id)
-        context['api_key'] = leadmo_api_key.value
+    def test_leadmo_create_contact_tool(self, leadmo_tool_tester_agent_config, session_id, state, leadmo_calendar_id, safe_leadmo_user, leadmo_location_id, leadmo_api_key):
+        context = safe_leadmo_user
+        context["locationId"] = leadmo_location_id
         context['calendarId'] = leadmo_calendar_id
+        context['api_key'] = leadmo_api_key.value
 
         agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("Create a contact.")
@@ -115,12 +117,12 @@ class TestAgentTools:
         assert "success" in response.casefold()
 
 
-
-
-
     @pytest.mark.tools
-    def test_leadmo_update_contact_tool(self, leadmo_tool_tester_agent_config, session_id):
-        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+    def test_leadmo_update_contact_tool(self, leadmo_tool_tester_agent_config, session_id, state, leadmo_calendar_id, safe_leadmo_user, leadmo_location_id, leadmo_api_key):
+        context = safe_leadmo_user
+        context["locationId"] = leadmo_location_id
+        context['calendarId'] = leadmo_calendar_id
+        context['api_key'] = leadmo_api_key.value
 
         agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("Update the contact.")
@@ -129,8 +131,11 @@ class TestAgentTools:
 
 
     @pytest.mark.tools
-    def test_leadmo_stop_conversation_tool(self, leadmo_tool_tester_agent_config, session_id):
-        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+    def test_leadmo_stop_conversation_tool(self, leadmo_tool_tester_agent_config, session_id, state, leadmo_calendar_id, safe_leadmo_user, leadmo_location_id, leadmo_api_key):
+        context = safe_leadmo_user
+        context["locationId"] = leadmo_location_id
+        context['calendarId'] = leadmo_calendar_id
+        context['api_key'] = leadmo_api_key.value
 
         agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("Stop the conversation.")
@@ -138,8 +143,11 @@ class TestAgentTools:
         assert "success" in response.casefold()
 
     @pytest.mark.tools
-    def test_get_contact_info_from_context(self, leadmo_tool_tester_agent_config, session_id):
-        context = generate_leadmo_contact(contact_id='8LDRBvYKbVyhXymqMurF', location_id='HbTkOpUVUXtrMQ5wkwxD')
+    def test_get_contact_info_from_context(self, leadmo_tool_tester_agent_config, session_id, state, leadmo_calendar_id, safe_leadmo_user, leadmo_location_id, leadmo_api_key):
+        context = safe_leadmo_user
+        context["locationId"] = leadmo_location_id
+        context['calendarId'] = leadmo_calendar_id
+        context['api_key'] = leadmo_api_key.value
 
         agent = GptAgent(agent_config=leadmo_tool_tester_agent_config, context=context, session_id=session_id)
         response = agent.handle_user_message("What's my first name?")

@@ -38,11 +38,11 @@ class LeadmoCreateAppointmentTool(BaseTool, ContextAwareToolMixin):
     def _run(self, *args, **kwargs) -> str:
         tool_input = json.loads(self.tool_input)
         context = json.loads(tool_input.get('context'))
+        agent_config = tool_input.get("agent_config")
+        session_id = tool_input.get("session_id")
 
         try:
             # Create an appointment in Lead Momentum
-            agent_config = tool_input.get("agent_config")
-            session_id = tool_input.get("session_id")
 
             location_id = context.get("locationId")
             calendar_id = context.get("calendarId")
