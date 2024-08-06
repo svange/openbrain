@@ -190,13 +190,13 @@ tests-no-zope = ["attrs[tests-mypy]", "cloudpickle", "hypothesis", "pympler", "p
 
 [[package]]
 name = "augint-tools"
-version = "1.39.4"
+version = "1.39.5"
 description = "Standard tools for Augmenting Integrations"
 optional = false
 python-versions = "<4.0,>=3.10"
 files = [
-    {file = "augint_tools-1.39.4-py3-none-any.whl", hash = "sha256:36866c2267b8801271754547d860d9a7fd741637ce54b7f2730d047dcd01cd8a"},
-    {file = "augint_tools-1.39.4.tar.gz", hash = "sha256:30518dd7ba4f9aa9d946a8816cf7edfe2ac30f1691f3265426eed8d3e39c321f"},
+    {file = "augint_tools-1.39.5-py3-none-any.whl", hash = "sha256:819a480d111c4328759d428226ec3a69c193dca283da6f7f4d73fe7dc143ff73"},
+    {file = "augint_tools-1.39.5.tar.gz", hash = "sha256:4dc02bbab7468dcb4d93fbc1d143cad8dc7f8824c99cecfc59f4a3faafac1976"},
 ]
 
 [package.dependencies]

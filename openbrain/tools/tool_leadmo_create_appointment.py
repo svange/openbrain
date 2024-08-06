@@ -73,7 +73,7 @@ class LeadmoCreateAppointmentTool(BaseTool, ContextAwareToolMixin):
                 leadmo_client = LeadmoApiV1(api_key=api_key)
                 # start = timer()
                 response_from_crm = leadmo_client.create_appointment(
-                    **leadmo_create_appointment_params.model_dump(exclude_none=True))
+                    **leadmo_create_appointment_params.model_dump())
                 # end = timer()
                 # elapsed_time = end - start
                 # put_metric_data('ExternalApiLatency', elapsed_time, [{'Name': 'ExternalApi', 'Value': "Leadmo"}], namespace=METRICS_NAMESPACE)
