@@ -70,7 +70,7 @@ def get_lls_api_key():
 
 class LLSScrubberPhoneNumberTool(BaseTool, ContextAwareToolMixin):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
         populate_by_name = True
 
     name = TOOL_NAME

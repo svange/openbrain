@@ -23,7 +23,7 @@ TOOL_NAME = "input_and_context_tester"
 
 class TesterAdaptor(BaseModel):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
         populate_by_name = True
         # validate_assignment = True
 
@@ -45,7 +45,7 @@ def on_tool_error(agent_config: AgentConfig = None, agent_input=None, *args, **k
 # LangChain tool
 class TesterTool(BaseTool):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
 
     name = TOOL_NAME
     description = """Useful when you want prove that you can use tools."""

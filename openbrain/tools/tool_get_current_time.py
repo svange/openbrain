@@ -29,7 +29,7 @@ class TimeRequestAdapter(BaseModel):
 # LangChain tool
 class GetCurrentTimeTool(BaseTool, ContextAwareToolMixin):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
         populate_by_name = True
     name = TOOL_NAME
     description = """Useful when you need to know the current time."""

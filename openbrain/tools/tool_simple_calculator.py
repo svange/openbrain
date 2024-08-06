@@ -58,7 +58,7 @@ class SimpleCalculatorAdaptor(BaseModel):
 # LangChain tool
 class SimpleCalculatorTool(BaseTool, ContextAwareToolMixin):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
         populate_by_name = True
     name = TOOL_NAME
     description = """Useful when you need to make simple calculations."""

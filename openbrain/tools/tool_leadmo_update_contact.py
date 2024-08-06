@@ -22,7 +22,7 @@ TOOL_NAME = "leadmo_update_contact"
 
 class LeadmoUpdateContactTool(BaseTool, ContextAwareToolMixin):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
         populate_by_name = True
 
     name = TOOL_NAME

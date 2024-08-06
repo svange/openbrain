@@ -30,7 +30,7 @@ class Serializable(BaseModel, metaclass=ABCMeta):
         """Pydantic configuration for the Serializable class"""
 
         alias_generator = snake_to_camel_case
-        extra = Extra.ignore
+        extra = 'ignore'
         populate_by_name = True
         validate_assignment = True
 
@@ -54,7 +54,7 @@ class Serializable(BaseModel, metaclass=ABCMeta):
 
     def to_json(self) -> str:
         """Returns a JSON string representation of the object using the Pydantic alias generator (camelCase here)"""
-        obj_dict = self.dict(by_alias=True)
+        obj_dict = self.model_dump(by_alias=True)
         return json.dumps(obj_dict)
 
     @classmethod

@@ -26,7 +26,7 @@ TOOL_NAME = "leadmo_create_contact"
 # LangChain tool
 class LeadmoCreateContactTool(BaseTool, ContextAwareToolMixin):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
         populate_by_name = True
 
     name = TOOL_NAME

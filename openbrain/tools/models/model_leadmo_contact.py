@@ -29,7 +29,7 @@ from typing import Optional
 
 class LeadmoContactAdaptor(BaseModel):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
         populate_by_name = True
         # validate_assignment = True
 

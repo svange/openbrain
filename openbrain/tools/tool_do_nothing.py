@@ -28,7 +28,7 @@ class DoNothingAdapter(BaseModel):
 # LangChain tool
 class DoNothingTool(BaseTool, ContextAwareToolMixin):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
         populate_by_name = True
     name = TOOL_NAME
     description = """Does nothing."""

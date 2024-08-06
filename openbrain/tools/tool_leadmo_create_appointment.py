@@ -26,7 +26,7 @@ TOOL_NAME = "leadmo_create_appointment"
 # LangChain tool
 class LeadmoCreateAppointmentTool(BaseTool, ContextAwareToolMixin):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
         populate_by_name = True
 
     name = TOOL_NAME

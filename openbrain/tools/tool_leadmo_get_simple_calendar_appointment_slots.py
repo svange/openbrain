@@ -33,7 +33,7 @@ TOOL_NAME = "leadmo_get_simple_calendar_appointment_slots"
 class LeadmoAvailableAppointmentSlotsAdaptor(BaseModel):
     """Adaptor class for Lead Momentum get available appointment slots tool."""
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
         populate_by_name = True
         validate_assignment = True
 
@@ -47,7 +47,7 @@ class LeadmoAvailableAppointmentSlotsAdaptor(BaseModel):
 # LangChain tool
 class LeadmoGetSimpleCalendarAppointmentSlotsTool(BaseTool, ContextAwareToolMixin):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
         populate_by_name = True
 
     name = TOOL_NAME

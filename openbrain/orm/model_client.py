@@ -16,7 +16,7 @@ TClient: TypeAlias = "Client"
 class Client(ORMModel, BaseModel):
     """Represents a message sent to the agent"""
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
 
     # Tracking
     # client_id: str = Field(description="The ID of the client this should match the cognito:username")

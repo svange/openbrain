@@ -28,7 +28,7 @@ class LeadmoGetContactInfoFromContextAdaptor(BaseModel):
 # LangChain tool
 class LeadmoGetContactInfoFromContextTool(BaseTool, ContextAwareToolMixin):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
 
     name = TOOL_NAME
     description = """Useful when you need to know some limited personal information from Lead Momentum about the user. The "context" is information about the customer from the CRM."""

@@ -23,7 +23,7 @@ TOOL_NAME = "leadmo_stop_conversation"
 # Utility classes and functions
 class LeadmoStopConversationAdaptor(BaseModel):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
         populate_by_name = True
         # validate_assignment = True
 
@@ -33,7 +33,7 @@ class LeadmoStopConversationAdaptor(BaseModel):
 # LangChain tool
 class LeadmoStopConversationTool(BaseTool, ContextAwareToolMixin):
     class Config:
-        extra = Extra.allow
+        extra = 'allow'
         populate_by_name = True
 
     name = TOOL_NAME
