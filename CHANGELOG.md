@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.1](https://github.com/svange/openbrain/compare/v5.3.0...v5.3.1) (2024-08-06)
+
+
+### Bug Fixes
+
+* updated leadmo client to get new default values. ([7b93191](https://github.com/svange/openbrain/commit/7b93191982ad1155e61ed91ffc8736eb3a7443d8))
+* updated leadmo client to get new default values. ([dbc71fc](https://github.com/svange/openbrain/commit/dbc71fce8664633e2cf64653eb9bdf628dcf5cb5))
+
 ## [5.3.0](https://github.com/svange/openbrain/compare/v5.2.0...v5.3.0) (2024-08-05)
 
 
