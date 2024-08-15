@@ -36,7 +36,7 @@ class LeadmoContactAdaptor(BaseModel):
     firstName: Optional[str] = Field(default=None, description="The contact's first name")
     lastName: Optional[str] = Field(default=None, description="The contact's last name")
     name: Optional[str] = Field(default=None, description="The contact's full name")
-    dateOfBirth: Optional[str] = Field(default=None, description="The contact's date of birth. Users must be between 18 and 100 years old.")
+    dateOfBirth: Optional[str] = Field(default=None, description="The contact's date of birth. Users must be between 18 and 100 years old. Input as YYYY-MM-DD (e.g. 1990-01-01)")
     phone: Optional[str] = Field(default=None, description="The contact's phone number")
     email: Optional[str] = Field(default=None, description="The contact's email address")
     address1: Optional[str] = Field(default=None, description="The contact's address line 1")

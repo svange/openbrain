@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from typing import TypeAlias, Optional
 
-from pydantic import BaseModel, Field, Extra
-from openbrain.orm.model_agent_config import AgentConfig
+from pydantic import BaseModel, Field
 from openbrain.util import config, Defaults
 
 if config.OB_MODE == Defaults.OB_MODE_LOCAL.value:
