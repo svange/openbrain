@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.4.0](https://github.com/svange/openbrain/compare/v5.3.5...v5.4.0) (2024-08-15)
+
+
+### Features
+
+* adding description of expected dob format in update_contact tool ([5bb322b](https://github.com/svange/openbrain/commit/5bb322bfea8d1bff367f0269e898edfcf575337d))
+
 ## [5.3.5](https://github.com/svange/openbrain/compare/v5.3.4...v5.3.5) (2024-08-06)
 
 
