@@ -45,8 +45,7 @@ FUNCTION_LANGUAGE_MODELS = [
     "gpt-4-0613",
     "gpt-3.5-turbo",
     "gpt-3.5-turbo-0125",
-    "gpt-3.5-turbo-1106",
-    "gpt-3.5-turbo-0613"
+    "gpt-3.5-turbo-1106"
 ]
 
 class DefaultSettings(Enum):
@@ -61,7 +60,7 @@ class DefaultSettings(Enum):
     MAX_EXECUTION_TIME = 45
     MAX_ITERATIONS = 10
 
-    LLM = "gpt-3.5-turbo-0613"
+    LLM = "gpt-3.5-turbo"
     TOOLS = []
 
     RECORD_TOOL_ACTIONS: bool = False
