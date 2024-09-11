@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "openbrain"
-version = "5.5.0"
+version = "5.6.0"
 description = "A package to interact with generative AI and build specialized generative AI workflows."
 authors = ["Samuel Vange <7166607+svange@users.noreply.github.com>"]
 readme = "README.md"

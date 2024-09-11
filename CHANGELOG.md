@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.0](https://github.com/svange/openbrain/compare/v5.5.0...v5.6.0) (2024-09-11)
+
+
+### Features
+
+* pipeline broken,  `sam validate --lint -t resources.yaml` fails in CI, but succeeds local. ([08ee010](https://github.com/svange/openbrain/commit/08ee01066296e0e32580c3e67784ed53a7fd6499))
+
 ## [5.5.0](https://github.com/svange/openbrain/compare/v5.4.2...v5.5.0) (2024-09-11)
 
 
