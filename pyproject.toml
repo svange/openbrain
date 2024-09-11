@@ -103,7 +103,7 @@ itsdangerous = "^2.2.0"
 #sphinx-click = "^6.0.0"
 sphinx-click = { version = "^6.0.0", optional = true }
 sphinx = { version = "^7.4.7", optional = true }
-augint-tools = "^1.39.0"
+augint-tools = "^1.41.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
