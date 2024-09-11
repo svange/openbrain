@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.7.0](https://github.com/svange/openbrain/compare/v5.6.0...v5.7.0) (2024-09-11)
+
+
+### Features
+
+* update packages and disable dependabot ([aac5df6](https://github.com/svange/openbrain/commit/aac5df642feb8ad18428e9bd2d9546d3f9aeb0c2))
+
 ## [5.6.0](https://github.com/svange/openbrain/compare/v5.5.0...v5.6.0) (2024-09-11)
 
 
