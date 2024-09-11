@@ -25,9 +25,9 @@ env:
   OB_MODE: ${{ vars.OB_MODE }}
   INFRA_STACK_NAME: ${{ vars.INFRA_STACK_NAME }}
   EVENTBUS_NAME: ${{ vars.EVENTBUS_NAME }}
-  DEV_API_URL: ${{ vars.DEV_API_URL }}
-  PROD_API_URL: ${{ vars.PROD_API_URL }}
-  OB_API_URL: ${{ vars.OB_API_URL }}
+  #DEV_API_URL: ${{ vars.DEV_API_URL }}
+  #PROD_API_URL: ${{ vars.PROD_API_URL }}
+  #OB_API_URL: ${{ vars.OB_API_URL }}
 
 
 jobs:

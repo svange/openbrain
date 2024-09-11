@@ -30,8 +30,8 @@ PROMPTLAYER_API_KEY = os.environ.get("PROMPTLAYER_API_KEY")
 DEV_OB_PROVIDER_API_KEY = os.environ.get("DEV_OB_PROVIDER_API_KEY")
 PROD_OB_PROVIDER_API_KEY = os.environ.get("PROD_OB_PROVIDER_API_KEY")
 STAGE = os.environ.get("STAGE", "dev")
-DEV_API_URL = os.environ.get("DEV_API_URL")
-PROD_API_URL = os.environ.get("PROD_API_URL")
+# DEV_API_URL = os.environ.get("DEV_API_URL")
+# PROD_API_URL = os.environ.get("PROD_API_URL")
 
 # we'll reuse objects in dynamodb
 pytest.CLIENT_ID = "test_client_id"
