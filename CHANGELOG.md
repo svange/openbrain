@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.5.0](https://github.com/svange/openbrain/compare/v5.4.2...v5.5.0) (2024-09-11)
+
+
+### Features
+
+* fixing tests and updating ([df99f28](https://github.com/svange/openbrain/commit/df99f28d0e9a366d82649bda8363532d2ca6fe87))
+* pipeline broken,  `sam validate --lint -t resources.yaml` fails in CI, but succeeds local. ([d19d12d](https://github.com/svange/openbrain/commit/d19d12d5e44abf6aacd779602469f0f783b8009a))
+* pipeline broken,  `sam validate --lint -t resources.yaml` fails in CI, but succeeds local. ([87c6d82](https://github.com/svange/openbrain/commit/87c6d8278b1c794362ba6573daaaa783b07c53a4))
+* removing deprecated llms ([2617993](https://github.com/svange/openbrain/commit/2617993b152a4c7d49d9aeab50091e421fb6725c))
+
 ## [5.4.2](https://github.com/svange/openbrain/compare/v5.4.1...v5.4.2) (2024-08-15)
 
 
