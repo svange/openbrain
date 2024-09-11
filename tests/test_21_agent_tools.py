@@ -321,6 +321,7 @@ class TestAgentTools:
 
 
     @pytest.mark.tools
+    @pytest.mark.xfail("LLS currently inop")
     def test_lls_scrub_phone_number(self, lls_tool_tester_agent_config, session_id):
         context = {
             "phone": "6194103847",
