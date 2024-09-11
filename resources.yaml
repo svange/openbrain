@@ -6,7 +6,7 @@ Parameters:
   BucketName:
     Description: Name of the S3 bucket
     Type: String
-    Default: ""
+    Default: "ob-publish"
 
 Resources:
   #######################################################
