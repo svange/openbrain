@@ -106,7 +106,7 @@ sphinx = { version = "^7.4.7", optional = true }
 augint-tools = "^1.41.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.4.2"
+pytest = ">=7.4.2,<9.0.0"
 faker = "^19.6.1"
 retry = "^0.9.2"
 flake8 = "^6.1.0"
