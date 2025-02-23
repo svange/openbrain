@@ -69,7 +69,7 @@ def leadmo_calendar_id():
 def leadmo_api_key():
     return Secret(os.getenv("LEADMO_BEARER_TOKEN"))
 
-
+@pytest.mark.skip(reason="Currently not supporting LeadMo.")
 class TestAgentTools:
     """Test the GptAgent's tools."""
 
