@@ -20,7 +20,7 @@
 
 ![OpenBra.in Tuner](assets/ob_tuner.png)
 
-- [Demo Deployed Agent Page](https://www.openbra.in):
+- [Demo Deployed Agent Page](https://demo.openbra.in):
 
   - An example page that's using the agent from the public demo API.
   - This page uses an identity registered with [OpenBrain Portal](https://portal.openbra.in).

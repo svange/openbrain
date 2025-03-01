@@ -34,18 +34,14 @@ CHAT_LANGUAGE_MODELS = [
     "gpt-3.5-turbo-16k",
 ]
 FUNCTION_LANGUAGE_MODELS = [
+    "o1",
+    "o1-mini",
+    "o3-mini",
     "gpt-4o",
-    "gpt-4o-2024-05-13",
+    "gpt-4o-mini"
     "gpt-4-turbo",
-    "gpt-4-turbo-2024-04-09",
-    "gpt-4-turbo-preview",
-    "gpt-4-0125-preview",
-    "gpt-4-1106-preview",
     "gpt-4",
-    "gpt-4-0613",
     "gpt-3.5-turbo",
-    "gpt-3.5-turbo-0125",
-    "gpt-3.5-turbo-1106"
 ]
 
 class DefaultSettings(Enum):
