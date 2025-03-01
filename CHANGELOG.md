@@ -1,3 +1,15 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [5.9.0](https://github.com/svange/openbrain/compare/v5.8.0...v5.9.0) (2025-03-01)
+
+
+### Features
+
+* update models and README to use new demo page. ([3e09a68](https://github.com/svange/openbrain/commit/3e09a68dd2602503d4888fc713f5f5df601af7a0))
+
 # CHANGELOG
 
 
