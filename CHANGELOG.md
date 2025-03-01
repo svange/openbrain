@@ -16,6 +16,13 @@
 - **release**: 5.7.0 [skip ci]
   ([`8a5d9b5`](https://github.com/svange/openbrain/commit/8a5d9b56338190fe19e407869a5e6f88dfabadb1))
 
+## [5.8.0](https://github.com/svange/openbrain/compare/v5.7.0...v5.8.0) (2025-02-23)
+
+
+### Features
+
+* update packages and disable dependabot ([cb30592](https://github.com/svange/openbrain/commit/cb30592e82966db6b718a664b84c3af4cb742aba))
+
 ## [5.7.0](https://github.com/svange/openbrain/compare/v5.6.0...v5.7.0) (2024-09-11)
 
 ### Features
